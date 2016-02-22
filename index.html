@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-    <LINK REL="SHORTCUT ICON" HREF="favicon.ico"/>
+<LINK REL="SHORTCUT ICON" HREF="favicon.ico" />
 
 <head>
     <meta charset="UTF-8">
@@ -9,25 +9,86 @@
     <meta name="keywords" content="Charts, maps, create charts, create maps, line charts, bar charts, column charts, interactive charts, tooltips, HighCharts" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-
     <title>Create interactive charts and maps</title>
     <meta name="Author" content="Jay McDaniel" />
 
-        <link rel="stylesheet" href="libraries/bootstrap-3.3.6-dist/css/bootstrap.min.css"></link>
-
+    <!-- stylesheets -->
+    <link rel="stylesheet" href="libraries/bootstrap-3.3.6-dist/css/bootstrap.min.css"></link>
     <link rel="stylesheet" href="styles/css/styles_cm.css" />
 
 
 </head>
 
 <body>
-    <h1>Interactive Chart Maker</h1>
+
+    <!-- top nav bar -->
+    <div id=top_nav_bar>
+        <h1>Interactive Chart Maker</h1>
+        <span id="app_version">v2.0.0</span>
+        <span id="get_code_button" title="Get chart/map code"><span id="get_code_icon">&lt; / &gt;</span> Get code</span>
+    </div>
+    <!-- top nav bar end -->
+
+
+
+    <!-- side nav bar -->
+    <div id="side_main">
+        <h3>Setup options</h3>
+
+        <div id="side_nav_tabs">
+
+            <div class="tab map_tab chart_tab selected_tab" id="tab_type">Chart type</div>
+            <div class="tab map_tab chart_tab" id="tab_data">Chart data</div>
+            <div class="tab chart_tab" id="tab_chart_template">Template options</div>
+            <div class="tab chart_tab" id="tab_chart_margins">Chart margins</div>
+            <div class="tab chart_tab" id="tab_chart_legend">Legend</div>
+            <div class="tab chart_tab" id="tab_chart_x_axis">X-axis</div>
+            <div class="tab chart_tab" id="tab_chart_y_axis">Y-axis</div>
+            <div class="tab chart_tab" id="tab_chart_tooltip">Tool tip (hover infobox)</div>
+            <div class="tab chart_tab" id="tab_chart_credits">Credits</div>
+            <div class="tab chart_tab" id="tab_chart_extra_options">Extra options</div>
+
+        </div>
+        <div id="side_display">
+            <div class="display map_display chart_display selected_display" id="display_div_type">
+                <h4>Chart type</h4>
+            </div>
+            <div class="display map_display chart_display" id="display_data">
+                <h4>Chart data</h4></div>
+            <div class="display chart_display" id="display_chart_template">
+                <h4>Template options</h4></div>
+            <div class="display chart_display" id="display_chart_margins">
+                <h4>Chart margins</h4></div>
+            <div class="display chart_display" id="display_chart_legend">
+                <h4>Legend</h4></div>
+            <div class="display chart_display" id="display_chart_x_axis">
+                <h4>X-axis</h4></div>
+            <div class="display chart_display" id="display_chart_y_axis">
+                <h4>Y-axis</h4></div>
+            <div class="display chart_display" id="display_chart_tooltip">
+                <h4>Tool tip (hover infobox)</h4></div>
+            <div class="display chart_display" id="display_chart_credits">
+                <h4>Credits</h4></div>
+            <div class="display chart_display" id="display_chart_extra_options">
+                <h4>Extra options</h4></div>
+
+        </div>
+
+    </div>
+    <!-- side nav bar end -->
+
+
 
 </body>
 
 
-
+<!-- external libraries -->
 <script src="libraries/jquery/jquery-2.2.0.min.js"></script>
+<script src="libraries/highcharts/highcharts.3.0.10.min.js"></script>
+<script src="libraries/highcharts/highcharts.more.3.0.10.min.js"></script>
+<script src="libraries/highcharts/exporting.3.0.10.min.js"></script>
+
+<!-- Chart Maker main JS file, compiled from scripts_src folder -->
 <script src="scripts_build/main.min.js"></script>
 
 </html>

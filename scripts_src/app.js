@@ -1,8 +1,8 @@
 var utils = require("./utils/utils_main.js");
+var navigation_setup = require("./navigation_setup.js");
 
 $(document).ready(function () {
 
-    utils.log("working!");
-    console.log("test");
+    navigation_setup.sideNavTabsChange();
 
 });

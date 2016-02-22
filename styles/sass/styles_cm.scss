@@ -1,19 +1,14 @@
-$primary-color: rgb(51, 122, 183);
-$highlight-color: #633737;
-
+$primary_color: rgb(51, 122, 183);
+$secondary_color: rgb(136, 181, 221);
+$highlight_color: rgb(183, 52, 56);
+$primary_light_text_color: #fff;
 @font-face {
     font-family: 'sinkin_sans200_x_light';
     src: url('../fonts/sinkin-sans.200-x-light-webfont.eot');
-    src: url('../fonts/sinkin-sans.200-x-light-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/sinkin-sans.200-x-light-webfont.woff2') format('woff2'),
-         url('../fonts/sinkin-sans.200-x-light-webfont.woff') format('woff'),
-         url('../fonts/sinkin-sans.200-x-light-webfont.ttf') format('truetype'),
-         url('../fonts/sinkin-sans.200-x-light-webfont.svg#sinkin_sans200_x_light') format('svg');
+    src: url('../fonts/sinkin-sans.200-x-light-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/sinkin-sans.200-x-light-webfont.woff2') format('woff2'), url('../fonts/sinkin-sans.200-x-light-webfont.woff') format('woff'), url('../fonts/sinkin-sans.200-x-light-webfont.ttf') format('truetype'), url('../fonts/sinkin-sans.200-x-light-webfont.svg#sinkin_sans200_x_light') format('svg');
     font-weight: normal;
     font-style: normal;
-
 }
-
 
 html {
     position: relative;
@@ -23,7 +18,7 @@ html {
 body {
     position: relative;
     height: 100%;
-    color: $primary-color;
+    color: $primary_color;
     font-family: sans-serif;
     p {
         margin: 8px;
@@ -38,4 +33,84 @@ a {
 br {
     display: block;
     line-height: 1.5em;
+}
+
+
+
+/* left side div with all of the configurations options etc. inside it */
+div#side_main {
+    width: 400px;
+    background-color: $secondary_color;
+    color: $primary_light_text_color;
+    height: 100%;
+    padding: 10px;
+    h3 {
+        margin-top: 0px;
+        margin-bottom: 5px;
+    }
+    #side_nav_tabs {
+        .tab {
+            cursor: pointer;
+            padding-left: 10px;
+        }
+        .tab:hover {
+            color: $highlight_color;
+        }
+        .tab.selected_tab {
+            background-color: $primary_light_text_color;
+            color: $highlight_color;
+        }
+    }
+    #side_display{
+        border-top: 2px solid $primary_light_text_color;
+        margin-top: 10px;
+        h4{
+            color: $highlight_color;
+        }
+        .display{
+            display: none;
+        }
+        .display.selected_display{
+            display: block;
+        }
+        
+    }
+}
+
+
+
+/* bar at the top with h1 head, get code button, and menu for other links */
+div#top_nav_bar {
+    width: 100%;
+    background-color: $primary_color;
+    color: $primary_light_text_color;
+    height: 40px;
+    padding-left: 10px;
+    #app_version {
+        margin-left: 3px;
+        position: relative;
+        top: 6px;
+    }
+    h1 {
+        margin-top: 0px;
+        float: left;
+    }
+    #get_code_button {
+        padding: 6px 5px 6px 5px;
+        border: solid 2px $highlight_color;
+        ;
+        border-radius: 5px;
+        margin-left: 30px;
+        cursor: pointer;
+        background-color: aliceblue;
+        color: $primary_color;
+        #get_code_icon {
+            font-size: 180%;
+            position: relative;
+            top: 3px;
+        }
+    }
+    #get_code_button:hover {
+        color: $highlight_color;
+    }
 }
