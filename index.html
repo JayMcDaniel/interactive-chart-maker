@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<LINK REL="SHORTCUT ICON" HREF="favicon.ico" />
+<LINK REL="SHORTCUT ICON" HREF="images/icons/bubble_chart_icon.png" />
 
 <head>
     <meta charset="UTF-8">
@@ -90,30 +90,31 @@
 
             <!-- chart template options box -->
             <div class="display chart_display" id="display_chart_template">
-                <h4>Template (chart sizing)</h4>
+                <h4>Template (chart sizing) <sup class = "help_icon">?</sup></h4>
 
                 <div class="display_options">
                     <label for="chart_id_textinput">Unique ID:</label>
                     <br>
                     <input type="text" id="chart_id_textinput" class="medium" value="chart0" />
-                    <p class="notes">Important if using one or more charts on a page. Make sure not to use spaces, hyphens, or start with a number.</p>
+                    <span class="notes">Important if using one or more charts on a page. Make sure not to use spaces, hyphens, or start with a number.</span>
+                    <br>
 
                     <label style="margin-bottom: -10px;">Chart size:</label>
                     <br>
                     <span style="margin-right: -5px;">&larr;</span>&rarr;
-                    <input type="text" id="chart_width_textinput" value="580" class="small" />
+                    <input type="text" id="chart_width_textinput" value="580" class="small number_entry" />
 
                     <span style="position: relative; top: 3px;"><span style="position: relative; left: 9px; top: -5px;">&uarr;</span>&darr;</span>
-                    <input type="text" id="chart_height_textinput" value="430" class="small" />
+                    <input type="text" id="chart_height_textinput" value="430" class="small number_entry" />
                     <br>
 
                     <label>Chart margins:</label>
 
                     <div id="margins_outer_div">
-                        <input type="text" id="top_margin_textinput" value="90" class="small" />
-                        <input type="text" id="right_margin_textinput" value="40" class="small" />
-                        <input type="text" id="bottom_margin_textinput" value="75" class="small" />
-                        <input type="text" id="left_margin_textinput" value="80" class="small" />
+                        <input type="text" id="top_margin_textinput" value="90" class="small number_entry" />
+                        <input type="text" id="right_margin_textinput" value="40" class="small number_entry" />
+                        <input type="text" id="bottom_margin_textinput" value="75" class="small number_entry" />
+                        <input type="text" id="left_margin_textinput" value="80" class="small number_entry" />
                         <div id="margins_inner_box">
                             <span id="margins_down_arrow" class="margin_arrow">&darr;</span>
                             <span id="margins_left_arrow" class="margin_arrow">&larr;</span>
@@ -123,7 +124,6 @@
                         </div>
 
                     </div>
-                    <br>
                 </div>
 
             </div>
@@ -131,10 +131,40 @@
 
 
 
+
+
             <!-- Legend options box -->
             <div class="display chart_display" id="display_chart_legend">
-                <h4>Legend</h4>
-                <div class="display_options"></div>
+                <h4>Legend <sup class = "help_icon">?</sup></h4>
+                <div class="display_options">
+
+                    <label for="legend_layout_select">Layout: </label>
+                    <select id="legend_layout_select">
+                        <option value="horizontal">Horizontal</option>
+                        <option value="vertical">Vertical</option>
+                        <option value="false">No Legend</option>
+                    </select>
+                    <br>
+
+
+                    <label>Placement</label> <span class="notes" style="margin-bottom: -5px;">(higher values push legend right and down)</span>
+                    <br>
+                    <label for="legend_placement_x" class="small">X: </label>
+                    <input type="text" id="legend_placement_x" value="0" class="small number_entry" />
+                    <label for="legend_placement_y" class="small">Y: </label>
+                    <input type="text" id="legend_placement_y" value="0" class="small number_entry" />
+                    <br>
+
+                    <label for="legend_reverse_layout_checkbox">Reverse legend item order: </label>
+                    <input type="checkbox" id="legend_reverse_layout_checkbox">
+                    <br>
+
+                    <label for="legend_make_toggle_checkbox" style="font-size:100%; font-weight:normal;">Hide other series when one is clicked: </label>
+                    <input type="checkbox" id="legend_make_toggle_checkbox">
+                    <br>
+                    <span class="notes">(This will cause the first legend item to be visible and the others to be hidden.)</span>
+
+                </div>
             </div>
 
 
@@ -142,8 +172,26 @@
 
             <!-- X-axis options box -->
             <div class="display chart_display" id="display_chart_x_axis">
-                <h4>X-axis</h4>
-                <div class="display_options"></div>
+                <h4>X-axis <sup class = "help_icon">?</sup></h4>
+                <div class="display_options">
+
+                    <label for="chart_x_axis_title_textarea">Title: </label>
+                    <br>
+                    <textarea id="chart_x_axis_title_textarea"></textarea>
+                    <br>
+
+                    <label for="chart_x_axis_tickmark_interval_input">Tick mark (label) interval: </label>
+                    <input type="text" id="chart_x_axis_tickmark_interval_input" class="small number_entry" value="" />
+                    <span class="notes">(Automatic if left empty.)</span>
+
+
+                    <label for="chart_x_axis_show_only_years">Show only years for dates: </label>
+                    <input type="checkbox" id="chart_x_axis_show_only_years"/>
+                    <br>
+                    <label for="chart_x_axis_add_commas">Add commas to labels: </label>
+                    <input type="checkbox" id="chart_x_axis_add_commas"/>
+
+                </div>
 
             </div>
 
@@ -152,7 +200,7 @@
 
             <!-- Y-axis options box -->
             <div class="display chart_display" id="display_chart_y_axis">
-                <h4>Y-axis</h4>
+                <h4>Y-axis <sup class = "help_icon">?</sup></h4>
                 <div class="display_options"></div>
 
             </div>
@@ -162,7 +210,7 @@
 
             <!-- Tooltip options box -->
             <div class="display chart_display" id="display_chart_tooltip">
-                <h4>Tooltip (hover infobox)</h4>
+                <h4>Tooltip (hover infobox) <sup class = "help_icon">?</sup></h4>
                 <div class="display_options"></div>
 
             </div>
@@ -172,7 +220,7 @@
 
             <!-- Credits options box -->
             <div class="display chart_display" id="display_chart_credits">
-                <h4>Credits</h4>
+                <h4>Credits <sup class = "help_icon">?</sup></h4>
                 <div class="display_options"></div>
 
             </div>
@@ -182,7 +230,7 @@
 
             <!-- Extra options box -->
             <div class="display chart_display" id="display_chart_extra_options">
-                <h4>Extra options</h4>
+                <h4>Extra options <sup class = "help_icon">?</sup></h4>
                 <div class="display_options"></div>
 
             </div>

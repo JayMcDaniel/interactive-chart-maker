@@ -3,6 +3,7 @@ var navigation_setup = {
 
     /** when tabs on left side nav bar are clicked, options displayed are changed */
     sideNavTabsChange: function sideNavTabsChange() {
+        
         $("#side_nav_tabs .tab").click(function () {
             //change selected menu tab
             $("#side_nav_tabs .selected_tab").removeClass("selected_tab");
@@ -18,15 +19,25 @@ var navigation_setup = {
 
     /** when chart type icon is clicked and changed */
     chartTypeIconChange: function chartTypeIconChange() {
+        
         $("#chart_type_icons .chart_type_icon").click(function () {
             //change selected icon
             $("#chart_type_icons .chart_type_icon").removeClass("selected_chart_type");
             $(this).addClass("selected_chart_type");
 
         });
+    },
+
+    /** when a help icon is clicked */
+
+    helpIconClick: function helpIconClick() {
+        
+        $(".help_icon").click(function () {
+            $(this).toggleClass("help_on");
+            $(".notes", $(this).parents(".display")).toggle();
+        });
+
     }
-
-
 }
 
 module.exports = navigation_setup;
