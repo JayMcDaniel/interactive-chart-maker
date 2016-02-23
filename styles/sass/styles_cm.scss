@@ -76,11 +76,15 @@
         }
         &#chart_type_map {
             background-image: url(../../images/icons/map_chart_icon.png);
-            background-position-y: -4px;
+            background-position-y: -7px;
         }
         &#chart_type_scatter {
             background-image: url(../../images/icons/scatter_chart_icon.png);
         }
+    }
+    
+    .clearfloat {
+        clear: both;
     }
     
     .help_icon {
@@ -220,6 +224,7 @@
                 display: none;
                 .display_options {
                     padding-left: 10px;
+                    padding-top: 5px;
                 }
             }
             .display.selected_display {
