@@ -15,6 +15,8 @@
     <!-- stylesheets -->
     <link rel="stylesheet" href="libraries/bootstrap-3.3.6-dist/css/bootstrap.min.css"></link>
     <link rel="stylesheet" href="styles/css/styles_cm.css" />
+    <link rel="stylesheet" href="libraries/highlight/styles/googlecode.css">
+
 
 
 </head>
@@ -22,7 +24,8 @@
 <body>
 
     <!-- top nav bar -->
-    <div id=top_nav_bar>
+    <div id="top_nav_bar_filler"></div>
+    <div id="top_nav_bar">
         <h1>Interactive Chart Maker</h1>
         <span id="app_version">v2.0.0</span>
         <span id="get_code_button" title="Get chart/map code"><span id="get_code_icon">&lt; / &gt;</span> Get code</span>
@@ -39,8 +42,7 @@
 
             <div class="tab map_tab chart_tab selected_tab" id="tab_type">Chart type</div>
             <div class="tab map_tab chart_tab" id="tab_data">Chart data</div>
-            <div class="tab chart_tab" id="tab_chart_template">Template options</div>
-            <div class="tab chart_tab" id="tab_chart_margins">Chart margins</div>
+            <div class="tab chart_tab" id="tab_chart_template">Template (chart sizing)</div>
             <div class="tab chart_tab" id="tab_chart_legend">Legend</div>
             <div class="tab chart_tab" id="tab_chart_x_axis">X-axis</div>
             <div class="tab chart_tab" id="tab_chart_y_axis">Y-axis</div>
@@ -50,27 +52,115 @@
 
         </div>
         <div id="side_display">
-            <div class="display map_display chart_display selected_display" id="display_div_type">
+
+            <!--chart type options box -->
+            <div class="display map_display chart_display selected_display" id="display_type">
                 <h4>Chart type</h4>
+                <div class="display_options">
+
+                    <label for="chart_type_select">Type:</label>
+                    <select id="chart_type_select">
+                        <option value="bar" selected>Bar</option>
+                        <option value="bubble">Bubble</option>
+                        <option value="column">Column</option>
+                        <option value="drilldown">Drilldown</option>
+                        <option value="line">Line</option>
+                        <option value="map">Map</option>
+                        <option value="scatter">Scatter</option>
+                    </select>
+                </div>
+
             </div>
+
+            <!-- chart data options box -->
             <div class="display map_display chart_display" id="display_data">
-                <h4>Chart data</h4></div>
+                <h4>Chart data</h4>
+                <div class="display_options">
+                    <textarea id="table_input_textarea" placeholder="Insert table html here"></textarea>
+                </div>
+
+            </div>
+
+            <!-- chart template options box -->
             <div class="display chart_display" id="display_chart_template">
-                <h4>Template options</h4></div>
-            <div class="display chart_display" id="display_chart_margins">
-                <h4>Chart margins</h4></div>
+                <h4>Template (chart sizing)</h4>
+
+                <div class="display_options">
+                    <label for="chart_id_textinput">Unique ID:</label>
+                    <br>
+                    <input type="text" id="chart_id_textinput" class="medium" value="chart0" />
+                    <p class="notes">Important if using one or more charts on a page. Make sure not to use spaces, hyphens, or start with a number.</p>
+
+                    <label style="margin-bottom: -10px;">Chart size:</label>
+                    <br>
+                    <span style="margin-right: -5px;">&larr;</span>&rarr;
+                    <input type="text" id="chart_width_textinput" value="580" class="small" />
+
+
+                    <span style="position: relative; top: 3px;"><span style="position: relative; left: 9px; top: -5px;">&uarr;</span>&darr;</span>
+                    <input type="text" id="chart_height_textinput" value="430" class="small" />
+                    <br>
+
+                    <label>Chart margins:</label>
+                    <div id="margins_outer_div">
+                        <input type="text" id="top_margin_textinput" value="90" class="small" />
+                        <input type="text" id="right_margin_textinput" value="40" class="small" />
+                        <input type="text" id="bottom_margin_textinput" value="75" class="small" />
+                        <input type="text" id="left_margin_textinput" value="80" class="small" />
+                        <div id="margins_inner_box">
+                            <span id="margins_down_arrow" class="margin_arrow" >&darr;</span>
+                            <span id="margins_left_arrow" class="margin_arrow" >&larr;</span>
+                            <span id="margins_up_arrow" class="margin_arrow" >&uarr;</span>
+                            <span id="margins_right_arrow" class="margin_arrow" >&rarr;</span>
+
+                        </div>
+
+                    </div>
+                    <br>
+                </div>
+
+            </div>
+
+            <!-- Legend options box -->
             <div class="display chart_display" id="display_chart_legend">
-                <h4>Legend</h4></div>
+                <h4>Legend</h4>
+                <div class="display_options"></div>
+            </div>
+
+            <!-- X-axis options box -->
             <div class="display chart_display" id="display_chart_x_axis">
-                <h4>X-axis</h4></div>
+                <h4>X-axis</h4>
+                <div class="display_options"></div>
+
+            </div>
+
+            <!-- Y-axis options box -->
             <div class="display chart_display" id="display_chart_y_axis">
-                <h4>Y-axis</h4></div>
+                <h4>Y-axis</h4>
+                <div class="display_options"></div>
+
+            </div>
+
+            <!-- Tooltip options box -->
             <div class="display chart_display" id="display_chart_tooltip">
-                <h4>Tool tip (hover infobox)</h4></div>
+                <h4>Tooltip (hover infobox)</h4>
+                <div class="display_options"></div>
+
+            </div>
+
+            <!-- Credits options box -->
             <div class="display chart_display" id="display_chart_credits">
-                <h4>Credits</h4></div>
+                <h4>Credits</h4>
+                <div class="display_options"></div>
+
+            </div>
+
+            <!-- Extra options box -->
             <div class="display chart_display" id="display_chart_extra_options">
-                <h4>Extra options</h4></div>
+                <h4>Extra options</h4>
+                <div class="display_options"></div>
+
+            </div>
 
         </div>
 
@@ -79,7 +169,13 @@
 
 
 
+    <!-- chart / map get code boxes -->
+    <!--<pre><code class="js"></code></pre>-->
+
 </body>
+
+
+
 
 
 <!-- external libraries -->
@@ -88,7 +184,14 @@
 <script src="libraries/highcharts/highcharts.more.3.0.10.min.js"></script>
 <script src="libraries/highcharts/exporting.3.0.10.min.js"></script>
 
+
 <!-- Chart Maker main JS file, compiled from scripts_src folder -->
 <script src="scripts_build/main.min.js"></script>
+
+<!-- code highlighting -->
+<script src="libraries/highlight/highlight.pack.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
 
 </html>

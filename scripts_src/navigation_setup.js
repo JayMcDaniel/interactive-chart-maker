@@ -1,9 +1,11 @@
+/** object that contains functions for all the navigation, ie changing between options and chart types */
 var navigation_setup = {
 
+    /** when tabs on left side nav bar are clicked, options displayed are changed */
     sideNavTabsChange: function sideNavTabsChange() {
         $("#side_nav_tabs .tab").click(function () {
             //change selected menu tab
-            $(".selected_tab").removeClass("selected_tab");
+            $("#side_nav_tabs .selected_tab").removeClass("selected_tab");
             $(this).addClass("selected_tab");
 
             //change display div showing
