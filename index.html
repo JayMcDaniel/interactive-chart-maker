@@ -186,10 +186,10 @@
 
 
                     <label for="chart_x_axis_show_only_years">Show only years for dates: </label>
-                    <input type="checkbox" id="chart_x_axis_show_only_years"/>
+                    <input type="checkbox" id="chart_x_axis_show_only_years" />
                     <br>
                     <label for="chart_x_axis_add_commas">Add commas to labels: </label>
-                    <input type="checkbox" id="chart_x_axis_add_commas"/>
+                    <input type="checkbox" id="chart_x_axis_add_commas" />
 
                 </div>
 
@@ -201,7 +201,71 @@
             <!-- Y-axis options box -->
             <div class="display chart_display" id="display_chart_y_axis">
                 <h4>Y-axis <sup class = "help_icon">?</sup></h4>
-                <div class="display_options"></div>
+                <div class="display_options">
+
+
+                    <label for="chart_y_axis_title_textarea">Title: </label>
+                    <br>
+                    <textarea id="chart_y_axis_title_textarea"></textarea>
+                    <br>
+
+
+                    <label for="chart_y_axis_x_position_input">Title indent: </label>
+                    <input type="text" id="chart_y_axis_x_position_input" class="small number_entry" value="" />
+                    <span class="notes">(higher value moves title to the right)</span>
+                    <br>
+                    <label for="chart_y_axis_tickmark_interval_input">Tickmark interval: </label>
+                    <input type="text" id="chart_y_axis_tickmark_interval_input" class="medium number_entry" value="" />
+                    <span class="notes">(Automatic if left empty.)</span>
+                    <br>
+                    <label for="chart_y_axis_min_input">Min value: </label>
+
+                    <input type="text" id="chart_y_axis_min_input" class="medium number_entry" value="" />
+                    <br>
+                    <label for="chart_y_axis_max_input">Max value: </label>
+
+                    <input type="text" id="chart_y_axis_max_input" class="medium number_entry" value="" />
+                    <span class="notes">(Automatic if left empty.)</span>
+                    <br>
+
+                    <label for="chart_y_axis_opposite_checkbox">Put labels on opposite side of chart: </label>
+                    <input type="checkbox" id="chart_y_axis_opposite_checkbox">
+                    <br>
+                    <label for="chart_y_axis_log_checkbox">Log axis: </label>
+                    <input type="checkbox" id="chart_y_axis_log_checkbox">
+                    <br>
+                    <label for="chart_y_axis_signs_select">Dollar / percent signs: </label>
+                    <select id="chart_y_axis_signs_select">
+                        <option value="no_signs" selected> </option>
+                        <option value="$">$</option>
+                        <option value="%">%</option>
+                    </select>
+                    <br>
+
+                    <label for="chart_y_axis_decimal_points_select">Decimal points: </label>
+                    <select id="chart_y_axis_decimal_points_select">
+                        <option value="auto">Auto</option>
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                    <br>
+
+                    <label for="chart_y_axis_divide_select">Divide label value by: </label>
+                    <select id="chart_y_axis_divide_select">
+                        <option value="1"> </option>
+                        <option value="10">10</option>
+                        <option value="100">100</option>
+                        <option value="1000">1,000</option>
+                        <option value="10000">10,000</option>
+                        <option value="100000">100,000</option>
+                        <option value="1000000">1,000,000</option>
+                    </select>
+
+
+
+                </div>
 
             </div>
 
