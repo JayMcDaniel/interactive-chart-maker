@@ -58,28 +58,35 @@
                 <h4>Chart type</h4>
                 <div class="display_options">
 
-                    <label for="chart_type_select">Type:</label>
-                    <select id="chart_type_select">
-                        <option value="bar" selected>Bar</option>
-                        <option value="bubble">Bubble</option>
-                        <option value="column">Column</option>
-                        <option value="drilldown">Drilldown</option>
-                        <option value="line">Line</option>
-                        <option value="map">Map</option>
-                        <option value="scatter">Scatter</option>
-                    </select>
+                    <span id="chart_type_icons">
+                    <div class="chart_type_icon selected_chart_type" id="chart_type_line" value="line" title="line"></div>
+                    <div class="chart_type_icon" id="chart_type_bar" value="bar" title="bar"></div>
+                    <div class="chart_type_icon" id="chart_type_column" value="column" title="column"></div>
+                    <div class="chart_type_icon" id="chart_type_bubble" value="bubble" title="bubble"></div>
+                    <div class="chart_type_icon" id="chart_type_scatter" value="scatter" title="scatter"></div>
+                    <div class="chart_type_icon" id="chart_type_drilldown" value="drilldown" title="drilldown"></div>
+                    <div class="chart_type_icon" id="chart_type_map" value="map" title="map"></div>
+                    </span>
+
+
                 </div>
 
             </div>
 
+
+
+
             <!-- chart data options box -->
             <div class="display map_display chart_display" id="display_data">
-                <h4>Chart data</h4>
+                <h4>Chart data <sup class = "help_icon">?</sup></h4>
                 <div class="display_options">
                     <textarea id="table_input_textarea" placeholder="Insert table html here"></textarea>
                 </div>
 
             </div>
+
+
+
 
             <!-- chart template options box -->
             <div class="display chart_display" id="display_chart_template">
@@ -96,22 +103,22 @@
                     <span style="margin-right: -5px;">&larr;</span>&rarr;
                     <input type="text" id="chart_width_textinput" value="580" class="small" />
 
-
                     <span style="position: relative; top: 3px;"><span style="position: relative; left: 9px; top: -5px;">&uarr;</span>&darr;</span>
                     <input type="text" id="chart_height_textinput" value="430" class="small" />
                     <br>
 
                     <label>Chart margins:</label>
+
                     <div id="margins_outer_div">
                         <input type="text" id="top_margin_textinput" value="90" class="small" />
                         <input type="text" id="right_margin_textinput" value="40" class="small" />
                         <input type="text" id="bottom_margin_textinput" value="75" class="small" />
                         <input type="text" id="left_margin_textinput" value="80" class="small" />
                         <div id="margins_inner_box">
-                            <span id="margins_down_arrow" class="margin_arrow" >&darr;</span>
-                            <span id="margins_left_arrow" class="margin_arrow" >&larr;</span>
-                            <span id="margins_up_arrow" class="margin_arrow" >&uarr;</span>
-                            <span id="margins_right_arrow" class="margin_arrow" >&rarr;</span>
+                            <span id="margins_down_arrow" class="margin_arrow">&darr;</span>
+                            <span id="margins_left_arrow" class="margin_arrow">&larr;</span>
+                            <span id="margins_up_arrow" class="margin_arrow">&uarr;</span>
+                            <span id="margins_right_arrow" class="margin_arrow">&rarr;</span>
 
                         </div>
 
@@ -121,11 +128,17 @@
 
             </div>
 
+
+
+
             <!-- Legend options box -->
             <div class="display chart_display" id="display_chart_legend">
                 <h4>Legend</h4>
                 <div class="display_options"></div>
             </div>
+
+
+
 
             <!-- X-axis options box -->
             <div class="display chart_display" id="display_chart_x_axis">
@@ -134,12 +147,18 @@
 
             </div>
 
+
+
+
             <!-- Y-axis options box -->
             <div class="display chart_display" id="display_chart_y_axis">
                 <h4>Y-axis</h4>
                 <div class="display_options"></div>
 
             </div>
+
+
+
 
             <!-- Tooltip options box -->
             <div class="display chart_display" id="display_chart_tooltip">
@@ -148,12 +167,18 @@
 
             </div>
 
+
+
+
             <!-- Credits options box -->
             <div class="display chart_display" id="display_chart_credits">
                 <h4>Credits</h4>
                 <div class="display_options"></div>
 
             </div>
+
+
+
 
             <!-- Extra options box -->
             <div class="display chart_display" id="display_chart_extra_options">

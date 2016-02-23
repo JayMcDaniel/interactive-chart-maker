@@ -14,7 +14,19 @@ var navigation_setup = {
             $(selectedID).addClass("selected_display");
 
         });
+    },
+
+    /** when chart type icon is clicked and changed */
+    chartTypeIconChange: function chartTypeIconChange() {
+        $("#chart_type_icons .chart_type_icon").click(function () {
+            //change selected icon
+            $("#chart_type_icons .chart_type_icon").removeClass("selected_chart_type");
+            $(this).addClass("selected_chart_type");
+
+        });
     }
+
+
 }
 
 module.exports = navigation_setup;
