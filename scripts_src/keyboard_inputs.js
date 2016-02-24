@@ -1,27 +1,30 @@
-var keyboard_inputs = {
+module.exports = (function () {
+
+    var keyboard_inputs = {
 
 
-    bindNumberEntryInputs: function bindNumberEntryInputs() {
+        bindNumberEntryInputs: function bindNumberEntryInputs() {
 
-        var adjValue = function adjValue(val, direction) {
-            var val = Number(val);
-            if (!isNaN(val)) {
-                return direction === "+" ? val + 10 : val - 10;
-            } else {
-                return val;
-            }
-        };
+            var adjValue = function adjValue(val, direction) {
+                var val = Number(val);
+                if (!isNaN(val)) {
+                    return direction === "+" ? val + 10 : val - 10;
+                } else {
+                    return val;
+                }
+            };
 
-        $(".number_entry").keyup(function (e) {
-            if (e.keyCode === 38) { //up pushed
-                $(this).val(adjValue($(this).val(), "+"));
-            } else if (e.keyCode === 40) {
-                $(this).val(adjValue($(this).val(), "-"));
-            }
-        });
+            $(".number_entry").keyup(function (e) {
+                if (e.keyCode === 38) { //up pushed
+                    $(this).val(adjValue($(this).val(), "+"));
+                } else if (e.keyCode === 40) {
+                    $(this).val(adjValue($(this).val(), "-"));
+                }
+            });
+
+        }
 
     }
 
-}
-
-module.exports = keyboard_inputs;
+    keyboard_inputs.bindNumberEntryInputs();
+})();
