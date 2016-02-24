@@ -335,8 +335,8 @@
 
 
 
-            
-            
+
+
 
             <!-- Credits options box -->
             <div class="display chart_display" id="display_chart_credits">
@@ -351,14 +351,14 @@
                     <label for="chart_credits_y_position_input">Vertical position: </label>
 
                     <br>
-                    <input type="text" id="chart_credits_y_position_input" value="-20" class="small number_entry"/>
+                    <input type="text" id="chart_credits_y_position_input" value="-20" class="small number_entry" />
                     <span class="notes">Lower value moves credits up.</span>
 
                 </div>
 
             </div>
 
-            
+
 
 
 
@@ -366,7 +366,42 @@
             <!-- Extra options box -->
             <div class="display chart_display" id="display_chart_extra_options">
                 <h4>Extra options <sup class = "help_icon">?</sup></h4>
-                <div class="display_options"></div>
+                <div class="display_options">
+
+                    <label for="chart_mlr_styles_checkbox">MLR styles: </label>
+                    <input type="checkbox" id="chart_mlr_styles_checkbox" />
+                    <br>
+
+                    <label for="chart_invert_axes_checkbox">Invert axes: </label>
+                    <input type="checkbox" id="chart_invert_axes_checkbox" />
+                    <br>
+
+                    <label for="chart_zoom_select">Make zoomable: </label>
+                    <select id="chart_zoom_select">
+                        <option value="no_zoom"> </option>
+                        <option value="x">X-axis zoom</option>
+                        <option value="y">Y-axis zoom</option>
+                        <option value="xy">Both axes zoom</option>
+                    </select>
+                    <br>
+
+                    <label for="chart_show_data_labels_checkbox">Show data labels: </label>
+                    <input type="checkbox" id="chart_show_data_labels_checkbox">
+                    <br>
+
+
+                    <label for="chart_add_recession_shading_select">Recession shading: </label>
+                    <select id="chart_add_recession_shading_select">
+                        <option value="no_recession"> </option>
+                        <option value="monthly_recession">Monthly data</option>
+                        <option value="quarterly_recession">Quarterly data</option>
+                        <option value="ECI_recession">ECI data</option>
+                    </select>
+                    <br>
+                    <span class="notes">NOTE: For this to work, dates must be entered in mmm yyyy, or Q1 yyyy style. (e.g.: "May 2014, Jun 2014, Jul 2014; or Q1 2010, Q2 2010, Q3 2010")</span>
+
+
+                </div>
 
             </div>
 
@@ -374,6 +409,9 @@
 
     </div>
     <!-- side nav bar end -->
+
+
+
 
 
 
