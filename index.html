@@ -17,9 +17,11 @@
     <link rel="stylesheet" href="styles/css/styles_cm.css" />
     <link rel="stylesheet" href="libraries/highlight/styles/googlecode.css">
 
-
-
 </head>
+
+
+
+
 
 <body>
 
@@ -47,7 +49,7 @@
             <div class="tab chart_tab" id="tab_chart_x_axis">X-axis</div>
             <div class="tab chart_tab" id="tab_chart_y_axis">Y-axis</div>
             <div class="tab chart_tab" id="tab_chart_tooltip">Tool tip (hover infobox)</div>
-            <div class="tab chart_tab" id="tab_chart_credits">Credits</div>
+            <div class="tab chart_tab" id="tab_chart_credits">Credits and notes</div>
             <div class="tab chart_tab" id="tab_chart_extra_options">Extra options</div>
 
         </div>
@@ -69,10 +71,10 @@
                     <div class="chart_type_icon" id="chart_type_map" value="map" title="map"></div>
                     </span>
 
-                    
+
                 </div>
                 <div class="clearfloat"></div>
-                
+
 
             </div>
 
@@ -83,7 +85,7 @@
             <div class="display map_display chart_display" id="display_data">
                 <h4>Chart data <sup class = "help_icon">?</sup></h4>
                 <div class="display_options">
-                    <textarea id="table_input_textarea" placeholder="Insert table html here"></textarea>
+                    <textarea id="table_input_textarea" class="large" placeholder="Insert table html here"></textarea>
                 </div>
 
             </div>
@@ -111,7 +113,8 @@
                     <input type="text" id="chart_height_textinput" value="430" class="small number_entry" />
                     <br>
 
-                    <label>Chart margins:</label>
+                    <label>Chart margins:</label> <span class="notes">Higher values move margins inwards.</span>
+
 
                     <div id="margins_outer_div">
                         <input type="text" id="top_margin_textinput" value="90" class="small number_entry" />
@@ -125,6 +128,7 @@
                             <span id="margins_right_arrow" class="margin_arrow">&rarr;</span>
 
                         </div>
+
 
                     </div>
                 </div>
@@ -165,7 +169,7 @@
                     <label for="legend_make_toggle_checkbox" style="font-size:100%; font-weight:normal;">Hide other series when one is clicked: </label>
                     <input type="checkbox" id="legend_make_toggle_checkbox">
                     <br>
-                    <span class="notes">(This will cause the first legend item to be visible and the others to be hidden.)</span>
+                    <span class="notes">This will cause the first legend item to be visible and the others to be hidden.</span>
 
                 </div>
             </div>
@@ -191,6 +195,7 @@
                     <label for="chart_x_axis_show_only_years">Show only years for dates: </label>
                     <input type="checkbox" id="chart_x_axis_show_only_years" />
                     <br>
+
                     <label for="chart_x_axis_add_commas">Add commas to labels: </label>
                     <input type="checkbox" id="chart_x_axis_add_commas" />
 
@@ -212,31 +217,31 @@
                     <textarea id="chart_y_axis_title_textarea"></textarea>
                     <br>
 
-
                     <label for="chart_y_axis_x_position_input">Title indent: </label>
                     <input type="text" id="chart_y_axis_x_position_input" class="small number_entry" value="" />
                     <span class="notes">(higher value moves title to the right)</span>
                     <br>
+
                     <label for="chart_y_axis_tickmark_interval_input">Tickmark interval: </label>
-                    <input type="text" id="chart_y_axis_tickmark_interval_input" class="medium number_entry" value="" />
-                    <span class="notes">(Automatic if left empty.)</span>
+                    <input type="text" id="chart_y_axis_tickmark_interval_input" class="medium number_entry" placeholder="Auto if empty" value="" />
                     <br>
+
                     <label for="chart_y_axis_min_input">Min value: </label>
-
-                    <input type="text" id="chart_y_axis_min_input" class="medium number_entry" value="" />
+                    <input type="text" id="chart_y_axis_min_input" class="medium number_entry" placeholder="Auto if empty" value="" />
                     <br>
-                    <label for="chart_y_axis_max_input">Max value: </label>
 
-                    <input type="text" id="chart_y_axis_max_input" class="medium number_entry" value="" />
-                    <span class="notes">(Automatic if left empty.)</span>
+                    <label for="chart_y_axis_max_input">Max value: </label>
+                    <input type="text" id="chart_y_axis_max_input" class="medium number_entry" placeholder="Auto if empty" value="" />
                     <br>
 
                     <label for="chart_y_axis_opposite_checkbox">Put labels on opposite side of chart: </label>
                     <input type="checkbox" id="chart_y_axis_opposite_checkbox">
                     <br>
+
                     <label for="chart_y_axis_log_checkbox">Log axis: </label>
                     <input type="checkbox" id="chart_y_axis_log_checkbox">
                     <br>
+
                     <label for="chart_y_axis_signs_select">Dollar / percent signs: </label>
                     <select id="chart_y_axis_signs_select">
                         <option value="no_signs" selected> </option>
@@ -245,8 +250,8 @@
                     </select>
                     <br>
 
-                    <label for="chart_y_axis_decimal_points_select">Decimal points: </label>
-                    <select id="chart_y_axis_decimal_points_select">
+                    <label for="chart_y_axis_decimals_select">Decimal points: </label>
+                    <select id="chart_y_axis_decimals_select">
                         <option value="auto">Auto</option>
                         <option value="0">0</option>
                         <option value="1">1</option>
@@ -266,6 +271,62 @@
                         <option value="1000000">1,000,000</option>
                     </select>
 
+                </div>
+
+            </div>
+
+
+
+
+
+            <!-- Tooltip options box -->
+            <div class="display chart_display" id="display_chart_tooltip">
+                <h4>Tooltip (hover infobox) <sup class = "help_icon">?</sup></h4>
+                <div class="display_options">
+
+                    <label for="chart_tooltip_shared_checkbox">Show all series: </label>
+                    <input type="checkbox" id="chart_tooltip_shared_checkbox">
+                    <span class="notes">This makes the tooltip "shared" and shows all series on hover instead of just one.</span>
+                    <br>
+
+                    <label for="chart_tooltip_force_decimals_select">Decimal points: </label>
+                    <select id="chart_tooltip_force_decimals_select">
+                        <option value="0">Auto</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                    <span class="notes">This will force the values shown to the selected decimal point, so "5" will be "5.0".</span>
+                    <br>
+
+                    <label for="chart_tooltip_signs_select">Dollar / percent signs: </label>
+                    <select id="chart_tooltip_signs_select">
+                        <option value="no_signs" selected> </option>
+                        <option value="$">$</option>
+                        <option value="%">%</option>
+                    </select>
+                    <span class="notes">This will add a dollar or percent sign after each value in the tooltip.</span>
+                    <br>
+
+                    <label for="chart_tooltip_crosshairs_select">Crosshairs: </label>
+                    <select id="chart_tooltip_crosshairs_select">
+                        <option value="no_crosshairs"> </option>
+                        <option value="x_crosshairs">X-axis</option>
+                        <option value="y_crosshairs">Y-axis</option>
+                        <option value="xy_crosshairs">Both axes</option>
+                    </select>
+                    <br>
+
+                    <label for="chart_tooltip_y_multiple_select">Multiply Y-value by: </label>
+                    <select id="chart_tooltip_y_multiple_select">
+                        <option value="1"> </option>
+                        <option value="10">10</option>
+                        <option value="100">100</option>
+                        <option value="1000">1,000</option>
+                        <option value="10000">10,000</option>
+                        <option value="100000">100,000</option>
+                        <option value="1000000">1,000,000</option>
+                    </select>
 
 
                 </div>
@@ -274,23 +335,30 @@
 
 
 
-
-            <!-- Tooltip options box -->
-            <div class="display chart_display" id="display_chart_tooltip">
-                <h4>Tooltip (hover infobox) <sup class = "help_icon">?</sup></h4>
-                <div class="display_options"></div>
-
-            </div>
-
-
-
+            
+            
 
             <!-- Credits options box -->
             <div class="display chart_display" id="display_chart_credits">
-                <h4>Credits <sup class = "help_icon">?</sup></h4>
-                <div class="display_options"></div>
+                <h4>Credits and notes<sup class = "help_icon">?</sup></h4>
+                <div class="display_options">
+
+                    <label for="chart_credits_text_textarea">Text: </label>
+                    <br>
+                    <textarea id="chart_credits_text_textarea" class="medium">Click legend items to change data display. Hover over chart to view data.&lt;br&gt;Source: U.S. Bureau of Labor Statistics.</textarea>
+                    <br>
+
+                    <label for="chart_credits_y_position_input">Vertical position: </label>
+
+                    <br>
+                    <input type="text" id="chart_credits_y_position_input" value="-20" class="small number_entry"/>
+                    <span class="notes">Lower value moves credits up.</span>
+
+                </div>
 
             </div>
+
+            
 
 
 

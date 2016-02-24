@@ -53,7 +53,7 @@
         background-repeat: no-repeat;
         background-position: center;
         &:hover {
-            border-color: $highlight_color;
+            border-color: $primary_color;
         }
         &.selected_chart_type {
             border-color: $highlight_color;
@@ -205,7 +205,7 @@
                 padding-left: 10px;
             }
             .tab:hover {
-                color: $highlight_color;
+                color: $primary_color;
             }
             .tab.selected_tab {
                 background-color: $primary_light_text_color;
@@ -277,11 +277,16 @@
         height: 40px;
     }
     
-    #table_input_textarea {
-        height: 400px;
-    }
-    
+  
     textarea {
         width: 100%;
         height: 50px;
+        
+        &.medium{
+            height: 100px;
+        }
+        
+        &.large{
+            height: 400px;
+        }
     }
