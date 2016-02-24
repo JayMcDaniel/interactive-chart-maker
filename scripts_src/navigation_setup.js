@@ -1,5 +1,5 @@
 /** object that contains functions for all the navigation, ie changing between options and chart types */
-module.exports =  (function () {
+module.exports = (function () {
     var navigation_setup = {
 
         /** when tabs on left side nav bar are clicked, options displayed are changed */
@@ -38,12 +38,29 @@ module.exports =  (function () {
                 $(".notes", $(this).parents(".display")).toggle();
             });
 
+        },
+
+        /** when a get code button is clicked */
+
+        getCodeButtonClick: function getCodeButtonClick() {
+
+            $("#get_code_button").click(function (e) {
+                var $get_code_span = $("#get_code_text");
+                $(this).toggleClass("code_on");
+                $("#main_result_code_div").slideToggle(100);
+                if ($get_code_span.text() === "Get code") {
+                    $get_code_span.text("Hide code");
+                } else {
+                    $get_code_span.text("Get code");
+                }
+            });
+
         }
     }
 
     navigation_setup.sideNavTabsChange();
     navigation_setup.chartTypeIconChange();
     navigation_setup.helpIconClick();
+    navigation_setup.getCodeButtonClick();
 
 })();
-

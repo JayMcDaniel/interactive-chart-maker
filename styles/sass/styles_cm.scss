@@ -1,7 +1,8 @@
     $primary_color: rgb(51, 122, 183);
     $secondary_color: rgb(136, 181, 221);
     $highlight_color: rgb(183, 52, 56);
-    $primary_light_text_color: #fff;
+    $primary_light_color: #fff;
+    $secondary_light_color: rgb(255, 250, 250);
     @font-face {
         font-family: 'sinkin_sans200_x_light';
         src: url('../fonts/sinkin-sans.200-x-light-webfont.eot');
@@ -20,6 +21,10 @@
         height: 100%;
         color: $primary_color;
         font-family: sans-serif;
+        h4 {
+            color: $highlight_color;
+            font-family: "sinkin_sans200_x_light";
+        }
         p {
             margin: 5px 0px 5px 0px;
         }
@@ -89,7 +94,7 @@
     
     .help_icon {
         font-family: sans-serif;
-        border: 1px solid #fff;
+        border: 1px solid $highlight-color;
         border-radius: 25px;
         padding: 1px 3px 1px 3px;
         font-size: 11px;
@@ -130,6 +135,22 @@
     
     label.small {
         margin-top: -5px;
+    }
+    
+    #main_content_div {
+        width: 70%;
+        height: 100%;
+        background-color: $secondary_light_color;
+        float: left;
+    }
+    
+    #main_result_code_div {
+        display: none;
+        width: 100%;
+        min-height: 500px;
+        padding: 10px;
+        background-color: $primary_light_color;
+        border: solid 1px $highlight-color;
     }
     
     #margins_outer_div {
@@ -189,9 +210,10 @@
     /* left side div with all of the configurations options etc. inside it */
     
     #side_main {
-        width: 400px;
+        float: left;
+        width: 30%;
         background-color: $secondary_color;
-        color: $primary_light_text_color;
+        color: $primary_light_color;
         height: 100%;
         padding: 10px;
         h3 {
@@ -209,18 +231,14 @@
                 color: $primary_color;
             }
             .tab.selected_tab {
-                background-color: $primary_light_text_color;
+                background-color: $secondary_light_color;
                 color: $highlight_color;
                 cursor: default;
             }
         }
         #side_display {
-            border-top: 2px solid $primary_light_text_color;
+            border-top: 2px solid $primary_light_color;
             margin-top: 10px;
-            h4 {
-                color: $highlight_color;
-                font-family: "sinkin_sans200_x_light";
-            }
             .display {
                 display: none;
                 .display_options {
@@ -238,7 +256,7 @@
     #top_nav_bar {
         width: 100%;
         background-color: $primary_color;
-        color: $primary_light_text_color;
+        color: $primary_light_color;
         height: 40px;
         padding-left: 10px;
         position: fixed;
@@ -256,12 +274,14 @@
         #get_code_button {
             padding: 6px 5px 6px 5px;
             border: solid 1px $highlight_color;
-            ;
             border-radius: 5px;
             margin-left: 30px;
             cursor: pointer;
             background-color: #fff;
             color: $primary_color;
+            &.code_on{
+                color: $highlight_color;
+            }
             #get_code_icon {
                 font-size: 180%;
                 position: relative;
@@ -278,16 +298,13 @@
         height: 40px;
     }
     
-  
     textarea {
         width: 100%;
         height: 50px;
-        
-        &.medium{
+        &.medium {
             height: 100px;
         }
-        
-        &.large{
+        &.large {
             height: 400px;
         }
     }

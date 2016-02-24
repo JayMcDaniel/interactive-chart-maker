@@ -29,7 +29,7 @@
     <div id="top_nav_bar">
         <h1>Interactive Chart Maker</h1>
         <span id="app_version">v2.0.0</span>
-        <span id="get_code_button" title="Get chart/map code"><span id="get_code_icon">&lt; / &gt;</span> Get code</span>
+        <span id="get_code_button" title="Get chart/map code"><span id="get_code_icon">&lt; / &gt;</span> <span id="get_code_text">Get code</span></span>
     </div>
     <!-- top nav bar end -->
 
@@ -212,6 +212,7 @@
                     <label for="chart_x_axis_tickmark_interval_input">Tick mark (label) interval: </label>
                     <input type="text" id="chart_x_axis_tickmark_interval_input" class="small number_entry" value="" />
                     <span class="notes">(Automatic if left empty.)</span>
+                    <br>
 
 
                     <label for="chart_x_axis_show_only_years">Show only years for dates: </label>
@@ -371,8 +372,6 @@
                     <br>
 
                     <label for="chart_credits_y_position_input">Vertical position: </label>
-
-                    <br>
                     <input type="text" id="chart_credits_y_position_input" value="-20" class="small number_entry" />
                     <span class="notes">Lower value moves credits up.</span>
 
@@ -434,11 +433,24 @@
 
 
 
+    <!-- main content div (shows the chart / map / code to the right of the side nav)-->
+
+    <div id="main_content_div">
+        <!-- chart / map get code boxes -->
+        <div id="main_result_code_div">
+            <h4>Chart code <sup class = "help_icon">?</sup></h4>
+            <pre><code id="chart_output_code" class="js"></code></pre>
+        </div>
 
 
 
-    <!-- chart / map get code boxes -->
-    <!--<pre><code class="js"></code></pre>-->
+
+
+    </div>
+    <!-- main_content_div end -->
+
+
+
 
 
 
