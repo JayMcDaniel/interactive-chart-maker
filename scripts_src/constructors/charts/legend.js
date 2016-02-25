@@ -15,19 +15,19 @@ var Legend = function (o) {
     this.shadow = o.shadow || false;
     this.useHTML = o.useHTML || false;
     this.verticalAlign = o.verticalAlign || 'top';
-    this.width = o.width || undefined;
+    this.width = o.width;
     this.x = o.x || 0;
     this.y = o.y || 30;
 
-    this.itemStyle: {
+    this.itemStyle = {
         fontFamily: 'Calibri, Verdana, Arial, Helvetica, sans-serif',
         color: '#000'
     };
-    this.itemHiddenStyle: {
+    this.itemHiddenStyle = {
         color: 'gray'
     };
-    this.itemHoverStyle: {
-        cursor: o.itemHoverStyle.cursor || "pointer"
+    this.itemHoverStyle = {
+        cursor: o.itemHoverStyle ? o.itemHoverStyle.cursor || "pointer" : "pointer"
     }
 
 }

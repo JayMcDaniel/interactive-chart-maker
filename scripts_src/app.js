@@ -5,26 +5,11 @@ $(document).ready(function () {
     var jq_extensions = require("./utils/jq_extensions.js");
 
     //page init
-    var page_init = require("./controllers/page_init.js");
-
-    //constructors
-    var AllChartOptions = require("./constructors/charts/all_chart_options.js");
-
-
-
-
-
-
-
-
-
-    var options = {
-        colors: [1, 3]
-    }
-    var all_chart_options = new AllChartOptions(options);
+    var page_init = require("./initializers/page_init.js");
     
-    all_chart_options.setOption("colors", [5,6]);
-
+    //initial all chart options init
+    var allChartOptionsInit = require("./initializers/all_chart_options_init.js");
+    var all_chart_options = allChartOptionsInit();
 
 
 
@@ -33,3 +18,5 @@ $(document).ready(function () {
     $("#chart_output_code").text(chart_options_js_string);
 
 });
+
+

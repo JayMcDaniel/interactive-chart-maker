@@ -8,8 +8,8 @@ var yAxis = function (o) {
     this.gridLineDashStyle = o.gridLineDashStyle || 'Dot';
 
     this.labels = {
-        formatter: o.labels.formatter || undefined,
-        rotation: o.labels.rotation || 0,
+        formatter: o.labels ? o.labels.formatter : undefined,
+        rotation: o.labels ? o.labels.rotation || 0 : 0,
         style: {
             color: '#000000',
             fontFamily: 'Calibri, Verdana, Arial, Helvetica, sans-serif',
@@ -38,16 +38,16 @@ var yAxis = function (o) {
     this.tickmarkPlacement = o.tickmarkPlacement || 'on';
     this.tickPosition = o.tickPosition || 'outside';
     this.tickColor = o.tickColor || '#C0D0E0';
-    this.tickWidth = o.tickWidth: || 1;
+    this.tickWidth = o.tickWidth || 1;
 
     this.title = {
         useHTML: true,
-        text: o.title.text || '',
-        margin: o.title.margin || 6,
-        align: o.title.align || 'middle',
+        text: o.title ? o.title.text || '' : '',
+        margin: o.title ? o.title.margin || 6 : 6,
+        align: o.title ? o.title.align || 'middle' : 'middle',
         offset: 20,
         rotation: 0,
-        x: o.title.x || 35,
+        x: o.title ? o.title.x || 35 : 35,
         y: -15,
 
         style: {

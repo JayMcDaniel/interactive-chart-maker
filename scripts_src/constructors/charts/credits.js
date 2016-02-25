@@ -7,7 +7,7 @@ var Credits = function (o) {
     this.position = {
         align: 'left',
         x: 10,
-        y: o.position.y || -20
+        y: o.position ? o.position.y || -20 : -20
     };
     this.style = {
         cursor: "default",

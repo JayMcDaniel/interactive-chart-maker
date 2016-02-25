@@ -4,7 +4,7 @@ var utils_main = require("../../utils/utils_main.js");
 var Tooltip = function (o) {
     this.backgroundColor = '#FEFFEF';
     this.crosshairs = o.crosshairs || [false, false];
-    this.formatter = o.formatter || undefined;
+    this.formatter = o.formatter;
     this.shared = o.shared || false;
     
     this.style = {
@@ -13,7 +13,7 @@ var Tooltip = function (o) {
     };
     
     this.useHTML = true;
-    this.valueDecimals = o.valueDecimals || undefined;
+    this.valueDecimals = o.valueDecimals;
     this.valuePrefix = o.valuePrefix || "";
     this.valueSuffix = o.valueSuffix || "";
 

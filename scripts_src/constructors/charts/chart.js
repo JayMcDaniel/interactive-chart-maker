@@ -6,7 +6,6 @@ var ChartOptions = function (o) {
 
     this.renderTo = o.renderTo || "chart0";
     this.margin = [o.marginTop || 90, o.marginRight || 40, o.marginBottom || 80, o.marginLeft || 75]; //[top,right,bottom,left]
-    this.borderColor = o.borderColor || 'white';
     this.borderWidth = o.borderWidth || 0;
     this.plotBorderColor = o.plotBorderColor || '#fff';
     this.plotBorderWidth = o.plotBorderWidth || 0;
