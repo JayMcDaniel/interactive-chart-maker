@@ -1,15 +1,14 @@
 $(document).ready(function () {
 
     //utils
-    var utils = require("./utils/utils_main.js");
+    var utils_main = require("./utils/utils_main.js");
     var jq_extensions = require("./utils/jq_extensions.js");
 
-    //inits
-    var navigation_setup = require("./navigation_setup.js");
-    var keyboard_inputs = require("./keyboard_inputs");
+    //page init
+    var page_init = require("./controllers/page_init.js");
 
     //constructors
-    var ChartOptions = require("./constructors/chart_options.js");
+    var AllChartOptions = require("./constructors/charts/all_chart_options.js");
 
 
 
@@ -22,12 +21,14 @@ $(document).ready(function () {
     var options = {
         colors: [1, 3]
     }
-    var chart_options = new ChartOptions(options);
+    var all_chart_options = new AllChartOptions(options);
+    
+    all_chart_options.setOption("colors", [5,6]);
 
 
 
 
-    var chart_options_js_string = utils.deepStringify(chart_options);
+    var chart_options_js_string = utils_main.deepStringify(all_chart_options);
 
     $("#chart_output_code").text(chart_options_js_string);
 

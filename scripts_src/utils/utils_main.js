@@ -16,6 +16,11 @@ var utils_main = {
             }
         }).replace(/\\n/g, "");
 
+    },
+
+    //sets an option to a given object. the chart options constructors use this in thier prototypes
+    setOption: function setOption(option, obj) {
+        this[option] = obj;
     }
 
 }
