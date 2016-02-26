@@ -3,9 +3,14 @@ var update_template = require("./update_template.js");
 var updateChartType = require("./update_chart_type.js");
 var utils_forms = require("../utils/utils_forms");
 var update_legend = require("./update_legend.js");
+var update_x_axis = require("./update_x_axis.js");
 
 var allFormUpdates = function (chart, all_chart_options) {
 
+    
+    
+/** TEMPLATE CHANGES */
+    
     //chart width
     $("#chart_width_textinput").keyup(function () {
         update_template.resize($(this).val(), "width", chart, all_chart_options);
@@ -24,8 +29,9 @@ var allFormUpdates = function (chart, all_chart_options) {
         update_template.margin(margins_arr, chart, all_chart_options);
 
     });
-
-
+    
+/** CHART TYPE CHANGES */
+    
     //chart type changed
     $.each(['line', 'bar', 'column', 'bubble', 'scatter', "drilldown"], function (i, type) {
         $('#chart_type_' + type).click(function () {
@@ -39,6 +45,8 @@ var allFormUpdates = function (chart, all_chart_options) {
         update_legend.updateLayout($(this).val(), chart, all_chart_options);
     });
 
+/** LEGEND CHANGES */
+    
     //legend reverse ceckbox changed
     $("#legend_reverse_layout_checkbox").change(function () {
         var val = utils_forms.getCheckBoxValue($(this));
@@ -52,6 +60,15 @@ var allFormUpdates = function (chart, all_chart_options) {
 
         update_legend.updateXYpositions(newX, newY, chart, all_chart_options);
     });
+    
+/** X AXIS CHANGES */
+    
+    //x axis title textarea changed
+    $("#chart_x_axis_title_textarea").keyup(function () {
+        var newTitle = $(this).val();
+        update_x_axis.updateTitle(newTitle, chart, all_chart_options);
+    });
+    
 
 };
 

@@ -5,11 +5,11 @@ var Series = function (o) {
 
     this.series = o.series || [{
             name: "Series 1",
-            data: [1, 2, 3, 4]
+            data: [1000, 2000, 3000, 4000]
     },
         {
             name: "Series 2",
-            data: [2, 4, 6, 8]
+            data: [2000, 4000, 6000, 8000]
     }];
 
 }
