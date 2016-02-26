@@ -4,8 +4,8 @@ var utils_main = require("../../utils/utils_main.js");
 
 var ChartOptions = function (o) {
 
-    this.renderTo = o.renderTo || "chart0";
-    this.margin = [o.marginTop || 90, o.marginRight || 40, o.marginBottom || 80, o.marginLeft || 75]; //[top,right,bottom,left]
+    this.renderTo = o.renderTo || "chart_display_area";
+    this.margin = [o.margin[0] || 90, o.margin[1] || 40, o.margin[2] || 80, o.margin[3] || 75]; //[top,right,bottom,left]
     this.borderWidth = o.borderWidth || 0;
     this.plotBorderColor = o.plotBorderColor || '#fff';
     this.plotBorderWidth = o.plotBorderWidth || 0;

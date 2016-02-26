@@ -35,7 +35,7 @@ module.exports = (function () {
 
             $(".help_icon").click(function () {
                 $(this).toggleClass("help_on");
-                $(".notes", $(this).parents(".display")).toggle();
+                $(".notes", $(this).parents("div")).toggle();
             });
 
         },

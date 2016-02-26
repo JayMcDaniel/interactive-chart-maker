@@ -22,7 +22,7 @@
          chart: chartInit(),
          colors: colorsInit(),
          credits: creditsInit(),
-         exportig: exportingInit(),
+        // exportig: exportingInit(),
          legend: legendInit(),
          plotOptions: plotOptionsInit(),
          series: seriesInit(),

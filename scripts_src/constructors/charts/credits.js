@@ -2,18 +2,21 @@
 var utils_main = require("../../utils/utils_main.js");
 
 var Credits = function (o) {
+    this.href = "http://www.bls.gov";
 
-    this.useHTML = true;
     this.position = {
         align: 'left',
         x: 10,
         y: o.position ? o.position.y || -20 : -20
     };
+
     this.style = {
         cursor: "default",
         color: "#2C2C2C"
     };
-    this.href = "http://www.bls.gov";
+
+    this.text = o.text || "";
+    this.useHTML = true;
 }
 
 Credits.prototype.setOption = utils_main.setOption;

@@ -45,6 +45,14 @@
         line-height: .5em;
     }
     
+    #chart_display_area {
+        width: 580px;
+        height: 430px;
+        margin: 20px;
+        padding: 5px;
+        background-color: $primary_color;
+    }
+    
     .chart_type_icon {
         float: left;
         border: solid 2px #fff;
@@ -261,6 +269,7 @@
         padding-left: 10px;
         position: fixed;
         top: 0px;
+        z-index: 500;
         #app_version {
             margin-left: 3px;
             position: relative;
@@ -279,7 +288,7 @@
             cursor: pointer;
             background-color: #fff;
             color: $primary_color;
-            &.code_on{
+            &.code_on {
                 color: $highlight_color;
             }
             #get_code_icon {

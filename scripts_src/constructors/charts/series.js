@@ -5,7 +5,7 @@ var Series = function (o) {
     
     this.series = o.series || [{
         name: "Series 1",
-        data: [1, 2, 3, 4]
+        data: [1,2,3,4]
     }];
 
 }

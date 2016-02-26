@@ -90,7 +90,7 @@
                 <div class="display_options">
                     <label for="chart_id_textinput">Unique ID:</label>
                     <br>
-                    <input type="text" id="chart_id_textinput" class="medium" value="chart0" />
+                    <input type="text" id="chart_id_textinput" class="medium" value="chart_display_area" />
                     <span class="notes">Important if using one or more charts on a page. Make sure not to use spaces, hyphens, or start with a number.</span>
                     <br>
 
@@ -436,13 +436,19 @@
     <!-- main content div (shows the chart / map / code to the right of the side nav)-->
 
     <div id="main_content_div">
-        <!-- chart / map get code boxes -->
+        <!-- chart / map code boxes -->
         <div id="main_result_code_div">
             <h4>Chart code <sup class = "help_icon">?</sup></h4>
-            <pre><code id="chart_output_code" class="prettyprint">{"chart":{},"colors":[1,3],"credits":{},"exporting":{},"legend":{},"plotOptions":{},"series":[{}],"subtitle":{},"title":{},"tooltip":{},"xAxis":{},"yAxis":{}}</code></pre>
+            <p class="notes">The JS comes packed by default, if you need to unpack it, most IDEs (DreamWeaver etc.) will do the trick, or use this tool: <a href="http://www.strictly-software.com/unpack-javascript.aspx" target="_blank">http://www.strictly-software.com/unpack-javascript.aspx</a></p>
+            <pre><code id="chart_output_code" class="prettyprint"></code></pre>
         </div>
 
+        <!-- chart / map display area -->
+        <div id="chart_display_area" class="chart_display_area">
 
+
+
+        </div>
 
 
 
@@ -458,7 +464,7 @@
     <script src="libraries/jquery/jquery-2.2.0.min.js"></script>
     <script src="libraries/highcharts/highcharts.3.0.10.min.js"></script>
     <script src="libraries/highcharts/highcharts.more.3.0.10.min.js"></script>
-    <script src="libraries/highcharts/exporting.3.0.10.min.js"></script>
+<!--    <script src="libraries/highcharts/exporting.3.0.10.min.js"></script>-->
 
 
 

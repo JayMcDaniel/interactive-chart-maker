@@ -7,7 +7,12 @@ var ChartOptions = require("../constructors/charts/chart.js");
 
      //load options from user inputs
      var options = {
-
+         margin: [Number($("#top_margin_textinput").val()),
+                  Number($("#right_margin_textinput").val()),
+                  Number($("#bottom_margin_textinput").val()),
+                  Number($("#left_margin_textinput").val()),
+                 ],
+        renderTo: $("#chart_id_textinput").val()
      };
 
 
