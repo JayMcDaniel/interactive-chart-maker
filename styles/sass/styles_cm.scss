@@ -21,6 +21,7 @@
         height: 100%;
         color: $primary_color;
         font-family: sans-serif;
+        background-color: $secondary_light_color;
         h4 {
             color: $highlight_color;
             font-family: "sinkin_sans200_x_light";
@@ -148,7 +149,6 @@
     #main_content_div {
         width: 70%;
         height: 100%;
-        background-color: $secondary_light_color;
         float: left;
     }
     

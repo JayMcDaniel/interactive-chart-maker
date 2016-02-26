@@ -170,8 +170,8 @@
                     <label for="legend_layout_select">Layout: </label>
                     <select id="legend_layout_select">
                         <option value="horizontal">Horizontal</option>
-                        <option value="vertical">Vertical</option>
-                        <option value="false">No Legend</option>
+                        <option value="vertical" >Vertical</option>
+                        <option value="no_legend">No Legend</option>
                     </select>
                     <br>
 
@@ -179,9 +179,9 @@
                     <label>Placement</label> <span class="notes" style="margin-bottom: -5px;">(higher values push legend right and down)</span>
                     <br>
                     <label for="legend_placement_x" class="small">X: </label>
-                    <input type="text" id="legend_placement_x" value="0" class="small number_entry" />
+                    <input type="text" id="legend_placement_x" value="100" class="small number_entry" />
                     <label for="legend_placement_y" class="small">Y: </label>
-                    <input type="text" id="legend_placement_y" value="0" class="small number_entry" />
+                    <input type="text" id="legend_placement_y" value="30" class="small number_entry" />
                     <br>
 
                     <label for="legend_reverse_layout_checkbox">Reverse legend item order: </label>
@@ -440,7 +440,8 @@
         <div id="main_result_code_div">
             <h4>Chart code <sup class = "help_icon">?</sup></h4>
             <p class="notes">The JS comes packed by default, if you need to unpack it, most IDEs (DreamWeaver etc.) will do the trick, or use this tool: <a href="http://www.strictly-software.com/unpack-javascript.aspx" target="_blank">http://www.strictly-software.com/unpack-javascript.aspx</a></p>
-            <pre><code id="chart_output_code" class="prettyprint"></code></pre>
+            
+            <pre><code class="js" id="chart_output_code"></code></pre>
         </div>
 
         <!-- chart / map display area -->
@@ -473,8 +474,9 @@
     </script>
 
     <!-- code highlighting -->
-    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
-
+<link rel="stylesheet" href="libraries/highlight/styles/custom.css">
+<script src="libraries/highlight/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
 
 
 </body>

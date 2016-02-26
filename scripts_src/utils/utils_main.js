@@ -6,7 +6,7 @@ var utils_main = {
         return console.log(e);
     },
 
-    //turns objects into strings, including their methods
+    /** turns objects into strings, including their methods */
     deepStringify: function deepStringify(obj) {
         return JSON.stringify(obj, function (key, value) {
             if (typeof value === 'function') {
@@ -17,11 +17,23 @@ var utils_main = {
         }).replace(/\\n/g, "");
 
     },
-
-    //sets an option to a given object. the chart options constructors use this in thier prototypes
-    setOption: function setOption(option, obj) {
+    
+    /** sets an option to a given object. the chart options constructors use this in thier prototypes */
+    setOption: function setOption(option, obj, all_chart_options) {
         this[option] = obj;
+        utils_main.writeCode(all_chart_options);
+    },
+
+    writeCode: function writeCode(all_chart_options) {
+
+         //place code in chart_output_code and reinit highlight
+        var chart_options_js_string = utils_main.deepStringify(all_chart_options);
+        $("#chart_output_code").text(chart_options_js_string).each(function (i, block) {
+            hljs.highlightBlock(block);
+        });
+
     }
+
 
 }
 

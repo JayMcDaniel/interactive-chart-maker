@@ -3,7 +3,7 @@ var utils_main = require("../../utils/utils_main.js");
 
 var Legend = function (o) {
 
-    this.align = o.align || 'center';
+    this.align = o.align || 'left';
     this.backgroundColor = o.backgroundColor || 'none';
     this.borderColor = o.borderColor || 'none';
     this.borderWidth = o.borderWidth || 0;

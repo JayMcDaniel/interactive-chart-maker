@@ -1,5 +1,3 @@
-var writeCode = require("../write_code.js");
-
 var update_template = {
     resize: function (val, dimension, chart, all_chart_options) {
         val = Number(val);
@@ -16,9 +14,7 @@ var update_template = {
         });
         chart.margin = margins_arr;
         chart.redraw(false);
-        all_chart_options.chart.setOption("margin", margins_arr);
-        writeCode(all_chart_options);
-
+        all_chart_options.chart.setOption("margin", margins_arr, all_chart_options);
 
 
     }
