@@ -14,8 +14,8 @@ var update_template = {
         });
         chart.margin = margins_arr;
         chart.redraw(false);
-        all_chart_options.chart.setOption("margin", margins_arr, all_chart_options);
-
+        
+        all_chart_options.chart.margin = margins_arr;
 
     }
 }

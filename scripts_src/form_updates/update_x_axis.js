@@ -8,7 +8,7 @@ var update_x_axis = {
             text: newTitle
         });
 
-        all_chart_options.xAxis.setOption("title.text", newTitle, all_chart_options);
+        all_chart_options.xAxis.title.text = newTitle;
 
     }
 

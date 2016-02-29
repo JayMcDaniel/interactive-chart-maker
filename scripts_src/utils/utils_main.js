@@ -22,40 +22,27 @@ var utils_main = {
     setOption: function setOption(option, val, all_chart_options) {
 
         var optionArr = option.split(".");
-        switch (optionArr.length) {
-        case 1:
-            {
-                this[optionArr[0]] = val;
-                break;
-            }
-        case 2:
-            {
-                this[optionArr[0]][optionArr[1]] = val;
-                break;
-            }
-        case 3:
-            {
-                this[optionArr[0]][optionArr[1]][optionArr[2]] = val;
-                break;
-            }
-        case 4:
-            {
-                this[optionArr[0]][optionArr[1]][optionArr[2]][optionArr[3]] = val;
-                break;
-            }
-        }
+        var keyToSet = optionArr.pop();
+        var objectToSetOn = this;
+        
+        optionArr.forEach(function (subKey) {
+            // set a default value if that sub key doesn't yet exist
+            objectToSetOn[subKey] = objectToSetOn[subKey] || {};
+            objectToSetOn = objectToSetOn[subKey];
+        });
+        objectToSetOn[keyToSet] = val;
 
         utils_main.writeCode(all_chart_options);
     },
 
-    writeCode: function writeCode(all_chart_options) {
-
+    writeCode: function writeCode(all_chart_options) { 
+        
         //place code in chart_output_code and reinit highlight
         var chart_options_js_string = utils_main.deepStringify(all_chart_options);
         $("#chart_output_code").text(chart_options_js_string).each(function (i, block) {
             hljs.highlightBlock(block);
         });
-
+        
     }
 
 

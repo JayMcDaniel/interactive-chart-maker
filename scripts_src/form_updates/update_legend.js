@@ -9,7 +9,8 @@ var update_legend = {
         legend.options.reversed = val;
         legend.render();
 
-        all_chart_options.legend.setOption("reversed", val, all_chart_options);
+
+        all_chart_options.legend.reversed = val;
     },
 
 
@@ -36,8 +37,9 @@ var update_legend = {
             legend.options.enabled = true;
         }
 
-        all_chart_options.legend.setOption("layout", val, all_chart_options);
-        all_chart_options.legend.setOption("enabled", legend.options.enabled, all_chart_options);
+        all_chart_options.legend.layout = val;
+        all_chart_options.legend.enabled = legend.options.enabled;
+
     },
 
     /** update X and Y positions on legend */
@@ -48,8 +50,8 @@ var update_legend = {
         legend.options.y = newY;
         legend.render(false);
 
-        all_chart_options.legend.setOption("x", newX, all_chart_options);
-        all_chart_options.legend.setOption("y", newY, all_chart_options);
+        all_chart_options.legend.x = newX;
+        all_chart_options.legend.y = newY;
 
     }
 
