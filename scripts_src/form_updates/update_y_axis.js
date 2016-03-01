@@ -135,31 +135,6 @@ var update_y_axis = {
 
 
 
-
-    //
-    //
-    //        if (isNaN(newInterval) || newInterval === 0) {
-    //            newInterval = undefined;
-    //        };
-    //
-    //        if (!chart) { // called when this is used in x_axis_init
-    //            return newInterval;
-    //        } 
-    //
-    //        if (newInterval > chart.xAxis[0].dataMax) {
-    //            newInterval = chart.xAxis[0].dataMax;
-    //        }
-    //
-    //        chart.xAxis[0].update({
-    //            tickInterval: newInterval
-    //
-    //        });
-    //        all_chart_options.xAxis.tickInterval = newInterval;
-    //
-    //
-    //    }
-
-
 }
 
 

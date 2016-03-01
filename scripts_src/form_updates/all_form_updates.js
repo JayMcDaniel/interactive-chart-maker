@@ -5,6 +5,7 @@ var utils_forms = require("../utils/utils_forms");
 var update_legend = require("./update_legend.js");
 var update_x_axis = require("./update_x_axis.js");
 var update_y_axis = require("./update_y_axis.js");
+var update_tooltip = require("./update_tooltip.js");
 
 var allFormUpdates = function (chart, all_chart_options) {
 
@@ -128,9 +129,18 @@ var allFormUpdates = function (chart, all_chart_options) {
         update_y_axis.updateFormat(sign, decimals, chart, all_chart_options)
     });
 
+    
+    
+    /** TOOLTIP CHANGES */
+    
+    //change shared tooltip checkbox, decimals, signs, or mulitplier selects
+    $("#chart_tooltip_shared_checkbox, #chart_tooltip_force_decimals_select, #chart_tooltip_signs_select, #chart_tooltip_y_multiple_select").change(function () {
 
+        update_tooltip.updateToolTip(chart, all_chart_options);
+    });
 
-
+//call update tooltip after page and chart is loaded (has to be on a callback with the 'chart' object)
+    update_tooltip.updateToolTip(chart, all_chart_options);
 
 };
 

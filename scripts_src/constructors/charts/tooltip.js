@@ -5,7 +5,6 @@ var Tooltip = function (o) {
     this.backgroundColor = '#FEFFEF';
     this.crosshairs = o.crosshairs || [false, false];
     this.formatter = o.formatter;
-    this.shared = o.shared || false;
     
     this.style = {
         color: '#000000',
@@ -13,9 +12,6 @@ var Tooltip = function (o) {
     };
     
     this.useHTML = true;
-    this.valueDecimals = o.valueDecimals;
-    this.valuePrefix = o.valuePrefix || "";
-    this.valueSuffix = o.valueSuffix || "";
 
 }
 
