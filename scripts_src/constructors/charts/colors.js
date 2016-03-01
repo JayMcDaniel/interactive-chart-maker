@@ -8,7 +8,4 @@ var Colors = function (o) {
    '#492970', '#f28f43', '#77a1e5', '#c42525', '#a6c96a'];
 }
 
-Colors.prototype.setOption = utils_main.setOption;
-
-
 module.exports = Colors;

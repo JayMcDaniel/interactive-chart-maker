@@ -206,12 +206,11 @@
 
                     <label for="chart_x_axis_title_textarea">Title: </label>
                     <br>
-                    <textarea id="chart_x_axis_title_textarea"></textarea>
+                    <textarea id="chart_x_axis_title_textarea">Test X</textarea>
                     <br>
 
                     <label for="chart_x_axis_tickmark_interval_input">Tick mark (label) interval: </label>
-                    <input type="text" id="chart_x_axis_tickmark_interval_input" class="small number_entry" value="" />
-                    <span class="notes">(Automatic if left empty.)</span>
+                    <input type="text" id="chart_x_axis_tickmark_interval_input" class="small number_entry" value="" placeholder="(Auto)"/>
                     <br>
 
 
@@ -237,13 +236,15 @@
 
                     <label for="chart_y_axis_title_textarea">Title: </label>
                     <br>
-                    <textarea id="chart_y_axis_title_textarea"></textarea>
+                    <textarea id="chart_y_axis_title_textarea">Test Y</textarea>
                     <br>
 
+                    <span id="chart_y_axis_x_position_span" class = "not_bar">
                     <label for="chart_y_axis_x_position_input">Title indent: </label>
-                    <input type="text" id="chart_y_axis_x_position_input" class="small number_entry" value="" />
+                    <input type="text" id="chart_y_axis_x_position_input" class="small number_entry" value="35" />
                     <span class="notes">(higher value moves title to the right)</span>
                     <br>
+                    </span>
 
                     <label for="chart_y_axis_tickmark_interval_input">Tickmark interval: </label>
                     <input type="text" id="chart_y_axis_tickmark_interval_input" class="medium number_entry" placeholder="Auto if empty" value="" />

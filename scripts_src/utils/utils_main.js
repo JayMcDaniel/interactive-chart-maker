@@ -1,6 +1,10 @@
 /** Main utility object, contains functions that get reused often */
 var utils_main = {
 
+    checkforUndefined: function (val) {
+        return val === 0 || isNaN(val) ? undefined : val;
+    },
+
     /** shortcut for console.log **/
     log: function log(e) {
         return console.log(e);
@@ -18,31 +22,14 @@ var utils_main = {
 
     },
 
-    /** sets an option to a given object. The chart options constructors use this in their prototypes */
-    setOption: function setOption(option, val, all_chart_options) {
+    writeCode: function writeCode(all_chart_options) {
 
-        var optionArr = option.split(".");
-        var keyToSet = optionArr.pop();
-        var objectToSetOn = this;
-        
-        optionArr.forEach(function (subKey) {
-            // set a default value if that sub key doesn't yet exist
-            objectToSetOn[subKey] = objectToSetOn[subKey] || {};
-            objectToSetOn = objectToSetOn[subKey];
-        });
-        objectToSetOn[keyToSet] = val;
-
-        utils_main.writeCode(all_chart_options);
-    },
-
-    writeCode: function writeCode(all_chart_options) { 
-        
         //place code in chart_output_code and reinit highlight
         var chart_options_js_string = utils_main.deepStringify(all_chart_options);
         $("#chart_output_code").text(chart_options_js_string).each(function (i, block) {
             hljs.highlightBlock(block);
         });
-        
+
     }
 
 

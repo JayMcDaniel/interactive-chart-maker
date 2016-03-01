@@ -20,6 +20,4 @@ var Tooltip = function (o) {
 }
 
 
-Tooltip.prototype.setOption = utils_main.setOption;
-
 module.exports = Tooltip;

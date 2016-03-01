@@ -13,7 +13,5 @@ var Exporting = function (o) {
     };
 }
 
-Exporting.prototype.setOption = utils_main.setOption;
-
 
 module.exports = Exporting;

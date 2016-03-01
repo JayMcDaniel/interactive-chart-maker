@@ -16,7 +16,5 @@ var Title = function (o) {
 }
 
 
-Title.prototype.setOption = utils_main.setOption;
-
 module.exports = Title;
 

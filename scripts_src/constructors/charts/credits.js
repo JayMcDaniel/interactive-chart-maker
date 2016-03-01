@@ -19,7 +19,5 @@ var Credits = function (o) {
     this.useHTML = true;
 }
 
-Credits.prototype.setOption = utils_main.setOption;
-
 
 module.exports = Credits;

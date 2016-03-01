@@ -46,6 +46,4 @@ var XAxis = function (o) {
 }
 
 
-XAxis.prototype.setOption = utils_main.setOption;
-
 module.exports = XAxis;

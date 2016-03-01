@@ -1,5 +1,5 @@
 var update_template = {
-    resize: function (val, dimension, chart, all_chart_options) {
+    resize: function (val, dimension, chart) {
         val = Number(val);
         if (!isNaN(val)) {
             $(".chart_display_area").css(dimension, val + "px");

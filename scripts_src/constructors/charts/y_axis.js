@@ -49,7 +49,7 @@ var yAxis = function (o) {
         rotation: 0,
         x: o.title ? o.title.x || 35 : 35,
         y: -15,
-
+        
         style: {
             color: '#000000',
             fontFamily: 'Calibri, Verdana, Arial, Helvetica, sans-serif',
@@ -63,7 +63,5 @@ var yAxis = function (o) {
 
 }
 
-
-yAxis.prototype.setOption = utils_main.setOption;
 
 module.exports = yAxis;

@@ -16,6 +16,4 @@ var Subtitle = function (o) {
 }
 
 
-Subtitle.prototype.setOption = utils_main.setOption;
-
 module.exports = Subtitle;

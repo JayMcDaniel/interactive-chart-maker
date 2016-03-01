@@ -17,7 +17,4 @@ var AllChartOptions = function (o) {
 }
 
 
-AllChartOptions.prototype.setOption = utils_main.setOption;
-
-
 module.exports = AllChartOptions;

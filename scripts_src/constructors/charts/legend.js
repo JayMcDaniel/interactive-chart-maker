@@ -32,7 +32,4 @@ var Legend = function (o) {
 
 }
 
-
-Legend.prototype.setOption = utils_main.setOption;
-
 module.exports = Legend;

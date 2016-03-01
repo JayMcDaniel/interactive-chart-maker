@@ -15,6 +15,4 @@ var Series = function (o) {
 }
 
 
-Series.prototype.setOption = utils_main.setOption;
-
 module.exports = Series;

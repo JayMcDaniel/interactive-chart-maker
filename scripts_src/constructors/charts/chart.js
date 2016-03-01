@@ -16,7 +16,5 @@ var ChartOptions = function (o) {
     this.ignoreHiddenSeries = o.ignoreHiddenSeries || true; //false for bubble charts so bubbles won't resize
 }
 
-ChartOptions.prototype.setOption = utils_main.setOption;
-
 
 module.exports = ChartOptions;

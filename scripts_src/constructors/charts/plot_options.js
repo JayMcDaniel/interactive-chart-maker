@@ -56,6 +56,4 @@ var PlotOptions = function (o) {
 }
 
 
-PlotOptions.prototype.setOption = utils_main.setOption;
-
 module.exports = PlotOptions;

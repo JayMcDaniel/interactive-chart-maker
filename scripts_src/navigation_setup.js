@@ -41,17 +41,17 @@ var navigation_setup = {
 
     },
 
-    /** when a get code button is clicked */
+    /** when a get code button is clicked, update and show the code area. */
 
     getCodeButtonClick: function getCodeButtonClick(all_chart_options) {
 
         $("#get_code_button").click(function (e) {
-            utils_main.writeCode(all_chart_options);
 
             var $get_code_span = $("#get_code_text");
             $(this).toggleClass("code_on");
             $("#main_result_code_div").slideToggle(100);
             if ($get_code_span.text() === "Get code") {
+                utils_main.writeCode(all_chart_options);
                 $get_code_span.text("Hide code");
             } else {
                 $get_code_span.text("Get code");
