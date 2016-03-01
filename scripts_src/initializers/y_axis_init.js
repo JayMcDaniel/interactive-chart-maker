@@ -10,9 +10,13 @@ var yAxisInit = function yAxisInit() {
     //load options from user inputs
     var options = {
 
+        labels: {
+            format: update_y_axis.updateFormat($("#chart_y_axis_signs_select").val(), $("#chart_y_axis_decimals_select").val()) //val, decimals
+        },
 
         max: update_y_axis.updateMax(Number($("#chart_y_axis_max_input").val())),
         min: update_y_axis.updateMin(Number($("#chart_y_axis_min_input").val())),
+        type: update_y_axis.updateIsLog(utils_forms.getCheckBoxValue($("#chart_y_axis_log_checkbox"))),
         opposite: utils_forms.getCheckBoxValue($("#chart_y_axis_opposite_checkbox")),
         tickInterval: update_y_axis.updateTickmarkInterval(Number($("#chart_y_axis_tickmark_interval_input").val())),
 
@@ -31,14 +35,3 @@ var yAxisInit = function yAxisInit() {
 };
 
 module.exports = yAxisInit;
-
-//    
-//                    align: 'high',
-//
-//                            offset: 0,
-//							
-//							rotation: 0,
-//
-//                            y: -15,
-//
-//                            x: 35,

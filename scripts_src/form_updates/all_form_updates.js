@@ -79,7 +79,7 @@ var allFormUpdates = function (chart, all_chart_options) {
 
     /** Y-AXIS CHANGES */
 
-    //x-axis title textarea changed
+    //y-axis title textarea changed
     $("#chart_y_axis_title_textarea").keyup(function () {
         var newTitle = $(this).val();
         update_y_axis.updateTitle(newTitle, chart, all_chart_options);
@@ -114,6 +114,21 @@ var allFormUpdates = function (chart, all_chart_options) {
         var val = utils_forms.getCheckBoxValue($(this));
         update_y_axis.updateIsOpposite(val, chart, all_chart_options);
     });
+
+    //y-axis log ceckbox changed
+    $("#chart_y_axis_log_checkbox").change(function () {
+        var val = utils_forms.getCheckBoxValue($(this));
+        update_y_axis.updateIsLog(val, chart, all_chart_options);
+    });
+
+    //y-axis dollar / percent or decimal selects changed (format)
+    $("#chart_y_axis_signs_select, #chart_y_axis_decimals_select").change(function () {
+        var sign = $("#chart_y_axis_signs_select").val();
+        var decimals = $("#chart_y_axis_decimals_select").val();
+        update_y_axis.updateFormat(sign, decimals, chart, all_chart_options)
+    });
+
+
 
 
 

@@ -8,6 +8,8 @@ var yAxis = function (o) {
     this.gridLineDashStyle = o.gridLineDashStyle || 'Dot';
 
     this.labels = {
+        
+        format: o.labels ? o.labels.format : {value},
         formatter: o.labels ? o.labels.formatter : undefined,
         rotation: o.labels ? o.labels.rotation || 0 : 0,
         style: {

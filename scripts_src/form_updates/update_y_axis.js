@@ -5,6 +5,50 @@ var utils_main = require("../utils/utils_main.js");
 
 var update_y_axis = {
 
+
+    /** update format when dollar / percent signs select is changed */
+    updateFormat: function (sign, decimals, chart, all_chart_options) {
+
+        var newFormat = "{value:,." + decimals + "f}";
+        if (sign === "$") {
+            newFormat = "${value:,." + decimals + "f}";
+        }
+
+        if (sign === "%") {
+            newFormat = "{value:,." + decimals + "f}%";
+        }
+
+        if (!chart) { // called when this is used in y_axis_init
+            return newFormat;
+        }
+
+        chart.yAxis[0].update({
+            labels: {
+                format: newFormat
+            }
+        });
+
+        all_chart_options.yAxis.format = newFormat;
+
+    },
+
+
+    /** update if y-axis is log */
+    updateIsLog: function (val, chart, all_chart_options) {
+
+        var type = val === true ? "logarithmic" : "linear";
+        if (!chart) { // called when this is used in y_axis_init
+            return type;
+        }
+
+        chart.yAxis[0].update({
+            type: type
+        });
+        all_chart_options.yAxis.type = type;
+
+    },
+
+
     /** update if y axis labels are on opposite side */
     updateIsOpposite: function (val, chart, all_chart_options) {
         chart.yAxis[0].update({
@@ -15,7 +59,7 @@ var update_y_axis = {
     },
 
     /** update y-axis max */
-        updateMax: function (newMax, chart, all_chart_options) {
+    updateMax: function (newMax, chart, all_chart_options) {
         newMax = utils_main.checkforUndefined(newMax);
         if (!chart) { // called when this is used in y_axis_init
             return newMax;
@@ -88,6 +132,9 @@ var update_y_axis = {
         all_chart_options.yAxis.tickInterval = newInterval;
 
     }
+
+
+
 
     //
     //
