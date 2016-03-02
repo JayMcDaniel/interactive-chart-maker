@@ -12,25 +12,30 @@
      titleInit = require("./title_init.js"),
      tooltipInit = require("./tooltip_init.js"),
      xAxisInit = require("./x_axis_init.js"),
-     yAxisInit = require("./y_axis_init.js");
+     yAxisInit = require("./y_axis_init.js"),
+     parseTableInput = require("./parse_table_input.js");
+
 
 
  var allChartOptionsInit = function allChartOptionsInit() {
+     
+     var chart_type = $(".selected_chart_type").divVal();
+     var parsed_table_output = parseTableInput($("#table_input_textarea").val(), chart_type);
 
      //get options from individual inits
      var options = {
-         chart: chartInit(),
+         chart: chartInit(chart_type),
          colors: colorsInit(),
          credits: creditsInit(),
-        // exportig: exportingInit(),
+         // exportig: exportingInit(),
          legend: legendInit(),
-         plotOptions: plotOptionsInit(),
-         series: seriesInit(),
+         plotOptions: plotOptionsInit(chart_type),
+         series: seriesInit(parsed_table_output.series),
          subtitle: subtitleInit(),
-         title: titleInit(),
+         title: titleInit(parsed_table_output.title_text),
          tooltip: tooltipInit(),
-         xAxis: xAxisInit(),
-         yAxis: yAxisInit()
+         xAxis: xAxisInit(parsed_table_output.x_axis_categories),
+         yAxis: yAxisInit(chart_type)
 
      };
 

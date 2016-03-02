@@ -28,25 +28,25 @@ var PlotOptions = function (o) {
     if (o.bubble) {
         this.bubble = {
             maxSize: o.bubble.maxSize || 50,
-            sizeBy: o.bubble.sizeBy || 'width' //instead of 'area', seems more accurate
+            sizeBy: 'width' //instead of 'area', seems more accurate
         };
     }
 
     //just for line charts
     if (o.line) {
         this.line = {
-            lineWidth: o.line.lineWidth || 1.5,
+            lineWidth: 1.5,
             states: {
                 hover: {
-                    lineWidth: o.line.hover.lineWidth || 4
+                    lineWidth: 4
                 }
             },
             marker: {
-                enabled: o.line.marker.enabled || false,
+                enabled: o.line.marker ? o.line.marker.enabled || false : false,
                 states: {
                     hover: {
-                        enabled: o.line.marker.hover.enabled || true,
-                        radius: o.line.marker.hover.radius || 5
+                        enabled: true,
+                        radius: 5
                     }
                 }
             }

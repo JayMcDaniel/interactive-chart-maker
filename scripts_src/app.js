@@ -19,11 +19,7 @@ $(document).ready(function () {
 
     //page init (navigation and keyboard entries)
     var navigation_setup = require("./navigation_setup.js");
-    navigation_setup.sideNavTabsChange();
-    navigation_setup.chartTypeIconChange();
-    navigation_setup.helpIconClick();
-    navigation_setup.getCodeButtonClick(all_chart_options);
-    navigation_setup.chartOutputCodeFocus(all_chart_options);
+    navigation_setup.initAllNavigation(all_chart_options);
     
     var keyboard_inputs = require("./keyboard_inputs");
 

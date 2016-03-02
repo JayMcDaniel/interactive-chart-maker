@@ -3,9 +3,8 @@
 var ChartOptions = require("../constructors/charts/chart.js");
 
 
-var chartInit = function chartInit() {
+var chartInit = function chartInit(chart_type) {
     
-    var chart_type = $(".selected_chart_type").divVal();
         if (chart_type === "drilldown"){
             chart_type = "column";
         }

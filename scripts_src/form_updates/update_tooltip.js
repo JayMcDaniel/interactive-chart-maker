@@ -39,11 +39,11 @@ var update_tooltip = {
 
                 new_tooltip = function () {
 
-                    var shared_tooltip_arr = [];
+                    var shared_tooltip_arr = ["<b>" + this.key + "</b>"];
                     var point = this.point;
-
+                
                     $.each(chart.series, function () {
-                        shared_tooltip_arr.push("<b>" + this.name + "</b> <br>" + this.points[point.x].x + ": " + signs_arr[0] + (addCommas(this.points[point.x].y * multiplier)) + signs_arr[1]);
+                        shared_tooltip_arr.push(this.name + ": " + signs_arr[0] + (addCommas(this.points[point.x].y * multiplier)) + signs_arr[1]);
                     });
                     return shared_tooltip_arr.join('<br/>');
                 }
@@ -55,13 +55,13 @@ var update_tooltip = {
 
             if (decimals > 0) { //use decimal formatter
                 new_tooltip = function () {
-                    return "<b>" + this.series.name + "</b><br>" + this.x + ": " +
-                        Highcharts.numberFormat((this.y * multiplier), decimals);
+                    return "<b>" + this.series.name + "</b><br>" + this.x + ": " + signs_arr[0] +
+                        Highcharts.numberFormat((this.y * multiplier), decimals) + signs_arr[1];
                 }
             } else { //don't use decimal formatter
                 new_tooltip = function () {
-                    return "<b>" + this.series.name + "</b><br>" + this.x + ": " +
-                        (addCommas(this.y * multiplier));
+                    return "<b>" + this.series.name + "</b><br>" + this.x + ": " + signs_arr[0] +
+                        (addCommas(this.y * multiplier)) + signs_arr[1];
                 }
             }
         }

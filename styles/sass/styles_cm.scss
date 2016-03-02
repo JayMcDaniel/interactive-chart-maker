@@ -54,7 +54,8 @@
         background-color: $primary_color;
     }
     
-    .chart_type_icon {
+    .chart_type_icon,
+    .load_series_from_icon {
         float: left;
         border: solid 2px #fff;
         width: 70px;
@@ -69,7 +70,8 @@
         &:hover {
             border-color: $primary_color;
         }
-        &.selected_chart_type {
+        &.selected_chart_type,
+        &.selected_load_series_from {
             border-color: $highlight_color;
             cursor: default;
         }
@@ -95,11 +97,30 @@
         &#chart_type_scatter {
             background-image: url(../../images/icons/scatter_chart_icon.png);
         }
+        /* for Load data area (load series from: icons)*/
+        &#load_series_from_column_heads {
+            background-image: url(../../images/icons/load_series_from_column_headers_icon.png);
+        }
+        &#load_series_from_row_heads {
+            background-image: url(../../images/icons/load_series_from_row_headers_icon.png);
+        }
     }
     
     .clearfloat {
         clear: both;
+        margin-bottom: -10px;
     }
+    
+    .clear_next_textarea_button {
+        float: right;
+        color: $primary_color;
+        text-decoration: underline;
+        cursor: pointer;
+        position: relative;
+        top: 20px;
+        right: 2px;
+        font-size: 110%;
+}
     
     .help_icon {
         font-family: sans-serif;
@@ -210,10 +231,13 @@
     }
     
     .notes {
-        font-size: 80%;
+        font-size: 85%;
         color: $highlight_color;
         border: none;
         display: none;
+        a {
+            font-size: 110%;
+        }
     }
     /* left side div with all of the configurations options etc. inside it */
     

@@ -5,7 +5,7 @@ var update_y_axis = require("../form_updates/update_y_axis.js");
 var utils_forms = require("../utils/utils_forms.js");
 
 
-var yAxisInit = function yAxisInit() {
+var yAxisInit = function yAxisInit(chart_type) {
 
     //load options from user inputs
     var options = {
@@ -22,7 +22,7 @@ var yAxisInit = function yAxisInit() {
 
         title: {
             text: $("#chart_y_axis_title_textarea").val(),
-            align: $(".selected_chart_type").divVal() === "bar" ? "middle" : "high",
+            align: chart_type === "bar" ? "middle" : "high",
             x: Number($("#chart_y_axis_x_position_input").val())
         }
 

@@ -4,7 +4,7 @@ var utils_main = require("./utils/utils_main.js");
 var navigation_setup = {
 
     /** when tabs on left side nav bar are clicked, options displayed are changed */
-    sideNavTabsChange: function sideNavTabsChange() {
+    sideNavTabsChange: function () {
 
         $("#side_nav_tabs .tab").click(function () {
             //change selected menu tab
@@ -19,20 +19,49 @@ var navigation_setup = {
         });
     },
 
+    /** when chart code is entered, update */
+    chartOutputCodeFocus: function (all_chart_options) {
+        $("#chart_output_code").click(function () {
+            utils_main.writeCode(all_chart_options);
+        });
+
+    },
+
     /** when chart type icon is clicked and changed */
-    chartTypeIconChange: function chartTypeIconChange() {
+    chartTypeIconChange: function () {
 
         $("#chart_type_icons .chart_type_icon").click(function () {
             //change selected icon
             $("#chart_type_icons .chart_type_icon").removeClass("selected_chart_type");
             $(this).addClass("selected_chart_type");
+            var chart_type =  $(this).divVal();
+            
+            //hide stuff unrelated to that chart type
+            if (["line","bar","column"].indexOf(chart_type) === -1 ){
+                $(".show_line, .show_bar, .show_column").hide();
+            }else{
+                $(".show_line, .show_bar, .show_column").show();
+            }
+            
 
         });
     },
 
+    /** when clear next text area button (X) is clicked, find and clear the text of the next textarea */
+    clearNextTextareaClick: function () {
+
+        $(".clear_next_textarea_button").click(function () {
+            $(this).next("textarea").val("");
+
+        });
+    },
+
+
+
+
     /** when a help icon is clicked */
 
-    helpIconClick: function helpIconClick() {
+    helpIconClick: function () {
 
         $(".help_icon").click(function () {
             $(this).toggleClass("help_on");
@@ -43,7 +72,7 @@ var navigation_setup = {
 
     /** when a get code button is clicked, update and show the code area. */
 
-    getCodeButtonClick: function getCodeButtonClick(all_chart_options) {
+    getCodeButtonClick: function (all_chart_options) {
 
         $("#get_code_button").click(function (e) {
 
@@ -60,11 +89,27 @@ var navigation_setup = {
 
     },
 
-    /** when chart code is entered, update */
-    chartOutputCodeFocus: function (all_chart_options) {
-        $("#chart_output_code").click(function () {
-            utils_main.writeCode(all_chart_options);
+    /** when "Load series names from:" icons are clicked and changed */
+    loadSeriesFromIcon: function () {
+
+        $("#table_input_load_series_from_icons .load_series_from_icon").click(function () {
+            //change selected icon
+            $("#table_input_load_series_from_icons .load_series_from_icon").removeClass("selected_load_series_from");
+            $(this).addClass("selected_load_series_from");
+
         });
+    },
+
+    //* INIT ALL NAVIGATION, called from app.js when page is loaded *//
+    initAllNavigation: function (all_chart_options) {
+        
+        navigation_setup.sideNavTabsChange();
+        navigation_setup.chartTypeIconChange();
+        navigation_setup.helpIconClick();
+        navigation_setup.getCodeButtonClick(all_chart_options);
+        navigation_setup.chartOutputCodeFocus(all_chart_options);
+        navigation_setup.loadSeriesFromIcon();
+        navigation_setup.clearNextTextareaClick();
 
     }
 

@@ -6,10 +6,20 @@ var update_legend = require("./update_legend.js");
 var update_x_axis = require("./update_x_axis.js");
 var update_y_axis = require("./update_y_axis.js");
 var update_tooltip = require("./update_tooltip.js");
+var update_data = require("./update_data.js");
 
 var allFormUpdates = function (chart, all_chart_options) {
 
 
+        /** CHART TYPE CHANGES */
+
+    //chart type changed
+    $.each(['line', 'bar', 'column', 'bubble', 'scatter', "drilldown"], function (i, type) {
+        $('#chart_type_' + type).click(function () {
+            updateChartType(i, type, chart, all_chart_options)
+        });
+    });
+    
 
     /** TEMPLATE CHANGES */
 
@@ -32,22 +42,20 @@ var allFormUpdates = function (chart, all_chart_options) {
 
     });
 
-    /** CHART TYPE CHANGES */
 
-    //chart type changed
-    $.each(['line', 'bar', 'column', 'bubble', 'scatter', "drilldown"], function (i, type) {
-        $('#chart_type_' + type).click(function () {
-            updateChartType(i, type, chart, all_chart_options)
-        });
+    /*CHART DATA CHANGES - (x-axis categories and series array)*/
+    $(".load_series_from_icon").click(function(){
+        update_data.updateData(chart, all_chart_options);
     });
 
+    
+    /** LEGEND CHANGES */
 
     //legend layout changed
     $("#legend_layout_select").change(function () {
         update_legend.updateLayout($(this).val(), chart, all_chart_options);
     });
 
-    /** LEGEND CHANGES */
 
     //legend reverse ceckbox changed
     $("#legend_reverse_layout_checkbox").change(function () {

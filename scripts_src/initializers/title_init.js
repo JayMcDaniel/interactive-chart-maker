@@ -3,11 +3,11 @@
 var Title = require("../constructors/charts/title.js");
 
 
- var titleInit = function titleInit() {
+ var titleInit = function titleInit(title_text) {
 
      //load options from user inputs
      var options = {
-
+         text: title_text
      };
 
 
