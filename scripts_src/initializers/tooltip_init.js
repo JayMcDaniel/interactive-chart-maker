@@ -2,15 +2,13 @@
 
 var Tooltip = require("../constructors/charts/tooltip.js");
 var utils_forms = require("../utils/utils_forms.js");
-var update_tooltip = require("../form_updates/update_tooltip.js");
-
 
 var tooltipInit = function tooltipInit() {
 
  
     //load options from user inputs
     var options = {
-        formatter: undefined
+        formatter: undefined  ///formatter is created with update_tooltip as a callback (needs chart to exist first)
         
     };
 

@@ -34,15 +34,22 @@ var navigation_setup = {
             //change selected icon
             $("#chart_type_icons .chart_type_icon").removeClass("selected_chart_type");
             $(this).addClass("selected_chart_type");
-            var chart_type =  $(this).divVal();
-            
-            //hide stuff unrelated to that chart type
-            if (["line","bar","column"].indexOf(chart_type) === -1 ){
-                $(".show_line, .show_bar, .show_column").hide();
-            }else{
+            var chart_type = $(this).divVal();
+
+            //hide stuff unrelated to that chart type (line, bar, column)
+            if (["line", "bar", "column"].indexOf(chart_type) > -1) {
                 $(".show_line, .show_bar, .show_column").show();
+            } else {
+                $(".show_line, .show_bar, .show_column").hide();
             }
-            
+
+            if (chart_type === "scatter") {
+                $(".show_scatter").show();
+            } else {
+                $(".show_scatter").hide();
+            }
+
+
 
         });
     },
@@ -102,7 +109,7 @@ var navigation_setup = {
 
     //* INIT ALL NAVIGATION, called from app.js when page is loaded *//
     initAllNavigation: function (all_chart_options) {
-        
+
         navigation_setup.sideNavTabsChange();
         navigation_setup.chartTypeIconChange();
         navigation_setup.helpIconClick();

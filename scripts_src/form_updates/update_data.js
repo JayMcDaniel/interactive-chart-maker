@@ -1,10 +1,12 @@
-var parseTableInput = require("../initializers/parse_table_input.js");
+var parseTableInput = require("../parsers/parse_table_input.js");
 
 var update_data = {
 
     updateData: function (chart, all_chart_options) {
         var chart_type = $(".selected_chart_type").divVal();
-        var parsed_table_output = parseTableInput($("#table_input_textarea").val(), chart_type);
+        var load_series_from = $(".selected_load_series_from").divVal();
+        var input = $("#table_input_textarea").val();
+        var parsed_table_output = parseTableInput(input, load_series_from, chart_type);
 
         //update x-axis categories
         chart.xAxis[0].update({

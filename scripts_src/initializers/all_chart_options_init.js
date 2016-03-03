@@ -13,14 +13,16 @@
      tooltipInit = require("./tooltip_init.js"),
      xAxisInit = require("./x_axis_init.js"),
      yAxisInit = require("./y_axis_init.js"),
-     parseTableInput = require("./parse_table_input.js");
+     parseTableInput = require("../parsers/parse_table_input.js");
 
 
 
  var allChartOptionsInit = function allChartOptionsInit() {
-     
      var chart_type = $(".selected_chart_type").divVal();
-     var parsed_table_output = parseTableInput($("#table_input_textarea").val(), chart_type);
+     var load_series_from = $(".selected_load_series_from").divVal();
+     var input = $("#table_input_textarea").val();
+     var parsed_table_output = parseTableInput(input, load_series_from, chart_type);
+     
 
      //get options from individual inits
      var options = {
