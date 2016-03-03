@@ -11,7 +11,7 @@ var update_data = require("./update_data.js");
 var allFormUpdates = function (chart, all_chart_options) {
 
 
-        /** CHART TYPE CHANGES */
+    /** CHART TYPE CHANGES */
 
     //chart type changed
     $.each(['line', 'bar', 'column', 'bubble', 'scatter', "drilldown"], function (i, type) {
@@ -19,7 +19,7 @@ var allFormUpdates = function (chart, all_chart_options) {
             updateChartType(i, type, chart, all_chart_options)
         });
     });
-    
+
 
     /** TEMPLATE CHANGES */
 
@@ -44,11 +44,17 @@ var allFormUpdates = function (chart, all_chart_options) {
 
 
     /*CHART DATA CHANGES - (x-axis categories and series array)*/
-    $(".load_series_from_icon").click(function(){
+    //"series names loaded from" icon clicked
+    $(".load_series_from_icon").click(function () {
         update_data.updateData(chart, all_chart_options);
     });
 
-    
+    //
+    $("#table_input_textarea").bind('input propertychange', function() {
+        update_data.updateData(chart, all_chart_options);
+    });
+
+
     /** LEGEND CHANGES */
 
     //legend layout changed
@@ -137,17 +143,17 @@ var allFormUpdates = function (chart, all_chart_options) {
         update_y_axis.updateFormat(sign, decimals, chart, all_chart_options)
     });
 
-    
-    
+
+
     /** TOOLTIP CHANGES */
-    
+
     //change shared tooltip checkbox, decimals, signs, or mulitplier selects
     $("#chart_tooltip_shared_checkbox, #chart_tooltip_force_decimals_select, #chart_tooltip_signs_select, #chart_tooltip_y_multiple_select").change(function () {
 
         update_tooltip.updateToolTip(chart, all_chart_options);
     });
 
-//call update tooltip after page and chart is loaded (has to be on a callback with the 'chart' object)
+    //call update tooltip after page and chart is loaded (has to be on a callback with the 'chart' object)
     update_tooltip.updateToolTip(chart, all_chart_options);
 
 };

@@ -24,7 +24,11 @@ var update_data = {
         chart.redraw(true);
 
 
-
+        //update chart options for code output
+        
+        all_chart_options.series = parsed_table_output.series;
+        all_chart_options.xAxis.categories = parsed_table_output.x_axis_categories;
+        
     }
 
 }

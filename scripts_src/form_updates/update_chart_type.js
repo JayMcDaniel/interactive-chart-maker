@@ -29,7 +29,7 @@ var updateChartType = function (i, type, chart, all_chart_options) {
     $.each(chart.series, function () {
         this.update({
             type: type
-        });
+        }, false);
     });
 
     chart.yAxis[0].setTitle({
