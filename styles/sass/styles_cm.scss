@@ -121,7 +121,7 @@
         top: 20px;
         right: 2px;
         font-size: 110%;
-}
+    }
     
     .help_icon {
         font-family: sans-serif;
@@ -341,4 +341,8 @@
         &.large {
             height: 400px;
         }
+    }
+    
+    .underline {
+        text-decoration: underline;
     }
