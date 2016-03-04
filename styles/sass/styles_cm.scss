@@ -76,6 +76,9 @@
             border-color: $highlight_color;
             cursor: default;
         }
+        &#chart_type_area {
+            background-image: url(../../images/icons/area_chart_icon.png);
+        }
         &#chart_type_bar {
             background-image: url(../../images/icons/bar_chart_icon.png);
         }

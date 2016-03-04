@@ -3,8 +3,10 @@ var plotOptionsInit = require("../initializers/plot_options_init.js");
 var update_data = require("./update_data.js");
 
 var updateChartType = function (i, type, chart, all_chart_options) {
-
+console.log(type);
     var y_axis_title_align;
+    
+    type = type.replace("stacked_","");
 
     if (type === "bar") {
         //fix y axis position

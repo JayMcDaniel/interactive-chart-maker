@@ -1,6 +1,8 @@
 /** parsing function for typical chart types (line, bar, column) */
 var parseForTypicalChart = function (input, load_series_from, chart_type) {
     
+    var type = chart_type.replace("stacked_","");
+    
         var output = {};
 
     /** If loading series names from column heads is selected*/
@@ -18,8 +20,10 @@ var parseForTypicalChart = function (input, load_series_from, chart_type) {
         $("thead tr:last th:gt(0)", input).each(function (i) {
             var seriesObj = {
                 name: $.trim($.trim($(this).text())),
-                type: chart_type,
-                data: []
+                type: type,
+                data: [],
+                stacking: ["area", "stacked_bar", "stacked_column"].indexOf(chart_type) > -1 ? "stacked" : null
+                
             };
 
             //data from each column's tds
@@ -52,9 +56,10 @@ var parseForTypicalChart = function (input, load_series_from, chart_type) {
             var this_row = $(this);
 
             var seriesObj = {
-                type: chart_type,
+                type: type ,
                 name: $.trim($("th:eq(0)", this_row).text()),
-                data: []
+                data: [],
+                stacking: ["area", "stacked_bar", "stacked_column"].indexOf(chart_type) > -1 ? "stacked" : null
             };
 
             //get data values from each row's td cells

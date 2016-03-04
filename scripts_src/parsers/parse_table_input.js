@@ -25,7 +25,7 @@ var parseTableInput = function (input, load_series_from, chart_type) {
 
     var output;
     /** Depending on the chart type, start that parsing */
-    if (["line", "bar", "column"].indexOf(chart_type) > -1) {
+    if (["area", "line", "bar","stacked_bar", "column", "stacked_column"].indexOf(chart_type) > -1) {
         output = parseForTypicalChart(input, load_series_from, chart_type);
     } else if (chart_type == "bubble") {
         output = parseForBubble(input, chart_type);

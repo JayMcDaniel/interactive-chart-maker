@@ -37,7 +37,7 @@ var navigation_setup = {
             var chart_type = $(this).divVal();
 
             //hide stuff unrelated to that chart type (line, bar, column)
-            if (["line", "bar", "column"].indexOf(chart_type) > -1) {
+            if (["area", "line", "bar", "column", "stacked_column", "stacked_bar"].indexOf(chart_type) > -1) {
                 $(".show_line, .show_bar, .show_column").show();
             } else {
                 $(".show_line, .show_bar, .show_column").hide();
