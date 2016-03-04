@@ -2,11 +2,12 @@
 
 /** parsing function for typical chart types (line, bar, column) */
 var parseForTypicalChart = require("./parse_for_typical_chart.js");
+
+/** parsing function for scatter charts */
 var parseForScatter = require("./parse_for_scatter.js");
 
-
 /** parsing function for bubble charts */
-var parseForBubble = function (input) {};
+var parseForBubble = require("./parse_for_bubble.js");
 
 
 
