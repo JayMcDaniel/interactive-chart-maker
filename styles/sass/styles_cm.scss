@@ -93,10 +93,17 @@
         }
         &#chart_type_map {
             background-image: url(../../images/icons/map_chart_icon.png);
-            background-position-y: -7px;
+            background-position-y: -10px;
+            background-size: 104%;
         }
         &#chart_type_scatter {
             background-image: url(../../images/icons/scatter_chart_icon.png);
+        }
+        &#chart_type_stacked_bar {
+            background-image: url(../../images/icons/stacked_bar_chart_icon.png);
+        }
+        &#chart_type_stacked_column {
+            background-image: url(../../images/icons/stacked_column_chart_icon.png);
         }
         /* for Load data area (load series from: icons)*/
         &#load_series_from_column_heads {

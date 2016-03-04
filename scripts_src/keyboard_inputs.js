@@ -15,10 +15,12 @@ module.exports = (function () {
         /** when nothing is selected, pressing up or downchanges which side nav tab is selected */
         sideNavTabShortcuts: function () {
             $(document).keydown(function (e) {
-                e.preventDefault();
+                
                 if (e.keyCode === 38) { //up
+                    e.preventDefault();
                     $(".selected_tab").prev().click();
                 } else if (e.keyCode === 40) { //down
+                    e.preventDefault();
                     $(".selected_tab").next().click();
                 }else if (e.keyCode === 67) { //c
                     $("#tab_type").click();
