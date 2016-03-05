@@ -1,4 +1,5 @@
 /** parsing function for typical chart types (line, bar, column) */
+
 var parseForTypicalChart = function (input, load_series_from, chart_type) {
     
     var type = chart_type.replace("stacked_","");
@@ -7,7 +8,6 @@ var parseForTypicalChart = function (input, load_series_from, chart_type) {
 
     /** If loading series names from column heads is selected*/
     if (load_series_from === "column_heads") {
-
         //load x-axis categories from row heads
         output.x_axis_categories = [];
         $("tbody th", input).each(function () {
@@ -30,7 +30,7 @@ var parseForTypicalChart = function (input, load_series_from, chart_type) {
             $("tbody tr", input).each(function () {
                 var this_row = $(this);
                 $("td:eq(" + i + ")", this_row).each(function () {
-                    seriesObj.data.push(Number($.trim($(this).text())));
+                    seriesObj.data.push($(this).getNumber());
                 });
             });
 
@@ -64,7 +64,7 @@ var parseForTypicalChart = function (input, load_series_from, chart_type) {
 
             //get data values from each row's td cells
             $("td", this_row).each(function () {
-                seriesObj.data.push(Number($.trim($(this).text())));
+                seriesObj.data.push($(this).getNumber());
             });
 
             output.series.push(seriesObj);

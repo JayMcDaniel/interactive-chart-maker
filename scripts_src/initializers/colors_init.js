@@ -7,7 +7,7 @@ var Colors = require("../constructors/charts/colors.js");
 
      //load options from user inputs
      var options = {
-
+      //   colors: ["#000"]
      };
 
 

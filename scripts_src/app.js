@@ -28,5 +28,4 @@ $(document).ready(function () {
     var allFormUpdates = require("./form_updates/all_form_updates.js");
     allFormUpdates(chart, all_chart_options);
 
-
 });

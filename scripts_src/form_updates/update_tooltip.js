@@ -2,6 +2,7 @@
 var utils_main = require("../utils/utils_main.js");
 var utils_forms = require("../utils/utils_forms");
 
+
 var addCommas = utils_main.addCommas;
 
 var update_tooltip = {
@@ -43,7 +44,7 @@ var update_tooltip = {
                     var point = this.point;
                 
                     $.each(chart.series, function () {
-                        shared_tooltip_arr.push(this.name + ": " + signs_arr[0] + (addCommas(this.points[point.x].y * multiplier)) + signs_arr[1]);
+                        shared_tooltip_arr.push(this.name + ": " + signs_arr[0] + $(this.points[point.x].y * multiplier).addCommas() + signs_arr[1]);
                     });
                     return shared_tooltip_arr.join('<br/>');
                 }
@@ -61,7 +62,7 @@ var update_tooltip = {
             } else { //don't use decimal formatter
                 new_tooltip = function () {
                     return "<b>" + this.series.name + "</b><br>" + this.x + ": " + signs_arr[0] +
-                        (addCommas(this.y * multiplier)) + signs_arr[1];
+                        $(this.y * multiplier).addCommas() + signs_arr[1];
                 }
             }
         }
