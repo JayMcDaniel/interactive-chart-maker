@@ -1,7 +1,7 @@
-/** PlotOptions constructor. Info at http://api.highcharts.com/highcharts#plotOptions*/
-var utils_main = require("../../utils/utils_main.js");
-
-
+/** PlotOptions constructor. Info at http://api.highcharts.com/highcharts#plotOptions
+* @constructor PlotOptions 
+* @param o {object} PlotOptions options object
+*/
 var PlotOptions = function (o) {
 
     //for all chart types. values are undefined if not in o.

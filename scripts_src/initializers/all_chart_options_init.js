@@ -1,5 +1,3 @@
- /** create and return an instance of all_chart_options */
-
  var AllChartOptions = require("../constructors/charts/all_chart_options.js"),
      chartInit = require("./chart_init.js"),
      colorsInit = require("./colors_init.js"),
@@ -16,7 +14,9 @@
      parseTableInput = require("../parsers/parse_table_input.js");
 
 
-
+ /** create and return an instance of all_chart_options 
+ @module
+ **/
  var allChartOptionsInit = function allChartOptionsInit() {
      var chart_type = $(".selected_chart_type").divVal();
      var load_series_from = $(".selected_load_series_from").divVal();
@@ -36,7 +36,7 @@
          subtitle: subtitleInit(),
          title: titleInit(parsed_table_output.title_text),
          tooltip: tooltipInit(),
-         xAxis: xAxisInit(parsed_table_output.x_axis_categories),
+         xAxis: xAxisInit(parsed_table_output.x_axis_categories, chart_type),
          yAxis: yAxisInit(chart_type)
 
      };

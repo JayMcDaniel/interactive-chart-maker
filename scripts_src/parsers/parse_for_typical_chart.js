@@ -1,4 +1,12 @@
-/** parsing function for typical chart types (line, bar, column) */
+/** 
+* Parsing function for typical chart types (line, bar, column) 
+* @module
+* @param input {element} input jquery table element retrieved from textarea
+* @param load_series_from {string} column_heads or column_rows
+* @param chart_type {string} type of chart (line, bar etc.)
+* @returns {object} Object with chart title, X-axis categories and series array of objects
+*/
+
 
 var parseForTypicalChart = function (input, load_series_from, chart_type) {
     

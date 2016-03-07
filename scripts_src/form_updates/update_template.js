@@ -1,3 +1,6 @@
+/** when template are changed in the side area, these methods are called 
+@namespace
+*/
 var update_template = {
     resize: function (val, dimension, chart) {
         val = Number(val);

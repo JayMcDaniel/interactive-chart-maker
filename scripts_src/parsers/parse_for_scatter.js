@@ -1,4 +1,10 @@
-/** parsing function for scatter charts */
+/** 
+* Parsing function for scatter charts
+* @module
+* @param input {element} input jquery table element retrieved from textarea
+* @param chart_type {string} type of chart (line, bar etc.)
+* @returns {object} Object with chart title, X-axis categories and series array of objects
+*/
 var parseForScatter = function (input, chart_type) {
     var output = {};
     output.x_axis_categories = undefined; //resets this in case there were previous categories

@@ -1,8 +1,9 @@
-/** when Y-axis options are changed in the side area, these methods are called */
 var utils_main = require("../utils/utils_main.js");
 
 
-
+/** when Y-axis options are changed in the side area, these methods are called 
+@namespace
+*/
 var update_y_axis = {
 
 

@@ -1,28 +1,18 @@
-/** Main utility object, contains functions that get reused often */
+/**
+ * Main utility object, contains functions that get reused often
+ * @namespace
+ */
 var utils_main = {
-    /** add commas function */
-    addCommas: function (val) {
 
-        if (isNaN(val)) {
-            return val;
-        } else if ((val > 999) || (val < -999)) {
-            while (/(\d+)(\d{3})/.test(val.toString())) {
-                val = val.toString().replace(/(\d+)(\d{3})/, '$1' + ',' + '$2');
-            }
-        }
-        return val;
-    },
-
+    /** check value - if 0 or not a number, return undefined **/
     checkforUndefined: function (val) {
         return val === 0 || isNaN(val) ? undefined : val;
     },
 
-    /** shortcut for console.log **/
-    log: function log(e) {
-        return console.log(e);
-    },
-
-    /** turns objects into strings, including their methods */
+    /** 
+    turns objects into strings, including their methods 
+    @returns {string} JSON
+    */
     deepStringify: function deepStringify(obj) {
         return JSON.stringify(obj, function (key, value) {
             if (typeof value === 'function') {

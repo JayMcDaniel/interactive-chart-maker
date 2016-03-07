@@ -1,6 +1,7 @@
-/** Credits options constructor. Info at http://api.highcharts.com/highcharts#credits */
-var utils_main = require("../../utils/utils_main.js");
-
+/** Credits options constructor. Info at http://api.highcharts.com/highcharts#credits
+* @constructor Credits 
+*  @param o {object} credits options object
+*/
 var Credits = function (o) {
     this.href = "http://www.bls.gov";
 

@@ -62,14 +62,14 @@
                 <div class="display_options">
 
                     <div id="chart_type_icons">
-                        <div class="chart_type_icon selected_chart_type" id="chart_type_line" value="line" title="line"></div>
+                        <div class="chart_type_icon" id="chart_type_line" value="line" title="line"></div>
                         <div class="chart_type_icon" id="chart_type_area" value="area" title="area"></div>
                         <div class="chart_type_icon" id="chart_type_bar" value="bar" title="bar"></div>
                         <div class="chart_type_icon" id="chart_type_stacked_bar" value="stacked_bar" title="stacked bar"></div>
                         <div class="chart_type_icon" id="chart_type_column" value="column" title="column"></div>
                         <div class="chart_type_icon" id="chart_type_stacked_column" value="stacked_column" title="stacked column"></div>
                         <div class="chart_type_icon" id="chart_type_bubble" value="bubble" title="bubble"></div>
-                        <div class="chart_type_icon" id="chart_type_scatter" value="scatter" title="scatter"></div>
+                        <div class="chart_type_icon selected_chart_type" id="chart_type_scatter" value="scatter" title="scatter"></div>
                         <div class="chart_type_icon" id="chart_type_drilldown" value="drilldown" title="drilldown"></div>
                         <div class="chart_type_icon" id="chart_type_map" value="map" title="map"></div>
                     </div>
@@ -153,10 +153,12 @@
                         <br> Paste table HTML source code in here.
                         <br> Make sure it has a title and contains column and row headers.
                         <br> For this to work, it needs to be a properly formatted, 508-compliant table (using thead, tbody, caption, th and td tags where appropriate). It also needs to have a title and be a simple table with only one column header per column and one row header per row. You can convert spreadsheets to 508-compliant tables with the <a href="table_wizard/better_table_wizard.htm" target="_blank">Table Wizard</a>.
-                        <span class="show_scatter">
-                        <br>
-                            With scatter charts, series names will be loaded from the row headers. For each set of two columns in the table body, a dot will be drawn &mdash; its x-value coming from the first column and its y-value coming from the second column.
-                        </span>
+
+                    </p>
+<br>
+                    <p class="show_scatter">
+
+                        With scatter charts, series names will be loaded from the row headers. For each set of two columns in the table body, a dot will be drawn &mdash; its x-value coming from the first column and its y-value coming from the second column.
                     </p>
                     <div class="clear_next_textarea_button" title="Clear the text area">X</div>
                     <textarea id="table_input_textarea" class="large" placeholder="Insert table html here">
@@ -181,7 +183,7 @@
                                     <th id="rowHead0">
                                         <p>series 1</p>
                                     </th>
-                                    <td headers="rowHead0 columnHead1">1</td>
+                                    <td headers="rowHead0 columnHead1">-1</td>
                                     <td headers="rowHead0 columnHead2">1</td>
                                     <td headers="rowHead0 columnHead3">2</td>
                                     <td headers="rowHead0 columnHead4">3</td>

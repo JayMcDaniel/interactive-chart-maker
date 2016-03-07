@@ -1,6 +1,8 @@
-/** All Chart options constructor. combines all other options into main options object. Info at http://api.highcharts.com/highcharts */
-var utils_main = require("../../utils/utils_main.js");
-
+/** 
+* All Chart options constructor. Combines all other options into main options object. Info at http://api.highcharts.com/highcharts 
+@constructor AllChartOptions
+@param o {object} chart options object
+*/
 var AllChartOptions = function (o) {
     this.chart = o.chart;
     this.colors = o.colors;

@@ -1,12 +1,13 @@
-/** when a chart icon is clicked, this function is called - changes the chart type shown */
 var plotOptionsInit = require("../initializers/plot_options_init.js");
 var update_data = require("./update_data.js");
 
+/** when a chart icon is clicked, this function is called - changes the chart type shown 
+@module
+*/
 var updateChartType = function (i, type, chart, all_chart_options) {
-console.log(type);
     var y_axis_title_align;
-    
-    type = type.replace("stacked_","");
+
+    type = type.replace("stacked_", "");
 
     if (type === "bar") {
         //fix y axis position
@@ -15,8 +16,7 @@ console.log(type);
         //hide non-relevant elements
         $(".not_bar").hide();
 
-
-    } else {
+    } else { //chart not bar
         chart.inverted = false;
         y_axis_title_align = "high";
         $(".not_bar").show();
@@ -26,9 +26,17 @@ console.log(type);
     if (type === "drilldown") {
         type = "column";
     }
-    
 
-    chart.xAxis[0].update({}, false);
+    chart.xAxis[0].update({
+        plotLines: [{
+            "value": 0,
+            "color": "#c0c0c0",
+            "dashStyle": "solid",
+            "width": type === "scatter" || type === "bubble" ? 1 : 0
+        }]
+    }, false);
+
+
     chart.yAxis[0].update({}, false);
     chart.yAxis[0].setTitle({
         align: y_axis_title_align
@@ -37,7 +45,7 @@ console.log(type);
     //re parse data
     update_data.updateData(chart, all_chart_options);
 
-    
+
 
 
     all_chart_options.chart.type = type;

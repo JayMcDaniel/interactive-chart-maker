@@ -1,8 +1,10 @@
-/** when legend options are changed in the side area */
+/** when legend options are changed in the side area 
+@namespace
+*/
 
 var update_legend = {
 
-    /* decide if the legend should be reverse order */
+    /** decide if the legend should be reverse order **/
     updateIsReversed: function updateIsReversed(val, chart, all_chart_options) {
 
         var legend = chart.legend;

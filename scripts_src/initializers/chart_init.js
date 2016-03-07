@@ -1,8 +1,8 @@
-/** Initializer for "chart" options section of all_chart_options. Creates and returns a new instance */
-
 var ChartOptions = require("../constructors/charts/chart.js");
 
-
+/** Initializer for "chart" options section of all_chart_options. Creates and returns a new instance 
+@module
+*/
 var chartInit = function chartInit(chart_type) {
     
         if (chart_type === "drilldown"){

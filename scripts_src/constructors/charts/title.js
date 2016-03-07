@@ -1,6 +1,7 @@
-/** title options constructor. Info at http://api.highcharts.com/highcharts#title */
-var utils_main = require("../../utils/utils_main.js");
-
+/** Title options constructor. Info at http://api.highcharts.com/highcharts#title
+* @constructor Title 
+* @param o {object} Title options object
+*/
 var Title = function (o) {
     
     this.text = o.text || "";

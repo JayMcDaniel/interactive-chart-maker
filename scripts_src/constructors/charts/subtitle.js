@@ -1,6 +1,7 @@
-/** subtitle options constructor. Info at http://api.highcharts.com/highcharts#subtitle */
-var utils_main = require("../../utils/utils_main.js");
-
+/** subtitle options constructor. Info at http://api.highcharts.com/highcharts#subtitle
+* @constructor Subtitle 
+* @param o {object} Subtitle options object
+*/
 var Subtitle = function (o) {
     
     this.text = o.text || "";

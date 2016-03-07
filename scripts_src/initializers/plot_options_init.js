@@ -1,8 +1,8 @@
-/** Initializer for "plotOptions" options section of all_chart_options. Creates and returns a new instance */
-
 var PlotOptions = require("../constructors/charts/plot_options.js");
 
-
+/** Initializer for "plotOptions" options section of all_chart_options. Creates and returns a new instance 
+@module
+*/
 var plotOptionsInit = function plotOptionsInit(chart_type) {
 
     //load options from user inputs

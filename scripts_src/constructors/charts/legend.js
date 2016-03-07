@@ -1,6 +1,7 @@
-/** legend options constructor. Info at http://api.highcharts.com/highcharts#legend */
-var utils_main = require("../../utils/utils_main.js");
-
+/** Legend options constructor. Info at http://api.highcharts.com/highcharts#legend 
+* @constructor Legend 
+* @param o {object} legend options object
+*/
 var Legend = function (o) {
 
     this.align = o.align || 'left';

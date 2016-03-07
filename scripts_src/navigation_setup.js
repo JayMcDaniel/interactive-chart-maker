@@ -1,6 +1,8 @@
 var utils_main = require("./utils/utils_main.js");
 
-/** object that contains functions for all the navigation, ie changing between options and chart types */
+/** object that contains functions for all the navigation, ie changing between options and chart types 
+@namespace
+*/
 var navigation_setup = {
 
     /** when tabs on left side nav bar are clicked, options displayed are changed */

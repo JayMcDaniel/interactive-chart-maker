@@ -1,5 +1,7 @@
-/** yAxis options constructor. Info at http://api.highcharts.com/highcharts#yAxis */
-var utils_main = require("../../utils/utils_main.js");
+/** yAxis options constructor. Info at http://api.highcharts.com/highcharts#yAxis
+* @constructor yAxis 
+* @param o {object} yAxis options object
+*/
 
 var yAxis = function (o) {
 

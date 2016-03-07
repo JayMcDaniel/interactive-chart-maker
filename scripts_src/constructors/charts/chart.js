@@ -1,7 +1,7 @@
-/** Chart options constructor. Info at http://api.highcharts.com/highcharts#chart */
-var utils_main = require("../../utils/utils_main.js");
-
-
+/** Chart options constructor. Info at http://api.highcharts.com/highcharts#chart
+* @constructor ChartOptions 
+*  @param o {object} chart options object
+*/
 var ChartOptions = function (o) {
 
     this.renderTo = o.renderTo || "chart_display_area";

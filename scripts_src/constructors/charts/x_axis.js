@@ -1,13 +1,14 @@
-/** xAxis options constructor. Info at http://api.highcharts.com/highcharts#xAxis */
-var utils_main = require("../../utils/utils_main.js");
-
+/** xAxis options constructor. Info at http://api.highcharts.com/highcharts#xAxis
+ * @constructor XAxis 
+ * @param o {object} XAxis options object
+ */
 var XAxis = function (o) {
 
     this.categories = o.categories;
     this.gridLineColor = o.gridLineColor || '#c0c0c0';
     this.gridLineWidth = o.gridLineWidth || 0;
     this.gridLineDashStyle = o.gridLineDashStyle || 'Dot';
-    
+
     this.labels = {
         formatter: o.labels ? o.labels.formatter || undefined : undefined,
         rotation: o.labels ? o.labels.rotation || 0 : 0,
@@ -20,10 +21,16 @@ var XAxis = function (o) {
         }
 
     };
-    
+
     this.lineWidth = o.lineWidth || 1.2;
     this.lineColor = o.lineColor || 'gray';
     this.plotBands = o.plotBands || [];
+    this.plotLines = o.plotLines || [{
+        "value": 0,
+        "color": "#c0c0c0",
+        "dashStyle": "solid",
+        "width": 1
+    }];
     this.tickInterval = o.tickInterval || null;
     this.tickmarkPlacement = o.tickmarkPlacement || 'on';
     this.tickPosition = o.tickPosition || 'outside';

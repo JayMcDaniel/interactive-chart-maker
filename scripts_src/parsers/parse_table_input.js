@@ -1,12 +1,12 @@
-/** takes the table html from a given textarea and parses it into an object, depending on useer-selected inputs */
+/* takes the table html from a given textarea and parses it into an object, depending on useer-selected inputs */
 
-/** parsing function for typical chart types (line, bar, column) */
+/* parsing function for typical chart types (line, bar, column) */
 var parseForTypicalChart = require("./parse_for_typical_chart.js");
 
-/** parsing function for scatter charts */
+/* parsing function for scatter charts */
 var parseForScatter = require("./parse_for_scatter.js");
 
-/** parsing function for bubble charts */
+/* parsing function for bubble charts */
 var parseForBubble = require("./parse_for_bubble.js");
 
 
@@ -20,8 +20,15 @@ var parseForMap = function (input) {};
 
 
 
+/** 
+* Function that decides which parse function to run, depending on chart type
+* @module
+* @param input {element} input jquery table element retrieved from textarea
+* @param load_series_from {string} column_heads or column_rows
+* @param chart_type {string} type of chart (line, bar etc.)
+* @returns {object} Object with chart title, X-axis categories and series array of objects
+*/
 
-/** Decides which parse function to run, depending on chart type */
 var parseTableInput = function (input, load_series_from, chart_type) {
 
     var output;

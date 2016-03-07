@@ -1,6 +1,7 @@
-/** Colors options constructor. Info at http://api.highcharts.com/highcharts#colors */
-var utils_main = require("../../utils/utils_main.js");
-
+/** Colors options constructor. Info at http://api.highcharts.com/highcharts#colors 
+* @constructor Colors 
+*  @param o {object} colors options object with colors array
+*/
 var Colors = function (o) {
 
     this.colors = o.colors || ['#7cb5ec', '#434348', '#90ed7d', '#f7a35c', '#8085e9',

@@ -1,7 +1,7 @@
-/** Exporting options constructor. Info at http://api.highcharts.com/highcharts#exporting */
-var utils_main = require("../../utils/utils_main.js");
-
-
+/** Exporting options constructor. Info at http://api.highcharts.com/highcharts#exporting
+* @constructor Exporting 
+* @param o {object} exporting options object
+*/
 var Exporting = function (o) {
 
     this.buttons = {

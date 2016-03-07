@@ -1,4 +1,3 @@
-/** listens for any form updates and calls appropriate function */
 var update_template = require("./update_template.js");
 var updateChartType = require("./update_chart_type.js");
 var utils_forms = require("../utils/utils_forms");
@@ -8,15 +7,19 @@ var update_y_axis = require("./update_y_axis.js");
 var update_tooltip = require("./update_tooltip.js");
 var update_data = require("./update_data.js");
 
+/** listens for any form updates and calls appropriate function 
+@module
+*/
 var allFormUpdates = function (chart, all_chart_options) {
 
 
-    /** CHART TYPE CHANGES */
+    /* CHART TYPE CHANGES */
 
     //chart type changed
     $.each(['area', 'line', 'bar', 'stacked_bar', 'column', 'stacked_column', 'bubble', 'scatter', "drilldown"], function (i, type) {
         $('#chart_type_' + type).click(function () {
             updateChartType(i, type, chart, all_chart_options);
+            update_tooltip.updateToolTip(chart, all_chart_options);
         });
     });
 
