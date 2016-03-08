@@ -29,24 +29,28 @@ var XAxis = function (o) {
         "value": 0,
         "color": "#c0c0c0",
         "dashStyle": "solid",
-        "width": 1
+        "width": 0
     }];
+
     this.tickInterval = o.tickInterval || null;
     this.tickmarkPlacement = o.tickmarkPlacement || 'on';
     this.tickPosition = o.tickPosition || 'outside';
     this.tickColor = o.tickColor || '#C0D0E0';
 
     this.title = {
+        align: o.title.align,
         useHTML: true,
         text: o.title ? o.title.text || '' : '',
         margin: o.title ? o.title.margin || 6 : '',
+        rotation: 0,
         style: {
             color: '#000000',
             fontFamily: 'Calibri, Verdana, Arial, Helvetica, sans-serif',
             fontWeight: 'normal',
             backgroundColor: '#fff',
             fontSize: '13px'
-        }
+        },
+        x: o.title.x
     };
 
 

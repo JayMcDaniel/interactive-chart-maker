@@ -2,17 +2,20 @@ var Colors = require("../constructors/charts/colors.js");
 
 /** Initializer for "colors" options section of all_chart_options. Creates and returns a new instance 
 @module
-*/ 
- var colorsInit = function colorsInit() {
+*/
+var colorsInit = function colorsInit() {
+    var color_arr = [];
+    $(".color_palette_selected .color_palette_cell").each(function () {
+        color_arr.push($(this).css("background-color"));
+    });
 
-     //load options from user inputs
-     var options = {
-      //   colors: ["#000"]
-     };
+    //load options from user inputs
+    var options = {
+        colors: color_arr
+    };
 
+    var colors = new Colors(options);
+    return colors.colors;
+};
 
-     var colors = new Colors(options);
-     return colors.colors;
- };
-
- module.exports = colorsInit;
+module.exports = colorsInit;

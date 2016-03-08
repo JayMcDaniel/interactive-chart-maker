@@ -1,23 +1,6 @@
-//
-//scatterChartsToolTip = function() {
-//    if (this.series.xAxis.axisTitle) {
-//        var xAxisText = this.series.xAxis.axisTitle.textStr;
-//    } else {
-//        var xAxisText = "x axis";
-//    }
-//
-//    var s = "<b>" + this.series.name + "</b><br>" + this.series.yAxis.axisTitle.textStr + ": <b>" + negDollarFormat((this.y * tipMultiple), chartToolTipDecimalPoints) + chartToolTipPercentSign + "</b><br>" + xAxisText + ": <b>" + negDollarFormat((this.x * tipMultiple), chartToolTipDecimalPoints) + chartToolTipPercentSign + "</b><br>";
-//    return s;
-//
-//}
-
-
-
 var utils_main = require("../utils/utils_main.js");
 var utils_forms = require("../utils/utils_forms");
 
-
-var addCommas = utils_main.addCommas;
 
 /** when tooltip options are changed in the side area, these methods are called 
 @namespace
@@ -27,18 +10,16 @@ var update_tooltip = {
     /** gets a tooltip for scatter charts. Called from updateToolTip**/
     getScatterTooltip: function (chart, is_shared, decimals, signs_arr, multiplier, chart_type) {
         var new_tooltip = function () {
-            
+
             var y_axis_title = this.series.yAxis.axisTitle ? this.series.yAxis.axisTitle.textStr : "Y-Axis";
             var x_axis_title = this.series.xAxis.axisTitle ? this.series.xAxis.axisTitle.textStr : "X-Axis";
-            
+
             return "<b>" + this.series.name + "</b><br>" + y_axis_title + ": <b>" + signs_arr[0] +
-                        Highcharts.numberFormat((this.y * multiplier), decimals) + signs_arr[1] + "</b><br/>" +
+                Highcharts.numberFormat((this.y * multiplier), decimals) + signs_arr[1] + "</b><br/>" +
                 x_axis_title + ": <b>" + signs_arr[0] + Highcharts.numberFormat((this.x * multiplier), decimals) + signs_arr[1] + "<br/>";
-                
-            
-                //negDollarFormat((this.y * tipMultiple), chartToolTipDecimalPoints) + chartToolTipPercentSign + "</b><br>" + xAxisText + ": <b>" + negDollarFormat((this.x * tipMultiple), chartToolTipDecimalPoints) + chartToolTipPercentSign + "</b><br>";
-        }
-        
+
+        };
+
         return new_tooltip;
     },
 
@@ -86,6 +67,7 @@ var update_tooltip = {
                 }
             } else { //don't use decimal formatter
                 new_tooltip = function () {
+                    console.log("hi");
                     return "<b>" + this.series.name + "</b><br>" + this.x + ": " + signs_arr[0] +
                         $(this.y * multiplier).addCommas() + signs_arr[1];
                 }
@@ -97,10 +79,11 @@ var update_tooltip = {
 
 
 
-    
-    
+
+
     /** update tooltip - decide which kind of chart and call that get tooltip function **/
     updateToolTip: function (chart, all_chart_options) {
+
         var is_shared = utils_forms.getCheckBoxValue($("#chart_tooltip_shared_checkbox"));
         var decimals = Number($("#chart_tooltip_force_decimals_select").val());
         var signs = $("#chart_tooltip_signs_select").val();
@@ -126,15 +109,17 @@ var update_tooltip = {
         if (!chart) { //for use in tooltip_init
             return new_tooltip;
         }
-        
-        chart.tooltip.options.formatter = new_tooltip;
 
+        chart.tooltip.options.formatter = new_tooltip;
+    //    chart.tooltip.refresh(chart.series[0].data[0]);
 
         all_chart_options.tooltip.formatter = utils_main.stringifyFormatter(new_tooltip, decimals, multiplier, signs_arr);
-
+        
     }
 
 }
 
 
 module.exports = update_tooltip;
+
+

@@ -19,8 +19,8 @@ var allFormUpdates = function (chart, all_chart_options) {
     $.each(['area', 'line', 'bar', 'stacked_bar', 'column', 'stacked_column', 'bubble', 'scatter', "drilldown"], function (i, type) {
         $('#chart_type_' + type).click(function () {
             updateChartType(i, type, chart, all_chart_options);
-            update_tooltip.updateToolTip(chart, all_chart_options);
         });
+
     });
 
 

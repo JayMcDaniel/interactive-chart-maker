@@ -6,9 +6,9 @@ var PlotOptions = function (o) {
 
     //for all chart types. values are undefined if not in o.
     this.series = {
-        events: {
-            legendItemClick: o.series.events.legendItemClick
-        },
+//        events: {
+//            legendItemClick: o.series.events.legendItemClick
+//        },
         dataLabels: {
             enabled: o.series.dataLabels.enabled || false
         },

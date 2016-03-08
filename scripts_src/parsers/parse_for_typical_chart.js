@@ -28,8 +28,10 @@ var parseForTypicalChart = function (input, load_series_from, chart_type) {
         $("thead tr:last th:gt(0)", input).each(function (i) {
             var seriesObj = {
                 name: $.trim($.trim($(this).text())),
-                type: type,
                 data: [],
+                type: type,
+                _colorIndex: i,
+                _symbolIndex: i,
                 stacking: ["area", "stacked_bar", "stacked_column"].indexOf(chart_type) > -1 ? "stacked" : null
                 
             };
@@ -59,14 +61,16 @@ var parseForTypicalChart = function (input, load_series_from, chart_type) {
 
         //load series object names from row heads, and data from row tds
         output.series = [];
-        $("tbody tr", input).each(function () {
+        $("tbody tr", input).each(function (i) {
 
             var this_row = $(this);
 
             var seriesObj = {
-                type: type ,
                 name: $.trim($("th:eq(0)", this_row).text()),
                 data: [],
+                type: type,
+                 _colorIndex: i,
+                _symbolIndex: i,
                 stacking: ["area", "stacked_bar", "stacked_column"].indexOf(chart_type) > -1 ? "stacked" : null
             };
 

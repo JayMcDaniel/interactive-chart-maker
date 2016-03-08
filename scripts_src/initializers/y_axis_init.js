@@ -24,7 +24,8 @@ var yAxisInit = function yAxisInit(chart_type) {
         title: {
             text: $("#chart_y_axis_title_textarea").val(),
             align: chart_type === "bar" ? "middle" : "high",
-            x: Number($("#chart_y_axis_x_position_input").val())
+            x: chart_type === "bar" || chart_type === "stacked_bar" ? 0 : Number($("#chart_y_axis_x_position_input").val()),
+            y: chart_type === "bar" || chart_type === "stacked_bar" ? 8 : -20,
         }
 
 

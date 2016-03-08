@@ -52,7 +52,7 @@ var yAxis = function (o) {
         offset: 20,
         rotation: 0,
         x: o.title ? o.title.x || 35 : 35,
-        y: -15,
+        y: o.title ? o.title.y || -15 : -15,
         
         style: {
             color: '#000000',

@@ -133,6 +133,24 @@
         font-size: 110%;
     }
     
+    .color_palette_cell {
+        width: 15px;
+        height: 17px;
+        float: left;
+    }
+    
+    .color_palette_row {
+        margin-bottom: 5px;
+        cursor: pointer;
+        width: 233px;
+        height: 25px;
+        padding: 4px;
+    }
+    
+    .color_palette_selected {
+        background-color: $primary_color;
+    }
+    
     .help_icon {
         font-family: sans-serif;
         border: 1px solid $highlight-color;
@@ -169,6 +187,16 @@
         }
     }
     
+    .jscolor {
+        width: 20px;
+        height: 20px;
+        padding: 0px;
+        color: rgb(0, 0, 0);
+        border: 1px solid rgb(255, 255, 255);
+        background-image: none;
+        background-color: rgb(152, 184, 79);
+    }
+    
     label {
         font-weight: normal;
         margin-top: 10px;
@@ -180,7 +208,7 @@
     
     #main_content_div {
         width: 70%;
-        height: 100%;
+        min-height: 100%;
         float: left;
     }
     
@@ -257,7 +285,7 @@
         width: 30%;
         background-color: $secondary_color;
         color: $primary_light_color;
-        height: 100%;
+        min-height: 100%;
         padding: 10px;
         h3 {
             margin-top: 0px;
