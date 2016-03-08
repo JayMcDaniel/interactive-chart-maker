@@ -1,7 +1,12 @@
 var parseTableInput = require("../parsers/parse_table_input.js");
 
+/** called when .selected_chart_type or #table_input_textarea is changed - calls functions to reparse data
+@namespace
+*/
+
 var update_data = {
 
+    /** called when .selected_chart_type or #table_input_textarea is changed - calls functions to reparse data */
     updateData: function (chart, all_chart_options) {
         var chart_type = $(".selected_chart_type").divVal();
         var load_series_from = $(".selected_load_series_from").divVal();

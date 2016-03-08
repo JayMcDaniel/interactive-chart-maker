@@ -7,7 +7,6 @@ var update_tooltip = require("./update_tooltip.js");
 @module
 */
 var updateChartType = function (i, type, chart, all_chart_options) {
-    var y_axis_title_align;
 
     type = type.replace("stacked_", "");
 
@@ -28,10 +27,12 @@ var updateChartType = function (i, type, chart, all_chart_options) {
         chart.inverted = false;
         all_chart_options.yAxis.title.align = "high";
         all_chart_options.xAxis.title.align = "middle";
-        $(".not_bar").show();
+        all_chart_options.yAxis.title.x = Number($("#chart_y_axis_x_position_input").val());
         all_chart_options.yAxis.title.y = -20;
         all_chart_options.xAxis.title.y = 0;
         all_chart_options.xAxis.title.x = 0;
+        
+        $(".not_bar").show();
     }
 
     if (type === "drilldown") {
@@ -47,8 +48,6 @@ var updateChartType = function (i, type, chart, all_chart_options) {
         }]
     }, false);
 
-
-    chart.yAxis[0].update({}, false);
     
     chart.xAxis[0].setTitle({
         align: all_chart_options.xAxis.title.align,

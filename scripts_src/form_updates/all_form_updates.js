@@ -1,5 +1,6 @@
 var update_template = require("./update_template.js");
 var updateChartType = require("./update_chart_type.js");
+var updateColors = require("./update_colors.js");
 var utils_forms = require("../utils/utils_forms");
 var update_legend = require("./update_legend.js");
 var update_x_axis = require("./update_x_axis.js");
@@ -52,13 +53,17 @@ var allFormUpdates = function (chart, all_chart_options) {
         update_data.updateData(chart, all_chart_options);
     });
 
-    //
-    $("#table_input_textarea").bind('input propertychange', function() {
+    $("#table_input_textarea").bind('input propertychange', function () {
         update_data.updateData(chart, all_chart_options);
     });
 
 
-    /** LEGEND CHANGES */
+    /* COLOR PALETTE CHANGES */
+    $(".color_palette_row").click(function () {
+        updateColors(chart, all_chart_options);
+    });
+
+    /* LEGEND CHANGES */
 
     //legend layout changed
     $("#legend_layout_select").change(function () {
@@ -80,7 +85,7 @@ var allFormUpdates = function (chart, all_chart_options) {
         update_legend.updateXYpositions(newX, newY, chart, all_chart_options);
     });
 
-    /** X-AXIS CHANGES */
+    /* X-AXIS CHANGES */
 
     //x-axis title textarea changed
     $("#chart_x_axis_title_textarea").keyup(function () {

@@ -5,7 +5,7 @@ var utils_main = require("./utils/utils_main.js");
 */
 var navigation_setup = {
 
-    /** when tabs on left side nav bar are clicked, options displayed are changed */
+    /** when tabs on left side nav bar are clicked, options displayed are changed **/
     sideNavTabsChange: function () {
 
         $("#side_nav_tabs .tab").click(function () {
@@ -21,7 +21,8 @@ var navigation_setup = {
         });
     },
 
-    /** when chart code is entered, update */
+    
+    /** when chart code is entered, update **/
     chartOutputCodeFocus: function (all_chart_options) {
         $("#chart_output_code").click(function () {
             utils_main.writeCode(all_chart_options);
@@ -29,7 +30,8 @@ var navigation_setup = {
 
     },
 
-    /** when chart type icon is clicked and changed */
+    
+    /** when chart type icon is clicked and changed **/
     chartTypeIconChange: function () {
 
         $("#chart_type_icons .chart_type_icon").click(function () {
@@ -51,21 +53,25 @@ var navigation_setup = {
                 $(".show_scatter").hide();
             }
 
-
-
         });
     },
+    
 
     /** when clear next text area button (X) is clicked, find and clear the text of the next textarea */
     clearNextTextareaClick: function () {
-
         $(".clear_next_textarea_button").click(function () {
             $(this).next("textarea").val("");
-
         });
     },
+    
 
-
+    /** when .color_palette_row is clicked, change colors */
+    colorPaletteRowClick: function () {
+        $(".color_palette_row").click(function(){
+            $(".color_palette_row").removeClass("color_palette_selected");
+            $(this).addClass("color_palette_selected");
+        });
+    },
 
 
     /** when a help icon is clicked */
@@ -109,7 +115,7 @@ var navigation_setup = {
         });
     },
 
-    //* INIT ALL NAVIGATION, called from app.js when page is loaded *//
+    /** INIT ALL NAVIGATION, called from app.js when page is loaded **/
     initAllNavigation: function (all_chart_options) {
 
         navigation_setup.sideNavTabsChange();
@@ -119,6 +125,7 @@ var navigation_setup = {
         navigation_setup.chartOutputCodeFocus(all_chart_options);
         navigation_setup.loadSeriesFromIcon();
         navigation_setup.clearNextTextareaClick();
+        navigation_setup.colorPaletteRowClick();
 
     }
 

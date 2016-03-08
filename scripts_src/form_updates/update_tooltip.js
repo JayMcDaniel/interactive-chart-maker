@@ -67,7 +67,6 @@ var update_tooltip = {
                 }
             } else { //don't use decimal formatter
                 new_tooltip = function () {
-                    console.log("hi");
                     return "<b>" + this.series.name + "</b><br>" + this.x + ": " + signs_arr[0] +
                         $(this.y * multiplier).addCommas() + signs_arr[1];
                 }

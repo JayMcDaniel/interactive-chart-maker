@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Module: initializers/all_chart_options_init</title>
+    <title>JSDoc: Source: form_updates/update_colors.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,126 +17,38 @@
 
 <div id="main">
 
-    <h1 class="page-title">Module: initializers/all_chart_options_init</h1>
+    <h1 class="page-title">Source: form_updates/update_colors.js</h1>
 
     
 
 
 
-
-<section>
-
-<header>
     
-        
-            
-        
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>var colorsInit = require("../initializers/colors_init.js");
+
+/** updates the chart's colors - called when palette is changed. Calls colorsInit 
+@module
+@param chart {object} the main chart object, built when chart is loaded
+@param all_chart_options {object} the main chart options that load into building of the chart and are turned to string for the output
+**/
+var updateColors = function (chart, all_chart_options) {
+    all_chart_options.colors = colorsInit(chart);
+    chart.options.colors = all_chart_options.colors;
+
+    $(chart.series).each(function (i) {
+        this.update({
+            _colorIndex: i
+        }, false);
+    });
     
-</header>
+    chart.redraw();
+}
 
-<article>
-    <div class="container-overview">
-    
-        
-            <div class="description">create and return an instance of all_chart_options</div>
-        
-
-        
-            
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="initializers_all_chart_options_init.js.html">initializers/all_chart_options_init.js</a>, <a href="initializers_all_chart_options_init.js.html#line17">line 17</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-    
-    </div>
-
-    
-
-    
-
-    
-
-     
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
+module.exports = updateColors;</code></pre>
+        </article>
+    </section>
 
 
 
