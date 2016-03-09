@@ -8,7 +8,12 @@ var plotOptionsInit = function plotOptionsInit(chart_type) {
     //load options from user inputs
     var options = {
         series: {
-            events: {},
+            events: {
+
+                // when one legend item is clicked, the others hide
+                legendItemClick: function () {
+                }
+            },
             dataLabels: {},
 
             lineWidth: 1.5,

@@ -17,7 +17,7 @@ var update_legend = {
 
 
     /** if 'no legend' is selected, hide the legend, and set options, else, show it with the correct layout */
-    updateLayout: function updateLayout(val, chart, all_chart_options) {
+    updateLayout: function (val, chart, all_chart_options) {
 
         var legend = chart.legend;
         if (val === "no_legend") {
@@ -43,6 +43,39 @@ var update_legend = {
         all_chart_options.legend.enabled = legend.options.enabled;
 
     },
+
+
+
+    /** set if when one legend item is clicked, the others hide */
+    updateToggle: function (toggle_enabled, chart, all_chart_options) {
+
+        //update all_chart_options
+        if (toggle_enabled) {
+            all_chart_options.plotOptions.series.events.legendItemClick = function (event) {
+                var selected = this.index;
+                var allSeries = this.chart.series;
+                $.each(allSeries, function (index, series) {
+                    selected == index ? series.show() : series.hide();
+                });
+                return false;
+            }
+            
+        } else {
+            all_chart_options.plotOptions.series.events.legendItemClick = function (event) {
+            }
+        }
+        
+        //update in current chart
+        $(chart.series).each(function(i){
+           this.update({
+               visible: i > 0 && toggle_enabled === true ? false : true,
+               events:{
+                   legendItemClick: all_chart_options.plotOptions.series.events.legendItemClick
+               }
+           }) 
+        });
+    },
+
 
     /** update X and Y positions on legend */
 

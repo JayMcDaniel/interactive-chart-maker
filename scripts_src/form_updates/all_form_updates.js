@@ -77,6 +77,13 @@ var allFormUpdates = function (chart, all_chart_options) {
         var val = utils_forms.getCheckBoxValue($(this));
         update_legend.updateIsReversed(val, chart, all_chart_options);
     });
+    
+    
+    //legend toggle (hide others) checkbox changed
+    $("#legend_make_toggle_checkbox").change(function(){
+        var toggle_enabled = utils_forms.getCheckBoxValue($(this));
+        update_legend.updateToggle(toggle_enabled, chart, all_chart_options);
+    });
 
     //legend X or Y placement values changed
     $("#legend_placement_x, #legend_placement_y").keyup(function () {

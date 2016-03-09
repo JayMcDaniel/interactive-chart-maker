@@ -33,6 +33,9 @@ var update_data = {
         //update chart options for code output
         all_chart_options.series = parsed_table_output.series;
         all_chart_options.xAxis.categories = parsed_table_output.x_axis_categories;
+        
+        //update whether legend toggle is enabled 
+        $("#legend_make_toggle_checkbox").change();
 
     }
 
