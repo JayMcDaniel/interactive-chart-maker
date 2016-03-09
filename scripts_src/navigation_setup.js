@@ -21,7 +21,7 @@ var navigation_setup = {
         });
     },
 
-    
+
     /** when chart code is entered, update **/
     chartOutputCodeFocus: function (all_chart_options) {
         $("#chart_output_code").click(function () {
@@ -30,7 +30,7 @@ var navigation_setup = {
 
     },
 
-    
+
     /** when chart type icon is clicked and changed **/
     chartTypeIconChange: function () {
 
@@ -55,7 +55,7 @@ var navigation_setup = {
 
         });
     },
-    
+
 
     /** when clear next text area button (X) is clicked, find and clear the text of the next textarea */
     clearNextTextareaClick: function () {
@@ -63,11 +63,23 @@ var navigation_setup = {
             $(this).next("textarea").val("");
         });
     },
-    
+
+
+    /** when #color_palette_reverse_icon is clicked, reverse the orders of each palette */
+    colorPaletteReverseIconClick: function () {
+        $("#color_palette_reverse_icon").click(function () {
+            $(".color_palette_row").each(function () {
+                var this_row = $(this);
+                var color_cells = this_row.children('.color_palette_cell');
+                this_row.prepend(color_cells.get().reverse());
+            });
+            $(".color_palette_selected").click();
+        });
+    },
 
     /** when .color_palette_row is clicked, change colors */
     colorPaletteRowClick: function () {
-        $(".color_palette_row").click(function(){
+        $(".color_palette_row").click(function () {
             $(".color_palette_row").removeClass("color_palette_selected");
             $(this).addClass("color_palette_selected");
         });
@@ -126,6 +138,7 @@ var navigation_setup = {
         navigation_setup.loadSeriesFromIcon();
         navigation_setup.clearNextTextareaClick();
         navigation_setup.colorPaletteRowClick();
+        navigation_setup.colorPaletteReverseIconClick();
 
     }
 
