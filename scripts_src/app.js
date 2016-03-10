@@ -27,5 +27,5 @@ $(document).ready(function () {
     //all form updates - when updates are made, update the chart
     var allFormUpdates = require("./form_updates/all_form_updates.js");
     allFormUpdates(chart, all_chart_options);
-
+    
 });

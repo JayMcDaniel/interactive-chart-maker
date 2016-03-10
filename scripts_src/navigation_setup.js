@@ -24,7 +24,7 @@ var navigation_setup = {
 
     /** when chart code is entered, update **/
     chartOutputCodeFocus: function (all_chart_options) {
-        $("#chart_output_code").click(function () {
+        $("#chart_output_code").hover(function () {
             utils_main.writeCode(all_chart_options);
         });
 

@@ -8,13 +8,13 @@ var update_y_axis = require("./update_y_axis.js");
 var update_tooltip = require("./update_tooltip.js");
 var update_data = require("./update_data.js");
 var update_credits = require("./update_credits.js");
+var update_individual_series_options = require("./update_individual_series_options.js");
 
 /** listens for any form updates and calls appropriate function 
 @module
 */
 var allFormUpdates = function (chart, all_chart_options) {
-
-
+    
     /* CHART TYPE CHANGES */
 
     //chart type changed
@@ -40,11 +40,8 @@ var allFormUpdates = function (chart, all_chart_options) {
 
     //inner chart margins
     $(".margin_input").keyup(function () {
-
         var margins_arr = utils_forms.getClassValuesArray("margin_input");
-
         update_template.margin(margins_arr, chart, all_chart_options);
-
     });
 
 
@@ -59,11 +56,25 @@ var allFormUpdates = function (chart, all_chart_options) {
     });
 
 
+    
+    
+    /* INDIVIDUAL SERIES UPDATES */
+
+    //update individual series options section (call on load and when data is changed)
+    $("#tab_series_options").click(function () {
+        update_individual_series_options.populateForm(chart, all_chart_options);
+
+    });
+    
+    
+
     /* COLOR PALETTE CHANGES */
     $(".color_palette_row").click(function () {
-        updateColors(chart, all_chart_options);
+       updateColors(chart, all_chart_options);
     });
-
+       
+    
+    
     /* LEGEND CHANGES */
 
     //legend layout changed
@@ -77,10 +88,10 @@ var allFormUpdates = function (chart, all_chart_options) {
         var val = utils_forms.getCheckBoxValue($(this));
         update_legend.updateIsReversed(val, chart, all_chart_options);
     });
-    
-    
+
+
     //legend toggle (hide others) checkbox changed
-    $("#legend_make_toggle_checkbox").change(function(){
+    $("#legend_make_toggle_checkbox").change(function () {
         var toggle_enabled = utils_forms.getCheckBoxValue($(this));
         update_legend.updateToggle(toggle_enabled, chart, all_chart_options);
     });
@@ -92,6 +103,8 @@ var allFormUpdates = function (chart, all_chart_options) {
 
         update_legend.updateXYpositions(newX, newY, chart, all_chart_options);
     });
+
+
 
     /* X-AXIS CHANGES */
 
@@ -106,6 +119,8 @@ var allFormUpdates = function (chart, all_chart_options) {
         var newInterval = Number($(this).val());
         update_x_axis.updateTickmarkInterval(newInterval, chart, all_chart_options);
     });
+
+
 
 
     /* Y-AXIS CHANGES */
@@ -171,13 +186,16 @@ var allFormUpdates = function (chart, all_chart_options) {
     update_tooltip.updateToolTip(chart, all_chart_options);
 
 
-    
-    
+
+
     /* CREDITS CHANGES */
-    
+
     $("#chart_credits_text_textarea").bind('input propertychange', function () {
         update_credits.updateCreditText(chart, all_chart_options);
     });
+
+
+
 
 };
 

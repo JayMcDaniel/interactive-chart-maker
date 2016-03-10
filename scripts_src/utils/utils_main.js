@@ -24,6 +24,13 @@ var utils_main = {
 
     },
 
+    rgb2arr: function (rgb) {
+        return rgb.replace(/[^0-9\,]+/g, '').split(",").map(function (item) {
+            return parseInt(item, 10);
+        });
+    },
+    
+
     /** stringify tooltip formatter function **/
     stringifyFormatter: function (new_tooltip, decimals, multiplier, signs_arr) {
         return new_tooltip.toString()
@@ -37,7 +44,6 @@ var utils_main = {
 
     /** place code in chart_output_code and reinit highlight */
     writeCode: function writeCode(all_chart_options) {
-
 
         var chart_options_js_string = utils_main.deepStringify(all_chart_options);
         $("#chart_output_code").text(chart_options_js_string).each(function (i, block) {

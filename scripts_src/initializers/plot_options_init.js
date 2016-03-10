@@ -1,19 +1,19 @@
 var PlotOptions = require("../constructors/charts/plot_options.js");
+var update_legend = require("../form_updates/update_legend.js");
 
 /** Initializer for "plotOptions" options section of all_chart_options. Creates and returns a new instance 
 @module
 */
-var plotOptionsInit = function plotOptionsInit(chart_type) {
+var plotOptionsInit = function plotOptionsInit(chart_type, legend_toggle_enabled) {
 
     //load options from user inputs
     var options = {
         series: {
             events: {
-
                 // when one legend item is clicked, the others hide
-                legendItemClick: function () {
-                }
+                legendItemClick: update_legend.updateToggle(legend_toggle_enabled)
             },
+            
             dataLabels: {},
 
             lineWidth: 1.5,

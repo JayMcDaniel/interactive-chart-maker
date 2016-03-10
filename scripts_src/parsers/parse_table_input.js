@@ -29,18 +29,18 @@ var parseForMap = function (input) {};
 * @returns {object} Object with chart title, X-axis categories and series array of objects
 */
 
-var parseTableInput = function (input, load_series_from, chart_type) {
+var parseTableInput = function (input, load_series_from, chart_type, legend_toggle_enabled, colors) {
 
     var output;
     /** Depending on the chart type, start that parsing */
     if (["area", "line", "bar","stacked_bar", "column", "stacked_column"].indexOf(chart_type) > -1) {
-        output = parseForTypicalChart(input, load_series_from, chart_type);
+        output = parseForTypicalChart(input, load_series_from, chart_type, legend_toggle_enabled, colors);
     } else if (chart_type == "bubble") {
-        output = parseForBubble(input, chart_type);
+        output = parseForBubble(input, chart_type, colors);
     } else if (chart_type == "scatter") {
-        output = parseForScatter(input, chart_type);
+        output = parseForScatter(input, chart_type, colors);
     } else if (chart_type == "drilldown") {
-        output = parseForDrilldown(input, chart_type);
+        output = parseForDrilldown(input, chart_type, colors);
     } else if (chart_type == "map") {
         output = parseForMap(input);
     }

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: utils/utils_forms.js</title>
+    <title>JSDoc: Module: form_updates/update_individual_series_options</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,49 +17,198 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: utils/utils_forms.js</h1>
+    <h1 class="page-title">Module: form_updates/update_individual_series_options</h1>
 
     
 
 
 
-    
-    <section>
-        <article>
-            <pre class="prettyprint source linenums"><code>/**
- * Forms utility object, contains functions that work with form elements
- * @namespace
- */
-var utils_forms = {
-    
-    
-    /** returns true if checkbox is checked, false if not 
-    @param elem {element} checkbox element
-    @returns {bool}
-    */
-    getCheckBoxValue: function getCheckBoxValue(elem){
-        return elem.is(':checked');
-    },
 
-    /** gets an array of values from a given class 
-    @param class_name {string}
-    @returns {array}
-    */
-    getClassValuesArray: function (class_name) {
-        var arr = [];
-        $("." + class_name).each(
-            function () {
-                arr.push(Number($(this).val()));
-            }
-        );
-        return arr;
-    }
+<section>
 
-}
+<header>
+    
+        
+            
+        
+    
+</header>
 
-module.exports = utils_forms;</code></pre>
-        </article>
-    </section>
+<article>
+    <div class="container-overview">
+    
+        
+            <div class="description">methods for updating individual series options in  #display_series_options - called when its side nav tab is selected.</div>
+        
+
+        
+            
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>chart</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">the main chart object, built when chart is loaded</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>all_chart_options</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">the main chart options that load into building of the chart and are turned to string for the output</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="form_updates_update_individual_series_options.js.html">form_updates/update_individual_series_options.js</a>, <a href="form_updates_update_individual_series_options.js.html#line3">line 3</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+     
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
 
 
 

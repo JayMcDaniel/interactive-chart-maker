@@ -652,7 +652,8 @@
                 <div class="display_options">
                     <p class="notes">This area will have options for individual series once data is loaded.</p>
 
-                    <button class="jscolor {valueElement:null,value:'66ccff'}"></button>
+                    <div id="display_series_options_inner_div"></div> <!-- gets populated when tabbed to -->
+                    
                 </div>
 
             </div>
@@ -689,8 +690,8 @@
                     <input type="checkbox" id="legend_reverse_layout_checkbox">
                     <br>
 
-                    <label for="legend_make_toggle_checkbox" style="font-size:100%; font-weight:normal;">Hide other series when one is clicked: </label>
-                    <input type="checkbox" id="legend_make_toggle_checkbox">
+                    <label for="legend_make_toggle_checkbox" style="font-size:100%; font-weight:normal;">When a series is clicked, hide the others: </label>
+                    <input type="checkbox" id="legend_make_toggle_checkbox" >
                     <br>
                     <span class="notes">This will cause the first legend item to be visible and the others to be hidden.</span>
 

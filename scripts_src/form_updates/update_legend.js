@@ -51,7 +51,8 @@ var update_legend = {
 
         //update all_chart_options
         if (toggle_enabled) {
-            all_chart_options.plotOptions.series.events.legendItemClick = function (event) {
+            
+            var legendItemClick = function (event) {
                 var selected = this.index;
                 var allSeries = this.chart.series;
                 $.each(allSeries, function (index, series) {
@@ -61,8 +62,14 @@ var update_legend = {
             }
             
         } else {
-            all_chart_options.plotOptions.series.events.legendItemClick = function (event) {
+            var legendItemClick = function (event) {
             }
+        }
+        
+        if(!chart){
+            return legendItemClick;
+        }else{
+            all_chart_options.plotOptions.series.events.legendItemClick = legendItemClick;
         }
         
         //update in current chart

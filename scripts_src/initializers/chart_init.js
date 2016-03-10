@@ -22,7 +22,6 @@ var chartInit = function chartInit(chart_type) {
     }
     
 
-
     var chart_options = new ChartOptions(options);
     return chart_options;
 };

@@ -151,7 +151,8 @@
         background-color: $primary_color;
     }
     
-    .help_icon, #color_palette_reverse_icon {
+    .help_icon,
+    #color_palette_reverse_icon {
         font-family: sans-serif;
         border: 1px solid $highlight-color;
         border-radius: 25px;
@@ -188,13 +189,11 @@
     }
     
     .jscolor {
-        width: 20px;
+        width: 40px;
         height: 20px;
-        padding: 0px;
-        color: rgb(0, 0, 0);
-        border: 1px solid rgb(255, 255, 255);
-        background-image: none;
-        background-color: rgb(152, 184, 79);
+        padding: 2px;
+        font-size: 9px;
+        border: 1px solid #FFFFFF;
     }
     
     label {
@@ -280,9 +279,14 @@
     }
     /* left side div with all of the configurations options etc. inside it */
     
+    //p tags with individual series info in them
+    .series_snippet {
+        margin-bottom: 30px;
+    }
+    
     #side_main {
         float: left;
-        width: 30%;
+        width: 28%;
         background-color: $secondary_color;
         color: $primary_light_color;
         min-height: 100%;
@@ -293,10 +297,16 @@
             font-family: "sinkin_sans200_x_light";
             color: $primary_color;
         }
+        h5 {
+            font-family: "sinkin_sans200_x_light";
+            color: $primary_light_color;
+            font-size: 120%;
+        }
         #side_nav_tabs {
             .tab {
                 cursor: pointer;
                 padding-left: 10px;
+                font-size: 120%;
             }
             .tab:hover {
                 color: $primary_color;

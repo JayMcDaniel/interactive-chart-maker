@@ -11,7 +11,8 @@
      tooltipInit = require("./tooltip_init.js"),
      xAxisInit = require("./x_axis_init.js"),
      yAxisInit = require("./y_axis_init.js"),
-     parseTableInput = require("../parsers/parse_table_input.js");
+     parseTableInput = require("../parsers/parse_table_input.js"),
+     utils_forms = require("../utils/utils_forms.js");
 
 
  /** create and return an instance of all_chart_options 
@@ -20,18 +21,21 @@
  var allChartOptionsInit = function allChartOptionsInit() {
      var chart_type = $(".selected_chart_type").divVal();
      var load_series_from = $(".selected_load_series_from").divVal();
+     var legend_toggle_enabled = utils_forms.getCheckBoxValue($("#legend_make_toggle_checkbox"));
      var input = $("#table_input_textarea").val();
-     var parsed_table_output = parseTableInput(input, load_series_from, chart_type);
+     var colors = colorsInit();
+     
+     var parsed_table_output = parseTableInput(input, load_series_from, chart_type, legend_toggle_enabled, colors);
      
 
      //get options from individual inits
      var options = {
          chart: chartInit(chart_type),
-         colors: colorsInit(),
          credits: creditsInit(),
-         // exportig: exportingInit(),
+         colors: colors,
+         // exporting: exportingInit(),
          legend: legendInit(),
-         plotOptions: plotOptionsInit(chart_type),
+         plotOptions: plotOptionsInit(chart_type, legend_toggle_enabled),
          series: seriesInit(parsed_table_output.series),
          subtitle: subtitleInit(),
          title: titleInit(parsed_table_output.title_text),

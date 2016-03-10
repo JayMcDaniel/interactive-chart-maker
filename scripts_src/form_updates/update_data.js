@@ -1,4 +1,6 @@
 var parseTableInput = require("../parsers/parse_table_input.js");
+var update_individual_series_options = require("./update_individual_series_options.js");
+var utils_forms = require("../utils/utils_forms.js");
 
 /** called when .selected_chart_type or #table_input_textarea is changed - calls functions to reparse data
 @namespace
@@ -9,9 +11,10 @@ var update_data = {
     /** called when .selected_chart_type or #table_input_textarea is changed - calls functions to reparse data */
     updateData: function (chart, all_chart_options) {
         var chart_type = $(".selected_chart_type").divVal();
-        var load_series_from = $(".selected_load_series_from").divVal();
         var input = $("#table_input_textarea").val();
-        var parsed_table_output = parseTableInput(input, load_series_from, chart_type);
+        var legend_toggle_enabled = utils_forms.getCheckBoxValue($("#legend_make_toggle_checkbox"));
+        var load_series_from = $(".selected_load_series_from").divVal();
+        var parsed_table_output = parseTableInput(input, load_series_from, chart_type, legend_toggle_enabled, all_chart_options.colors); 
 
         //update x-axis categories
         chart.xAxis[0].update({
@@ -36,6 +39,7 @@ var update_data = {
         
         //update whether legend toggle is enabled 
         $("#legend_make_toggle_checkbox").change();
+        
 
     }
 
