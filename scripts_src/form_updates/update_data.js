@@ -1,5 +1,4 @@
 var parseTableInput = require("../parsers/parse_table_input.js");
-var update_individual_series_options = require("./update_individual_series_options.js");
 var utils_forms = require("../utils/utils_forms.js");
 
 /** called when .selected_chart_type or #table_input_textarea is changed - calls functions to reparse data

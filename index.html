@@ -14,8 +14,6 @@
 <!-- stylesheets -->
 <link rel="stylesheet" href="libraries/bootstrap-3.3.6-dist/css/bootstrap.min.css" />
 <link rel="stylesheet" href="styles/css/styles_cm.css" />
-<link rel="stylesheet" href="libraries/highlight/styles/googlecode.css">
-
 </head>
 
 
@@ -59,7 +57,7 @@
             <!--chart type options box -->
             <div class="display map_display chart_display selected_display" id="display_type">
                 <h4>Chart type <sup class = "help_icon">?</sup></h4>
-                <p class="notes">Hover over chart icon for type name.</p>
+                <p class="notes">Hover over chart icon for type name. Press shift + c at any time to cycle through chart types.</p>
                 <div class="display_options">
 
                     <div id="chart_type_icons">
@@ -94,11 +92,13 @@
                 <div class="display_options">
                     <label for="chart_id_textinput">Unique ID:</label>
                     <br>
+                    <span class="notes">Important if using one or more charts on a page. Make sure not to use spaces, hyphens, or start with a number.<br></span>
                     <input type="text" id="chart_id_textinput" class="medium" value="chart_display_area" />
-                    <span class="notes">Important if using one or more charts on a page. Make sure not to use spaces, hyphens, or start with a number.</span>
+                    
                     <br>
 
                     <label style="margin-bottom: -10px;">Chart size:</label>
+                    <span class="notes"><br>You can also adjust the chart size at any time by using the shift + arrow keys.</span>
                     <br>
                     <span style="margin-right: -5px;">&larr;</span>&rarr;
                     <input type="text" id="chart_width_textinput" value="580" class="small number_entry" />
@@ -107,7 +107,7 @@
                     <input type="text" id="chart_height_textinput" value="430" class="small number_entry" />
                     <br>
 
-                    <label>Chart margins:</label> <span class="notes">Higher values move margins inwards.</span>
+                    <label>Chart margins:</label> <p class="notes">Higher values move margins inwards. You can also adjust the margins at any time by using the ctrl/cmd + arrow keys (top and right margins) and the alt + arrow keys (bottom and left margins).<br></p>
 
 
                     <div id="margins_outer_div">
@@ -142,7 +142,7 @@
                     <div class="show_line show_bar show_column">
                         <label>Load series names from:</label>
                         <br>
-
+                        <p class="notes">Press the tab key at any time to toggle between these.</p>
                         <div id="table_input_load_series_from_icons" class="show_line show_bar show_column">
                             <div class="load_series_from_icon selected_load_series_from" id="load_series_from_column_heads" value="column_heads" title="column heads"></div>
                             <div class="load_series_from_icon" id="load_series_from_row_heads" value="row_heads" title="row heads"></div>
@@ -230,7 +230,7 @@
                 <h4>Color palette <sup class = "help_icon">?</sup> <sup id="color_palette_reverse_icon" title="Reverse palettes">(&#8596;)</sup></h4>
                 <div class="display_options">
 
-                    <p class="notes">Series will load their colors from the chosen palette left to right. For more customization, see the "Individual series options" tab. </p>
+                    <p class="notes">Series will load their colors from the chosen palette left to right. For more customization, see the "Individual series options" tab. You can cycle through the color templates at any time by pressing "c".</p>
 
                     <br>
 
@@ -938,7 +938,7 @@
         <!-- chart / map code boxes -->
         <div id="main_result_code_div">
             <h4>Chart code <sup class = "help_icon">?</sup></h4>
-            <p class="notes">The JS comes packed by default, if you need to unpack it, most IDEs (DreamWeaver etc.) will do the trick, or use this tool: <a href="http://www.strictly-software.com/unpack-javascript.aspx" target="_blank">http://www.strictly-software.com/unpack-javascript.aspx</a></p>
+            <p class="notes">The JS comes packed by default. If you need to unpack it, most code editors will do the trick, or use this tool: <a href="http://www.strictly-software.com/unpack-javascript.aspx" target="_blank">http://www.strictly-software.com/unpack-javascript.aspx</a>. You can hit the spacebar at any time to show and hide this area.</p>
 
             <pre><code class="js" id="chart_output_code"></code></pre>
         </div>

@@ -52,11 +52,12 @@
         margin: 20px;
         padding: 5px;
         background-color: $primary_color;
-        resize: both;
+        position: fixed;
     }
     
     .chart_type_icon,
-    .load_series_from_icon {
+    .load_series_from_icon,
+    .series_type_icon {
         float: left;
         border: solid 2px #fff;
         width: 70px;
@@ -72,6 +73,7 @@
             border-color: $primary_color;
         }
         &.selected_chart_type,
+        &.series_type_selected,
         &.selected_load_series_from {
             border-color: $highlight_color;
             cursor: default;
@@ -194,6 +196,8 @@
         padding: 2px;
         font-size: 9px;
         border: 1px solid #FFFFFF;
+        position: relative;
+        top: 4px;
     }
     
     label {
@@ -279,9 +283,30 @@
     }
     /* left side div with all of the configurations options etc. inside it */
     
+    .series_type_div {
+        padding-top: 10px;
+    }
+    
+    .series_type_icon {
+        width: 30px;
+        height: 30px;
+        &.series_type_column {
+            background-image: url(../../images/icons/column_chart_icon.png);
+        }
+        &.series_type_line {
+            background-image: url(../../images/icons/line_chart_icon.png);
+        }
+    }
+    
+    .series_type_label,
+    .series_color_label {
+        float: left;
+        margin-right: 10px;
+    }
+    
     //p tags with individual series info in them
     .series_snippet {
-        margin-bottom: 30px;
+        margin-bottom: 40px;
     }
     
     #side_main {

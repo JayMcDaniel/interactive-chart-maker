@@ -23,6 +23,12 @@ var utils_main = {
         }).replace(/\\n/g, "");
 
     },
+    
+    makeClearFloatDiv: function(){
+        var clear_div = document.createElement("div");
+        clear_div.className = "clearfloat";
+        return clear_div;
+    },
 
     rgb2arr: function (rgb) {
         return rgb.replace(/[^0-9\,]+/g, '').split(",").map(function (item) {

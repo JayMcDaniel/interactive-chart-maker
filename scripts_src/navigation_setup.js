@@ -55,7 +55,8 @@ var navigation_setup = {
 
         });
     },
-
+    
+    
 
     /** when clear next text area button (X) is clicked, find and clear the text of the next textarea */
     clearNextTextareaClick: function () {
@@ -92,7 +93,7 @@ var navigation_setup = {
 
         $(".help_icon").click(function () {
             $(this).toggleClass("help_on");
-            $(".notes", $(this).parents("div")).toggle();
+            $(".notes", $(this).parents(".display, #main_result_code_div")).toggle();
         });
 
     },

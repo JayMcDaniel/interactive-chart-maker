@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: constructors/charts/y_axis.js</title>
+    <title>JSDoc: Module: form_updates/update_individual_series</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,88 +17,198 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: constructors/charts/y_axis.js</h1>
+    <h1 class="page-title">Module: form_updates/update_individual_series</h1>
 
     
 
 
 
+
+<section>
+
+<header>
     
-    <section>
-        <article>
-            <pre class="prettyprint source linenums"><code>/** yAxis options constructor. Info at http://api.highcharts.com/highcharts#yAxis
-* @constructor yAxis 
-* @param o {object} yAxis options object
-*/
-
-var yAxis = function (o) {
-
-    this.gridLineColor = o.gridLineColor || '#c0c0c0';
-    this.gridLineWidth = o.gridLineWidth || 1;
-    this.gridLineDashStyle = o.gridLineDashStyle || 'Dot';
-
-    this.labels = {
         
-        format: o.labels ? o.labels.format : {value},
-        formatter: o.labels ? o.labels.formatter : undefined,
-        rotation: o.labels ? o.labels.rotation || 0 : 0,
-        style: {
-            color: '#000000',
-            fontFamily: 'Calibri, Verdana, Arial, Helvetica, sans-serif',
-            fontWeight: 'normal',
-            backgroundColor: '#fff',
-            fontSize: '12px'
-        }
-
-    };
-
-    this.lineColor = o.lineColor || 'gray';
-    this.lineWidth = o.lineWidth || 1;
-    this.max = o.max || null;
-    this.min = o.min || null;
-    this.opposite = o.opposite || false;
-    this.plotBands = o.plotBands || [];
-
-    this.plotLines = o.plotLines || [{
-        "value": 0,
-        "color": "#c0c0c0",
-        "dashStyle": "solid",
-        "width": 1
-    }];
-
-    this.tickInterval = o.tickInterval || null;
-    this.tickmarkPlacement = o.tickmarkPlacement || 'on';
-    this.tickPosition = o.tickPosition || 'outside';
-    this.tickColor = o.tickColor || '#C0D0E0';
-    this.tickWidth = o.tickWidth || 1;
-
-    this.title = {
-        useHTML: true,
-        text: o.title ? o.title.text || '' : '',
-        margin: o.title ? o.title.margin || 6 : 6,
-        align: o.title ? o.title.align || 'middle' : 'middle',
-        offset: 20,
-        rotation: 0,
-        x: o.title ? o.title.x || 35 : 35,
-        y: o.title ? o.title.y || -15 : -15,
+            
         
-        style: {
-            color: '#000000',
-            fontFamily: 'Calibri, Verdana, Arial, Helvetica, sans-serif',
-            fontWeight: 'normal',
-            backgroundColor: '#fff',
-            fontSize: '13px'
-        }
-    };
+    
+</header>
 
-    this.type = o.type || 'linear';
+<article>
+    <div class="container-overview">
+    
+        
+            <div class="description">methods for updating individual series options in  #display_series_options - called when its side nav tab is selected.</div>
+        
 
-}
+        
+            
 
 
-module.exports = yAxis;</code></pre>
-        </article>
-    </section>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>chart</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">the main chart object, built when chart is loaded</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>all_chart_options</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">the main chart options that load into building of the chart and are turned to string for the output</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="form_updates_update_individual_series.js.html">form_updates/update_individual_series.js</a>, <a href="form_updates_update_individual_series.js.html#line3">line 3</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+     
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
 
 
 

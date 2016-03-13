@@ -8,7 +8,7 @@ var update_y_axis = require("./update_y_axis.js");
 var update_tooltip = require("./update_tooltip.js");
 var update_data = require("./update_data.js");
 var update_credits = require("./update_credits.js");
-var update_individual_series_options = require("./update_individual_series_options.js");
+var update_individual_series = require("./update_individual_series.js");
 
 /** listens for any form updates and calls appropriate function 
 @module
@@ -62,7 +62,7 @@ var allFormUpdates = function (chart, all_chart_options) {
 
     //update individual series options section (call on load and when data is changed)
     $("#tab_series_options").click(function () {
-        update_individual_series_options.populateForm(chart, all_chart_options);
+        update_individual_series.populateForm(chart, all_chart_options);
 
     });
     
