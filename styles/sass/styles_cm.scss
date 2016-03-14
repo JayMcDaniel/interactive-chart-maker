@@ -1,0 +1,421 @@
+    $primary_color: rgb(51, 122, 183);
+    $secondary_color: rgb(136, 181, 221);
+    $highlight_color: rgb(183, 52, 56);
+    $primary_light_color: #fff;
+    $secondary_light_color: rgb(255, 250, 250);
+    @font-face {
+        font-family: 'sinkin_sans200_x_light';
+        src: url('../fonts/sinkin-sans.200-x-light-webfont.eot');
+        src: url('../fonts/sinkin-sans.200-x-light-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/sinkin-sans.200-x-light-webfont.woff2') format('woff2'), url('../fonts/sinkin-sans.200-x-light-webfont.woff') format('woff'), url('../fonts/sinkin-sans.200-x-light-webfont.ttf') format('truetype'), url('../fonts/sinkin-sans.200-x-light-webfont.svg#sinkin_sans200_x_light') format('svg');
+        font-weight: normal;
+        font-style: normal;
+    }
+    
+    html {
+        position: relative;
+        height: 100%;
+    }
+    
+    body {
+        position: relative;
+        height: 100%;
+        color: $primary_color;
+        font-family: sans-serif;
+        background-color: $secondary_light_color;
+        h4 {
+            color: $highlight_color;
+            font-family: "sinkin_sans200_x_light";
+        }
+        p {
+            margin: 5px 0px 5px 0px;
+        }
+    }
+    
+    a {
+        text-decoration: underline;
+        color: #337ab7;
+    }
+    
+    br {
+        display: block;
+        line-height: 1.5em;
+    }
+    
+    br.small {
+        display: block;
+        line-height: .5em;
+    }
+    
+    #chart_display_area {
+        width: 580px;
+        height: 430px;
+        margin: 20px;
+        padding: 5px;
+        background-color: $primary_color;
+        position: fixed;
+    }
+    
+    .chart_type_icon,
+    .load_series_from_icon,
+    .series_type_icon {
+        float: left;
+        border: solid 2px #fff;
+        width: 70px;
+        height: 70px;
+        margin-right: 15px;
+        margin-bottom: 15px;
+        cursor: pointer;
+        background-color: #fff;
+        background-size: 95% 95%;
+        background-repeat: no-repeat;
+        background-position: center;
+        &:hover {
+            border-color: $primary_color;
+        }
+        &.selected_chart_type,
+        &.series_type_selected,
+        &.selected_load_series_from {
+            border-color: $highlight_color;
+            cursor: default;
+        }
+        &#chart_type_area {
+            background-image: url(../../images/icons/area_chart_icon.png);
+        }
+        &#chart_type_bar {
+            background-image: url(../../images/icons/bar_chart_icon.png);
+        }
+        &#chart_type_bubble {
+            background-image: url(../../images/icons/bubble_chart_icon.png);
+        }
+        &#chart_type_column {
+            background-image: url(../../images/icons/column_chart_icon.png);
+        }
+        &#chart_type_drilldown {
+            background-image: url(../../images/icons/drilldown_chart_icon.png);
+        }
+        &#chart_type_line {
+            background-image: url(../../images/icons/line_chart_icon.png);
+        }
+        &#chart_type_map {
+            background-image: url(../../images/icons/map_chart_icon.png);
+            background-position-y: -10px;
+            background-size: 104%;
+        }
+        &#chart_type_scatter {
+            background-image: url(../../images/icons/scatter_chart_icon.png);
+        }
+        &#chart_type_stacked_bar {
+            background-image: url(../../images/icons/stacked_bar_chart_icon.png);
+        }
+        &#chart_type_stacked_column {
+            background-image: url(../../images/icons/stacked_column_chart_icon.png);
+        }
+        /* for Load data area (load series from: icons)*/
+        &#load_series_from_column_heads {
+            background-image: url(../../images/icons/load_series_from_column_headers_icon.png);
+        }
+        &#load_series_from_row_heads {
+            background-image: url(../../images/icons/load_series_from_row_headers_icon.png);
+        }
+    }
+    
+    .clearfloat {
+        clear: both;
+        margin-bottom: -10px;
+    }
+    
+    .clear_next_textarea_button {
+        float: right;
+        color: $primary_color;
+        text-decoration: underline;
+        cursor: pointer;
+        position: relative;
+        top: 20px;
+        right: 2px;
+        font-size: 110%;
+    }
+    
+    .color_palette_cell {
+        width: 15px;
+        height: 17px;
+        float: left;
+    }
+    
+    .color_palette_row {
+        margin-bottom: 5px;
+        cursor: pointer;
+        width: 233px;
+        height: 25px;
+        padding: 4px;
+    }
+    
+    .color_palette_selected {
+        background-color: $primary_color;
+    }
+    
+    .help_icon,
+    #color_palette_reverse_icon {
+        font-family: sans-serif;
+        border: 1px solid $highlight-color;
+        border-radius: 25px;
+        padding: 1px 3px 1px 3px;
+        font-size: 11px;
+        color: #337ab7;
+        background-color: #fff;
+        cursor: pointer;
+        &.help_on {
+            color: $highlight_color;
+        }
+        &:hover {
+            color: $highlight_color;
+        }
+    }
+    
+    input,
+    textarea {
+        color: #000;
+    }
+    
+    input[type="text"] {
+        &.small {
+            width: 50px;
+            margin-right: 10px;
+        }
+        &.medium {
+            width: 150px;
+        }
+        &.large {
+            width: 300px;
+            height: 50px;
+        }
+    }
+    
+    .jscolor {
+        width: 40px;
+        height: 20px;
+        padding: 2px;
+        font-size: 9px;
+        border: 1px solid #FFFFFF;
+        position: relative;
+        top: 4px;
+    }
+    
+    label {
+        font-weight: normal;
+        margin-top: 10px;
+    }
+    
+    label.small {
+        margin-top: -5px;
+    }
+    
+    #main_content_div {
+        width: 70%;
+        min-height: 100%;
+        float: left;
+    }
+    
+    #main_result_code_div {
+        display: none;
+        width: 100%;
+        min-height: 500px;
+        padding: 10px;
+        background-color: $primary_light_color;
+        border: solid 1px $highlight-color;
+    }
+    
+    #margins_outer_div {
+        position: relative;
+        div,
+        span,
+        input {
+            position: absolute;
+        }
+        #margins_inner_box {
+            top: 30px;
+            left: 55px;
+            width: 75px;
+            height: 75px;
+            border: 1px solid #fff;
+            font-size: 25px;
+            #margins_down_arrow {
+                left: 28px;
+            }
+            #margins_left_arrow {
+                right: 4px;
+                top: 20px;
+            }
+            #margins_up_arrow {
+                left: 28px;
+                bottom: 0px;
+            }
+            #margins_right_arrow {
+                left: 4px;
+                top: 20px;
+            }
+        }
+        #top_margin_textinput {
+            left: 66px;
+            top: 0px;
+        }
+        #right_margin_textinput {
+            left: 140px;
+            top: 52px;
+        }
+        #bottom_margin_textinput {
+            left: 66px;
+            top: 111px;
+        }
+        #left_margin_textinput {
+            left: 0px;
+            top: 52px;
+        }
+    }
+    
+    .notes {
+        font-size: 85%;
+        color: $highlight_color;
+        border: none;
+        display: none;
+        a {
+            font-size: 110%;
+        }
+    }
+    /* left side div with all of the configurations options etc. inside it */
+    
+    .series_type_div {
+        padding-top: 10px;
+    }
+    
+    .series_type_icon {
+        width: 30px;
+        height: 30px;
+        &.series_type_column {
+            background-image: url(../../images/icons/column_chart_icon.png);
+        }
+        &.series_type_line {
+            background-image: url(../../images/icons/line_chart_icon.png);
+        }
+    }
+    
+    .series_type_label,
+    .series_color_label {
+        float: left;
+        margin-right: 10px;
+    }
+    
+    //p tags with individual series info in them
+    .series_snippet {
+        margin-bottom: 40px;
+    }
+    
+    #side_main {
+        float: left;
+        width: 28%;
+        background-color: $secondary_color;
+        color: $primary_light_color;
+        min-height: 100%;
+        padding: 10px;
+        h3 {
+            margin-top: 0px;
+            margin-bottom: 5px;
+            font-family: "sinkin_sans200_x_light";
+            color: $primary_color;
+        }
+        h5 {
+            font-family: "sinkin_sans200_x_light";
+            color: $primary_light_color;
+            font-size: 120%;
+        }
+        #side_nav_tabs {
+            .tab {
+                cursor: pointer;
+                padding-left: 10px;
+                font-size: 120%;
+            }
+            .tab:hover {
+                color: $primary_color;
+            }
+            .tab.selected_tab {
+                background-color: $secondary_light_color;
+                color: $highlight_color;
+                cursor: default;
+            }
+        }
+        #side_display {
+            border-top: 2px solid $primary_light_color;
+            margin-top: 10px;
+            .display {
+                display: none;
+                .display_options {
+                    padding-left: 10px;
+                    padding-top: 5px;
+                }
+            }
+            .display.selected_display {
+                display: block;
+            }
+        }
+    }
+    /* bar at the top with h1 head, get code button, and menu for other links */
+    
+    #top_nav_bar {
+        width: 100%;
+        background-color: $primary_color;
+        color: $primary_light_color;
+        height: 40px;
+        padding-left: 10px;
+        position: fixed;
+        top: 0px;
+        z-index: 500;
+        #app_version {
+            margin-left: 3px;
+            position: relative;
+            top: 10px;
+        }
+        h1 {
+            margin-top: 0px;
+            float: left;
+            font-family: "sinkin_sans200_x_light";
+        }
+        #get_code_button {
+            padding: 6px 5px 6px 5px;
+            border: solid 1px $highlight_color;
+            border-radius: 5px;
+            margin-left: 30px;
+            cursor: pointer;
+            background-color: #fff;
+            color: $primary_color;
+            &.code_on {
+                color: $highlight_color;
+            }
+            #get_code_icon {
+                font-size: 180%;
+                position: relative;
+                top: 3px;
+            }
+        }
+        #get_code_button:hover {
+            color: $highlight_color;
+        }
+    }
+    
+    #top_nav_bar_filler {
+        width: 100%;
+        height: 40px;
+    }
+    
+    textarea {
+        width: 100%;
+        height: 50px;
+        &.medium {
+            height: 100px;
+        }
+        &.large {
+            height: 400px;
+        }
+    }
+    
+    .underline {
+        text-decoration: underline;
+    }

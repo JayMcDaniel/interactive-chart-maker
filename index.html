@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="en">
+<LINK REL="SHORTCUT ICON" HREF="images/icons/bubble_chart_icon.png" />
+
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="Create interactive charts and maps.">
+<meta name="keywords" content="Charts, maps, create charts, create maps, line charts, bar charts, column charts, interactive charts, tooltips, HighCharts" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Create interactive charts and maps</title>
+<meta name="Author" content="Jay McDaniel" />
+
+<!-- stylesheets -->
+<link rel="stylesheet" href="libraries/bootstrap-3.3.6-dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="styles/css/styles_cm.css" />
+</head>
+
+
+
+
+
+<body>
+
+    <!-- top nav bar -->
+    <div id="top_nav_bar_filler"></div>
+    <div id="top_nav_bar">
+        <h1>Interactive Chart Maker</h1>
+        <span id="app_version">v2.0.0</span>
+        <span id="get_code_button" title="Get chart/map code"><span id="get_code_icon">&lt; / &gt;</span> <span id="get_code_text">Get code</span></span>
+    </div>
+    <!-- top nav bar end -->
+
+
+
+    <!-- side nav bar -->
+    <div id="side_main">
+        <h3>Setup options</h3>
+
+        <div id="side_nav_tabs">
+
+            <div class="tab map_tab chart_tab selected_tab" id="tab_type">Chart type</div>
+            <div class="tab chart_tab" id="tab_chart_template">Sizing (Chart template)</div>
+            <div class="tab map_tab chart_tab" id="tab_data">Data</div>
+            <div class="tab map_tab chart_tab" id="tab_color_palette">Color palette</div>
+            <div class="tab chart_tab" id="tab_series_options">Individual series options</div>
+            <div class="tab chart_tab" id="tab_chart_legend">Legend</div>
+            <div class="tab chart_tab" id="tab_chart_x_axis">X-axis</div>
+            <div class="tab chart_tab" id="tab_chart_y_axis">Y-axis</div>
+            <div class="tab chart_tab" id="tab_chart_tooltip">Tool tip (hover infobox)</div>
+            <div class="tab chart_tab" id="tab_chart_credits">Notes and credits</div>
+            <div class="tab chart_tab" id="tab_chart_extra_options">Extra options</div>
+
+        </div>
+        <div id="side_display">
+
+            <!--chart type options box -->
+            <div class="display map_display chart_display selected_display" id="display_type">
+                <h4>Chart type <sup class = "help_icon">?</sup></h4>
+                <p class="notes">Hover over chart icon for type name. Press shift + c at any time to cycle through chart types.</p>
+                <div class="display_options">
+
+                    <div id="chart_type_icons">
+                        <div class="chart_type_icon selected_chart_type" id="chart_type_line" value="line" title="line"></div>
+                        <div class="chart_type_icon" id="chart_type_area" value="area" title="area"></div>
+                        <div class="chart_type_icon" id="chart_type_bar" value="bar" title="bar"></div>
+                        <div class="chart_type_icon" id="chart_type_stacked_bar" value="stacked_bar" title="stacked bar"></div>
+                        <div class="chart_type_icon" id="chart_type_column" value="column" title="column"></div>
+                        <div class="chart_type_icon" id="chart_type_stacked_column" value="stacked_column" title="stacked column"></div>
+                        <div class="chart_type_icon" id="chart_type_bubble" value="bubble" title="bubble"></div>
+                        <div class="chart_type_icon" id="chart_type_scatter" value="scatter" title="scatter"></div>
+                        <div class="chart_type_icon" id="chart_type_drilldown" value="drilldown" title="drilldown"></div>
+                        <div class="chart_type_icon" id="chart_type_map" value="map" title="map"></div>
+                    </div>
+
+
+                </div>
+                <div class="clearfloat"></div>
+
+
+            </div>
+
+
+
+
+
+
+            <!-- chart template options box -->
+            <div class="display chart_display" id="display_chart_template">
+                <h4>Sizing (Chart template) <sup class = "help_icon">?</sup></h4>
+
+                <div class="display_options">
+                    <label for="chart_id_textinput">Unique ID:</label>
+                    <br>
+                    <span class="notes">Important if using one or more charts on a page. Make sure not to use spaces, hyphens, or start with a number.<br></span>
+                    <input type="text" id="chart_id_textinput" class="medium" value="chart_display_area" />
+                    
+                    <br>
+
+                    <label style="margin-bottom: -10px;">Chart size:</label>
+                    <span class="notes"><br>You can also adjust the chart size at any time by using the shift + arrow keys.</span>
+                    <br>
+                    <span style="margin-right: -5px;">&larr;</span>&rarr;
+                    <input type="text" id="chart_width_textinput" value="580" class="small number_entry" />
+
+                    <span style="position: relative; top: 3px;"><span style="position: relative; left: 9px; top: -5px;">&uarr;</span>&darr;</span>
+                    <input type="text" id="chart_height_textinput" value="430" class="small number_entry" />
+                    <br>
+
+                    <label>Chart margins:</label> <p class="notes">Higher values move margins inwards. You can also adjust the margins at any time by using the ctrl/cmd + arrow keys (top and right margins) and the alt + arrow keys (bottom and left margins).<br></p>
+
+
+                    <div id="margins_outer_div">
+                        <input type="text" id="top_margin_textinput" value="100" class="small number_entry margin_input" />
+                        <input type="text" id="right_margin_textinput" value="40" class="small number_entry margin_input" />
+                        <input type="text" id="bottom_margin_textinput" value="80" class="small number_entry margin_input" />
+                        <input type="text" id="left_margin_textinput" value="80" class="small number_entry margin_input" />
+                        <div id="margins_inner_box">
+                            <span id="margins_down_arrow" class="margin_arrow">&darr;</span>
+                            <span id="margins_left_arrow" class="margin_arrow">&larr;</span>
+                            <span id="margins_up_arrow" class="margin_arrow">&uarr;</span>
+                            <span id="margins_right_arrow" class="margin_arrow">&rarr;</span>
+
+                        </div>
+
+
+                    </div>
+                </div>
+
+            </div>
+
+
+
+
+
+
+
+            <!-- chart data options box -->
+            <div class="display chart_display" id="display_data">
+                <h4>Data <sup class = "help_icon">?</sup></h4>
+                <div class="display_options">
+                    <div class="show_line show_bar show_column">
+                        <label>Load series names from:</label>
+                        <br>
+                        <p class="notes">Press the tab key at any time to toggle between these.</p>
+                        <div id="table_input_load_series_from_icons" class="show_line show_bar show_column">
+                            <div class="load_series_from_icon selected_load_series_from" id="load_series_from_column_heads" value="column_heads" title="column heads"></div>
+                            <div class="load_series_from_icon" id="load_series_from_row_heads" value="row_heads" title="row heads"></div>
+                        </div>
+
+                    </div>
+                    <div class="clearfloat"></div>
+                    <p class="notes">
+                        <br> Paste table HTML source code in here.
+                        <br> Make sure it has a title and contains column and row headers.
+                        <br> For this to work, it needs to be a properly formatted, 508-compliant table (using thead, tbody, caption, th and td tags where appropriate). It also needs to have a title and be a simple table with only one column header per column and one row header per row. You can convert spreadsheets to 508-compliant tables with the <a href="table_wizard/better_table_wizard.htm" target="_blank">Table Wizard</a>.
+
+                    </p>
+                    <br>
+                    <p class="show_scatter">
+
+                        With scatter charts, series names will be loaded from the row headers. For each set of two columns in the table body, a dot will be drawn &mdash; its x-value coming from the first column and its y-value coming from the second column.
+                    </p>
+                    <div class="clear_next_textarea_button" title="Clear the text area">X</div>
+                    <textarea id="table_input_textarea" class="large" placeholder="Insert table html here">
+                        <table id="BLS_table" class="regular" cellspacing="0" cellpadding="0" xborder="1" style="width: 95%">
+                            <caption><span class="tableTitle">Test table data for scatter charts</span></caption>
+                            <thead>
+                                <tr>
+                                    <th rowspan="1" id="columnHead0" style="vertical-align: middle;">categories</th>
+                                    <th id="columnHead1">x1</th>
+                                    <th id="columnHead2">y1</th>
+                                    <th id="columnHead3">z1</th>
+                                    <th id="columnHead4">x2</th>
+                                    <th id="columnHead5">y2</th>
+                                    <th id="columnHead6">z2</th>
+                                    <th id="columnHead7">x3</th>
+                                    <th id="columnHead8">y3</th>
+                                    <th id="columnHead9">z3</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th id="rowHead0">
+                                        <p>series 1</p>
+                                    </th>
+                                    <td headers="rowHead0 columnHead1">-1</td>
+                                    <td headers="rowHead0 columnHead2">1</td>
+                                    <td headers="rowHead0 columnHead3">2</td>
+                                    <td headers="rowHead0 columnHead4">3</td>
+                                    <td headers="rowHead0 columnHead5">3</td>
+                                    <td headers="rowHead0 columnHead6">4</td>
+                                    <td headers="rowHead0 columnHead7">5</td>
+                                    <td headers="rowHead0 columnHead8">5</td>
+                                    <td headers="rowHead0 columnHead9">8</td>
+                                </tr>
+                                <tr class="greenbar">
+                                    <th id="rowHead1">
+                                        <p>series 2</p>
+                                    </th>
+                                    <td headers="rowHead1 columnHead1">2</td>
+                                    <td headers="rowHead1 columnHead2">1</td>
+                                    <td headers="rowHead1 columnHead3">2</td>
+                                    <td headers="rowHead1 columnHead4">4</td>
+                                    <td headers="rowHead1 columnHead5">3</td>
+                                    <td headers="rowHead1 columnHead6">5</td>
+                                    <td headers="rowHead1 columnHead7">8</td>
+                                    <td headers="rowHead1 columnHead8">9</td>
+                                    <td headers="rowHead1 columnHead9">9</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+
+                    </textarea>
+                </div>
+
+            </div>
+
+
+
+
+
+
+
+
+
+            <!-- color palette options box -->
+            <div class="display map_display chart_display" id="display_color_palette">
+                <h4>Color palette <sup class = "help_icon">?</sup> <sup id="color_palette_reverse_icon" title="Reverse palettes">(&#8596;)</sup></h4>
+                <div class="display_options">
+
+                    <p class="notes">Series will load their colors from the chosen palette left to right. For more customization, see the "Individual series options" tab. You can cycle through the color templates at any time by pressing "c".</p>
+
+                    <br>
+
+                    <div id="color_palettes">
+                        <p class="notes">(BTN colors)</p>
+                        <div class="color_palette_row color_palette_selected">
+
+                            <!--BTN colors -->
+
+
+
+                            <div class="color_palette_cell" style="background-color: rgb(15, 5, 165);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(175, 210, 255);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(210, 35, 42);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(221, 177, 57);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(190, 190, 190);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(15, 5, 165);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(175, 210, 255);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(210, 35, 42);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(221, 177, 57);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(190, 190, 190);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(15, 5, 165);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(175, 210, 255);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(210, 35, 42);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(221, 177, 57);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(190, 190, 190);">&nbsp;</div>
+                            <div style="clear:both; height:5px;">&nbsp;</div>
+                        </div>
+
+                        <p class="notes">(MLR colors)</p>
+                        <div class="color_palette_row">
+
+                            <!--MLR colors -->
+
+
+
+                            <div class="color_palette_cell" style="background-color: rgb(0,0,153);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(153,0,0);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(0,102,204);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(77,153,0);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(77,0,153);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(153,77,0);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(0,153,153);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(153,153,0);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(0,0,153);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(153,0,0);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(0,102,204);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(77,153,0);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(77,0,153);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(153,77,0);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(0,153,153);">&nbsp;</div>
+                            <div style="clear:both; height:5px;">&nbsp;</div>
+
+                        </div>
+
+                        <div class="color_palette_row">
+
+
+
+                            <div class="color_palette_cell" style="background-color: #7cb5ec;">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: #434348;">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: #90ed7d;">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: #f7a35c;">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: #8085e9;">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: #f15c80;">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: #e4d354;">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: #2b908f;">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: #f45b5b;">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: #91e8e1;">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: #2f7ed8;">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: #0d233a;">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: #8bbc21;">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: #910000;">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: #1aadce;">&nbsp;</div>
+                            <div style="clear:both; height:5px;">&nbsp;</div>
+
+                        </div>
+
+                        <div class="color_palette_row">
+
+
+
+                            <div class="color_palette_cell" style="background-color: #492970;">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: #f28f43;">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: #77a1e5;">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: #c42525;">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: #1aadce;">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: #a6c96a;">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: #434348;">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: #90ed7d;">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: #f7a35c;">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: #8085e9;">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: #f15c80;">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: #e4d354;">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: #2b908f;">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: #f45b5b;">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: #91e8e1;">&nbsp;</div>
+                            <div style="clear:both; height:5px;">&nbsp;</div>
+                        </div>
+
+
+                        <div class="color_palette_row">
+
+
+                            <div class="color_palette_cell" style="background-color: rgb(128, 0, 0);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(153, 102, 51);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(0, 102, 153);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(204, 0, 204);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(204, 0, 0);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(51, 51, 255);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(204, 153, 0);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(0, 153, 51);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(0, 153, 153);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(51, 51, 255);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(214, 51, 255);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(255, 0, 0);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(204, 204, 0);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(0, 204, 0);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(51, 102, 255);">&nbsp;</div>
+                            <div style="clear:both; height:5px;">&nbsp;</div>
+
+                        </div>
+                        <div class="color_palette_row">
+
+
+                            <div class="color_palette_cell" style="background-color: rgb(8, 81, 156);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(178, 223, 138);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(255, 127, 0);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(51, 102, 153);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(227, 26, 28);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(178, 68, 221);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(51, 102, 0);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(127, 0, 255);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(251, 154, 153);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(153, 102, 0);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(174, 1, 126);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(51, 160, 44);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(8, 81, 156);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(178, 223, 138);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(51, 102, 255);">&nbsp;</div>
+                            <div style="clear:both; height:5px;">&nbsp;</div>
+
+                        </div>
+                        <div class="color_palette_row">
+
+
+
+                            <div class="color_palette_cell" style="background-color: rgb(0, 51, 0);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(0, 51, 102);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(102, 0, 102);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(153, 51, 51);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(0, 0, 102);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(102, 51, 0);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(0, 102, 102);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(0, 0, 204);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(153, 0, 204);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(153, 0, 51);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(153, 102, 0);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(51, 102, 0);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(51, 102, 153);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(51, 51, 153);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(153, 51, 153);">&nbsp;</div>
+                            <div style="clear:both; height:5px;">&nbsp;</div>
+
+                        </div>
+                        <div class="color_palette_row">
+
+
+
+                            <div class="color_palette_cell" style="background-color: rgb(255, 0, 255);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(255, 80, 80);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(255, 255, 0);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(51, 204, 51);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(0, 255, 255);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(102, 153, 255);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(255, 102, 255);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(255, 102, 102);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(33, 106, 181);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(178, 223, 138);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(255, 127, 0);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(227, 26, 28);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(178, 68, 221);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(51, 102, 0);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(251, 154, 153);">&nbsp;</div>
+                            <div style="clear:both; height:5px;">&nbsp;</div>
+
+                        </div>
+                        <div class="color_palette_row">
+
+
+                            <div class="color_palette_cell" style="background-color: #543005;">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: #8c510a;">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: #bf812d;">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: #dfc27d;">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: #f6e8c3;">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: #c7eae5;">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: #80cdc1;">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: #35978f;">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: #01665e;">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: #003c30;">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: #8e0152;">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: #c51b7d;">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: #de77ae;">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: #f1b6da;">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: #fde0ef;">&nbsp;</div>
+                            <div style="clear:both; height:5px;">&nbsp;</div>
+
+                        </div>
+                        <div class="color_palette_row">
+
+
+                            <div class="color_palette_cell" style="background-color: #8e0152;">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: #c51b7d;">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: #de77ae;">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: #f1b6da;">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: #fde0ef;">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: #e6f5d0;">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: #b8e186;">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: #7fbc41;">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: #4d9221;">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: #276419;">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: #7f3b08;">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: #b35806;">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: #e08214;">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: #fdb863;">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: #fee0b6;">&nbsp;</div>
+                            <div style="clear:both; height:5px;">&nbsp;</div>
+
+                        </div>
+                        <div class="color_palette_row">
+
+
+
+                            <div class="color_palette_cell" style="background-color: #67001f;">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: #b2182b;">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: #d6604d;">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: #f4a582;">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: #fddbc7;">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: #d1e5f0;">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: #92c5de;">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: #4393c3;">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: #2166ac;">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: #053061;">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: #d9ef8b;">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: #a6d96a;">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: #66bd63;">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: #1a9850;">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: #006837;">&nbsp;</div>
+                            <div style="clear:both; height:5px;">&nbsp;</div>
+
+                        </div>
+                        <div class="color_palette_row">
+
+
+
+                            <div class="color_palette_cell" style="background-color: rgb(255, 184, 13);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(232, 137, 12);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(255, 97, 0);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(232, 45, 0);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(255, 1, 0);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(255, 13, 71);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(232, 12, 207);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(181, 0, 255);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(82, 0, 232);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(1, 0, 255);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(13, 113, 255);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(12, 178, 232);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(0, 255, 228);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(0, 232, 123);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(0, 255, 41);">&nbsp;</div>
+                            <div style="clear:both; height:5px;">&nbsp;</div>
+
+                        </div>
+                        <div class="color_palette_row">
+
+
+
+                            <div class="color_palette_cell" style="background-color: rgb(128, 0, 255);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(12, 41, 232);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(0, 192, 255);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(0, 232, 139);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(20, 255, 0);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(26, 106, 0);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(232, 223, 12);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(255, 184, 0);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(232, 102, 0);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(255, 24, 0);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(255, 108, 35);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(232, 12, 116);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(214, 0, 255);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(91, 0, 232);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(11, 24, 255);">&nbsp;</div>
+                            <div style="clear:both; height:5px;">&nbsp;</div>
+
+                        </div>
+                        <div class="color_palette_row">
+
+
+                            <div class="color_palette_cell" style="background-color: rgb(141, 183, 255);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(117, 226, 232);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(141, 255, 191);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(69, 106, 59);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(254, 255, 153);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(255, 211, 152);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(232, 154, 128);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(255, 153, 176);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(99, 64, 106);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(185, 164, 255);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(255, 154, 197);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(203, 129, 232);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(167, 155, 255);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(64, 84, 106);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(166, 255, 251);">&nbsp;</div>
+                            <div style="clear:both; height:5px;">&nbsp;</div>
+
+                        </div>
+
+
+
+                        <div class="color_palette_row">
+
+
+                            <div class="color_palette_cell" style="background-color: rgb(255, 185, 0);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(232, 11, 0);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(63, 0, 255);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(0, 106, 95);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(171, 255, 0);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(255, 140, 0);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(232, 0, 169);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(0, 68, 255);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(0, 106, 33);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(255, 223, 0);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(255, 39, 0);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(109, 0, 232);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(0, 219, 255);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(34, 106, 0);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(255, 177, 0);">&nbsp;</div>
+                            <div style="clear:both; height:5px;">&nbsp;</div>
+
+                        </div>
+
+                        <div class="color_palette_row">
+
+                            <div class="color_palette_cell" style="background-color: rgb(145, 116, 255);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(87, 105, 192);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(116, 192, 255);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(46, 101, 106);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(116, 255, 210);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(195, 248, 248);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(108, 192, 109);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(197, 255, 143);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(105, 106, 57);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(255, 240, 143);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(255, 183, 138);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(192, 119, 104);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(255, 138, 152);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(106, 55, 98);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(220, 138, 255);">&nbsp;</div>
+                            <div style="clear:both; height:5px;">&nbsp;</div>
+
+                        </div>
+
+                        <div class="color_palette_row">
+
+                            <div class="color_palette_cell" style="background-color: rgb(255, 0, 0);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(196,189,151);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(255,192,0);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(155,187,89);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(255,255,0);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(112,48,160);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(192,0,0);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(255, 0, 0);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(196,189,151);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(255,192,0);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(155,187,89);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(255,255,0);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(112,48,160);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(192,0,0);">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: rgb(255, 0, 0);">&nbsp;</div>
+                            <div style="clear:both; height:5px;">&nbsp;</div>
+
+                        </div>
+                        <div class="color_palette_row">
+
+                            <div class="color_palette_cell" style="background-color: #142966;">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: #1A3380;">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: #1F3D99;">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: #2447B2;">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: #2952CC;">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: #2952CC;">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: #2E5CE6;">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: #3366FF;">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: #4775FF;">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: #5C85FF;">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: #7094FF;">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: #85A3FF;">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: #99B2FF;">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: #ADC2FF;">&nbsp;</div>
+                            <div class="color_palette_cell" style="background-color: #C2D1FF;">&nbsp;</div>
+                            <div style="clear:both; height:5px;">&nbsp;</div>
+
+                        </div>
+                    </div>
+                    <!-- end all color palettes -->
+
+                </div>
+
+            </div>
+
+
+
+
+
+
+
+            <!-- series options box -->
+            <div class="display map_display chart_display" id="display_series_options">
+                <h4>Individual series options <sup class = "help_icon">?</sup></h4>
+                <div class="display_options">
+                    <p class="notes">This area will have options for individual series once data is loaded.</p>
+
+                    <div id="display_series_options_inner_div"></div> <!-- gets populated when tabbed to -->
+                    
+                </div>
+
+            </div>
+
+
+
+
+
+
+
+            <!-- Legend options box -->
+            <div class="display chart_display" id="display_chart_legend">
+                <h4>Legend <sup class = "help_icon">?</sup></h4>
+                <div class="display_options">
+
+                    <label for="legend_layout_select">Layout: </label>
+                    <select id="legend_layout_select">
+                        <option value="horizontal">Horizontal</option>
+                        <option value="vertical">Vertical</option>
+                        <option value="no_legend">No Legend</option>
+                    </select>
+                    <br>
+
+
+                    <label>Placement:</label> <span class="notes" style="margin-bottom: -5px;">(higher values push legend right and down)</span>
+                    <br>
+                    <label for="legend_placement_x">&rarr; <sup>(X)</sup> </label>
+                    <input type="text" id="legend_placement_x" value="100" class="small number_entry" />
+                    <label for="legend_placement_y">&darr; <sup>(Y)</sup> </label>
+                    <input type="text" id="legend_placement_y" value="40" class="small number_entry" />
+                    <br>
+
+                    <label for="legend_reverse_layout_checkbox">Reverse order: </label>
+                    <input type="checkbox" id="legend_reverse_layout_checkbox">
+                    <br>
+
+                    <label for="legend_make_toggle_checkbox" style="font-size:100%; font-weight:normal;">When a series is clicked, hide the others: </label>
+                    <input type="checkbox" id="legend_make_toggle_checkbox" >
+                    <br>
+                    <span class="notes">This will cause the first legend item to be visible and the others to be hidden.</span>
+
+                </div>
+            </div>
+
+
+
+
+            <!-- X-axis options box -->
+            <div class="display chart_display" id="display_chart_x_axis">
+                <h4>X-axis <sup class = "help_icon">?</sup></h4>
+                <div class="display_options">
+
+                    <label for="chart_x_axis_title_textarea">Title: </label>
+                    <br>
+                    <textarea id="chart_x_axis_title_textarea">Test X</textarea>
+                    <br>
+
+                    <label for="chart_x_axis_tickmark_interval_input">Tick mark (label) interval: </label>
+                    <input type="text" id="chart_x_axis_tickmark_interval_input" class="small number_entry" value="" placeholder="(Auto)" />
+                    <br>
+
+
+                    <label for="chart_x_axis_show_only_years">Show only years for dates: </label>
+                    <input type="checkbox" id="chart_x_axis_show_only_years" />
+                    <br>
+
+                    <label for="chart_x_axis_add_commas">Add commas to labels: </label>
+                    <input type="checkbox" id="chart_x_axis_add_commas" />
+
+                </div>
+
+            </div>
+
+
+
+
+            <!-- Y-axis options box -->
+            <div class="display chart_display" id="display_chart_y_axis">
+                <h4>Y-axis <sup class = "help_icon">?</sup></h4>
+                <div class="display_options">
+
+
+                    <label for="chart_y_axis_title_textarea">Title: </label>
+                    <br>
+                    <textarea id="chart_y_axis_title_textarea">Test Y</textarea>
+                    <br>
+
+                    <span id="chart_y_axis_x_position_span" class="not_bar">
+                    <label for="chart_y_axis_x_position_input">Title indent: </label>
+                    <input type="text" id="chart_y_axis_x_position_input" class="small number_entry" value="35" />
+                    <span class="notes">(higher value moves title to the right)</span>
+                    <br>
+                    </span>
+
+                    <label for="chart_y_axis_tickmark_interval_input">Tickmark interval: </label>
+                    <input type="text" id="chart_y_axis_tickmark_interval_input" class="medium number_entry" placeholder="Auto if empty" value="" />
+                    <br>
+
+                    <label for="chart_y_axis_min_input">Min value: </label>
+                    <input type="text" id="chart_y_axis_min_input" class="medium number_entry" placeholder="Auto if empty" value="" />
+                    <br>
+
+                    <label for="chart_y_axis_max_input">Max value: </label>
+                    <input type="text" id="chart_y_axis_max_input" class="medium number_entry" placeholder="Auto if empty" value="" />
+                    <br>
+
+                    <label for="chart_y_axis_opposite_checkbox">Put labels on opposite side of chart: </label>
+                    <input type="checkbox" id="chart_y_axis_opposite_checkbox">
+                    <br>
+
+                    <label for="chart_y_axis_log_checkbox">Log axis: </label>
+                    <input type="checkbox" id="chart_y_axis_log_checkbox">
+                    <br>
+
+                    <label for="chart_y_axis_signs_select">Dollar / percent signs: </label>
+                    <select id="chart_y_axis_signs_select">
+                        <option value="no_signs" selected>&nbsp;</option>
+                        <option value="$">$</option>
+                        <option value="%">%</option>
+                    </select>
+                    <br>
+
+                    <label for="chart_y_axis_decimals_select">Decimal points: </label>
+                    <select id="chart_y_axis_decimals_select">
+                        <option value="" selected>Auto</option>
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                    <br>
+
+                    <label for="chart_y_axis_divide_select">Divide label value by: </label>
+                    <select id="chart_y_axis_divide_select">
+                        <option value="1">&nbsp;</option>
+                        <option value="10">10</option>
+                        <option value="100">100</option>
+                        <option value="1000">1,000</option>
+                        <option value="10000">10,000</option>
+                        <option value="100000">100,000</option>
+                        <option value="1000000">1,000,000</option>
+                    </select>
+
+                </div>
+
+            </div>
+
+
+
+
+
+            <!-- Tooltip options box -->
+            <div class="display chart_display" id="display_chart_tooltip">
+                <h4>Tooltip (hover infobox) <sup class = "help_icon">?</sup></h4>
+                <div class="display_options">
+
+                    <label for="chart_tooltip_shared_checkbox">Show all series: </label>
+                    <input type="checkbox" id="chart_tooltip_shared_checkbox" />
+                    <span class="notes">This makes the tooltip "shared" and shows all series on hover instead of just one.</span>
+                    <br>
+
+                    <label for="chart_tooltip_force_decimals_select">Decimal points: </label>
+                    <select id="chart_tooltip_force_decimals_select">
+                        <option value="0">Auto</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                    <span class="notes">This will force the values shown to the selected decimal point, so "5" will be "5.0".</span>
+                    <br>
+
+                    <label for="chart_tooltip_signs_select">Dollar / percent signs: </label>
+                    <select id="chart_tooltip_signs_select">
+                        <option value="no_signs" selected>&nbsp;</option>
+                        <option value="$">$</option>
+                        <option value="%">%</option>
+                    </select>
+                    <span class="notes">This will add a dollar or percent sign after each value in the tooltip.</span>
+                    <br>
+
+                    <label for="chart_tooltip_crosshairs_select">Crosshairs: </label>
+                    <select id="chart_tooltip_crosshairs_select">
+                        <option value="no_crosshairs">&nbsp;</option>
+                        <option value="x_crosshairs">X-axis</option>
+                        <option value="y_crosshairs">Y-axis</option>
+                        <option value="xy_crosshairs">Both axes</option>
+                    </select>
+                    <br>
+
+                    <label for="chart_tooltip_y_multiple_select">Multiply Y-value by: </label>
+                    <select id="chart_tooltip_y_multiple_select">
+                        <option value="1">&nbsp;</option>
+                        <option value="10">10</option>
+                        <option value="100">100</option>
+                        <option value="1000">1,000</option>
+                        <option value="10000">10,000</option>
+                        <option value="100000">100,000</option>
+                        <option value="1000000">1,000,000</option>
+                    </select>
+
+
+                </div>
+
+            </div>
+
+
+
+
+
+
+            <!-- Credits options box -->
+            <div class="display chart_display" id="display_chart_credits">
+                <h4>Notes and credits <sup class = "help_icon">?</sup></h4>
+                <div class="display_options">
+
+                    <label for="chart_credits_text_textarea">Text: </label>
+                    <br>
+                    <textarea id="chart_credits_text_textarea" class="medium">Click legend items to change data display. Hover over chart to view data. Source: U.S. Bureau of Labor Statistics.</textarea>
+
+
+                </div>
+
+            </div>
+
+
+
+
+
+
+            <!-- Extra options box -->
+            <div class="display chart_display" id="display_chart_extra_options">
+                <h4>Extra options <sup class = "help_icon">?</sup></h4>
+                <div class="display_options">
+
+                    <label for="chart_mlr_styles_checkbox">MLR styles: </label>
+                    <input type="checkbox" id="chart_mlr_styles_checkbox" />
+                    <br>
+
+                    <label for="chart_invert_axes_checkbox">Invert axes: </label>
+                    <input type="checkbox" id="chart_invert_axes_checkbox" />
+                    <br>
+
+                    <label for="chart_zoom_select">Make zoomable: </label>
+                    <select id="chart_zoom_select">
+                        <option value="no_zoom">&nbsp;</option>
+                        <option value="x">X-axis zoom</option>
+                        <option value="y">Y-axis zoom</option>
+                        <option value="xy">Both axes zoom</option>
+                    </select>
+                    <br>
+
+                    <label for="chart_show_data_labels_checkbox">Show data labels: </label>
+                    <input type="checkbox" id="chart_show_data_labels_checkbox">
+                    <br>
+
+
+                    <label for="chart_add_recession_shading_select">Recession shading: </label>
+                    <select id="chart_add_recession_shading_select">
+                        <option value="no_recession">&nbsp;</option>
+                        <option value="monthly_recession">Monthly data</option>
+                        <option value="quarterly_recession">Quarterly data</option>
+                        <option value="ECI_recession">ECI data</option>
+                    </select>
+                    <br>
+                    <span class="notes">NOTE: For this to work, dates must be entered in mmm yyyy, or Q1 yyyy style. (e.g.: "May 2014, Jun 2014, Jul 2014; or Q1 2010, Q2 2010, Q3 2010")</span>
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+    <!-- side nav bar end -->
+
+
+
+    <!-- main content div (shows the chart / map / code to the right of the side nav)-->
+
+    <div id="main_content_div">
+        <!-- chart / map code boxes -->
+        <div id="main_result_code_div">
+            <h4>Chart code <sup class = "help_icon">?</sup></h4>
+            <p class="notes">The JS comes packed by default. If you need to unpack it, most code editors will do the trick, or use this tool: <a href="http://www.strictly-software.com/unpack-javascript.aspx" target="_blank">http://www.strictly-software.com/unpack-javascript.aspx</a>. You can hit the spacebar at any time to show and hide this area.</p>
+
+            <pre><code class="js" id="chart_output_code"></code></pre>
+        </div>
+
+        <!-- chart / map display area -->
+        <div id="chart_display_area" class="chart_display_area">
+
+
+
+        </div>
+
+    </div>
+    <!-- main_content_div end -->
+
+
+
+
+
+
+    <!-- external libraries -->
+    <script src="libraries/jquery/jquery-2.2.0.min.js"></script>
+    <script src="libraries/Highcharts-4.2.3/js/highcharts.src.js"></script>
+    <script src="libraries/Highcharts-4.2.3/js/highcharts-more.src.js"></script>
+    <!--    <script src="libraries/highcharts/exporting.3.0.10.min.js"></script>-->
+
+
+
+    <!-- Chart Maker main JS file, compiled from scripts_src folder -->
+    <script src="scripts_build/main.min.js"></script>
+
+    <!--JS Color for color picker boxes -->
+    <script src="libraries/jscolor-2.0.4/jscolor.min.js"></script>
+
+    <!-- code highlighting -->
+    <link rel="stylesheet" href="libraries/highlight/styles/custom.css">
+    <script src="libraries/highlight/highlight.pack.js"></script>
+    <script>
+        hljs.initHighlightingOnLoad();
+    </script>
+
+
+</body>
+
+
+
+
+
+</html>

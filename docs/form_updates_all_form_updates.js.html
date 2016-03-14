@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: form_updates/all_form_updates.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: form_updates/all_form_updates.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>var update_template = require("./update_template.js");
+var updateChartType = require("./update_chart_type.js");
+var updateColors = require("./update_colors.js");
+var utils_forms = require("../utils/utils_forms");
+var update_legend = require("./update_legend.js");
+var update_x_axis = require("./update_x_axis.js");
+var update_y_axis = require("./update_y_axis.js");
+var update_tooltip = require("./update_tooltip.js");
+var update_data = require("./update_data.js");
+var update_credits = require("./update_credits.js");
+var update_individual_series = require("./update_individual_series.js");
+
+/** listens for any form updates and calls appropriate function 
+@module
+*/
+var allFormUpdates = function (chart, all_chart_options) {
+    
+    /* CHART TYPE CHANGES */
+
+    //chart type changed
+    $.each(['area', 'line', 'bar', 'stacked_bar', 'column', 'stacked_column', 'bubble', 'scatter', "drilldown"], function (i, type) {
+        $('#chart_type_' + type).click(function () {
+            updateChartType(i, type, chart, all_chart_options);
+        });
+
+    });
+
+
+    /* TEMPLATE CHANGES */
+
+    //chart width
+    $("#chart_width_textinput").keyup(function () {
+        update_template.resize($(this).val(), "width", chart);
+    });
+
+    //chart height
+    $("#chart_height_textinput").keyup(function () {
+        update_template.resize($(this).val(), "height", chart);
+    });
+
+    //inner chart margins
+    $(".margin_input").keyup(function () {
+        var margins_arr = utils_forms.getClassValuesArray("margin_input");
+        update_template.margin(margins_arr, chart, all_chart_options);
+    });
+
+
+    /* CHART DATA CHANGES - (x-axis categories and series array)*/
+    //"series names loaded from" icon clicked
+    $(".load_series_from_icon").click(function () {
+        update_data.updateData(chart, all_chart_options);
+    });
+
+    $("#table_input_textarea").bind('input propertychange', function () {
+        update_data.updateData(chart, all_chart_options);
+    });
+
+
+    
+    
+    /* INDIVIDUAL SERIES UPDATES */
+
+    //update individual series options section (call on load and when data is changed)
+    $("#tab_series_options").click(function () {
+        update_individual_series.populateForm(chart, all_chart_options);
+
+    });
+    
+    
+
+    /* COLOR PALETTE CHANGES */
+    $(".color_palette_row").click(function () {
+       updateColors(chart, all_chart_options);
+    });
+       
+    
+    
+    /* LEGEND CHANGES */
+
+    //legend layout changed
+    $("#legend_layout_select").change(function () {
+        update_legend.updateLayout($(this).val(), chart, all_chart_options);
+    });
+
+
+    //legend reverse ceckbox changed
+    $("#legend_reverse_layout_checkbox").change(function () {
+        var val = utils_forms.getCheckBoxValue($(this));
+        update_legend.updateIsReversed(val, chart, all_chart_options);
+    });
+
+
+    //legend toggle (hide others) checkbox changed
+    $("#legend_make_toggle_checkbox").change(function () {
+        var toggle_enabled = utils_forms.getCheckBoxValue($(this));
+        update_legend.updateToggle(toggle_enabled, chart, all_chart_options);
+    });
+
+    //legend X or Y placement values changed
+    $("#legend_placement_x, #legend_placement_y").keyup(function () {
+        var newX = Number($("#legend_placement_x").val());
+        var newY = Number($("#legend_placement_y").val());
+
+        update_legend.updateXYpositions(newX, newY, chart, all_chart_options);
+    });
+
+
+
+    /* X-AXIS CHANGES */
+
+    //x-axis title textarea changed
+    $("#chart_x_axis_title_textarea").keyup(function () {
+        var newTitle = $(this).val();
+        update_x_axis.updateTitle(newTitle, chart, all_chart_options);
+    });
+
+    //x-axis tickmark interval input changed
+    $("#chart_x_axis_tickmark_interval_input").keyup(function () {
+        var newInterval = Number($(this).val());
+        update_x_axis.updateTickmarkInterval(newInterval, chart, all_chart_options);
+    });
+
+
+
+
+    /* Y-AXIS CHANGES */
+
+    //y-axis title textarea changed
+    $("#chart_y_axis_title_textarea").keyup(function () {
+        var newTitle = $(this).val();
+        update_y_axis.updateTitle(newTitle, chart, all_chart_options);
+    });
+
+    //y-axis title indent changed
+    $("#chart_y_axis_x_position_input").keyup(function () {
+        var newXPosition = Number($(this).val());
+        update_y_axis.updateXPosition(newXPosition, chart, all_chart_options);
+    });
+
+    //y-axis tickmark interval input changed
+    $("#chart_y_axis_tickmark_interval_input").keyup(function () {
+        var newInterval = Number($(this).val());
+        update_y_axis.updateTickmarkInterval(newInterval, chart, all_chart_options);
+    });
+
+    //y-axis max input changed
+    $("#chart_y_axis_max_input").keyup(function () {
+        var newMax = Number($(this).val());
+        update_y_axis.updateMax(newMax, chart, all_chart_options);
+    });
+
+    //y-axis min input changed
+    $("#chart_y_axis_min_input").keyup(function () {
+        var newMin = Number($(this).val());
+        update_y_axis.updateMin(newMin, chart, all_chart_options);
+    });
+
+    //y-axis opposite side ceckbox changed
+    $("#chart_y_axis_opposite_checkbox").change(function () {
+        var val = utils_forms.getCheckBoxValue($(this));
+        update_y_axis.updateIsOpposite(val, chart, all_chart_options);
+    });
+
+    //y-axis log ceckbox changed
+    $("#chart_y_axis_log_checkbox").change(function () {
+        var val = utils_forms.getCheckBoxValue($(this));
+        update_y_axis.updateIsLog(val, chart, all_chart_options);
+    });
+
+    //y-axis dollar / percent or decimal selects changed (format)
+    $("#chart_y_axis_signs_select, #chart_y_axis_decimals_select").change(function () {
+        var sign = $("#chart_y_axis_signs_select").val();
+        var decimals = $("#chart_y_axis_decimals_select").val();
+        update_y_axis.updateFormat(sign, decimals, chart, all_chart_options)
+    });
+
+
+
+    /* TOOLTIP CHANGES */
+
+    //change shared tooltip checkbox, decimals, signs, or mulitplier selects
+    $("#chart_tooltip_shared_checkbox, #chart_tooltip_force_decimals_select, #chart_tooltip_signs_select, #chart_tooltip_y_multiple_select").change(function () {
+        update_tooltip.updateToolTip(chart, all_chart_options);
+    });
+    //call update tooltip after page and chart is loaded (has to be on a callback with the 'chart' object)
+    update_tooltip.updateToolTip(chart, all_chart_options);
+
+
+
+
+    /* CREDITS CHANGES */
+
+    $("#chart_credits_text_textarea").bind('input propertychange', function () {
+        update_credits.updateCreditText(chart, all_chart_options);
+    });
+
+
+
+
+};
+
+module.exports = allFormUpdates;</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-form_updates_all_form_updates.html">form_updates/all_form_updates</a></li><li><a href="module-form_updates_update_chart_type.html">form_updates/update_chart_type</a></li><li><a href="module-form_updates_update_colors.html">form_updates/update_colors</a></li><li><a href="module-form_updates_update_individual_series.html">form_updates/update_individual_series</a></li><li><a href="module-initializers_all_chart_options_init.html">initializers/all_chart_options_init</a></li><li><a href="module-initializers_chart_init.html">initializers/chart_init</a></li><li><a href="module-initializers_colors_init.html">initializers/colors_init</a></li><li><a href="module-initializers_credits_init.html">initializers/credits_init</a></li><li><a href="module-initializers_exporting_init.html">initializers/exporting_init</a></li><li><a href="module-initializers_legend_init.html">initializers/legend_init</a></li><li><a href="module-initializers_plot_options_init.html">initializers/plot_options_init</a></li><li><a href="module-initializers_series_init.html">initializers/series_init</a></li><li><a href="module-initializers_subtitle_init.html">initializers/subtitle_init</a></li><li><a href="module-initializers_title_init.html">initializers/title_init</a></li><li><a href="module-initializers_tooltip_init.html">initializers/tooltip_init</a></li><li><a href="module-initializers_x_axis_init.html">initializers/x_axis_init</a></li><li><a href="module-initializers_y_axis_init.html">initializers/y_axis_init</a></li><li><a href="module-parsers_parse_for_bubble.html">parsers/parse_for_bubble</a></li><li><a href="module-parsers_parse_for_scatter.html">parsers/parse_for_scatter</a></li><li><a href="module-parsers_parse_for_typical_chart.html">parsers/parse_for_typical_chart</a></li><li><a href="module-parsers_parse_table_input.html">parsers/parse_table_input</a></li><li><a href="module-utils_jq_extensions.html">utils/jq_extensions</a></li></ul><h3>Classes</h3><ul><li><a href="AllChartOptions.html">AllChartOptions</a></li><li><a href="ChartOptions.html">ChartOptions</a></li><li><a href="Credits.html">Credits</a></li><li><a href="Exporting.html">Exporting</a></li><li><a href="Legend.html">Legend</a></li><li><a href="PlotOptions.html">PlotOptions</a></li><li><a href="Series.html">Series</a></li><li><a href="Subtitle.html">Subtitle</a></li><li><a href="Title.html">Title</a></li><li><a href="Tooltip.html">Tooltip</a></li><li><a href="XAxis.html">XAxis</a></li><li><a href="yAxis.html">yAxis</a></li></ul><h3>Namespaces</h3><ul><li><a href="draw_chart.html">draw_chart</a></li><li><a href="keyboard_inputs.html">keyboard_inputs</a></li><li><a href="navigation_setup.html">navigation_setup</a></li><li><a href="update_credits.html">update_credits</a></li><li><a href="update_data.html">update_data</a></li><li><a href="update_legend.html">update_legend</a></li><li><a href="update_template.html">update_template</a></li><li><a href="update_tooltip.html">update_tooltip</a></li><li><a href="update_x_axis.html">update_x_axis</a></li><li><a href="update_y_axis.html">update_y_axis</a></li><li><a href="utils_forms.html">utils_forms</a></li><li><a href="utils_main.html">utils_main</a></li></ul><h3>Global</h3><ul><li><a href="global.html#parseForDrilldown">parseForDrilldown</a></li><li><a href="global.html#parseForMap">parseForMap</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Sun Mar 13 2016 21:54:38 GMT-0400 (EDT)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
