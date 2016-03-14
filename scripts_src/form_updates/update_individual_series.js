@@ -10,7 +10,7 @@ var utils_main = require("../utils/utils_main.js");
 
 var update_individual_series = {
 
-    
+
     /** called when the series type icons are clicked. Binded at the end of populateForm **/
     seriesTypeIconChange: function (chart, all_chart_options) {
         $(".series_type_icon").click(function () {
@@ -20,14 +20,14 @@ var update_individual_series = {
             chart.series[i].update({
                 type: type
             });
-            
+
             //highlight clicked icon
             $(".series_type_selected", $(this).parent()).removeClass("series_type_selected");
             $(this).addClass("series_type_selected");
-            
+
             //update all_chart_options
             all_chart_options.series[i].type = type;
-                        
+
         });
     },
 
@@ -79,6 +79,32 @@ var update_individual_series = {
     },
 
 
+
+    /** add line style option - shown only if type is line**/
+    makeLineStyleDiv: function () {
+
+        var line_style_div = document.createElement("div");
+        line_style_div.className = "line_style_div";
+        var line_style_label = document.createElement("label");
+        line_style_label.className = "line_style_label";
+        line_style_label.textContent = "Line style: ";
+        var line_style_select = document.createElement("select");
+        var line_style_option_solid = document.createElement("option");
+        line_style_option_solid.textContent = "Solid";
+        var line_style_option_dashed = document.createElement("option");
+        line_style_option_dashed.textContent = "Dashed";
+
+        line_style_select.appendChild(line_style_option_solid);
+        line_style_select.appendChild(line_style_option_dashed);
+
+        line_style_div.appendChild(line_style_label);
+        line_style_div.appendChild(line_style_select);
+
+        return line_style_div;
+
+    },
+
+
     makeSeriesTypeDiv: function (chart, all_chart_options, i) {
         var series_type_div = document.createElement("div");
         series_type_div.className = "series_type_div";
@@ -100,6 +126,7 @@ var update_individual_series = {
             .attr("type", "line");
         if (chart.series[i].type === "line") {
             $(series_type_line).addClass("series_type_selected");
+
         }
 
         var clear_div = utils_main.makeClearFloatDiv();
@@ -110,7 +137,6 @@ var update_individual_series = {
         series_type_div.appendChild(clear_div);
 
         return series_type_div;
-
 
     },
 
@@ -146,10 +172,17 @@ var update_individual_series = {
             }
 
 
+            var line_style_div = update_individual_series.makeLineStyleDiv();
+            series_snippet.appendChild(line_style_div);
+
             $(display_series_options_inner_div).append(series_snippet);
 
+            if (all_chart_options.chart.type === "line") {
+                $(".line_style_div").show();
+            }
+
         });
-        
+
         //bind series type changes
         update_individual_series.seriesTypeIconChange(chart, all_chart_options);
     }
