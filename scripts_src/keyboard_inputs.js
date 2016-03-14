@@ -1,3 +1,5 @@
+var update_individual_series = require("./form_updates/update_individual_series.js");
+
 /**
  * Contains functions that deal with keyboard inputs
  * @namespace
@@ -33,7 +35,7 @@ var keyboard_inputs = {
 
 
     /** when nothing is selected, pressing up or downchanges which side nav tab is selected */
-    sideNavTabShortcuts: function () {
+    sideNavTabShortcuts: function (chart, all_chart_options) {
         $(document).keydown(function (e) {
 
 
@@ -121,6 +123,7 @@ var keyboard_inputs = {
             else if (e.keyCode === 9) { //tab
                 e.preventDefault();
                 keyboard_inputs.clickNext("load_series_from_icon", "selected_load_series_from");
+                update_individual_series.populateForm(chart, all_chart_options);
             }
             
 
@@ -167,7 +170,7 @@ var keyboard_inputs = {
     when a number entry input is focused on, attach those event listeners
     when it leaves to main document, attach those
     **/
-    initListeners: function () {
+    initListeners: function (chart, all_chart_options) {
         $("input, textarea").focus(function () {
             $(document).unbind();
             $(this).off("keydown"); //so it doesnt duplicate when moving from one entry to another
@@ -176,7 +179,7 @@ var keyboard_inputs = {
         $("input, textarea").blur(function () {
             $(this).off("keydown");
             //reinit side tab nav shortcuts
-            keyboard_inputs.sideNavTabShortcuts();
+            keyboard_inputs.sideNavTabShortcuts(chart, all_chart_options);
         });
 
 
@@ -184,8 +187,5 @@ var keyboard_inputs = {
 
 }
 
-//first init
-keyboard_inputs.sideNavTabShortcuts();
-keyboard_inputs.initListeners();
 
 module.exports = keyboard_inputs;

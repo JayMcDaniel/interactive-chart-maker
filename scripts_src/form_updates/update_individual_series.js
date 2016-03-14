@@ -10,11 +10,24 @@ var utils_main = require("../utils/utils_main.js");
 
 var update_individual_series = {
 
-    seriesTypeIconChange: function () {
+    
+    /** called when the series type icons are clicked. Binded at the end of populateForm **/
+    seriesTypeIconChange: function (chart, all_chart_options) {
         $(".series_type_icon").click(function () {
+            //update series type
+            var type = $(this).attr("type");
+            var i = $(this).parents(".series_snippet").index();
+            chart.series[i].update({
+                type: type
+            });
             
+            //highlight clicked icon
             $(".series_type_selected", $(this).parent()).removeClass("series_type_selected");
             $(this).addClass("series_type_selected");
+            
+            //update all_chart_options
+            all_chart_options.series[i].type = type;
+                        
         });
     },
 
@@ -28,12 +41,12 @@ var update_individual_series = {
     },
 
 
+    /** makes a color box, called from populateForm **/
     makeSeriesColorDiv: function (chart, all_chart_options, i) {
         var series_color_div = document.createElement("div");
         series_color_div.className = "series_color_div";
 
-        /** makes a color box, called from populateForm **/
-
+        // make a color label
         var series_color_label = document.createElement("label");
         series_color_label.className = "series_color_label";
         series_color_label.textContent = "Color: ";
@@ -76,13 +89,15 @@ var update_individual_series = {
 
 
         var series_type_column = document.createElement("div");
-        $(series_type_column).addClass("series_type_icon series_type_column");
+        $(series_type_column).addClass("series_type_icon series_type_column")
+            .attr("type", "column");
         if (chart.series[i].type === "column") {
             $(series_type_column).addClass("series_type_selected");
         }
 
         var series_type_line = document.createElement("div");
-        $(series_type_line).addClass("series_type_icon series_type_line");
+        $(series_type_line).addClass("series_type_icon series_type_line")
+            .attr("type", "line");
         if (chart.series[i].type === "line") {
             $(series_type_line).addClass("series_type_selected");
         }
@@ -136,7 +151,7 @@ var update_individual_series = {
         });
         
         //bind series type changes
-        update_individual_series.seriesTypeIconChange();
+        update_individual_series.seriesTypeIconChange(chart, all_chart_options);
     }
 
 }

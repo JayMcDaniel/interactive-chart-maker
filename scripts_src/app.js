@@ -20,12 +20,15 @@ $(document).ready(function () {
     //page init (navigation and keyboard entries)
     var navigation_setup = require("./navigation_setup.js");
     navigation_setup.initAllNavigation(all_chart_options);
-    
+
     var keyboard_inputs = require("./keyboard_inputs");
+    //first init
+    keyboard_inputs.sideNavTabShortcuts(chart, all_chart_options);
+    keyboard_inputs.initListeners(chart, all_chart_options);
 
 
     //all form updates - when updates are made, update the chart
     var allFormUpdates = require("./form_updates/all_form_updates.js");
     allFormUpdates(chart, all_chart_options);
-    
+
 });
