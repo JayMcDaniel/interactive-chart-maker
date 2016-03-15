@@ -294,7 +294,8 @@
     }
     /* left side div with all of the configurations options etc. inside it */
     
-    option, select {
+    option,
+    select {
         color: #000;
     }
     
@@ -330,6 +331,10 @@
     //p tags with individual series info in them
     .series_snippet {
         margin-bottom: 40px;
+    }
+    
+    .show_scatter {
+        display: none;
     }
     
     #side_main {

@@ -14,9 +14,6 @@ $(document).ready(function () {
     var draw_chart = require("./draw_chart.js");
     var chart = draw_chart.init(all_chart_options);
 
-    //write code to "#chart_output_code" function
-    utils_main.writeCode(all_chart_options);
-
     //page init (navigation and keyboard entries)
     var navigation_setup = require("./navigation_setup.js");
     navigation_setup.initAllNavigation(all_chart_options);
@@ -30,5 +27,6 @@ $(document).ready(function () {
     //all form updates - when updates are made, update the chart
     var allFormUpdates = require("./form_updates/all_form_updates.js");
     allFormUpdates(chart, all_chart_options);
+    
 
 });

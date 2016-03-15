@@ -41,6 +41,19 @@ var update_individual_series = {
     },
 
 
+    /** bound with populateForm. When the line style dropdown is changed, change that series **/
+    lineStyleSelectChange: function (chart, all_chart_options) {
+        $(".line_style_select").change(function () {
+            console.log("change");
+            var line_style = $(this).val();
+            var i = $(this).parents(".series_snippet").index();
+            chart.series[i].update({
+                dashStyle: line_style
+            });
+        });
+    },
+
+
     /** makes a color box, called from populateForm **/
     makeSeriesColorDiv: function (chart, all_chart_options, i) {
         var series_color_div = document.createElement("div");
@@ -85,17 +98,39 @@ var update_individual_series = {
 
         var line_style_div = document.createElement("div");
         line_style_div.className = "line_style_div";
+
         var line_style_label = document.createElement("label");
         line_style_label.className = "line_style_label";
         line_style_label.textContent = "Line style: ";
+
         var line_style_select = document.createElement("select");
+        line_style_select.className = "line_style_select";
+
         var line_style_option_solid = document.createElement("option");
         line_style_option_solid.textContent = "Solid";
-        var line_style_option_dashed = document.createElement("option");
-        line_style_option_dashed.textContent = "Dashed";
+        line_style_option_solid.value = "Solid";
+
+        var line_style_option_dash = document.createElement("option");
+        line_style_option_dash.textContent = "Dash";
+        line_style_option_dash.value = "Dash";
+
+        var line_style_option_dot = document.createElement("option");
+        line_style_option_dot.textContent = "Dot";
+        line_style_option_dot.value = "Dot";
+
+        var line_style_option_long_dash = document.createElement("option");
+        line_style_option_long_dash.textContent = "Long dash";
+        line_style_option_long_dash.value = "LongDash";
+
+        var line_style_option_dash_dot = document.createElement("option");
+        line_style_option_dash_dot.textContent = "Dash-dot";
+        line_style_option_dash_dot.value = "DashDot";
 
         line_style_select.appendChild(line_style_option_solid);
-        line_style_select.appendChild(line_style_option_dashed);
+        line_style_select.appendChild(line_style_option_dash);
+        line_style_select.appendChild(line_style_option_dot);
+        line_style_select.appendChild(line_style_option_long_dash);
+        line_style_select.appendChild(line_style_option_dash_dot);
 
         line_style_div.appendChild(line_style_label);
         line_style_div.appendChild(line_style_select);
@@ -185,6 +220,8 @@ var update_individual_series = {
 
         //bind series type changes
         update_individual_series.seriesTypeIconChange(chart, all_chart_options);
+        //bind line style changes
+        update_individual_series.lineStyleSelectChange(chart, all_chart_options);
     }
 
 }

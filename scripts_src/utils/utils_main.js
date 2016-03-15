@@ -29,6 +29,18 @@ var utils_main = {
         clear_div.className = "clearfloat";
         return clear_div;
     },
+    
+    parseBoolsFromArray: function(arr){
+        return arr.map(function(e){
+            if(e==="true"){
+                return true;
+            }else if (e === "false"){
+                return false;
+            }else{
+                return e;
+            }
+        });
+    },
 
     rgb2arr: function (rgb) {
         return rgb.replace(/[^0-9\,]+/g, '').split(",").map(function (item) {

@@ -8,13 +8,13 @@ var update_y_axis = require("./update_y_axis.js");
 var update_tooltip = require("./update_tooltip.js");
 var update_data = require("./update_data.js");
 var update_credits = require("./update_credits.js");
+var update_chart_options = require("./update_chart_options.js");
 var update_individual_series = require("./update_individual_series.js");
 
 /** listens for any form updates and calls appropriate function 
 @module
 */
 var allFormUpdates = function (chart, all_chart_options) {
-    
     /* CHART TYPE CHANGES */
 
     //chart type changed
@@ -56,8 +56,8 @@ var allFormUpdates = function (chart, all_chart_options) {
     });
 
 
-    
-    
+
+
     /* INDIVIDUAL SERIES UPDATES */
 
     //update individual series options section (call on load and when data is changed)
@@ -65,16 +65,16 @@ var allFormUpdates = function (chart, all_chart_options) {
         update_individual_series.populateForm(chart, all_chart_options);
 
     });
-    
-    
+
+
 
     /* COLOR PALETTE CHANGES */
     $(".color_palette_row").click(function () {
-       updateColors(chart, all_chart_options);
+        updateColors(chart, all_chart_options);
     });
-       
-    
-    
+
+
+
     /* LEGEND CHANGES */
 
     //legend layout changed
@@ -195,6 +195,29 @@ var allFormUpdates = function (chart, all_chart_options) {
     });
 
 
+
+    /* EXTRA OPTIONS CHANGES */
+
+    //MLR style toggle
+    $("#chart_mlr_styles_checkbox").change(function () {
+        var is_checked = utils_forms.getCheckBoxValue($(this));
+        update_x_axis.toggleMLRStyle(is_checked, chart, all_chart_options);
+        update_y_axis.toggleMLRStyle(is_checked, chart, all_chart_options);
+        update_chart_options.toggleMLRStyle(is_checked, all_chart_options); //draw_chart is called from here to update plotBorder
+    });
+
+
+    //Zoom type changed
+    $("#chart_zoom_select").change(function () {
+        var val = $(this).val();
+        update_chart_options.changeZoomType(val, chart, all_chart_options);
+    });
+    
+    //data labels checkbox toggled
+    $("#chart_show_data_labels_checkbox").change(function(){
+        var val = utils_forms.getCheckBoxValue($(this));
+        update_chart_options.toggleDataLabels(val, chart, all_chart_options);
+    });
 
 
 };

@@ -13,7 +13,7 @@ var update_data = {
         var input = $("#table_input_textarea").val();
         var legend_toggle_enabled = utils_forms.getCheckBoxValue($("#legend_make_toggle_checkbox"));
         var load_series_from = $(".selected_load_series_from").divVal();
-        var parsed_table_output = parseTableInput(input, load_series_from, chart_type, legend_toggle_enabled, all_chart_options.colors); 
+        var parsed_table_output = parseTableInput(input, load_series_from, chart_type, legend_toggle_enabled, all_chart_options.colors, all_chart_options); 
 
         //update x-axis categories
         chart.xAxis[0].update({

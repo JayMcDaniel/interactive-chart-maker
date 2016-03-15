@@ -8,7 +8,7 @@
  */
 
 
-var parseForTypicalChart = function (input, load_series_from, chart_type, legend_toggle_enabled, colors) {
+var parseForTypicalChart = function (input, load_series_from, chart_type, legend_toggle_enabled, colors, all_chart_options) {
 
     var type = chart_type.replace("stacked_", "");
 
@@ -29,6 +29,9 @@ var parseForTypicalChart = function (input, load_series_from, chart_type, legend
             var seriesObj = {
                 name: $.trim($.trim($(this).text())),
                 data: [],
+                dataLabels: {
+                    enabled: all_chart_options ? all_chart_options.plotOptions.series.dataLabels.enabled : false
+                },
                 type: type,
                 color: colors[i],
                 _symbolIndex: i,
@@ -69,6 +72,9 @@ var parseForTypicalChart = function (input, load_series_from, chart_type, legend
             var seriesObj = {
                 name: $.trim($("th:eq(0)", this_row).text()),
                 data: [],
+                dataLabels: {
+                    enabled: all_chart_options ? all_chart_options.plotOptions.series.dataLabels.enabled : false
+                },
                 type: type,
                 color: colors[i],
                 _symbolIndex: i,

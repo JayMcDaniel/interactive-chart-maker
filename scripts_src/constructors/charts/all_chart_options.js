@@ -6,8 +6,6 @@
 var AllChartOptions = function (o) {
     this.chart = o.chart;
     this.colors = o.colors;
-    this.credits = o.credits;
-    this.exporting = o.exporting;
     this.legend = o.legend;
     this.plotOptions = o.plotOptions;
     this.series = o.series;
@@ -16,6 +14,8 @@ var AllChartOptions = function (o) {
     this.tooltip = o.tooltip;
     this.xAxis = o.xAxis;
     this.yAxis = o.yAxis;
+    this.credits = o.credits;
+    this.exporting = o.exporting;
 }
 
 

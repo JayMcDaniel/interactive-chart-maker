@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Module: initializers/exporting_init</title>
+    <title>JSDoc: Source: form_updates/update_chart_options.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,126 +17,67 @@
 
 <div id="main">
 
-    <h1 class="page-title">Module: initializers/exporting_init</h1>
+    <h1 class="page-title">Source: form_updates/update_chart_options.js</h1>
 
     
 
 
 
-
-<section>
-
-<header>
     
-        
-            
-        
-    
-</header>
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>var draw_chart = require("../draw_chart.js");
+var utils_main = require("../utils/utils_main");
 
-<article>
-    <div class="container-overview">
-    
-        
-            <div class="description">Initializer for "exporting" options section of all_chart_options. Creates and returns a new instance</div>
-        
-
-        
-            
+/** updaters for all_chart_options.chart
+@namespace
+**/
+var update_chart_options = {
 
 
+    /** when zoon type dropdown is changed **/
+    changeZoomType: function (val, chart, all_chart_options) {
+
+        var val_arr = utils_main.parseBoolsFromArray(val.split(",")); //array is [x-zoom {bool}, y-zoom {bool}, zoomtype {stiring: x, y, or xy}]
+
+        chart.pointer.zoomX = val_arr[0];
+        chart.pointer.zoomY = val_arr[1];
+        chart.pointer.zoomHor = val_arr[0];
+        chart.pointer.zoomVert = val_arr[1];
+
+        all_chart_options.chart.zoomType = val_arr[2];
+    },
 
 
+    /** enable or disabled data labels. Called when chart_show_data_labels_checkbox is changed **/
 
+    toggleDataLabels: function (val, chart, all_chart_options) {
 
+        $(chart.series).each(function () {
+            this.update({
+                dataLabels: {
+                    enabled: val
+                }
+            });
+        });
 
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
+        all_chart_options.plotOptions.series.dataLabels.enabled = val;
+    },
     
 
-    
+    /** when Use MLR Styles checkbox is toggled **/
+    toggleMLRStyle: function (is_checked, all_chart_options) {
+        //if or not using MLR styles
+        all_chart_options.chart.plotBorderWidth = is_checked ? 1 : 0;
 
-    
+        //have to completely redraw chart to update plotBorderWidth - not accesible by HC's API - this messes up a lot, so for now I'm not.        
+    }
 
-    
+}
 
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="initializers_exporting_init.js.html">initializers/exporting_init.js</a>, <a href="initializers_exporting_init.js.html#line3">line 3</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-    
-    </div>
-
-    
-
-    
-
-    
-
-     
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
+module.exports = update_chart_options;</code></pre>
+        </article>
+    </section>
 
 
 

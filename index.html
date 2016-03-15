@@ -892,16 +892,18 @@
                     <input type="checkbox" id="chart_mlr_styles_checkbox" />
                     <br>
 
+<!--
                     <label for="chart_invert_axes_checkbox">Invert axes: </label>
                     <input type="checkbox" id="chart_invert_axes_checkbox" />
                     <br>
+-->
 
                     <label for="chart_zoom_select">Make zoomable: </label>
                     <select id="chart_zoom_select">
-                        <option value="no_zoom">&nbsp;</option>
-                        <option value="x">X-axis zoom</option>
-                        <option value="y">Y-axis zoom</option>
-                        <option value="xy">Both axes zoom</option>
+                        <option value="false,false,null">&nbsp;</option>
+                        <option value="true,false,x">X-axis zoom</option>
+                        <option value="false,true,y">Y-axis zoom</option>
+                        <option value="true,true,xy">Both axes zoom</option>
                     </select>
                     <br>
 

@@ -4,6 +4,27 @@
 
 var update_x_axis = {
 
+
+    /**makes x-axis MLR or standard style **/
+    toggleMLRStyle: function (is_checked, chart, all_chart_options) {
+
+        //if using MLR styles
+        if (is_checked) {
+            all_chart_options.xAxis.tickPosition = "inside";
+            all_chart_options.xAxis.tickColor = "#000";
+        } else { //using standard styles
+            all_chart_options.xAxis.tickPosition = "outside";
+            all_chart_options.xAxis.tickColor = "#C0D0E0";
+        }
+
+
+        chart.xAxis[0].update({
+            tickPosition: all_chart_options.xAxis.tickPosition,
+            tickColor: all_chart_options.xAxis.tickColor
+        });
+    },
+
+
     /** update the x axis title */
     updateTitle: function (newTitle, chart, all_chart_options) {
         chart.xAxis[0].setTitle({

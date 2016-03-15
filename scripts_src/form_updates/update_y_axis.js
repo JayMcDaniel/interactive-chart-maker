@@ -6,6 +6,26 @@ var utils_main = require("../utils/utils_main.js");
 */
 var update_y_axis = {
 
+    /**makes y-axis MLR or standard style **/
+    toggleMLRStyle: function (is_checked, chart, all_chart_options) {
+
+        //if using MLR styles
+        if (is_checked) {
+            all_chart_options.yAxis.tickWidth = 0;
+            all_chart_options.yAxis.gridLineDashStyle = 'Solid';
+        } else { //using standard styles
+            all_chart_options.yAxis.tickWidth = 1;
+            all_chart_options.yAxis.gridLineDashStyle = 'Dot';
+                       
+        }
+        
+        chart.yAxis[0].update({
+            tickWidth: all_chart_options.yAxis.tickWidth,
+            gridLineDashStyle: all_chart_options.yAxis.gridLineDashStyle
+        });
+  
+    },
+
 
     /** update format when dollar / percent signs select is changed */
     updateFormat: function (sign, decimals, chart, all_chart_options) {
