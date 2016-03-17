@@ -13,6 +13,7 @@ var parseForTypicalChart = function (input, load_series_from, chart_type, legend
     var type = chart_type.replace("stacked_", "");
 
     var output = {};
+    output.series = [];
 
     /** If loading series names from column heads is selected*/
     if (load_series_from === "column_heads") {
@@ -23,7 +24,6 @@ var parseForTypicalChart = function (input, load_series_from, chart_type, legend
         });
 
         //load series object names from column heads, and data from each column tds
-        output.series = [];
 
         $("thead tr:last th:gt(0)", input).each(function (i) {
             var seriesObj = {
@@ -64,7 +64,6 @@ var parseForTypicalChart = function (input, load_series_from, chart_type, legend
         });
 
         //load series object names from row heads, and data from row tds
-        output.series = [];
         $("tbody tr", input).each(function (i) {
 
             var this_row = $(this);

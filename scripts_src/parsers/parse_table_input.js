@@ -12,7 +12,7 @@ var parseForBubble = require("./parse_for_bubble.js");
 
 
 /** parsing function for drilldown charts */
-var parseForDrilldown = function (input) {};
+var parseForDrilldown = require("./parse_for_drilldown.js");
 
 
 /** parsing function for map charts */

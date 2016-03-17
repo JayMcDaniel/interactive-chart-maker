@@ -26,13 +26,23 @@ var update_x_axis = {
 
 
     /** update the x axis title */
-    updateTitle: function (newTitle, chart, all_chart_options) {
+    updateTitle: function (new_title, chart, all_chart_options) {
         chart.xAxis[0].setTitle({
-            text: newTitle
+            text: new_title
         });
 
-        all_chart_options.xAxis.title.text = newTitle;
+        all_chart_options.xAxis.title.text = new_title;
 
+    },
+    
+
+    /** update x-axis type */
+    updateType: function (chart_type, chart, all_chart_options) {
+        chart.xAxis[0].update({
+            type: chart_type === "drilldown" ? "category" : "linear"
+        });
+        
+        all_chart_options.xAxis.type = chart_type === "drilldown" ? "category" : "linear";
     },
 
 

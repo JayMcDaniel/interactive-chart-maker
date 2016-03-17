@@ -53,6 +53,7 @@ var XAxis = function (o) {
         x: o.title.x
     };
 
+    this.type = o.type;
 
 }
 

@@ -1,14 +1,15 @@
 var plotOptionsInit = require("../initializers/plot_options_init.js");
 var update_data = require("./update_data.js");
 var update_tooltip = require("./update_tooltip.js");
+var update_x_axis = require("./update_x_axis.js");
 
 
 /** when a chart icon is clicked, this function is called - changes the chart type shown 
 @module
 */
-var updateChartType = function (i, type, chart, all_chart_options) {
+var updateChartType = function (i, chart_type, chart, all_chart_options) {
 
-    type = type.replace("stacked_", "");
+    var type = chart_type.replace("stacked_", "");
 
     if (type === "bar") {
         //fix y axis position
@@ -69,6 +70,9 @@ var updateChartType = function (i, type, chart, all_chart_options) {
 
     //update tooltip
     update_tooltip.updateToolTip(chart, all_chart_options);
+    
+    //update x-axis type
+    update_x_axis.updateType(chart_type, chart, all_chart_options);
 
 }
 

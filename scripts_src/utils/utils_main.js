@@ -23,20 +23,24 @@ var utils_main = {
         }).replace(/\\n/g, "");
 
     },
-    
-    makeClearFloatDiv: function(){
+
+    /** 
+    creates and returns a clearfloat class div
+    @returns {element} div with "clearfloat" class
+    */
+    makeClearFloatDiv: function () {
         var clear_div = document.createElement("div");
         clear_div.className = "clearfloat";
         return clear_div;
     },
-    
-    parseBoolsFromArray: function(arr){
-        return arr.map(function(e){
-            if(e==="true"){
+
+    parseBoolsFromArray: function (arr) {
+        return arr.map(function (e) {
+            if (e === "true") {
                 return true;
-            }else if (e === "false"){
+            } else if (e === "false") {
                 return false;
-            }else{
+            } else {
                 return e;
             }
         });
@@ -47,7 +51,7 @@ var utils_main = {
             return parseInt(item, 10);
         });
     },
-    
+
 
     /** stringify tooltip formatter function **/
     stringifyFormatter: function (new_tooltip, decimals, multiplier, signs_arr) {

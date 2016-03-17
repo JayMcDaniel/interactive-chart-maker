@@ -9,13 +9,14 @@ var AllChartOptions = function (o) {
     this.legend = o.legend;
     this.plotOptions = o.plotOptions;
     this.series = o.series;
+    this.drilldown = o.drilldown;
     this.subtitle = o.subtitle;
     this.title = o.title;
     this.tooltip = o.tooltip;
     this.xAxis = o.xAxis;
     this.yAxis = o.yAxis;
     this.credits = o.credits;
-    this.exporting = o.exporting;
+  //  this.exporting = o.exporting;
 }
 
 

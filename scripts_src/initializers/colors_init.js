@@ -15,5 +15,5 @@ var colorsInit = function colorsInit() {
     
         return color_arr;
 };
-
+ 
 module.exports = colorsInit;

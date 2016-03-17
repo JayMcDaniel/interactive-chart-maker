@@ -70,7 +70,8 @@ var allFormUpdates = function (chart, all_chart_options) {
 
     /* COLOR PALETTE CHANGES */
     $(".color_palette_row").click(function () {
-        updateColors(chart, all_chart_options);
+        var chart_type = $(".selected_chart_type").divVal();
+        updateColors(chart, all_chart_options, chart_type);
     });
 
 

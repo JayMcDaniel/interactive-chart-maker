@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: initializers/all_chart_options_init.js</title>
+    <title>JSDoc: Source: parsers/parse_for_drilldown.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: initializers/all_chart_options_init.js</h1>
+    <h1 class="page-title">Source: parsers/parse_for_drilldown.js</h1>
 
     
 
@@ -26,59 +26,76 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code> var AllChartOptions = require("../constructors/charts/all_chart_options.js"),
-     chartInit = require("./chart_init.js"),
-     colorsInit = require("./colors_init.js"),
-     creditsInit = require("./credits_init.js"),
-     exportingInit = require("./exporting_init.js"),
-     legendInit = require("./legend_init.js"),
-     plotOptionsInit = require("./plot_options_init.js"),
-     seriesInit = require("./series_init.js"),
-     subtitleInit = require("./subtitle_init.js"),
-     titleInit = require("./title_init.js"),
-     tooltipInit = require("./tooltip_init.js"),
-     xAxisInit = require("./x_axis_init.js"),
-     yAxisInit = require("./y_axis_init.js"),
-     parseTableInput = require("../parsers/parse_table_input.js"),
-     utils_forms = require("../utils/utils_forms.js");
+            <pre class="prettyprint source linenums"><code>/** parsing function for drilldown charts */
+var parseForDrilldown = function (input, chart_type, colors) {
+
+    var output = {};
+    output.x_axis_categories = undefined;
+
+    output.series = [{
+        name: "test",
+        colorByPoint: true,
+        data: []
+    }];
+
+    output.drilldown = {};
+    output.drilldown.series = [];
+
+    $("tbody th p", input).each(function (i) {
+        
+        
+        
+        
+        
+
+        if (!$(this).is('[class*="sub"]')) { //if this doesn't countain "sub" as a class, it's a top level
+
+            var this_name = $.trim($(this).text());
+            var this_drilldown = $("tbody th:eq(" + (i + 1) + ") p", input).is('[class*="sub1"]') ? this_name : undefined;
+
+            //make top level series
+            output.series[0].data.push({
+                name: this_name,
+                y: $(this).parent().next().getNumber(),
+                type: chart_type,
+                color: colors[output.series[0].data.length],
+                drilldown: this_drilldown
+            });
 
 
- /** create and return an instance of all_chart_options 
- @module
- **/
- var allChartOptionsInit = function allChartOptionsInit() {
-     var chart_type = $(".selected_chart_type").divVal();
-     var load_series_from = $(".selected_load_series_from").divVal(); 
-     var legend_toggle_enabled = utils_forms.getCheckBoxValue($("#legend_make_toggle_checkbox"));
-     var input = $("#table_input_textarea").val();
-     var colors = colorsInit();
-     
-     var parsed_table_output = parseTableInput(input, load_series_from, chart_type, legend_toggle_enabled, colors);
-     
+        } else if ($(this).is('[class*="sub"]')) { //if this is a sub1 sub2 etc
 
-     //get options from individual inits
-     var options = {
-         chart: chartInit(chart_type),
-         credits: creditsInit(),
-         colors: colors,
-         // exporting: exportingInit(),
-         legend: legendInit(),
-         plotOptions: plotOptionsInit(chart_type, legend_toggle_enabled),
-         series: parsed_table_output.series, //removed seriesInit(parsed_table_output.series)
-         drilldown: parsed_table_output.drilldown || {},
-         subtitle: subtitleInit(),
-         title: titleInit(parsed_table_output.title_text),
-         tooltip: tooltipInit(),
-         xAxis: xAxisInit(parsed_table_output.x_axis_categories, chart_type),
-         yAxis: yAxisInit(chart_type)
+            var next_sub = Number($(this).attr("class").replace("sub", "")) + 1; //to get the class of the next level sub
+            console.log(next_sub);
 
-     };
+            var this_name = $.trim($(this).text());
+            var this_drilldown = $("tbody th:eq(" + (i + 1) + ") p", input).is('[class*="' + next_sub + '"]') ? this_name : undefined;
+            var this_val = $(this).parent().next().getNumber();
+            var last_drill_series = output.drilldown.series.length - 1;
 
-     var all_chart_options = new AllChartOptions(options);
-     return all_chart_options;
- };
+            output.drilldown.series[last_drill_series].data.push({
+                name: this_name,
+                y: this_val,
+                drilldown: this_drilldown
+            });
 
- module.exports = allChartOptionsInit;</code></pre>
+        }
+
+        //make drilldown series for those
+        if (this_drilldown) {
+            output.drilldown.series.push({
+                name: this_name,
+                id: this_name,
+                data: []
+            });
+        }
+
+    });
+    return output;
+};
+
+
+module.exports = parseForDrilldown;</code></pre>
         </article>
     </section>
 

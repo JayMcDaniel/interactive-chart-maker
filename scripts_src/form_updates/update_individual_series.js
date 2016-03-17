@@ -24,6 +24,9 @@ var update_individual_series = {
             //highlight clicked icon
             $(".series_type_selected", $(this).parent()).removeClass("series_type_selected");
             $(this).addClass("series_type_selected");
+            
+            //hide or show the line styles for that series
+            type === "line" ? $(".line_style_div:eq("+i+")").show() : $(".line_style_div:eq("+i+")").hide();
 
             //update all_chart_options
             all_chart_options.series[i].type = type;
@@ -76,7 +79,8 @@ var update_individual_series = {
         });
 
         //convert rgb string into arrray
-        var rgb = utils_main.rgb2arr(all_chart_options.colors[i]);
+        var c = i < 15 ? i : i - 15;
+        var rgb = utils_main.rgb2arr(all_chart_options.colors[c]);
         //create picker
         picker.fromRGB(rgb[0], rgb[1], rgb[2]);
 

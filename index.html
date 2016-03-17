@@ -61,7 +61,7 @@
                 <div class="display_options">
 
                     <div id="chart_type_icons">
-                        <div class="chart_type_icon selected_chart_type" id="chart_type_line" value="line" title="line"></div>
+                        <div class="chart_type_icon" id="chart_type_line" value="line" title="line"></div>
                         <div class="chart_type_icon" id="chart_type_area" value="area" title="area"></div>
                         <div class="chart_type_icon" id="chart_type_bar" value="bar" title="bar"></div>
                         <div class="chart_type_icon" id="chart_type_stacked_bar" value="stacked_bar" title="stacked bar"></div>
@@ -69,7 +69,7 @@
                         <div class="chart_type_icon" id="chart_type_stacked_column" value="stacked_column" title="stacked column"></div>
                         <div class="chart_type_icon" id="chart_type_bubble" value="bubble" title="bubble"></div>
                         <div class="chart_type_icon" id="chart_type_scatter" value="scatter" title="scatter"></div>
-                        <div class="chart_type_icon" id="chart_type_drilldown" value="drilldown" title="drilldown"></div>
+                        <div class="chart_type_icon selected_chart_type" id="chart_type_drilldown" value="drilldown" title="drilldown"></div>
                         <div class="chart_type_icon" id="chart_type_map" value="map" title="map"></div>
                     </div>
 
@@ -94,7 +94,7 @@
                     <br>
                     <span class="notes">Important if using one or more charts on a page. Make sure not to use spaces, hyphens, or start with a number.<br></span>
                     <input type="text" id="chart_id_textinput" class="medium" value="chart_display_area" />
-                    
+
                     <br>
 
                     <label style="margin-bottom: -10px;">Chart size:</label>
@@ -107,7 +107,10 @@
                     <input type="text" id="chart_height_textinput" value="430" class="small number_entry" />
                     <br>
 
-                    <label>Chart margins:</label> <p class="notes">Higher values move margins inwards. You can also adjust the margins at any time by using the ctrl/cmd + arrow keys (top and right margins) and the alt + arrow keys (bottom and left margins).<br></p>
+                    <label>Chart margins:</label>
+                    <p class="notes">Higher values move margins inwards. You can also adjust the margins at any time by using the ctrl/cmd + arrow keys (top and right margins) and the alt + arrow keys (bottom and left margins).
+                        <br>
+                    </p>
 
 
                     <div id="margins_outer_div">
@@ -163,54 +166,7 @@
                     </p>
                     <div class="clear_next_textarea_button" title="Clear the text area">X</div>
                     <textarea id="table_input_textarea" class="large" placeholder="Insert table html here">
-                        <table id="BLS_table" class="regular" cellspacing="0" cellpadding="0" xborder="1" style="width: 95%">
-                            <caption><span class="tableTitle">Test table data for scatter charts</span></caption>
-                            <thead>
-                                <tr>
-                                    <th rowspan="1" id="columnHead0" style="vertical-align: middle;">categories</th>
-                                    <th id="columnHead1">x1</th>
-                                    <th id="columnHead2">y1</th>
-                                    <th id="columnHead3">z1</th>
-                                    <th id="columnHead4">x2</th>
-                                    <th id="columnHead5">y2</th>
-                                    <th id="columnHead6">z2</th>
-                                    <th id="columnHead7">x3</th>
-                                    <th id="columnHead8">y3</th>
-                                    <th id="columnHead9">z3</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th id="rowHead0">
-                                        <p>series 1</p>
-                                    </th>
-                                    <td headers="rowHead0 columnHead1">-1</td>
-                                    <td headers="rowHead0 columnHead2">1</td>
-                                    <td headers="rowHead0 columnHead3">2</td>
-                                    <td headers="rowHead0 columnHead4">3</td>
-                                    <td headers="rowHead0 columnHead5">3</td>
-                                    <td headers="rowHead0 columnHead6">4</td>
-                                    <td headers="rowHead0 columnHead7">5</td>
-                                    <td headers="rowHead0 columnHead8">5</td>
-                                    <td headers="rowHead0 columnHead9">8</td>
-                                </tr>
-                                <tr class="greenbar">
-                                    <th id="rowHead1">
-                                        <p>series 2</p>
-                                    </th>
-                                    <td headers="rowHead1 columnHead1">2</td>
-                                    <td headers="rowHead1 columnHead2">1</td>
-                                    <td headers="rowHead1 columnHead3">2</td>
-                                    <td headers="rowHead1 columnHead4">4</td>
-                                    <td headers="rowHead1 columnHead5">3</td>
-                                    <td headers="rowHead1 columnHead6">5</td>
-                                    <td headers="rowHead1 columnHead7">8</td>
-                                    <td headers="rowHead1 columnHead8">9</td>
-                                    <td headers="rowHead1 columnHead9">9</td>
-                                </tr>
-                            </tbody>
-                        </table>
-
+                      <table id="BLS_table" class="regular" cellspacing="0" cellpadding="0" xborder="1" style="width: 95%"><caption><span class="tableTitle">Test table data for drill down charts</span></caption><thead><tr><th rowspan="1" id="columnHead0" style="vertical-align: middle;">categories</th><th id="columnHead1">value</th></tr></thead><tbody><tr><th id="rowHead0"><p>series 1</p></th><td headers="rowHead0 columnHead1">1</td></tr><tr class="greenbar"><th id="rowHead1"><p class="sub1">series 1a</p></th><td headers="rowHead1 columnHead1">2</td></tr><tr><th id="rowHead2"><p class="sub1">series 1b</p></th><td headers="rowHead2 columnHead1">3</td></tr><tr class="greenbar"><th id="rowHead3"><p class="sub1">series 1c</p></th><td headers="rowHead3 columnHead1">4</td></tr><tr><th id="rowHead4"><p class="sub2">series 1ci</p></th><td headers="rowHead4 columnHead1">5</td></tr><tr class="greenbar"><th id="rowHead5"><p class="sub2">series 1cii</p></th><td headers="rowHead5 columnHead1">6</td></tr><tr><th id="rowHead6"><p class="sub2">series 1ciii</p></th><td headers="rowHead6 columnHead1">7</td></tr><tr class="greenbar"><th id="rowHead7"><p>series 2</p></th><td headers="rowHead7 columnHead1">2</td></tr><tr><th id="rowHead8"><p class="sub1">series 2a</p></th><td headers="rowHead8 columnHead1">3</td></tr><tr class="greenbar"><th id="rowHead9"><p class="sub1">series 2b</p></th><td headers="rowHead9 columnHead1">4</td></tr><tr><th id="rowHead10"><p class="sub1">series 2c</p></th><td headers="rowHead10 columnHead1">5</td></tr><tr class="greenbar"><th id="rowHead11"><p>series 3</p></th><td headers="rowHead11 columnHead1">6</td></tr><tr><th id="rowHead12"><p class="sub1">series 3a</p></th><td headers="rowHead12 columnHead1">3</td></tr><tr class="greenbar"><th id="rowHead13"><p class="sub1">series 3b</p></th><td headers="rowHead13 columnHead1">4</td></tr><tr><th id="rowHead14"><p class="sub1">series 3c</p></th><td headers="rowHead14 columnHead1">2</td></tr><tr class="greenbar"><th id="rowHead15"><p class="sub1">series 3d</p></th><td headers="rowHead15 columnHead1">3</td></tr><tr><th id="rowHead16"><p>Series 4 (no drill)</p></th><td headers="rowHead16 columnHead1">5</td></tr></tbody></table>
 
                     </textarea>
                 </div>
@@ -652,8 +608,9 @@
                 <div class="display_options">
                     <p class="notes">This area will have options for individual series once data is loaded.</p>
 
-                    <div id="display_series_options_inner_div"></div> <!-- gets populated when tabbed to -->
-                    
+                    <div id="display_series_options_inner_div"></div>
+                    <!-- gets populated when tabbed to -->
+
                 </div>
 
             </div>
@@ -691,7 +648,7 @@
                     <br>
 
                     <label for="legend_make_toggle_checkbox" style="font-size:100%; font-weight:normal;">When a series is clicked, hide the others: </label>
-                    <input type="checkbox" id="legend_make_toggle_checkbox" >
+                    <input type="checkbox" id="legend_make_toggle_checkbox">
                     <br>
                     <span class="notes">This will cause the first legend item to be visible and the others to be hidden.</span>
 
@@ -892,7 +849,7 @@
                     <input type="checkbox" id="chart_mlr_styles_checkbox" />
                     <br>
 
-<!--
+                    <!--
                     <label for="chart_invert_axes_checkbox">Invert axes: </label>
                     <input type="checkbox" id="chart_invert_axes_checkbox" />
                     <br>
@@ -963,9 +920,9 @@
     <!-- external libraries -->
     <script src="libraries/jquery/jquery-2.2.0.min.js"></script>
     <script src="libraries/Highcharts-4.2.3/js/highcharts.src.js"></script>
-    <script src="libraries/Highcharts-4.2.3/js/highcharts-more.src.js"></script>
-    <!--    <script src="libraries/highcharts/exporting.3.0.10.min.js"></script>-->
-
+    <script src="libraries/Highcharts-4.2.3/js/highcharts-more.src.js"></script> 
+    <script src="libraries/Highcharts-4.2.3/js/modules/drilldown.src.js"></script>
+    <!--    <script src="libraries/Highcharts-4.2.3/js/modules/exporting.js"></script>-->
 
 
     <!-- Chart Maker main JS file, compiled from scripts_src folder -->
