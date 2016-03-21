@@ -40,6 +40,8 @@ var utils_main = {
                 return true;
             } else if (e === "false") {
                 return false;
+            } else if (e === "null") {
+                return null;
             } else {
                 return e;
             }
@@ -54,12 +56,13 @@ var utils_main = {
 
 
     /** stringify tooltip formatter function **/
-    stringifyFormatter: function (new_tooltip, decimals, multiplier, signs_arr) {
+    stringifyFormatter: function (new_tooltip, decimals, multiplier, signs_arr, z_title) {
         return new_tooltip.toString()
             .replace(/multiplier/g, multiplier)
             .replace(/decimals/g, decimals)
             .replace(/signs_arr\[0\]/g, '"' + signs_arr[0] + '"')
-            .replace(/signs_arr\[1\]/g, '"' + signs_arr[1] + '"');
+            .replace(/signs_arr\[1\]/g, '"' + signs_arr[1] + '"')
+            .replace(/z_title/, z_title);
 
     },
 

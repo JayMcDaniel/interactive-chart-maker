@@ -38,7 +38,6 @@ var keyboard_inputs = {
     sideNavTabShortcuts: function (chart, all_chart_options) {
         $(document).keydown(function (e) {
 
-
             //get code
             if (e.keyCode === 32) { //space bar
                 e.preventDefault();
@@ -117,15 +116,15 @@ var keyboard_inputs = {
                 e.preventDefault();
                 keyboard_inputs.clickNext("chart_type_icon", "selected_chart_type");
             }
-            
-            
+
+
             //data load - series names from columns / rows
             else if (e.keyCode === 9) { //tab
                 e.preventDefault();
                 keyboard_inputs.clickNext("load_series_from_icon", "selected_load_series_from");
                 update_individual_series.populateForm(chart, all_chart_options);
             }
-            
+
 
             //color template (cycle through)    
             else if (e.keyCode === 67) { //c
@@ -182,6 +181,13 @@ var keyboard_inputs = {
             keyboard_inputs.sideNavTabShortcuts(chart, all_chart_options);
         });
 
+        //unbind nav quick keys when over the code result area
+        $("#main_result_code_div").hover(function () {
+                $(document).unbind();
+            },
+            function () {
+                keyboard_inputs.sideNavTabShortcuts(chart, all_chart_options);
+            });
 
     }
 

@@ -14,6 +14,7 @@
 <!-- stylesheets -->
 <link rel="stylesheet" href="libraries/bootstrap-3.3.6-dist/css/bootstrap.min.css" />
 <link rel="stylesheet" href="styles/css/styles_cm.css" />
+<link rel="stylesheet" href="styles/css/bls_tables.css" />
 </head>
 
 
@@ -39,17 +40,17 @@
 
         <div id="side_nav_tabs">
 
-            <div class="tab map_tab chart_tab selected_tab" id="tab_type">Chart type</div>
-            <div class="tab chart_tab" id="tab_chart_template">Sizing (Chart template)</div>
-            <div class="tab map_tab chart_tab" id="tab_data">Data</div>
-            <div class="tab map_tab chart_tab" id="tab_color_palette">Color palette</div>
-            <div class="tab chart_tab" id="tab_series_options">Individual series options</div>
-            <div class="tab chart_tab" id="tab_chart_legend">Legend</div>
-            <div class="tab chart_tab" id="tab_chart_x_axis">X-axis</div>
-            <div class="tab chart_tab" id="tab_chart_y_axis">Y-axis</div>
-            <div class="tab chart_tab" id="tab_chart_tooltip">Tool tip (hover infobox)</div>
-            <div class="tab chart_tab" id="tab_chart_credits">Notes and credits</div>
-            <div class="tab chart_tab" id="tab_chart_extra_options">Extra options</div>
+            <div class="tab map_tab chart_tab selected_tab" id="tab_type"><span id="side_nav_tab_icon_chart_type" class="side_nav_tab_icon"></span>Chart type</div>
+            <div class="tab chart_tab" id="tab_chart_template"><span id="side_nav_tab_icon_sizing" class="side_nav_tab_icon"></span>Sizing (Chart template)</div>
+            <div class="tab map_tab chart_tab" id="tab_data"><span id="side_nav_tab_icon_data" class="side_nav_tab_icon"></span>Data</div>
+            <div class="tab map_tab chart_tab" id="tab_color_palette"><span id="side_nav_tab_icon_color_palette" class="side_nav_tab_icon"></span>Color palette</div>
+            <div class="tab chart_tab" id="tab_series_options"><span id="side_nav_tab_icon_series_options" class="side_nav_tab_icon"></span>Individual series options</div>
+            <div class="tab chart_tab" id="tab_chart_legend"><span id="side_nav_tab_icon_chart_legend" class="side_nav_tab_icon"></span>Legend</div>
+            <div class="tab chart_tab" id="tab_chart_x_axis"><span id="side_nav_tab_icon_x_axis" class="side_nav_tab_icon"></span>X-axis</div>
+            <div class="tab chart_tab" id="tab_chart_y_axis"><span id="side_nav_tab_icon_y_axis" class="side_nav_tab_icon"></span>Y-axis</div>
+            <div class="tab chart_tab" id="tab_chart_tooltip"><span id="side_nav_tab_icon_chart_tooltip" class="side_nav_tab_icon"></span>Tool tip (hover infobox)</div>
+            <div class="tab chart_tab" id="tab_chart_credits"><span id="side_nav_tab_icon_chart_credits" class="side_nav_tab_icon"></span>Notes and credits</div>
+            <div class="tab chart_tab" id="tab_chart_extra_options"><span id="side_nav_tab_icon_extra_options" class="side_nav_tab_icon"></span>Extra options</div>
 
         </div>
         <div id="side_display">
@@ -61,7 +62,7 @@
                 <div class="display_options">
 
                     <div id="chart_type_icons">
-                        <div class="chart_type_icon" id="chart_type_line" value="line" title="line"></div>
+                        <div class="chart_type_icon selected_chart_type" id="chart_type_line" value="line" title="line"></div>
                         <div class="chart_type_icon" id="chart_type_area" value="area" title="area"></div>
                         <div class="chart_type_icon" id="chart_type_bar" value="bar" title="bar"></div>
                         <div class="chart_type_icon" id="chart_type_stacked_bar" value="stacked_bar" title="stacked bar"></div>
@@ -69,7 +70,7 @@
                         <div class="chart_type_icon" id="chart_type_stacked_column" value="stacked_column" title="stacked column"></div>
                         <div class="chart_type_icon" id="chart_type_bubble" value="bubble" title="bubble"></div>
                         <div class="chart_type_icon" id="chart_type_scatter" value="scatter" title="scatter"></div>
-                        <div class="chart_type_icon selected_chart_type" id="chart_type_drilldown" value="drilldown" title="drilldown"></div>
+                        <div class="chart_type_icon" id="chart_type_drilldown" value="drilldown" title="drilldown"></div>
                         <div class="chart_type_icon" id="chart_type_map" value="map" title="map"></div>
                     </div>
 
@@ -160,13 +161,24 @@
 
                     </p>
                     <br>
-                    <p class="show_scatter">
-
-                        With scatter charts, series names will be loaded from the row headers. For each set of two columns in the table body, a dot will be drawn &mdash; its x-value coming from the first column and its y-value coming from the second column.
-                    </p>
+                    <div class="show_scatter">
+                       <p> With scatter charts, series names will be loaded from the row headers. For each set of two columns in the table body, a dot will be drawn &mdash; its x-value coming from the first column and its y-value coming from the second column.</p>
+                        <table id="scatter_example" class="regular" cellspacing="0" cellpadding="0" xborder="1" style="width: 95%"><caption><span class="tableTitle">Example table data for scatter charts</span></caption><thead><tr><th rowspan="1" id="columnHead0" style="vertical-align: middle;">categories</th><th id="columnHead1">x1</th><th id="columnHead2">y1</th><th id="columnHead3">x2</th><th id="columnHead4">y2</th><th id="columnHead5">x3</th><th id="columnHead6">y3</th></tr></thead><tbody><tr><th id="rowHead0"><p>series 1</p></th><td headers="rowHead0 columnHead1">1</td><td headers="rowHead0 columnHead2">1</td><td headers="rowHead0 columnHead3">3</td><td headers="rowHead0 columnHead4">3</td><td headers="rowHead0 columnHead5">5</td><td headers="rowHead0 columnHead6">5</td></tr><tr class="greenbar"><th id="rowHead1"><p>series 2</p></th><td headers="rowHead1 columnHead1">2</td><td headers="rowHead1 columnHead2">1</td><td headers="rowHead1 columnHead3">4</td><td headers="rowHead1 columnHead4">3</td><td headers="rowHead1 columnHead5">8</td><td headers="rowHead1 columnHead6">9</td></tr></tbody></table>
+                        
+                    </div>
+                    
+                    <div class="show_drilldown">
+                        <p>
+                        This will load the table into a drilldown chart. For this to work, your table row headers must be indented correctly using BLS style indents of class = "sub1", "sub2". The <a href="table_wizard/better_table_wizard.htm" target="_blank">table wizard</a> will apply these style classes when the cell text is preceded by two spaces or more.</p>
+                        
+                        <table id="drilldown_example" class="regular" cellspacing="0" cellpadding="0" xborder="1" style="width: 95%"><caption><span class="tableTitle">Example table data for drill down charts</span></caption><thead><tr><th rowspan="1" id="columnHead0" style="vertical-align: middle;">categories</th><th id="columnHead1">value</th></tr></thead><tbody><tr><th id="rowHead0"><p>series 1</p></th><td headers="rowHead0 columnHead1">1</td></tr><tr class="greenbar"><th id="rowHead1"><p class="sub1">series 1a</p></th><td headers="rowHead1 columnHead1">2</td></tr><tr><th id="rowHead2"><p class="sub1">series 1b</p></th><td headers="rowHead2 columnHead1">3</td></tr><tr class="greenbar"><th id="rowHead3"><p class="sub1">series 1c</p></th><td headers="rowHead3 columnHead1">4</td></tr><tr><th id="rowHead4"><p class="sub2">series 1ci</p></th><td headers="rowHead4 columnHead1">5</td></tr><tr class="greenbar"><th id="rowHead5"><p class="sub2">series 1cii</p></th><td headers="rowHead5 columnHead1">6</td></tr></tbody></table>
+                    </div>
+                    
+                    
                     <div class="clear_next_textarea_button" title="Clear the text area">X</div>
+                    
                     <textarea id="table_input_textarea" class="large" placeholder="Insert table html here">
-                      <table id="BLS_table" class="regular" cellspacing="0" cellpadding="0" xborder="1" style="width: 95%"><caption><span class="tableTitle">Test table data for drill down charts</span></caption><thead><tr><th rowspan="1" id="columnHead0" style="vertical-align: middle;">categories</th><th id="columnHead1">value</th></tr></thead><tbody><tr><th id="rowHead0"><p>series 1</p></th><td headers="rowHead0 columnHead1">1</td></tr><tr class="greenbar"><th id="rowHead1"><p class="sub1">series 1a</p></th><td headers="rowHead1 columnHead1">2</td></tr><tr><th id="rowHead2"><p class="sub1">series 1b</p></th><td headers="rowHead2 columnHead1">3</td></tr><tr class="greenbar"><th id="rowHead3"><p class="sub1">series 1c</p></th><td headers="rowHead3 columnHead1">4</td></tr><tr><th id="rowHead4"><p class="sub2">series 1ci</p></th><td headers="rowHead4 columnHead1">5</td></tr><tr class="greenbar"><th id="rowHead5"><p class="sub2">series 1cii</p></th><td headers="rowHead5 columnHead1">6</td></tr><tr><th id="rowHead6"><p class="sub2">series 1ciii</p></th><td headers="rowHead6 columnHead1">7</td></tr><tr class="greenbar"><th id="rowHead7"><p>series 2</p></th><td headers="rowHead7 columnHead1">2</td></tr><tr><th id="rowHead8"><p class="sub1">series 2a</p></th><td headers="rowHead8 columnHead1">3</td></tr><tr class="greenbar"><th id="rowHead9"><p class="sub1">series 2b</p></th><td headers="rowHead9 columnHead1">4</td></tr><tr><th id="rowHead10"><p class="sub1">series 2c</p></th><td headers="rowHead10 columnHead1">5</td></tr><tr class="greenbar"><th id="rowHead11"><p>series 3</p></th><td headers="rowHead11 columnHead1">6</td></tr><tr><th id="rowHead12"><p class="sub1">series 3a</p></th><td headers="rowHead12 columnHead1">3</td></tr><tr class="greenbar"><th id="rowHead13"><p class="sub1">series 3b</p></th><td headers="rowHead13 columnHead1">4</td></tr><tr><th id="rowHead14"><p class="sub1">series 3c</p></th><td headers="rowHead14 columnHead1">2</td></tr><tr class="greenbar"><th id="rowHead15"><p class="sub1">series 3d</p></th><td headers="rowHead15 columnHead1">3</td></tr><tr><th id="rowHead16"><p>Series 4 (no drill)</p></th><td headers="rowHead16 columnHead1">5</td></tr></tbody></table>
+                  <table id="BLS_table" class="regular" cellspacing="0" cellpadding="0" xborder="1" style="width: 95%"><caption><span class="tableTitle">Test table data for scatter charts</span></caption><thead><tr><th rowspan="1" id="columnHead0" style="vertical-align: middle;">categories</th><th id="columnHead1">x1</th><th id="columnHead2">y1</th><th id="columnHead3">z1</th><th id="columnHead4">x2</th><th id="columnHead5">y2</th><th id="columnHead6">z2</th><th id="columnHead7">x3</th><th id="columnHead8">y3</th><th id="columnHead9">z3</th></tr></thead><tbody><tr><th id="rowHead0"><p>series 1</p></th><td headers="rowHead0 columnHead1">1</td><td headers="rowHead0 columnHead2">1</td><td headers="rowHead0 columnHead3">2</td><td headers="rowHead0 columnHead4">3</td><td headers="rowHead0 columnHead5">3</td><td headers="rowHead0 columnHead6">4</td><td headers="rowHead0 columnHead7">5</td><td headers="rowHead0 columnHead8">-5</td><td headers="rowHead0 columnHead9">8</td></tr><tr class="greenbar"><th id="rowHead1"><p>series 2</p></th><td headers="rowHead1 columnHead1">2</td><td headers="rowHead1 columnHead2">1</td><td headers="rowHead1 columnHead3">2</td><td headers="rowHead1 columnHead4">4</td><td headers="rowHead1 columnHead5">3</td><td headers="rowHead1 columnHead6">5</td><td headers="rowHead1 columnHead7">8</td><td headers="rowHead1 columnHead8">9</td><td headers="rowHead1 columnHead9">9</td></tr></tbody></table>
 
                     </textarea>
                 </div>

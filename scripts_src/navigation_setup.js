@@ -47,12 +47,13 @@ var navigation_setup = {
                 $(".show_line, .show_bar, .show_column").hide();
             }
 
-            if (chart_type === "scatter") {
-                $(".show_scatter").show();
-            } else {
-                $(".show_scatter").hide();
-            }
-
+            $(".show_drilldown, .show_scatter").hide();
+            if (["scatter", "drilldown"].indexOf(chart_type) > -1 ) {
+                $(".show_" + chart_type).show();
+            } 
+            
+         
+                
         });
     },
     

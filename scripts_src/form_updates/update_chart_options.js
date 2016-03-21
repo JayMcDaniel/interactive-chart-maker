@@ -18,6 +18,7 @@ var update_chart_options = {
         chart.pointer.zoomVert = val_arr[1];
 
         all_chart_options.chart.zoomType = val_arr[2];
+        
     },
 
 

@@ -212,7 +212,8 @@ var allFormUpdates = function (chart, all_chart_options) {
     $("#chart_zoom_select").change(function () {
         var val = $(this).val();
         update_chart_options.changeZoomType(val, chart, all_chart_options);
-    });
+    }).change(); //change once on init to make type null, because zoomtype must be xy to start to enable dynamic changing
+    
     
     //data labels checkbox toggled
     $("#chart_show_data_labels_checkbox").change(function(){

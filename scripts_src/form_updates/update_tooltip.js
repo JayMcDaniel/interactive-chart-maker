@@ -7,21 +7,53 @@ var utils_forms = require("../utils/utils_forms");
 */
 var update_tooltip = {
 
-    /** gets a tooltip for scatter charts. Called from updateToolTip**/
-    getScatterTooltip: function (chart, is_shared, decimals, signs_arr, multiplier, chart_type) {
-        var new_tooltip = function () {
 
+
+
+
+
+
+
+
+    /** gets a tooltip for bubble charts. Called from updateToolTip **/
+    getBubbleTooltip: function (chart, decimals, signs_arr, multiplier, chart_type, z_title) {
+
+        var new_tooltip = function () {
             var y_axis_title = this.series.yAxis.axisTitle ? this.series.yAxis.axisTitle.textStr : "Y-Axis";
             var x_axis_title = this.series.xAxis.axisTitle ? this.series.xAxis.axisTitle.textStr : "X-Axis";
 
-            return "<b>" + this.series.name + "</b><br>" + y_axis_title + ": <b>" + signs_arr[0] +
+            var s = "<b>" + this.series.name + "</b><br>" + y_axis_title + ": <b>" + signs_arr[0] +
+                Highcharts.numberFormat((this.y * multiplier), decimals) + signs_arr[1] + "</b><br/>" +
+                x_axis_title + ": <b>" + signs_arr[0] + Highcharts.numberFormat((this.x * multiplier), decimals) + signs_arr[1] + "</b><br/>" +
+                z_title + ": <b>" + signs_arr[0] + Highcharts.numberFormat((this.x * multiplier), decimals) + signs_arr[1] + "</b>";
+
+            return s.replace(/\$-/g, "-$");
+        };
+
+        return new_tooltip;
+
+    },
+
+
+
+    /** gets a tooltip for scatter charts. Called from updateToolTip**/
+    getScatterTooltip: function (chart, decimals, signs_arr, multiplier, chart_type) {
+
+        var new_tooltip = function () {
+            var y_axis_title = this.series.yAxis.axisTitle ? this.series.yAxis.axisTitle.textStr : "Y-Axis";
+            var x_axis_title = this.series.xAxis.axisTitle ? this.series.xAxis.axisTitle.textStr : "X-Axis";
+
+            var s = "<b>" + this.series.name + "</b><br>" + y_axis_title + ": <b>" + signs_arr[0] +
                 Highcharts.numberFormat((this.y * multiplier), decimals) + signs_arr[1] + "</b><br/>" +
                 x_axis_title + ": <b>" + signs_arr[0] + Highcharts.numberFormat((this.x * multiplier), decimals) + signs_arr[1] + "<br/>";
 
+            return s.replace(/\$-/g, "-$");
         };
 
         return new_tooltip;
     },
+
+
 
     /** gets a tooltip for typical charts (line, area, bar etc). Called from updateToolTip**/
     getTypicalTooltip: function (chart, is_shared, decimals, signs_arr, multiplier, chart_type) {
@@ -40,7 +72,7 @@ var update_tooltip = {
                     $.each(chart.series, function () {
                         shared_tooltip_arr.push("<b>" + this.name + "</b> <br>" + this.points[point.x].x + ": " + signs_arr[0] + Highcharts.numberFormat((this.points[point.x].y * multiplier), decimals) + signs_arr[1]);
                     });
-                    return shared_tooltip_arr.join('<br/>');
+                    return shared_tooltip_arr.join('<br/>').replace(/\$-/g, "-$");
                 }
 
             } else { //don't use decimal formatter
@@ -53,7 +85,7 @@ var update_tooltip = {
                     $.each(chart.series, function () {
                         shared_tooltip_arr.push(this.name + ": " + signs_arr[0] + $(this.points[point.x].y * multiplier).addCommas() + signs_arr[1]);
                     });
-                    return shared_tooltip_arr.join('<br/>');
+                    return shared_tooltip_arr.join('<br/>').replace(/\$-/g, "-$");
                 }
             }
 
@@ -62,13 +94,15 @@ var update_tooltip = {
 
             if (decimals > 0) { //use decimal formatter
                 new_tooltip = function () {
-                    return "<b>" + this.series.name + "</b><br>" + this.x + ": " + signs_arr[0] +
+                    var s = "<b>" + this.series.name + "</b><br>" + this.x + ": " + signs_arr[0] +
                         Highcharts.numberFormat((this.y * multiplier), decimals) + signs_arr[1];
+                    return s.replace(/\$-/g, "-$");
                 }
             } else { //don't use decimal formatter
                 new_tooltip = function () {
-                    return "<b>" + this.series.name + "</b><br>" + this.x + ": " + signs_arr[0] +
+                    var s = "<b>" + this.series.name + "</b><br>" + this.x + ": " + signs_arr[0] +
                         $(this.y * multiplier).addCommas() + signs_arr[1];
+                    return s.replace(/\$-/g, "-$");
                 }
             }
         }
@@ -90,6 +124,7 @@ var update_tooltip = {
         var chart_type = all_chart_options.chart.type;
         var new_tooltip;
         var signs_arr = [signs === "$" ? "$" : "", signs === "%" ? "%" : ""];
+        var z_title = "Test Z title";
 
 
         //IF A TYPICAL CHART
@@ -97,12 +132,16 @@ var update_tooltip = {
             new_tooltip = update_tooltip.getTypicalTooltip(chart, is_shared, decimals, signs_arr, multiplier, chart_type);
         }
 
-
         //IF A SCATTER CHART
         else if (chart_type === "scatter") {
-            new_tooltip = update_tooltip.getScatterTooltip(chart, is_shared, decimals, signs_arr, multiplier, chart_type);
-
+            new_tooltip = update_tooltip.getScatterTooltip(chart, decimals, signs_arr, multiplier, chart_type);
         }
+
+        //IF A BUBBLE CHART
+        else if (chart_type === "bubble") {
+            new_tooltip = update_tooltip.getBubbleTooltip(chart, decimals, signs_arr, multiplier, chart_type, z_title);
+        }
+
 
 
         if (!chart) { //for use in tooltip_init
@@ -110,15 +149,13 @@ var update_tooltip = {
         }
 
         chart.tooltip.options.formatter = new_tooltip;
-    //    chart.tooltip.refresh(chart.series[0].data[0]);
+        //    chart.tooltip.refresh(chart.series[0].data[0]);
 
-        all_chart_options.tooltip.formatter = utils_main.stringifyFormatter(new_tooltip, decimals, multiplier, signs_arr);
-        
+        all_chart_options.tooltip.formatter = utils_main.stringifyFormatter(new_tooltip, decimals, multiplier, signs_arr, z_title);
+
     }
 
 }
 
 
 module.exports = update_tooltip;
-
-

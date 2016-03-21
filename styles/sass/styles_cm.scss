@@ -156,6 +156,11 @@
         background-color: $primary_color;
     }
     
+    .example_table {
+        width: 100%;
+        margin-top: 10px;
+    }
+    
     .float_left {
         float: left;
     }
@@ -333,7 +338,8 @@
         margin-bottom: 40px;
     }
     
-    .show_scatter {
+    .show_scatter,
+    .show_drilldown {
         display: none;
     }
     
@@ -358,7 +364,7 @@
         #side_nav_tabs {
             .tab {
                 cursor: pointer;
-                padding-left: 10px;
+                padding: 4px 10px 4px 2px;
                 font-size: 120%;
             }
             .tab:hover {
@@ -368,6 +374,60 @@
                 background-color: $secondary_light_color;
                 color: $highlight_color;
                 cursor: default;
+            }
+            .side_nav_tab_icon {
+                width: 22px;
+                height: 22px;
+                border: 1px solid #337ab7;
+                background-color: #fff;
+                display: block;
+                float: left;
+                position: relative;
+                margin-right: 5px;
+                background-size: 100% 100%;
+                background-repeat: no-repeat;
+                &#side_nav_tab_icon_chart_type {
+                    background-image: url(../../images/icons/line_chart_icon.png);
+                }
+                &#side_nav_tab_icon_sizing {
+                    background-image: url(../../images/icons/margins_icon.png);
+                    background-size: 140% 140%;
+                    background-repeat: no-repeat;
+                    background-position-x: -4.8px;
+                    background-position-y: -4.5px;
+                }
+                &#side_nav_tab_icon_data {
+                    background-image: url(../../images/icons/load_series_from_column_headers_icon.png);
+                }
+                &#side_nav_tab_icon_color_palette {
+                    background-image: url(../../images/icons/colors_icon.png);
+                }
+                &#side_nav_tab_icon_series_options {
+                    background-image: url(../../images/icons/individual_series_icon.png);
+                    background-size: 95% 95%;
+                    background-position-y: 1px;
+                }
+                &#side_nav_tab_icon_chart_legend {
+                    background-image: url(../../images/icons/legend_icon.png);
+                    background-size: 95% 95%;
+                    background-position-x: .5px;
+                }
+                &#side_nav_tab_icon_x_axis {
+                    background-image: url(../../images/icons/x_axis_icon.png);
+                    background-size: 95% 95%;
+                }
+                &#side_nav_tab_icon_y_axis {
+                    background-image: url(../../images/icons/y_axis_icon.png);
+                    background-size: 95% 95%;
+                    background-position-x: 1px;
+                    background-position-y: .5px;
+                }
+                &#side_nav_tab_icon_chart_tooltip {
+                    background-image: url(../../images/icons/mouse_pointer_icon.svg);
+                    background-position-y: -3px;
+                    background-position-x: -7px;
+                    background-size: 170% 170%;
+                }
             }
         }
         #side_display {
