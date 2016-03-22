@@ -29,6 +29,7 @@
         <h1>Interactive Chart Maker</h1>
         <span id="app_version">v2.0.0</span>
         <span id="get_code_button" title="Get chart/map code"><span id="get_code_icon">&lt; / &gt;</span> <span id="get_code_text">Get code</span></span>
+        <span id="load_chart_button" title = "Load saved chart"></span>
     </div>
     <!-- top nav bar end -->
 
@@ -62,8 +63,8 @@
                 <div class="display_options">
 
                     <div id="chart_type_icons">
-                        <div class="chart_type_icon selected_chart_type" id="chart_type_line" value="line" title="line"></div>
-                        <div class="chart_type_icon" id="chart_type_area" value="area" title="area"></div>
+                        <div class="chart_type_icon" id="chart_type_line" value="line" title="line"></div>
+                        <div class="chart_type_icon selected_chart_type" id="chart_type_area" value="area" title="area"></div>
                         <div class="chart_type_icon" id="chart_type_bar" value="bar" title="bar"></div>
                         <div class="chart_type_icon" id="chart_type_stacked_bar" value="stacked_bar" title="stacked bar"></div>
                         <div class="chart_type_icon" id="chart_type_column" value="column" title="column"></div>
@@ -198,12 +199,12 @@
                 <h4>Color palette <sup class = "help_icon">?</sup> <sup id="color_palette_reverse_icon" title="Reverse palettes">(&#8596;)</sup></h4>
                 <div class="display_options">
 
-                    <p class="notes">Series will load their colors from the chosen palette left to right. For more customization, see the "Individual series options" tab. You can cycle through the color templates at any time by pressing "c".</p>
+                    <p class="notes">Series will load their colors from the chosen palette left to right. For more customization, see the "Individual series options" tab. You can cycle through the color templates at any time by pressing "c". The first two rows are Beyond The Numbers and Monthly Labor Review colors.</p>
 
                     <br>
 
                     <div id="color_palettes">
-                        <p class="notes">(BTN colors)</p>
+                         <!--BTN colors -->
                         <div class="color_palette_row color_palette_selected">
 
                             <!--BTN colors -->
@@ -228,7 +229,6 @@
                             <div style="clear:both; height:5px;">&nbsp;</div>
                         </div>
 
-                        <p class="notes">(MLR colors)</p>
                         <div class="color_palette_row">
 
                             <!--MLR colors -->

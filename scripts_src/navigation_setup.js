@@ -25,6 +25,7 @@ var navigation_setup = {
     /** when chart code is entered, update **/
     chartOutputCodeFocus: function (all_chart_options) {
         $("#chart_output_code").hover(function () {
+
             utils_main.writeCode(all_chart_options);
         });
 
@@ -48,16 +49,16 @@ var navigation_setup = {
             }
 
             $(".show_drilldown, .show_scatter").hide();
-            if (["scatter", "drilldown"].indexOf(chart_type) > -1 ) {
+            if (["scatter", "drilldown"].indexOf(chart_type) > -1) {
                 $(".show_" + chart_type).show();
-            } 
-            
-         
-                
+            }
+
+
+
         });
     },
-    
-    
+
+
 
     /** when clear next text area button (X) is clicked, find and clear the text of the next textarea */
     clearNextTextareaClick: function () {
@@ -109,6 +110,8 @@ var navigation_setup = {
             $(this).toggleClass("code_on");
             $("#main_result_code_div").slideToggle(100);
             if ($get_code_span.text() === "Get code") {
+
+                //write all_chart_options
                 utils_main.writeCode(all_chart_options);
                 $get_code_span.text("Hide code");
             } else {

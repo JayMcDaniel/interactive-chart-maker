@@ -9,7 +9,7 @@ var jq_extensions = (function () {
         /** extend so that we can get and set "value" with divs */
         divVal: function (string) {
             if (arguments.length === 0) {
-                return $(this).attr("value");
+                return $(this).attr("value") || $(this).attr("type") || $(this).index();
             } else {
                 $(this).attr("value", string);
                 return $(this);
