@@ -46,6 +46,7 @@ var allFormUpdates = function (chart, all_chart_options) {
 
 
     /* CHART DATA CHANGES - (x-axis categories and series array)*/
+
     //"series names loaded from" icon clicked
     $(".load_series_from_icon").click(function () {
         update_data.updateData(chart, all_chart_options);
@@ -68,18 +69,21 @@ var allFormUpdates = function (chart, all_chart_options) {
 
 
 
-    /* COLOR PALETTE CHANGES */
-    $(".color_palette_row").click(function () {
-        var chart_type = $(".selected_chart_type").divVal();
-        updateColors(chart, all_chart_options, chart_type);
-    });
+    /* COLOR PALETTE CHANGES - defined and initiated in navigation setup*/
+
+    allFormUpdates.colorPaletteRowClick = function () {
+        $(".color_palette_row").click(function () {
+            var chart_type = $("#chart_type_icons .selected").divVal();
+            updateColors(chart, all_chart_options, chart_type);
+        });
+    }
 
 
 
     /* LEGEND CHANGES */
 
     //legend layout changed
-    $("#legend_layout_select").change(function () {
+    $("#legend_layout_select").change(function () { 
         update_legend.updateLayout($(this).val(), chart, all_chart_options);
     });
 
@@ -213,10 +217,10 @@ var allFormUpdates = function (chart, all_chart_options) {
         var val = $(this).val();
         update_chart_options.changeZoomType(val, chart, all_chart_options);
     }).change(); //change once on init to make type null, because zoomtype must be xy to start to enable dynamic changing
-    
-    
+
+
     //data labels checkbox toggled
-    $("#chart_show_data_labels_checkbox").change(function(){
+    $("#chart_show_data_labels_checkbox").change(function () {
         var val = utils_forms.getCheckBoxValue($(this));
         update_chart_options.toggleDataLabels(val, chart, all_chart_options);
     });

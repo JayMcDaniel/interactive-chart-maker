@@ -1,18 +1,18 @@
 var parseTableInput = require("../parsers/parse_table_input.js");
 var utils_forms = require("../utils/utils_forms.js");
 
-/** called when .selected_chart_type or #table_input_textarea is changed - calls functions to reparse data
+/** called when #chart_type_icons .selected or #table_input_textarea is changed - calls functions to reparse data
 @namespace
 */
 
 var update_data = {
 
-    /** called when .selected_chart_type or #table_input_textarea is changed - calls functions to reparse data */
+    /** called when #chart_type_icons .selected or #table_input_textarea is changed - calls functions to reparse data */
     updateData: function (chart, all_chart_options) {
-        var chart_type = $(".selected_chart_type").divVal();
+        var chart_type = $("#chart_type_icons .selected").divVal();
         var input = $("#table_input_textarea").val();
         var legend_toggle_enabled = utils_forms.getCheckBoxValue($("#legend_make_toggle_checkbox"));
-        var load_series_from = $(".selected_load_series_from").divVal();
+        var load_series_from = $("#table_input_load_series_from_icons .selected").divVal();
         var parsed_table_output = parseTableInput(input, load_series_from, chart_type, legend_toggle_enabled, all_chart_options.colors, all_chart_options);
 
         //update x-axis categories

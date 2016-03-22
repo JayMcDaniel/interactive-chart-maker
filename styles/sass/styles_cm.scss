@@ -52,7 +52,6 @@
         margin: 20px;
         padding: 5px;
         background-color: $primary_color;
-        position: fixed;
     }
     
     .chart_type_icon,
@@ -72,9 +71,8 @@
         &:hover {
             border-color: $primary_color;
         }
-        &.selected_chart_type,
-        &.series_type_selected,
-        &.selected_load_series_from {
+        &.selected,
+        &.series_type_selected {
             border-color: $highlight_color;
             cursor: default;
         }
@@ -119,6 +117,26 @@
         }
     }
     
+    #chart_output_code_hidden_textarea { //hidden but can't actually hide to make this .select able
+       // display: block;
+        // Place in top-left corner of screen regardless of scroll position.
+        position: fixed;
+        top: 0;
+        left: 0;
+        // Ensure it has a small width and height. Setting to 1px / 1em
+        // doesn't work as this gives a negative w/h on some browsers.
+        width: 2em;
+        height: 2em;
+        // We don't need padding, reducing the size if it does flash render.
+        padding: 0;
+        // Clean up any borders.
+        border: none;
+        outline: none;
+        boxShadow: none;
+        // Avoid flash of white box if rendered for any reason.
+        background: transparent;
+    }
+    
     .clearfloat {
         clear: both;
         height: 0px;
@@ -150,10 +168,9 @@
         width: 233px;
         height: 25px;
         padding: 4px;
-    }
-    
-    .color_palette_selected {
-        background-color: $primary_color;
+        &.selected {
+            background-color: $primary_color;
+        }
     }
     
     .example_table {
@@ -163,6 +180,10 @@
     
     .float_left {
         float: left;
+    }
+    
+    .fixed {
+        position: fixed;
     }
     
     .help_icon,
@@ -221,6 +242,10 @@
         margin-top: -5px;
     }
     
+    #load_chart_textarea {
+        height: 600px;
+    }
+    
     .line_style_div {
         display: none;
     }
@@ -231,7 +256,8 @@
         float: left;
     }
     
-    #main_result_code_div {
+    #main_result_code_div,
+    #load_chart_div {
         display: none;
         width: 100%;
         min-height: 500px;
@@ -466,47 +492,69 @@
             float: left;
             font-family: "sinkin_sans200_x_light";
         }
-        #get_code_button,
-        #load_chart_button {
-            padding: 0px 5px 0px 5px;
-            border: solid 1px #b73438;
-            border-radius: 5px;
-            margin-left: 30px;
-            cursor: pointer;
-            background-color: #fff;
-            color: #337ab7;
-            float: left;
-            display: block;
-            height: 35px;
-            margin-top: 2px;
-            &.code_on {
-                color: $highlight_color;
-            }
-     
-            #get_code_icon, #get_code_text {
-                font-size: 180%;
-                position: relative;
-                top: -2px;
-            }
-            
-            #get_code_text {
-                font-size: 100%;
-            }
-        }
-        #get_code_button:hover {
+    }
+    
+    #get_code_button,
+    #load_chart_button,
+    .copy_to_clipboard_button {
+        padding: 0px 5px 0px 5px;
+        border: solid 1px #b73438;
+        border-radius: 5px;
+        margin-left: 30px;
+        cursor: pointer;
+        background-color: #fff;
+        color: #337ab7;
+        float: left;
+        display: block;
+        height: 35px;
+        margin-top: 2px;
+        &.code_on {
             color: $highlight_color;
         }
+        #get_code_icon,
+        #get_code_text {
+            font-size: 180%;
+            position: relative;
+            top: -2px;
+        }
+        #get_code_text {
+            font-size: 100%;
+        }
+    }
+    
+    #get_code_button:hover {
+        color: $highlight_color;
+    }
+    
+    .copy_to_clipboard_button {
+        width: 30px;
+        height: 30px;
+        float: none;
+        margin-left: 0px;
+        margin-bottom: 3px;
+        background-image: url(../../images/icons/copy_to_clipboard_icon.png);
+        background-size: 80% 80%;
+        background-repeat: no-repeat;
+        background-position: center;
+        &:hover {
+            background-image: url(../../images/icons/copy_to_clipboard_icon_hover.png);
+        }
+    }
+    
+    .copy_message {
+        float: left;
+        position: relative;
+        left: 36px;
     }
     
     #load_chart_button {
         background-image: url("../../images/icons/load.png");
         width: 35px;
-        float: right;
         background-size: 80% 80%;
         background-repeat: no-repeat;
         background-position: center;
-        
-        &:hover{
+        &:hover,
+        &.load_chart_showing {
             background-image: url("../../images/icons/load_hover.png");
             background-size: 100% 100%;
         }

@@ -38,13 +38,8 @@ var keyboard_inputs = {
     sideNavTabShortcuts: function (chart, all_chart_options) {
         $(document).keydown(function (e) {
 
-            //get code
-            if (e.keyCode === 32) { //space bar
-                e.preventDefault();
-                $("#get_code_button").click();
-
                 //chart resizing keys
-            } else if (e.shiftKey && e.keyCode === 40) { //shift + down
+           if (e.shiftKey && e.keyCode === 40) { //shift + down
                 e.preventDefault();
                 $("#chart_height_textinput").val(keyboard_inputs.adjValue($("#chart_height_textinput").val(), "+")).keyup();
 
@@ -114,14 +109,14 @@ var keyboard_inputs = {
             //chart type (cycle through)    
             else if (e.shiftKey && e.keyCode === 67) { //shift + c 
                 e.preventDefault();
-                keyboard_inputs.clickNext("chart_type_icon", "selected_chart_type");
+                keyboard_inputs.clickNext("chart_type_icon", "selected");
             }
 
 
             //data load - series names from columns / rows
             else if (e.keyCode === 9) { //tab
                 e.preventDefault();
-                keyboard_inputs.clickNext("load_series_from_icon", "selected_load_series_from");
+                keyboard_inputs.clickNext("load_series_from_icon", "selected");
                 update_individual_series.populateForm(chart, all_chart_options);
             }
 
@@ -129,7 +124,7 @@ var keyboard_inputs = {
             //color template (cycle through)    
             else if (e.keyCode === 67) { //c
                 e.preventDefault();
-                keyboard_inputs.clickNext("color_palette_row", "color_palette_selected");
+                keyboard_inputs.clickNext("color_palette_row", "selected");
             }
 
             //side nav shortcut keys

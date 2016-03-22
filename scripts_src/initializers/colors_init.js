@@ -3,7 +3,7 @@
 */
 var colorsInit = function colorsInit() {
     var color_arr = [];
-    $(".color_palette_selected .color_palette_cell").each(function () {
+    $("#color_palettes .selected .color_palette_cell").each(function () {
         color_arr.push($(this).css("background-color"));
     });
     

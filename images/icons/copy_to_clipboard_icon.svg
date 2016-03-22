@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 744.09448819 1052.3622047"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="copy_to_clipboard_icon.svg"
+   inkscape:export-filename="/Users/jaymcdaniel/localhost/interactive-chart-maker/images/icons/copy_to_clipboard_icon.png"
+   inkscape:export-xdpi="9.32302"
+   inkscape:export-ydpi="9.32302">
+  <defs
+     id="defs4" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.35"
+     inkscape:cx="-80.714286"
+     inkscape:cy="520"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1440"
+     inkscape:window-height="851"
+     inkscape:window-x="0"
+     inkscape:window-y="1"
+     inkscape:window-maximized="1"
+     showguides="true"
+     inkscape:guide-bbox="true" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="opacity:0.98999999;fill:#000000;fill-opacity:0;stroke:#337ab7;stroke-width:81.10236359;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect4155"
+       width="536.04053"
+       height="553.18335"
+       x="109.12261"
+       y="324.34195" />
+    <rect
+       style="opacity:0.98999999;fill:#000000;fill-opacity:0;stroke:#337ab7;stroke-width:61.21866989;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect4157"
+       width="238.78133"
+       height="10.209901"
+       x="213.46649"
+       y="466.11438" />
+    <ellipse
+       style="opacity:0.98999999;fill:#337ab7;fill-opacity:0.99215686;stroke:#337ab7;stroke-width:33.70978546;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="path4163"
+       cx="377.14288"
+       cy="242.36221"
+       rx="34.573654"
+       ry="40.287941" />
+    <rect
+       y="298.73822"
+       x="311.8046"
+       height="44.962284"
+       width="130.67657"
+       id="rect4165"
+       style="opacity:0.98999999;fill:#000000;fill-opacity:0;stroke:#337ab7;stroke-width:95.03771973;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <rect
+       y="601.31299"
+       x="214.37939"
+       height="8.3840952"
+       width="308.38409"
+       id="rect4167"
+       style="opacity:0.98999999;fill:#000000;fill-opacity:0;stroke:#337ab7;stroke-width:63.04447556;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <rect
+       style="opacity:0.98999999;fill:#000000;fill-opacity:0;stroke:#337ab7;stroke-width:62.32768631;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect4169"
+       width="277.6723"
+       height="9.1008835"
+       x="214.021"
+       y="735.2403" />
+  </g>
+</svg>
