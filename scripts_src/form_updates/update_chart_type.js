@@ -8,7 +8,6 @@ var update_x_axis = require("./update_x_axis.js");
 @module
 */
 var updateChartType = function (i, chart_type, chart, all_chart_options) {
-
     var type = chart_type.replace("stacked_", "");
 
     if (type === "bar") {
@@ -62,9 +61,9 @@ var updateChartType = function (i, chart_type, chart, all_chart_options) {
         y: all_chart_options.yAxis.title.y
     }, false);
 
+    
     //re parse data
     update_data.updateData(chart, all_chart_options);
-
 
     all_chart_options.chart.type = type;
 

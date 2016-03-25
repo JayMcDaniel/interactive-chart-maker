@@ -71,8 +71,7 @@
         &:hover {
             border-color: $primary_color;
         }
-        &.selected,
-        &.series_type_selected {
+        &.selected {
             border-color: $highlight_color;
             cursor: default;
         }
@@ -495,7 +494,7 @@
     }
     
     #get_code_button,
-    #load_chart_button,
+    #show_load_chart_area_button,
     .copy_to_clipboard_button {
         padding: 0px 5px 0px 5px;
         border: solid 1px #b73438;
@@ -547,7 +546,7 @@
         left: 36px;
     }
     
-    #load_chart_button {
+    #show_load_chart_area_button {
         background-image: url("../../images/icons/load.png");
         width: 35px;
         background-size: 80% 80%;

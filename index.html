@@ -29,7 +29,8 @@
         <h1>Interactive Chart Maker</h1>
         <span id="app_version">v2.0.0</span>
         <span id="get_code_button" title="Get chart/map code"><span id="get_code_icon">&lt; / &gt;</span> <span id="get_code_text">Get code</span></span>
-        <span id="load_chart_button" title = "Load saved chart" alt ="Load chart"></span>
+        <span id="show_load_chart_area_button" title="Load saved chart" alt="Load chart"></span>
+
     </div>
     <!-- top nav bar end -->
 
@@ -63,8 +64,8 @@
                 <div class="display_options">
 
                     <div id="chart_type_icons">
-                        <div class="chart_type_icon" id="chart_type_line" value="line" title="line"></div>
-                        <div class="chart_type_icon selected" id="chart_type_area" value="area" title="area"></div>
+                        <div class="chart_type_icon selected" id="chart_type_line" value="line" title="line"></div>
+                        <div class="chart_type_icon" id="chart_type_area" value="area" title="area"></div>
                         <div class="chart_type_icon" id="chart_type_bar" value="bar" title="bar"></div>
                         <div class="chart_type_icon" id="chart_type_stacked_bar" value="stacked_bar" title="stacked bar"></div>
                         <div class="chart_type_icon" id="chart_type_column" value="column" title="column"></div>
@@ -163,23 +164,152 @@
                     </p>
                     <br>
                     <div class="show_scatter">
-                       <p> With scatter charts, series names will be loaded from the row headers. For each set of two columns in the table body, a dot will be drawn &mdash; its x-value coming from the first column and its y-value coming from the second column.</p>
-                        <table id="scatter_example" class="regular" cellspacing="0" cellpadding="0" xborder="1" style="width: 95%"><caption><span class="tableTitle">Example table data for scatter charts</span></caption><thead><tr><th rowspan="1" id="columnHead0" style="vertical-align: middle;">categories</th><th id="columnHead1">x1</th><th id="columnHead2">y1</th><th id="columnHead3">x2</th><th id="columnHead4">y2</th><th id="columnHead5">x3</th><th id="columnHead6">y3</th></tr></thead><tbody><tr><th id="rowHead0"><p>series 1</p></th><td headers="rowHead0 columnHead1">1</td><td headers="rowHead0 columnHead2">1</td><td headers="rowHead0 columnHead3">3</td><td headers="rowHead0 columnHead4">3</td><td headers="rowHead0 columnHead5">5</td><td headers="rowHead0 columnHead6">5</td></tr><tr class="greenbar"><th id="rowHead1"><p>series 2</p></th><td headers="rowHead1 columnHead1">2</td><td headers="rowHead1 columnHead2">1</td><td headers="rowHead1 columnHead3">4</td><td headers="rowHead1 columnHead4">3</td><td headers="rowHead1 columnHead5">8</td><td headers="rowHead1 columnHead6">9</td></tr></tbody></table>
-                        
+                        <p> With scatter charts, series names will be loaded from the row headers. For each set of two columns in the table body, a dot will be drawn &mdash; its x-value coming from the first column and its y-value coming from the second column.</p>
+                        <table id="scatter_example" class="regular" cellspacing="0" cellpadding="0" xborder="1" style="width: 95%">
+                            <caption><span class="tableTitle">Example table data for scatter charts</span></caption>
+                            <thead>
+                                <tr>
+                                    <th rowspan="1" id="columnHead0" style="vertical-align: middle;">categories</th>
+                                    <th id="columnHead1">x1</th>
+                                    <th id="columnHead2">y1</th>
+                                    <th id="columnHead3">x2</th>
+                                    <th id="columnHead4">y2</th>
+                                    <th id="columnHead5">x3</th>
+                                    <th id="columnHead6">y3</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th id="rowHead0">
+                                        <p>series 1</p>
+                                    </th>
+                                    <td headers="rowHead0 columnHead1">1</td>
+                                    <td headers="rowHead0 columnHead2">1</td>
+                                    <td headers="rowHead0 columnHead3">3</td>
+                                    <td headers="rowHead0 columnHead4">3</td>
+                                    <td headers="rowHead0 columnHead5">5</td>
+                                    <td headers="rowHead0 columnHead6">5</td>
+                                </tr>
+                                <tr class="greenbar">
+                                    <th id="rowHead1">
+                                        <p>series 2</p>
+                                    </th>
+                                    <td headers="rowHead1 columnHead1">2</td>
+                                    <td headers="rowHead1 columnHead2">1</td>
+                                    <td headers="rowHead1 columnHead3">4</td>
+                                    <td headers="rowHead1 columnHead4">3</td>
+                                    <td headers="rowHead1 columnHead5">8</td>
+                                    <td headers="rowHead1 columnHead6">9</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
                     </div>
-                    
+
                     <div class="show_drilldown">
                         <p>
-                        This will load the table into a drilldown chart. For this to work, your table row headers must be indented correctly using BLS style indents of class = "sub1", "sub2". The <a href="table_wizard/better_table_wizard.htm" target="_blank">table wizard</a> will apply these style classes when the cell text is preceded by two spaces or more.</p>
-                        
-                        <table id="drilldown_example" class="regular" cellspacing="0" cellpadding="0" xborder="1" style="width: 95%"><caption><span class="tableTitle">Example table data for drill down charts</span></caption><thead><tr><th rowspan="1" id="columnHead0" style="vertical-align: middle;">categories</th><th id="columnHead1">value</th></tr></thead><tbody><tr><th id="rowHead0"><p>series 1</p></th><td headers="rowHead0 columnHead1">1</td></tr><tr class="greenbar"><th id="rowHead1"><p class="sub1">series 1a</p></th><td headers="rowHead1 columnHead1">2</td></tr><tr><th id="rowHead2"><p class="sub1">series 1b</p></th><td headers="rowHead2 columnHead1">3</td></tr><tr class="greenbar"><th id="rowHead3"><p class="sub1">series 1c</p></th><td headers="rowHead3 columnHead1">4</td></tr><tr><th id="rowHead4"><p class="sub2">series 1ci</p></th><td headers="rowHead4 columnHead1">5</td></tr><tr class="greenbar"><th id="rowHead5"><p class="sub2">series 1cii</p></th><td headers="rowHead5 columnHead1">6</td></tr></tbody></table>
+                            This will load the table into a drilldown chart. For this to work, your table row headers must be indented correctly using BLS style indents of class = "sub1", "sub2". The <a href="table_wizard/better_table_wizard.htm" target="_blank">table wizard</a> will apply these style classes when the cell text is preceded by two spaces or more.</p>
+
+                        <table id="drilldown_example" class="regular" cellspacing="0" cellpadding="0" xborder="1" style="width: 95%">
+                            <caption><span class="tableTitle">Example table data for drill down charts</span></caption>
+                            <thead>
+                                <tr>
+                                    <th rowspan="1" id="columnHead0" style="vertical-align: middle;">categories</th>
+                                    <th id="columnHead1">value</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th id="rowHead0">
+                                        <p>series 1</p>
+                                    </th>
+                                    <td headers="rowHead0 columnHead1">1</td>
+                                </tr>
+                                <tr class="greenbar">
+                                    <th id="rowHead1">
+                                        <p class="sub1">series 1a</p>
+                                    </th>
+                                    <td headers="rowHead1 columnHead1">2</td>
+                                </tr>
+                                <tr>
+                                    <th id="rowHead2">
+                                        <p class="sub1">series 1b</p>
+                                    </th>
+                                    <td headers="rowHead2 columnHead1">3</td>
+                                </tr>
+                                <tr class="greenbar">
+                                    <th id="rowHead3">
+                                        <p class="sub1">series 1c</p>
+                                    </th>
+                                    <td headers="rowHead3 columnHead1">4</td>
+                                </tr>
+                                <tr>
+                                    <th id="rowHead4">
+                                        <p class="sub2">series 1ci</p>
+                                    </th>
+                                    <td headers="rowHead4 columnHead1">5</td>
+                                </tr>
+                                <tr class="greenbar">
+                                    <th id="rowHead5">
+                                        <p class="sub2">series 1cii</p>
+                                    </th>
+                                    <td headers="rowHead5 columnHead1">6</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
-                    
-                    
+
+
                     <div class="clear_next_textarea_button" title="Clear the text area">X</div>
-                    
+
                     <textarea id="table_input_textarea" class="large" placeholder="Insert table html here">
-                  <table id="BLS_table" class="regular" cellspacing="0" cellpadding="0" xborder="1" style="width: 95%"><caption><span class="tableTitle">Test table data for scatter charts</span></caption><thead><tr><th rowspan="1" id="columnHead0" style="vertical-align: middle;">categories</th><th id="columnHead1">x1</th><th id="columnHead2">y1</th><th id="columnHead3">z1</th><th id="columnHead4">x2</th><th id="columnHead5">y2</th><th id="columnHead6">z2</th><th id="columnHead7">x3</th><th id="columnHead8">y3</th><th id="columnHead9">z3</th></tr></thead><tbody><tr><th id="rowHead0"><p>series 1</p></th><td headers="rowHead0 columnHead1">1</td><td headers="rowHead0 columnHead2">1</td><td headers="rowHead0 columnHead3">2</td><td headers="rowHead0 columnHead4">3</td><td headers="rowHead0 columnHead5">3</td><td headers="rowHead0 columnHead6">4</td><td headers="rowHead0 columnHead7">5</td><td headers="rowHead0 columnHead8">-5</td><td headers="rowHead0 columnHead9">8</td></tr><tr class="greenbar"><th id="rowHead1"><p>series 2</p></th><td headers="rowHead1 columnHead1">2</td><td headers="rowHead1 columnHead2">1</td><td headers="rowHead1 columnHead3">2</td><td headers="rowHead1 columnHead4">4</td><td headers="rowHead1 columnHead5">3</td><td headers="rowHead1 columnHead6">5</td><td headers="rowHead1 columnHead7">8</td><td headers="rowHead1 columnHead8">9</td><td headers="rowHead1 columnHead9">9</td></tr></tbody></table>
+                        <table id="BLS_table" class="regular" cellspacing="0" cellpadding="0" xborder="1" style="width: 95%">
+                            <caption><span class="tableTitle">Test table data for scatter charts</span></caption>
+                            <thead>
+                                <tr>
+                                    <th rowspan="1" id="columnHead0" style="vertical-align: middle;">categories</th>
+                                    <th id="columnHead1">x1</th>
+                                    <th id="columnHead2">y1</th>
+                                    <th id="columnHead3">z1</th>
+                                    <th id="columnHead4">x2</th>
+                                    <th id="columnHead5">y2</th>
+                                    <th id="columnHead6">z2</th>
+                                    <th id="columnHead7">x3</th>
+                                    <th id="columnHead8">y3</th>
+                                    <th id="columnHead9">z3</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th id="rowHead0">
+                                        <p>series 1</p>
+                                    </th>
+                                    <td headers="rowHead0 columnHead1">1</td>
+                                    <td headers="rowHead0 columnHead2">1</td>
+                                    <td headers="rowHead0 columnHead3">2</td>
+                                    <td headers="rowHead0 columnHead4">3</td>
+                                    <td headers="rowHead0 columnHead5">3</td>
+                                    <td headers="rowHead0 columnHead6">4</td>
+                                    <td headers="rowHead0 columnHead7">5</td>
+                                    <td headers="rowHead0 columnHead8">-5</td>
+                                    <td headers="rowHead0 columnHead9">8</td>
+                                </tr>
+                                <tr class="greenbar">
+                                    <th id="rowHead1">
+                                        <p>series 2</p>
+                                    </th>
+                                    <td headers="rowHead1 columnHead1">2</td>
+                                    <td headers="rowHead1 columnHead2">1</td>
+                                    <td headers="rowHead1 columnHead3">2</td>
+                                    <td headers="rowHead1 columnHead4">4</td>
+                                    <td headers="rowHead1 columnHead5">3</td>
+                                    <td headers="rowHead1 columnHead6">5</td>
+                                    <td headers="rowHead1 columnHead7">8</td>
+                                    <td headers="rowHead1 columnHead8">9</td>
+                                    <td headers="rowHead1 columnHead9">9</td>
+                                </tr>
+                            </tbody>
+                        </table>
 
                     </textarea>
                 </div>
@@ -202,10 +332,10 @@
                     <p class="notes">Series will load their colors from the chosen palette left to right. For more customization, see the "Individual series options" tab. You can cycle through the color templates at any time by pressing "c". The first two rows are Beyond The Numbers and Monthly Labor Review colors.</p>
 
                     <br>
-<!-- color palettes are loaded the first time user clicks on that tab -->
+                    <!-- color palettes are loaded the first time user clicks on that tab -->
 
                     <div id="color_palettes">
-                         <!--BTN colors -->
+                        <!--BTN colors -->
                     </div>
                     <!-- end all color palettes -->
 
@@ -511,36 +641,39 @@
     <!-- main content div (shows the chart / map / code to the right of the side nav)-->
 
     <div id="main_content_div">
-        
+
         <!-- chart / map code boxes -->
         <div id="main_result_code_div">
             <h4>Chart code <sup class = "help_icon">?</sup></h4>
             <p class="notes">The JS comes packed by default. If you need to unpack it, most code editors will do the trick, or use this tool: <a href="http://www.strictly-software.com/unpack-javascript.aspx" target="_blank">http://www.strictly-software.com/unpack-javascript.aspx</a>.</p>
 
-            <span class="copy_message"></span><div class = "copy_to_clipboard_button"></div>
+            <span class="copy_message"></span>
+            <div class="copy_to_clipboard_button"></div>
             <pre><code class="js" id="chart_output_code"></code></pre>
             <textarea id="chart_output_code_hidden_textarea"></textarea>
         </div>
-        
-        
+
+
         <!-- load code area -->
         <div id="load_chart_div">
             <h4>Load chart from saved JavaScript <sup class = "help_icon">?</sup></h4>
-            <p>Copy and paste the output from a previous chart here, and click the load icon again to load that chart.</p>
-            <p class="notes">Now you can copy the entire output from a previous chart into here, and it will work. If the entry area is empty, clicking the icon will just close this window.</p>
-            
-        <textarea id="load_chart_textarea"></textarea>
-        
+            <p>Copy and paste the output from a previous chart here.</p>
+            <p class="notes">Now you can copy the entire output from a previous chart into here, and it will work.</p>
+
+
+            <button id="load_chart_button">Load chart</button>
+
+
+            <textarea id="load_chart_textarea"></textarea>
+
         </div>
-        
-        
+
+
 
         <!-- chart / map display area -->
         <div id="chart_display_area" class="chart_display_area fixed">
-
-
-
         </div>
+        <p class="alert-danger"></p>
 
     </div>
     <!-- main_content_div end -->
@@ -553,7 +686,7 @@
     <!-- external libraries -->
     <script src="libraries/jquery/jquery-2.2.0.min.js"></script>
     <script src="libraries/Highcharts-4.2.3/js/highcharts.src.js"></script>
-    <script src="libraries/Highcharts-4.2.3/js/highcharts-more.src.js"></script> 
+    <script src="libraries/Highcharts-4.2.3/js/highcharts-more.src.js"></script>
     <script src="libraries/Highcharts-4.2.3/js/modules/drilldown.src.js"></script>
     <!--    <script src="libraries/Highcharts-4.2.3/js/modules/exporting.js"></script>-->
 

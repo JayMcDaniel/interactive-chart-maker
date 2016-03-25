@@ -22,11 +22,11 @@ var update_individual_series = {
             });
 
             //highlight clicked icon
-            $(".series_type_selected", $(this).parent()).removeClass("series_type_selected");
-            $(this).addClass("series_type_selected");
-            
+            $(".selected", $(this).parent()).removeClass("selected");
+            $(this).addClass("selected");
+
             //hide or show the line styles for that series
-            type === "line" ? $(".line_style_div:eq("+i+")").show() : $(".line_style_div:eq("+i+")").hide();
+            type === "line" ? $(".line_style_div:eq(" + i + ")").show() : $(".line_style_div:eq(" + i + ")").hide();
 
             //update all_chart_options
             all_chart_options.series[i].type = type;
@@ -47,7 +47,6 @@ var update_individual_series = {
     /** bound with populateForm. When the line style dropdown is changed, change that series **/
     lineStyleSelectChange: function (chart, all_chart_options) {
         $(".line_style_select").change(function () {
-            console.log("change");
             var line_style = $(this).val();
             var i = $(this).parents(".series_snippet").index();
             chart.series[i].update({
@@ -70,6 +69,7 @@ var update_individual_series = {
         //make color input box
         var series_color = document.createElement('input');
         $(series_color).addClass("jscolor {valueElement:null}");
+        series_color.id = "series_color_" + i;
 
         //init with color, using jscolor.js
         var picker = new jscolor(series_color, {
@@ -78,15 +78,22 @@ var update_individual_series = {
             }
         });
 
+
         //convert rgb string into arrray
         var c = i < 15 ? i : i - 15;
-        var rgb = utils_main.rgb2arr(all_chart_options.colors[c]);
+        var color = all_chart_options.colors[c];
+
         //create picker
-        picker.fromRGB(rgb[0], rgb[1], rgb[2]);
+        if (color.charAt(0) === "#") { //if hex
+            picker.fromString(color);
+
+        } else { //else color is rgb
+            var rgb = utils_main.rgb2arr(color);
+            picker.fromRGB(rgb[0], rgb[1], rgb[2]);
+        }
 
         //make clear float div
         var clear_div = utils_main.makeClearFloatDiv();
-
 
         series_color_div.appendChild(series_color_label);
         series_color_div.appendChild(series_color);
@@ -98,7 +105,7 @@ var update_individual_series = {
 
 
     /** add line style option - shown only if type is line**/
-    makeLineStyleDiv: function () {
+    makeLineStyleDiv: function (i) {
 
         var line_style_div = document.createElement("div");
         line_style_div.className = "line_style_div";
@@ -109,6 +116,7 @@ var update_individual_series = {
 
         var line_style_select = document.createElement("select");
         line_style_select.className = "line_style_select";
+        line_style_select.id = "line_style_select_" + i;
 
         var line_style_option_solid = document.createElement("option");
         line_style_option_solid.textContent = "Solid";
@@ -157,14 +165,14 @@ var update_individual_series = {
         $(series_type_column).addClass("series_type_icon series_type_column")
             .attr("type", "column");
         if (chart.series[i].type === "column") {
-            $(series_type_column).addClass("series_type_selected");
+            $(series_type_column).addClass("selected");
         }
 
         var series_type_line = document.createElement("div");
         $(series_type_line).addClass("series_type_icon series_type_line")
             .attr("type", "line");
         if (chart.series[i].type === "line") {
-            $(series_type_line).addClass("series_type_selected");
+            $(series_type_line).addClass("selected");
 
         }
 
@@ -178,6 +186,8 @@ var update_individual_series = {
         return series_type_div;
 
     },
+
+
 
 
     /** populates #display_series_options with options for each series. Called when its side nav tab is selected. **/
@@ -195,8 +205,6 @@ var update_individual_series = {
             //make series color input
             var series_color_div = update_individual_series.makeSeriesColorDiv(chart, all_chart_options, i);
 
-
-
             //make outer snippet p tag
             var series_snippet = document.createElement('p');
             series_snippet.className = "series_snippet";
@@ -211,7 +219,7 @@ var update_individual_series = {
             }
 
 
-            var line_style_div = update_individual_series.makeLineStyleDiv();
+            var line_style_div = update_individual_series.makeLineStyleDiv(i);
             series_snippet.appendChild(line_style_div);
 
             $(display_series_options_inner_div).append(series_snippet);

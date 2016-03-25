@@ -26,7 +26,6 @@
      var colors = colorsInit();
      
      var parsed_table_output = parseTableInput(input, load_series_from, chart_type, legend_toggle_enabled, colors);
-     
 
      //get options from individual inits
      var options = {

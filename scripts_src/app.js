@@ -5,7 +5,6 @@ $(document).ready(function () {
     var utils_main = require("./utils/utils_main");
 
 
-
     //initial all chart options init
     var allChartOptionsInit = require("./initializers/all_chart_options_init.js");
     var all_chart_options = allChartOptionsInit();
@@ -16,15 +15,10 @@ $(document).ready(function () {
 
     //page init (navigation and keyboard entries)
     var navigation_setup = require("./navigation_setup.js");
-    navigation_setup.initAllNavigation(chart, all_chart_options);
-
-    var keyboard_inputs = require("./keyboard_inputs");
-    //first init
-    keyboard_inputs.sideNavTabShortcuts(chart, all_chart_options);
-    keyboard_inputs.initListeners(chart, all_chart_options);
+    navigation_setup.firstNavInit();
 
 
-    //all form updates - when updates are made, update the chart
+    //all form updates - when updates are made, update the chart. this also calls some nav and keyboard input inits
     var allFormUpdates = require("./form_updates/all_form_updates.js");
     allFormUpdates(chart, all_chart_options);
         
