@@ -36,12 +36,14 @@ var update_individual_series = {
 
     /** called when the jscolor selector is changed (mouse still down). Updates the actual chart object and all_chart_options code output object***/
     updateSeriesColor: function (chart, all_chart_options, i, jscolor) {
-        all_chart_options.colors[i] = jscolor.toRGBString();
+
+        all_chart_options.colors[i] = typeof jscolor === "string" ? jscolor : jscolor.toRGBString();
         all_chart_options.series[i].color = all_chart_options.colors[i];
         chart.series[i].update({
             color: all_chart_options.series[i].color
-        })
+        });
     },
+
 
 
     /** bound with populateForm. When the line style dropdown is changed, change that series **/
@@ -76,7 +78,9 @@ var update_individual_series = {
             onFineChange: function () {
                 update_individual_series.updateSeriesColor(chart, all_chart_options, i, this);
             }
+
         });
+
 
 
         //convert rgb string into arrray
@@ -155,6 +159,7 @@ var update_individual_series = {
     makeSeriesTypeDiv: function (chart, all_chart_options, i) {
         var series_type_div = document.createElement("div");
         series_type_div.className = "series_type_div";
+        series_type_div.id = "series_type_div_" + i;
 
         var series_type_label = document.createElement("label");
         series_type_label.className = "series_type_label";
@@ -175,6 +180,7 @@ var update_individual_series = {
             $(series_type_line).addClass("selected");
 
         }
+
 
         var clear_div = utils_main.makeClearFloatDiv();
 
@@ -218,11 +224,13 @@ var update_individual_series = {
                 series_snippet.appendChild(series_type_div);
             }
 
-
+            //make line style div
             var line_style_div = update_individual_series.makeLineStyleDiv(i);
             series_snippet.appendChild(line_style_div);
 
+            //append all
             $(display_series_options_inner_div).append(series_snippet);
+
 
             if (all_chart_options.chart.type === "line") {
                 $(".line_style_div").show();

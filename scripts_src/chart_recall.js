@@ -2,6 +2,7 @@ var utils_form = require("./utils/utils_forms.js");
 
 
 
+
 /**
  * Contains functions that deal with chart (options selected and data loaded) saving and loading
  * @namespace
@@ -16,7 +17,7 @@ var chart_recall = {
         //object to load each input's values and ID's into (textareas, selects, checkboxes, div icons etc )
         var saved_values = [];
 
-        $("input, select, textarea, #chart_type_icons, #table_input_load_series_from_icons, #color_palettes", $("#side_main")).each(function () {
+        $("input, select, textarea, #chart_type_icons, #table_input_load_series_from_icons, #color_palettes, .series_type_div", $("#side_main")).each(function () {
 
             if (this.nodeName === "DIV") {
                 var input_val = $(this).children("[class*='selected']").divVal();
@@ -30,7 +31,7 @@ var chart_recall = {
             });
 
         });
-        //console.log(JSON.stringify(saved_values));
+       // console.log(JSON.stringify(saved_values));
         return saved_values;
 
     },
@@ -41,15 +42,12 @@ var chart_recall = {
     /** takes input (originally from #load_chart_textarea, parses it, and sets option values accordingly, to load a saved chart) **/
 
     loadValues: function (chart, all_chart_options, input) {
+        var utils_main = require("./utils/utils_main.js");
+        console.log(utils_main);
         try {
             input = JSON.parse(input);
-        } catch (e) {
-            // statements to handle any exceptions
-            $(".alert-danger").text("Sorry, the JSON parsing didn't work. Please double check your input. " + e); // pass exception object to error handler
-            setTimeout(function () {
-                $(".alert-danger").text("");
-            }, 8000);
-
+        } catch (e) {       
+            utils_main.showError("Sorry, the JSON parsing didn't work. Please double check your input. " + e);
         }
 
 
@@ -61,9 +59,7 @@ var chart_recall = {
 
             $.each(arr, function () {
 
-                if (!set_individual_series && this.id.match(/series_color/)) { //look if this id has to do with individual series options
-                    individual_series_options.push(this);
-                } else if (!set_individual_series && this.id.match(/line_style_select/)) {
+                if (!set_individual_series && this.id.match(/series_color|line_style_select|series_type_div/)) { //look if this id has to do with individual series options
                     individual_series_options.push(this);
                 } else {
 
@@ -72,6 +68,9 @@ var chart_recall = {
                         if (element.nodeName === "DIV") {
                             $(element).children().removeClass("selected");
                             $(element).children("[value='" + this.val + "']").addClass("selected");
+                            $(element).children("[type='" + this.val + "']").click();
+
+
                         } else if (element.type === "checkbox") {
                             element.checked = this.val;
                         } else {
@@ -84,11 +83,11 @@ var chart_recall = {
             return individual_series_options;
         }; //end setValues
 
+        
 
 
         if (input.saved_values) {
             var individual_series_options = setValues(input.saved_values, false); //false to not set indivdual series yet
-            //console.log(individual_series_options);
 
             //initial all chart options init and redraw chart
             var allChartOptionsInit = require("./initializers/all_chart_options_init.js");
@@ -107,10 +106,20 @@ var chart_recall = {
             setValues(individual_series_options, true); //true to set indivdual series now
 
 
+            //trigger changes to update chart
             $(".line_style_select").each(function () {
                 $(this).change();
             });
 
+            $(".jscolor").each(function (i) {
+                var color = "#" + $(this).val();
+                update_individual_series.updateSeriesColor(chart, all_chart_options, i, color);
+                $(this).focus().blur();
+
+            });
+
+
+            window.scrollTo(0, 0); //scrolls to top
 
         }
     },

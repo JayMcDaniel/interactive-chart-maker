@@ -49,12 +49,22 @@
              });
          },
 
+         /** Converts an rgb string to an array of 3 values**/
          rgb2arr: function (rgb) {
              return rgb.replace(/[^0-9\,]+/g, '').split(",").map(function (item) {
                  return parseInt(item, 10);
              });
          },
 
+
+         /** Displays an error message for a few seconds**/
+         showError: function (string) {
+             $(".alert-danger").text(string);
+             setTimeout(function () {
+                 $(".alert-danger").text("");
+             }, 8000);
+
+         },
 
          /** stringify tooltip formatter function **/
          stringifyFormatter: function (new_tooltip, decimals, multiplier, signs_arr, z_title) {
@@ -68,6 +78,7 @@
          },
 
 
+
          /** place code in chart_output_code and reinit highlight */
          writeCode: function writeCode(all_chart_options) {
              //save chart input values
@@ -76,7 +87,7 @@
              var chart_options_js_string = utils_main.deepStringify(all_chart_options)
                  .replace(/headers=\\"rowHead\d+ columnHead\d+\\"/g, "") //trim down table alt output to make it smaller
                  .replace(/id=\\"(rowHead|columnHead)\d+\\"/g, "");
-             
+
              $("#chart_output_code").text(chart_options_js_string).each(function (i, block) {
                  hljs.highlightBlock(block);
              });

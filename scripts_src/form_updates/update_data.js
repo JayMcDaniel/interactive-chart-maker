@@ -26,6 +26,8 @@ var update_data = {
         $(chart.series).each(function () {
             this.remove(false); //false to not redraw yet
         });
+        
+        
 
         //add new series
         $(parsed_table_output.series).each(function () {

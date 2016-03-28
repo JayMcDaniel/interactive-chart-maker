@@ -1,7 +1,8 @@
+var calculate_recession_dates = require("../utils/calculate_recession_dates.js");
 var update_template = require("./update_template.js");
 var updateChartType = require("./update_chart_type.js");
 var updateColors = require("./update_colors.js");
-var utils_forms = require("../utils/utils_forms");
+var utils_forms = require("../utils/utils_forms.js");
 var update_legend = require("./update_legend.js");
 var update_x_axis = require("./update_x_axis.js");
 var update_y_axis = require("./update_y_axis.js");
@@ -116,8 +117,6 @@ var allFormUpdates = function (chart, all_chart_options) {
     } else {
         allFormUpdates.colorPaletteRowClick(); // runs when this main function is called with chart_recall
     }
-
-
 
 
 
@@ -268,6 +267,17 @@ var allFormUpdates = function (chart, all_chart_options) {
         update_chart_options.toggleDataLabels(val, chart, all_chart_options);
     });
 
+    
+    //recession shading
+    $("#chart_add_recession_shading_select").change(function(){
+        var dates_type = $(this).val();
+        var plot_bands_arr = calculate_recession_dates.createPlotBands(all_chart_options.xAxis.categories, dates_type);
+        calculate_recession_dates.insertPlotBands(plot_bands_arr, chart, all_chart_options);
+        update_credits.updateCreditText(chart, all_chart_options);
+    });
+    
+    
+    
 
 
     /* Initialize chart_recall (load saved chart button ) */
