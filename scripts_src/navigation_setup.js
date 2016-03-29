@@ -59,7 +59,8 @@ var navigation_setup = {
                 var color_cells = this_row.children('.color_palette_cell');
                 this_row.prepend(color_cells.get().reverse());
             });
-            $("#color_palettes .selected").click();
+            $("#color_palettes .selected").click(); //click to change colors in chart
+        
         });
     },
 
@@ -71,22 +72,26 @@ var navigation_setup = {
     getCodeButtonClick: function (all_chart_options) {
 
         $("#get_code_button").unbind().click(function (e) {
-            $(".load_chart_showing").click(); //hide the load saved chart area if it's showing
+            $(".load_chart_showing").removeClass("load_chart_showing"); //hide the load saved chart area if it's showing
+            $("#load_chart_div").hide();
 
             var $get_code_span = $("#get_code_text");
-            $(this).toggleClass("code_on");
-            $("#main_result_code_div").slideToggle(100);
+            
             if ($get_code_span.text() === "Get code") {
+                $("#main_result_code_div").slideDown(50, function () {
+                    //write all_chart_options
+                    utils_main.writeCode(all_chart_options);
+                    $get_code_span.text("Hide code");
+                });
 
-                //write all_chart_options
-                utils_main.writeCode(all_chart_options);
-                $get_code_span.text("Hide code");
-                $("#chart_display_area").removeClass("fixed");
             } else {
+                $("#main_result_code_div").slideUp(50);
                 $get_code_span.text("Get code");
-                $("#chart_display_area").addClass("fixed");
-
             }
+
+            $(this).toggleClass("code_on");
+            $("#chart_display_area").toggleClass("fixed");
+
         });
 
     },
@@ -113,11 +118,15 @@ var navigation_setup = {
 
     loadChartButtonClick: function (chart, all_chart_options) {
         $("#show_load_chart_area_button").unbind().click(function () {
-            $(".code_on").click(); //hide the get code area if it's showing
+            $("#main_result_code_div").slideUp(function () { //hide the get code area if it's showing
+                $("#load_chart_div").slideToggle(50);
+                $(".code_on").removeClass("code_on");
+                $("#chart_display_area").toggleClass("fixed");
+            });
+
             $(this).toggleClass("load_chart_showing");
-            $("#load_chart_div").slideToggle(100);
-            $("#chart_display_area").toggleClass("fixed");
         });
+
     },
 
 
@@ -125,25 +134,25 @@ var navigation_setup = {
 
     /** INIT ALL NAVIGATION that needs parameters, called from all_form_updates when page is loaded, and whenever a saved chart is loaded **/
     initNavWithChart: function (chart, all_chart_options) {
-        
+
         navigation_setup.chartOutputCodeFocus(all_chart_options);
         navigation_setup.getCodeButtonClick(all_chart_options);
         navigation_setup.loadChartButtonClick(chart, all_chart_options);
         navigation_setup.sideNavTabsChange(chart, all_chart_options);
-        
+
         keyboard_inputs.initListeners(chart, all_chart_options);
         keyboard_inputs.sideNavTabShortcuts(chart, all_chart_options);
-        
+
     },
-    
-    
+
+
     /** FIRST NAVIGATION INIT, called from app.js when page is loaded. These never need to be re-initialized **/
-    firstNavInit: function(){
-        
+    firstNavInit: function () {
+
         navigation_setup.clearNextTextareaClick();
         navigation_setup.colorPaletteReverseIconClick();
         navigation_setup.helpIconClick();
-        
+
     }
 
 }

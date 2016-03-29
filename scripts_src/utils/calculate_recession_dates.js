@@ -64,7 +64,7 @@ var calculate_recession_dates = {
 
         ///alert if not found
         if (plot_band_starts_arr.length == 0) {
-            utils_main.showError("There are no matching recession dates, or your months aren't formatted in the needed style");
+            utils_main.showError("There are no matching recession dates, or your dates aren't formatted in the needed style.");
 
         } else {
             for (var i = 0, len = plot_band_starts_arr.length; i < len; i++) {

@@ -58,7 +58,6 @@ var yAxis = function (o) {
             color: '#000000',
             fontFamily: 'Calibri, Verdana, Arial, Helvetica, sans-serif',
             fontWeight: 'normal',
-            backgroundColor: '#fff',
             fontSize: '13px'
         }
     };

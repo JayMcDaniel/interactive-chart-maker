@@ -244,6 +244,13 @@ var allFormUpdates = function (chart, all_chart_options) {
 
 
     /* EXTRA OPTIONS CHANGES */
+    
+    
+    //Subtitle change
+    $("#chart_subtitle_textarea").unbind().bind('input propertychange', function () {
+        var new_title = $(this).val();
+        update_chart_options.updateSubtitle(new_title, chart, all_chart_options);
+    });
 
     //MLR style toggle
     $("#chart_mlr_styles_checkbox").unbind().change(function () {
@@ -269,7 +276,7 @@ var allFormUpdates = function (chart, all_chart_options) {
 
     
     //recession shading
-    $("#chart_add_recession_shading_select").change(function(){
+    $("#chart_add_recession_shading_select").unbind().change(function(){
         var dates_type = $(this).val();
         var plot_bands_arr = calculate_recession_dates.createPlotBands(all_chart_options.xAxis.categories, dates_type);
         calculate_recession_dates.insertPlotBands(plot_bands_arr, chart, all_chart_options);

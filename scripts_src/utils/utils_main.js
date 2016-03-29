@@ -86,7 +86,8 @@
 
              var chart_options_js_string = utils_main.deepStringify(all_chart_options)
                  .replace(/headers=\\"rowHead\d+ columnHead\d+\\"/g, "") //trim down table alt output to make it smaller
-                 .replace(/id=\\"(rowHead|columnHead)\d+\\"/g, "");
+                 .replace(/id=\\"(rowHead|columnHead)\d+\\"/g, "")
+                 .replace(/\s{2,} /g, " ");
 
              $("#chart_output_code").text(chart_options_js_string).each(function (i, block) {
                  hljs.highlightBlock(block);

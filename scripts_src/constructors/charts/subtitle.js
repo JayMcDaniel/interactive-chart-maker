@@ -3,6 +3,7 @@
 * @param o {object} Subtitle options object
 */
 var Subtitle = function (o) {
+
     
     this.text = o.text || "";
     this.align = o.align || "left";

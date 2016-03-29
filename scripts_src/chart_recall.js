@@ -31,7 +31,7 @@ var chart_recall = {
             });
 
         });
-       // console.log(JSON.stringify(saved_values));
+        //console.log(JSON.stringify(saved_values));
         return saved_values;
 
     },
@@ -43,10 +43,9 @@ var chart_recall = {
 
     loadValues: function (chart, all_chart_options, input) {
         var utils_main = require("./utils/utils_main.js");
-        console.log(utils_main);
         try {
             input = JSON.parse(input);
-        } catch (e) {       
+        } catch (e) {
             utils_main.showError("Sorry, the JSON parsing didn't work. Please double check your input. " + e);
         }
 
@@ -68,7 +67,7 @@ var chart_recall = {
                         if (element.nodeName === "DIV") {
                             $(element).children().removeClass("selected");
                             $(element).children("[value='" + this.val + "']").addClass("selected");
-                            $(element).children("[type='" + this.val + "']").click();
+                            //   $(element).children("[type='" + this.val + "']").click();
 
 
                         } else if (element.type === "checkbox") {
@@ -83,7 +82,7 @@ var chart_recall = {
             return individual_series_options;
         }; //end setValues
 
-        
+
 
 
         if (input.saved_values) {
@@ -106,18 +105,22 @@ var chart_recall = {
             setValues(individual_series_options, true); //true to set indivdual series now
 
 
-            //trigger changes to update chart
+            /*  trigger changes to update chart  */
+
+            //line style changes
             $(".line_style_select").each(function () {
                 $(this).change();
             });
 
+            //individual color changes
             $(".jscolor").each(function (i) {
                 var color = "#" + $(this).val();
                 update_individual_series.updateSeriesColor(chart, all_chart_options, i, color);
                 $(this).focus().blur();
-
             });
 
+            //add recession shading
+            $("#chart_add_recession_shading_select").change();
 
             window.scrollTo(0, 0); //scrolls to top
 
@@ -133,10 +136,15 @@ var chart_recall = {
 
         $("#load_chart_button").unbind().click(function () {
             var input = $("#load_chart_textarea").val();
-            $("#show_load_chart_area_button").click(); //hide this area (makes loading much faster)
-            if (input.length > 0) {
-                chart_recall.loadValues(chart, all_chart_options, input);
-            };
+            $("#load_chart_div").hide(function () { //hide this area (makes loading much faster)
+                if (input.length > 0) {
+                    chart_recall.loadValues(chart, all_chart_options, input);
+                    $("#show_load_chart_area_button").removeClass("load_chart_showing");
+                };
+            })
+
+
+
 
         });
     }
