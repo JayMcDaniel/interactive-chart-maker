@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: chart_recall.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: chart_recall.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>var utils_form = require("./utils/utils_forms.js");
+
+
+
+
+/**
+ * Contains functions that deal with chart (options selected and data loaded) saving and loading
+ * @namespace
+ */
+
+var chart_recall = {
+
+
+    /** reads all of the page's selectable options and loads values into an object **/
+
+    saveValues: function () {
+        //object to load each input's values and ID's into (textareas, selects, checkboxes, div icons etc )
+        var saved_values = [];
+
+        $("input, select, textarea, #chart_type_icons, #table_input_load_series_from_icons, #color_palettes, .series_type_div", $("#side_main")).each(function () {
+
+            if (this.nodeName === "DIV") {
+                var input_val = $(this).children("[class*='selected']").divVal();
+            } else {
+                var input_val = this.type === "checkbox" ? utils_form.getCheckBoxValue($(this)) : $(this).val();
+            }
+
+            saved_values.push({
+                id: $(this).attr("id"),
+                val: input_val
+            });
+
+        });
+        //console.log(JSON.stringify(saved_values));
+        return saved_values;
+
+    },
+
+
+
+
+    /** takes input (originally from #load_chart_textarea, parses it, and sets option values accordingly, to load a saved chart) **/
+
+    loadValues: function (chart, all_chart_options, input) {
+        var utils_main = require("./utils/utils_main.js");
+        try {
+            input = JSON.parse(input);
+        } catch (e) {
+            utils_main.showError("Sorry, the JSON parsing didn't work. Please double check your input. " + e);
+        }
+
+
+
+
+        /** goes through an array of objects with id / val, sets elements with a given ID to that value **/
+        var setValues = function (arr, set_individual_series /*bool*/ ) {
+            var individual_series_options = []; //gets populated if series_color and line_style_select are found
+
+            $.each(arr, function () {
+
+                if (!set_individual_series &amp;&amp; this.id.match(/series_color|line_style_select|series_type_div/)) { //look if this id has to do with individual series options
+                    individual_series_options.push(this);
+                } else {
+
+                    var element = document.getElementById(this.id);
+                    if (element) {
+                        if (element.nodeName === "DIV") {
+                            $(element).children().removeClass("selected");
+                            $(element).children("[value='" + this.val + "']").addClass("selected");
+                            //   $(element).children("[type='" + this.val + "']").click();
+
+
+                        } else if (element.type === "checkbox") {
+                            element.checked = this.val;
+                        } else {
+                            element.value = this.val;
+                        }
+                    }
+                }
+            });
+
+            return individual_series_options;
+        }; //end setValues
+
+
+
+
+        if (input.saved_values) {
+            var individual_series_options = setValues(input.saved_values, false); //false to not set indivdual series yet
+
+            //initial all chart options init and redraw chart
+            var allChartOptionsInit = require("./initializers/all_chart_options_init.js");
+            var draw_chart = require("./draw_chart.js");
+            all_chart_options = allChartOptionsInit();
+            chart = undefined;
+            chart = draw_chart.init(all_chart_options);
+
+            //reinit form updates bindings
+            var allFormUpdates = require("./form_updates/all_form_updates.js");
+            allFormUpdates(chart, all_chart_options);
+
+            //re populate the individual series options forms
+            var update_individual_series = require("./form_updates/update_individual_series.js");
+            update_individual_series.populateForm(chart, all_chart_options);
+            setValues(individual_series_options, true); //true to set indivdual series now
+
+
+            /*  trigger changes to update chart  */
+
+            //line style changes
+            $(".line_style_select").each(function () {
+                $(this).change();
+            });
+
+            //individual color changes
+            $(".jscolor").each(function (i) {
+                var color = "#" + $(this).val();
+                update_individual_series.updateSeriesColor(chart, all_chart_options, i, color);
+                $(this).focus().blur();
+            });
+
+            //add recession shading
+            $("#chart_add_recession_shading_select").change();
+
+            window.scrollTo(0, 0); //scrolls to top
+
+        }
+    },
+
+
+
+
+    /** when load_chart_button is clicked, load the input options from #load_chart_textarea and update the chart **/
+
+    initLoad: function (chart, all_chart_options) {
+
+        $("#load_chart_button").unbind().click(function () {
+            var input = $("#load_chart_textarea").val();
+            $("#load_chart_div").hide(function () { //hide this area (makes loading much faster)
+                if (input.length > 0) {
+                    chart_recall.loadValues(chart, all_chart_options, input);
+                    $("#show_load_chart_area_button").removeClass("load_chart_showing");
+                };
+            })
+
+
+
+
+        });
+    }
+
+
+};
+
+module.exports = chart_recall;</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-form_updates_all_form_updates.html">form_updates/all_form_updates</a></li><li><a href="module-form_updates_update_chart_type.html">form_updates/update_chart_type</a></li><li><a href="module-form_updates_update_colors.html">form_updates/update_colors</a></li><li><a href="module-form_updates_update_individual_series.html">form_updates/update_individual_series</a></li><li><a href="module-initializers_all_chart_options_init.html">initializers/all_chart_options_init</a></li><li><a href="module-initializers_chart_init.html">initializers/chart_init</a></li><li><a href="module-initializers_colors_init.html">initializers/colors_init</a></li><li><a href="module-initializers_credits_init.html">initializers/credits_init</a></li><li><a href="module-initializers_exporting_init.html">initializers/exporting_init</a></li><li><a href="module-initializers_legend_init.html">initializers/legend_init</a></li><li><a href="module-initializers_plot_options_init.html">initializers/plot_options_init</a></li><li><a href="module-initializers_series_init.html">initializers/series_init</a></li><li><a href="module-initializers_subtitle_init.html">initializers/subtitle_init</a></li><li><a href="module-initializers_title_init.html">initializers/title_init</a></li><li><a href="module-initializers_tooltip_init.html">initializers/tooltip_init</a></li><li><a href="module-initializers_x_axis_init.html">initializers/x_axis_init</a></li><li><a href="module-initializers_y_axis_init.html">initializers/y_axis_init</a></li><li><a href="module-parsers_parse_for_bubble.html">parsers/parse_for_bubble</a></li><li><a href="module-parsers_parse_for_drilldown.html">parsers/parse_for_drilldown</a></li><li><a href="module-parsers_parse_for_scatter.html">parsers/parse_for_scatter</a></li><li><a href="module-parsers_parse_for_typical_chart.html">parsers/parse_for_typical_chart</a></li><li><a href="module-parsers_parse_table_input.html">parsers/parse_table_input</a></li><li><a href="module-utils_jq_extensions.html">utils/jq_extensions</a></li></ul><h3>Classes</h3><ul><li><a href="AllChartOptions.html">AllChartOptions</a></li><li><a href="ChartOptions.html">ChartOptions</a></li><li><a href="Colors.html">Colors</a></li><li><a href="Credits.html">Credits</a></li><li><a href="Exporting.html">Exporting</a></li><li><a href="Legend.html">Legend</a></li><li><a href="PlotOptions.html">PlotOptions</a></li><li><a href="Series.html">Series</a></li><li><a href="Subtitle.html">Subtitle</a></li><li><a href="Title.html">Title</a></li><li><a href="Tooltip.html">Tooltip</a></li><li><a href="XAxis.html">XAxis</a></li><li><a href="yAxis.html">yAxis</a></li></ul><h3>Namespaces</h3><ul><li><a href="calculate_recession_dates.html">calculate_recession_dates</a></li><li><a href="chart_recall.html">chart_recall</a></li><li><a href="draw_chart.html">draw_chart</a></li><li><a href="keyboard_inputs.html">keyboard_inputs</a></li><li><a href="navigation_setup.html">navigation_setup</a></li><li><a href="update_chart_options.html">update_chart_options</a></li><li><a href="update_credits.html">update_credits</a></li><li><a href="update_data.html">update_data</a></li><li><a href="update_legend.html">update_legend</a></li><li><a href="update_template.html">update_template</a></li><li><a href="update_tooltip.html">update_tooltip</a></li><li><a href="update_x_axis.html">update_x_axis</a></li><li><a href="update_y_axis.html">update_y_axis</a></li><li><a href="utils_forms.html">utils_forms</a></li><li><a href="utils_main.html">utils_main</a></li></ul><h3>Global</h3><ul><li><a href="global.html#parseForMap">parseForMap</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Fri Apr 01 2016 08:43:00 GMT-0400 (EDT)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

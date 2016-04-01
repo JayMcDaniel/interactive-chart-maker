@@ -1,10 +1,11 @@
 var PlotOptions = require("../constructors/charts/plot_options.js");
 var update_legend = require("../form_updates/update_legend.js");
+var utils_forms = require("../utils/utils_forms.js");
 
 /** Initializer for "plotOptions" options section of all_chart_options. Creates and returns a new instance 
 @module
 */
-var plotOptionsInit = function plotOptionsInit(chart_type, legend_toggle_enabled) {
+var plotOptionsInit = function plotOptionsInit(legend_toggle_enabled) {
 
     //load options from user inputs
     var options = {
@@ -14,7 +15,9 @@ var plotOptionsInit = function plotOptionsInit(chart_type, legend_toggle_enabled
                 legendItemClick: update_legend.updateToggle(legend_toggle_enabled)
             },
             
-            dataLabels: {},
+            dataLabels: {
+                enabled: utils_forms.getCheckBoxValue($("#chart_show_data_labels_checkbox"))
+            },
 
             lineWidth: 1.5,
             marker: {
@@ -36,10 +39,10 @@ var plotOptionsInit = function plotOptionsInit(chart_type, legend_toggle_enabled
 
     };
 
-    options[chart_type] = {};
 
-    /** unique chart options (choosing to keep these with every chart so I don't have to reload them with individual series when chart types are updated) */
-    //just for bar or column 
+    /* unique chart options (choosing to keep these with every chart so I don't have to reload them with individual series when chart types are updated) */
+    
+    //bar or column options
     options.series.groupPadding = 0.2;
     options.series.pointPadding = 0.1;
     options.series.pointPlacement = null;

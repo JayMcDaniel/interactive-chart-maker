@@ -4,14 +4,45 @@
 
 var update_x_axis = {
 
+
+    /**makes x-axis MLR or standard style **/
+    toggleMLRStyle: function (is_checked, chart, all_chart_options) {
+
+        //if using MLR styles
+        if (is_checked) {
+            all_chart_options.xAxis.tickPosition = "inside";
+            all_chart_options.xAxis.tickColor = "#000";
+        } else { //using standard styles
+            all_chart_options.xAxis.tickPosition = "outside";
+            all_chart_options.xAxis.tickColor = "#C0D0E0";
+        }
+
+
+        chart.xAxis[0].update({
+            tickPosition: all_chart_options.xAxis.tickPosition,
+            tickColor: all_chart_options.xAxis.tickColor
+        });
+    },
+
+
     /** update the x axis title */
-    updateTitle: function (newTitle, chart, all_chart_options) {
+    updateTitle: function (new_title, chart, all_chart_options) {
         chart.xAxis[0].setTitle({
-            text: newTitle
+            text: new_title
         });
 
-        all_chart_options.xAxis.title.text = newTitle;
+        all_chart_options.xAxis.title.text = new_title;
 
+    },
+    
+
+    /** update x-axis type */
+    updateType: function (chart_type, chart, all_chart_options) {
+        chart.xAxis[0].update({
+            type: chart_type === "drilldown" ? "category" : "linear"
+        });
+        
+        all_chart_options.xAxis.type = chart_type === "drilldown" ? "category" : "linear";
     },
 
 

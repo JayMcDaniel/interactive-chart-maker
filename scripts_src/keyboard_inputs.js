@@ -35,31 +35,34 @@ var keyboard_inputs = {
 
 
     /** when nothing is selected, pressing up or downchanges which side nav tab is selected */
-    sideNavTabShortcuts: function (chart, all_chart_options) {
-        $(document).keydown(function (e) {
-
-
-            //get code
-            if (e.keyCode === 32) { //space bar
-                e.preventDefault();
-                $("#get_code_button").click();
+    sideNavTabShortcuts: function () {
+        var keys = keyboard_inputs,
+            $h = $("#chart_height_textinput"),
+            $w = $("#chart_width_textinput"),
+            $rm = $("#right_margin_textinput"),
+            $lm = $("#left_margin_textinput"),
+            $tm = $("#top_margin_textinput"),
+            $bm = $("#bottom_margin_textinput");
+                 
+        
+        $(document).unbind().keydown(function (e) {
 
                 //chart resizing keys
-            } else if (e.shiftKey && e.keyCode === 40) { //shift + down
+           if (e.shiftKey && e.keyCode === 40) { //shift + down
                 e.preventDefault();
-                $("#chart_height_textinput").val(keyboard_inputs.adjValue($("#chart_height_textinput").val(), "+")).keyup();
+                $h.val(keys.adjValue($h.val(), "+")).keyup();
 
             } else if (e.shiftKey && e.keyCode === 38) { //shift + up
                 e.preventDefault();
-                $("#chart_height_textinput").val(keyboard_inputs.adjValue($("#chart_height_textinput").val(), "-")).keyup();
+                $h.val(keys.adjValue($h.val(), "-")).keyup();
 
             } else if (e.shiftKey && e.keyCode === 37) { //shift + left
                 e.preventDefault();
-                $("#chart_width_textinput").val(keyboard_inputs.adjValue($("#chart_width_textinput").val(), "-")).keyup();
+                $w.val(keys.adjValue($w.val(), "-")).keyup();
 
             } else if (e.shiftKey && e.keyCode === 39) { //shift + right
                 e.preventDefault();
-                $("#chart_width_textinput").val(keyboard_inputs.adjValue($("#chart_width_textinput").val(), "+")).keyup();
+                $w.val(keys.adjValue($w.val(), "+")).keyup();
             }
 
 
@@ -67,38 +70,38 @@ var keyboard_inputs = {
             //margin resizing keys (up and right margins)
             else if ((event.ctrlKey || event.metaKey) && e.keyCode === 39) { //ctrl/cmd + right
                 e.preventDefault();
-                $("#right_margin_textinput").val(keyboard_inputs.adjValue($("#right_margin_textinput").val(), "-")).keyup();
+                $rm.val(keys.adjValue($rm.val(), "-")).keyup();
 
             } else if ((event.ctrlKey || event.metaKey) && e.keyCode === 37) { //ctrl/cmd + left
                 e.preventDefault();
-                $("#right_margin_textinput").val(keyboard_inputs.adjValue($("#right_margin_textinput").val(), "+")).keyup();
+                $rm.val(keys.adjValue($rm.val(), "+")).keyup();
 
             } else if ((event.ctrlKey || event.metaKey) && e.keyCode === 38) { //ctrl/cmd + up
                 e.preventDefault();
-                $("#top_margin_textinput").val(keyboard_inputs.adjValue($("#top_margin_textinput").val(), "-")).keyup();
+                $tm.val(keys.adjValue($tm.val(), "-")).keyup();
 
             } else if ((event.ctrlKey || event.metaKey) && e.keyCode === 40) { //ctrl/cmd + down
                 e.preventDefault();
-                $("#top_margin_textinput").val(keyboard_inputs.adjValue($("#top_margin_textinput").val(), "+")).keyup();
+                $tm.val(keys.adjValue($tm.val(), "+")).keyup();
             }
 
 
             //margin resizing keys (bottom and left margins
             else if (event.altKey && e.keyCode === 39) { //alt + right
                 e.preventDefault();
-                $("#left_margin_textinput").val(keyboard_inputs.adjValue($("#left_margin_textinput").val(), "+")).keyup();
+                $lm.val(keys.adjValue($lm.val(), "+")).keyup();
 
             } else if (event.altKey && e.keyCode === 37) { //alt + left
                 e.preventDefault();
-                $("#left_margin_textinput").val(keyboard_inputs.adjValue($("#left_margin_textinput").val(), "-")).keyup();
+                $lm.val(keys.adjValue($lm.val(), "-")).keyup();
 
             } else if (event.altKey && e.keyCode === 38) { //alt + up
                 e.preventDefault();
-                $("#bottom_margin_textinput").val(keyboard_inputs.adjValue($("#bottom_margin_textinput").val(), "+")).keyup();
+                $bm.val(keys.adjValue($bm.val(), "+")).keyup();
 
             } else if (event.altKey && e.keyCode === 40) { //alt + down
                 e.preventDefault();
-                $("#bottom_margin_textinput").val(keyboard_inputs.adjValue($("#bottom_margin_textinput").val(), "-")).keyup();
+                $bm.val(keys.adjValue($bm.val(), "-")).keyup();
             }
 
 
@@ -108,29 +111,28 @@ var keyboard_inputs = {
                 $(".selected_tab").prev().click();
             } else if (e.keyCode === 40) { //down
                 e.preventDefault();
-                keyboard_inputs.clickNext("tab", "selected_tab");
+                keys.clickNext("tab", "selected_tab");
             }
 
 
             //chart type (cycle through)    
             else if (e.shiftKey && e.keyCode === 67) { //shift + c 
                 e.preventDefault();
-                keyboard_inputs.clickNext("chart_type_icon", "selected_chart_type");
+                keys.clickNext("chart_type_icon", "selected");
             }
-            
-            
+
+
             //data load - series names from columns / rows
             else if (e.keyCode === 9) { //tab
                 e.preventDefault();
-                keyboard_inputs.clickNext("load_series_from_icon", "selected_load_series_from");
-                update_individual_series.populateForm(chart, all_chart_options);
+                keys.clickNext("load_series_from_icon", "selected");
             }
-            
+
 
             //color template (cycle through)    
             else if (e.keyCode === 67) { //c
                 e.preventDefault();
-                keyboard_inputs.clickNext("color_palette_row", "color_palette_selected");
+                keys.clickNext("color_palette_row", "selected");
             }
 
             //side nav shortcut keys
@@ -168,9 +170,9 @@ var keyboard_inputs = {
 
     /** initialize listenters 
     when a number entry input is focused on, attach those event listeners
-    when it leaves to main document, attach those
+    when it leaves to main document, attach those. called from navigation_setup.InitNavWithChart()
     **/
-    initListeners: function (chart, all_chart_options) {
+    initListeners: function () {
         $("input, textarea").focus(function () {
             $(document).unbind();
             $(this).off("keydown"); //so it doesnt duplicate when moving from one entry to another
@@ -179,9 +181,16 @@ var keyboard_inputs = {
         $("input, textarea").blur(function () {
             $(this).off("keydown");
             //reinit side tab nav shortcuts
-            keyboard_inputs.sideNavTabShortcuts(chart, all_chart_options);
+            keyboard_inputs.sideNavTabShortcuts();
         });
 
+        //unbind nav quick keys when over the code result area
+        $("#main_result_code_div").hover(function () {
+                $(document).unbind();
+            },
+            function () {
+                keyboard_inputs.sideNavTabShortcuts();
+            });
 
     }
 

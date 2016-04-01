@@ -22,8 +22,11 @@ var update_individual_series = {
             });
 
             //highlight clicked icon
-            $(".series_type_selected", $(this).parent()).removeClass("series_type_selected");
-            $(this).addClass("series_type_selected");
+            $(".selected", $(this).parent()).removeClass("selected");
+            $(this).addClass("selected");
+
+            //hide or show the line styles for that series
+            type === "line" ? $(".line_style_div:eq(" + i + ")").show() : $(".line_style_div:eq(" + i + ")").hide();
 
             //update all_chart_options
             all_chart_options.series[i].type = type;
@@ -33,11 +36,25 @@ var update_individual_series = {
 
     /** called when the jscolor selector is changed (mouse still down). Updates the actual chart object and all_chart_options code output object***/
     updateSeriesColor: function (chart, all_chart_options, i, jscolor) {
-        all_chart_options.colors[i] = jscolor.toRGBString();
+
+        all_chart_options.colors[i] = typeof jscolor === "string" ? jscolor : jscolor.toRGBString();
         all_chart_options.series[i].color = all_chart_options.colors[i];
         chart.series[i].update({
             color: all_chart_options.series[i].color
-        })
+        });
+    },
+
+
+
+    /** bound with populateForm. When the line style dropdown is changed, change that series **/
+    lineStyleSelectChange: function (chart, all_chart_options) {
+        $(".line_style_select").change(function () {
+            var line_style = $(this).val();
+            var i = $(this).parents(".series_snippet").index();
+            chart.series[i].update({
+                dashStyle: line_style
+            });
+        });
     },
 
 
@@ -54,22 +71,33 @@ var update_individual_series = {
         //make color input box
         var series_color = document.createElement('input');
         $(series_color).addClass("jscolor {valueElement:null}");
+        series_color.id = "series_color_" + i;
 
         //init with color, using jscolor.js
         var picker = new jscolor(series_color, {
             onFineChange: function () {
                 update_individual_series.updateSeriesColor(chart, all_chart_options, i, this);
             }
+
         });
 
+
+
         //convert rgb string into arrray
-        var rgb = utils_main.rgb2arr(all_chart_options.colors[i]);
+        var c = i < 15 ? i : i - 15;
+        var color = all_chart_options.colors[c];
+
         //create picker
-        picker.fromRGB(rgb[0], rgb[1], rgb[2]);
+        if (color.charAt(0) === "#") { //if hex
+            picker.fromString(color);
+
+        } else { //else color is rgb
+            var rgb = utils_main.rgb2arr(color);
+            picker.fromRGB(rgb[0], rgb[1], rgb[2]);
+        }
 
         //make clear float div
         var clear_div = utils_main.makeClearFloatDiv();
-
 
         series_color_div.appendChild(series_color_label);
         series_color_div.appendChild(series_color);
@@ -81,21 +109,44 @@ var update_individual_series = {
 
 
     /** add line style option - shown only if type is line**/
-    makeLineStyleDiv: function () {
+    makeLineStyleDiv: function (i) {
 
         var line_style_div = document.createElement("div");
         line_style_div.className = "line_style_div";
+
         var line_style_label = document.createElement("label");
         line_style_label.className = "line_style_label";
         line_style_label.textContent = "Line style: ";
+
         var line_style_select = document.createElement("select");
+        line_style_select.className = "line_style_select";
+        line_style_select.id = "line_style_select_" + i;
+
         var line_style_option_solid = document.createElement("option");
         line_style_option_solid.textContent = "Solid";
-        var line_style_option_dashed = document.createElement("option");
-        line_style_option_dashed.textContent = "Dashed";
+        line_style_option_solid.value = "Solid";
+
+        var line_style_option_dash = document.createElement("option");
+        line_style_option_dash.textContent = "Dash";
+        line_style_option_dash.value = "Dash";
+
+        var line_style_option_dot = document.createElement("option");
+        line_style_option_dot.textContent = "Dot";
+        line_style_option_dot.value = "Dot";
+
+        var line_style_option_long_dash = document.createElement("option");
+        line_style_option_long_dash.textContent = "Long dash";
+        line_style_option_long_dash.value = "LongDash";
+
+        var line_style_option_dash_dot = document.createElement("option");
+        line_style_option_dash_dot.textContent = "Dash-dot";
+        line_style_option_dash_dot.value = "DashDot";
 
         line_style_select.appendChild(line_style_option_solid);
-        line_style_select.appendChild(line_style_option_dashed);
+        line_style_select.appendChild(line_style_option_dash);
+        line_style_select.appendChild(line_style_option_dot);
+        line_style_select.appendChild(line_style_option_long_dash);
+        line_style_select.appendChild(line_style_option_dash_dot);
 
         line_style_div.appendChild(line_style_label);
         line_style_div.appendChild(line_style_select);
@@ -108,6 +159,7 @@ var update_individual_series = {
     makeSeriesTypeDiv: function (chart, all_chart_options, i) {
         var series_type_div = document.createElement("div");
         series_type_div.className = "series_type_div";
+        series_type_div.id = "series_type_div_" + i;
 
         var series_type_label = document.createElement("label");
         series_type_label.className = "series_type_label";
@@ -118,16 +170,17 @@ var update_individual_series = {
         $(series_type_column).addClass("series_type_icon series_type_column")
             .attr("type", "column");
         if (chart.series[i].type === "column") {
-            $(series_type_column).addClass("series_type_selected");
+            $(series_type_column).addClass("selected");
         }
 
         var series_type_line = document.createElement("div");
         $(series_type_line).addClass("series_type_icon series_type_line")
             .attr("type", "line");
         if (chart.series[i].type === "line") {
-            $(series_type_line).addClass("series_type_selected");
+            $(series_type_line).addClass("selected");
 
         }
+
 
         var clear_div = utils_main.makeClearFloatDiv();
 
@@ -139,6 +192,8 @@ var update_individual_series = {
         return series_type_div;
 
     },
+
+
 
 
     /** populates #display_series_options with options for each series. Called when its side nav tab is selected. **/
@@ -156,8 +211,6 @@ var update_individual_series = {
             //make series color input
             var series_color_div = update_individual_series.makeSeriesColorDiv(chart, all_chart_options, i);
 
-
-
             //make outer snippet p tag
             var series_snippet = document.createElement('p');
             series_snippet.className = "series_snippet";
@@ -171,11 +224,13 @@ var update_individual_series = {
                 series_snippet.appendChild(series_type_div);
             }
 
-
-            var line_style_div = update_individual_series.makeLineStyleDiv();
+            //make line style div
+            var line_style_div = update_individual_series.makeLineStyleDiv(i);
             series_snippet.appendChild(line_style_div);
 
+            //append all
             $(display_series_options_inner_div).append(series_snippet);
+
 
             if (all_chart_options.chart.type === "line") {
                 $(".line_style_div").show();
@@ -185,6 +240,8 @@ var update_individual_series = {
 
         //bind series type changes
         update_individual_series.seriesTypeIconChange(chart, all_chart_options);
+        //bind line style changes
+        update_individual_series.lineStyleSelectChange(chart, all_chart_options);
     }
 
 }

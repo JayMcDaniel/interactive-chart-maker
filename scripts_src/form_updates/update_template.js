@@ -2,6 +2,19 @@
 @namespace
 */
 var update_template = {
+
+    /** change the chart's RenderTo ID (the div ID that the chart is loaded into)  **/
+    changeID: function (new_ID, all_chart_options) {
+
+        new_ID = $.trim(new_ID).replace(/^[^a-zA-Z_]+/g, "");
+        if (!all_chart_options) {
+            return new_ID;
+        } else {
+            all_chart_options.chart.renderTo = new_ID;
+        }
+    },
+
+    /** change the chart height and witdh **/
     resize: function (val, dimension, chart) {
         val = Number(val);
         if (!isNaN(val)) {
@@ -10,6 +23,7 @@ var update_template = {
         chart.reflow();
     },
 
+    /** change the chart's inner margins **/
     margin: function (margins_arr, chart, all_chart_options) {
 
         $.each(chart.axes, function (i, e) {
@@ -17,7 +31,7 @@ var update_template = {
         });
         chart.margin = margins_arr;
         chart.redraw(false);
-        
+
         all_chart_options.chart.margin = margins_arr;
 
     }

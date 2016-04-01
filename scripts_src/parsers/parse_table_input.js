@@ -11,8 +11,8 @@ var parseForBubble = require("./parse_for_bubble.js");
 
 
 
-/** parsing function for drilldown charts */
-var parseForDrilldown = function (input) {};
+/* parsing function for drilldown charts */
+var parseForDrilldown = require("./parse_for_drilldown.js");
 
 
 /** parsing function for map charts */
@@ -29,12 +29,12 @@ var parseForMap = function (input) {};
 * @returns {object} Object with chart title, X-axis categories and series array of objects
 */
 
-var parseTableInput = function (input, load_series_from, chart_type, legend_toggle_enabled, colors) {
+var parseTableInput = function (input, load_series_from, chart_type, legend_toggle_enabled, colors, all_chart_options) {
 
     var output;
     /** Depending on the chart type, start that parsing */
     if (["area", "line", "bar","stacked_bar", "column", "stacked_column"].indexOf(chart_type) > -1) {
-        output = parseForTypicalChart(input, load_series_from, chart_type, legend_toggle_enabled, colors);
+        output = parseForTypicalChart(input, load_series_from, chart_type, legend_toggle_enabled, colors, all_chart_options);
     } else if (chart_type == "bubble") {
         output = parseForBubble(input, chart_type, colors);
     } else if (chart_type == "scatter") {

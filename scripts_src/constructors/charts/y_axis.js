@@ -11,7 +11,7 @@ var yAxis = function (o) {
 
     this.labels = {
         
-        format: o.labels ? o.labels.format : {value},
+     //   format: o.labels ? o.labels.format : {value},
         formatter: o.labels ? o.labels.formatter : undefined,
         rotation: o.labels ? o.labels.rotation || 0 : 0,
         style: {
@@ -58,7 +58,6 @@ var yAxis = function (o) {
             color: '#000000',
             fontFamily: 'Calibri, Verdana, Arial, Helvetica, sans-serif',
             fontWeight: 'normal',
-            backgroundColor: '#fff',
             fontSize: '13px'
         }
     };

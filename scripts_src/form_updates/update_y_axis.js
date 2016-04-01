@@ -6,18 +6,45 @@ var utils_main = require("../utils/utils_main.js");
 */
 var update_y_axis = {
 
+    /**makes y-axis MLR or standard style **/
+    toggleMLRStyle: function (is_checked, chart, all_chart_options) {
+
+        //if using MLR styles
+        if (is_checked) {
+            all_chart_options.yAxis.tickWidth = 0;
+            all_chart_options.yAxis.gridLineDashStyle = 'Solid';
+        } else { //using standard styles
+            all_chart_options.yAxis.tickWidth = 1;
+            all_chart_options.yAxis.gridLineDashStyle = 'Dot';
+
+        }
+
+        chart.yAxis[0].update({
+            tickWidth: all_chart_options.yAxis.tickWidth,
+            gridLineDashStyle: all_chart_options.yAxis.gridLineDashStyle
+        });
+
+    },
+
 
     /** update format when dollar / percent signs select is changed */
-    updateFormat: function (sign, decimals, chart, all_chart_options) {
+    updateFormatter: function (sign, decimals, dividend, chart, all_chart_options) {
 
-        var newFormat = "{value:,." + decimals + "f}";
         if (sign === "$") {
-            newFormat = "${value:,." + decimals + "f}";
+            var newFormat = function () {
+                var s = "$" + Highcharts.numberFormat(this.value / dividend, decimals);
+                return s.replace(/\$-/g, "-$");
+            }
+        } else if (sign === "%") {
+            var newFormat = function () {
+                return Highcharts.numberFormat(this.value / dividend, decimals) + "%";
+            }
+        } else {
+            var newFormat = function () {
+                return Highcharts.numberFormat(this.value / dividend, decimals);
+            }
         }
 
-        if (sign === "%") {
-            newFormat = "{value:,." + decimals + "f}%";
-        }
 
         if (!chart) { // called when this is used in y_axis_init
             return newFormat;
@@ -25,13 +52,23 @@ var update_y_axis = {
 
         chart.yAxis[0].update({
             labels: {
-                format: newFormat
+                formatter: newFormat
             }
         });
 
-        all_chart_options.yAxis.format = newFormat;
+
+        var replacement_obj ={
+            decimals: decimals,
+            dividend: dividend  
+        };
+        
+        all_chart_options.yAxis.formatter = utils_main.stringifyFormatter(newFormat, replacement_obj); ///////TODO FIXX
+
 
     },
+
+
+
 
 
     /** update if y-axis is log */

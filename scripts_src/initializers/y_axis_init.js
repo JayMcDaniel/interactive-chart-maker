@@ -12,7 +12,7 @@ var yAxisInit = function yAxisInit(chart_type) {
     var options = {
 
         labels: {
-            format: update_y_axis.updateFormat($("#chart_y_axis_signs_select").val(), $("#chart_y_axis_decimals_select").val()) //val, decimals
+            formatter: undefined //fomatter is made on call back in all_form_updates.js
         },
 
         max: update_y_axis.updateMax(Number($("#chart_y_axis_max_input").val())),

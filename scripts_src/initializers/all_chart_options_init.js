@@ -19,14 +19,13 @@
  @module
  **/
  var allChartOptionsInit = function allChartOptionsInit() {
-     var chart_type = $(".selected_chart_type").divVal();
-     var load_series_from = $(".selected_load_series_from").divVal();
+     var chart_type = $("#chart_type_icons .selected").divVal();
+     var load_series_from = $("#table_input_load_series_from_icons .selected").divVal(); 
      var legend_toggle_enabled = utils_forms.getCheckBoxValue($("#legend_make_toggle_checkbox"));
      var input = $("#table_input_textarea").val();
      var colors = colorsInit();
      
      var parsed_table_output = parseTableInput(input, load_series_from, chart_type, legend_toggle_enabled, colors);
-     
 
      //get options from individual inits
      var options = {
@@ -36,7 +35,8 @@
          // exporting: exportingInit(),
          legend: legendInit(),
          plotOptions: plotOptionsInit(chart_type, legend_toggle_enabled),
-         series: seriesInit(parsed_table_output.series),
+         series: parsed_table_output.series, //removed seriesInit(parsed_table_output.series)
+         drilldown: parsed_table_output.drilldown || {},
          subtitle: subtitleInit(),
          title: titleInit(parsed_table_output.title_text),
          tooltip: tooltipInit(),
@@ -44,7 +44,6 @@
          yAxis: yAxisInit(chart_type)
 
      };
-
 
      var all_chart_options = new AllChartOptions(options);
      return all_chart_options;

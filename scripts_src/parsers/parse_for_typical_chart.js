@@ -8,11 +8,12 @@
  */
 
 
-var parseForTypicalChart = function (input, load_series_from, chart_type, legend_toggle_enabled, colors) {
+var parseForTypicalChart = function (input, load_series_from, chart_type, legend_toggle_enabled, colors, all_chart_options) {
 
     var type = chart_type.replace("stacked_", "");
 
     var output = {};
+    output.series = [];
 
     /** If loading series names from column heads is selected*/
     if (load_series_from === "column_heads") {
@@ -23,12 +24,14 @@ var parseForTypicalChart = function (input, load_series_from, chart_type, legend
         });
 
         //load series object names from column heads, and data from each column tds
-        output.series = [];
 
         $("thead tr:last th:gt(0)", input).each(function (i) {
             var seriesObj = {
                 name: $.trim($.trim($(this).text())),
                 data: [],
+//                dataLabels: {
+//                    enabled: all_chart_options ? all_chart_options.plotOptions.series.dataLabels.enabled : false
+//                },
                 type: type,
                 color: colors[i],
                 _symbolIndex: i,
@@ -61,7 +64,6 @@ var parseForTypicalChart = function (input, load_series_from, chart_type, legend
         });
 
         //load series object names from row heads, and data from row tds
-        output.series = [];
         $("tbody tr", input).each(function (i) {
 
             var this_row = $(this);
@@ -69,6 +71,9 @@ var parseForTypicalChart = function (input, load_series_from, chart_type, legend
             var seriesObj = {
                 name: $.trim($("th:eq(0)", this_row).text()),
                 data: [],
+//                dataLabels: {
+//                    enabled: all_chart_options ? all_chart_options.plotOptions.series.dataLabels.enabled : false
+//                },
                 type: type,
                 color: colors[i],
                 _symbolIndex: i,

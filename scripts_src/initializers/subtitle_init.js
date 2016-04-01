@@ -8,7 +8,7 @@ var subtitleInit = function subtitleInit() {
 
     //load options from user inputs
     var options = {
-
+        text: $("#chart_subtitle_textarea").val()
     };
 
 

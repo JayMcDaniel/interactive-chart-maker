@@ -9,7 +9,7 @@ var watchify = require("watchify"); //tool that watches src for changes and auto
 //var reactify = require("reactify"); //tool that changes jsx to js
 var streamify = require('gulp-streamify'); //glue
 var uglify = require('gulp-uglify'); //minimizes
-var sass = require('gulp-sass');  //converts sass to css
+var sass = require('gulp-sass'); //converts sass to css
 
 
 
@@ -26,8 +26,6 @@ gulp.task('sass', function () {
 gulp.task('sass:watch', function () {
     gulp.watch('./styles/sass/*.scss', ['sass']);
 });
-
-
 
 
 
@@ -55,9 +53,20 @@ gulp.task("default", ['sass', 'sass:watch'], function () {
 
         return bundler
             .bundle()
-            .on("error", gutil.log.bind(gutil, "Browserify Error"))
-            .pipe(source("scripts_build/main.min.js"))
-           // .pipe(streamify(uglify()))
+            .on("error", function (err) {
+                if (err && err.codeFrame) {
+                    gutil.log(
+                        gutil.colors.red("Browserify error: "),
+                        gutil.colors.cyan(err.filename) + ` [${err.loc.line},${err.loc.column}]`,
+                        "\r\n" + err.message + "\r\n" + err.codeFrame);
+                } else {
+                    gutil.log(err);
+                }
+                this.emit("end");
+            })
+
+        .pipe(source("scripts_build/main.min.js"))
+            // .pipe(streamify(uglify()))
             .pipe(gulp.dest("./"));
     };
     build();
