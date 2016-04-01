@@ -90,7 +90,7 @@ var navigation_setup = {
             }
 
             $(this).toggleClass("code_on");
-            $("#chart_display_area").toggleClass("fixed");
+            $(".chart_display_area").toggleClass("fixed");
 
         });
 
@@ -121,7 +121,7 @@ var navigation_setup = {
             $("#main_result_code_div").slideUp(function () { //hide the get code area if it's showing
                 $("#load_chart_div").slideToggle(50);
                 $(".code_on").removeClass("code_on");
-                $("#chart_display_area").toggleClass("fixed");
+                $(".chart_display_area").toggleClass("fixed");
             });
 
             $(this).toggleClass("load_chart_showing");

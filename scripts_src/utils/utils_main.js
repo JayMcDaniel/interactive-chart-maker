@@ -66,21 +66,52 @@
 
          },
 
-         /** stringify tooltip formatter function **/
-         stringifyFormatter: function (new_tooltip, decimals, multiplier, signs_arr, z_title) {
-             return new_tooltip.toString()
-                 .replace(/multiplier/g, multiplier)
-                 .replace(/decimals/g, decimals)
-                 .replace(/signs_arr\[0\]/g, '"' + signs_arr[0] + '"')
-                 .replace(/signs_arr\[1\]/g, '"' + signs_arr[1] + '"')
-                 .replace(/z_title/, z_title);
+
+
+
+         /** stringify tooltip / y-axis formatter function **/
+         stringifyFormatter: function (tooltip, replacement_obj) {
+
+             var tooltip_str = tooltip.toString();
+
+             for (name in replacement_obj) {
+                 var re = new RegExp(name, "g");
+
+                 if (isNaN(Number(replacement_obj[name]))) { //replace strings with quotes
+                     tooltip_str = tooltip_str.replace(re, '"' + replacement_obj[name] + '"');
+                 } else {
+                     tooltip_str = tooltip_str.replace(re, replacement_obj[name]); //replace numbers without quotes
+                 }
+
+                 if (replacement_obj.signs_arr) { //replace signs array (["$","%"]) with symbols 
+                     tooltip_str = tooltip_str.replace(/signs_arr\[0\]/g, '"' + replacement_obj.signs_arr[0] + '"')
+                         .replace(/signs_arr\[1\]/g, '"' + replacement_obj.signs_arr[1] + '"');
+                 }
+
+                 tooltip_str = tooltip_str.replace('+ ""', ""); //replace empty string
+             }
+
+             return tooltip_str;
 
          },
 
 
 
-         /** place code in chart_output_code and reinit highlight */
+         /** calls code writing functions */
          writeCode: function writeCode(all_chart_options) {
+
+             utils_main.writeHTMLCode();
+             utils_main.writeJSCode(all_chart_options);
+
+         },
+         
+         writeHTMLCode: function(){
+             
+         },
+
+
+         /** place code in chart_output_code and reinit highlight */
+         writeJSCode: function (all_chart_options) {
              //save chart input values
              all_chart_options.saved_values = chart_recall.saveValues();
 
@@ -90,9 +121,8 @@
                  .replace(/\s{2,} /g, " ");
 
              $("#chart_output_code").text(chart_options_js_string).each(function (i, block) {
-                 hljs.highlightBlock(block);
+                 hljs.highlightBlock(block); //init code coloring
              });
-
          }
 
 

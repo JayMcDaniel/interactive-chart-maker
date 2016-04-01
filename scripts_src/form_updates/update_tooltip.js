@@ -149,9 +149,15 @@ var update_tooltip = {
         }
 
         chart.tooltip.options.formatter = new_tooltip;
-        //    chart.tooltip.refresh(chart.series[0].data[0]);
 
-        all_chart_options.tooltip.formatter = utils_main.stringifyFormatter(new_tooltip, decimals, multiplier, signs_arr, z_title);
+        var replacement_obj = {
+            decimals: decimals,
+            multiplier: multiplier,
+            signs_arr: signs_arr,
+            z_title: z_title
+        };
+
+        all_chart_options.tooltip.formatter = utils_main.stringifyFormatter(new_tooltip, replacement_obj);
 
     }
 

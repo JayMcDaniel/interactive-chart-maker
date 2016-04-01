@@ -53,6 +53,12 @@ var allFormUpdates = function (chart, all_chart_options) {
 
     /* TEMPLATE CHANGES */
 
+    
+    //chart ID
+    $("#chart_id_textinput").unbind().keyup(function () {
+        update_template.changeID($(this).val(), all_chart_options);
+    });
+
     //chart width
     $("#chart_width_textinput").unbind().keyup(function () {
         update_template.resize($(this).val(), "width", chart);
@@ -215,12 +221,13 @@ var allFormUpdates = function (chart, all_chart_options) {
     });
 
     //y-axis dollar / percent or decimal selects changed (format)
-    $("#chart_y_axis_signs_select, #chart_y_axis_decimals_select").unbind().change(function () {
+    $("#chart_y_axis_signs_select, #chart_y_axis_decimals_select, #chart_y_axis_divide_select").unbind().change(function () {
         var sign = $("#chart_y_axis_signs_select").val();
         var decimals = $("#chart_y_axis_decimals_select").val();
-        update_y_axis.updateFormat(sign, decimals, chart, all_chart_options)
+        var dividend = Number($("#chart_y_axis_divide_select").val());
+        update_y_axis.updateFormatter(sign, decimals, dividend, chart, all_chart_options);
     });
-
+    $("#chart_y_axis_signs_select").change(); //call once on load
 
 
     /* TOOLTIP CHANGES */
@@ -244,8 +251,8 @@ var allFormUpdates = function (chart, all_chart_options) {
 
 
     /* EXTRA OPTIONS CHANGES */
-    
-    
+
+
     //Subtitle change
     $("#chart_subtitle_textarea").unbind().bind('input propertychange', function () {
         var new_title = $(this).val();
@@ -274,17 +281,17 @@ var allFormUpdates = function (chart, all_chart_options) {
         update_chart_options.toggleDataLabels(val, chart, all_chart_options);
     });
 
-    
+
     //recession shading
-    $("#chart_add_recession_shading_select").unbind().change(function(){
+    $("#chart_add_recession_shading_select").unbind().change(function () {
         var dates_type = $(this).val();
         var plot_bands_arr = calculate_recession_dates.createPlotBands(all_chart_options.xAxis.categories, dates_type);
         calculate_recession_dates.insertPlotBands(plot_bands_arr, chart, all_chart_options);
         update_credits.updateCreditText(chart, all_chart_options);
     });
-    
-    
-    
+
+
+
 
 
     /* Initialize chart_recall (load saved chart button ) */

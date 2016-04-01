@@ -45,16 +45,16 @@
         display: block;
         line-height: .5em;
     }
-
-.alert-danger{
-    display: block;
-    margin: 0px;
-    position: fixed;
-    padding-left: 5px;
-    padding-right: 5px;
-}
     
-    #chart_display_area {
+    .alert-danger {
+        display: block;
+        margin: 0px;
+        position: fixed;
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+    
+    .chart_display_area {
         width: 580px;
         height: 430px;
         margin: 20px;
@@ -124,8 +124,9 @@
         }
     }
     
-    #chart_output_code_hidden_textarea { //hidden but can't actually hide to make this .select able
-       // display: block;
+    #chart_output_code_hidden_textarea {
+        //hidden but can't actually hide to make this .select able
+        // display: block;
         // Place in top-left corner of screen regardless of scroll position.
         position: fixed;
         top: 0;
