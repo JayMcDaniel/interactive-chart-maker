@@ -22,18 +22,25 @@ var allFormUpdates = function (chart, all_chart_options) {
     /* CHART TYPE CHANGES */
 
 
-    /** when chart type icon is clicked and changed **/
+    allFormUpdates.selectChart = function (selected) {
+        //change selected icon
+        $("#chart_type_icons .chart_type_icon").removeClass("selected");
+        $(selected).addClass("selected");
+        
+    };
 
+    /* when chart type icon is clicked and changed */
 
     $.each(['area', 'line', 'bar', 'stacked_bar', 'column', 'stacked_column', 'bubble', 'scatter', "drilldown"], function (i, type) {
         $('#chart_type_' + type).unbind().click(function () {
-            //change selected icon
-            $("#chart_type_icons .chart_type_icon").removeClass("selected");
-            $(this).addClass("selected");
+
+            $(".chart_tab").show();
+            allFormUpdates.selectChart(this);
             var chart_type = $(this).divVal();
 
+
             //hide stuff unrelated to that chart type (line, bar, column)
-            if (["area", "line", "bar", "column", "stacked_column", "stacked_bar"].indexOf(chart_type) > -1) {
+            if (["area", "line", "bar", "column", "stacked_column", "stacked_bar"].indexOf(chart_type) > -1) { //if one of these
                 $(".show_line, .show_bar, .show_column").show();
             } else {
                 $(".show_line, .show_bar, .show_column").hide();
@@ -49,11 +56,16 @@ var allFormUpdates = function (chart, all_chart_options) {
     });
 
 
+    /* when map type icon is click */
+    $('#chart_type_map').unbind().click(function () {
+        allFormUpdates.selectChart(this);
+        $(".chart_tab").not(".map_tab").hide();
 
+    });
 
     /* TEMPLATE CHANGES */
 
-    
+
     //chart ID
     $("#chart_id_textinput").unbind().keyup(function () {
         update_template.changeID($(this).val(), all_chart_options);

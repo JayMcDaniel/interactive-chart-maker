@@ -1,5 +1,6 @@
     $primary_color: rgb(51, 122, 183);
     $secondary_color: rgb(136, 181, 221);
+    $dark_color: #4B4B50;
     $highlight_color: rgb(183, 52, 56);
     $primary_light_color: #fff;
     $secondary_light_color: rgb(255, 250, 250);
@@ -33,7 +34,11 @@
     
     a {
         text-decoration: underline;
-        color: #337ab7;
+        color: $dark_color;
+    }
+    
+    a:hover {
+        color: $highlight_color;
     }
     
     br {
@@ -124,6 +129,10 @@
         }
     }
     
+    .load_series_from_icon {
+        margin-bottom: 0px;
+    }
+    
     #chart_output_code_hidden_textarea {
         //hidden but can't actually hide to make this .select able
         // display: block;
@@ -192,6 +201,19 @@
     
     .fixed {
         position: fixed;
+    }
+    
+    h3 {
+        margin-top: 0px;
+        margin-bottom: 20px;
+        font-family: "sinkin_sans200_x_light";
+        color: $primary_color;
+    }
+    
+    h5 {
+        font-family: "sinkin_sans200_x_light";
+        color: $primary_light_color;
+        font-size: 120%;
     }
     
     .help_icon,
@@ -267,6 +289,7 @@
     #main_result_code_div,
     #load_chart_div {
         display: none;
+        position: relative;
         width: 100%;
         min-height: 500px;
         padding: 10px;
@@ -385,17 +408,6 @@
         color: $primary_light_color;
         min-height: 100%;
         padding: 10px;
-        h3 {
-            margin-top: 0px;
-            margin-bottom: 5px;
-            font-family: "sinkin_sans200_x_light";
-            color: $primary_color;
-        }
-        h5 {
-            font-family: "sinkin_sans200_x_light";
-            color: $primary_light_color;
-            font-size: 120%;
-        }
         #side_nav_tabs {
             .tab {
                 cursor: pointer;
@@ -505,7 +517,8 @@
     
     #get_code_button,
     #show_load_chart_area_button,
-    .copy_to_clipboard_button {
+    .copy_to_clipboard_button,
+    #open_table_wizard_button {
         padding: 0px 5px 0px 5px;
         border: solid 1px #b73438;
         border-radius: 5px;
@@ -536,11 +549,11 @@
     }
     
     .copy_to_clipboard_button {
-        width: 30px;
-        height: 30px;
-        float: none;
+        width: 25px;
+        height: 25px;
         margin-left: 0px;
-        margin-bottom: 3px;
+        margin-bottom: 0px;
+        margin-right: 10px;
         background-image: url(../../images/icons/copy_to_clipboard_icon.png);
         background-size: 80% 80%;
         background-repeat: no-repeat;
@@ -551,9 +564,11 @@
     }
     
     .copy_message {
-        float: left;
         position: relative;
-        left: 36px;
+        left: 3px;
+        color: #337ab7;
+        font-size: 80%;
+        font-weight: bold;
     }
     
     #show_load_chart_area_button {
@@ -567,6 +582,19 @@
             background-image: url("../../images/icons/load_hover.png");
             background-size: 100% 100%;
         }
+    }
+    
+    #open_table_wizard_button {
+        width: 35px;
+        height: 35px;
+        float: none;
+        position: relative;
+        top: 19px;
+        left: 193px;
+        background-size: 98% 98%;
+        margin: 0px;
+        background-repeat: no-repeat;
+        background-image: url(../../images/icons/ff1-sprite.gif);
     }
     
     #top_nav_bar_filler {

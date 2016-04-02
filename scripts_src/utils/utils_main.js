@@ -100,13 +100,26 @@
          /** calls code writing functions */
          writeCode: function writeCode(all_chart_options) {
 
-             utils_main.writeHTMLCode();
+             utils_main.writeHTMLCode(all_chart_options);
              utils_main.writeJSCode(all_chart_options);
 
          },
-         
-         writeHTMLCode: function(){
-             
+
+         writeHTMLCode: function (all_chart_options) {
+             if (all_chart_options.chart.type !== "map") {
+                 var width = $("#chart_width_textinput").val();
+                 var height = $("#chart_height_textinput").val();
+                 var id = all_chart_options.chart.renderTo;
+
+                 var html_string = '<div id="' + id + '" style = "width: ' + width + 'px; height: ' + height + 'px; margin: auto; padding: 0px;"> </div>';
+             }
+
+
+             $("#chart_html_code").text(html_string).each(function (i, block) {
+                 hljs.highlightBlock(block); //init code coloring
+             });
+
+
          },
 
 
@@ -120,10 +133,17 @@
                  .replace(/id=\\"(rowHead|columnHead)\d+\\"/g, "")
                  .replace(/\s{2,} /g, " ");
 
-             $("#chart_output_code").text(chart_options_js_string).each(function (i, block) {
-                 hljs.highlightBlock(block); //init code coloring
-             });
-         }
+
+
+             chart_options_js_string = '$(document).ready(function(){\n\
+             var all_chart_options = ' + chart_options_js_string + ';\n\
+    var ' + all_chart_options.chart.renderTo + ' = new Highcharts.Chart({all_chart_options});\n\
+});';
+
+     $("#chart_output_code").text(chart_options_js_string).each(function (i, block) {
+         hljs.highlightBlock(block); //init code coloring
+     });
+     }
 
 
      }
