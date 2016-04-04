@@ -38,21 +38,24 @@
 
     <!-- side nav bar -->
     <div id="side_main">
-        <h3>Setup options</h3>
-
+        <span id="side_nav_top">
+        <h3>Setup options <sup class = "help_icon" style="position: relative;
+    top: -10px;">?</sup></h3>
+        <p class="notes">These options have everything you need to build an interactive chart. You can cycle through them with the arrow keys.</p>
+        </span>
         <div id="side_nav_tabs">
 
             <div class="tab map_tab chart_tab selected_tab" id="tab_type"><span id="side_nav_tab_icon_chart_type" class="side_nav_tab_icon"></span>Chart type</div>
-            <div class="tab chart_tab" id="tab_chart_template"><span id="side_nav_tab_icon_sizing" class="side_nav_tab_icon"></span>Sizing (Chart template)</div>
+            <div class="tab map_tab chart_tab" id="tab_chart_template"><span id="side_nav_tab_icon_sizing" class="side_nav_tab_icon"></span>Sizing (Chart template)</div>
             <div class="tab map_tab chart_tab" id="tab_data"><span id="side_nav_tab_icon_data" class="side_nav_tab_icon"></span>Data</div>
             <div class="tab map_tab chart_tab" id="tab_color_palette"><span id="side_nav_tab_icon_color_palette" class="side_nav_tab_icon"></span>Color palette</div>
             <div class="tab chart_tab" id="tab_series_options"><span id="side_nav_tab_icon_series_options" class="side_nav_tab_icon"></span>Individual series options</div>
-            <div class="tab chart_tab" id="tab_chart_legend"><span id="side_nav_tab_icon_chart_legend" class="side_nav_tab_icon"></span>Legend</div>
+            <div class="tab map_tab chart_tab" id="tab_chart_legend"><span id="side_nav_tab_icon_chart_legend" class="side_nav_tab_icon"></span>Legend</div>
             <div class="tab chart_tab" id="tab_chart_x_axis"><span id="side_nav_tab_icon_x_axis" class="side_nav_tab_icon"></span>X-axis</div>
             <div class="tab chart_tab" id="tab_chart_y_axis"><span id="side_nav_tab_icon_y_axis" class="side_nav_tab_icon"></span>Y-axis</div>
-            <div class="tab chart_tab" id="tab_chart_tooltip"><span id="side_nav_tab_icon_chart_tooltip" class="side_nav_tab_icon"></span>Tool tip (hover infobox)</div>
-            <div class="tab chart_tab" id="tab_chart_credits"><span id="side_nav_tab_icon_chart_credits" class="side_nav_tab_icon"></span>Notes and credits</div>
-            <div class="tab chart_tab" id="tab_chart_extra_options"><span id="side_nav_tab_icon_extra_options" class="side_nav_tab_icon"></span>Extra options</div>
+            <div class="tab map_tab chart_tab" id="tab_chart_tooltip"><span id="side_nav_tab_icon_chart_tooltip" class="side_nav_tab_icon"></span>Tool tip (hover infobox)</div>
+            <div class="tab map_tab chart_tab" id="tab_chart_credits"><span id="side_nav_tab_icon_chart_credits" class="side_nav_tab_icon"></span>Notes and credits</div>
+            <div class="tab map_tab chart_tab" id="tab_chart_extra_options"><span id="side_nav_tab_icon_extra_options" class="side_nav_tab_icon"></span>Extra options</div>
 
         </div>
         <div id="side_display">
@@ -96,7 +99,7 @@
                     <label for="chart_id_textinput">Unique ID:</label>
                     <br>
                     <span class="notes">Important if using one or more charts on a page. Make sure not to use spaces, hyphens, or start with a number.<br></span>
-                    <input type="text" id="chart_id_textinput" class="medium" value="chart_display_area" />
+                    <input type="text" id="chart_id_textinput" class="medium" value="chart1" />
 
                     <br>
 
@@ -162,7 +165,6 @@
                         <br> For this to work, it needs to be a properly formatted, 508-compliant table (using thead, tbody, caption, th and td tags where appropriate). It also needs to have a title and be a simple table with only one column header per column and one row header per row. You can convert spreadsheets to 508-compliant tables with the <a href="table_wizard/better_table_wizard.htm" target="_blank">Table Wizard</a>.
 
                     </p>
-                    <br>
                     <div class="show_scatter">
                         <p> With scatter charts, series names will be loaded from the row headers. For each set of two columns in the table body, a dot will be drawn &mdash; its x-value coming from the first column and its y-value coming from the second column.</p>
                         <table id="scatter_example" class="regular" cellspacing="0" cellpadding="0" xborder="1" style="width: 95%">
@@ -258,129 +260,130 @@
                             </tbody>
                         </table>
                     </div>
-
+                    
+                <a href="table_wizard/better_table_wizard.htm" target="_blank" title="Open Table Wizard (new tab)"><span id="open_table_wizard_button"></span>Open Table Wizard (new tab)</a>
 
                     <div class="clear_next_textarea_button" title="Clear the text area">X</div>
 
                     <textarea id="table_input_textarea" class="large" placeholder="Insert table html here">
-                   <table id="BLS_table" class="regular" cellspacing="0" cellpadding="0" xborder="1" style=" width: 95%;">
-    <caption><span class="tableTitle">Union membership rates of employed wage and salary workers, annual averages, 2000–15</span></caption>
+                        <table id="BLS_table" class="regular" cellspacing="0" cellpadding="0" xborder="1" style=" width: 95%;">
+                            <caption><span class="tableTitle">Union membership rates of employed wage and salary workers, annual averages, 2000–15</span></caption>
 
-    <thead>
-        <tr>
-            <th rowspan="1" id="columnHead0" style=" vertical-align: middle;">Year</th>
-            <th id="columnHead1">Total private</th>
-
-
-            <th id="columnHead4">Construction</th>
-            <th id="columnHead5">Manufacturing</th>
-
-            <th id="columnHead7">Retail trade</th>
+                            <thead>
+                                <tr>
+                                    <th rowspan="1" id="columnHead0" style=" vertical-align: middle;">Year</th>
+                                    <th id="columnHead1">Total private</th>
 
 
+                                    <th id="columnHead4">Construction</th>
+                                    <th id="columnHead5">Manufacturing</th>
 
-        </tr>
-
-    </thead>
-    <tbody>
-
-
-        <tr>
-            <th id="rowHead10">
-                <p>2010</p>
-            </th>
-            <td headers="rowHead10 columnHead1">6.9</td>
-            <td headers="rowHead10 columnHead4">13.1</td>
-            <td headers="rowHead10 columnHead5">10.7</td>
-
-            <td headers="rowHead10 columnHead7">4.7</td>
+                                    <th id="columnHead7">Retail trade</th>
 
 
 
-        </tr>
+                                </tr>
 
-        <tr class="greenbar">
-            <th id="rowHead11">
-                <p>2011</p>
-            </th>
-            <td headers="rowHead11 columnHead1">6.9</td>
+                            </thead>
+                            <tbody>
 
 
-            <td headers="rowHead11 columnHead4">14.0</td>
-            <td headers="rowHead11 columnHead5">10.5</td>
+                                <tr>
+                                    <th id="rowHead10">
+                                        <p>2010</p>
+                                    </th>
+                                    <td headers="rowHead10 columnHead1">6.9</td>
+                                    <td headers="rowHead10 columnHead4">13.1</td>
+                                    <td headers="rowHead10 columnHead5">10.7</td>
 
-            <td headers="rowHead11 columnHead7">4.9</td>
-
-
-
-        </tr>
-
-        <tr>
-            <th id="rowHead12">
-                <p>2012</p>
-            </th>
-            <td headers="rowHead12 columnHead1">6.6</td>
-
-
-            <td headers="rowHead12 columnHead4">13.2</td>
-            <td headers="rowHead12 columnHead5">9.6</td>
-
-            <td headers="rowHead12 columnHead7">4.6</td>
+                                    <td headers="rowHead10 columnHead7">4.7</td>
 
 
 
-        </tr>
+                                </tr>
 
-        <tr class="greenbar">
-            <th id="rowHead13">
-                <p>2013</p>
-            </th>
-            <td headers="rowHead13 columnHead1">6.7</td>
-
-
-            <td headers="rowHead13 columnHead4">14.1</td>
-            <td headers="rowHead13 columnHead5">10.1</td>
-
-            <td headers="rowHead13 columnHead7">4.6</td>
+                                <tr class="greenbar">
+                                    <th id="rowHead11">
+                                        <p>2011</p>
+                                    </th>
+                                    <td headers="rowHead11 columnHead1">6.9</td>
 
 
+                                    <td headers="rowHead11 columnHead4">14.0</td>
+                                    <td headers="rowHead11 columnHead5">10.5</td>
 
-        </tr>
-
-        <tr>
-            <th id="rowHead14">
-                <p>2014</p>
-            </th>
-            <td headers="rowHead14 columnHead1">6.6</td>
-
-
-            <td headers="rowHead14 columnHead4">13.9</td>
-            <td headers="rowHead14 columnHead5">9.7</td>
-
-            <td headers="rowHead14 columnHead7">4.4</td>
+                                    <td headers="rowHead11 columnHead7">4.9</td>
 
 
 
-        </tr>
+                                </tr>
 
-        <tr class="greenbar">
-            <th id="rowHead15">
-                <p>2015</p>
-            </th>
-            <td headers="rowHead15 columnHead1">6.7</td>
-
-
-            <td headers="rowHead15 columnHead4">13.2</td>
-            <td headers="rowHead15 columnHead5">9.4</td>
-
-            <td headers="rowHead15 columnHead7">4.8</td>
+                                <tr>
+                                    <th id="rowHead12">
+                                        <p>2012</p>
+                                    </th>
+                                    <td headers="rowHead12 columnHead1">6.6</td>
 
 
+                                    <td headers="rowHead12 columnHead4">13.2</td>
+                                    <td headers="rowHead12 columnHead5">9.6</td>
 
-        </tr>
+                                    <td headers="rowHead12 columnHead7">4.6</td>
 
-    </tbody>
-</table>
+
+
+                                </tr>
+
+                                <tr class="greenbar">
+                                    <th id="rowHead13">
+                                        <p>2013</p>
+                                    </th>
+                                    <td headers="rowHead13 columnHead1">6.7</td>
+
+
+                                    <td headers="rowHead13 columnHead4">14.1</td>
+                                    <td headers="rowHead13 columnHead5">10.1</td>
+
+                                    <td headers="rowHead13 columnHead7">4.6</td>
+
+
+
+                                </tr>
+
+                                <tr>
+                                    <th id="rowHead14">
+                                        <p>2014</p>
+                                    </th>
+                                    <td headers="rowHead14 columnHead1">6.6</td>
+
+
+                                    <td headers="rowHead14 columnHead4">13.9</td>
+                                    <td headers="rowHead14 columnHead5">9.7</td>
+
+                                    <td headers="rowHead14 columnHead7">4.4</td>
+
+
+
+                                </tr>
+
+                                <tr class="greenbar">
+                                    <th id="rowHead15">
+                                        <p>2015</p>
+                                    </th>
+                                    <td headers="rowHead15 columnHead1">6.7</td>
+
+
+                                    <td headers="rowHead15 columnHead4">13.2</td>
+                                    <td headers="rowHead15 columnHead5">9.4</td>
+
+                                    <td headers="rowHead15 columnHead7">4.8</td>
+
+
+
+                                </tr>
+
+                            </tbody>
+                        </table>
 
                     </textarea>
                 </div>
@@ -402,7 +405,6 @@
 
                     <p class="notes">Series will load their colors from the chosen palette left to right. For more customization, see the "Individual series options" tab. You can cycle through the color templates at any time by pressing "c". The first two rows are Beyond The Numbers and Monthly Labor Review colors.</p>
 
-                    <br>
                     <!-- color palettes are loaded the first time user clicks on that tab -->
 
                     <div id="color_palettes">
@@ -483,7 +485,7 @@
 
                     <label for="chart_x_axis_title_textarea">Title: </label>
                     <br>
-                    <textarea id="chart_x_axis_title_textarea">Test X</textarea>
+                    <textarea id="chart_x_axis_title_textarea"></textarea>
                     <br>
 
                     <label for="chart_x_axis_tickmark_interval_input">Tick mark (label) interval: </label>
@@ -513,7 +515,7 @@
 
                     <label for="chart_y_axis_title_textarea">Title: </label>
                     <br>
-                    <textarea id="chart_y_axis_title_textarea">Test Y</textarea>
+                    <textarea id="chart_y_axis_title_textarea"></textarea>
                     <br>
 
                     <span id="chart_y_axis_x_position_span" class="not_bar">
@@ -553,7 +555,7 @@
 
                     <label for="chart_y_axis_decimals_select">Decimal points: </label>
                     <select id="chart_y_axis_decimals_select">
-                        <option value="" selected>Auto</option>
+                        <option value="null" selected>Auto</option>
                         <option value="0">0</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -608,6 +610,7 @@
                     </select>
                     <span class="notes">This will add a dollar or percent sign after each value in the tooltip.</span>
                     <br>
+<!--
 
                     <label for="chart_tooltip_crosshairs_select">Crosshairs: </label>
                     <select id="chart_tooltip_crosshairs_select">
@@ -617,6 +620,7 @@
                         <option value="xy_crosshairs">Both axes</option>
                     </select>
                     <br>
+-->
 
                     <label for="chart_tooltip_y_multiple_select">Multiply Y-value by: </label>
                     <select id="chart_tooltip_y_multiple_select">
@@ -662,7 +666,7 @@
             <div class="display chart_display" id="display_chart_extra_options">
                 <h4>Extra options <sup class = "help_icon">?</sup></h4>
                 <div class="display_options">
-                    
+
                     <label for="chart_subtitle_textarea">Subtitle: </label>
                     <textarea id="chart_subtitle_textarea" placeholder="Subtitle text goes here"></textarea>
                     <br>
@@ -719,13 +723,44 @@
 
         <!-- chart / map code boxes -->
         <div id="main_result_code_div">
-            <h4>Chart code <sup class = "help_icon">?</sup></h4>
-            <p class="notes">The JS comes packed by default. If you need to unpack it, most code editors will do the trick, or use this tool: <a href="http://www.strictly-software.com/unpack-javascript.aspx" target="_blank">http://www.strictly-software.com/unpack-javascript.aspx</a>.</p>
+            <h3>Chart code <sup class = "help_icon">?</sup></h3>
 
-            <span class="copy_message"></span>
-            <div class="copy_to_clipboard_button"></div>
+
+
+            <!--HTML  Code box -->
+            <div class="copy_to_clipboard_button" style="position: relative;
+    top: -5px;"></div>
+            <h4>HTML <span class="copy_message"></span></h4>
+            <p class="notes">The chart HTML is where the chart will load into on your page. Copy this into your HTML file where you want the chart to appear. Or, in the BLS CMS, this is what you put in the "chart template" section.</p>
+
+            <pre><code class="html" id="chart_html_code"></code></pre>
+
+            <br>
+            <!--JS  Code box -->
+            <div class="copy_to_clipboard_button" style="position: relative;
+    margin-top: 7px;"></div>
+            <h4>JavaScript <span class="copy_message"></span></h4>
+
+            <p class="notes">The JS comes packed by default. If you need to unpack it, most code editors will do the trick, or use this tool: <a href="http://www.strictly-software.com/unpack-javascript.aspx" target="_blank">http://www.strictly-software.com/unpack-javascript.aspx</a>.
+                <br> For these interactive charts to work on your web page, you need to first link to the supporting libraries from your HTML document:
+                <br>
+
+                <span class="code"> &lt;script src="http://www.bls.gov/javascripts/jquery-1.11.0.min.js"&gt;&lt;/script&gt;<br>
+    &lt;script src="http://www.bls.gov/assets/highcharts/3.0.10/highcharts.js"&gt;&lt;/script&gt;<br>
+    &lt;script src="http://www.bls.gov/assets/highcharts/3.0.10/highcharts-more.js"&gt;&lt;/script&gt;<br>
+    &lt;script src="http://www.bls.gov/assets/highcharts/3.0.10/modules/exporting.js"&gt;&lt;/script&gt;<br>
+    </span>
+                <br> Save the following code in a .js file with any text editor, and link to it from your HTML document like the other files.
+
+            </p>
+
             <pre><code class="js" id="chart_output_code"></code></pre>
+
+            <!--hidden textarea, used to copy code to clipboard with JS -->
             <textarea id="chart_output_code_hidden_textarea"></textarea>
+
+
+
         </div>
 
 
@@ -746,7 +781,7 @@
 
 
         <!-- chart / map display area -->
-        <div id="chart_display_area" class="chart_display_area fixed">
+        <div id="chart1" class="chart_display_area fixed">
         </div>
         <p class="alert-danger"></p>
 
@@ -760,7 +795,7 @@
 
     <!-- external libraries -->
     <script src="libraries/jquery/jquery-2.2.0.min.js"></script>
-<!--    <script   src="https://code.jquery.com/jquery-2.2.2.js"   integrity="sha256-4/zUCqiq0kqxhZIyp4G0Gk+AOtCJsY1TA00k5ClsZYE="   crossorigin="anonymous"></script>-->
+    <!--    <script   src="https://code.jquery.com/jquery-2.2.2.js"   integrity="sha256-4/zUCqiq0kqxhZIyp4G0Gk+AOtCJsY1TA00k5ClsZYE="   crossorigin="anonymous"></script>-->
     <script src="libraries/Highcharts-4.2.3/js/highcharts.src.js"></script>
     <script src="libraries/Highcharts-4.2.3/js/highcharts-more.src.js"></script>
     <script src="libraries/Highcharts-4.2.3/js/modules/drilldown.src.js"></script>

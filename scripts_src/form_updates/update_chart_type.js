@@ -7,7 +7,7 @@ var update_x_axis = require("./update_x_axis.js");
 /** when a chart icon is clicked, this function is called - changes the chart type shown 
 @module
 */
-var updateChartType = function (i, chart_type, chart, all_chart_options) {
+var updateChartType = function (chart_type, chart, all_chart_options) {
     var type = chart_type.replace("stacked_", "");
 
     if (type === "bar") {

@@ -32,16 +32,17 @@ var utils_forms = {
         $(".copy_to_clipboard_button").click(
             function () {
 
-                var copied_text = $(this).next("pre").text();
-                $(this).nextAll("textarea").val(copied_text).select(); //move text to hidden text area so it can be selected and copied
+                var copied_text = $(this).nextAll("pre:eq(0)").text();
+                var copy_message_span = $(this).next().children(".copy_message");
+                $(this).nextAll("textarea:eq(0)").val(copied_text).select(); //move text to hidden text area so it can be selected and copied
 
                 try {
                     var successful = document.execCommand('copy');
                     var msg = successful ? 'Copied!' : 'Not copied!';
-                    $(".copy_message").text(msg);
+                    copy_message_span.text(msg);
 
                     setTimeout(function () { //hide message after a bit
-                        $(".copy_message").text("");
+                        copy_message_span.text("");
                     }, 2000);
 
                 } catch (err) {

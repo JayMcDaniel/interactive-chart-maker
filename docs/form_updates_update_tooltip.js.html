@@ -46,7 +46,7 @@ var update_tooltip = {
     /** gets a tooltip for bubble charts. Called from updateToolTip **/
     getBubbleTooltip: function (chart, decimals, signs_arr, multiplier, chart_type, z_title) {
 
-        var new_tooltip = function () {
+        var newTooltip = function () {
             var y_axis_title = this.series.yAxis.axisTitle ? this.series.yAxis.axisTitle.textStr : "Y-Axis";
             var x_axis_title = this.series.xAxis.axisTitle ? this.series.xAxis.axisTitle.textStr : "X-Axis";
 
@@ -58,7 +58,7 @@ var update_tooltip = {
             return s.replace(/\$-/g, "-$");
         };
 
-        return new_tooltip;
+        return newTooltip;
 
     },
 
@@ -67,7 +67,7 @@ var update_tooltip = {
     /** gets a tooltip for scatter charts. Called from updateToolTip**/
     getScatterTooltip: function (chart, decimals, signs_arr, multiplier, chart_type) {
 
-        var new_tooltip = function () {
+        var newTooltip = function () {
             var y_axis_title = this.series.yAxis.axisTitle ? this.series.yAxis.axisTitle.textStr : "Y-Axis";
             var x_axis_title = this.series.xAxis.axisTitle ? this.series.xAxis.axisTitle.textStr : "X-Axis";
 
@@ -78,7 +78,7 @@ var update_tooltip = {
             return s.replace(/\$-/g, "-$");
         };
 
-        return new_tooltip;
+        return newTooltip;
     },
 
 
@@ -86,13 +86,13 @@ var update_tooltip = {
     /** gets a tooltip for typical charts (line, area, bar etc). Called from updateToolTip**/
     getTypicalTooltip: function (chart, is_shared, decimals, signs_arr, multiplier, chart_type) {
 
-        var new_tooltip;
+        var newTooltip;
 
         if (is_shared) { //SHARED TOOLTIP
 
             if (decimals > 0) { //use decimal formatter
 
-                new_tooltip = function () {
+                newTooltip = function () {
 
                     var shared_tooltip_arr = [];
                     var point = this.point;
@@ -105,7 +105,7 @@ var update_tooltip = {
 
             } else { //don't use decimal formatter
 
-                new_tooltip = function () {
+                newTooltip = function () {
 
                     var shared_tooltip_arr = ["&lt;b>" + this.key + "&lt;/b>"];
                     var point = this.point;
@@ -121,13 +121,13 @@ var update_tooltip = {
         } else { //NOT SHARED TOOLTIP
 
             if (decimals > 0) { //use decimal formatter
-                new_tooltip = function () {
+                newTooltip = function () {
                     var s = "&lt;b>" + this.series.name + "&lt;/b>&lt;br>" + this.x + ": " + signs_arr[0] +
                         Highcharts.numberFormat((this.y * multiplier), decimals) + signs_arr[1];
                     return s.replace(/\$-/g, "-$");
                 }
             } else { //don't use decimal formatter
-                new_tooltip = function () {
+                newTooltip = function () {
                     var s = "&lt;b>" + this.series.name + "&lt;/b>&lt;br>" + this.x + ": " + signs_arr[0] +
                         $(this.y * multiplier).addCommas() + signs_arr[1];
                     return s.replace(/\$-/g, "-$");
@@ -135,7 +135,7 @@ var update_tooltip = {
             }
         }
 
-        return new_tooltip;
+        return newTooltip;
     },
 
 
@@ -143,50 +143,53 @@ var update_tooltip = {
 
 
     /** update tooltip - decide which kind of chart and call that get tooltip function **/
-    updateToolTip: function (chart, all_chart_options) {
+    updateToolTip: function (chart, all_chart_options, tt_options) {
 
-        var is_shared = utils_forms.getCheckBoxValue($("#chart_tooltip_shared_checkbox"));
-        var decimals = Number($("#chart_tooltip_force_decimals_select").val());
-        var signs = $("#chart_tooltip_signs_select").val();
-        var multiplier = $("#chart_tooltip_y_multiple_select").val();
+        var newTooltip; //will be the returned function
+
+        var is_shared = tt_options.is_shared;
+        var decimals = tt_options.decimals;
+        var signs = tt_options.signs;
+        var multiplier = tt_options.multiplier;
         var chart_type = all_chart_options.chart.type;
-        var new_tooltip;
+
         var signs_arr = [signs === "$" ? "$" : "", signs === "%" ? "%" : ""];
         var z_title = "Test Z title";
 
 
         //IF A TYPICAL CHART
         if (["area", "line", "bar", "stacked_bar", "column", "stacked_column"].indexOf(chart_type) > -1) {
-            new_tooltip = update_tooltip.getTypicalTooltip(chart, is_shared, decimals, signs_arr, multiplier, chart_type);
+            newTooltip = update_tooltip.getTypicalTooltip(chart, is_shared, decimals, signs_arr, multiplier, chart_type);
         }
 
         //IF A SCATTER CHART
         else if (chart_type === "scatter") {
-            new_tooltip = update_tooltip.getScatterTooltip(chart, decimals, signs_arr, multiplier, chart_type);
+            newTooltip = update_tooltip.getScatterTooltip(chart, decimals, signs_arr, multiplier, chart_type);
         }
 
         //IF A BUBBLE CHART
         else if (chart_type === "bubble") {
-            new_tooltip = update_tooltip.getBubbleTooltip(chart, decimals, signs_arr, multiplier, chart_type, z_title);
+            newTooltip = update_tooltip.getBubbleTooltip(chart, decimals, signs_arr, multiplier, chart_type, z_title);
         }
 
 
 
         if (!chart) { //for use in tooltip_init
-            return new_tooltip;
+            return newTooltip;
         }
 
-        chart.tooltip.options.formatter = new_tooltip;
+        chart.tooltip.options.formatter = newTooltip;
 
-        var replacement_obj = {
+        update_tooltip.replacement_obj = {
             decimals: decimals,
             multiplier: multiplier,
             signs_arr: signs_arr,
             z_title: z_title
         };
 
-        all_chart_options.tooltip.formatter = utils_main.stringifyFormatter(new_tooltip, replacement_obj);
+        //   all_chart_options.tooltip.formatter = utils_main.stringifyFormatter(newTooltip, replacement_obj);
 
+        all_chart_options.tooltip.formatter = newTooltip;
     }
 
 }
@@ -208,7 +211,7 @@ module.exports = update_tooltip;</code></pre>
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Fri Apr 01 2016 08:43:00 GMT-0400 (EDT)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Mon Apr 04 2016 16:22:02 GMT-0400 (EDT)
 </footer>
 
 <script> prettyPrint(); </script>

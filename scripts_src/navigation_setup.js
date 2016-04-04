@@ -105,7 +105,9 @@ var navigation_setup = {
 
         $(".help_icon").click(function () {
             $(this).toggleClass("help_on");
-            $(".notes", $(this).parents(".display, #main_result_code_div, #load_chart_div")).toggle();
+     
+            $(".notes", $(this).parents(".display, #main_result_code_div, #load_chart_div, #side_nav_top")).toggle();
+            
         });
 
     },
@@ -121,6 +123,7 @@ var navigation_setup = {
             $("#main_result_code_div").slideUp(function () { //hide the get code area if it's showing
                 $("#load_chart_div").slideToggle(50);
                 $(".code_on").removeClass("code_on");
+                $("#get_code_text").text("Get code");
                 $(".chart_display_area").toggleClass("fixed");
             });
 
