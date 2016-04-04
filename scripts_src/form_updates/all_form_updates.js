@@ -26,34 +26,33 @@ var allFormUpdates = function (chart, all_chart_options) {
         //change selected icon
         $("#chart_type_icons .chart_type_icon").removeClass("selected");
         $(selected).addClass("selected");
-        
+
     };
+
 
     /* when chart type icon is clicked and changed */
 
-    $.each(['area', 'line', 'bar', 'stacked_bar', 'column', 'stacked_column', 'bubble', 'scatter', "drilldown"], function (i, type) {
-        $('#chart_type_' + type).unbind().click(function () {
+    $('.chart_type_icon').unbind().click(function () {
 
-            $(".chart_tab").show();
-            allFormUpdates.selectChart(this);
-            var chart_type = $(this).divVal();
+        $(".chart_tab").show();
+        allFormUpdates.selectChart(this);
+        var chart_type = $(this).divVal();
 
+        //hide stuff unrelated to that chart type (line, bar, column)
+        if (["area", "line", "bar", "column", "stacked_column", "stacked_bar"].indexOf(chart_type) > -1) { //if one of these
+            $(".show_line, .show_bar, .show_column").show();
+        } else {
+            $(".show_line, .show_bar, .show_column").hide();
+        }
 
-            //hide stuff unrelated to that chart type (line, bar, column)
-            if (["area", "line", "bar", "column", "stacked_column", "stacked_bar"].indexOf(chart_type) > -1) { //if one of these
-                $(".show_line, .show_bar, .show_column").show();
-            } else {
-                $(".show_line, .show_bar, .show_column").hide();
-            }
+        $(".show_drilldown, .show_scatter").hide();
+        if (["scatter", "drilldown"].indexOf(chart_type) > -1) {
+            $(".show_" + chart_type).show();
+        }
 
-            $(".show_drilldown, .show_scatter").hide();
-            if (["scatter", "drilldown"].indexOf(chart_type) > -1) {
-                $(".show_" + chart_type).show();
-            }
-
-            updateChartType(i, type, chart, all_chart_options);
-        });
+        updateChartType(chart_type, chart, all_chart_options);
     });
+
 
 
     /* when map type icon is click */
@@ -246,10 +245,18 @@ var allFormUpdates = function (chart, all_chart_options) {
 
     //change shared tooltip checkbox, decimals, signs, or mulitplier selects
     $("#chart_tooltip_shared_checkbox, #chart_tooltip_force_decimals_select, #chart_tooltip_signs_select, #chart_tooltip_y_multiple_select").unbind().change(function () {
-        update_tooltip.updateToolTip(chart, all_chart_options);
+
+        var tt_options = {
+            is_shared: utils_forms.getCheckBoxValue($("#chart_tooltip_shared_checkbox")),
+            decimals: Number($("#chart_tooltip_force_decimals_select").val()),
+            signs: $("#chart_tooltip_signs_select").val(),
+            multiplier: Number($("#chart_tooltip_y_multiple_select").val())
+        };
+
+        update_tooltip.updateToolTip(chart, all_chart_options, tt_options);
     });
     //call update tooltip after page and chart is loaded (has to be on a callback with the 'chart' object)
-    update_tooltip.updateToolTip(chart, all_chart_options);
+    $("#chart_tooltip_shared_checkbox").change();
 
 
 
