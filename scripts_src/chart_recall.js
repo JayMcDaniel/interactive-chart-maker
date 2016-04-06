@@ -50,8 +50,6 @@ var chart_recall = {
         }
 
 
-
-
         /** goes through an array of objects with id / val, sets elements with a given ID to that value **/
         var setValues = function (arr, set_individual_series /*bool*/ ) {
             var individual_series_options = []; //gets populated if series_color and line_style_select are found
@@ -85,8 +83,8 @@ var chart_recall = {
 
 
 
-        if (input.saved_values) {
-            var individual_series_options = setValues(input.saved_values, false); //false to not set indivdual series yet
+       
+            var individual_series_options = setValues(input, false); //false to not set indivdual series yet
 
             //initial all chart options init and redraw chart
             var allChartOptionsInit = require("./initializers/all_chart_options_init.js");
@@ -124,7 +122,6 @@ var chart_recall = {
 
             window.scrollTo(0, 0); //scrolls to top
 
-        }
     },
 
 
@@ -135,13 +132,15 @@ var chart_recall = {
     initLoad: function (chart, all_chart_options) {
 
         $("#load_chart_button").unbind().click(function () {
-            var input = $("#load_chart_textarea").val();
+            var re = /"saved_values":(\[.+}\])/;
+            var input = $("#load_chart_textarea").val().match(re)[1]; //separate all_chart_options obj from textarea
+                        
             $("#load_chart_div").hide(function () { //hide this area (makes loading much faster)
                 if (input.length > 0) {
                     chart_recall.loadValues(chart, all_chart_options, input);
                     $("#show_load_chart_area_button").removeClass("load_chart_showing");
                 };
-            })
+            });
 
 
 

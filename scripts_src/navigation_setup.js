@@ -30,7 +30,6 @@ var navigation_setup = {
     },
 
 
-
     /** when chart code is hovered over, update **/
     chartOutputCodeFocus: function (all_chart_options) {
         $("#chart_output_code").unbind().hover(function () {
@@ -60,7 +59,7 @@ var navigation_setup = {
                 this_row.prepend(color_cells.get().reverse());
             });
             $("#color_palettes .selected").click(); //click to change colors in chart
-        
+
         });
     },
 
@@ -76,17 +75,22 @@ var navigation_setup = {
             $("#load_chart_div").hide();
 
             var $get_code_span = $("#get_code_text");
-            
+
             if ($get_code_span.text() === "Get code") {
                 $("#main_result_code_div").slideDown(50, function () {
                     //write all_chart_options
                     utils_main.writeCode(all_chart_options);
                     $get_code_span.text("Hide code");
+
+
+
                 });
 
             } else {
                 $("#main_result_code_div").slideUp(50);
                 $get_code_span.text("Get code");
+
+
             }
 
             $(this).toggleClass("code_on");
@@ -105,9 +109,9 @@ var navigation_setup = {
 
         $(".help_icon").click(function () {
             $(this).toggleClass("help_on");
-     
+
             $(".notes", $(this).parents(".display, #main_result_code_div, #load_chart_div, #side_nav_top")).toggle();
-            
+
         });
 
     },
@@ -120,7 +124,7 @@ var navigation_setup = {
 
     loadChartButtonClick: function (chart, all_chart_options) {
         $("#show_load_chart_area_button").unbind().click(function () {
-            $("#main_result_code_div").slideUp(function () { //hide the get code area if it's showing
+            $("#main_result_code_div").slideUp(50, function () { //hide the get code area if it's showing
                 $("#load_chart_div").slideToggle(50);
                 $(".code_on").removeClass("code_on");
                 $("#get_code_text").text("Get code");

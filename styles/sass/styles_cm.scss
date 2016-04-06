@@ -403,7 +403,7 @@
     
     #side_main {
         float: left;
-        width: 28%;
+        width: 30%;
         background-color: $secondary_color;
         color: $primary_light_color;
         min-height: 100%;
@@ -432,8 +432,8 @@
                 position: relative;
                 margin-right: 5px;
                 background-size: 90% 90%;
-                background-position-x: .5px;
-                background-position-y: .5px;
+                background-position-x: 1px;
+                background-position-y: 1px;
                 background-repeat: no-repeat;
                 &#side_nav_tab_icon_chart_type {
                     background-image: url(../../images/icons/line_chart_icon.png);

@@ -115,18 +115,16 @@ var update_tooltip = {
 
 
     /** update tooltip - decide which kind of chart and call that get tooltip function **/
-    updateToolTip: function (chart, all_chart_options, tt_options) {
+    updateToolTip: function (chart, all_chart_options) {
 
-        var newTooltip; //will be the returned function
-
-        var is_shared = tt_options.is_shared;
-        var decimals = tt_options.decimals;
-        var signs = tt_options.signs;
-        var multiplier = tt_options.multiplier;
-        var chart_type = all_chart_options.chart.type;
-
-        var signs_arr = [signs === "$" ? "$" : "", signs === "%" ? "%" : ""];
-        var z_title = "Test Z title";
+        var newTooltip, //will be the returned function
+            is_shared = utils_forms.getCheckBoxValue($("#chart_tooltip_shared_checkbox")),
+            decimals = Number($("#chart_tooltip_force_decimals_select").val()),
+            signs = $("#chart_tooltip_signs_select").val(),
+            multiplier = Number($("#chart_tooltip_y_multiple_select").val()),
+            chart_type = all_chart_options.chart.type,
+            signs_arr = [signs === "$" ? "$" : "", signs === "%" ? "%" : ""],
+            z_title = "Test Z title";
 
 
         //IF A TYPICAL CHART

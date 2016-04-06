@@ -246,14 +246,9 @@ var allFormUpdates = function (chart, all_chart_options) {
     //change shared tooltip checkbox, decimals, signs, or mulitplier selects
     $("#chart_tooltip_shared_checkbox, #chart_tooltip_force_decimals_select, #chart_tooltip_signs_select, #chart_tooltip_y_multiple_select").unbind().change(function () {
 
-        var tt_options = {
-            is_shared: utils_forms.getCheckBoxValue($("#chart_tooltip_shared_checkbox")),
-            decimals: Number($("#chart_tooltip_force_decimals_select").val()),
-            signs: $("#chart_tooltip_signs_select").val(),
-            multiplier: Number($("#chart_tooltip_y_multiple_select").val())
-        };
+ 
 
-        update_tooltip.updateToolTip(chart, all_chart_options, tt_options);
+        update_tooltip.updateToolTip(chart, all_chart_options);
     });
     //call update tooltip after page and chart is loaded (has to be on a callback with the 'chart' object)
     $("#chart_tooltip_shared_checkbox").change();
