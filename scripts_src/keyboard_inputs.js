@@ -19,18 +19,22 @@ var keyboard_inputs = {
     @param classname {string} the class name of each of the elements
     @param selected_classname {string} the name of the selected element
     **/
-    clickNext: function (classname, selected_classname) {
+    clickNext: function (classname, selected_classname, prev) {
+        var only_visible = classname === "tab" ? ":visible" : "";
+        
         var next = 0;
-        var len = $("." + classname).length;
-        $("." + classname).each(function (i) {
+        var len = $("." + classname + only_visible).length;
+        
+        $("." + classname + only_visible).each(function (i) {
             if ($(this).hasClass(selected_classname)) {
-                next = i + 1;
-                if (next === len) {
+ 
+               next = prev ? i + prev : i+ 1; //if a prev exists, go backwards
+                if (next === len) { //if end is reached, go to first
                     next = 0;
                 }
             }
         });
-        $("." + classname + ":eq(" + next + ")").click();
+        $("." + classname + only_visible+":eq(" + next + ")").click();
     },
 
 
@@ -43,12 +47,12 @@ var keyboard_inputs = {
             $lm = $("#left_margin_textinput"),
             $tm = $("#top_margin_textinput"),
             $bm = $("#bottom_margin_textinput");
-                 
-        
+
+
         $(document).unbind().keydown(function (e) {
 
-                //chart resizing keys
-           if (e.shiftKey && e.keyCode === 40) { //shift + down
+            //chart resizing keys
+            if (e.shiftKey && e.keyCode === 40) { //shift + down
                 e.preventDefault();
                 $h.val(keys.adjValue($h.val(), "+")).keyup();
 
@@ -108,7 +112,7 @@ var keyboard_inputs = {
             //side nav up and down keys
             else if (e.keyCode === 38) { //up
                 e.preventDefault();
-                $(".selected_tab").prev().click();
+                keys.clickNext("tab", "selected_tab", -1); //-1 for prev
             } else if (e.keyCode === 40) { //down
                 e.preventDefault();
                 keys.clickNext("tab", "selected_tab");
@@ -132,7 +136,13 @@ var keyboard_inputs = {
             //color template (cycle through)    
             else if (e.keyCode === 67) { //c
                 e.preventDefault();
-                keys.clickNext("color_palette_row", "selected");
+
+                if ($(".map_display_area").is(":visible")) {
+                    keys.clickNext("map_color_palette_row", "selected"); //map colors
+                } else {
+                    keys.clickNext("color_palette_row", "selected"); //chart colors
+                }
+
             }
 
             //side nav shortcut keys

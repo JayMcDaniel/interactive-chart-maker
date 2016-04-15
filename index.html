@@ -96,22 +96,27 @@
                 <h4>Sizing (Chart template) <sup class = "help_icon">?</sup></h4>
 
                 <div class="display_options">
-                    <label for="chart_id_textinput">Unique ID:</label>
+
+                    <span class="show_map">
+                        <label for="chart_id_textinput">Unique ID:</label>
                     <br>
                     <span class="notes">Important if using one or more charts on a page. Make sure not to use spaces, hyphens, or start with a number.<br></span>
                     <input type="text" id="chart_id_textinput" class="medium" value="chart1" />
 
                     <br>
+                    </span>
 
+                    <span class="show_map">
                     <label style="margin-bottom: -10px;">Chart size:</label>
                     <span class="notes"><br>You can also adjust the chart size at any time by using the shift + arrow keys.</span>
                     <br>
-                    <span style="margin-right: -5px;">&larr;</span>&rarr;
+                    <span style="margin-right: -5px;">&larr;</span><span>&rarr;</span>
                     <input type="text" id="chart_width_textinput" value="580" class="small number_entry" />
 
                     <span style="position: relative; top: 3px;"><span style="position: relative; left: 9px; top: -8px;">&uarr;</span>&darr;</span>
                     <input type="text" id="chart_height_textinput" value="430" class="small number_entry" />
                     <br>
+                    </span>
 
                     <label>Chart margins:</label>
                     <p class="notes">Higher values move margins inwards. You can also adjust the margins at any time by using the ctrl/cmd + arrow keys (top and right margins) and the alt + arrow keys (bottom and left margins).
@@ -165,7 +170,7 @@
                         <br> For this to work, it needs to be a properly formatted, 508-compliant table (using thead, tbody, caption, th and td tags where appropriate). It also needs to have a title and be a simple table with only one column header per column and one row header per row. You can convert spreadsheets to 508-compliant tables with the <a href="table_wizard/better_table_wizard.htm" target="_blank">Table Wizard</a>.
 
                     </p>
-                    <div class="show_scatter">
+                    <div class="just_scatter">
                         <p> With scatter charts, series names will be loaded from the row headers. For each set of two columns in the table body, a dot will be drawn &mdash; its x-value coming from the first column and its y-value coming from the second column.</p>
                         <table id="scatter_example" class="regular" cellspacing="0" cellpadding="0" xborder="1" style="width: 95%">
                             <caption><span class="tableTitle">Example table data for scatter charts</span></caption>
@@ -208,7 +213,7 @@
 
                     </div>
 
-                    <div class="show_drilldown">
+                    <div class="just_drilldown">
                         <p>
                             This will load the table into a drilldown chart. For this to work, your table row headers must be indented correctly using BLS style indents of class = "sub1", "sub2". The <a href="table_wizard/better_table_wizard.htm" target="_blank">table wizard</a> will apply these style classes when the cell text is preceded by two spaces or more.</p>
 
@@ -260,131 +265,561 @@
                             </tbody>
                         </table>
                     </div>
-                    
-                <a href="table_wizard/better_table_wizard.htm" target="_blank" title="Open Table Wizard (new tab)"><span id="open_table_wizard_button"></span>Open Table Wizard (new tab)</a>
 
-                    <div class="clear_next_textarea_button" title="Clear the text area">X</div>
+                    <div class="show_map just_map">
+                        <p>State or area names should be in the left column and values should be in the next columns. The columns need headers to work. Areas will be colored by the values in the second column Extra tooltip data will come from values in any other columns and will include their fomatting. See example:</p>
 
-                    <textarea id="table_input_textarea" class="large" placeholder="Insert table html here">
-                        <table id="BLS_table" class="regular" cellspacing="0" cellpadding="0" xborder="1" style=" width: 95%;">
-                            <caption><span class="tableTitle">Union membership rates of employed wage and salary workers, annual averages, 2000–15</span></caption>
+
+                        <table id="map_table_example" class="regular" cellspacing="0" cellpadding="0" xborder="1" style=" width: 95%;">
+                            <caption><span class="tableTitle">Example table for maps</span></caption>
 
                             <thead>
                                 <tr>
-                                    <th rowspan="1" id="columnHead0" style=" vertical-align: middle;">Year</th>
-                                    <th id="columnHead1">Total private</th>
-
-
-                                    <th id="columnHead4">Construction</th>
-                                    <th id="columnHead5">Manufacturing</th>
-
-                                    <th id="columnHead7">Retail trade</th>
-
-
-
+                                    <th rowspan="1" id="columnHead0" style=" vertical-align: middle;">State</th>
+                                    <th id="columnHead1">Location quotient</th>
+                                    <th id="columnHead2">Employment</th>
+                                    <th id="columnHead3">Annual mean wage</th>
                                 </tr>
 
                             </thead>
                             <tbody>
+                                <tr>
+                                    <th id="rowHead0">
+                                        <p>Georgia</p>
+                                    </th>
+                                    <td headers="rowHead0 columnHead1">1.74</td>
+                                    <td headers="rowHead0 columnHead2">3,730</td>
+                                    <td headers="rowHead0 columnHead3">$41,880</td>
+                                </tr>
 
+                                <tr class="greenbar">
+                                    <th id="rowHead1">
+                                        <p>Oregon</p>
+                                    </th>
+                                    <td headers="rowHead1 columnHead1">1.62</td>
+                                    <td headers="rowHead1 columnHead2">1,470</td>
+                                    <td headers="rowHead1 columnHead3">43,630</td>
+                                </tr>
+
+                                <tr>
+                                    <th id="rowHead2">
+                                        <p>Alaska</p>
+                                    </th>
+                                    <td headers="rowHead2 columnHead1">1.41</td>
+                                    <td headers="rowHead2 columnHead2">240</td>
+                                    <td headers="rowHead2 columnHead3">54,500</td>
+                                </tr>
+
+                                <tr class="greenbar">
+                                    <th id="rowHead3">
+                                        <p>Michigan</p>
+                                    </th>
+                                    <td headers="rowHead3 columnHead1">1.35</td>
+                                    <td headers="rowHead3 columnHead2">2,920</td>
+                                    <td headers="rowHead3 columnHead3">40,760</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                    <a class="show_map" href="table_wizard/better_table_wizard.htm" target="_blank" title="Open Table Wizard (new tab)"><span id="open_table_wizard_button"></span>Open Table Wizard (new tab)</a>
+
+                    <div class="clear_next_textarea_button show_map" title="Clear the text area">X</div>
+
+                    <textarea id="table_input_textarea" class="large show_map" placeholder="Insert table html here">
+                        <table id="BLS_table" class="regular" cellspacing="0" cellpadding="0" xborder="1" style=" width: 95%;">
+                            <caption><span class="tableTitle">Location quotients of tax preparers by state, 2015</span></caption>
+
+                            <thead>
+                                <tr>
+                                    <th rowspan="1" id="columnHead0" style=" vertical-align: middle;">State</th>
+                                    <th id="columnHead1">Location quotient</th>
+                                    <th id="columnHead2">Employment</th>
+                                    <th id="columnHead3">Annual mean wage</th>
+                                </tr>
+
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th id="rowHead0">
+                                        <p>Georgia</p>
+                                    </th>
+                                    <td headers="rowHead0 columnHead1">1.74</td>
+                                    <td headers="rowHead0 columnHead2">3,730</td>
+                                    <td headers="rowHead0 columnHead3">$41,880</td>
+                                </tr>
+
+                                <tr class="greenbar">
+                                    <th id="rowHead1">
+                                        <p>Oregon</p>
+                                    </th>
+                                    <td headers="rowHead1 columnHead1">1.62</td>
+                                    <td headers="rowHead1 columnHead2">1,470</td>
+                                    <td headers="rowHead1 columnHead3">43,630</td>
+                                </tr>
+
+                                <tr>
+                                    <th id="rowHead2">
+                                        <p>Alaska</p>
+                                    </th>
+                                    <td headers="rowHead2 columnHead1">1.41</td>
+                                    <td headers="rowHead2 columnHead2">240</td>
+                                    <td headers="rowHead2 columnHead3">54,500</td>
+                                </tr>
+
+                                <tr class="greenbar">
+                                    <th id="rowHead3">
+                                        <p>Michigan</p>
+                                    </th>
+                                    <td headers="rowHead3 columnHead1">1.35</td>
+                                    <td headers="rowHead3 columnHead2">2,920</td>
+                                    <td headers="rowHead3 columnHead3">40,760</td>
+                                </tr>
+
+                                <tr>
+                                    <th id="rowHead4">
+                                        <p>South Carolina</p>
+                                    </th>
+                                    <td headers="rowHead4 columnHead1">1.34</td>
+                                    <td headers="rowHead4 columnHead2">1,360</td>
+                                    <td headers="rowHead4 columnHead3">31,670</td>
+                                </tr>
+
+                                <tr class="greenbar">
+                                    <th id="rowHead5">
+                                        <p>Illinois</p>
+                                    </th>
+                                    <td headers="rowHead5 columnHead1">1.28</td>
+                                    <td headers="rowHead5 columnHead2">3,920</td>
+                                    <td headers="rowHead5 columnHead3">49,740</td>
+                                </tr>
+
+                                <tr>
+                                    <th id="rowHead6">
+                                        <p>Massachusetts</p>
+                                    </th>
+                                    <td headers="rowHead6 columnHead1">1.25</td>
+                                    <td headers="rowHead6 columnHead2">2,230</td>
+                                    <td headers="rowHead6 columnHead3">58,450</td>
+                                </tr>
+
+                                <tr class="greenbar">
+                                    <th id="rowHead7">
+                                        <p>California</p>
+                                    </th>
+                                    <td headers="rowHead7 columnHead1">1.23</td>
+                                    <td headers="rowHead7 columnHead2">9,920</td>
+                                    <td headers="rowHead7 columnHead3">56,170</td>
+                                </tr>
+
+                                <tr>
+                                    <th id="rowHead8">
+                                        <p>Arizona</p>
+                                    </th>
+                                    <td headers="rowHead8 columnHead1">1.18</td>
+                                    <td headers="rowHead8 columnHead2">1,590</td>
+                                    <td headers="rowHead8 columnHead3">46,330</td>
+                                </tr>
+
+                                <tr class="greenbar">
+                                    <th id="rowHead9">
+                                        <p>South Dakota</p>
+                                    </th>
+                                    <td headers="rowHead9 columnHead1">1.18</td>
+                                    <td headers="rowHead9 columnHead2">250</td>
+                                    <td headers="rowHead9 columnHead3">38,350</td>
+                                </tr>
 
                                 <tr>
                                     <th id="rowHead10">
-                                        <p>2010</p>
+                                        <p>Louisiana</p>
                                     </th>
-                                    <td headers="rowHead10 columnHead1">6.9</td>
-                                    <td headers="rowHead10 columnHead4">13.1</td>
-                                    <td headers="rowHead10 columnHead5">10.7</td>
-
-                                    <td headers="rowHead10 columnHead7">4.7</td>
-
-
-
+                                    <td headers="rowHead10 columnHead1">1.15</td>
+                                    <td headers="rowHead10 columnHead2">1,160</td>
+                                    <td headers="rowHead10 columnHead3">30,850</td>
                                 </tr>
 
                                 <tr class="greenbar">
                                     <th id="rowHead11">
-                                        <p>2011</p>
+                                        <p>Indiana</p>
                                     </th>
-                                    <td headers="rowHead11 columnHead1">6.9</td>
-
-
-                                    <td headers="rowHead11 columnHead4">14.0</td>
-                                    <td headers="rowHead11 columnHead5">10.5</td>
-
-                                    <td headers="rowHead11 columnHead7">4.9</td>
-
-
-
+                                    <td headers="rowHead11 columnHead1">1.14</td>
+                                    <td headers="rowHead11 columnHead2">1,760</td>
+                                    <td headers="rowHead11 columnHead3">32,670</td>
                                 </tr>
 
                                 <tr>
                                     <th id="rowHead12">
-                                        <p>2012</p>
+                                        <p>Virginia</p>
                                     </th>
-                                    <td headers="rowHead12 columnHead1">6.6</td>
-
-
-                                    <td headers="rowHead12 columnHead4">13.2</td>
-                                    <td headers="rowHead12 columnHead5">9.6</td>
-
-                                    <td headers="rowHead12 columnHead7">4.6</td>
-
-
-
+                                    <td headers="rowHead12 columnHead1">1.12</td>
+                                    <td headers="rowHead12 columnHead2">2,160</td>
+                                    <td headers="rowHead12 columnHead3">39,550</td>
                                 </tr>
 
                                 <tr class="greenbar">
                                     <th id="rowHead13">
-                                        <p>2013</p>
+                                        <p>Missouri</p>
                                     </th>
-                                    <td headers="rowHead13 columnHead1">6.7</td>
-
-
-                                    <td headers="rowHead13 columnHead4">14.1</td>
-                                    <td headers="rowHead13 columnHead5">10.1</td>
-
-                                    <td headers="rowHead13 columnHead7">4.6</td>
-
-
-
+                                    <td headers="rowHead13 columnHead1">1.10</td>
+                                    <td headers="rowHead13 columnHead2">1,550</td>
+                                    <td headers="rowHead13 columnHead3">50,270</td>
                                 </tr>
 
                                 <tr>
                                     <th id="rowHead14">
-                                        <p>2014</p>
+                                        <p>Oklahoma</p>
                                     </th>
-                                    <td headers="rowHead14 columnHead1">6.6</td>
-
-
-                                    <td headers="rowHead14 columnHead4">13.9</td>
-                                    <td headers="rowHead14 columnHead5">9.7</td>
-
-                                    <td headers="rowHead14 columnHead7">4.4</td>
-
-
-
+                                    <td headers="rowHead14 columnHead1">1.06</td>
+                                    <td headers="rowHead14 columnHead2">890</td>
+                                    <td headers="rowHead14 columnHead3">38,360</td>
                                 </tr>
 
                                 <tr class="greenbar">
                                     <th id="rowHead15">
-                                        <p>2015</p>
+                                        <p>Montana</p>
                                     </th>
-                                    <td headers="rowHead15 columnHead1">6.7</td>
+                                    <td headers="rowHead15 columnHead1">1.05</td>
+                                    <td headers="rowHead15 columnHead2">240</td>
+                                    <td headers="rowHead15 columnHead3">38,020</td>
+                                </tr>
 
+                                <tr>
+                                    <th id="rowHead16">
+                                        <p>Kentucky</p>
+                                    </th>
+                                    <td headers="rowHead16 columnHead1">1.03</td>
+                                    <td headers="rowHead16 columnHead2">990</td>
+                                    <td headers="rowHead16 columnHead3">40,390</td>
+                                </tr>
 
-                                    <td headers="rowHead15 columnHead4">13.2</td>
-                                    <td headers="rowHead15 columnHead5">9.4</td>
+                                <tr class="greenbar">
+                                    <th id="rowHead17">
+                                        <p>Arkansas</p>
+                                    </th>
+                                    <td headers="rowHead17 columnHead1">1.02</td>
+                                    <td headers="rowHead17 columnHead2">630</td>
+                                    <td headers="rowHead17 columnHead3">22,340</td>
+                                </tr>
 
-                                    <td headers="rowHead15 columnHead7">4.8</td>
+                                <tr>
+                                    <th id="rowHead18">
+                                        <p>Colorado</p>
+                                    </th>
+                                    <td headers="rowHead18 columnHead1">1.02</td>
+                                    <td headers="rowHead18 columnHead2">1,310</td>
+                                    <td headers="rowHead18 columnHead3">57,190</td>
+                                </tr>
 
+                                <tr class="greenbar">
+                                    <th id="rowHead19">
+                                        <p>United States</p>
+                                    </th>
+                                    <td headers="rowHead19 columnHead1">1.00</td>
+                                    <td headers="rowHead19 columnHead2">72,060</td>
+                                    <td headers="rowHead19 columnHead3">44,730</td>
+                                </tr>
 
+                                <tr>
+                                    <th id="rowHead20">
+                                        <p>New Hampshire</p>
+                                    </th>
+                                    <td headers="rowHead20 columnHead1">0.99</td>
+                                    <td headers="rowHead20 columnHead2">330</td>
+                                    <td headers="rowHead20 columnHead3">35,990</td>
+                                </tr>
 
+                                <tr class="greenbar">
+                                    <th id="rowHead21">
+                                        <p>Texas</p>
+                                    </th>
+                                    <td headers="rowHead21 columnHead1">0.97</td>
+                                    <td headers="rowHead21 columnHead2">5,880</td>
+                                    <td headers="rowHead21 columnHead3">43,390</td>
+                                </tr>
+
+                                <tr>
+                                    <th id="rowHead22">
+                                        <p>Utah</p>
+                                    </th>
+                                    <td headers="rowHead22 columnHead1">0.97</td>
+                                    <td headers="rowHead22 columnHead2">670</td>
+                                    <td headers="rowHead22 columnHead3">51,600</td>
+                                </tr>
+
+                                <tr class="greenbar">
+                                    <th id="rowHead23">
+                                        <p>Kansas</p>
+                                    </th>
+                                    <td headers="rowHead23 columnHead1">0.95</td>
+                                    <td headers="rowHead23 columnHead2">680</td>
+                                    <td headers="rowHead23 columnHead3">41,790</td>
+                                </tr>
+
+                                <tr>
+                                    <th id="rowHead24">
+                                        <p>Maine</p>
+                                    </th>
+                                    <td headers="rowHead24 columnHead1">0.94</td>
+                                    <td headers="rowHead24 columnHead2">290</td>
+                                    <td headers="rowHead24 columnHead3">40,300</td>
+                                </tr>
+
+                                <tr class="greenbar">
+                                    <th id="rowHead25">
+                                        <p>Minnesota</p>
+                                    </th>
+                                    <td headers="rowHead25 columnHead1">0.93</td>
+                                    <td headers="rowHead25 columnHead2">1,350</td>
+                                    <td headers="rowHead25 columnHead3">43,640</td>
+                                </tr>
+
+                                <tr>
+                                    <th id="rowHead26">
+                                        <p>Tennessee</p>
+                                    </th>
+                                    <td headers="rowHead26 columnHead1">0.93</td>
+                                    <td headers="rowHead26 columnHead2">1,360</td>
+                                    <td headers="rowHead26 columnHead3">48,050</td>
+                                </tr>
+
+                                <tr class="greenbar">
+                                    <th id="rowHead27">
+                                        <p>Florida</p>
+                                    </th>
+                                    <td headers="rowHead27 columnHead1">0.92</td>
+                                    <td headers="rowHead27 columnHead2">3,820</td>
+                                    <td headers="rowHead27 columnHead3">29,470</td>
+                                </tr>
+
+                                <tr>
+                                    <th id="rowHead28">
+                                        <p>Hawaii</p>
+                                    </th>
+                                    <td headers="rowHead28 columnHead1">0.92</td>
+                                    <td headers="rowHead28 columnHead2">300</td>
+                                    <td headers="rowHead28 columnHead3">56,450</td>
+                                </tr>
+
+                                <tr class="greenbar">
+                                    <th id="rowHead29">
+                                        <p>Connecticut</p>
+                                    </th>
+                                    <td headers="rowHead29 columnHead1">0.91</td>
+                                    <td headers="rowHead29 columnHead2">790</td>
+                                    <td headers="rowHead29 columnHead3">41,940</td>
+                                </tr>
+
+                                <tr>
+                                    <th id="rowHead30">
+                                        <p>Nevada</p>
+                                    </th>
+                                    <td headers="rowHead30 columnHead1">0.89</td>
+                                    <td headers="rowHead30 columnHead2">570</td>
+                                    <td headers="rowHead30 columnHead3">50,750</td>
+                                </tr>
+
+                                <tr class="greenbar">
+                                    <th id="rowHead31">
+                                        <p>Mississippi</p>
+                                    </th>
+                                    <td headers="rowHead31 columnHead1">0.88</td>
+                                    <td headers="rowHead31 columnHead2">510</td>
+                                    <td headers="rowHead31 columnHead3">26,940</td>
+                                </tr>
+
+                                <tr>
+                                    <th id="rowHead32">
+                                        <p>Vermont</p>
+                                    </th>
+                                    <td headers="rowHead32 columnHead1">0.87</td>
+                                    <td headers="rowHead32 columnHead2">140</td>
+                                    <td headers="rowHead32 columnHead3">51,550</td>
+                                </tr>
+
+                                <tr class="greenbar">
+                                    <th id="rowHead33">
+                                        <p>Ohio</p>
+                                    </th>
+                                    <td headers="rowHead33 columnHead1">0.85</td>
+                                    <td headers="rowHead33 columnHead2">2,350</td>
+                                    <td headers="rowHead33 columnHead3">37,030</td>
+                                </tr>
+
+                                <tr>
+                                    <th id="rowHead34">
+                                        <p>Rhode Island</p>
+                                    </th>
+                                    <td headers="rowHead34 columnHead1">0.85</td>
+                                    <td headers="rowHead34 columnHead2">210</td>
+                                    <td headers="rowHead34 columnHead3"><a href="#BLS_table_footnotes" id="anch_181"><sup>(1)</sup></a></td>
+                                </tr>
+
+                                <tr class="greenbar">
+                                    <th id="rowHead35">
+                                        <p>North Carolina</p>
+                                    </th>
+                                    <td headers="rowHead35 columnHead1">0.82</td>
+                                    <td headers="rowHead35 columnHead2">1,760</td>
+                                    <td headers="rowHead35 columnHead3">43,740</td>
+                                </tr>
+
+                                <tr>
+                                    <th id="rowHead36">
+                                        <p>Iowa</p>
+                                    </th>
+                                    <td headers="rowHead36 columnHead1">0.78</td>
+                                    <td headers="rowHead36 columnHead2">620</td>
+                                    <td headers="rowHead36 columnHead3">40,220</td>
+                                </tr>
+
+                                <tr class="greenbar">
+                                    <th id="rowHead37">
+                                        <p>New York</p>
+                                    </th>
+                                    <td headers="rowHead37 columnHead1">0.77</td>
+                                    <td headers="rowHead37 columnHead2">3,630</td>
+                                    <td headers="rowHead37 columnHead3">58,600</td>
+                                </tr>
+
+                                <tr>
+                                    <th id="rowHead38">
+                                        <p>Nebraska</p>
+                                    </th>
+                                    <td headers="rowHead38 columnHead1">0.75</td>
+                                    <td headers="rowHead38 columnHead2">380</td>
+                                    <td headers="rowHead38 columnHead3">37,720</td>
+                                </tr>
+
+                                <tr class="greenbar">
+                                    <th id="rowHead39">
+                                        <p>New Mexico</p>
+                                    </th>
+                                    <td headers="rowHead39 columnHead1">0.73</td>
+                                    <td headers="rowHead39 columnHead2">300</td>
+                                    <td headers="rowHead39 columnHead3">36,220</td>
+                                </tr>
+
+                                <tr>
+                                    <th id="rowHead40">
+                                        <p>Idaho</p>
+                                    </th>
+                                    <td headers="rowHead40 columnHead1">0.72</td>
+                                    <td headers="rowHead40 columnHead2">240</td>
+                                    <td headers="rowHead40 columnHead3">33,780</td>
+                                </tr>
+
+                                <tr class="greenbar">
+                                    <th id="rowHead41">
+                                        <p>New Jersey</p>
+                                    </th>
+                                    <td headers="rowHead41 columnHead1">0.71</td>
+                                    <td headers="rowHead41 columnHead2">1,440</td>
+                                    <td headers="rowHead41 columnHead3">42,660</td>
+                                </tr>
+
+                                <tr>
+                                    <th id="rowHead42">
+                                        <p>West Virginia</p>
+                                    </th>
+                                    <td headers="rowHead42 columnHead1">0.68</td>
+                                    <td headers="rowHead42 columnHead2">250</td>
+                                    <td headers="rowHead42 columnHead3">26,500</td>
+                                </tr>
+
+                                <tr class="greenbar">
+                                    <th id="rowHead43">
+                                        <p>Pennsylvania</p>
+                                    </th>
+                                    <td headers="rowHead43 columnHead1">0.59</td>
+                                    <td headers="rowHead43 columnHead2">1,770</td>
+                                    <td headers="rowHead43 columnHead3">42,450</td>
+                                </tr>
+
+                                <tr>
+                                    <th id="rowHead44">
+                                        <p>Maryland</p>
+                                    </th>
+                                    <td headers="rowHead44 columnHead1">0.56</td>
+                                    <td headers="rowHead44 columnHead2">760</td>
+                                    <td headers="rowHead44 columnHead3">47,520</td>
+                                </tr>
+
+                                <tr class="greenbar">
+                                    <th id="rowHead45">
+                                        <p>Wisconsin</p>
+                                    </th>
+                                    <td headers="rowHead45 columnHead1">0.56</td>
+                                    <td headers="rowHead45 columnHead2">820</td>
+                                    <td headers="rowHead45 columnHead3">39,830</td>
+                                </tr>
+
+                                <tr>
+                                    <th id="rowHead46">
+                                        <p>Delaware</p>
+                                    </th>
+                                    <td headers="rowHead46 columnHead1">0.55</td>
+                                    <td headers="rowHead46 columnHead2">130</td>
+                                    <td headers="rowHead46 columnHead3"><a href="#BLS_table_footnotes" id="anch_182"><sup>(1)</sup></a></td>
+                                </tr>
+
+                                <tr class="greenbar">
+                                    <th id="rowHead47">
+                                        <p>North Dakota</p>
+                                    </th>
+                                    <td headers="rowHead47 columnHead1">0.54</td>
+                                    <td headers="rowHead47 columnHead2">130</td>
+                                    <td headers="rowHead47 columnHead3">54,060</td>
+                                </tr>
+
+                                <tr>
+                                    <th id="rowHead48">
+                                        <p>Alabama</p>
+                                    </th>
+                                    <td headers="rowHead48 columnHead1">0.52</td>
+                                    <td headers="rowHead48 columnHead2">510</td>
+                                    <td headers="rowHead48 columnHead3">29,200</td>
+                                </tr>
+
+                                <tr class="greenbar">
+                                    <th id="rowHead49">
+                                        <p>Wyoming</p>
+                                    </th>
+                                    <td headers="rowHead49 columnHead1">0.35</td>
+                                    <td headers="rowHead49 columnHead2">50</td>
+                                    <td headers="rowHead49 columnHead3">31,720</td>
+                                </tr>
+
+                                <tr>
+                                    <th id="rowHead50">
+                                        <p>District of Columbia</p>
+                                    </th>
+                                    <td headers="rowHead50 columnHead1"><a href="#BLS_table_footnotes" id="anch_183"><sup>.8</sup></a></td>
+                                    <td headers="rowHead50 columnHead2"><a href="#BLS_table_footnotes" id="anch_184"><sup>(1)</sup></a></td>
+                                    <td headers="rowHead50 columnHead3"><a href="#BLS_table_footnotes" id="anch_185"><sup>(1)</sup></a></td>
+                                </tr>
+
+                                <tr class="greenbar">
+                                    <th id="rowHead51">
+                                        <p>Washington</p>
+                                    </th>
+                                    <td headers="rowHead51 columnHead1"><a href="#BLS_table_footnotes" id="anch_186"><sup>(1)</sup></a></td>
+                                    <td headers="rowHead51 columnHead2"><a href="#BLS_table_footnotes" id="anch_187"><sup>(1)</sup></a></td>
+                                    <td headers="rowHead51 columnHead3">37,170</td>
                                 </tr>
 
                             </tbody>
-                        </table>
+                            <tfoot>
+                                <tr class="footnotes" id="BLS_table_footnotes">
+                                    <td class="footnotes" colspan="4"><span class="footnotesTitle">Footnotes:</span>
+                                        <br>
+                                        <p><a href="#BLS_table" id="anch_188"><sup>(1)</sup></a> Data not available</p>
+                                    </td>
+                                </tr>
 
+                            </tfoot>
+                        </table>
                     </textarea>
                 </div>
 
@@ -409,6 +844,91 @@
 
                     <div id="color_palettes">
                         <!--BTN colors -->
+                    </div>
+
+                    <div id="map_color_palettes" class="just_map" style="display: block;">
+                        <div class="map_color_palette_row selected" value="color_palette_0">
+                            <div class="map_color_palette_cell" style="background-color: #cfdee7;">&nbsp;</div>
+                            <div class="map_color_palette_cell" style="background-color: #bbdbef;">&nbsp;</div>
+                            <div class="map_color_palette_cell" style="background-color: #7cacc5;">&nbsp;</div>
+                            <div class="map_color_palette_cell" style="background-color: #577b8f;">&nbsp;</div>
+                            <div class="map_color_palette_cell" style="background-color: #395463;">&nbsp;</div>
+
+                            <div style="clear:both; height:5px;">&nbsp;</div>
+                        </div>
+                        <div class="map_color_palette_row" value="color_palette_1">
+                            <div class="map_color_palette_cell" style="background-color: #ccece6;">&nbsp;</div>
+                            <div class="map_color_palette_cell" style="background-color: #99d8c9;">&nbsp;</div>
+                            <div class="map_color_palette_cell" style="background-color: #66c2a4;">&nbsp;</div>
+                            <div class="map_color_palette_cell" style="background-color: #2ca25f;">&nbsp;</div>
+                            <div class="map_color_palette_cell" style="background-color: #006d2c;">&nbsp;</div>
+
+                            <div style="clear:both; height:5px;">&nbsp;</div>
+                        </div>
+                        <div class="map_color_palette_row" value="color_palette_2">
+                            <div class="map_color_palette_cell" style="background-color: #bfd3e6;">&nbsp;</div>
+                            <div class="map_color_palette_cell" style="background-color: #9ebcda;">&nbsp;</div>
+                            <div class="map_color_palette_cell" style="background-color: #8c96c6;">&nbsp;</div>
+                            <div class="map_color_palette_cell" style="background-color: #8856a7;">&nbsp;</div>
+                            <div class="map_color_palette_cell" style="background-color: #810f7c">&nbsp;</div>
+
+                            <div style="clear:both; height:5px;">&nbsp;</div>
+                        </div>
+                        <div class="map_color_palette_row" value="color_palette_3">
+                            <div class="map_color_palette_cell" style="background-color: #ccebc5;">&nbsp;</div>
+                            <div class="map_color_palette_cell" style="background-color: #a8ddb5;">&nbsp;</div>
+                            <div class="map_color_palette_cell" style="background-color: #7bccc4;">&nbsp;</div>
+                            <div class="map_color_palette_cell" style="background-color: #43a2ca;">&nbsp;</div>
+                            <div class="map_color_palette_cell" style="background-color: #0868ac">&nbsp;</div>
+
+
+                            <div style="clear:both; height:5px;">&nbsp;</div>
+                        </div>
+                        <div class="map_color_palette_row" value="color_palette_4">
+                            <div class="map_color_palette_cell" style="background-color: #fef0d9;">&nbsp;</div>
+                            <div class="map_color_palette_cell" style="background-color: #fdbb84;">&nbsp;</div>
+                            <div class="map_color_palette_cell" style="background-color: #fc8d59;">&nbsp;</div>
+                            <div class="map_color_palette_cell" style="background-color: #e34a33;">&nbsp;</div>
+                            <div class="map_color_palette_cell" style="background-color: #b30000">&nbsp;</div>
+
+                            <div style="clear:both; height:5px;">&nbsp;</div>
+                        </div>
+                        <div class="map_color_palette_row" value="color_palette_5">
+                            <div class="map_color_palette_cell" style="background-color: #fee391;">&nbsp;</div>
+                            <div class="map_color_palette_cell" style="background-color: #fec44f;">&nbsp;</div>
+                            <div class="map_color_palette_cell" style="background-color: #fe9929;">&nbsp;</div>
+                            <div class="map_color_palette_cell" style="background-color: #d95f0e;">&nbsp;</div>
+                            <div class="map_color_palette_cell" style="background-color: #993404">&nbsp;</div>
+
+                            <div style="clear:both; height:5px;">&nbsp;</div>
+                        </div>
+                        <div class="map_color_palette_row" value="color_palette_6">
+                            <div class="map_color_palette_cell" style="background-color: #ffffb2;">&nbsp;</div>
+                            <div class="map_color_palette_cell" style="background-color: #feb24c;">&nbsp;</div>
+                            <div class="map_color_palette_cell" style="background-color: #fd8d3c;">&nbsp;</div>
+                            <div class="map_color_palette_cell" style="background-color: #f03b20;">&nbsp;</div>
+                            <div class="map_color_palette_cell" style="background-color: #bd0026">&nbsp;</div>
+
+                            <div style="clear:both; height:5px;">&nbsp;</div>
+                        </div>
+                        <div class="map_color_palette_row" value="color_palette_7">
+                            <div class="map_color_palette_cell" style="background-color: #0571b0;">&nbsp;</div>
+                            <div class="map_color_palette_cell" style="background-color: #92c5de;">&nbsp;</div>
+                            <div class="map_color_palette_cell" style="background-color: #ffffbf;">&nbsp;</div>
+                            <div class="map_color_palette_cell" style="background-color: #f4a582;">&nbsp;</div>
+                            <div class="map_color_palette_cell" style="background-color: #ca0020">&nbsp;</div>
+
+                            <div style="clear:both; height:5px;">&nbsp;</div>
+                        </div>
+                        <div class="map_color_palette_row" value="color_palette_8">
+                            <div class="map_color_palette_cell" style="background-color: #4dac26;">&nbsp;</div>
+                            <div class="map_color_palette_cell" style="background-color: #b8e186;">&nbsp;</div>
+                            <div class="map_color_palette_cell" style="background-color: rgb(215, 238, 236);">&nbsp;</div>
+                            <div class="map_color_palette_cell" style="background-color: #f1b6da;">&nbsp;</div>
+                            <div class="map_color_palette_cell" style="background-color: #d01c8b">&nbsp;</div>
+
+                            <div style="clear:both; height:5px;">&nbsp;</div>
+                        </div>
                     </div>
                     <!-- end all color palettes -->
 
@@ -454,7 +974,7 @@
                     </select>
                     <br>
 
-
+                    <span class="show_map">
                     <label>Placement:</label> <span class="notes" style="margin-bottom: -5px;">(higher values push legend right and down)</span>
                     <br>
                     <label for="legend_placement_x">&rarr; <sup>(X)</sup> </label>
@@ -466,6 +986,8 @@
                     <label for="legend_reverse_layout_checkbox">Reverse order: </label>
                     <input type="checkbox" id="legend_reverse_layout_checkbox">
                     <br>
+                    </span>
+
 
                     <label for="legend_make_toggle_checkbox" style="font-size:100%; font-weight:normal;">When a series is clicked, hide the others: </label>
                     <input type="checkbox" id="legend_make_toggle_checkbox">
@@ -592,6 +1114,7 @@
                     <span class="notes">This makes the tooltip "shared" and shows all series on hover instead of just one.</span>
                     <br>
 
+                    <span class="show_map">
                     <label for="chart_tooltip_force_decimals_select">Decimal points: </label>
                     <select id="chart_tooltip_force_decimals_select">
                         <option value="0">Auto</option>
@@ -610,7 +1133,8 @@
                     </select>
                     <span class="notes">This will add a dollar or percent sign after each value in the tooltip.</span>
                     <br>
-<!--
+                    </span>
+                    <!--
 
                     <label for="chart_tooltip_crosshairs_select">Crosshairs: </label>
                     <select id="chart_tooltip_crosshairs_select">
@@ -622,7 +1146,7 @@
                     <br>
 -->
 
-                    <label for="chart_tooltip_y_multiple_select">Multiply Y-value by: </label>
+                    <label for="chart_tooltip_y_multiple_select">Multiply values by: </label>
                     <select id="chart_tooltip_y_multiple_select">
                         <option value="1">&nbsp;</option>
                         <option value="10">10</option>
@@ -632,7 +1156,7 @@
                         <option value="100000">100,000</option>
                         <option value="1000000">1,000,000</option>
                     </select>
-
+                    <span class="notes">This can be useful when using data from a table that shows its values divided by a number.</span>
 
                 </div>
 
@@ -647,12 +1171,12 @@
             <div class="display chart_display" id="display_chart_credits">
                 <h4>Notes and credits <sup class = "help_icon">?</sup></h4>
                 <div class="display_options">
-
+                    <span class="show_map">
                     <label for="chart_credits_text_textarea">Text: </label>
                     <br>
                     <textarea id="chart_credits_text_textarea" class="medium">Click legend items to change data display. Hover over chart to view data. Source: U.S. Bureau of Labor Statistics.</textarea>
 
-
+                    </span>
                 </div>
 
             </div>
@@ -667,9 +1191,11 @@
                 <h4>Extra options <sup class = "help_icon">?</sup></h4>
                 <div class="display_options">
 
+                    <span class="show_map">
                     <label for="chart_subtitle_textarea">Subtitle: </label>
                     <textarea id="chart_subtitle_textarea" placeholder="Subtitle text goes here"></textarea>
                     <br>
+                    </span>
 
                     <label for="chart_mlr_styles_checkbox">MLR styles: </label>
                     <input type="checkbox" id="chart_mlr_styles_checkbox" />
@@ -782,6 +1308,9 @@
 
         <!-- chart / map display area -->
         <div id="chart1" class="chart_display_area fixed">
+        </div>
+
+        <div id="map1" class="map_display_area fixed">
         </div>
         <p class="alert-danger"></p>
 

@@ -1,5 +1,5 @@
-var update_x_axis = require("../form_updates/update_x_axis.js");
-var XAxis = require("../constructors/charts/x_axis.js");
+var update_x_axis = require("../../form_updates/update_x_axis.js");
+var XAxis = require("../../constructors/charts/x_axis.js");
 
 /** Initializer for "xAxis" options section of all_chart_options. Creates and returns a new instance 
 @module

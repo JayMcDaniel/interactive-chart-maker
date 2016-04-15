@@ -1,4 +1,4 @@
-var Credits = require("../constructors/charts/credits.js");
+var Credits = require("../../constructors/charts/credits.js");
 
 /** Initializer for "credits" options section of all_chart_options. Creates and returns a new instance 
 @module

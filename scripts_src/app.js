@@ -6,7 +6,7 @@ $(document).ready(function () {
 
 
     //initial all chart options init
-    var allChartOptionsInit = require("./initializers/all_chart_options_init.js");
+    var allChartOptionsInit = require("./initializers/charts/all_chart_options_init.js");
     var all_chart_options = allChartOptionsInit();
 
     //draw chart

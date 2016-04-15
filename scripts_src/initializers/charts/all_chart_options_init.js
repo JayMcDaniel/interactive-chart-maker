@@ -1,4 +1,4 @@
- var AllChartOptions = require("../constructors/charts/all_chart_options.js"),
+ var AllChartOptions = require("../../constructors/charts/all_chart_options.js"),
      chartInit = require("./chart_init.js"),
      colorsInit = require("./colors_init.js"),
      creditsInit = require("./credits_init.js"),
@@ -11,14 +11,14 @@
      tooltipInit = require("./tooltip_init.js"),
      xAxisInit = require("./x_axis_init.js"),
      yAxisInit = require("./y_axis_init.js"),
-     parseTableInput = require("../parsers/parse_table_input.js"),
-     utils_forms = require("../utils/utils_forms.js");
+     parseTableInput = require("../../parsers/parse_table_input.js"),
+     utils_forms = require("../../utils/utils_forms.js"); 
 
 
  /** create and return an instance of all_chart_options 
  @module
  **/
- var allChartOptionsInit = function allChartOptionsInit() {
+ var allChartOptionsInit = function() {
      var chart_type = $("#chart_type_icons .selected").divVal();
      var load_series_from = $("#table_input_load_series_from_icons .selected").divVal(); 
      var legend_toggle_enabled = utils_forms.getCheckBoxValue($("#legend_make_toggle_checkbox"));

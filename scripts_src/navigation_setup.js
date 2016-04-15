@@ -53,12 +53,12 @@ var navigation_setup = {
     /** when #color_palette_reverse_icon is clicked, reverse the orders of each palette */
     colorPaletteReverseIconClick: function () {
         $("#color_palette_reverse_icon").click(function () {
-            $(".color_palette_row").each(function () {
+            $(".color_palette_row, .map_color_palette_row").each(function () {
                 var this_row = $(this);
-                var color_cells = this_row.children('.color_palette_cell');
+                var color_cells = this_row.children('.color_palette_cell, .map_color_palette_cell');
                 this_row.prepend(color_cells.get().reverse());
             });
-            $("#color_palettes .selected").click(); //click to change colors in chart
+            $("#color_palettes .selected, .map_color_palette_row.selected").click(); //click to change colors in chart
 
         });
     },

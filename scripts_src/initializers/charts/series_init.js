@@ -1,4 +1,4 @@
-var Series = require("../constructors/charts/series.js");
+var Series = require("../../constructors/charts/series.js");
 
 /** Initializer for "series" options section of all_chart_options. Creates and returns a new instance 
 @module

@@ -1,4 +1,4 @@
-var Subtitle = require("../constructors/charts/subtitle.js");
+var Subtitle = require("../../constructors/charts/subtitle.js");
 
 /** Initializer for "subtitle" options section of all_chart_options. Creates and returns a new instance
 @module

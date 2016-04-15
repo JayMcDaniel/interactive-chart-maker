@@ -1,4 +1,4 @@
-var Legend = require("../constructors/charts/legend.js");
+var Legend = require("../../constructors/charts/legend.js");
 
 /** Initializer for "legend" options section of all_chart_options. Creates and returns a new instance 
 @module

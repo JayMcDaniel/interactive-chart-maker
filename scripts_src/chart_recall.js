@@ -87,7 +87,7 @@ var chart_recall = {
             var individual_series_options = setValues(input, false); //false to not set indivdual series yet
 
             //initial all chart options init and redraw chart
-            var allChartOptionsInit = require("./initializers/all_chart_options_init.js");
+            var allChartOptionsInit = require("./initializers/charts/all_chart_options_init.js");
             var draw_chart = require("./draw_chart.js");
             all_chart_options = allChartOptionsInit();
             chart = undefined;

@@ -1,5 +1,5 @@
-var ChartOptions = require("../constructors/charts/chart.js");
-var update_template = require("../form_updates/update_template.js");
+var ChartOptions = require("../../constructors/charts/chart.js");
+var update_template = require("../../form_updates/update_template.js");
 
 /** Initializer for "chart" options section of all_chart_options. Creates and returns a new instance 
 @module

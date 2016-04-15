@@ -1,6 +1,6 @@
-var PlotOptions = require("../constructors/charts/plot_options.js");
-var update_legend = require("../form_updates/update_legend.js");
-var utils_forms = require("../utils/utils_forms.js");
+var PlotOptions = require("../../constructors/charts/plot_options.js");
+var update_legend = require("../../form_updates/update_legend.js");
+var utils_forms = require("../../utils/utils_forms.js");
 
 /** Initializer for "plotOptions" options section of all_chart_options. Creates and returns a new instance 
 @module

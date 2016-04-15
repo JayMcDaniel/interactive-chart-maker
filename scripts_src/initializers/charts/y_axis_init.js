@@ -1,7 +1,7 @@
-var utils_main = require("../utils/utils_main.js");
-var YAxis = require("../constructors/charts/y_axis.js");
-var update_y_axis = require("../form_updates/update_y_axis.js");
-var utils_forms = require("../utils/utils_forms.js");
+var utils_main = require("../../utils/utils_main.js");
+var YAxis = require("../../constructors/charts/y_axis.js");
+var update_y_axis = require("../../form_updates/update_y_axis.js");
+var utils_forms = require("../../utils/utils_forms.js");
 
 /** Initializer for "yAxis" options section of all_chart_options. Creates and returns a new instance 
 @module

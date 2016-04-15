@@ -59,12 +59,17 @@
         padding-right: 5px;
     }
     
-    .chart_display_area {
+    .chart_display_area,
+    .map_display_area {
         width: 580px;
         height: 430px;
         margin: 20px;
         padding: 5px;
         background-color: $primary_color;
+    }
+    
+    .map_display_area {
+        display: none;
     }
     
     .chart_type_icon,
@@ -173,13 +178,13 @@
         font-size: 110%;
     }
     
-    .color_palette_cell {
+    .color_palette_cell, .map_color_palette_cell {
         width: 15px;
         height: 17px;
         float: left;
     }
     
-    .color_palette_row {
+    .color_palette_row, .map_color_palette_row {
         margin-bottom: 5px;
         cursor: pointer;
         width: 233px;
@@ -263,6 +268,12 @@
         top: 4px;
     }
     
+    .just_scatter,
+    .just_drilldown,
+    .just_map {
+        display: none;
+    }
+    
     label {
         font-weight: normal;
         margin-top: 10px;
@@ -279,6 +290,45 @@
     .line_style_div {
         display: none;
     }
+    /* MAP styles */
+    
+    .state {
+//        fill: #E0E0E0;
+        stroke: #646464;
+        stroke-width: 1;
+        stroke-opacity: 1;
+    }
+    
+    .territory {
+        opacity: 0;
+        fill: #E0E0E0;
+        stroke: #646464;
+        stroke-width: 1;
+        stroke-opacity: 1;
+        cursor: pointer;
+    }
+    
+    .territoryborder {
+        opacity: 0;
+        fill: none;
+        stroke: #A9A9A9;
+        stroke-width: 2;
+    }
+    
+    .border {
+        opacity: 1;
+        fill: none;
+        stroke: #A9A9A9;
+        stroke-width: 2;
+    }
+    
+    .circle {
+        opacity: 1;
+        fill: #E0E0E0;
+        stroke: #646464;
+        stroke-width: 1;
+    }
+    /* end map styles */
     
     #main_content_div {
         width: 70%;
@@ -396,17 +446,12 @@
         margin-bottom: 40px;
     }
     
-    .show_scatter,
-    .show_drilldown {
-        display: none;
-    }
-    
     #side_main {
         float: left;
         width: 30%;
         background-color: $secondary_color;
         color: $primary_light_color;
-        min-height: 100%;
+        min-height: 150%;
         padding: 10px;
         #side_nav_tabs {
             .tab {
@@ -585,8 +630,8 @@
     }
     
     #open_table_wizard_button {
-        width: 35px;
-        height: 35px;
+        width: 25px;
+        height: 25px;
         float: none;
         position: relative;
         top: 19px;

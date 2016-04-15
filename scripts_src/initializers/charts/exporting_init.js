@@ -1,4 +1,4 @@
-var Exporting = require("../constructors/charts/exporting.js");
+var Exporting = require("../../constructors/charts/exporting.js");
 
 /** Initializer for "exporting" options section of all_chart_options. Creates and returns a new instance 
 @module
