@@ -31,16 +31,16 @@ var utils_main = {
 
             //functions are named "function1, function2" and later replaced with the real function after the rest of the json has been stringified
             if (typeof value === 'function') {
-                
+
                 //combine y axis and tooltip replacement objs
                 var replacements_obj = $.extend({}, update_tooltip.replacement_obj, update_y_axis.replacement_obj);
-                
+
                 //put these string functions in the array for later
-                stringified_obj.functions_arr.push(utils_main.stringifyFormatter(value, replacements_obj)); 
-              
+                stringified_obj.functions_arr.push(utils_main.stringifyFormatter(value, replacements_obj));
+
                 // use a placeholder text in this json
-                var fn_placeholder = "function" + fn_count; 
-               
+                var fn_placeholder = "function" + fn_count;
+
                 fn_count++;
                 return fn_placeholder;
 
@@ -142,6 +142,19 @@ var utils_main = {
 
     },
 
+    valueSort(arr) {
+        var values_arr = [];
+        $.each(arr, function () {
+            if (this.value) {
+                values_arr.push(this.value);
+            }
+        });
+        values_arr.sort(function (a, b) {
+            return a - b;
+        });
+
+        return values_arr;
+    },
 
 
     /** calls code writing functions */

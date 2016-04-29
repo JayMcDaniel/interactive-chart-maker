@@ -1,4 +1,4 @@
-var utils_form = require("./utils/utils_forms.js");
+var utils_forms = require("./utils/utils_forms.js");
 
 
 
@@ -22,7 +22,7 @@ var chart_recall = {
             if (this.nodeName === "DIV") {
                 var input_val = $(this).children("[class*='selected']").divVal();
             } else {
-                var input_val = this.type === "checkbox" ? utils_form.getCheckBoxValue($(this)) : $(this).val();
+                var input_val = this.type === "checkbox" ? utils_forms.getCheckBoxValue($(this)) : $(this).val();
             }
 
             saved_values.push({

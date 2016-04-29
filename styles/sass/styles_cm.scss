@@ -72,6 +72,10 @@
         display: none;
     }
     
+    .map_tooltip br {
+        line-height: 0em
+    }
+    
     .chart_type_icon,
     .load_series_from_icon,
     .series_type_icon {
@@ -178,13 +182,15 @@
         font-size: 110%;
     }
     
-    .color_palette_cell, .map_color_palette_cell {
+    .color_palette_cell,
+    .map_color_palette_cell {
         width: 15px;
         height: 17px;
         float: left;
     }
     
-    .color_palette_row, .map_color_palette_row {
+    .color_palette_row,
+    .map_color_palette_row {
         margin-bottom: 5px;
         cursor: pointer;
         width: 233px;
@@ -293,7 +299,7 @@
     /* MAP styles */
     
     .state {
-//        fill: #E0E0E0;
+        //        fill: #E0E0E0;
         stroke: #646464;
         stroke-width: 1;
         stroke-opacity: 1;

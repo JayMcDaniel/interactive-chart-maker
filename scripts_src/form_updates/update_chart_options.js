@@ -46,6 +46,8 @@ var update_chart_options = {
         //have to completely redraw chart to update plotBorderWidth - not accesible by HC's API - this messes up a lot, so for now I'm not.        
     },
 
+
+
     /** updates the subtitle (when that #chart_subtitle_textarea is updated) **/
     updateSubtitle: function (new_title, chart, all_chart_options) {
 
@@ -54,6 +56,7 @@ var update_chart_options = {
         });
 
         all_chart_options.subtitle.text = new_title;
+
     }
 
 }

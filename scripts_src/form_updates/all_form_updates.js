@@ -290,10 +290,11 @@ var allFormUpdates = function (chart, all_chart_options) {
 
     //change shared tooltip checkbox, decimals, signs, or mulitplier selects
     $("#chart_tooltip_shared_checkbox, #chart_tooltip_force_decimals_select, #chart_tooltip_signs_select, #chart_tooltip_y_multiple_select").unbind().change(function () {
-
-
-
-        update_tooltip.updateToolTip(chart, all_chart_options);
+        if (all_chart_options.chart.type === "map") { //for maps
+            map_init.loadNewMap();
+        } else {
+            update_tooltip.updateToolTip(chart, all_chart_options);
+        }
     });
     //call update tooltip after page and chart is loaded (has to be on a callback with the 'chart' object)
     $("#chart_tooltip_shared_checkbox").change();
@@ -304,7 +305,11 @@ var allFormUpdates = function (chart, all_chart_options) {
     /* CREDITS CHANGES */
 
     $("#chart_credits_text_textarea").unbind().bind('input propertychange', function () {
-        update_credits.updateCreditText(chart, all_chart_options);
+        if (all_chart_options.chart.type === "map") { //for maps
+            map_init.loadNewMap();
+        } else {
+            update_credits.updateCreditText(chart, all_chart_options); //for charts
+        }
     });
 
 
@@ -314,8 +319,15 @@ var allFormUpdates = function (chart, all_chart_options) {
 
     //Subtitle change
     $("#chart_subtitle_textarea").unbind().bind('input propertychange', function () {
-        var new_title = $(this).val();
-        update_chart_options.updateSubtitle(new_title, chart, all_chart_options);
+
+        if (all_chart_options.chart.type === "map") { //if map
+            map_init.loadNewMap();
+
+        } else { //if chart
+            var new_title = $(this).val();
+            update_chart_options.updateSubtitle(new_title, chart, all_chart_options);
+        }
+
     });
 
     //MLR style toggle
@@ -348,6 +360,32 @@ var allFormUpdates = function (chart, all_chart_options) {
         calculate_recession_dates.insertPlotBands(plot_bands_arr, chart, all_chart_options);
         update_credits.updateCreditText(chart, all_chart_options);
     });
+
+
+
+
+
+    /* MAP SPECIFIC FORM CHANGES */
+
+    //type of map changed
+    $("#map_type_select").unbind().change(function () {
+        map_init.loadNewMap();
+    });
+
+
+    //circle size range slider changed
+    $("#map_circle_size_range").unbind().on("input", function () {
+        map_init.loadNewMap();
+    });
+
+
+    //map tooltip N/A input value changed
+    $("#map_tooltip_na_text_input").unbind().on("input", function () {
+        map_init.loadNewMap();
+    });
+    
+
+
 
 
 

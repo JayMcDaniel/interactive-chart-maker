@@ -1,8 +1,10 @@
+var utils_main = require("../../utils/utils_main.js");
+
 /** Given an array of map areas, this sorts them by value and decides which colors they should have 
 @module
 **/
 
-var colors_init = {
+var map_colors_init = {
 
 
     cached_map_options: {},
@@ -12,29 +14,21 @@ var colors_init = {
 
         $.each(all_map_options.areas, function () {
 
-            $(".map_display_area path[loc_name='" + this.loc_name + "'], .map_display_area circle[loc_name='" + this.loc_name + "']").attr("fill", this.color);
+            $('.map_display_area path[loc_name="' + this.loc_name + '"], .map_display_area circle[loc_name="' + this.loc_name + '"]').attr("fill", this.color);
         });
     },
     
     
     
-
+/** assigns colors to all_map_options.areas depending on where their values are on a range**/
     getBoundaryMapColors: function (all_map_options, colors) {
 
-        all_map_options = all_map_options || colors_init.cached_map_options; //used cached if all_map_options not passed
+        all_map_options = all_map_options || map_colors_init.cached_map_options; //used cached if all_map_options not passed
 
-
-        //if a all_map_options is passed, calculate new value ranges, else used the cached array
-
+        
         //get all values in order
-        var values_arr = [];
-        $.each(all_map_options.areas, function () {
-            if (this.value) {
-                values_arr.push(this.value);
-            }
-        });
-        values_arr.sort();
-
+        var values_arr = utils_main.valueSort(all_map_options.areas);
+        
 
         //divide values into ranges
         var value_ranges = []; //to be used to color areas
@@ -42,7 +36,7 @@ var colors_init = {
             value_ranges.push(values_arr[Math.floor(values_arr.length * i)]);
         }
 
-        colors_init.cached_value_ranges = value_ranges; //set new cached array
+        map_colors_init.cached_value_ranges = value_ranges; //set new cached array
 
 
         //add color property to each obj in map_objs depending on its value
@@ -63,7 +57,7 @@ var colors_init = {
         });
 
 
-        colors_init.cached_map_options = all_map_options;
+        map_colors_init.cached_map_options = all_map_options;
         //    console.log("values", values_arr);
         //    console.log("map", map_objs);
 
@@ -71,7 +65,7 @@ var colors_init = {
     },
 
 
-    //make and return an array of colors from a color palette
+    /** make and return an array of colors from a color palette **/
     newColorArray: function (color_palette) {
         var selected_colors = [];
         $.each($(".map_color_palette_cell", color_palette), function () {
@@ -84,4 +78,4 @@ var colors_init = {
 }
 
 
-module.exports = colors_init;
+module.exports = map_colors_init;

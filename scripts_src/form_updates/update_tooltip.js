@@ -23,9 +23,9 @@ var update_tooltip = {
             var x_axis_title = this.series.xAxis.axisTitle ? this.series.xAxis.axisTitle.textStr : "X-Axis";
 
             var s = "<b>" + this.series.name + "</b><br>" + y_axis_title + ": <b>" + signs_arr[0] +
-                Highcharts.numberFormat((this.y * multiplier), decimals) + signs_arr[1] + "</b><br/>" +
-                x_axis_title + ": <b>" + signs_arr[0] + Highcharts.numberFormat((this.x * multiplier), decimals) + signs_arr[1] + "</b><br/>" +
-                z_title + ": <b>" + signs_arr[0] + Highcharts.numberFormat((this.x * multiplier), decimals) + signs_arr[1] + "</b>";
+                Highcharts.numberFormat((this.y * multiplier), decimals,".",",") + signs_arr[1] + "</b><br/>" +
+                x_axis_title + ": <b>" + signs_arr[0] + Highcharts.numberFormat((this.x * multiplier), decimals,".",",") + signs_arr[1] + "</b><br/>" +
+                z_title + ": <b>" + signs_arr[0] + Highcharts.numberFormat((this.x * multiplier), decimals,".",",") + signs_arr[1] + "</b>";
 
             return s.replace(/\$-/g, "-$");
         };
@@ -44,8 +44,8 @@ var update_tooltip = {
             var x_axis_title = this.series.xAxis.axisTitle ? this.series.xAxis.axisTitle.textStr : "X-Axis";
 
             var s = "<b>" + this.series.name + "</b><br>" + y_axis_title + ": <b>" + signs_arr[0] +
-                Highcharts.numberFormat((this.y * multiplier), decimals) + signs_arr[1] + "</b><br/>" +
-                x_axis_title + ": <b>" + signs_arr[0] + Highcharts.numberFormat((this.x * multiplier), decimals) + signs_arr[1] + "<br/>";
+                Highcharts.numberFormat((this.y * multiplier), decimals,".",",") + signs_arr[1] + "</b><br/>" +
+                x_axis_title + ": <b>" + signs_arr[0] + Highcharts.numberFormat((this.x * multiplier), decimals,".",",") + signs_arr[1] + "<br/>";
 
             return s.replace(/\$-/g, "-$");
         };
@@ -70,7 +70,7 @@ var update_tooltip = {
                     var point = this.point;
 
                     $.each(chart.series, function () {
-                        shared_tooltip_arr.push("<b>" + this.name + "</b> <br>" + this.points[point.x].x + ": " + signs_arr[0] + Highcharts.numberFormat((this.points[point.x].y * multiplier), decimals) + signs_arr[1]);
+                        shared_tooltip_arr.push("<b>" + this.name + "</b> <br>" + this.points[point.x].x + ": " + signs_arr[0] + Highcharts.numberFormat((this.points[point.x].y * multiplier), decimals,".",",") + signs_arr[1]);
                     });
                     return shared_tooltip_arr.join('<br/>').replace(/\$-/g, "-$");
                 }
@@ -95,7 +95,7 @@ var update_tooltip = {
             if (decimals > 0) { //use decimal formatter
                 newTooltip = function () {
                     var s = "<b>" + this.series.name + "</b><br>" + this.x + ": " + signs_arr[0] +
-                        Highcharts.numberFormat((this.y * multiplier), decimals) + signs_arr[1];
+                        Highcharts.numberFormat((this.y * multiplier), decimals,".",",") + signs_arr[1];
                     return s.replace(/\$-/g, "-$");
                 }
             } else { //don't use decimal formatter
