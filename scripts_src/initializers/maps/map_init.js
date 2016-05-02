@@ -310,7 +310,7 @@ var map_init = {
                 if (this_extra_vals) {
                     this_extra_vals = this_extra_vals.split(";");
                     $.each(this_extra_vals, function (i) {
-                        value_html = value_html + "<br><span style='font-size: 50%'>" + this_extra_vals[i] + "</span>";
+                        value_html = value_html + "<p style='font-size: 50%'>" + this_extra_vals[i] + "</p>";
                     });
 
                 }
@@ -333,7 +333,7 @@ var map_init = {
             $(".map_svg path[loc_name], .map_svg circle[loc_name]").attr("fill-opacity", "1");
 
             //hide tooltip
-            $(".map_tooltip").hide();
+          //  $(".map_tooltip").hide();
         });
 
     }

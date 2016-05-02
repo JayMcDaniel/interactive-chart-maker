@@ -558,7 +558,7 @@
             position: relative;
             top: 10px;
             float: left;
-        }
+        }y
         h1 {
             margin-top: 0px;
             float: left;
@@ -571,8 +571,8 @@
     .copy_to_clipboard_button,
     #open_table_wizard_button {
         padding: 0px 5px 0px 5px;
-        border: solid 1px #b73438;
-        border-radius: 5px;
+//        border: solid 1px #b73438;
+//        border-radius: 5px;
         margin-left: 30px;
         cursor: pointer;
         background-color: #fff;
@@ -599,9 +599,9 @@
         color: $highlight_color;
     }
     
-    .copy_to_clipboard_button {
-        width: 25px;
-        height: 25px;
+    .copy_to_clboard_button {
+        width: 31px;
+        height: 31px;
         margin-left: 0px;
         margin-bottom: 0px;
         margin-right: 10px;
