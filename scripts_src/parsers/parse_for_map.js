@@ -15,6 +15,7 @@ var parseForMap = function (all_map_options, table_input) {
         var row_loc_name = $.trim($("th", thisRow).text()); //location name
         var row_val = $("td:eq(0)", thisRow).getNumber(); //main value
         
+        
         var extra_vals = []; //extra values
         $("td:gt(0)", thisRow).each(function () {
             extra_vals.push($.trim($(this).text()));
@@ -30,8 +31,14 @@ var parseForMap = function (all_map_options, table_input) {
             }
         }
 
-    });
+    }); //end tbody tr loop
     
+    
+    //add extra value titles
+    $("thead th:gt(1)", $(table_input)).each(function () {
+        all_map_options.extra_value_titles.push($.trim($(this).text()));
+    });
+        
 }
 
 module.exports = parseForMap;

@@ -13,7 +13,7 @@ var map_tooltip_init = {
 
         var tooltip_title = document.createElement("h2");
         tooltip_title.className = "tooltip_title";
-        tooltip_title.setAttribute("style", "color: #000; font-family: sans-serif; font-weight: bold; font-size:14px; margin: 5px 0px 0px 5px; ");
+        tooltip_title.setAttribute("style", "color: #000; font-family: sans-serif; font-weight: bold; font-size:16px; margin: 5px 0px 0px 5px; ");
 
         var tooltip_main_value = document.createElement("h4");
         tooltip_main_value.className = "tooltip_main_value";

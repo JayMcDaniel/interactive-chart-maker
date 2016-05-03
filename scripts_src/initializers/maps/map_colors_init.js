@@ -61,6 +61,8 @@ var map_colors_init = {
         //    console.log("values", values_arr);
         //    console.log("map", map_objs);
 
+        all_map_options.value_ranges = value_ranges;
+        all_map_options.colors = colors;
         return all_map_options;
     },
 

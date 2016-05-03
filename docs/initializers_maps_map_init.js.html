@@ -52,16 +52,19 @@ var map_init = {
             title: {},
             subtitle: {},
             areas: areas,
+            colors: [],
             legend: "",
             map_type: map_type,
             viewbox: "",
+            value_ranges: [],
             credits: {},
             tooltip: {
                 dollar_sign: "",
                 percent_sign: "",
                 decimals: "",
                 na_text: ""
-            }
+            },
+            extra_value_titles: []
 
         };
 
@@ -132,15 +135,17 @@ var map_init = {
         var map_title = map_init.getMapTitle(all_map_options.title); //creates and returns a styled map h2 title with text
         var map_subtitle = map_init.getMapSubtitle(all_map_options.subtitle); //creates and returns a styled map h3 title with text
         var map_credits = map_init.getMapCredits(all_map_options.credits); //creates and returns a styled map div credits with text
+        var map_legend = map_init.getMapLegend(all_map_options); //creates and returns a styled map div legend with color boxes and text
 
         var tooltip_div = map_tooltip_init.getMapTooltip(); //creates and returns an empty tooltip div template 
 
         //put elements together
-        map_outer_div.appendChild(tooltip_div);
-        map_outer_div.appendChild(map_title);
-        map_outer_div.appendChild(map_subtitle);
-        map_outer_div.appendChild(map_outer_svg); //put svg in outer div
-        map_outer_div.appendChild(map_credits);
+        map_outer_div.appendChild(tooltip_div); //tooltip
+        map_outer_div.appendChild(map_title); //title
+        map_outer_div.appendChild(map_subtitle); //subtitle
+        map_outer_div.appendChild(map_outer_svg); //main svg
+        map_outer_div.appendChild(map_legend); //legend
+        map_outer_div.appendChild(map_credits); //credits
 
         map_display_area.append($(map_outer_div)); //put map on page
 
@@ -153,13 +158,65 @@ var map_init = {
 
 
 
+    /** creates and returns a styled map div legend with color boxes and text **/
+    getMapLegend: function (all_map_options) {
+
+        //create outer legend box
+        var map_legend_div = document.createElement("div");
+        map_legend_div.setAttribute("class", "map_legend_div");
+        map_legend_div.setAttribute("style", "position: absolute; top: 430px; left: 351px; min-width: 171px; min-height: 130px; margin: auto; z-index: 500");
+
+        //create legend item for each color
+        $.each(all_map_options.colors, function (i) {
+
+            var map_legend_item = document.createElement("div"); //outer div for each legend item
+            map_legend_item.setAttribute("class", "map_legend_item");
+            map_legend_item.setAttribute("style", "min-width: 171px; min-height: 15px; margin-bottom: 7px;");
+
+            var map_legend_color = document.createElement("div"); //map color box div for each legend item
+            map_legend_color.setAttribute("class", "map_legend_color");
+
+            //set round color boxes for metro type maps
+            var border_radius = all_map_options.map_type === "metro_area" ? "50px" : "0px";
+
+            map_legend_color.setAttribute("style", "width: 15px; height: 15px; background-color: " + all_map_options.colors[i] + "; float: left; border: rgb(153, 153, 153) solid .5px; border-radius: " + border_radius + "");
+
+            var map_legend_text = document.createElement("div"); //map text div for each legend item
+            map_legend_text.setAttribute("class", "map_legend_text");
+            map_legend_text.setAttribute("style", "color: black; float: left; line-height: 1em; margin-left: 5px; font-size: 12px;");
+
+
+            // all_map_options.value_ranges.reverse();
+            if (i === 0) {
+                map_legend_text.textContent = all_map_options.value_ranges[i] + " and lower";
+            } else if (i === all_map_options.colors.length - 1) {
+                map_legend_text.textContent = all_map_options.value_ranges[i - 1] + " and higher";
+            } else {
+                map_legend_text.textContent = all_map_options.value_ranges[i - 1] + " to " + all_map_options.value_ranges[i];
+            }
+
+
+
+
+
+            map_legend_item.appendChild(map_legend_color);
+            map_legend_item.appendChild(map_legend_text);
+         //   map_legend_div.appendChild(map_legend_item);
+            map_legend_div.insertBefore(map_legend_item, null);
+
+        });
+
+        return map_legend_div;
+    },
+
+
 
 
     /** creates and returns an empty map outer div. This will hold the map svg, tooltip box, legend, title, etc. **/
 
     getMapOuterDiv: function () {
         var div = document.createElement("div");
-        div.setAttribute("style", "position: relative; width: 695px; min-height: 480px; margin: auto; background-color:#FFFFFF;");
+        div.setAttribute("style", "position: relative; width: 695px; min-height: 580px; margin: auto; background-color:#FFFFFF;");
         div.setAttribute("class", "map_outer_div");
 
         return div;
@@ -274,10 +331,10 @@ var map_init = {
 
                 if (this.loc_name) { //if it's a named area, set value and color
                     el.setAttributeNS(null, "loc_value", this.value);
-                    el.setAttributeNS(null, "extra_vals", this.extra_vals.join(";"));
 
                     el.setAttributeNS(null, "fill", this.color || "#E0E0E0");
                     el.setAttribute("loc_name", this.loc_name);
+                    this.extra_vals ? el.setAttributeNS(null, "extra_vals", this.extra_vals.join(";")) : null;
                 }
 
             } else { //circle (DC or metro area)
@@ -338,7 +395,7 @@ var map_init = {
                 if (this_extra_vals) {
                     this_extra_vals = this_extra_vals.split(";");
                     $.each(this_extra_vals, function (i) {
-                        value_html = value_html + "&lt;p style='font-size: 50%'>" + this_extra_vals[i] + "&lt;/p>";
+                        value_html = value_html + "&lt;p style='font-size: 40%'>&lt;span style='color: black'>" + all_map_options.extra_value_titles[i] + ": &lt;/span>" + this_extra_vals[i] + "&lt;/p>";
                     });
 
                 }
@@ -361,7 +418,7 @@ var map_init = {
             $(".map_svg path[loc_name], .map_svg circle[loc_name]").attr("fill-opacity", "1");
 
             //hide tooltip
-          //  $(".map_tooltip").hide();
+            $(".map_tooltip").hide();
         });
 
     }
@@ -387,7 +444,7 @@ module.exports = map_init;</code></pre>
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Sun May 01 2016 21:45:54 GMT-0700 (PDT)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Tue May 03 2016 10:50:37 GMT-0700 (PDT)
 </footer>
 
 <script> prettyPrint(); </script>
