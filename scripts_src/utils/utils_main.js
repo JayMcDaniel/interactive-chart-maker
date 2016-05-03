@@ -1,7 +1,7 @@
 var chart_recall = require("../chart_recall.js");
 
 /**
- * Main utility object, contains functions that get reused often
+ * Main utility object, contains functions that get reused often, including the code writing
  * @namespace
  */
 var utils_main = {
@@ -28,11 +28,19 @@ var utils_main = {
         };
 
         stringified_obj.string = JSON.stringify(obj, function (key, value) {
-            if (typeof value === 'function') { //functions are named "function1, function2" and later replaced with the real function after the rest of the json has been stringified
 
-                var replacements_obj = $.extend({}, update_tooltip.replacement_obj, update_y_axis.replacement_obj); //combine y axis and tooltip replacement objs
-                stringified_obj.functions_arr.push(utils_main.stringifyFormatter(value, replacements_obj)); //put these string functions in the array for later
-                var fn_placeholder = "function" + fn_count; // use a placeholder text in this json
+            //functions are named "function1, function2" and later replaced with the real function after the rest of the json has been stringified
+            if (typeof value === 'function') {
+
+                //combine y axis and tooltip replacement objs
+                var replacements_obj = $.extend({}, update_tooltip.replacement_obj, update_y_axis.replacement_obj);
+
+                //put these string functions in the array for later
+                stringified_obj.functions_arr.push(utils_main.stringifyFormatter(value, replacements_obj));
+
+                // use a placeholder text in this json
+                var fn_placeholder = "function" + fn_count;
+
                 fn_count++;
                 return fn_placeholder;
 
@@ -58,7 +66,7 @@ var utils_main = {
     },
 
 
-
+    /** looks at an array, takes string "false" or "null" and returns false or null **/
     parseBoolsFromArray: function (arr) {
         return arr.map(function (e) {
             if (e === "true") {
@@ -124,13 +132,29 @@ var utils_main = {
                     .replace(/signs_arr\[1\]/g, '"' + replacement_obj.signs_arr[1] + '"');
             }
 
-            formatter_str = formatter_str.replace('+ ""', "").replace('"" +', "").replace(/value \/ 1(?!0)/g,"value "); //replace empty strings and remove divide by 1
+            formatter_str = formatter_str.replace('+ ""', "")
+                .replace('"" +', "")
+                .replace(/y \* 1(?!0)/g, "y")
+                .replace(/value \/ 1(?!0)/g, "value"); //replace empty strings and remove divide or times by 1
         }
 
         return formatter_str;
 
     },
 
+    valueSort(arr) {
+        var values_arr = [];
+        $.each(arr, function () {
+            if (this.value) {
+                values_arr.push(this.value);
+            }
+        });
+        values_arr.sort(function (a, b) {
+            return a - b;
+        });
+
+        return values_arr;
+    },
 
 
     /** calls code writing functions */
@@ -164,7 +188,7 @@ var utils_main = {
 
     /** place code in chart_output_code and reinit highlight */
     writeJSCode: function (all_chart_options) {
-        
+
         //save chart input values
         all_chart_options.saved_values = chart_recall.saveValues();
 
@@ -185,7 +209,7 @@ var utils_main = {
              var all_chart_options = ' + chart_options_js.string + ';\n\
     var ' + all_chart_options.chart.renderTo + ' = new Highcharts.Chart(all_chart_options);\n\
 });\n\
-jQuery.fn.extend({addCommas:'+ $("string").addCommas.toString()+' });';
+jQuery.fn.extend({addCommas:' + $("string").addCommas.toString() + ' });';
 
         $("#chart_output_code").text(chart_options_js.string).each(function (i, block) {
             hljs.highlightBlock(block); //init code coloring

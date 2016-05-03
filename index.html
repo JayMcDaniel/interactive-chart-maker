@@ -96,43 +96,50 @@
                 <h4>Sizing (Chart template) <sup class = "help_icon">?</sup></h4>
 
                 <div class="display_options">
-                    <label for="chart_id_textinput">Unique ID:</label>
+
+                    <span class="show_map">
+                        <label for="chart_id_textinput">Unique ID:</label>
                     <br>
                     <span class="notes">Important if using one or more charts on a page. Make sure not to use spaces, hyphens, or start with a number.<br></span>
                     <input type="text" id="chart_id_textinput" class="medium" value="chart1" />
 
                     <br>
+                    </span>
 
+                    <span class="show_map">
                     <label style="margin-bottom: -10px;">Chart size:</label>
-                    <span class="notes"><br>You can also adjust the chart size at any time by using the shift + arrow keys.</span>
+                    <span class="notes"><br>Values in number boxes can be adjusted with up/down arrow keys. You can also adjust the chart size at any time by using the shift + arrow keys.</span>
                     <br>
-                    <span style="margin-right: -5px;">&larr;</span>&rarr;
+                    <span style="margin-right: -5px;">&larr;</span><span>&rarr;</span>
                     <input type="text" id="chart_width_textinput" value="580" class="small number_entry" />
 
                     <span style="position: relative; top: 3px;"><span style="position: relative; left: 9px; top: -8px;">&uarr;</span>&darr;</span>
                     <input type="text" id="chart_height_textinput" value="430" class="small number_entry" />
                     <br>
+                    </span>
 
-                    <label>Chart margins:</label>
-                    <p class="notes">Higher values move margins inwards. You can also adjust the margins at any time by using the ctrl/cmd + arrow keys (top and right margins) and the alt + arrow keys (bottom and left margins).
-                        <br>
-                    </p>
+                    <div class="show_bar show_scatter show_bubble show_drilldown show_column">
+                        <label>Chart margins:</label>
+                        <p class="notes">Higher values move margins inwards. You can also adjust the margins at any time by using the ctrl/cmd + arrow keys (top and right margins) and the alt + arrow keys (bottom and left margins).
+                            <br>
+                        </p>
 
 
-                    <div id="margins_outer_div">
-                        <input type="text" id="top_margin_textinput" value="100" class="small number_entry margin_input" />
-                        <input type="text" id="right_margin_textinput" value="40" class="small number_entry margin_input" />
-                        <input type="text" id="bottom_margin_textinput" value="80" class="small number_entry margin_input" />
-                        <input type="text" id="left_margin_textinput" value="80" class="small number_entry margin_input" />
-                        <div id="margins_inner_box">
-                            <span id="margins_down_arrow" class="margin_arrow">&darr;</span>
-                            <span id="margins_left_arrow" class="margin_arrow">&larr;</span>
-                            <span id="margins_up_arrow" class="margin_arrow">&uarr;</span>
-                            <span id="margins_right_arrow" class="margin_arrow">&rarr;</span>
+                        <div id="margins_outer_div">
+                            <input type="text" id="top_margin_textinput" value="100" class="small number_entry margin_input" />
+                            <input type="text" id="right_margin_textinput" value="40" class="small number_entry margin_input" />
+                            <input type="text" id="bottom_margin_textinput" value="80" class="small number_entry margin_input" />
+                            <input type="text" id="left_margin_textinput" value="80" class="small number_entry margin_input" />
+                            <div id="margins_inner_box">
+                                <span id="margins_down_arrow" class="margin_arrow">&darr;</span>
+                                <span id="margins_left_arrow" class="margin_arrow">&larr;</span>
+                                <span id="margins_up_arrow" class="margin_arrow">&uarr;</span>
+                                <span id="margins_right_arrow" class="margin_arrow">&rarr;</span>
+
+                            </div>
+
 
                         </div>
-
-
                     </div>
                 </div>
 
@@ -165,7 +172,7 @@
                         <br> For this to work, it needs to be a properly formatted, 508-compliant table (using thead, tbody, caption, th and td tags where appropriate). It also needs to have a title and be a simple table with only one column header per column and one row header per row. You can convert spreadsheets to 508-compliant tables with the <a href="table_wizard/better_table_wizard.htm" target="_blank">Table Wizard</a>.
 
                     </p>
-                    <div class="show_scatter">
+                    <div class="just_scatter">
                         <p> With scatter charts, series names will be loaded from the row headers. For each set of two columns in the table body, a dot will be drawn &mdash; its x-value coming from the first column and its y-value coming from the second column.</p>
                         <table id="scatter_example" class="regular" cellspacing="0" cellpadding="0" xborder="1" style="width: 95%">
                             <caption><span class="tableTitle">Example table data for scatter charts</span></caption>
@@ -208,7 +215,7 @@
 
                     </div>
 
-                    <div class="show_drilldown">
+                    <div class="just_drilldown">
                         <p>
                             This will load the table into a drilldown chart. For this to work, your table row headers must be indented correctly using BLS style indents of class = "sub1", "sub2". The <a href="table_wizard/better_table_wizard.htm" target="_blank">table wizard</a> will apply these style classes when the cell text is preceded by two spaces or more.</p>
 
@@ -260,130 +267,80 @@
                             </tbody>
                         </table>
                     </div>
-                    
-                <a href="table_wizard/better_table_wizard.htm" target="_blank" title="Open Table Wizard (new tab)"><span id="open_table_wizard_button"></span>Open Table Wizard (new tab)</a>
 
-                    <div class="clear_next_textarea_button" title="Clear the text area">X</div>
+                    <div class="show_map just_map">
+                        <p>State or area names should be in the left column and values should be in the next columns. The columns need headers to work. Areas will be colored by the values in the second column Extra tooltip data will come from values in any other columns and will include their fomatting. See example:</p>
 
-                    <textarea id="table_input_textarea" class="large" placeholder="Insert table html here">
-                        <table id="BLS_table" class="regular" cellspacing="0" cellpadding="0" xborder="1" style=" width: 95%;">
-                            <caption><span class="tableTitle">Union membership rates of employed wage and salary workers, annual averages, 2000–15</span></caption>
+
+                        <table id="map_table_example" class="regular" cellspacing="0" cellpadding="0" xborder="1" style=" width: 95%;">
+                            <caption><span class="tableTitle">Example table for maps</span></caption>
 
                             <thead>
                                 <tr>
-                                    <th rowspan="1" id="columnHead0" style=" vertical-align: middle;">Year</th>
-                                    <th id="columnHead1">Total private</th>
-
-
-                                    <th id="columnHead4">Construction</th>
-                                    <th id="columnHead5">Manufacturing</th>
-
-                                    <th id="columnHead7">Retail trade</th>
-
-
-
+                                    <th rowspan="1" id="columnHead0" style=" vertical-align: middle;">State</th>
+                                    <th id="columnHead1">Location quotient</th>
+                                    <th id="columnHead2">Employment</th>
+                                    <th id="columnHead3">Annual mean wage</th>
                                 </tr>
 
                             </thead>
                             <tbody>
-
-
                                 <tr>
-                                    <th id="rowHead10">
-                                        <p>2010</p>
+                                    <th id="rowHead0">
+                                        <p>Georgia</p>
                                     </th>
-                                    <td headers="rowHead10 columnHead1">6.9</td>
-                                    <td headers="rowHead10 columnHead4">13.1</td>
-                                    <td headers="rowHead10 columnHead5">10.7</td>
-
-                                    <td headers="rowHead10 columnHead7">4.7</td>
-
-
-
+                                    <td headers="rowHead0 columnHead1">1.74</td>
+                                    <td headers="rowHead0 columnHead2">3,730</td>
+                                    <td headers="rowHead0 columnHead3">$41,880</td>
                                 </tr>
 
                                 <tr class="greenbar">
-                                    <th id="rowHead11">
-                                        <p>2011</p>
+                                    <th id="rowHead1">
+                                        <p>Oregon</p>
                                     </th>
-                                    <td headers="rowHead11 columnHead1">6.9</td>
-
-
-                                    <td headers="rowHead11 columnHead4">14.0</td>
-                                    <td headers="rowHead11 columnHead5">10.5</td>
-
-                                    <td headers="rowHead11 columnHead7">4.9</td>
-
-
-
+                                    <td headers="rowHead1 columnHead1">1.62</td>
+                                    <td headers="rowHead1 columnHead2">1,470</td>
+                                    <td headers="rowHead1 columnHead3">$43,630</td>
                                 </tr>
 
                                 <tr>
-                                    <th id="rowHead12">
-                                        <p>2012</p>
+                                    <th id="rowHead2">
+                                        <p>Alaska</p>
                                     </th>
-                                    <td headers="rowHead12 columnHead1">6.6</td>
-
-
-                                    <td headers="rowHead12 columnHead4">13.2</td>
-                                    <td headers="rowHead12 columnHead5">9.6</td>
-
-                                    <td headers="rowHead12 columnHead7">4.6</td>
-
-
-
+                                    <td headers="rowHead2 columnHead1">1.41</td>
+                                    <td headers="rowHead2 columnHead2">240</td>
+                                    <td headers="rowHead2 columnHead3">$54,500</td>
                                 </tr>
 
                                 <tr class="greenbar">
-                                    <th id="rowHead13">
-                                        <p>2013</p>
+                                    <th id="rowHead3">
+                                        <p>Michigan</p>
                                     </th>
-                                    <td headers="rowHead13 columnHead1">6.7</td>
-
-
-                                    <td headers="rowHead13 columnHead4">14.1</td>
-                                    <td headers="rowHead13 columnHead5">10.1</td>
-
-                                    <td headers="rowHead13 columnHead7">4.6</td>
-
-
-
+                                    <td headers="rowHead3 columnHead1">1.35</td>
+                                    <td headers="rowHead3 columnHead2">2,920</td>
+                                    <td headers="rowHead3 columnHead3">$40,760</td>
                                 </tr>
-
-                                <tr>
-                                    <th id="rowHead14">
-                                        <p>2014</p>
-                                    </th>
-                                    <td headers="rowHead14 columnHead1">6.6</td>
-
-
-                                    <td headers="rowHead14 columnHead4">13.9</td>
-                                    <td headers="rowHead14 columnHead5">9.7</td>
-
-                                    <td headers="rowHead14 columnHead7">4.4</td>
-
-
-
-                                </tr>
-
-                                <tr class="greenbar">
-                                    <th id="rowHead15">
-                                        <p>2015</p>
-                                    </th>
-                                    <td headers="rowHead15 columnHead1">6.7</td>
-
-
-                                    <td headers="rowHead15 columnHead4">13.2</td>
-                                    <td headers="rowHead15 columnHead5">9.4</td>
-
-                                    <td headers="rowHead15 columnHead7">4.8</td>
-
-
-
-                                </tr>
-
                             </tbody>
                         </table>
+
+                        <br>
+
+                        <label for="map_type_select">Map type: </label>
+                        <select id="map_type_select">
+                            <option value="state" selected>State</option>
+                            <option value="county">County</option>
+                            <option value="metro_area">Metro area</option>
+                        </select>
+                        <br>
+
+                    </div>
+
+                    <a class="show_map" href="table_wizard/better_table_wizard.htm" target="_blank" title="Open Table Wizard (new tab)"><span id="open_table_wizard_button"></span>Open Table Wizard (new tab)</a>
+
+                    <div class="clear_next_textarea_button show_map" title="Clear the text area">X</div>
+
+                    <textarea id="table_input_textarea" class="large show_map" placeholder="Insert table html here">
+
 
                     </textarea>
                 </div>
@@ -409,6 +366,91 @@
 
                     <div id="color_palettes">
                         <!--BTN colors -->
+                    </div>
+
+                    <div id="map_color_palettes" class="just_map" style="display: block;">
+                        <div class="map_color_palette_row selected" value="color_palette_0">
+                            <div class="map_color_palette_cell" style="background-color: #cfdee7;">&nbsp;</div>
+                            <div class="map_color_palette_cell" style="background-color: #bbdbef;">&nbsp;</div>
+                            <div class="map_color_palette_cell" style="background-color: #7cacc5;">&nbsp;</div>
+                            <div class="map_color_palette_cell" style="background-color: #577b8f;">&nbsp;</div>
+                            <div class="map_color_palette_cell" style="background-color: #395463;">&nbsp;</div>
+
+                            <div style="clear:both; height:5px;">&nbsp;</div>
+                        </div>
+                        <div class="map_color_palette_row" value="color_palette_1">
+                            <div class="map_color_palette_cell" style="background-color: #ccece6;">&nbsp;</div>
+                            <div class="map_color_palette_cell" style="background-color: #99d8c9;">&nbsp;</div>
+                            <div class="map_color_palette_cell" style="background-color: #66c2a4;">&nbsp;</div>
+                            <div class="map_color_palette_cell" style="background-color: #2ca25f;">&nbsp;</div>
+                            <div class="map_color_palette_cell" style="background-color: #006d2c;">&nbsp;</div>
+
+                            <div style="clear:both; height:5px;">&nbsp;</div>
+                        </div>
+                        <div class="map_color_palette_row" value="color_palette_2">
+                            <div class="map_color_palette_cell" style="background-color: #bfd3e6;">&nbsp;</div>
+                            <div class="map_color_palette_cell" style="background-color: #9ebcda;">&nbsp;</div>
+                            <div class="map_color_palette_cell" style="background-color: #8c96c6;">&nbsp;</div>
+                            <div class="map_color_palette_cell" style="background-color: #8856a7;">&nbsp;</div>
+                            <div class="map_color_palette_cell" style="background-color: #810f7c">&nbsp;</div>
+
+                            <div style="clear:both; height:5px;">&nbsp;</div>
+                        </div>
+                        <div class="map_color_palette_row" value="color_palette_3">
+                            <div class="map_color_palette_cell" style="background-color: #ccebc5;">&nbsp;</div>
+                            <div class="map_color_palette_cell" style="background-color: #a8ddb5;">&nbsp;</div>
+                            <div class="map_color_palette_cell" style="background-color: #7bccc4;">&nbsp;</div>
+                            <div class="map_color_palette_cell" style="background-color: #43a2ca;">&nbsp;</div>
+                            <div class="map_color_palette_cell" style="background-color: #0868ac">&nbsp;</div>
+
+
+                            <div style="clear:both; height:5px;">&nbsp;</div>
+                        </div>
+                        <div class="map_color_palette_row" value="color_palette_4">
+                            <div class="map_color_palette_cell" style="background-color: #fef0d9;">&nbsp;</div>
+                            <div class="map_color_palette_cell" style="background-color: #fdbb84;">&nbsp;</div>
+                            <div class="map_color_palette_cell" style="background-color: #fc8d59;">&nbsp;</div>
+                            <div class="map_color_palette_cell" style="background-color: #e34a33;">&nbsp;</div>
+                            <div class="map_color_palette_cell" style="background-color: #b30000">&nbsp;</div>
+
+                            <div style="clear:both; height:5px;">&nbsp;</div>
+                        </div>
+                        <div class="map_color_palette_row" value="color_palette_5">
+                            <div class="map_color_palette_cell" style="background-color: #fee391;">&nbsp;</div>
+                            <div class="map_color_palette_cell" style="background-color: #fec44f;">&nbsp;</div>
+                            <div class="map_color_palette_cell" style="background-color: #fe9929;">&nbsp;</div>
+                            <div class="map_color_palette_cell" style="background-color: #d95f0e;">&nbsp;</div>
+                            <div class="map_color_palette_cell" style="background-color: #993404">&nbsp;</div>
+
+                            <div style="clear:both; height:5px;">&nbsp;</div>
+                        </div>
+                        <div class="map_color_palette_row" value="color_palette_6">
+                            <div class="map_color_palette_cell" style="background-color: #ffffb2;">&nbsp;</div>
+                            <div class="map_color_palette_cell" style="background-color: #feb24c;">&nbsp;</div>
+                            <div class="map_color_palette_cell" style="background-color: #fd8d3c;">&nbsp;</div>
+                            <div class="map_color_palette_cell" style="background-color: #f03b20;">&nbsp;</div>
+                            <div class="map_color_palette_cell" style="background-color: #bd0026">&nbsp;</div>
+
+                            <div style="clear:both; height:5px;">&nbsp;</div>
+                        </div>
+                        <div class="map_color_palette_row" value="color_palette_7">
+                            <div class="map_color_palette_cell" style="background-color: #0571b0;">&nbsp;</div>
+                            <div class="map_color_palette_cell" style="background-color: #92c5de;">&nbsp;</div>
+                            <div class="map_color_palette_cell" style="background-color: #ffffbf;">&nbsp;</div>
+                            <div class="map_color_palette_cell" style="background-color: #f4a582;">&nbsp;</div>
+                            <div class="map_color_palette_cell" style="background-color: #ca0020">&nbsp;</div>
+
+                            <div style="clear:both; height:5px;">&nbsp;</div>
+                        </div>
+                        <div class="map_color_palette_row" value="color_palette_8">
+                            <div class="map_color_palette_cell" style="background-color: #4dac26;">&nbsp;</div>
+                            <div class="map_color_palette_cell" style="background-color: #b8e186;">&nbsp;</div>
+                            <div class="map_color_palette_cell" style="background-color: rgb(215, 238, 236);">&nbsp;</div>
+                            <div class="map_color_palette_cell" style="background-color: #f1b6da;">&nbsp;</div>
+                            <div class="map_color_palette_cell" style="background-color: #d01c8b">&nbsp;</div>
+
+                            <div style="clear:both; height:5px;">&nbsp;</div>
+                        </div>
                     </div>
                     <!-- end all color palettes -->
 
@@ -454,7 +496,7 @@
                     </select>
                     <br>
 
-
+                    <span class="show_map">
                     <label>Placement:</label> <span class="notes" style="margin-bottom: -5px;">(higher values push legend right and down)</span>
                     <br>
                     <label for="legend_placement_x">&rarr; <sup>(X)</sup> </label>
@@ -466,6 +508,8 @@
                     <label for="legend_reverse_layout_checkbox">Reverse order: </label>
                     <input type="checkbox" id="legend_reverse_layout_checkbox">
                     <br>
+                    </span>
+
 
                     <label for="legend_make_toggle_checkbox" style="font-size:100%; font-weight:normal;">When a series is clicked, hide the others: </label>
                     <input type="checkbox" id="legend_make_toggle_checkbox">
@@ -587,11 +631,14 @@
                 <h4>Tooltip (hover infobox) <sup class = "help_icon">?</sup></h4>
                 <div class="display_options">
 
-                    <label for="chart_tooltip_shared_checkbox">Show all series: </label>
-                    <input type="checkbox" id="chart_tooltip_shared_checkbox" />
-                    <span class="notes">This makes the tooltip "shared" and shows all series on hover instead of just one.</span>
+                    <span class="show_line show_bar show_column">
+                        <label for="chart_tooltip_shared_checkbox">Show all series: </label>
+                        <input type="checkbox" id="chart_tooltip_shared_checkbox" />
+                        <span class="notes">This makes the tooltip "shared" and shows all series on hover instead of just one.</span>
                     <br>
+                    </span>
 
+                    <span class="show_map">
                     <label for="chart_tooltip_force_decimals_select">Decimal points: </label>
                     <select id="chart_tooltip_force_decimals_select">
                         <option value="0">Auto</option>
@@ -610,7 +657,15 @@
                     </select>
                     <span class="notes">This will add a dollar or percent sign after each value in the tooltip.</span>
                     <br>
-<!--
+                    </span>
+
+                    <span class="just_map">
+                        <label for="map_tooltip_na_text_input">Text if data not available: </label>
+                        <br>
+                        <input type="text" id="map_tooltip_na_text_input" class="medium" value="N/A" />
+                    </span>
+
+                    <!--
 
                     <label for="chart_tooltip_crosshairs_select">Crosshairs: </label>
                     <select id="chart_tooltip_crosshairs_select">
@@ -621,8 +676,10 @@
                     </select>
                     <br>
 -->
-
-                    <label for="chart_tooltip_y_multiple_select">Multiply Y-value by: </label>
+                    <span class="show_bar show_scatter show_bubble show_drilldown show_column">
+                    
+                    
+                    <label for="chart_tooltip_y_multiple_select">Multiply values by: </label>
                     <select id="chart_tooltip_y_multiple_select">
                         <option value="1">&nbsp;</option>
                         <option value="10">10</option>
@@ -632,8 +689,8 @@
                         <option value="100000">100,000</option>
                         <option value="1000000">1,000,000</option>
                     </select>
-
-
+                    <span class="notes show_line">This can be useful when using data from a table that shows its values divided by a number.</span>
+                    </span>
                 </div>
 
             </div>
@@ -647,12 +704,12 @@
             <div class="display chart_display" id="display_chart_credits">
                 <h4>Notes and credits <sup class = "help_icon">?</sup></h4>
                 <div class="display_options">
-
+                    <span class="show_map">
                     <label for="chart_credits_text_textarea">Text: </label>
                     <br>
                     <textarea id="chart_credits_text_textarea" class="medium">Click legend items to change data display. Hover over chart to view data. Source: U.S. Bureau of Labor Statistics.</textarea>
 
-
+                    </span>
                 </div>
 
             </div>
@@ -667,9 +724,11 @@
                 <h4>Extra options <sup class = "help_icon">?</sup></h4>
                 <div class="display_options">
 
+                    <span class="show_map">
                     <label for="chart_subtitle_textarea">Subtitle: </label>
                     <textarea id="chart_subtitle_textarea" placeholder="Subtitle text goes here"></textarea>
                     <br>
+                    </span>
 
                     <label for="chart_mlr_styles_checkbox">MLR styles: </label>
                     <input type="checkbox" id="chart_mlr_styles_checkbox" />
@@ -694,7 +753,8 @@
                     <input type="checkbox" id="chart_show_data_labels_checkbox">
                     <br>
 
-
+                    <span class="show_line show_bar show_column">
+                                                  
                     <label for="chart_add_recession_shading_select">Recession shading: </label>
                     <select id="chart_add_recession_shading_select">
                         <option value="no_recession">&nbsp;</option>
@@ -704,11 +764,31 @@
                     </select>
                     <br>
                     <span class="notes">NOTE: For this to work, dates must be entered in mmm yyyy, or Q1 yyyy style. (e.g.: "May 2014, Jun 2014, Jul 2014; or Q1 2010, Q2 2010, Q3 2010")</span>
+                    </span>
+                    <div class="just_map">
+                        <label for="map_circle_size_range">Circle size:</label>
+                        <br>
 
+                        <span id="map_circle_size_span">
+                            <svg style="height: 20px; width: 20px; float: left; position: relative; top: -1px;">
+                                <circle r="7" cx="8" cy="8" fill="#337ab7"></circle>
+                            </svg>
+                            <input type="range" id="map_circle_size_range" min = "0" max="100" style="float: left; width: 75%;"></input>
+                            <svg style="height: 45px; width: 45px; float: left; position: relative; left:  5px; top: -13px;">
+                                <circle r="20" cx="22" cy="22" fill="#337ab7"></circle>
+                            </svg>
+                        </span>
+
+
+
+
+
+                    </div>
 
                 </div>
-
             </div>
+
+
 
         </div>
 
@@ -782,6 +862,9 @@
 
         <!-- chart / map display area -->
         <div id="chart1" class="chart_display_area fixed">
+        </div>
+
+        <div id="map1" class="map_display_area fixed">
         </div>
         <p class="alert-danger"></p>
 

@@ -13,15 +13,21 @@ var update_chart_options = require("./update_chart_options.js");
 var chart_recall = require("../chart_recall.js");
 var update_individual_series = require("./update_individual_series.js");
 
+var map_init = require("../initializers/maps/map_init.js");
+var map_colors_init = require("../initializers/maps/map_colors_init.js");
+
+
 
 /** listens for any form updates and calls appropriate function 
 @module
 */
 var allFormUpdates = function (chart, all_chart_options) {
 
+
     /* CHART TYPE CHANGES */
 
 
+    /** highlights the icon clicked by adding 'selected' class **/
     allFormUpdates.selectChart = function (selected) {
         //change selected icon
         $("#chart_type_icons .chart_type_icon").removeClass("selected");
@@ -34,7 +40,10 @@ var allFormUpdates = function (chart, all_chart_options) {
 
     $('.chart_type_icon').unbind().click(function () {
 
-        $(".chart_tab").show();
+
+        $(".chart_tab, .display_options>*").not(".notes").show(); //start showing all, and might hide later if map selected
+        $(".just_map").hide(); //hide just map stuff
+
         allFormUpdates.selectChart(this);
         var chart_type = $(this).divVal();
 
@@ -45,22 +54,39 @@ var allFormUpdates = function (chart, all_chart_options) {
             $(".show_line, .show_bar, .show_column").hide();
         }
 
-        $(".show_drilldown, .show_scatter").hide();
+        $(".just_drilldown, .just_scatter").hide();
         if (["scatter", "drilldown"].indexOf(chart_type) > -1) {
-            $(".show_" + chart_type).show();
+            $(".just_" + chart_type).show();
         }
 
         updateChartType(chart_type, chart, all_chart_options);
+        if (chart_type === "map") {
+            $(".chart_display_area").hide();
+            $(".map_display_area").show();
+
+            map_init.loadNewMap();
+
+        } else {
+            $(".map_display_area").hide();
+            $(".chart_display_area").show();
+            chart.reflow();
+        }
+
     });
 
 
 
-    /* when map type icon is click */
-    $('#chart_type_map').unbind().click(function () {
+    /* when map type icon is clicked */
+    $('#chart_type_map').click(function () {
         allFormUpdates.selectChart(this);
         $(".chart_tab").not(".map_tab").hide();
+        $(".display_options:gt(0)>*").not(".notes").not(".show_map").hide(); //hide everything except map relevent options
+        $(".just_map").show();
 
     });
+
+
+
 
     /* TEMPLATE CHANGES */
 
@@ -72,12 +98,12 @@ var allFormUpdates = function (chart, all_chart_options) {
 
     //chart width
     $("#chart_width_textinput").unbind().keyup(function () {
-        update_template.resize($(this).val(), "width", chart);
+        update_template.resize($(this).val(), "width", chart, all_chart_options);
     });
 
     //chart height
     $("#chart_height_textinput").unbind().keyup(function () {
-        update_template.resize($(this).val(), "height", chart);
+        update_template.resize($(this).val(), "height", chart, all_chart_options);
     });
 
     //inner chart margins
@@ -98,7 +124,6 @@ var allFormUpdates = function (chart, all_chart_options) {
         $(this).addClass("selected");
         update_data.updateData(chart, all_chart_options);
         update_individual_series.populateForm(chart, all_chart_options);
-
     });
 
 
@@ -106,7 +131,14 @@ var allFormUpdates = function (chart, all_chart_options) {
 
     //table input textarea
     $("#table_input_textarea").unbind().bind('input propertychange', function () {
-        update_data.updateData(chart, all_chart_options);
+
+        if (all_chart_options.chart.type === "map") { //for maps
+            map_init.loadNewMap();
+        } else {
+            update_data.updateData(chart, all_chart_options); //for charts
+        }
+
+
     });
 
 
@@ -115,17 +147,30 @@ var allFormUpdates = function (chart, all_chart_options) {
 
     /* COLOR PALETTE CHANGES - defined and initiated in navigation setup*/
 
+    //chart color palettes
     allFormUpdates.colorPaletteRowClick = function () {
         $(".color_palette_row").unbind().click(function () {
             var chart_type = $("#chart_type_icons .selected").divVal(); //need chart type because drill is colored differently
             $(".color_palette_row").removeClass("selected");
             $(this).addClass("selected");
             updateColors(chart, all_chart_options, chart_type);
-
         });
     }
 
-    // when page loads, load the palettes
+
+    //map color palettes
+    $(".map_color_palette_row").unbind().click(function () {
+        $(".map_color_palette_row").removeClass("selected");
+        var color_palette = $(this);
+        color_palette.addClass("selected");
+        var selected_colors = map_colors_init.newColorArray(color_palette);
+        var all_map_options = map_colors_init.getBoundaryMapColors(null, selected_colors); //this mods all_map_options.areas with color ranges and returns a cached all_map_options
+        map_colors_init.colorPaths(all_map_options);
+
+    });
+
+
+    // when page loads, load the chart palettes
 
     if ($("#color_palettes").children().length < 1) {
         $("#color_palettes").load("./components/color_palettes.htm", function () {
@@ -245,15 +290,11 @@ var allFormUpdates = function (chart, all_chart_options) {
 
     //change shared tooltip checkbox, decimals, signs, or mulitplier selects
     $("#chart_tooltip_shared_checkbox, #chart_tooltip_force_decimals_select, #chart_tooltip_signs_select, #chart_tooltip_y_multiple_select").unbind().change(function () {
-
-        var tt_options = {
-            is_shared: utils_forms.getCheckBoxValue($("#chart_tooltip_shared_checkbox")),
-            decimals: Number($("#chart_tooltip_force_decimals_select").val()),
-            signs: $("#chart_tooltip_signs_select").val(),
-            multiplier: Number($("#chart_tooltip_y_multiple_select").val())
-        };
-
-        update_tooltip.updateToolTip(chart, all_chart_options, tt_options);
+        if (all_chart_options.chart.type === "map") { //for maps
+            map_init.loadNewMap();
+        } else {
+            update_tooltip.updateToolTip(chart, all_chart_options);
+        }
     });
     //call update tooltip after page and chart is loaded (has to be on a callback with the 'chart' object)
     $("#chart_tooltip_shared_checkbox").change();
@@ -264,7 +305,11 @@ var allFormUpdates = function (chart, all_chart_options) {
     /* CREDITS CHANGES */
 
     $("#chart_credits_text_textarea").unbind().bind('input propertychange', function () {
-        update_credits.updateCreditText(chart, all_chart_options);
+        if (all_chart_options.chart.type === "map") { //for maps
+            map_init.loadNewMap();
+        } else {
+            update_credits.updateCreditText(chart, all_chart_options); //for charts
+        }
     });
 
 
@@ -274,8 +319,15 @@ var allFormUpdates = function (chart, all_chart_options) {
 
     //Subtitle change
     $("#chart_subtitle_textarea").unbind().bind('input propertychange', function () {
-        var new_title = $(this).val();
-        update_chart_options.updateSubtitle(new_title, chart, all_chart_options);
+
+        if (all_chart_options.chart.type === "map") { //if map
+            map_init.loadNewMap();
+
+        } else { //if chart
+            var new_title = $(this).val();
+            update_chart_options.updateSubtitle(new_title, chart, all_chart_options);
+        }
+
     });
 
     //MLR style toggle
@@ -308,6 +360,32 @@ var allFormUpdates = function (chart, all_chart_options) {
         calculate_recession_dates.insertPlotBands(plot_bands_arr, chart, all_chart_options);
         update_credits.updateCreditText(chart, all_chart_options);
     });
+
+
+
+
+
+    /* MAP SPECIFIC FORM CHANGES */
+
+    //type of map changed
+    $("#map_type_select").unbind().change(function () {
+        map_init.loadNewMap();
+    });
+
+
+    //circle size range slider changed
+    $("#map_circle_size_range").unbind().on("input", function () {
+        map_init.loadNewMap();
+    });
+
+
+    //map tooltip N/A input value changed
+    $("#map_tooltip_na_text_input").unbind().on("input", function () {
+        map_init.loadNewMap();
+    });
+    
+
+
 
 
 

@@ -18,22 +18,31 @@ var jq_extensions = (function () {
         },
 
         /** puts commas in a number */
-        addCommas: function () {
+        addCommas: function (decimals) {
             var val = this[0];
             if (isNaN(val)) {
                 return val;
+            } else if (((val > 999) || (val < -999)) && decimals > 1) {
+                while (/(\d+)(\d{3})/.test(val.toString())) {
+                    val = val.toFixed(decimals).replace(/(\d+)(\d{3})/, '$1' + ',' + '$2');
+                }
             } else if ((val > 999) || (val < -999)) {
                 while (/(\d+)(\d{3})/.test(val.toString())) {
                     val = val.toString().replace(/(\d+)(\d{3})/, '$1' + ',' + '$2');
                 }
             }
+            
+            
             return val;
         },
         
+        
+        
         /** takes an element's text string and returns a number, trimming spaces and removing non-numbers (good for numbers with commas etc.)*/
         getNumber: function(){
-            var val = Number($.trim($(this).text().replace(/[^0-9\.\-]+/g, '')));
-            return isNaN(val) ? null : val;
+            var val = $.trim($(this).text().replace(/\(.*\)/,"").replace(/[^0-9\.\-]+/g, ''));
+            
+            return val === "" || isNaN(Number(val)) ? null : Number(val);
         }
         
     });

@@ -15,12 +15,15 @@ var update_template = {
     },
 
     /** change the chart height and witdh **/
-    resize: function (val, dimension, chart) {
+    resize: function (val, dimension, chart, all_chart_options) {
         val = Number(val);
         if (!isNaN(val)) {
-            $(".chart_display_area").css(dimension, val + "px");
+            $(".chart_display_area, .map_display_area").css(dimension, val + "px");
         }
-        chart.reflow();
+
+        if (all_chart_options.chart.type !== "map") {
+            chart.reflow();
+        }
     },
 
     /** change the chart's inner margins **/

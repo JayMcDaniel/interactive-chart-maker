@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Test</title>
+    <meta name="Author" content="" />
+</head>
+
+<body>
+    <h1>Test</h1>
+
+
+
+
+
+    <svg height="450" width="680" id="us_map" class="svg_map" viewBox="180 0 620 620" style="z-index: 400; position: relative; left: 13px; top: 0px; ">
+
+        <style type="text/css">
+            .state {
+                fill: #E0E0E0;
+                stroke: #646464;
+                stroke-width: 1;
+                stroke-opacity: 1;
+            }
+            
+            .territory {
+                opacity: 0;
+                fill: #E0E0E0;
+                stroke: #646464;
+                stroke-width: 1;
+                stroke-opacity: 1;
+                cursor: pointer;
+            }
+            
+            .territoryborder {
+                opacity: 0;
+                fill: none;
+                stroke: #A9A9A9;
+                stroke-width: 2;
+            }
+            
+            .border {
+                opacity: 1;
+                fill: none;
+                stroke: #A9A9A9;
+                stroke-width: 2;
+            }
+            
+            .circle {
+                opacity: 1;
+                fill: #E0E0E0;
+                stroke: #646464;
+                stroke-width: 1;
+            }
+        </style>
+
+    </svg>
+
+
+
+    <!-- external libraries -->
+    <script src="../../libraries/jquery/jquery-2.2.0.min.js"></script>
+
+
+    <script>
+        $("document").ready(function () {
+            $.get("state_map.json", function (data) {
+
+                var usa_map = $("#us_map");
+
+                console.log(data);
+                $.each(data, function () {
+
+
+                    var g = document.createElementNS("http://www.w3.org/2000/svg","g");
+                    if (this.d) {
+                        
+                        var path = document.createElementNS("http://www.w3.org/2000/svg","path");
+                        path.setAttributeNS(null, "d", this.d);
+                    
+                    }else{
+                        var path = document.createElementNS("http://www.w3.org/2000/svg","circle");
+                        path.setAttributeNS(null, "r", this.r);
+                        path.setAttributeNS(null, "cy", this.cx);
+                        path.setAttributeNS(null, "cy", this.cy);
+                    }
+
+                    path.setAttribute("style", this.style);
+                    path.setAttribute("class", this.class);
+                    path.setAttribute("state_name", this.state_name || "");
+
+
+                    g.appendChild(path);
+                    usa_map.append($(g));
+                });
+
+
+
+            });
+        });
+    </script>
+
+</body>
+
+</html>

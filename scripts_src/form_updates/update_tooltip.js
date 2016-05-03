@@ -23,9 +23,9 @@ var update_tooltip = {
             var x_axis_title = this.series.xAxis.axisTitle ? this.series.xAxis.axisTitle.textStr : "X-Axis";
 
             var s = "<b>" + this.series.name + "</b><br>" + y_axis_title + ": <b>" + signs_arr[0] +
-                Highcharts.numberFormat((this.y * multiplier), decimals) + signs_arr[1] + "</b><br/>" +
-                x_axis_title + ": <b>" + signs_arr[0] + Highcharts.numberFormat((this.x * multiplier), decimals) + signs_arr[1] + "</b><br/>" +
-                z_title + ": <b>" + signs_arr[0] + Highcharts.numberFormat((this.x * multiplier), decimals) + signs_arr[1] + "</b>";
+                Highcharts.numberFormat((this.y * multiplier), decimals,".",",") + signs_arr[1] + "</b><br/>" +
+                x_axis_title + ": <b>" + signs_arr[0] + Highcharts.numberFormat((this.x * multiplier), decimals,".",",") + signs_arr[1] + "</b><br/>" +
+                z_title + ": <b>" + signs_arr[0] + Highcharts.numberFormat((this.x * multiplier), decimals,".",",") + signs_arr[1] + "</b>";
 
             return s.replace(/\$-/g, "-$");
         };
@@ -44,8 +44,8 @@ var update_tooltip = {
             var x_axis_title = this.series.xAxis.axisTitle ? this.series.xAxis.axisTitle.textStr : "X-Axis";
 
             var s = "<b>" + this.series.name + "</b><br>" + y_axis_title + ": <b>" + signs_arr[0] +
-                Highcharts.numberFormat((this.y * multiplier), decimals) + signs_arr[1] + "</b><br/>" +
-                x_axis_title + ": <b>" + signs_arr[0] + Highcharts.numberFormat((this.x * multiplier), decimals) + signs_arr[1] + "<br/>";
+                Highcharts.numberFormat((this.y * multiplier), decimals,".",",") + signs_arr[1] + "</b><br/>" +
+                x_axis_title + ": <b>" + signs_arr[0] + Highcharts.numberFormat((this.x * multiplier), decimals,".",",") + signs_arr[1] + "<br/>";
 
             return s.replace(/\$-/g, "-$");
         };
@@ -70,7 +70,7 @@ var update_tooltip = {
                     var point = this.point;
 
                     $.each(chart.series, function () {
-                        shared_tooltip_arr.push("<b>" + this.name + "</b> <br>" + this.points[point.x].x + ": " + signs_arr[0] + Highcharts.numberFormat((this.points[point.x].y * multiplier), decimals) + signs_arr[1]);
+                        shared_tooltip_arr.push("<b>" + this.name + "</b> <br>" + this.points[point.x].x + ": " + signs_arr[0] + Highcharts.numberFormat((this.points[point.x].y * multiplier), decimals,".",",") + signs_arr[1]);
                     });
                     return shared_tooltip_arr.join('<br/>').replace(/\$-/g, "-$");
                 }
@@ -95,7 +95,7 @@ var update_tooltip = {
             if (decimals > 0) { //use decimal formatter
                 newTooltip = function () {
                     var s = "<b>" + this.series.name + "</b><br>" + this.x + ": " + signs_arr[0] +
-                        Highcharts.numberFormat((this.y * multiplier), decimals) + signs_arr[1];
+                        Highcharts.numberFormat((this.y * multiplier), decimals,".",",") + signs_arr[1];
                     return s.replace(/\$-/g, "-$");
                 }
             } else { //don't use decimal formatter
@@ -115,18 +115,16 @@ var update_tooltip = {
 
 
     /** update tooltip - decide which kind of chart and call that get tooltip function **/
-    updateToolTip: function (chart, all_chart_options, tt_options) {
+    updateToolTip: function (chart, all_chart_options) {
 
-        var newTooltip; //will be the returned function
-
-        var is_shared = tt_options.is_shared;
-        var decimals = tt_options.decimals;
-        var signs = tt_options.signs;
-        var multiplier = tt_options.multiplier;
-        var chart_type = all_chart_options.chart.type;
-
-        var signs_arr = [signs === "$" ? "$" : "", signs === "%" ? "%" : ""];
-        var z_title = "Test Z title";
+        var newTooltip, //will be the returned function
+            is_shared = utils_forms.getCheckBoxValue($("#chart_tooltip_shared_checkbox")),
+            decimals = Number($("#chart_tooltip_force_decimals_select").val()),
+            signs = $("#chart_tooltip_signs_select").val(),
+            multiplier = Number($("#chart_tooltip_y_multiple_select").val()),
+            chart_type = all_chart_options.chart.type,
+            signs_arr = [signs === "$" ? "$" : "", signs === "%" ? "%" : ""],
+            z_title = "Test Z title";
 
 
         //IF A TYPICAL CHART

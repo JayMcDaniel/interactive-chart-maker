@@ -1,4 +1,4 @@
-var colorsInit = require("../initializers/colors_init.js");
+var colorsInit = require("../initializers/charts/colors_init.js");
 
 /** updates the chart's colors - called when palette is changed. Calls colorsInit 
 @module

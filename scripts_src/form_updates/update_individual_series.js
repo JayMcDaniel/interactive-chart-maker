@@ -85,7 +85,7 @@ var update_individual_series = {
 
         //convert rgb string into arrray
         var c = i < 15 ? i : i - 15;
-        var color = all_chart_options.colors[c];
+        var color = all_chart_options.colors[c] || "#000";
 
         //create picker
         if (color.charAt(0) === "#") { //if hex

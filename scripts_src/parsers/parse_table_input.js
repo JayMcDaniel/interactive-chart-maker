@@ -15,10 +15,6 @@ var parseForBubble = require("./parse_for_bubble.js");
 var parseForDrilldown = require("./parse_for_drilldown.js");
 
 
-/** parsing function for map charts */
-var parseForMap = function (input) {};
-
-
 
 /** 
 * Function that decides which parse function to run, depending on chart type
@@ -41,10 +37,8 @@ var parseTableInput = function (input, load_series_from, chart_type, legend_togg
         output = parseForScatter(input, chart_type, colors);
     } else if (chart_type == "drilldown") {
         output = parseForDrilldown(input, chart_type, colors);
-    } else if (chart_type == "map") {
-        output = parseForMap(input);
-    }
-
+    } 
+    
     //add chart title (same for all types of charts)
     output.title_text = $("caption", input).text();
     

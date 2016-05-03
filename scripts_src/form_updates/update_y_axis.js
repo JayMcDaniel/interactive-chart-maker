@@ -35,14 +35,14 @@ var update_y_axis = {
         if (y_decimals !== "null") { //if decimals are not null   
 
             var newYFormat = function () {
-                var s = Highcharts.numberFormat(this.value / dividend, y_decimals);
+                var s = Highcharts.numberFormat(this.value / dividend, y_decimals,".",",");
                 return y_signs_arr[0] + s.replace(/\$-/g, "-$") + y_signs_arr[1];
             }
 
         } else { //if decimals are null
 
             var newYFormat = function () {
-                var s = (this.value / dividend == parseInt(this.value / dividend)) ? Highcharts.numberFormat(this.value, 0) : Highcharts.numberFormat(this.value / dividend, 1);
+                var s = (this.value / dividend == parseInt(this.value / dividend)) ? Highcharts.numberFormat(this.value, 0,".",",") : Highcharts.numberFormat(this.value / dividend, 1,".",",");
                 return y_signs_arr[0] + s.replace(/\$-/g, "-$") + y_signs_arr[1];
             }
 

@@ -1,4 +1,4 @@
-var creditsInit = require("../initializers/credits_init.js");
+var creditsInit = require("../initializers/charts/credits_init.js");
 
 /** when credit options are changed in the side area 
 @namespace

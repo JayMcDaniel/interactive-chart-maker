@@ -1,4 +1,4 @@
-var utils_form = require("./utils/utils_forms.js");
+var utils_forms = require("./utils/utils_forms.js");
 
 
 
@@ -22,7 +22,7 @@ var chart_recall = {
             if (this.nodeName === "DIV") {
                 var input_val = $(this).children("[class*='selected']").divVal();
             } else {
-                var input_val = this.type === "checkbox" ? utils_form.getCheckBoxValue($(this)) : $(this).val();
+                var input_val = this.type === "checkbox" ? utils_forms.getCheckBoxValue($(this)) : $(this).val();
             }
 
             saved_values.push({
@@ -48,8 +48,6 @@ var chart_recall = {
         } catch (e) {
             utils_main.showError("Sorry, the JSON parsing didn't work. Please double check your input. " + e);
         }
-
-
 
 
         /** goes through an array of objects with id / val, sets elements with a given ID to that value **/
@@ -85,11 +83,11 @@ var chart_recall = {
 
 
 
-        if (input.saved_values) {
-            var individual_series_options = setValues(input.saved_values, false); //false to not set indivdual series yet
+       
+            var individual_series_options = setValues(input, false); //false to not set indivdual series yet
 
             //initial all chart options init and redraw chart
-            var allChartOptionsInit = require("./initializers/all_chart_options_init.js");
+            var allChartOptionsInit = require("./initializers/charts/all_chart_options_init.js");
             var draw_chart = require("./draw_chart.js");
             all_chart_options = allChartOptionsInit();
             chart = undefined;
@@ -124,7 +122,6 @@ var chart_recall = {
 
             window.scrollTo(0, 0); //scrolls to top
 
-        }
     },
 
 
@@ -135,13 +132,15 @@ var chart_recall = {
     initLoad: function (chart, all_chart_options) {
 
         $("#load_chart_button").unbind().click(function () {
-            var input = $("#load_chart_textarea").val();
+            var re = /"saved_values":(\[.+}\])/;
+            var input = $("#load_chart_textarea").val().match(re)[1]; //separate all_chart_options obj from textarea
+                        
             $("#load_chart_div").hide(function () { //hide this area (makes loading much faster)
                 if (input.length > 0) {
                     chart_recall.loadValues(chart, all_chart_options, input);
                     $("#show_load_chart_area_button").removeClass("load_chart_showing");
                 };
-            })
+            });
 
 
 
