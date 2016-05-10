@@ -64,7 +64,8 @@ var allFormUpdates = function (chart, all_chart_options) {
             $(".chart_display_area").hide();
             $(".map_display_area").show();
 
-            map_init.loadNewMap();
+            map_colors_init.loadMapColorPalettes(4, map_init.loadNewMap);
+
 
         } else {
             $(".map_display_area").hide();
@@ -82,6 +83,7 @@ var allFormUpdates = function (chart, all_chart_options) {
         $(".chart_tab").not(".map_tab").hide();
         $(".display_options:gt(0)>*").not(".notes").not(".show_map").hide(); //hide everything except map relevent options
         $(".just_map").show();
+        $("#chart_credits_text_textarea").val("Hover over an area to see data.\nHover over legend items to see areas in a category.\nSource: U.S. Bureau of Labor Statistics."); //update credits area
 
     });
 
@@ -155,19 +157,21 @@ var allFormUpdates = function (chart, all_chart_options) {
             $(this).addClass("selected");
             updateColors(chart, all_chart_options, chart_type);
         });
+
+
+        //map color palettes
+        $(".map_color_palette_row").unbind().click(function () {
+            $(".map_color_palette_row").removeClass("selected");
+            var color_palette = $(this);
+            color_palette.addClass("selected");
+            map_init.loadNewMap();
+
+        });
+
+
     }
 
 
-    //map color palettes
-    $(".map_color_palette_row").unbind().click(function () {
-        $(".map_color_palette_row").removeClass("selected");
-        var color_palette = $(this);
-        color_palette.addClass("selected");
-        var selected_colors = map_colors_init.newColorArray(color_palette);
-        var all_map_options = map_colors_init.getBoundaryMapColors(null, selected_colors); //this mods all_map_options.areas with color ranges and returns a cached all_map_options
-        map_colors_init.colorPaths(all_map_options);
-
-    });
 
 
     // when page loads, load the chart palettes
@@ -194,8 +198,12 @@ var allFormUpdates = function (chart, all_chart_options) {
 
     //legend reverse ceckbox changed
     $("#legend_reverse_layout_checkbox").unbind().change(function () {
-        var val = utils_forms.getCheckBoxValue($(this));
-        update_legend.updateIsReversed(val, chart, all_chart_options);
+        if (all_chart_options.chart.type === "map") { //for maps
+            map_init.loadNewMap();
+        } else {
+            var val = utils_forms.getCheckBoxValue($(this));
+            update_legend.updateIsReversed(val, chart, all_chart_options);
+        }
     });
 
 
@@ -207,10 +215,16 @@ var allFormUpdates = function (chart, all_chart_options) {
 
     //legend X or Y placement values changed
     $("#legend_placement_x, #legend_placement_y").unbind().keyup(function () {
-        var newX = Number($("#legend_placement_x").val());
-        var newY = Number($("#legend_placement_y").val());
 
-        update_legend.updateXYpositions(newX, newY, chart, all_chart_options);
+        if (all_chart_options.chart.type === "map") { //for maps
+            map_init.loadNewMap();
+        } else {
+
+            var newX = Number($("#legend_placement_x").val());
+            var newY = Number($("#legend_placement_y").val());
+
+            update_legend.updateXYpositions(newX, newY, chart, all_chart_options);
+        }
     });
 
 
@@ -383,7 +397,38 @@ var allFormUpdates = function (chart, all_chart_options) {
     $("#map_tooltip_na_text_input").unbind().on("input", function () {
         map_init.loadNewMap();
     });
-    
+
+
+    //map palette + / - buttons clicked to change amount of colors
+    $("#add_map_color, #minus_map_color").unbind().click(function () {
+
+
+        if (!$(this).hasClass("off")) {
+
+
+            var mod = $(this).attr("id").replace("_map_color", "") == "add" ? 1 : -1;
+            console.log(mod);
+
+            var new_palette_num = $(".map_color_palette_row.selected .map_color_palette_cell").length + mod;
+            map_colors_init.loadMapColorPalettes(new_palette_num, map_init.loadNewMap);
+
+            $("#add_map_color").removeClass("off");
+            $("#minus_map_color").removeClass("off");
+            if (new_palette_num > 5) {
+                $("#add_map_color").addClass("off");
+            }
+
+            if (new_palette_num < 3) {
+                $("#minus_map_color").addClass("off");
+            }
+
+
+        }
+
+
+    });
+
+
 
 
 

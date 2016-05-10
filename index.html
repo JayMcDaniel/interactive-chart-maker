@@ -106,7 +106,7 @@
                     <br>
                     </span>
 
-                    <span class="show_map">
+                    <span class="show_bar show_line show_scatter show_bubble show_drilldown show_column">
                     <label style="margin-bottom: -10px;">Chart size:</label>
                     <span class="notes"><br>Values in number boxes can be adjusted with up/down arrow keys. You can also adjust the chart size at any time by using the shift + arrow keys.</span>
                     <br>
@@ -118,7 +118,7 @@
                     <br>
                     </span>
 
-                    <div class="show_bar show_scatter show_bubble show_drilldown show_column">
+                    <div class="show_bar show_line show_scatter show_bubble show_drilldown show_column">
                         <label>Chart margins:</label>
                         <p class="notes">Higher values move margins inwards. You can also adjust the margins at any time by using the ctrl/cmd + arrow keys (top and right margins) and the alt + arrow keys (bottom and left margins).
                             <br>
@@ -141,6 +141,28 @@
 
                         </div>
                     </div>
+
+
+                    <div class="just_map">
+                        <label for="map_circle_size_range">Circle size:</label>
+                        <br>
+
+                        <span id="map_circle_size_span">
+                            <svg style="height: 20px; width: 20px; float: left; position: relative; top: -1px;">
+                                <circle r="7" cx="8" cy="8" fill="#337ab7"></circle>
+                            </svg>
+                            <input type="range" id="map_circle_size_range" min = "0" max="100" style="float: left; width: 75%;"></input>
+                            <svg style="height: 45px; width: 45px; float: left; position: relative; left:  5px; top: -13px;">
+                                <circle r="20" cx="22" cy="22" fill="#337ab7"></circle>
+                            </svg>
+                        </span>
+
+
+
+
+
+                    </div>
+
                 </div>
 
             </div>
@@ -357,104 +379,27 @@
 
             <!-- color palette options box -->
             <div class="display map_display chart_display" id="display_color_palette">
-                <h4>Color palette <sup class = "help_icon">?</sup> <sup id="color_palette_reverse_icon" title="Reverse palettes">(&#8596;)</sup></h4>
+                <h4>Color palette <sup class = "help_icon">?</sup> <sup id="color_palette_reverse_icon" title="Reverse palettes">(&#8596;)</sup>
+                
+                <sup class="just_map on" id="minus_map_color">&minus;</sup>&nbsp;<sup class="just_map on" id="add_map_color">+</sup>
+                </h4>
                 <div class="display_options">
 
-                    <p class="notes">Series will load their colors from the chosen palette left to right. For more customization, see the "Individual series options" tab. You can cycle through the color templates at any time by pressing "c". The first two rows are Beyond The Numbers and Monthly Labor Review colors.</p>
+                    <p class="notes"><span class="show_bar show_line show_scatter show_bubble show_drilldown show_column">Series will load their colors from the chosen palette left to right. For more customization, see the "Individual series options" tab. You can cycle through the color templates at any time by pressing "c". The first two rows are Beyond The Numbers and Monthly Labor Review colors.</span><span class="show_map">Areas will be colored from the chosen palette depending on their values.</span></p>
 
                     <!-- color palettes are loaded the first time user clicks on that tab -->
 
                     <div id="color_palettes">
-                        <!--BTN colors -->
+                        
                     </div>
 
                     <div id="map_color_palettes" class="just_map" style="display: block;">
-                        <div class="map_color_palette_row selected" value="color_palette_0">
-                            <div class="map_color_palette_cell" style="background-color: #cfdee7;">&nbsp;</div>
-                            <div class="map_color_palette_cell" style="background-color: #bbdbef;">&nbsp;</div>
-                            <div class="map_color_palette_cell" style="background-color: #7cacc5;">&nbsp;</div>
-                            <div class="map_color_palette_cell" style="background-color: #577b8f;">&nbsp;</div>
-                            <div class="map_color_palette_cell" style="background-color: #395463;">&nbsp;</div>
-
-                            <div style="clear:both; height:5px;">&nbsp;</div>
-                        </div>
-                        <div class="map_color_palette_row" value="color_palette_1">
-                            <div class="map_color_palette_cell" style="background-color: #ccece6;">&nbsp;</div>
-                            <div class="map_color_palette_cell" style="background-color: #99d8c9;">&nbsp;</div>
-                            <div class="map_color_palette_cell" style="background-color: #66c2a4;">&nbsp;</div>
-                            <div class="map_color_palette_cell" style="background-color: #2ca25f;">&nbsp;</div>
-                            <div class="map_color_palette_cell" style="background-color: #006d2c;">&nbsp;</div>
-
-                            <div style="clear:both; height:5px;">&nbsp;</div>
-                        </div>
-                        <div class="map_color_palette_row" value="color_palette_2">
-                            <div class="map_color_palette_cell" style="background-color: #bfd3e6;">&nbsp;</div>
-                            <div class="map_color_palette_cell" style="background-color: #9ebcda;">&nbsp;</div>
-                            <div class="map_color_palette_cell" style="background-color: #8c96c6;">&nbsp;</div>
-                            <div class="map_color_palette_cell" style="background-color: #8856a7;">&nbsp;</div>
-                            <div class="map_color_palette_cell" style="background-color: #810f7c">&nbsp;</div>
-
-                            <div style="clear:both; height:5px;">&nbsp;</div>
-                        </div>
-                        <div class="map_color_palette_row" value="color_palette_3">
-                            <div class="map_color_palette_cell" style="background-color: #ccebc5;">&nbsp;</div>
-                            <div class="map_color_palette_cell" style="background-color: #a8ddb5;">&nbsp;</div>
-                            <div class="map_color_palette_cell" style="background-color: #7bccc4;">&nbsp;</div>
-                            <div class="map_color_palette_cell" style="background-color: #43a2ca;">&nbsp;</div>
-                            <div class="map_color_palette_cell" style="background-color: #0868ac">&nbsp;</div>
-
-
-                            <div style="clear:both; height:5px;">&nbsp;</div>
-                        </div>
-                        <div class="map_color_palette_row" value="color_palette_4">
-                            <div class="map_color_palette_cell" style="background-color: #fef0d9;">&nbsp;</div>
-                            <div class="map_color_palette_cell" style="background-color: #fdbb84;">&nbsp;</div>
-                            <div class="map_color_palette_cell" style="background-color: #fc8d59;">&nbsp;</div>
-                            <div class="map_color_palette_cell" style="background-color: #e34a33;">&nbsp;</div>
-                            <div class="map_color_palette_cell" style="background-color: #b30000">&nbsp;</div>
-
-                            <div style="clear:both; height:5px;">&nbsp;</div>
-                        </div>
-                        <div class="map_color_palette_row" value="color_palette_5">
-                            <div class="map_color_palette_cell" style="background-color: #fee391;">&nbsp;</div>
-                            <div class="map_color_palette_cell" style="background-color: #fec44f;">&nbsp;</div>
-                            <div class="map_color_palette_cell" style="background-color: #fe9929;">&nbsp;</div>
-                            <div class="map_color_palette_cell" style="background-color: #d95f0e;">&nbsp;</div>
-                            <div class="map_color_palette_cell" style="background-color: #993404">&nbsp;</div>
-
-                            <div style="clear:both; height:5px;">&nbsp;</div>
-                        </div>
-                        <div class="map_color_palette_row" value="color_palette_6">
-                            <div class="map_color_palette_cell" style="background-color: #ffffb2;">&nbsp;</div>
-                            <div class="map_color_palette_cell" style="background-color: #feb24c;">&nbsp;</div>
-                            <div class="map_color_palette_cell" style="background-color: #fd8d3c;">&nbsp;</div>
-                            <div class="map_color_palette_cell" style="background-color: #f03b20;">&nbsp;</div>
-                            <div class="map_color_palette_cell" style="background-color: #bd0026">&nbsp;</div>
-
-                            <div style="clear:both; height:5px;">&nbsp;</div>
-                        </div>
-                        <div class="map_color_palette_row" value="color_palette_7">
-                            <div class="map_color_palette_cell" style="background-color: #0571b0;">&nbsp;</div>
-                            <div class="map_color_palette_cell" style="background-color: #92c5de;">&nbsp;</div>
-                            <div class="map_color_palette_cell" style="background-color: #ffffbf;">&nbsp;</div>
-                            <div class="map_color_palette_cell" style="background-color: #f4a582;">&nbsp;</div>
-                            <div class="map_color_palette_cell" style="background-color: #ca0020">&nbsp;</div>
-
-                            <div style="clear:both; height:5px;">&nbsp;</div>
-                        </div>
-                        <div class="map_color_palette_row" value="color_palette_8">
-                            <div class="map_color_palette_cell" style="background-color: #4dac26;">&nbsp;</div>
-                            <div class="map_color_palette_cell" style="background-color: #b8e186;">&nbsp;</div>
-                            <div class="map_color_palette_cell" style="background-color: rgb(215, 238, 236);">&nbsp;</div>
-                            <div class="map_color_palette_cell" style="background-color: #f1b6da;">&nbsp;</div>
-                            <div class="map_color_palette_cell" style="background-color: #d01c8b">&nbsp;</div>
-
-                            <div style="clear:both; height:5px;">&nbsp;</div>
-                        </div>
+                    
                     </div>
-                    <!-- end all color palettes -->
+                    
 
                 </div>
+                <!-- end all color palettes -->
 
             </div>
 
@@ -676,7 +621,7 @@
                     </select>
                     <br>
 -->
-                    <span class="show_bar show_scatter show_bubble show_drilldown show_column">
+                    <span class="show_bar show_line show_scatter show_bubble show_drilldown show_column">
                     
                     
                     <label for="chart_tooltip_y_multiple_select">Multiply values by: </label>
@@ -765,25 +710,7 @@
                     <br>
                     <span class="notes">NOTE: For this to work, dates must be entered in mmm yyyy, or Q1 yyyy style. (e.g.: "May 2014, Jun 2014, Jul 2014; or Q1 2010, Q2 2010, Q3 2010")</span>
                     </span>
-                    <div class="just_map">
-                        <label for="map_circle_size_range">Circle size:</label>
-                        <br>
 
-                        <span id="map_circle_size_span">
-                            <svg style="height: 20px; width: 20px; float: left; position: relative; top: -1px;">
-                                <circle r="7" cx="8" cy="8" fill="#337ab7"></circle>
-                            </svg>
-                            <input type="range" id="map_circle_size_range" min = "0" max="100" style="float: left; width: 75%;"></input>
-                            <svg style="height: 45px; width: 45px; float: left; position: relative; left:  5px; top: -13px;">
-                                <circle r="20" cx="22" cy="22" fill="#337ab7"></circle>
-                            </svg>
-                        </span>
-
-
-
-
-
-                    </div>
 
                 </div>
             </div>

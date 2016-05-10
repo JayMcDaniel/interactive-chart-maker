@@ -9,7 +9,7 @@ var map_tooltip_init = {
 
         var tooltip_div = document.createElement("div");
         tooltip_div.className = "map_tooltip";
-        tooltip_div.setAttribute("style", "min-width: 251px; min-height: 60px; background-color: #FCF8E3; border: solid 1px #395463; position: absolute; left: 353px; top: 5px; z-index: 500; display: none; padding-right: 5px;");
+        tooltip_div.setAttribute("style", "min-width: 251px; min-height: 60px; background-color: #FCF8E3; border: solid 1px #395463; position: absolute; left: 353px; top: 5px; z-index: 501; display: none; padding-right: 5px;");
 
         var tooltip_title = document.createElement("h2");
         tooltip_title.className = "tooltip_title";

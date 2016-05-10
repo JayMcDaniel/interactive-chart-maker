@@ -19,14 +19,18 @@ var jq_extensions = (function () {
 
         /** puts commas in a number */
         addCommas: function (decimals) {
+           
             var val = this[0];
-            if (isNaN(val)) {
+            if (isNaN(val) || (((val < 999) && (val > -999)) && decimals < 1)) { //small numbers auto decimals
                 return val;
-            } else if (((val > 999) || (val < -999)) && decimals > 1) {
+            } else if (((val < 999) && (val > -999)) && decimals > 0){ //small numbers fixed decimals
+                return val.toFixed(decimals);
+                
+            }else if (((val > 999) || (val < -999)) && decimals > 0) { //big numbers fixed decimals
                 while (/(\d+)(\d{3})/.test(val.toString())) {
                     val = val.toFixed(decimals).replace(/(\d+)(\d{3})/, '$1' + ',' + '$2');
                 }
-            } else if ((val > 999) || (val < -999)) {
+            } else if ((val > 999) || (val < -999)) {  //big number auto decimals
                 while (/(\d+)(\d{3})/.test(val.toString())) {
                     val = val.toString().replace(/(\d+)(\d{3})/, '$1' + ',' + '$2');
                 }
