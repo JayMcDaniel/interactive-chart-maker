@@ -222,7 +222,6 @@ var update_individual_series = {
         series_visible_label.className = "series_visible_label";
         series_visible_label.textContent = "Visible by default: ";
 
-        console.log(all_chart_options.series[i].visible);
         var series_visible_checkbox = document.createElement("input");
         series_visible_checkbox.setAttribute("type", "checkbox");
         series_visible_checkbox.checked = all_chart_options.series[i].visible;
