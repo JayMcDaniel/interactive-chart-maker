@@ -29,8 +29,8 @@ var parseForScatter = function (input, chart_type, colors) {
 
         //get data values from each row's td cells
         $("td:even", this_row).each(function (i) {
-            var x = Number($.trim($(this).text()));
-            var y = Number($.trim($(this).next().text()));
+            var x = $(this).getNumber();
+            var y = $(this).next().getNumber();
             var xy_arr = [x, y];
             seriesObj.data.push(xy_arr);
         });

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: XAxis</title>
+    <title>JSDoc: Source: form_updates/update_map_palettes.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,178 +17,51 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: XAxis</h1>
+    <h1 class="page-title">Source: form_updates/update_map_palettes.js</h1>
 
     
 
 
 
-
-<section>
-
-<header>
     
-        <h2>XAxis</h2>
-        
-    
-</header>
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>var map_colors_init = require("../initializers/maps/map_colors_init.js");
+var map_init = require("../initializers/maps/map_init.js");
 
-<article>
-    <div class="container-overview">
-    
-        
+/**
+Relates to the map color palettes. functions called from all_form_updates
+@namespace
+**/
 
-    
+var update_map_palettes = {
 
-    <h4 class="name" id="XAxis"><span class="type-signature"></span>new XAxis<span class="signature">(o)</span><span class="type-signature"></span></h4>
+    /** when plus and minus buttons ("#add_map_color) are clicked, this is triggered **/
+    changeAmount: function (button) {
 
-    
+        if (!button.hasClass("off")) {
 
+            var mod = button.attr("id").replace("_map_color", "") == "add" ? 1 : -1;
 
+            var new_palette_num = $(".map_color_palette_row.selected .map_color_palette_cell").length + mod;
+            map_colors_init.loadMapColorPalettes(new_palette_num, map_init.loadNewMap);
 
-<div class="description">
-    xAxis options constructor. Info at http://api.highcharts.com/highcharts#xAxis
-</div>
+            $("#add_map_color, #minus_map_color").removeClass("off");
+            if (new_palette_num > 6) {
+                $("#add_map_color").addClass("off");
+            }else if (new_palette_num &lt; 3) {
+                $("#minus_map_color").addClass("off");
+            }
 
 
+        }
+    }
 
+}
 
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>o</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">XAxis options object</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="constructors_charts_x_axis.js.html">constructors/charts/x_axis.js</a>, <a href="constructors_charts_x_axis.js.html#line1">line 1</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-    </div>
-
-    
-
-    
-
-    
-
-     
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
+module.exports = update_map_palettes;</code></pre>
+        </article>
+    </section>
 
 
 

@@ -46,8 +46,8 @@ var map_init = {
 
         };
 
-        
-        
+
+
         //set viewbox
         switch (map_type) {
         case "county":
@@ -80,7 +80,7 @@ var map_init = {
         //assign values to all_map_options.areas based on table input
 
         parseForMap(all_map_options, table_input);
-        
+
 
         var colors = map_colors_init.newColorArray($(".map_color_palette_row.selected")); //gets array of colors depending on what is selected
         map_colors_init.getBoundaryMapColors(all_map_options, colors); //mods all_map_options.areas to include fill colors depending on values
@@ -156,14 +156,13 @@ var map_init = {
         //create outer legend box
         var map_legend_div = document.createElement("div");
         map_legend_div.setAttribute("class", "map_legend_div");
-        map_legend_div.setAttribute("style", "position: absolute; top: " + (all_map_options.legend.y + 390) + "px; left: " + (all_map_options.legend.x + 251) + "px; min-width: 131px; min-height: 130px; margin: auto; z-index: 500");
+        map_legend_div.setAttribute("style", "position: absolute; top: " + (all_map_options.legend.y + 390) + "px; left: " + (all_map_options.legend.x + 261) + "px; min-width: 131px; min-height: 130px; margin: auto; z-index: 500");
 
-
-
-        //    all_map_options.colors.reverse();
-        //  all_map_options.value_ranges.reverse();
 
         //create legend item for each color
+        var dollar = all_map_options.tooltip.dollar_sign;
+        var percent = all_map_options.tooltip.percent_sign;
+
         $.each(all_map_options.colors, function (i) {
 
 
@@ -181,13 +180,13 @@ var map_init = {
             map_legend_text.setAttribute("class", "map_legend_text");
             map_legend_text.setAttribute("style", "color: black; float: left; line-height: 1em; margin-left: 5px; font-size: 12px;");
 
-
             if (i === 0) {
-                map_legend_text.textContent = all_map_options.value_ranges[i] + " and lower";
+                map_legend_text.textContent = dollar + all_map_options.value_ranges[i] + percent + " and lower";
             } else if (i === all_map_options.colors.length - 1) {
-                map_legend_text.textContent = all_map_options.value_ranges[i - 1] + " and higher";
+                map_legend_text.textContent = dollar + all_map_options.value_ranges[i - 1] + percent + " and higher";
             } else {
-                map_legend_text.textContent = all_map_options.value_ranges[i - 1] + " to " + all_map_options.value_ranges[i];
+                map_legend_text.textContent = dollar + all_map_options.value_ranges[i - 1] + percent + " to "
+                + dollar + all_map_options.value_ranges[i] + all_map_options.tooltip.percent_sign;
             }
 
 
@@ -419,7 +418,9 @@ var map_init = {
         $(".map_legend_item").hover(function () {
                 var this_color = $(this).children(".map_legend_color").css("background-color");
                 var this_map = $(this).parents(".map_outer_div");
-            
+                $(".map_legend_text", this).css("color", "#B73438"); //make text red
+
+                //lower opacity on other areas
                 $("path, circle", this_map).each(function () {
                     if ($(this).attr("fill") !== this_color && $(this).attr("stroke") !== this_color) {
                         $(this).attr("fill-opacity", ".1").attr("stroke-opacity", ".1");
@@ -428,10 +429,14 @@ var map_init = {
 
             },
             function () {
+
+                //bring back opacity
                 var this_map = $(this).parents(".map_outer_div");
                 $("path, circle", this_map).each(function () {
                     $(this).attr("fill-opacity", "1").attr("stroke-opacity", "1");
                 });
+
+                $(".map_legend_text", this).css("color", "#000"); //make text black
 
             });
     }

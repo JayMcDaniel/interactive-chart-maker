@@ -12,6 +12,7 @@ var update_credits = require("./update_credits.js");
 var update_chart_options = require("./update_chart_options.js");
 var chart_recall = require("../chart_recall.js");
 var update_individual_series = require("./update_individual_series.js");
+var update_map_palettes = require("./update_map_palettes.js");
 
 var map_init = require("../initializers/maps/map_init.js");
 var map_colors_init = require("../initializers/maps/map_colors_init.js");
@@ -313,6 +314,12 @@ var allFormUpdates = function (chart, all_chart_options) {
     //call update tooltip after page and chart is loaded (has to be on a callback with the 'chart' object)
     $("#chart_tooltip_shared_checkbox").change();
 
+    //bubble z value
+    $("#chart_z_title_text_input").unbind().keyup(function () {
+        update_tooltip.updateToolTip(chart, all_chart_options);
+
+    });
+
 
 
 
@@ -402,29 +409,7 @@ var allFormUpdates = function (chart, all_chart_options) {
     //map palette + / - buttons clicked to change amount of colors
     $("#add_map_color, #minus_map_color").unbind().click(function () {
 
-
-        if (!$(this).hasClass("off")) {
-
-
-            var mod = $(this).attr("id").replace("_map_color", "") == "add" ? 1 : -1;
-            console.log(mod);
-
-            var new_palette_num = $(".map_color_palette_row.selected .map_color_palette_cell").length + mod;
-            map_colors_init.loadMapColorPalettes(new_palette_num, map_init.loadNewMap);
-
-            $("#add_map_color").removeClass("off");
-            $("#minus_map_color").removeClass("off");
-            if (new_palette_num > 5) {
-                $("#add_map_color").addClass("off");
-            }
-
-            if (new_palette_num < 3) {
-                $("#minus_map_color").addClass("off");
-            }
-
-
-        }
-
+        update_map_palettes.changeAmount($(this));
 
     });
 

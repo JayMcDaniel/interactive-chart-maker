@@ -46,14 +46,14 @@
         <div id="side_nav_tabs">
 
             <div class="tab map_tab chart_tab selected_tab" id="tab_type"><span id="side_nav_tab_icon_chart_type" class="side_nav_tab_icon"></span>Chart type</div>
-            <div class="tab map_tab chart_tab" id="tab_chart_template"><span id="side_nav_tab_icon_sizing" class="side_nav_tab_icon"></span>Sizing (Chart template)</div>
+            <div class="tab map_tab chart_tab" id="tab_chart_template"><span id="side_nav_tab_icon_sizing" class="side_nav_tab_icon"></span>Sizing</div>
             <div class="tab map_tab chart_tab" id="tab_data"><span id="side_nav_tab_icon_data" class="side_nav_tab_icon"></span>Data</div>
-            <div class="tab map_tab chart_tab" id="tab_color_palette"><span id="side_nav_tab_icon_color_palette" class="side_nav_tab_icon"></span>Color palette</div>
+            <div class="tab map_tab chart_tab" id="tab_color_palette"><span id="side_nav_tab_icon_color_palette" class="side_nav_tab_icon"></span>Colors</div>
             <div class="tab chart_tab" id="tab_series_options"><span id="side_nav_tab_icon_series_options" class="side_nav_tab_icon"></span>Individual series options</div>
             <div class="tab map_tab chart_tab" id="tab_chart_legend"><span id="side_nav_tab_icon_chart_legend" class="side_nav_tab_icon"></span>Legend</div>
             <div class="tab chart_tab" id="tab_chart_x_axis"><span id="side_nav_tab_icon_x_axis" class="side_nav_tab_icon"></span>X-axis</div>
             <div class="tab chart_tab" id="tab_chart_y_axis"><span id="side_nav_tab_icon_y_axis" class="side_nav_tab_icon"></span>Y-axis</div>
-            <div class="tab map_tab chart_tab" id="tab_chart_tooltip"><span id="side_nav_tab_icon_chart_tooltip" class="side_nav_tab_icon"></span>Tool tip (hover infobox)</div>
+            <div class="tab map_tab chart_tab" id="tab_chart_tooltip"><span id="side_nav_tab_icon_chart_tooltip" class="side_nav_tab_icon"></span>Tooltip (hover infobox)</div>
             <div class="tab map_tab chart_tab" id="tab_chart_credits"><span id="side_nav_tab_icon_chart_credits" class="side_nav_tab_icon"></span>Notes and credits</div>
             <div class="tab map_tab chart_tab" id="tab_chart_extra_options"><span id="side_nav_tab_icon_extra_options" class="side_nav_tab_icon"></span>Extra options</div>
 
@@ -78,10 +78,18 @@
                         <div class="chart_type_icon" id="chart_type_drilldown" value="drilldown" title="drilldown"></div>
                         <div class="chart_type_icon" id="chart_type_map" value="map" title="map"></div>
                     </div>
+<div class="clearfloat"></div>
 
+                    <div class="show_map">
+                        <label for="chart_id_textinput">Unique ID:</label>
+                        <br>
+                        <span class="notes">Important if using one or more charts on a page. Make sure not to use spaces, hyphens, or start with a number.<br></span>
+                        <input type="text" id="chart_id_textinput" class="medium" value="chart1" />
+
+                        <br>
+                    </div>
 
                 </div>
-                <div class="clearfloat"></div>
 
 
             </div>
@@ -93,18 +101,9 @@
 
             <!-- chart template options box -->
             <div class="display chart_display" id="display_chart_template">
-                <h4>Sizing (Chart template) <sup class = "help_icon">?</sup></h4>
+                <h4>Sizing <sup class = "help_icon">?</sup></h4>
 
                 <div class="display_options">
-
-                    <span class="show_map">
-                        <label for="chart_id_textinput">Unique ID:</label>
-                    <br>
-                    <span class="notes">Important if using one or more charts on a page. Make sure not to use spaces, hyphens, or start with a number.<br></span>
-                    <input type="text" id="chart_id_textinput" class="medium" value="chart1" />
-
-                    <br>
-                    </span>
 
                     <span class="show_bar show_line show_scatter show_bubble show_drilldown show_column">
                     <label style="margin-bottom: -10px;">Chart size:</label>
@@ -379,7 +378,7 @@
 
             <!-- color palette options box -->
             <div class="display map_display chart_display" id="display_color_palette">
-                <h4>Color palette <sup class = "help_icon">?</sup> <sup id="color_palette_reverse_icon" title="Reverse palettes">(&#8596;)</sup>
+                <h4>Colors <sup class = "help_icon">?</sup> <sup id="color_palette_reverse_icon" title="Reverse palettes">(&#8596;)</sup>
                 
                 <sup class="just_map on" id="minus_map_color">&minus;</sup>&nbsp;<sup class="just_map on" id="add_map_color">+</sup>
                 </h4>
@@ -390,13 +389,13 @@
                     <!-- color palettes are loaded the first time user clicks on that tab -->
 
                     <div id="color_palettes">
-                        
+
                     </div>
 
                     <div id="map_color_palettes" class="just_map" style="display: block;">
-                    
+
                     </div>
-                    
+
 
                 </div>
                 <!-- end all color palettes -->
@@ -455,12 +454,12 @@
                     <br>
                     </span>
 
-
+                    <span class="show_bar show_line show_scatter show_bubble show_drilldown show_column">
                     <label for="legend_make_toggle_checkbox" style="font-size:100%; font-weight:normal;">When a series is clicked, hide the others: </label>
                     <input type="checkbox" id="legend_make_toggle_checkbox">
                     <br>
                     <span class="notes">This will cause the first legend item to be visible and the others to be hidden.</span>
-
+                    </span>
                 </div>
             </div>
 
@@ -608,6 +607,12 @@
                         <label for="map_tooltip_na_text_input">Text if data not available: </label>
                         <br>
                         <input type="text" id="map_tooltip_na_text_input" class="medium" value="N/A" />
+                    </span>
+                    
+                    <span class="just_bubble">
+                      <label for="chart_z_title_text_input">Z value title: </label>
+                    <input type="text" id="chart_z_title_text_input" class="medium" placeholder="Bubble size label" value="" />
+                    <br>
                     </span>
 
                     <!--

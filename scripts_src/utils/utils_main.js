@@ -207,10 +207,14 @@ var utils_main = {
         //add surrounding JS (doc ready, render chart, jq extensions...)
         chart_options_js.string = '$(document).ready(function(){\n\
              var all_chart_options = ' + chart_options_js.string + ';\n\
+Highcharts.setOptions({lang: {thousandsSep: ","}});\n\
     var ' + all_chart_options.chart.renderTo + ' = new Highcharts.Chart(all_chart_options);\n\
 });\n\
 jQuery.fn.extend({addCommas:' + $("string").addCommas.toString() + ' });';
 
+        
+        
+        
         $("#chart_output_code").text(chart_options_js.string).each(function (i, block) {
             hljs.highlightBlock(block); //init code coloring
         });
