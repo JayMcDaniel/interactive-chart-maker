@@ -1,12 +1,28 @@
-/** Gets credits from a text input element and returns it
+/** 
+functions for map credits
 @module
 */
-var mapCreditsInit = function (input) {
-    var map_credits = {
-        text: input.val().replace(/\n/g,"<br>"),
-        style: "color: #000; font-family: sans-serif; font-weight: normal; font-size: 12px; padding: 10px; margin-bottom: 0px; position: absolute; bottom: 0px"
+
+var map_credits_init = {
+
+/**Gets credits from a text input element and returns it **/
+    mapCreditsInit: function (input) {
+        var map_credits = {
+            text: input.val().replace(/\n/g, "<br>"),
+            style: "color: #000; font-family: sans-serif; font-weight: normal; font-size: 12px; padding: 10px; margin-bottom: 0px; position: absolute; bottom: 0px"
+        }
+        return map_credits;
+
+    },
+
+    /** creates and returns a styled map div credits with text **/
+    getMapCredits: function (credits) {
+        var map_credits = document.createElement("div");
+        map_credits.innerHTML = credits.text;
+        map_credits.setAttribute("style", credits.style);
+
+        return map_credits;
     }
-    return map_credits;
 };
 
-module.exports = mapCreditsInit;
+module.exports = map_credits_init;

@@ -1,7 +1,7 @@
 var utils_main = require("../utils/utils_main.js");
 var utils_forms = require("../utils/utils_forms.js");
 
-/** methods for updating individual series options in  #display_series_options - called when its side nav tab is selected.
+/** methods for updating individual series options in  #display_series_options - called when its side nav tab is selected in navigation_setup.
 @module
 @param chart {object} the main chart object, built when chart is loaded
 @param all_chart_options {object} the main chart options that load into building of the chart and are turned to string for the output
@@ -237,7 +237,7 @@ var update_individual_series = {
 
 
 
-    /** populates #display_series_options with options for each series. Called when its side nav tab is selected. **/
+    /** populates #display_series_options with options for each series. Called when its side nav tab is selected from navigation_setup. **/
     populateForm: function (chart, all_chart_options) {
 
         var display_series_options_inner_div = $("#display_series_options_inner_div");

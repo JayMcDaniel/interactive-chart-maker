@@ -352,6 +352,20 @@
         stroke: #646464;
         stroke-width: 1;
     }
+    
+    .map_range_input {
+        width: 30%;
+        float: left;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+    
+    [id^="map_color_input"] {
+        position: relative;
+        top: 3px;
+        margin-bottom: 20px;
+        float: left;
+    }
     /* end map styles */
     
     #main_content_div {

@@ -1,11 +1,13 @@
 var utils_forms = require("../../utils/utils_forms.js");
 var parseForMap = require("../../parsers/parse_for_map.js");
 var map_colors_init = require("./map_colors_init.js");
-var mapTitleInit = require("./map_title_init.js");
-var mapSubtitleInit = require("./map_subtitle_init.js");
+var map_title_init = require("./map_title_init.js");
+var map_subtitle_init = require("./map_subtitle_init.js");
 var map_tooltip_init = require("./map_tooltip_init.js");
-var mapCreditsInit = require("./map_credits_init.js");
+var map_legend_init = require("./map_legend_init");
+var map_credits_init = require("./map_credits_init.js");
 var map_circle_sizes_init = require("./map_circle_sizes_init.js");
+var update_map_individual_series = require("../../form_updates/update_map_individual_series.js");
 
 
 /** 
@@ -65,13 +67,13 @@ var map_init = {
         var table_input = $("#table_input_textarea").val();
 
         //set title
-        all_map_options.title = mapTitleInit(table_input);
+        all_map_options.title = map_title_init.mapTitleInit(table_input);
 
         //set subtitle
-        all_map_options.subtitle = mapSubtitleInit($("#chart_subtitle_textarea"));
+        all_map_options.subtitle = map_subtitle_init.mapSubtitleInit($("#chart_subtitle_textarea"));
 
         //set credits
-        all_map_options.credits = mapCreditsInit($("#chart_credits_text_textarea"));
+        all_map_options.credits = map_credits_init.mapCreditsInit($("#chart_credits_text_textarea"));
 
         //set tooltip format
         map_tooltip_init.formatMapToolTip(all_map_options);
@@ -112,10 +114,10 @@ var map_init = {
         var map_outer_svg = map_init.getMapOuterSVG(all_map_options); //creates and returns empty map svg tag
         map_init.populateSVG(all_map_options, map_outer_svg); //colorizes paths, sets circle attributes, appends g elements to svg
 
-        var map_title = map_init.getMapTitle(all_map_options.title); //creates and returns a styled map h2 title with text
-        var map_subtitle = map_init.getMapSubtitle(all_map_options.subtitle); //creates and returns a styled map h3 title with text
-        var map_credits = map_init.getMapCredits(all_map_options.credits); //creates and returns a styled map div credits with text
-        var map_legend = map_init.getMapLegend(all_map_options); //creates and returns a styled map div legend with color boxes and text
+        var map_title = map_title_init.getMapTitle(all_map_options.title); //creates and returns a styled map h2 title with text
+        var map_subtitle = map_subtitle_init.getMapSubtitle(all_map_options.subtitle); //creates and returns a styled map h3 title with text
+        var map_credits = map_credits_init.getMapCredits(all_map_options.credits); //creates and returns a styled map div credits with text
+        var map_legend = map_legend_init.getMapLegend(all_map_options); //creates and returns a styled map div legend with color boxes and text
 
         var tooltip_div = map_tooltip_init.getMapTooltip(); //creates and returns an empty tooltip div template 
 
@@ -138,66 +140,8 @@ var map_init = {
         }
 
 
-        map_init.resizeMap(); //adjust map_display_area size
-
-        //init tooltip and highlighting
-        map_init.setUpMapHover(all_map_options);
-
-        //init legend hovering
-        map_init.setUpMapLegendHover();
-
-    },
 
 
-
-    /** creates and returns a styled map div legend with color boxes and text **/
-    getMapLegend: function (all_map_options) {
-
-        //create outer legend box
-        var map_legend_div = document.createElement("div");
-        map_legend_div.setAttribute("class", "map_legend_div");
-        map_legend_div.setAttribute("style", "position: absolute; top: " + (all_map_options.legend.y + 390) + "px; left: " + (all_map_options.legend.x + 261) + "px; min-width: 131px; min-height: 130px; margin: auto; z-index: 500");
-
-
-        //create legend item for each color
-        var dollar = all_map_options.tooltip.dollar_sign;
-        var percent = all_map_options.tooltip.percent_sign;
-
-        $.each(all_map_options.colors, function (i) {
-
-
-            var map_legend_item = document.createElement("div"); //outer div for each legend item
-            map_legend_item.setAttribute("class", "map_legend_item");
-            map_legend_item.setAttribute("style", "min-width: 171px; min-height: 15px; margin-bottom: 7px; cursor: default;");
-
-            var map_legend_color = document.createElement("div"); //map color box div for each legend item
-            map_legend_color.setAttribute("class", "map_legend_color");
-            //set round color boxes for metro type maps
-            var border_radius = all_map_options.map_type === "metro_area" ? "50px" : "0px";
-            map_legend_color.setAttribute("style", "width: 15px; height: 15px; background-color: " + all_map_options.colors[i] + "; float: left; border: rgb(153, 153, 153) solid .5px; border-radius: " + border_radius + "");
-
-            var map_legend_text = document.createElement("div"); //map text div for each legend item
-            map_legend_text.setAttribute("class", "map_legend_text");
-            map_legend_text.setAttribute("style", "color: black; float: left; line-height: 1em; margin-left: 5px; font-size: 12px;");
-
-            if (i === 0) {
-                map_legend_text.textContent = dollar + all_map_options.value_ranges[i] + percent + " and lower";
-            } else if (i === all_map_options.colors.length - 1) {
-                map_legend_text.textContent = dollar + all_map_options.value_ranges[i - 1] + percent + " and higher";
-            } else {
-                map_legend_text.textContent = dollar + all_map_options.value_ranges[i - 1] + percent + " to "
-                + dollar + all_map_options.value_ranges[i] + all_map_options.tooltip.percent_sign;
-            }
-
-
-            map_legend_item.appendChild(map_legend_color);
-            map_legend_item.appendChild(map_legend_text);
-            map_legend_div.appendChild(map_legend_item);
-
-
-        });
-
-        return map_legend_div;
     },
 
 
@@ -233,44 +177,32 @@ var map_init = {
 
 
 
-
-
-    /** creates and returns a styled map h2 title with text **/
-    getMapTitle: function (title) {
-        var map_title = document.createElement("h2");
-        map_title.textContent = title.text;
-        map_title.setAttribute("style", title.style);
-
-        return map_title;
-    },
-
-
-    /** creates and returns a styled map h3 subtitle with text **/
-    getMapSubtitle: function (subtitle) {
-        var map_subtitle = document.createElement("h3");
-        map_subtitle.textContent = subtitle.text;
-        map_subtitle.setAttribute("style", subtitle.style);
-
-        return map_subtitle;
-    },
-
-
-    /** creates and returns a styled map div credits with text **/
-    getMapCredits: function (credits) {
-        var map_credits = document.createElement("div");
-        map_credits.innerHTML = credits.text;
-        map_credits.setAttribute("style", credits.style);
-
-        return map_credits;
-    },
+  
 
 
 
     /** loads and returns map json **/
-    loadMapJSON: function (filename, map_type, convertMapJSONtoSVG) {
+    loadMapJSON: function (filename, map_type, convertMapJSONtoSVG, repopulate_form) {
         $.get(filename, function (areas) {
             var all_map_options = map_init.createAllMapOptions(areas, map_type);
             map_init.convertMapOptionsToSVG(all_map_options);
+
+
+            map_init.resizeMap(); //adjust map_display_area size
+
+            //init tooltip and highlighting
+            map_init.setUpMapHover(all_map_options);
+
+            //init legend hovering
+            map_init.setUpMapLegendHover();
+
+            //init individual series range setup
+            
+            if(repopulate_form === true){
+               update_map_individual_series.populateForm(all_map_options); 
+            }
+            
+
         });
     },
 
@@ -279,11 +211,11 @@ var map_init = {
 
 
     /** Initial Function (called from map icon click) - calls functions to loads the map json, convert it to svg, loads options and displays map in .map_display_area **/
-    loadNewMap: function () {
+    loadNewMap: function (repopulate_form) {
 
         var map_type = $("#map_type_select").val();
 
-        map_init.loadMapJSON("json/maps/" + map_type + "_map.json", map_type, map_init.convertMapJSONtoSVG);
+        map_init.loadMapJSON("json/maps/" + map_type + "_map.json", map_type, map_init.convertMapJSONtoSVG, repopulate_form);
     },
 
 

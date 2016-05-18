@@ -10,6 +10,8 @@ var update_map_palettes = {
 
     /** when plus and minus buttons ("#add_map_color) are clicked, this is triggered **/
     changeAmount: function (button) {
+        
+        $("#display_series_options_inner_div").empty(); //emptys the individual choices area so colors are redone.
 
         if (!button.hasClass("off")) {
 

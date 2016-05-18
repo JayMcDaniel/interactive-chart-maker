@@ -1,4 +1,5 @@
 var utils_main = require("../../utils/utils_main.js");
+var utils_forms = require("../../utils/utils_forms.js");
 /** Given an array of map areas, this sorts them by value and decides which colors they should have 
 @module
 **/
@@ -30,15 +31,31 @@ var map_colors_init = {
 
 
 
-        var fraction = 1 / all_map_options.ranges_amount;
+
 
         //divide values into ranges
         var value_ranges = []; //to be used to color areas
-        for (var i = fraction; i < 1; i = i + fraction) {
-            value_ranges.push(values_arr[Math.floor(values_arr.length * i)]);
-        }
 
-        map_colors_init.cached_value_ranges = value_ranges; //set new cached array
+
+        //use custom input if available
+
+        if ($(".map_range_input").length > 0) { //grab from custom if available
+
+            $.each($(".map_range_input"), function () {
+                value_ranges.push(Number($(this).val()));
+            });
+
+        } else { //else calculate
+
+            var fraction = 1 / all_map_options.ranges_amount;
+            for (var i = fraction; i < 1; i = i + fraction) {
+                value_ranges.push(values_arr[Math.floor(values_arr.length * i)]);
+            }
+        }
+        
+        
+        //set new cached array
+        map_colors_init.cached_value_ranges = value_ranges; 
 
 
         //add color property to each obj in map_objs depending on its value
@@ -63,8 +80,6 @@ var map_colors_init = {
 
 
         map_colors_init.cached_map_options = all_map_options;
-        //    console.log("values", values_arr);
-        //    console.log("map", map_objs);
 
         all_map_options.value_ranges = value_ranges;
         all_map_options.colors = colors;
@@ -75,23 +90,40 @@ var map_colors_init = {
     /** make and return an array of colors from a color palette **/
     newColorArray: function (color_palette) {
         var selected_colors = [];
-        $.each($(".map_color_palette_cell", color_palette), function () {
-            selected_colors.push($(this).css("background-color"));
-        });
+
+
+        if ($(".map_color_div .jscolor").length > 0) { //grab from custom if available
+
+            $.each($(".map_color_div .jscolor"), function () {
+                selected_colors.push($(this).css("background-color"));
+            });
+
+        } else {
+            $.each($(".map_color_palette_cell", color_palette), function () {
+                selected_colors.push($(this).css("background-color"));
+            });
+
+        }
+
+
+
 
         return selected_colors;
     },
 
 
     /** load map color palette boxes into #map_color_palettes **/
-    loadMapColorPalettes(val, cb) {
+    loadMapColorPalettes(val) {
 
+        var selected_index = utils_forms.getSelectedIndex($(".map_color_palette_row")); //get current selected index to click later
         var allFormUpdates = require("../../form_updates/all_form_updates.js");
 
         var val = val || 5;
         $("#map_color_palettes").load("./components/map_color_palettes_" + val + ".htm", function () {
-            allFormUpdates.colorPaletteRowClick();
-            cb();
+            allFormUpdates.colorPaletteRowClick(); // reinits the click functionality
+
+            $(".map_color_palette_row:eq(" + selected_index + ")").click();
+
         });
     }
 
