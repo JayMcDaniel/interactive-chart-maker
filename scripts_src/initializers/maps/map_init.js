@@ -177,12 +177,14 @@ var map_init = {
 
 
 
-  
 
 
+    /** Initial Function (called from map icon click) - calls functions to loads the map json, convert it to svg, loads options and displays map in .map_display_area **/
+    loadNewMap: function (repopulate_form) {
+        var map_type = $("#map_type_select").val();
 
-    /** loads and returns map json **/
-    loadMapJSON: function (filename, map_type, convertMapJSONtoSVG, repopulate_form) {
+        var filename = "json/maps/" + map_type + "_map.json";
+
         $.get(filename, function (areas) {
             var all_map_options = map_init.createAllMapOptions(areas, map_type);
             map_init.convertMapOptionsToSVG(all_map_options);
@@ -196,26 +198,17 @@ var map_init = {
             //init legend hovering
             map_init.setUpMapLegendHover();
 
+            //init state links to eag pages
+            map_init.setUpMapStateLinks();
+
             //init individual series range setup
-            
-            if(repopulate_form === true){
-               update_map_individual_series.populateForm(all_map_options); 
+            if (repopulate_form === true) {
+                update_map_individual_series.populateForm(all_map_options);
             }
-            
+
 
         });
-    },
 
-
-
-
-
-    /** Initial Function (called from map icon click) - calls functions to loads the map json, convert it to svg, loads options and displays map in .map_display_area **/
-    loadNewMap: function (repopulate_form) {
-
-        var map_type = $("#map_type_select").val();
-
-        map_init.loadMapJSON("json/maps/" + map_type + "_map.json", map_type, map_init.convertMapJSONtoSVG, repopulate_form);
     },
 
 
@@ -276,8 +269,15 @@ var map_init = {
 
             }
 
-            el.setAttribute("style", this.style);
+            if (this.style) {
+                el.setAttribute("style", this.style);
+            }
+
             el.setAttribute("class", this.class);
+
+            if (this.id) {
+                el.setAttribute("id", this.id);
+            }
 
 
             g.appendChild(el);
@@ -345,7 +345,7 @@ var map_init = {
 
 
 
-    /** set up hovor functionality for the map legend **/
+    /** set up hover functionality for the map legend **/
     setUpMapLegendHover: function () {
         $(".map_legend_item").hover(function () {
                 var this_color = $(this).children(".map_legend_color").css("background-color");
@@ -371,6 +371,27 @@ var map_init = {
                 $(".map_legend_text", this).css("color", "#000"); //make text black
 
             });
+    },
+
+
+
+    /** Set up state links to eag page if applicable **/
+
+    setUpMapStateLinks: function () {
+
+        $(".map_svg path[loc_name], .map_svg circle[loc_name]").each(function () {
+            var thisID = $(this).attr("id");
+            if (thisID) {
+                $(this).css("cursor", "pointer")
+                    .click(function () {
+                        window.open("http://www.bls.gov/eag/eag." + thisID + ".htm", '_blank');
+                    });
+            }
+
+        });
+
+
+
     }
 
 

@@ -34,13 +34,15 @@ var map_legend_init = {
             var map_legend_text = document.createElement("div"); //map text div for each legend item
             map_legend_text.setAttribute("class", "map_legend_text");
             map_legend_text.setAttribute("style", "color: black; float: left; line-height: 1em; margin-left: 5px; font-size: 12px;");
+            
+            var dec = all_map_options.tooltip.decimals;
 
             if (i === 0) {
-                map_legend_text.textContent = dollar + all_map_options.value_ranges[i] + percent + " and lower";
+                map_legend_text.textContent = dollar + $(all_map_options.value_ranges[i]).addCommas(dec) + percent + " and lower";
             } else if (i === all_map_options.colors.length - 1) {
-                map_legend_text.textContent = dollar + all_map_options.value_ranges[i - 1] + percent + " and higher";
+                map_legend_text.textContent = dollar + $(all_map_options.value_ranges[i - 1]).addCommas(dec) + percent + " and higher";
             } else {
-                map_legend_text.textContent = dollar + all_map_options.value_ranges[i - 1] + percent + " to " + dollar + all_map_options.value_ranges[i] + all_map_options.tooltip.percent_sign;
+                map_legend_text.textContent = dollar + $(all_map_options.value_ranges[i - 1]).addCommas(dec) + percent + " to " + dollar + $(all_map_options.value_ranges[i]).addCommas(dec) + all_map_options.tooltip.percent_sign;
             }
 
 

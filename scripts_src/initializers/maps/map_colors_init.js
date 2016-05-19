@@ -53,7 +53,6 @@ var map_colors_init = {
             }
         }
         
-        
         //set new cached array
         map_colors_init.cached_value_ranges = value_ranges; 
 
