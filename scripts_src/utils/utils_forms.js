@@ -27,6 +27,18 @@ var utils_forms = {
         return arr;
     },
 
+    /** given a group of elements, this gives the index of an element with a class of "selected" **/
+    getSelectedIndex: function (elem) {
+        var selected_index = 0;
+        elem.each(function (i) {
+            if ($(this).hasClass("selected")) {
+              selected_index = i;
+            }
+        });
+        
+        return selected_index;
+    },
+
     /** When clipboard icon is clicked, this copies the next <pre> text to a clipboard via a hidden textarea **/
     copyToClipBoard: (function () {
         $(".copy_to_clipboard_button").click(

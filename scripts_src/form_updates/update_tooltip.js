@@ -124,7 +124,7 @@ var update_tooltip = {
             multiplier = Number($("#chart_tooltip_y_multiple_select").val()),
             chart_type = all_chart_options.chart.type,
             signs_arr = [signs === "$" ? "$" : "", signs === "%" ? "%" : ""],
-            z_title = "Test Z title";
+            z_title = $("#chart_z_title_text_input").val();
 
 
         //IF A TYPICAL CHART

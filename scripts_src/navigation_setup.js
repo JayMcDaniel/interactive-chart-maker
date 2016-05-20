@@ -22,8 +22,10 @@ var navigation_setup = {
             $(selectedID).addClass("selected_display");
 
             //if this is "Individual Series Options", run that setup function
-            if (selectedID === "#display_series_options") {
-                update_individual_series.populateForm(chart, all_chart_options);
+            if (selectedID === "#display_series_options" && all_chart_options.chart.type != "map") { //for charts
+
+                    update_individual_series.populateForm(chart, all_chart_options);
+                
             }
 
         });

@@ -228,7 +228,9 @@
     }
     
     .help_icon,
-    #color_palette_reverse_icon {
+    #color_palette_reverse_icon,
+    #add_map_color,
+    #minus_map_color {
         font-family: sans-serif;
         border: 1px solid $highlight-color;
         border-radius: 25px;
@@ -237,11 +239,26 @@
         color: #337ab7;
         background-color: #fff;
         cursor: pointer;
+        -webkit-touch-callout: none;
+        /* iOS Safari */
+        -webkit-user-select: none;
+        /* Chrome/Safari/Opera */
+        -khtml-user-select: none;
+        /* Konqueror */
+        -moz-user-select: none;
+        /* Firefox */
+        -ms-user-select: none;
+        /* Internet Explorer/Edge */
+        user-select: none;
         &.help_on {
             color: $highlight_color;
         }
         &:hover {
             color: $highlight_color;
+        }
+        &.off {
+            opacity: .1;
+            cursor: default;
         }
     }
     
@@ -283,6 +300,7 @@
     label {
         font-weight: normal;
         margin-top: 10px;
+        margin-right: 5px;
     }
     
     label.small {
@@ -333,6 +351,20 @@
         fill: #E0E0E0;
         stroke: #646464;
         stroke-width: 1;
+    }
+    
+    .map_range_input {
+        width: 30%;
+        float: left;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+    
+    [id^="map_color_input"] {
+        position: relative;
+        top: 3px;
+        margin-bottom: 20px;
+        float: left;
     }
     /* end map styles */
     

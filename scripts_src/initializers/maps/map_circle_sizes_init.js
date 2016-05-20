@@ -19,7 +19,7 @@ var map_circle_sizes_init = {
 
         $(all_map_options.areas).each(function () {
 
-            var this_area = this.value ? (this.value / size_multiple) || 1 : 0;
+            var this_area = this.value ? (Math.abs(this.value) / size_multiple) || 1 : 0;
             this.r = Math.sqrt(this_area / Math.PI);
 
         });

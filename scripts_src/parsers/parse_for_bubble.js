@@ -29,9 +29,9 @@ var parseForBubble = function (input, chart_type, colors) {
 
         //get data values from each row's td cells (every third cell for xyz groups)
         $("td:nth-child(3n - 1)", this_row).each(function (i) {
-            var x = Number($.trim($(this).text()));
-            var y = Number($.trim($(this).next().text()));
-            var z = Number($.trim($(this).next().next().text()));
+            var x = $(this).getNumber();
+            var y = $(this).next().getNumber();
+            var z = $(this).next().next().getNumber();
             var xyz_arr = [x, y, z];
             seriesObj.data.push(xyz_arr);
         });

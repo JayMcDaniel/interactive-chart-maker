@@ -14,7 +14,7 @@ var plotOptionsInit = function plotOptionsInit(legend_toggle_enabled) {
                 // when one legend item is clicked, the others hide
                 legendItemClick: update_legend.updateToggle(legend_toggle_enabled)
             },
-            
+
             dataLabels: {
                 enabled: utils_forms.getCheckBoxValue($("#chart_show_data_labels_checkbox"))
             },
@@ -41,7 +41,7 @@ var plotOptionsInit = function plotOptionsInit(legend_toggle_enabled) {
 
 
     /* unique chart options (choosing to keep these with every chart so I don't have to reload them with individual series when chart types are updated) */
-    
+
     //bar or column options
     options.series.groupPadding = 0.2;
     options.series.pointPadding = 0.1;
