@@ -65,7 +65,7 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
             $(".chart_display_area").hide();
             $(".map_display_area").show();
 
-            map_colors_init.loadMapColorPalettes(all_map_options, 4);
+            map_colors_init.loadMapColorPalettes(4);
 
 
         } else {

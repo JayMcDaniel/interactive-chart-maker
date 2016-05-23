@@ -181,11 +181,9 @@ var map_init = {
     /** Initial Function (called from map icon click) - calls functions to loads the map json, convert it to svg, loads options and displays map in .map_display_area **/
     loadNewMap: function (chart, all_chart_options, all_map_options, repopulate_form) {
 
-        console.log("load new");
 
         var navigation_setup = require("../../navigation_setup.js");
 
-        console.log("updates loaded");
         var map_type = $("#map_type_select").val();
 
         var filename = "json/maps/" + map_type + "_map.json";
@@ -304,8 +302,6 @@ var map_init = {
         //other areas fade out when an area is hovered
         $(".map_svg path[loc_name], .map_svg circle[loc_name]").hover(function () {
 
-            console.log("start");
-
             //gray out other states
             $(".map_svg path[loc_name], .map_svg circle[loc_name]").not($(this)).attr("fill-opacity", ".1");
 
@@ -343,7 +339,6 @@ var map_init = {
 
         }, function () {
 
-            console.log("stop");
             //return to all previous fill opacity
             $(".map_svg path[loc_name], .map_svg circle[loc_name]").attr("fill-opacity", "1");
 
