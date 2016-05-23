@@ -112,7 +112,7 @@ var map_colors_init = {
 
 
     /** load map color palette boxes into #map_color_palettes **/
-    loadMapColorPalettes(val) {
+    loadMapColorPalettes(all_map_options, val) {
 
         var selected_index = utils_forms.getSelectedIndex($(".map_color_palette_row")); //get current selected index to click later
         var allFormUpdates = require("../../form_updates/all_form_updates.js");

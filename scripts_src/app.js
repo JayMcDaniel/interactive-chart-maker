@@ -9,6 +9,9 @@ $(document).ready(function () {
 
     $("#table_input_textarea").load("./dev/test_tables/state_map_table.htm", function () {
 
+        //initial empty all map options
+
+        var all_map_options = {};
 
         //initial all chart options init
         var allChartOptionsInit = require("./initializers/charts/all_chart_options_init.js");
@@ -25,7 +28,7 @@ $(document).ready(function () {
 
         //all form updates - when updates are made, update the chart. this also calls some nav and keyboard input inits
         var allFormUpdates = require("./form_updates/all_form_updates.js");
-        allFormUpdates(chart, all_chart_options);
+        allFormUpdates(chart, all_chart_options, all_map_options);
 
 
 

@@ -1,4 +1,3 @@
-var chart_recall = require("../chart_recall.js");
 
 /**
  * Main utility object, contains functions that get reused often, including the code writing
@@ -155,71 +154,6 @@ var utils_main = {
 
         return values_arr;
     },
-
-
-    /** calls code writing functions */
-    writeCode: function writeCode(all_chart_options) {
-        utils_main.writeHTMLCode(all_chart_options);
-        utils_main.writeJSCode(all_chart_options);
-
-    },
-
-
-    /** write HTML code **/
-    writeHTMLCode: function (all_chart_options) {
-        if (all_chart_options.chart.type !== "map") { //not map
-
-            var width = $("#chart_width_textinput").val();
-            var height = $("#chart_height_textinput").val();
-            var id = all_chart_options.chart.renderTo;
-            var html_string = '<div id="' + id + '" style = "width: ' + width + 'px; height: ' + height + 'px; margin: auto; padding: 0px;"> </div>';
-        }
-
-
-        $("#chart_html_code").text(html_string).each(function (i, block) { //put code in the <code> and init code coloring
-            hljs.highlightBlock(block);
-        });
-
-
-    },
-
-
-
-
-    /** place code in chart_output_code and reinit highlight */
-    writeJSCode: function (all_chart_options) {
-
-        //save chart input values
-        all_chart_options.saved_values = chart_recall.saveValues();
-
-        var chart_options_js = utils_main.deepStringify(all_chart_options);
-
-        chart_options_js.string = chart_options_js.string
-
-            .replace(/"function(\d+)"/g, function (match, i) {
-                return chart_options_js.functions_arr[i]
-            }) // replace function place holders with their function string from its index in the array
-            .replace(/headers=\\"rowHead\d+ columnHead\d+\\"/g, "") //trim down table alt output to make it smaller
-            .replace(/id=\\"(rowHead|columnHead)\d+\\"/g, "")
-            .replace(/\s{2,} /g, " ")
-            .replace(/"null"/g, "null"); //replace "null" with null
-
-        //add surrounding JS (doc ready, render chart, jq extensions...)
-        chart_options_js.string = '$(document).ready(function(){\n\
-             var all_chart_options = ' + chart_options_js.string + ';\n\
-Highcharts.setOptions({lang: {thousandsSep: ","}});\n\
-    var ' + all_chart_options.chart.renderTo + ' = new Highcharts.Chart(all_chart_options);\n\
-});\n\
-jQuery.fn.extend({addCommas:' + $("string").addCommas.toString() + ' });';
-
-        
-        
-        
-        $("#chart_output_code").text(chart_options_js.string).each(function (i, block) {
-            hljs.highlightBlock(block); //init code coloring
-        });
-    }
-
 
 }
 

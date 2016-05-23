@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: initializers/maps/map_circle_sizes_init.js</title>
+    <title>JSDoc: Namespace: write_code</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,69 +17,511 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: initializers/maps/map_circle_sizes_init.js</h1>
+    <h1 class="page-title">Namespace: write_code</h1>
 
     
 
 
 
+
+<section>
+
+<header>
     
-    <section>
-        <article>
-            <pre class="prettyprint source linenums"><code>var utils_main = require("../../utils/utils_main.js");
+        <h2>write_code</h2>
+        
+    
+</header>
 
-/** Given an array of map circles, this sorts them by value and decides what radius they should have 
-@module
-**/
+<article>
+    <div class="container-overview">
+    
+        
+            <div class="description">functions for chart / map code output</div>
+        
 
-var map_circle_sizes_init = {
-
-    /** Given an array of map circles, this sorts them by value and decides what radius they should have  **/
-    getCircleSizes: function (all_map_options) {
-
-        var size_multiple = 101 - $("#map_circle_size_range").val();
+        
 
 
-        var circle_values_arr = utils_main.valueSort(all_map_options.areas);
-        var top_val = circle_values_arr[circle_values_arr.length - 1];
-
-        //assign R value to each circle area
-
-        $(all_map_options.areas).each(function () {
-
-            var this_area = this.value ? (Math.abs(this.value) / size_multiple) || 1 : 0;
-            this.r = Math.sqrt(this_area / Math.PI);
-
-        });
-
-        map_circle_sizes_init.sortCircles(all_map_options.areas);
-
-    },
-
+<dl class="details">
 
     
+
     
-    /** sorts circles so that smaller ones will appear on top in the map **/
-    sortCircles: function (areas) {
-        areas.sort(function (a, b) {
 
-                if (a.r || b.r === undefined) { //paths go on the bottom
-                    return 1;
-                } else {
-                    return b.r - a.r;
-                }
+    
 
-            }
+    
 
-        );
+    
 
-    }
+    
 
-};
+    
 
-module.exports = map_circle_sizes_init;</code></pre>
-        </article>
-    </section>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="utils_write_code.js.html">utils/write_code.js</a>, <a href="utils_write_code.js.html#line7">line 7</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+     
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    <h4 class="name" id=".writeChartHTMLCode"><span class="type-signature">(static) </span>writeChartHTMLCode<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    creates and returns chart HTML code
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="utils_write_code.js.html">utils/write_code.js</a>, <a href="utils_write_code.js.html#line42">line 42</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".writeChartJSCode"><span class="type-signature">(static) </span>writeChartJSCode<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    place code in chart_output_code and reinit highlight
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="utils_write_code.js.html">utils/write_code.js</a>, <a href="utils_write_code.js.html#line64">line 64</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".writeCode"><span class="type-signature">(static) </span>writeCode<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    calls code writing functions and writes to code area
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="utils_write_code.js.html">utils/write_code.js</a>, <a href="utils_write_code.js.html#line10">line 10</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".writeMapHTMLCode"><span class="type-signature">(static) </span>writeMapHTMLCode<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    creates and returns map HTML code
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="utils_write_code.js.html">utils/write_code.js</a>, <a href="utils_write_code.js.html#line52">line 52</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".writeMapJSCode"><span class="type-signature">(static) </span>writeMapJSCode<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    creates and returns map JS code
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="utils_write_code.js.html">utils/write_code.js</a>, <a href="utils_write_code.js.html#line96">line 96</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
 
 
 

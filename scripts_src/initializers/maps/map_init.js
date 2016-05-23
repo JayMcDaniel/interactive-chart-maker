@@ -9,7 +9,6 @@ var map_credits_init = require("./map_credits_init.js");
 var map_circle_sizes_init = require("./map_circle_sizes_init.js");
 var update_map_individual_series = require("../../form_updates/update_map_individual_series.js");
 
-
 /** 
 Map initialization object
 @namespace
@@ -19,11 +18,11 @@ var map_init = {
 
 
 
-    createAllMapOptions: function (areas, map_type) {
+    createAllMapOptions: function (all_map_options, areas, map_type) {
 
 
         //setup empty all_map_options
-        var all_map_options = {
+        all_map_options = {
             title: {},
             subtitle: {},
             areas: areas,
@@ -180,15 +179,20 @@ var map_init = {
 
 
     /** Initial Function (called from map icon click) - calls functions to loads the map json, convert it to svg, loads options and displays map in .map_display_area **/
-    loadNewMap: function (repopulate_form) {
+    loadNewMap: function (chart, all_chart_options, all_map_options, repopulate_form) {
+
+        console.log("load new");
+
+        var navigation_setup = require("../../navigation_setup.js");
+
+        console.log("updates loaded");
         var map_type = $("#map_type_select").val();
 
         var filename = "json/maps/" + map_type + "_map.json";
 
         $.get(filename, function (areas) {
-            var all_map_options = map_init.createAllMapOptions(areas, map_type);
+            var all_map_options = map_init.createAllMapOptions(all_map_options, areas, map_type);
             map_init.convertMapOptionsToSVG(all_map_options);
-
 
             map_init.resizeMap(); //adjust map_display_area size
 
@@ -206,6 +210,9 @@ var map_init = {
                 update_map_individual_series.populateForm(all_map_options);
             }
 
+            //reinit navigation get code button click so that load chart code button will work
+            navigation_setup.getCodeButtonClick(all_chart_options, all_map_options);
+            navigation_setup.chartOutputCodeFocus(all_chart_options, all_map_options);
 
         });
 
@@ -297,6 +304,8 @@ var map_init = {
         //other areas fade out when an area is hovered
         $(".map_svg path[loc_name], .map_svg circle[loc_name]").hover(function () {
 
+            console.log("start");
+
             //gray out other states
             $(".map_svg path[loc_name], .map_svg circle[loc_name]").not($(this)).attr("fill-opacity", ".1");
 
@@ -334,6 +343,7 @@ var map_init = {
 
         }, function () {
 
+            console.log("stop");
             //return to all previous fill opacity
             $(".map_svg path[loc_name], .map_svg circle[loc_name]").attr("fill-opacity", "1");
 

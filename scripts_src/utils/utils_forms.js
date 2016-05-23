@@ -50,7 +50,7 @@ var utils_forms = {
 
                 try {
                     var successful = document.execCommand('copy');
-                    var msg = successful ? 'Copied!' : 'Not copied!';
+                    var msg = successful ? 'Copied!' : 'Not copied! Try again in a few seconds.';
                     copy_message_span.text(msg);
 
                     setTimeout(function () { //hide message after a bit
@@ -73,7 +73,7 @@ module.exports = utils_forms;
 var copyToClipBoard = function (button) {
     try {
         var successful = document.execCommand('copy');
-        var msg = successful ? 'Copied!' : 'Not copied!';
+        var msg = successful ? 'Copied!' : 'Not copied! Try again in a few seconds.';
 
         copy_message
 
