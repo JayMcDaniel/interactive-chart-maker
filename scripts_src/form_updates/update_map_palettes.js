@@ -18,7 +18,7 @@ var update_map_palettes = {
             var mod = button.attr("id").replace("_map_color", "") == "add" ? 1 : -1;
 
             var new_palette_num = $(".map_color_palette_row.selected .map_color_palette_cell").length + mod;
-            map_colors_init.loadMapColorPalettes(new_palette_num, map_init.loadNewMap);
+            map_colors_init.loadMapColorPalettes(new_palette_num);
 
             $("#add_map_color, #minus_map_color").removeClass("off");
             if (new_palette_num > 6) {

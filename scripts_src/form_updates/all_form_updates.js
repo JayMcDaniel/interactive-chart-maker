@@ -22,7 +22,7 @@ var map_colors_init = require("../initializers/maps/map_colors_init.js");
 /** listens for any form updates and calls appropriate function 
 @module
 */
-var allFormUpdates = function (chart, all_chart_options) {
+var allFormUpdates = function (chart, all_chart_options, all_map_options) {
 
 
     /* CHART TYPE CHANGES */
@@ -40,7 +40,7 @@ var allFormUpdates = function (chart, all_chart_options) {
     /* when chart type icon is clicked and changed */
 
     $('.chart_type_icon').unbind().click(function () {
-        
+
 
         $(".chart_tab, .display_options>*").not(".notes").show(); //start showing all, and might hide later if map selected
         $(".just_map").hide(); //hide just map stuff
@@ -140,7 +140,7 @@ var allFormUpdates = function (chart, all_chart_options) {
     $("#table_input_textarea").unbind().bind('input propertychange', function () {
 
         if (all_chart_options.chart.type === "map") { //for maps
-            map_init.loadNewMap(true);  // true to repopulate form
+            map_init.loadNewMap(chart, all_chart_options, all_map_options, true); // true to repopulate form
         } else {
             update_data.updateData(chart, all_chart_options); //for charts
         }
@@ -170,7 +170,7 @@ var allFormUpdates = function (chart, all_chart_options) {
             var color_palette = $(this);
             color_palette.addClass("selected");
             $("#display_series_options_inner_div").empty(); //emptys the individual choices area so colors are redone.
-            map_init.loadNewMap(true);  // true to repopulate form
+            map_init.loadNewMap(chart, all_chart_options, all_map_options, true); // true to repopulate form
 
         });
 
@@ -205,7 +205,7 @@ var allFormUpdates = function (chart, all_chart_options) {
     //legend reverse ceckbox changed
     $("#legend_reverse_layout_checkbox").unbind().change(function () {
         if (all_chart_options.chart.type === "map") { //for maps
-            map_init.loadNewMap(true);  // true to repopulate form
+            map_init.loadNewMap(chart, all_chart_options, all_map_options, true); // true to repopulate form
         } else {
             var val = utils_forms.getCheckBoxValue($(this));
             update_legend.updateIsReversed(val, chart, all_chart_options);
@@ -223,7 +223,7 @@ var allFormUpdates = function (chart, all_chart_options) {
     $("#legend_placement_x, #legend_placement_y").unbind().keyup(function () {
 
         if (all_chart_options.chart.type === "map") { //for maps
-            map_init.loadNewMap(true);  // true to repopulate form
+            map_init.loadNewMap(chart, all_chart_options, all_map_options, true); // true to repopulate form
         } else {
 
             var newX = Number($("#legend_placement_x").val());
@@ -311,7 +311,7 @@ var allFormUpdates = function (chart, all_chart_options) {
     //change shared tooltip checkbox, decimals, signs, or mulitplier selects
     $("#chart_tooltip_shared_checkbox, #chart_tooltip_force_decimals_select, #chart_tooltip_signs_select, #chart_tooltip_y_multiple_select").unbind().change(function () {
         if (all_chart_options.chart.type === "map") { //for maps
-            map_init.loadNewMap(true);  // true to repopulate form
+            map_init.loadNewMap(chart, all_chart_options, all_map_options, true); // true to repopulate form
         } else {
             update_tooltip.updateToolTip(chart, all_chart_options);
         }
@@ -332,7 +332,7 @@ var allFormUpdates = function (chart, all_chart_options) {
 
     $("#chart_credits_text_textarea").unbind().bind('input propertychange', function () {
         if (all_chart_options.chart.type === "map") { //for maps
-            map_init.loadNewMap(true);  // true to repopulate form
+            map_init.loadNewMap(chart, all_chart_options, all_map_options, true); // true to repopulate form
         } else {
             update_credits.updateCreditText(chart, all_chart_options); //for charts
         }
@@ -347,7 +347,7 @@ var allFormUpdates = function (chart, all_chart_options) {
     $("#chart_subtitle_textarea").unbind().bind('input propertychange', function () {
 
         if (all_chart_options.chart.type === "map") { //if map
-            map_init.loadNewMap(true);  // true to repopulate form
+            map_init.loadNewMap(chart, all_chart_options, all_map_options, true); // true to repopulate form
 
         } else { //if chart
             var new_title = $(this).val();
@@ -395,19 +395,19 @@ var allFormUpdates = function (chart, all_chart_options) {
 
     //type of map changed
     $("#map_type_select").unbind().change(function () {
-        map_init.loadNewMap(true);  // true to repopulate form
+        map_init.loadNewMap(chart, all_chart_options, all_map_options, true); // true to repopulate form
     });
 
 
     //circle size range slider changed
     $("#map_circle_size_range").unbind().on("input", function () {
-        map_init.loadNewMap(true);  // true to repopulate form
+        map_init.loadNewMap(chart, all_chart_options, all_map_options, true); // true to repopulate form
     });
 
 
     //map tooltip N/A input value changed
     $("#map_tooltip_na_text_input").unbind().on("input", function () {
-        map_init.loadNewMap(true);  // true to repopulate form
+        map_init.loadNewMap(chart, all_chart_options, all_map_options, true); // true to repopulate form
     });
 
 
@@ -432,7 +432,7 @@ var allFormUpdates = function (chart, all_chart_options) {
 
     //bind nav clicks and keys
     var navigation_setup = require("../navigation_setup.js");
-    navigation_setup.initNavWithChart(chart, all_chart_options); // rebinds chart and all_chart_options to form events
+    navigation_setup.initNavWithChart(chart, all_chart_options, all_map_options); // rebinds chart and all_chart_options to form events
 
 };
 

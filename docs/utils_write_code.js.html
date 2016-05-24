@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: chart_recall.js</title>
+    <title>JSDoc: Source: utils/write_code.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: chart_recall.js</h1>
+    <h1 class="page-title">Source: utils/write_code.js</h1>
 
     
 
@@ -26,160 +26,114 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>var utils_forms = require("./utils/utils_forms.js");
+            <pre class="prettyprint source linenums"><code>var chart_recall = require("../chart_recall.js");
+var utils_main = require("./utils_main.js");
+/** functions for chart / map code output 
+@namespace
+**/
 
+var write_code = {
 
+    /** calls code writing functions and writes to code area*/
+    writeCode: function writeCode(all_chart_options, all_map_options) {
 
+        var width = $("#chart_width_textinput").val();
+        var height = $("#chart_height_textinput").val();
+        var id = all_chart_options.chart.renderTo;
 
-/**
- * Contains functions that deal with chart (options selected and data loaded) saving and loading
- * @namespace
- */
+        if (all_chart_options.chart.type !== "map") { //not map
 
-var chart_recall = {
-
-
-    /** reads all of the page's selectable options and loads values into an object **/
-
-    saveValues: function () {
-        //object to load each input's values and ID's into (textareas, selects, checkboxes, div icons etc )
-        var saved_values = [];
-
-        $("input, select, textarea, #chart_type_icons, #table_input_load_series_from_icons, #color_palettes, .series_type_div", $("#side_main")).each(function () {
-
-            if (this.nodeName === "DIV") {
-                var input_val = $(this).children("[class*='selected']").divVal();
-            } else {
-                var input_val = this.type === "checkbox" ? utils_forms.getCheckBoxValue($(this)) : $(this).val();
-            }
-
-            saved_values.push({
-                id: $(this).attr("id"),
-                val: input_val
-            });
-
-        });
-        //console.log(JSON.stringify(saved_values));
-        return saved_values;
-
-    },
-
-
-
-
-    /** takes input (originally from #load_chart_textarea, parses it, and sets option values accordingly, to load a saved chart) **/
-
-    loadValues: function (chart, all_chart_options, input) {
-        var utils_main = require("./utils/utils_main.js");
-        try {
-            input = JSON.parse(input);
-        } catch (e) {
-            utils_main.showError("Sorry, the JSON parsing didn't work. Please double check your input. " + e);
+            var html_string = write_code.writeChartHTMLCode(all_chart_options, width, height, id);
+            var js_string = write_code.writeChartJSCode(all_chart_options);
+        } else { //map
+            var html_string = write_code.writeMapHTMLCode(all_map_options, width, height, id);
+            var js_string = write_code.writeMapJSCode(all_map_options);
         }
 
+        //put code in the &lt;code> and init code coloring
+        $("#chart_html_code").text(html_string).each(function (i, block) {
+            hljs.highlightBlock(block);
+        });
 
-        /** goes through an array of objects with id / val, sets elements with a given ID to that value **/
-        var setValues = function (arr, set_individual_series /*bool*/ ) {
-            var individual_series_options = []; //gets populated if series_color and line_style_select are found
-
-            $.each(arr, function () {
-
-                if (!set_individual_series &amp;&amp; this.id.match(/series_color|line_style_select|series_type_div/)) { //look if this id has to do with individual series options
-                    individual_series_options.push(this);
-                } else {
-
-                    var element = document.getElementById(this.id);
-                    if (element) {
-                        if (element.nodeName === "DIV") {
-                            $(element).children().removeClass("selected");
-                            $(element).children("[value='" + this.val + "']").addClass("selected");
-                            //   $(element).children("[type='" + this.val + "']").click();
-
-
-                        } else if (element.type === "checkbox") {
-                            element.checked = this.val;
-                        } else {
-                            element.value = this.val;
-                        }
-                    }
-                }
-            });
-
-            return individual_series_options;
-        }; //end setValues
-
-
-
-
-       
-            var individual_series_options = setValues(input, false); //false to not set indivdual series yet
-
-            //initial all chart options init and redraw chart
-            var allChartOptionsInit = require("./initializers/charts/all_chart_options_init.js");
-            var draw_chart = require("./draw_chart.js");
-            all_chart_options = allChartOptionsInit();
-            chart = undefined;
-            chart = draw_chart.init(all_chart_options);
-
-            //reinit form updates bindings
-            var allFormUpdates = require("./form_updates/all_form_updates.js");
-            allFormUpdates(chart, all_chart_options);
-
-            //re populate the individual series options forms
-            var update_individual_series = require("./form_updates/update_individual_series.js");
-            update_individual_series.populateForm(chart, all_chart_options);
-            setValues(individual_series_options, true); //true to set indivdual series now
-
-
-            /*  trigger changes to update chart  */
-
-            //line style changes
-            $(".line_style_select").each(function () {
-                $(this).change();
-            });
-
-            //individual color changes
-            $(".jscolor").each(function (i) {
-                var color = "#" + $(this).val();
-                update_individual_series.updateSeriesColor(chart, all_chart_options, i, color);
-                $(this).focus().blur();
-            });
-
-            //add recession shading
-            $("#chart_add_recession_shading_select").change();
-
-            window.scrollTo(0, 0); //scrolls to top
+        //put js code in code area
+        $("#chart_output_code").text(js_string).each(function (i, block) {
+            hljs.highlightBlock(block); //init code coloring
+        });
 
     },
 
 
 
 
-    /** when load_chart_button is clicked, load the input options from #load_chart_textarea and update the chart **/
 
-    initLoad: function (chart, all_chart_options) {
+    /** creates and returns chart HTML code  **/
+    writeChartHTMLCode: function (all_chart_options, width, height, id) {
 
-        $("#load_chart_button").unbind().click(function () {
-            var re = /"saved_values":(\[.+}\])/;
-            var input = $("#load_chart_textarea").val().match(re)[1]; //separate all_chart_options obj from textarea
-                        
-            $("#load_chart_div").hide(function () { //hide this area (makes loading much faster)
-                if (input.length > 0) {
-                    chart_recall.loadValues(chart, all_chart_options, input);
-                    $("#show_load_chart_area_button").removeClass("load_chart_showing");
-                };
-            });
+        var html_string = '&lt;div id="' + id + '" style = "width: ' + width + 'px; height: ' + height + 'px; margin: auto; padding: 0px;"> &lt;/div>';
+
+        return html_string;
+
+    },
 
 
+    /** creates and returns map HTML code  **/
+    writeMapHTMLCode: function (all_map_options, width, height, id) {
+
+        var html_string = '&lt;div class="map_display_area" id="' + id + '" style = "width: ' + width + 'px; height: ' + height + 'px; margin: auto; padding: 0px;"> &lt;/div>';
+
+        return html_string;
 
 
-        });
+    },
+
+
+
+    /** place code in chart_output_code and reinit highlight */
+    writeChartJSCode: function (all_chart_options) {
+
+        //save chart input values
+        all_chart_options.saved_values = chart_recall.saveValues();
+
+        var chart_options_js = utils_main.deepStringify(all_chart_options);
+
+        chart_options_js.string = chart_options_js.string
+
+            .replace(/"function(\d+)"/g, function (match, i) {
+                return chart_options_js.functions_arr[i]
+            }) // replace function place holders with their function string from its index in the array
+            .replace(/headers=\\"rowHead\d+ columnHead\d+\\"/g, "") //trim down table alt output to make it smaller
+            .replace(/id=\\"(rowHead|columnHead)\d+\\"/g, "")
+            .replace(/\s{2,} /g, " ")
+            .replace(/"null"/g, "null"); //replace "null" with null
+
+        //add surrounding JS (doc ready, render chart, jq extensions...)
+        chart_options_js.string = '$(document).ready(function(){\n\
+             var all_chart_options = ' + chart_options_js.string + ';\n\
+Highcharts.setOptions({lang: {thousandsSep: ","}});\n\
+    var ' + all_chart_options.chart.renderTo + ' = new Highcharts.Chart(all_chart_options);\n\
+});\n\
+jQuery.fn.extend({addCommas:' + $("string").addCommas.toString() + ' });';
+
+        return chart_options_js.string;
+
+
+    },
+
+
+    /** creates and returns map JS code  **/
+    writeMapJSCode: function (all_map_options) {
+
+        var map_options_js = utils_main.deepStringify(all_map_options);
+        
+        map_options_js.string = "var all_map_options = " + map_options_js.string + ";\n";
+
+        return map_options_js.string;
     }
 
 
 };
 
-module.exports = chart_recall;</code></pre>
+module.exports = write_code;</code></pre>
         </article>
     </section>
 

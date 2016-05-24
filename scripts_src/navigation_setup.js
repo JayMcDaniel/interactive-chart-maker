@@ -1,6 +1,7 @@
 var utils_main = require("./utils/utils_main.js");
 var update_individual_series = require("./form_updates/update_individual_series.js");
 var keyboard_inputs = require("./keyboard_inputs.js");
+var write_code = require("./utils/write_code.js");
 
 
 /** object that contains functions for all the navigation, ie changing between options and chart types 
@@ -33,9 +34,9 @@ var navigation_setup = {
 
 
     /** when chart code is hovered over, update **/
-    chartOutputCodeFocus: function (all_chart_options) {
-        $("#chart_output_code").unbind().hover(function () {
-            utils_main.writeCode(all_chart_options);
+    chartOutputCodeFocus: function (all_chart_options, all_map_options) {
+        $("#chart_output_code").unbind().mouseenter(function () {
+            write_code.writeCode(all_chart_options, all_map_options);
         });
     },
 
@@ -70,7 +71,7 @@ var navigation_setup = {
 
 
     /** when a get code button is clicked, update and show the code area. */
-    getCodeButtonClick: function (all_chart_options) {
+    getCodeButtonClick: function (all_chart_options, all_map_options) {
 
         $("#get_code_button").unbind().click(function (e) {
             $(".load_chart_showing").removeClass("load_chart_showing"); //hide the load saved chart area if it's showing
@@ -81,7 +82,7 @@ var navigation_setup = {
             if ($get_code_span.text() === "Get code") {
                 $("#main_result_code_div").slideDown(50, function () {
                     //write all_chart_options
-                    utils_main.writeCode(all_chart_options);
+                    write_code.writeCode(all_chart_options, all_map_options);
                     $get_code_span.text("Hide code");
 
 
@@ -142,10 +143,10 @@ var navigation_setup = {
 
 
     /** INIT ALL NAVIGATION that needs parameters, called from all_form_updates when page is loaded, and whenever a saved chart is loaded **/
-    initNavWithChart: function (chart, all_chart_options) {
+    initNavWithChart: function (chart, all_chart_options, all_map_options) {
 
-        navigation_setup.chartOutputCodeFocus(all_chart_options);
-        navigation_setup.getCodeButtonClick(all_chart_options);
+        navigation_setup.chartOutputCodeFocus(all_chart_options, all_map_options);
+        navigation_setup.getCodeButtonClick(all_chart_options, all_map_options);
         navigation_setup.loadChartButtonClick(chart, all_chart_options);
         navigation_setup.sideNavTabsChange(chart, all_chart_options);
 
