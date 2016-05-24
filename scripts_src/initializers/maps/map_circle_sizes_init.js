@@ -10,7 +10,7 @@ var map_circle_sizes_init = {
     getCircleSizes: function (all_map_options) {
 
         var size_multiple = 101 - $("#map_circle_size_range").val();
-
+        console.log(size_multiple);
 
         var circle_values_arr = utils_main.valueSort(all_map_options.areas);
         var top_val = circle_values_arr[circle_values_arr.length - 1];
@@ -24,26 +24,31 @@ var map_circle_sizes_init = {
 
         });
 
+        $(all_map_options.areas).each(function () {
+            console.log(this.r);
+        });
         map_circle_sizes_init.sortCircles(all_map_options.areas);
+
+        $(all_map_options.areas).each(function () {
+            console.log("post", this.r);
+        });
 
     },
 
 
-    
-    
+
+
     /** sorts circles so that smaller ones will appear on top in the map **/
     sortCircles: function (areas) {
         areas.sort(function (a, b) {
 
-                if (a.r || b.r === undefined) { //paths go on the bottom
+                if ((a.r && b.r === undefined) || (a.r && b.r === 0)) { //paths go on the bottom
                     return 1;
                 } else {
                     return b.r - a.r;
                 }
 
-            }
-
-        );
+            });
 
     }
 

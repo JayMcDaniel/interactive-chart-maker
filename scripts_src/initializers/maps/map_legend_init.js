@@ -1,11 +1,13 @@
     /** 
-                    creates and returns a styled map div legend with color boxes and text 
-                    @namespace
-                    **/
+                        creates and returns a styled map div legend with color boxes and text 
+                        @namespace
+                        **/
 
 
     var map_legend_init = {
 
+
+        /** creates and returns a map legend div **/
         getMapLegend: function (all_map_options) {
 
             //create outer legend box
@@ -41,39 +43,7 @@
                 //set mod so that numbers in legend are 1, .1, .01, or .001 off    
 
 
-                var mod = .1;
-
-
-                switch (dec) {
-
-
-                case 0 || "0":
-                    {
-                        if (all_map_options.value_ranges[all_map_options.value_ranges.length - 1] > 100) {
-                            mod = 1;
-                        }
-                        break;
-                    }
-                case "1":
-                    {
-                        console.log("case 1");
-                        mod = .1;
-                        break;
-                    }
-                case "2":
-                    {
-                        console.log("case 2");
-                        mod = .01;
-                        break;
-                    }
-                case "3":
-                    {
-
-                        mod = .001;
-                        break;
-                    }
-
-                }
+                var mod = map_legend_init.getValueMod(all_map_options, dec);
 
 
                 //set legend text content
@@ -94,7 +64,43 @@
             });
 
             return map_legend_div;
+        },
+
+
+
+        /** returns a mod so that numbers in legend are 1, .1, .01, or .001 off so they don't overlap **/
+        getValueMod: function (all_map_options, dec) {
+            var mod = .1;
+
+            switch (dec) {
+
+            case 0 || "0":
+                {
+                    if (all_map_options.value_ranges[all_map_options.value_ranges.length - 1] > 100) {
+                        mod = 1;
+                    }
+                    break;
+                }
+            case 1 || "1":
+                {
+                    mod = .1;
+                    break;
+                }
+            case 2 || "2":
+                {
+                    mod = .01;
+                    break;
+                }
+            case 3 || "3":
+                {
+                    mod = .001;
+                    break;
+                }
+
+            }
+            return mod;
         }
+
     };
 
 

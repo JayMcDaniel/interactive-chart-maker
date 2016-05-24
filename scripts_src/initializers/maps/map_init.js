@@ -17,7 +17,7 @@ Map initialization object
 var map_init = {
 
 
-
+    /** creates / sets all map options, the main object that the map svg is made from **/
     createAllMapOptions: function (all_map_options, areas, map_type) {
 
 
@@ -25,7 +25,6 @@ var map_init = {
         all_map_options = {
             title: {},
             subtitle: {},
-            areas: areas,
             colors: [],
             legend: {
                 reversed: utils_forms.getCheckBoxValue($("#legend_reverse_layout_checkbox")),
@@ -43,7 +42,8 @@ var map_init = {
                 decimals: "",
                 na_text: ""
             },
-            extra_value_titles: []
+            extra_value_titles: [],
+            areas: areas
 
         };
 
@@ -190,6 +190,8 @@ var map_init = {
 
         $.get(filename, function (areas) {
             var all_map_options = map_init.createAllMapOptions(all_map_options, areas, map_type);
+
+         
             map_init.convertMapOptionsToSVG(all_map_options);
 
             map_init.resizeMap(); //adjust map_display_area size
@@ -303,7 +305,7 @@ var map_init = {
         $(".map_svg path[loc_name], .map_svg circle[loc_name]").hover(function () {
 
             //gray out other states
-            $(".map_svg path[loc_name], .map_svg circle[loc_name]").not($(this)).attr("fill-opacity", ".1");
+            $(".map_svg path[loc_name], .map_svg circle[loc_name]").not($(this)).attr("fill-opacity", ".05");
 
             //populate and show tooltip
             var this_tooltip = $(".map_tooltip", $(this).parents(".map_outer_div"));
@@ -360,7 +362,7 @@ var map_init = {
                 //lower opacity on other areas
                 $("path, circle", this_map).each(function () {
                     if ($(this).attr("fill") !== this_color && $(this).attr("stroke") !== this_color) {
-                        $(this).attr("fill-opacity", ".1").attr("stroke-opacity", ".1");
+                        $(this).attr("fill-opacity", ".1").attr("stroke-opacity", ".02");
                     }
                 });
 
