@@ -94,7 +94,10 @@ jQuery.fn.extend({addCommas:' + $("string").addCommas.toString() + ' });';
 
     /** creates and returns map JS code  **/
     writeMapJSCode: function (all_map_options) {
+
         var map_options_js = utils_main.deepStringify(all_map_options);
+        
+        map_options_js.string = "var all_map_options = " + map_options_js.string + ";\n";
 
         return map_options_js.string;
     }

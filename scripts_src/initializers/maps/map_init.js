@@ -138,10 +138,8 @@ var map_init = {
             });
         }
 
-
-
-
     },
+
 
 
 
@@ -191,8 +189,8 @@ var map_init = {
         $.get(filename, function (areas) {
             var all_map_options = map_init.createAllMapOptions(all_map_options, areas, map_type);
 
-         
-            map_init.convertMapOptionsToSVG(all_map_options);
+
+            map_init.convertMapOptionsToSVG(all_map_options); //converts all_map_options to svg and puts it on page **/
 
             map_init.resizeMap(); //adjust map_display_area size
 
@@ -273,8 +271,8 @@ var map_init = {
                     el.setAttribute("loc_name", this.loc_name);
                 }
 
-
             }
+            
 
             if (this.style) {
                 el.setAttribute("style", this.style);
@@ -307,19 +305,19 @@ var map_init = {
             //gray out other states
             $(".map_svg path[loc_name], .map_svg circle[loc_name]").not($(this)).attr("fill-opacity", ".05");
 
-            //populate and show tooltip
-            var this_tooltip = $(".map_tooltip", $(this).parents(".map_outer_div"));
+            //// populate tooltip
+            var this_tooltip = $(".map_tooltip", $(this).parents(".map_outer_div")); //get element
             //set title
             $(".tooltip_title", this_tooltip).text($(this).attr("loc_name") || "");
 
-            var this_loc_value = Number($(this).attr("loc_value")); //get main value
-            var this_extra_vals = $(this).attr("extra_vals"); //get extra values (if applicable)
-
+            
             //add main value to tooltip if applicable
+            var this_loc_value = Number($(this).attr("loc_value")); //get main value
             if (this_loc_value) {
                 var value_html = "<span style='font-size: 80%'>" + all_map_options.tooltip.dollar_sign + "</span>" + ($(this_loc_value).addCommas(all_map_options.tooltip.decimals || "")) + "<span style='font-size: 80%'>" + all_map_options.tooltip.percent_sign + "</span>";
 
                 //add extra values to tooltip if applicable
+                var this_extra_vals = $(this).attr("extra_vals"); //get extra values (if applicable)
                 if (this_extra_vals) {
                     this_extra_vals = this_extra_vals.split(";");
                     $.each(this_extra_vals, function (i) {
@@ -328,7 +326,7 @@ var map_init = {
 
                 }
 
-            } else {
+            } else { //if no loc_value
                 var value_html = "<span style='font-size: 70%'>" + all_map_options.tooltip.na_text + "</span>";
             }
 
@@ -351,6 +349,8 @@ var map_init = {
     },
 
 
+    
+    
 
     /** set up hover functionality for the map legend **/
     setUpMapLegendHover: function () {
@@ -382,6 +382,8 @@ var map_init = {
 
 
 
+    
+    
     /** Set up state links to eag page if applicable **/
 
     setUpMapStateLinks: function () {
@@ -396,8 +398,6 @@ var map_init = {
             }
 
         });
-
-
 
     }
 

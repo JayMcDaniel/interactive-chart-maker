@@ -10,7 +10,6 @@ var map_circle_sizes_init = {
     getCircleSizes: function (all_map_options) {
 
         var size_multiple = 101 - $("#map_circle_size_range").val();
-        console.log(size_multiple);
 
         var circle_values_arr = utils_main.valueSort(all_map_options.areas);
         var top_val = circle_values_arr[circle_values_arr.length - 1];
@@ -23,15 +22,8 @@ var map_circle_sizes_init = {
             this.r = Math.sqrt(this_area / Math.PI);
 
         });
-
-        $(all_map_options.areas).each(function () {
-            console.log(this.r);
-        });
+     
         map_circle_sizes_init.sortCircles(all_map_options.areas);
-
-        $(all_map_options.areas).each(function () {
-            console.log("post", this.r);
-        });
 
     },
 
