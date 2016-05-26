@@ -40,6 +40,10 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
     /* when chart type icon is clicked and changed */
 
     $('.chart_type_icon').unbind().click(function () {
+        
+        
+        //if drilled into a drilldown, click the up button to get out - prevents errors
+        $(".highcharts-button").click();
 
 
         $(".chart_tab, .display_options>*").not(".notes").show(); //start showing all, and might hide later if map selected

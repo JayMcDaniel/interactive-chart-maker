@@ -22,6 +22,7 @@ var update_data = {
             categories: parsed_table_output.x_axis_categories
         }, false);
 
+        
         //remove existing series array
         $(chart.series).each(function () {
             this.remove(false); //false to not redraw yet
@@ -34,13 +35,14 @@ var update_data = {
             chart.addSeries(this, false); //false to not redraw yet
         });
 
-        //remove drilldown series
         $(chart.options.drilldown.series).each(function () {
             delete this;
         });
 
         //add drilldown series if applicable
         if (parsed_table_output.drilldown) {
+            chart.options.drilldown.series = [];
+            
             $(parsed_table_output.drilldown.series).each(function () {
                 chart.options.drilldown.series.push(this);
             });
