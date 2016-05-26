@@ -142,7 +142,13 @@
         margin-bottom: 0px;
     }
     
+    #chart_output_code, #chart_html_code {
+        height: 200px;
+        color: $primary_color;
+    }
+    
     #chart_output_code_hidden_textarea {
+        /*NOT USING THIS NOW */
         //hidden but can't actually hide to make this .select able
         // display: block;
         // Place in top-left corner of screen regardless of scroll position.

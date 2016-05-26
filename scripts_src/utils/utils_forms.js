@@ -44,9 +44,9 @@ var utils_forms = {
         $(".copy_to_clipboard_button").click(
             function () {
 
-                var copied_text = $(this).nextAll("pre:eq(0)").text();
+                var copied_text = $(this).nextAll("textarea:eq(0)").select();
                 var copy_message_span = $(this).next().children(".copy_message");
-                $(this).nextAll("textarea:eq(0)").val(copied_text).select(); //move text to hidden text area so it can be selected and copied
+             //   $(this).nextAll("textarea:eq(0)").val(copied_text).select(); //move text to hidden text area so it can be selected and copied
 
                 try {
                     var successful = document.execCommand('copy');

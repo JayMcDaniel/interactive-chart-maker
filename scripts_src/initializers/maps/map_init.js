@@ -20,7 +20,6 @@ var map_init = {
     /** creates / sets all map options, the main object that the map svg is made from **/
     createAllMapOptions: function (all_map_options, areas, map_type) {
 
-
         //setup empty all_map_options
         all_map_options = {
             title: {},
@@ -147,6 +146,7 @@ var map_init = {
     /** creates and returns an empty map outer div. This will hold the map svg, tooltip box, legend, title, etc. **/
 
     getMapOuterDiv: function () {
+        
         var div = document.createElement("div");
         div.setAttribute("style", "position: relative; width: 695px; min-height: 580px; margin: auto; background-color:#FFFFFF;");
         div.setAttribute("class", "map_outer_div");
@@ -161,12 +161,11 @@ var map_init = {
     getMapOuterSVG: function (all_map_options) {
 
         var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+        
         svg.setAttribute("height", 450);
         svg.setAttribute("width", 680);
         svg.setAttribute("class", "map_svg");
-
         svg.setAttribute("viewBox", all_map_options.viewbox);
-
         svg.setAttribute("style", "z-index: 400; position: relative; left: 13px; top: 0px; background-color: #fff;");
 
         return svg;
@@ -179,7 +178,6 @@ var map_init = {
     /** Initial Function (called from map icon click) - calls functions to loads the map json, convert it to svg, loads options and displays map in .map_display_area **/
     loadNewMap: function (chart, all_chart_options, all_map_options, repopulate_form) {
 
-
         var navigation_setup = require("../../navigation_setup.js");
 
         var map_type = $("#map_type_select").val();
@@ -187,9 +185,9 @@ var map_init = {
         var filename = "json/maps/" + map_type + "_map.json";
 
         $.get(filename, function (areas) {
+            
             var all_map_options = map_init.createAllMapOptions(all_map_options, areas, map_type);
-
-
+            
             map_init.convertMapOptionsToSVG(all_map_options); //converts all_map_options to svg and puts it on page **/
 
             map_init.resizeMap(); //adjust map_display_area size
@@ -250,7 +248,6 @@ var map_init = {
 
                 if (this.loc_name) { //if it's a named area, set value and color
                     el.setAttributeNS(null, "loc_value", this.value);
-
                     el.setAttributeNS(null, "fill", this.color || "#E0E0E0");
                     el.setAttribute("loc_name", this.loc_name);
                     this.extra_vals ? el.setAttributeNS(null, "extra_vals", this.extra_vals.join(";")) : null;

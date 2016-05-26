@@ -744,7 +744,7 @@
             <h4>HTML <span class="copy_message"></span></h4>
             <p class="notes">The chart HTML is where the chart will load into on your page. Copy this into your HTML file where you want the chart to appear. Or, in the BLS CMS, this is what you put in the "chart template" section.</p>
 
-            <pre><code class="html" id="chart_html_code"></code></pre>
+            <textarea class="html" id="chart_html_code"></textarea>
 
             <br>
             <!--JS  Code box -->
@@ -765,7 +765,7 @@
 
             </p>
 
-            <pre><code class="js" id="chart_output_code"></code></pre>
+            <textarea class="js" id="chart_output_code"></textarea>
 
             <!--hidden textarea, used to copy code to clipboard with JS -->
             <textarea id="chart_output_code_hidden_textarea"></textarea>
@@ -823,11 +823,13 @@
     <script src="libraries/jscolor-2.0.4/jscolor.min.js"></script>
 
     <!-- code highlighting -->
+<!--
     <link rel="stylesheet" href="libraries/highlight/styles/custom.css">
     <script src="libraries/highlight/highlight.pack.js"></script>
     <script>
         hljs.initHighlightingOnLoad();
     </script>
+-->
 
 
 </body>

@@ -22,15 +22,19 @@ var write_code = {
             var js_string = write_code.writeMapJSCode(all_map_options);
         }
 
-        //put code in the <code> and init code coloring
-        $("#chart_html_code").text(html_string).each(function (i, block) {
-            hljs.highlightBlock(block);
-        });
+        //put code in the <code>
+        $("#chart_html_code").text(html_string);
+            
+//            .each(function (i, block) {  and init code coloring
+//            hljs.highlightBlock(block);
+//        });
 
         //put js code in code area
-        $("#chart_output_code").text(js_string).each(function (i, block) {
-            hljs.highlightBlock(block); //init code coloring
-        });
+        $("#chart_output_code").text(js_string);
+            
+//            .each(function (i, block) {
+//            hljs.highlightBlock(block); //init code coloring
+//        });
 
     },
 
