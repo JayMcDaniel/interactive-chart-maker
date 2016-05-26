@@ -296,25 +296,29 @@ var map_init = {
     /** sets up hover functionality for the map **/
     setUpMapHover: function (all_map_options) {
 
+        
         //other areas fade out when an area is hovered
         $(".map_svg path[loc_name], .map_svg circle[loc_name]").hover(function () {
-
-            //gray out other states
-            $(".map_svg path[loc_name], .map_svg circle[loc_name]").not($(this)).attr("fill-opacity", ".05");
+            
+            var $this = $(this);
+            
+            //gray out other states, highlight this one
+            $(".map_svg path, .map_svg circle").attr("fill-opacity", ".05");
+            $this.attr("fill-opacity", "1");
 
             //// populate tooltip
-            var this_tooltip = $(".map_tooltip", $(this).parents(".map_outer_div")); //get element
+            var this_tooltip = $(".map_tooltip", $this.parents(".map_outer_div")); //get element
             //set title
-            $(".tooltip_title", this_tooltip).text($(this).attr("loc_name") || "");
+            $(".tooltip_title", this_tooltip).text($this.attr("loc_name") || "");
 
             
             //add main value to tooltip if applicable
-            var this_loc_value = Number($(this).attr("loc_value")); //get main value
+            var this_loc_value = Number($this.attr("loc_value")); //get main value
             if (this_loc_value) {
                 var value_html = "<span style='font-size: 80%'>" + all_map_options.tooltip.dollar_sign + "</span>" + ($(this_loc_value).addCommas(all_map_options.tooltip.decimals || "")) + "<span style='font-size: 80%'>" + all_map_options.tooltip.percent_sign + "</span>";
 
                 //add extra values to tooltip if applicable
-                var this_extra_vals = $(this).attr("extra_vals"); //get extra values (if applicable)
+                var this_extra_vals = $this.attr("extra_vals"); //get extra values (if applicable)
                 if (this_extra_vals) {
                     this_extra_vals = this_extra_vals.split(";");
                     $.each(this_extra_vals, function (i) {
@@ -332,7 +336,7 @@ var map_init = {
             $(".tooltip_main_value", this_tooltip).html(value_html);
 
 
-            $(this_tooltip).show(); //show just this map's tooltip
+            this_tooltip.show(); //show just this map's tooltip
 
         }, function () {
 
