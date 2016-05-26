@@ -142,7 +142,8 @@
         margin-bottom: 0px;
     }
     
-    #chart_output_code, #chart_html_code {
+    #chart_output_code,
+    #chart_html_code {
         height: 200px;
         color: $primary_color;
     }
@@ -630,6 +631,28 @@
         }
         #get_code_text {
             font-size: 100%;
+        }
+        .glyphicon-refresh-animate {
+            margin-left: 3px;
+            -animation: spin .7s infinite linear;
+            -webkit-animation: spin2 .7s infinite linear;
+                visibility: hidden;
+        }
+        @-webkit-keyframes spin2 {
+            from {
+                -webkit-transform: rotate(0deg);
+            }
+            to {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+        @keyframes spin {
+            from {
+                transform: scale(1) rotate(0deg);
+            }
+            to {
+                transform: scale(1) rotate(360deg);
+            }
         }
     }
     

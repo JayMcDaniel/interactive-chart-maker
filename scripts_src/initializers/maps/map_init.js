@@ -208,7 +208,8 @@ var map_init = {
 
             //reinit navigation get code button click so that load chart code button will work
             navigation_setup.getCodeButtonClick(all_chart_options, all_map_options);
-            navigation_setup.chartOutputCodeFocus(all_chart_options, all_map_options);
+         
+           // navigation_setup.chartOutputCodeFocus(all_chart_options, all_map_options);
 
         });
 

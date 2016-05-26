@@ -8,6 +8,7 @@ var write_code = {
 
     /** calls code writing functions and writes to code area*/
     writeCode: function writeCode(all_chart_options, all_map_options) {
+        
 
         var width = $("#chart_width_textinput").val();
         var height = $("#chart_height_textinput").val();
@@ -23,18 +24,11 @@ var write_code = {
         }
 
         //put code in the <code>
-        $("#chart_html_code").text(html_string);
-            
-//            .each(function (i, block) {  and init code coloring
-//            hljs.highlightBlock(block);
-//        });
+        $("#chart_html_code").val(html_string);
 
         //put js code in code area
-        $("#chart_output_code").text(js_string);
-            
-//            .each(function (i, block) {
-//            hljs.highlightBlock(block); //init code coloring
-//        });
+        $("#chart_output_code").val(js_string);
+
 
     },
 
