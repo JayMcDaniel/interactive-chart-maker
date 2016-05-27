@@ -40,6 +40,10 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
     /* when chart type icon is clicked and changed */
 
     $('.chart_type_icon').unbind().click(function () {
+        
+        
+        //if drilled into a drilldown, click the up button to get out - prevents errors
+        $(".highcharts-button").click();
 
 
         $(".chart_tab, .display_options>*").not(".notes").show(); //start showing all, and might hide later if map selected
@@ -56,8 +60,10 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
         }
 
         $(".just_drilldown, .just_scatter").hide();
-        if (["scatter", "drilldown"].indexOf(chart_type) > -1) {
+        if (["scatter", "drilldown", "bubble"].indexOf(chart_type) > -1) {
             $(".just_" + chart_type).show();
+            $(".show_" + chart_type).show();
+            
         }
 
         updateChartType(chart_type, chart, all_chart_options);
@@ -395,7 +401,8 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
 
     //type of map changed
     $("#map_type_select").unbind().change(function () {
-        map_init.loadNewMap(chart, all_chart_options, all_map_options, true); // true to repopulate form
+        map_colors_init.loadMapColorPalettes(4);
+       // map_init.loadNewMap(chart, all_chart_options, all_map_options, true); // true to repopulate form
     });
 
 

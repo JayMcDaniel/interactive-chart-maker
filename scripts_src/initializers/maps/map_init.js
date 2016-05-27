@@ -20,7 +20,6 @@ var map_init = {
     /** creates / sets all map options, the main object that the map svg is made from **/
     createAllMapOptions: function (all_map_options, areas, map_type) {
 
-
         //setup empty all_map_options
         all_map_options = {
             title: {},
@@ -147,6 +146,7 @@ var map_init = {
     /** creates and returns an empty map outer div. This will hold the map svg, tooltip box, legend, title, etc. **/
 
     getMapOuterDiv: function () {
+        
         var div = document.createElement("div");
         div.setAttribute("style", "position: relative; width: 695px; min-height: 580px; margin: auto; background-color:#FFFFFF;");
         div.setAttribute("class", "map_outer_div");
@@ -161,12 +161,11 @@ var map_init = {
     getMapOuterSVG: function (all_map_options) {
 
         var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+        
         svg.setAttribute("height", 450);
         svg.setAttribute("width", 680);
         svg.setAttribute("class", "map_svg");
-
         svg.setAttribute("viewBox", all_map_options.viewbox);
-
         svg.setAttribute("style", "z-index: 400; position: relative; left: 13px; top: 0px; background-color: #fff;");
 
         return svg;
@@ -179,7 +178,6 @@ var map_init = {
     /** Initial Function (called from map icon click) - calls functions to loads the map json, convert it to svg, loads options and displays map in .map_display_area **/
     loadNewMap: function (chart, all_chart_options, all_map_options, repopulate_form) {
 
-
         var navigation_setup = require("../../navigation_setup.js");
 
         var map_type = $("#map_type_select").val();
@@ -187,9 +185,9 @@ var map_init = {
         var filename = "json/maps/" + map_type + "_map.json";
 
         $.get(filename, function (areas) {
+            
             var all_map_options = map_init.createAllMapOptions(all_map_options, areas, map_type);
-
-
+            
             map_init.convertMapOptionsToSVG(all_map_options); //converts all_map_options to svg and puts it on page **/
 
             map_init.resizeMap(); //adjust map_display_area size
@@ -210,7 +208,8 @@ var map_init = {
 
             //reinit navigation get code button click so that load chart code button will work
             navigation_setup.getCodeButtonClick(all_chart_options, all_map_options);
-            navigation_setup.chartOutputCodeFocus(all_chart_options, all_map_options);
+         
+           // navigation_setup.chartOutputCodeFocus(all_chart_options, all_map_options);
 
         });
 
@@ -250,7 +249,6 @@ var map_init = {
 
                 if (this.loc_name) { //if it's a named area, set value and color
                     el.setAttributeNS(null, "loc_value", this.value);
-
                     el.setAttributeNS(null, "fill", this.color || "#E0E0E0");
                     el.setAttribute("loc_name", this.loc_name);
                     this.extra_vals ? el.setAttributeNS(null, "extra_vals", this.extra_vals.join(";")) : null;
@@ -299,25 +297,29 @@ var map_init = {
     /** sets up hover functionality for the map **/
     setUpMapHover: function (all_map_options) {
 
+        
         //other areas fade out when an area is hovered
         $(".map_svg path[loc_name], .map_svg circle[loc_name]").hover(function () {
-
-            //gray out other states
-            $(".map_svg path[loc_name], .map_svg circle[loc_name]").not($(this)).attr("fill-opacity", ".05");
+            
+            var $this = $(this);
+            
+            //gray out other states, highlight this one
+            $(".map_svg path, .map_svg circle").attr("fill-opacity", ".05");
+            $this.attr("fill-opacity", "1");
 
             //// populate tooltip
-            var this_tooltip = $(".map_tooltip", $(this).parents(".map_outer_div")); //get element
+            var this_tooltip = $(".map_tooltip", $this.parents(".map_outer_div")); //get element
             //set title
-            $(".tooltip_title", this_tooltip).text($(this).attr("loc_name") || "");
+            $(".tooltip_title", this_tooltip).text($this.attr("loc_name") || "");
 
             
             //add main value to tooltip if applicable
-            var this_loc_value = Number($(this).attr("loc_value")); //get main value
+            var this_loc_value = Number($this.attr("loc_value")); //get main value
             if (this_loc_value) {
                 var value_html = "<span style='font-size: 80%'>" + all_map_options.tooltip.dollar_sign + "</span>" + ($(this_loc_value).addCommas(all_map_options.tooltip.decimals || "")) + "<span style='font-size: 80%'>" + all_map_options.tooltip.percent_sign + "</span>";
 
                 //add extra values to tooltip if applicable
-                var this_extra_vals = $(this).attr("extra_vals"); //get extra values (if applicable)
+                var this_extra_vals = $this.attr("extra_vals"); //get extra values (if applicable)
                 if (this_extra_vals) {
                     this_extra_vals = this_extra_vals.split(";");
                     $.each(this_extra_vals, function (i) {
@@ -335,7 +337,7 @@ var map_init = {
             $(".tooltip_main_value", this_tooltip).html(value_html);
 
 
-            $(this_tooltip).show(); //show just this map's tooltip
+            this_tooltip.show(); //show just this map's tooltip
 
         }, function () {
 

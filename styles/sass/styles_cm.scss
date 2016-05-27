@@ -142,7 +142,14 @@
         margin-bottom: 0px;
     }
     
+    #chart_output_code,
+    #chart_html_code {
+        height: 200px;
+        color: $primary_color;
+    }
+    
     #chart_output_code_hidden_textarea {
+        /*NOT USING THIS NOW */
         //hidden but can't actually hide to make this .select able
         // display: block;
         // Place in top-left corner of screen regardless of scroll position.
@@ -603,8 +610,6 @@
     .copy_to_clipboard_button,
     #open_table_wizard_button {
         padding: 0px 5px 0px 5px;
-        border: solid 1px #b73438;
-        border-radius: 5px;
         margin-left: 30px;
         cursor: pointer;
         background-color: #fff;
@@ -625,6 +630,28 @@
         #get_code_text {
             font-size: 100%;
         }
+        .glyphicon-refresh-animate {
+            margin-left: 3px;
+            -animation: spin .7s infinite linear;
+            -webkit-animation: spin2 .7s infinite linear;
+            visibility: hidden;
+        }
+        @-webkit-keyframes spin2 {
+            from {
+                -webkit-transform: rotate(0deg);
+            }
+            to {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+        @keyframes spin {
+            from {
+                transform: scale(1) rotate(0deg);
+            }
+            to {
+                transform: scale(1) rotate(360deg);
+            }
+        }
     }
     
     #get_code_button:hover {
@@ -632,15 +659,18 @@
     }
     
     .copy_to_clipboard_button {
+        border: solid 1px #b73438;
+        border-radius: 2px;
         width: 31px;
         height: 31px;
         margin-left: 0px;
         margin-bottom: 10px;
-        margin-right: 10px;
+        margin-right: 8px;
         background-image: url(../../images/icons/copy_to_clipboard_icon.png);
         background-size: 80% 80%;
         background-repeat: no-repeat;
         background-position: center;
+        top: -10px;
         &:hover {
             background-image: url(../../images/icons/copy_to_clipboard_icon_hover.png);
         }
