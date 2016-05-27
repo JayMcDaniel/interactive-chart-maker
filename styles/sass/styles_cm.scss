@@ -610,8 +610,6 @@
     .copy_to_clipboard_button,
     #open_table_wizard_button {
         padding: 0px 5px 0px 5px;
-        //        border: solid 1px #b73438;
-        //        border-radius: 5px;
         margin-left: 30px;
         cursor: pointer;
         background-color: #fff;
@@ -661,13 +659,15 @@
     }
     
     .copy_to_clipboard_button {
+        border: solid 1px #b73438;
+        border-radius: 2px;
         width: 31px;
         height: 31px;
         margin-left: 0px;
         margin-bottom: 10px;
         margin-right: 8px;
         background-image: url(../../images/icons/copy_to_clipboard_icon.png);
-        background-size: 90% 90%;
+        background-size: 80% 80%;
         background-repeat: no-repeat;
         background-position: center;
         top: -10px;
