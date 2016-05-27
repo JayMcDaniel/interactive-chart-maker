@@ -610,8 +610,8 @@
     .copy_to_clipboard_button,
     #open_table_wizard_button {
         padding: 0px 5px 0px 5px;
-        border: solid 1px #b73438;
-        border-radius: 5px;
+        //        border: solid 1px #b73438;
+        //        border-radius: 5px;
         margin-left: 30px;
         cursor: pointer;
         background-color: #fff;
@@ -636,7 +636,7 @@
             margin-left: 3px;
             -animation: spin .7s infinite linear;
             -webkit-animation: spin2 .7s infinite linear;
-                visibility: hidden;
+            visibility: hidden;
         }
         @-webkit-keyframes spin2 {
             from {
@@ -665,11 +665,12 @@
         height: 31px;
         margin-left: 0px;
         margin-bottom: 10px;
-        margin-right: 10px;
+        margin-right: 8px;
         background-image: url(../../images/icons/copy_to_clipboard_icon.png);
-        background-size: 80% 80%;
+        background-size: 90% 90%;
         background-repeat: no-repeat;
         background-position: center;
+        top: -10px;
         &:hover {
             background-image: url(../../images/icons/copy_to_clipboard_icon_hover.png);
         }

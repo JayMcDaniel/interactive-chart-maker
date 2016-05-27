@@ -60,8 +60,10 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
         }
 
         $(".just_drilldown, .just_scatter").hide();
-        if (["scatter", "drilldown"].indexOf(chart_type) > -1) {
+        if (["scatter", "drilldown", "bubble"].indexOf(chart_type) > -1) {
             $(".just_" + chart_type).show();
+            $(".show_" + chart_type).show();
+            
         }
 
         updateChartType(chart_type, chart, all_chart_options);

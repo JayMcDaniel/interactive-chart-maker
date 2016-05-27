@@ -37,7 +37,7 @@ var parseForDrilldown = function (input, chart_type, colors) {
             });
             
             //push top level categories name
-            output.x_axis_categories.push(this_name);
+        //    output.x_axis_categories.push(this_name);
 
         } else if ($(this).is('[class*="sub"]')) { //if this is a sub1 sub2 etc
 
