@@ -40,8 +40,8 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
     /* when chart type icon is clicked and changed */
 
     $('.chart_type_icon').unbind().click(function () {
-        
-        
+
+
         //if drilled into a drilldown, click the up button to get out - prevents errors
         $(".highcharts-button").click();
 
@@ -63,7 +63,7 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
         if (["scatter", "drilldown", "bubble"].indexOf(chart_type) > -1) {
             $(".just_" + chart_type).show();
             $(".show_" + chart_type).show();
-            
+
         }
 
         updateChartType(chart_type, chart, all_chart_options);
@@ -102,7 +102,12 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
 
     //chart ID
     $("#chart_id_textinput").unbind().keyup(function () {
-        update_template.changeID($(this).val(), all_chart_options);
+        if (all_chart_options.chart.type === "map") { //for maps
+            map_init.loadNewMap(chart, all_chart_options, all_map_options, false); // true to repopulate form
+        } else {
+            update_template.changeID($(this).val(), all_chart_options);
+        }
+
     });
 
     //chart width
@@ -368,7 +373,7 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
         update_x_axis.toggleMLRStyle(is_checked, chart, all_chart_options);
         update_y_axis.toggleMLRStyle(is_checked, chart, all_chart_options);
         update_chart_options.toggleMLRStyle(is_checked, all_chart_options); //draw_chart is called from here to update plotBorder
-        if(is_checked){
+        if (is_checked) {
             console.log("check");
             $("#color_palette_mlr").click(); //click MLR color palette
         }
@@ -406,7 +411,7 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
     //type of map changed
     $("#map_type_select").unbind().change(function () {
         map_colors_init.loadMapColorPalettes(4);
-       // map_init.loadNewMap(chart, all_chart_options, all_map_options, true); // true to repopulate form
+        // map_init.loadNewMap(chart, all_chart_options, all_map_options, true); // true to repopulate form
     });
 
 

@@ -36,6 +36,8 @@ var map_legend_init = require("./map_legend_init");
 var map_credits_init = require("./map_credits_init.js");
 var map_circle_sizes_init = require("./map_circle_sizes_init.js");
 var update_map_individual_series = require("../../form_updates/update_map_individual_series.js");
+var update_template = require("../../form_updates/update_template.js");
+
 
 /** 
 Map initialization object
@@ -50,6 +52,7 @@ var map_init = {
 
         //setup empty all_map_options
         all_map_options = {
+            render_ID: update_template.changeID($("#chart_id_textinput").val(), null, all_map_options),
             title: {},
             subtitle: {},
             colors: [],
@@ -73,7 +76,6 @@ var map_init = {
             areas: areas
 
         };
-
 
 
         //set viewbox
@@ -138,7 +140,7 @@ var map_init = {
         var map_outer_div = map_init.getMapOuterDiv(); //creates and returns outer map div
 
         var map_outer_svg = map_init.getMapOuterSVG(all_map_options); //creates and returns empty map svg tag
-        map_init.populateSVG(all_map_options, map_outer_svg); //colorizes paths, sets circle attributes, appends g elements to svg
+        map_init.populateSVGAreas(all_map_options, map_outer_svg); //colorizes paths, sets circle attributes, appends g elements to svg
 
         var map_title = map_title_init.getMapTitle(all_map_options.title); //creates and returns a styled map h2 title with text
         var map_subtitle = map_subtitle_init.getMapSubtitle(all_map_options.subtitle); //creates and returns a styled map h3 title with text
@@ -174,7 +176,7 @@ var map_init = {
     /** creates and returns an empty map outer div. This will hold the map svg, tooltip box, legend, title, etc. **/
 
     getMapOuterDiv: function () {
-        
+
         var div = document.createElement("div");
         div.setAttribute("style", "position: relative; width: 695px; min-height: 580px; margin: auto; background-color:#FFFFFF;");
         div.setAttribute("class", "map_outer_div");
@@ -189,7 +191,7 @@ var map_init = {
     getMapOuterSVG: function (all_map_options) {
 
         var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-        
+
         svg.setAttribute("height", 450);
         svg.setAttribute("width", 680);
         svg.setAttribute("class", "map_svg");
@@ -213,9 +215,9 @@ var map_init = {
         var filename = "json/maps/" + map_type + "_map.json";
 
         $.get(filename, function (areas) {
-            
+
             var all_map_options = map_init.createAllMapOptions(all_map_options, areas, map_type);
-            
+
             map_init.convertMapOptionsToSVG(all_map_options); //converts all_map_options to svg and puts it on page **/
 
             map_init.resizeMap(); //adjust map_display_area size
@@ -236,8 +238,7 @@ var map_init = {
 
             //reinit navigation get code button click so that load chart code button will work
             navigation_setup.getCodeButtonClick(all_chart_options, all_map_options);
-         
-           // navigation_setup.chartOutputCodeFocus(all_chart_options, all_map_options);
+
 
         });
 
@@ -246,7 +247,7 @@ var map_init = {
 
 
 
-    /** resizes chart_display_area by changind input values and triggering keyup **/
+    /** resizes chart_display_area by changing input values and triggering keyup **/
     resizeMap: function () {
         $("#chart_width_textinput").val(710).keyup();
         $("#chart_height_textinput").val(650).keyup();
@@ -255,9 +256,9 @@ var map_init = {
 
 
 
-    /** populates map svg (creates paths and circles) with options from all_map_options.areas **/
+    /** populates map svg (creates paths and circles) with options from all_map_options.areas. Called from convertMapOptionsToSVG() **/
 
-    populateSVG: function (all_map_options, map_outer_svg) {
+    populateSVGAreas: function (all_map_options, map_outer_svg) {
 
         $.each(all_map_options.areas, function () {
 
@@ -278,8 +279,15 @@ var map_init = {
                 if (this.loc_name) { //if it's a named area, set value and color
                     el.setAttributeNS(null, "loc_value", this.value);
                     el.setAttributeNS(null, "fill", this.color || "#E0E0E0");
+                    el.setAttributeNS(null, "stroke", "#646464");
                     el.setAttribute("loc_name", this.loc_name);
                     this.extra_vals ? el.setAttributeNS(null, "extra_vals", this.extra_vals.join(";")) : null;
+                }
+
+                if (this.class === "border") {
+                    el.setAttributeNS(null, "fill", "none");
+                    el.setAttributeNS(null, "stroke", "#A9A9A9");
+                    el.setAttributeNS(null, "stroke-width", 2);
                 }
 
             } else { //circle (DC or metro area)
@@ -298,7 +306,7 @@ var map_init = {
                 }
 
             }
-            
+
 
             if (this.style) {
                 el.setAttribute("style", this.style);
@@ -325,12 +333,12 @@ var map_init = {
     /** sets up hover functionality for the map **/
     setUpMapHover: function (all_map_options) {
 
-        
+
         //other areas fade out when an area is hovered
         $(".map_svg path[loc_name], .map_svg circle[loc_name]").hover(function () {
-            
+
             var $this = $(this);
-            
+
             //gray out other states, highlight this one
             $(".map_svg path, .map_svg circle").attr("fill-opacity", ".05");
             $this.attr("fill-opacity", "1");
@@ -340,7 +348,7 @@ var map_init = {
             //set title
             $(".tooltip_title", this_tooltip).text($this.attr("loc_name") || "");
 
-            
+
             //add main value to tooltip if applicable
             var this_loc_value = Number($this.attr("loc_value")); //get main value
             if (this_loc_value) {
@@ -351,7 +359,7 @@ var map_init = {
                 if (this_extra_vals) {
                     this_extra_vals = this_extra_vals.split(";");
                     $.each(this_extra_vals, function (i) {
-                        value_html = value_html + "&lt;p style='font-size: 40%'>&lt;span style='color: black'>" + all_map_options.extra_value_titles[i] + ": &lt;/span>" + this_extra_vals[i] + "&lt;/p>";
+                        value_html = value_html + "&lt;p style='font-size: 40%; line-height: 1.1; margin: 2px 0px 2px 0px;'>&lt;span style='color: black'>" + all_map_options.extra_value_titles[i] + ": &lt;/span>" + this_extra_vals[i] + "&lt;/p>";
                     });
 
                 }
@@ -379,8 +387,8 @@ var map_init = {
     },
 
 
-    
-    
+
+
 
     /** set up hover functionality for the map legend **/
     setUpMapLegendHover: function () {
@@ -412,8 +420,8 @@ var map_init = {
 
 
 
-    
-    
+
+
     /** Set up state links to eag page if applicable **/
 
     setUpMapStateLinks: function () {
@@ -452,7 +460,7 @@ module.exports = map_init;</code></pre>
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Thu Jun 02 2016 11:34:04 GMT-0400 (EDT)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Thu Jun 02 2016 14:52:32 GMT-0400 (EDT)
 </footer>
 
 <script> prettyPrint(); </script>
