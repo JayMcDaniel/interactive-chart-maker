@@ -274,19 +274,19 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
 
     //y-axis tickmark interval input changed
     $("#chart_y_axis_tickmark_interval_input").unbind().keyup(function () {
-        var newInterval = Number($(this).val());
+        var newInterval = $(this).val();
         update_y_axis.updateTickmarkInterval(newInterval, chart, all_chart_options);
     });
 
     //y-axis max input changed
     $("#chart_y_axis_max_input").unbind().keyup(function () {
-        var newMax = Number($(this).val());
+        var newMax = $(this).val();
         update_y_axis.updateMax(newMax, chart, all_chart_options);
     });
 
     //y-axis min input changed
     $("#chart_y_axis_min_input").unbind().keyup(function () {
-        var newMin = Number($(this).val());
+        var newMin = $(this).val();
         update_y_axis.updateMin(newMin, chart, all_chart_options);
     });
 

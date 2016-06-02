@@ -49,9 +49,6 @@ var update_y_axis = {
         }
 
 
-
-
-
         if (!chart) { // called when this is used in y_axis_init
             return newYFormat;
         }
@@ -117,6 +114,10 @@ var update_y_axis = {
         all_chart_options.yAxis.max = newMax;
     },
 
+    
+    
+    
+    
     /** update y-axis min */
     updateMin: function (newMin, chart, all_chart_options) {
         newMin = utils_main.checkforUndefined(newMin);
@@ -124,6 +125,7 @@ var update_y_axis = {
             return newMin;
         }
 
+        console.log(newMin);
         chart.yAxis[0].update({
             min: newMin
         });
@@ -131,6 +133,9 @@ var update_y_axis = {
         all_chart_options.yAxis.min = newMin;
     },
 
+    
+    
+    
     /** update the y axis title */
     updateTitle: function (newTitle, chart, all_chart_options) {
         chart.yAxis[0].setTitle({
@@ -141,9 +146,9 @@ var update_y_axis = {
 
     },
 
+    
+    
     /** update y axis x-position (title.x) */
-
-
     updateXPosition: function (newXPosition, chart, all_chart_options) {
 
         newXPosition = utils_main.checkforUndefined(newXPosition);
@@ -155,10 +160,13 @@ var update_y_axis = {
         all_chart_options.yAxis.title.x = newXPosition;
 
     },
+    
+    
+    
+    
 
     /** update y axis tickmark interval */
     updateTickmarkInterval: function (newInterval, chart, all_chart_options) {
-
 
         newInterval = utils_main.checkforUndefined(newInterval);
 
