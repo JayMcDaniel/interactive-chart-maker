@@ -128,7 +128,6 @@ var update_y_axis = {
             return newMin;
         }
 
-        console.log(newMin);
         chart.yAxis[0].update({
             min: newMin
         });

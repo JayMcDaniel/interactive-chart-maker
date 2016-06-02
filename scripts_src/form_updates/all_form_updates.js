@@ -59,7 +59,7 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
             $(".show_line, .show_bar, .show_column").hide();
         }
 
-        $(".just_drilldown, .just_scatter").hide();
+        $(".just_drilldown, .just_scatter, .just_bubble").hide();
         if (["scatter", "drilldown", "bubble"].indexOf(chart_type) > -1) {
             $(".just_" + chart_type).show();
             $(".show_" + chart_type).show();
@@ -368,6 +368,10 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
         update_x_axis.toggleMLRStyle(is_checked, chart, all_chart_options);
         update_y_axis.toggleMLRStyle(is_checked, chart, all_chart_options);
         update_chart_options.toggleMLRStyle(is_checked, all_chart_options); //draw_chart is called from here to update plotBorder
+        if(is_checked){
+            console.log("check");
+            $("#color_palette_mlr").click(); //click MLR color palette
+        }
     });
 
 
