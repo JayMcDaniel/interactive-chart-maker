@@ -35,14 +35,14 @@ var update_y_axis = {
         if (y_decimals !== "null") { //if decimals are not null   
 
             var newYFormat = function () {
-                var s = Highcharts.numberFormat(this.value / dividend, y_decimals,".",",");
+                var s = Highcharts.numberFormat(this.value / dividend, y_decimals, ".", ",");
                 return y_signs_arr[0] + s.replace(/\$-/g, "-$") + y_signs_arr[1];
             }
 
         } else { //if decimals are null
 
             var newYFormat = function () {
-                var s = (this.value / dividend == parseInt(this.value / dividend)) ? Highcharts.numberFormat(this.value, 0,".",",") : Highcharts.numberFormat(this.value / dividend, 1,".",",");
+                var s = (this.value / dividend == parseInt(this.value / dividend)) ? Highcharts.numberFormat(this.value, 0, ".", ",") : Highcharts.numberFormat(this.value / dividend, 1, ".", ",");
                 return y_signs_arr[0] + s.replace(/\$-/g, "-$") + y_signs_arr[1];
             }
 
@@ -98,6 +98,9 @@ var update_y_axis = {
         });
         all_chart_options.yAxis.opposite = val;
 
+        //update y axis title position
+        $("#chart_y_axis_x_position_input").val($("#chart_y_axis_x_position_input").val()*-1).keyup();
+
     },
 
     /** update y-axis max */
@@ -114,10 +117,10 @@ var update_y_axis = {
         all_chart_options.yAxis.max = newMax;
     },
 
-    
-    
-    
-    
+
+
+
+
     /** update y-axis min */
     updateMin: function (newMin, chart, all_chart_options) {
         newMin = utils_main.checkforUndefined(newMin);
@@ -133,9 +136,9 @@ var update_y_axis = {
         all_chart_options.yAxis.min = newMin;
     },
 
-    
-    
-    
+
+
+
     /** update the y axis title */
     updateTitle: function (newTitle, chart, all_chart_options) {
         chart.yAxis[0].setTitle({
@@ -146,8 +149,8 @@ var update_y_axis = {
 
     },
 
-    
-    
+
+
     /** update y axis x-position (title.x) */
     updateXPosition: function (newXPosition, chart, all_chart_options) {
 
@@ -159,11 +162,12 @@ var update_y_axis = {
 
         all_chart_options.yAxis.title.x = newXPosition;
 
+
     },
-    
-    
-    
-    
+
+
+
+
 
     /** update y axis tickmark interval */
     updateTickmarkInterval: function (newInterval, chart, all_chart_options) {

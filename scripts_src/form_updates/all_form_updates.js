@@ -268,7 +268,7 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
 
     //y-axis title indent changed
     $("#chart_y_axis_x_position_input").unbind().keyup(function () {
-        var newXPosition = Number($(this).val());
+        var newXPosition = $(this).val();
         update_y_axis.updateXPosition(newXPosition, chart, all_chart_options);
     });
 
