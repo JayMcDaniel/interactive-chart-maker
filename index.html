@@ -191,6 +191,8 @@
                         <br> For this to work, it needs to be a properly formatted, 508-compliant table (using thead, tbody, caption, th and td tags where appropriate). It also needs to have a title and be a simple table with only one column header per column and one row header per row. You can convert spreadsheets to 508-compliant tables with the <a href="table_wizard/better_table_wizard.htm" target="_blank">Table Wizard</a>.
 
                     </p>
+
+                    <!-- scatter chart example table in load data section -->
                     <div class="just_scatter">
                         <p> With scatter charts, series names will be loaded from the row headers. For each set of two columns in the table body, a dot will be drawn &mdash; its x-value coming from the first column and its y-value coming from the second column.</p>
                         <table id="scatter_example" class="regular" cellspacing="0" cellpadding="0" xborder="1" style="width: 95%">
@@ -234,6 +236,62 @@
 
                     </div>
 
+
+                    <!-- bubble chart example table in load data section -->
+                    <div class="just_bubble">
+                        <p> With bubble charts, series names will be loaded from the row headers. For each set of three columns in the table body, a bubble will be drawn &mdash; its x-value coming from the first column, its y-value coming from the second column, and its z-value (circle area) coming from the third column.</p>
+                        <table id="BLS_table" class="regular" cellspacing="0" cellpadding="0" xborder="1" style="width: 95%">
+                            <caption><span class="tableTitle">Test table data for scatter charts</span></caption>
+                            <thead>
+                                <tr>
+                                    <th rowspan="1" id="columnHead0" style="vertical-align: middle;">categories</th>
+                                    <th id="columnHead1">x1</th>
+                                    <th id="columnHead2">y1</th>
+                                    <th id="columnHead3">z1</th>
+                                    <th id="columnHead4">x2</th>
+                                    <th id="columnHead5">y2</th>
+                                    <th id="columnHead6">z2</th>
+                                    <th id="columnHead7">x3</th>
+                                    <th id="columnHead8">y3</th>
+                                    <th id="columnHead9">z3</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th id="rowHead0">
+                                        <p>series 1</p>
+                                    </th>
+                                    <td headers="rowHead0 columnHead1">1</td>
+                                    <td headers="rowHead0 columnHead2">1</td>
+                                    <td headers="rowHead0 columnHead3">2</td>
+                                    <td headers="rowHead0 columnHead4">3</td>
+                                    <td headers="rowHead0 columnHead5">3</td>
+                                    <td headers="rowHead0 columnHead6">4</td>
+                                    <td headers="rowHead0 columnHead7">5</td>
+                                    <td headers="rowHead0 columnHead8">5</td>
+                                    <td headers="rowHead0 columnHead9">8</td>
+                                </tr>
+                                <tr class="greenbar">
+                                    <th id="rowHead1">
+                                        <p>series 2</p>
+                                    </th>
+                                    <td headers="rowHead1 columnHead1">2</td>
+                                    <td headers="rowHead1 columnHead2">1</td>
+                                    <td headers="rowHead1 columnHead3">2</td>
+                                    <td headers="rowHead1 columnHead4">4</td>
+                                    <td headers="rowHead1 columnHead5">3</td>
+                                    <td headers="rowHead1 columnHead6">5</td>
+                                    <td headers="rowHead1 columnHead7">8</td>
+                                    <td headers="rowHead1 columnHead8">9</td>
+                                    <td headers="rowHead1 columnHead9">9</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+
+
+                    <!-- drilldown chart example table in load data section -->
                     <div class="just_drilldown">
                         <p>
                             This will load the table into a drilldown chart. For this to work, your table row headers must be indented correctly using BLS style indents of class = "sub1", "sub2". The <a href="table_wizard/better_table_wizard.htm" target="_blank">table wizard</a> will apply these style classes when the cell text is preceded by two spaces or more.</p>
@@ -286,6 +344,9 @@
                             </tbody>
                         </table>
                     </div>
+
+
+                    <!-- map example table in load data section -->
 
                     <div class="show_map just_map">
                         <p>State or area names should be in the left column and values should be in the next columns. The columns need headers to work. Areas will be colored by the values in the second column. Extra tooltip data will come from values in any other columns and will include their formatting. See example:</p>
@@ -822,7 +883,7 @@
     <script src="libraries/jscolor-2.0.4/jscolor.min.js"></script>
 
     <!-- code highlighting -->
-<!--
+    <!--
     <link rel="stylesheet" href="libraries/highlight/styles/custom.css">
     <script src="libraries/highlight/highlight.pack.js"></script>
     <script>
