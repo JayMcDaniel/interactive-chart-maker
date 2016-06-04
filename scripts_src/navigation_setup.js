@@ -100,7 +100,7 @@ var navigation_setup = {
             }
 
             $(this).toggleClass("code_on");
-            $(".chart_display_area").toggleClass("fixed");
+            $(".chart_display_area, .map_display_area").toggleClass("fixed");
 
         });
 

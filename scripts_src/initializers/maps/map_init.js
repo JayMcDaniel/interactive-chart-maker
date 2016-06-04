@@ -106,7 +106,9 @@ var map_init = {
 
     /** converts all_map_options (actually an array of objects by now after the .get() auto conversion) to svg and puts it on page **/
     convertMapOptionsToSVG: function (all_map_options) {
-        var map_display_area = $(".map_display_area");
+        var map_display_area = $("#" + all_map_options.render_ID + ".map_display_area");
+
+        //  var map_display_area = $(".map_display_area");
         map_display_area.empty();
 
         var map_outer_div = map_init.getMapOuterDiv(); //creates and returns outer map div
@@ -138,6 +140,8 @@ var map_init = {
                 map_legend_div.prepend(div)
             });
         }
+
+        return  map_display_area;
 
     },
 
@@ -190,18 +194,23 @@ var map_init = {
 
             var all_map_options = map_init.createAllMapOptions(all_map_options, areas, map_type);
 
-            map_init.convertMapOptionsToSVG(all_map_options); //converts all_map_options to svg and puts it on page **/
+            //give .map_display_area the chosen ID
+            $(".map_display_area").attr("id", all_map_options.render_ID);
 
-            map_init.resizeMap(); //adjust map_display_area size
+            //convert all_map_options to svg and puts it on page, returns jquery object of map div
+            var map_display_area =  map_init.convertMapOptionsToSVG(all_map_options);
+
+            //adjust map_display_area size
+            map_init.resizeMap();
 
             //init tooltip and highlighting
-            map_init.setUpMapHover(all_map_options);
+            map_init.setUpMapHover(all_map_options, map_display_area);
 
             //init legend hovering
-            map_init.setUpMapLegendHover();
+            map_init.setUpMapLegendHover(map_display_area);
 
             //init state links to eag pages
-            map_init.setUpMapStateLinks();
+            map_init.setUpMapStateLinks(map_display_area);
 
             //init individual series range setup
             if (repopulate_form === true) {
@@ -303,20 +312,20 @@ var map_init = {
 
 
     /** sets up hover functionality for the map **/
-    setUpMapHover: function (all_map_options) {
+    setUpMapHover: function (all_map_options, map_display_area) {
 
 
         //other areas fade out when an area is hovered
-        $(".map_svg path[loc_name], .map_svg circle[loc_name]").hover(function () {
+        $("path[loc_name], circle[loc_name]", map_display_area).hover(function () {
 
             var $this = $(this);
 
             //gray out other states, highlight this one
-            $(".map_svg path, .map_svg circle").attr("fill-opacity", ".05");
+            $("path, circle", map_display_area).attr("fill-opacity", ".05");
             $this.attr("fill-opacity", "1");
 
             //// populate tooltip
-            var this_tooltip = $(".map_tooltip", $this.parents(".map_outer_div")); //get element
+            var this_tooltip = $(".map_tooltip", map_display_area); //get element
             //set title
             $(".tooltip_title", this_tooltip).text($this.attr("loc_name") || "");
 
@@ -347,10 +356,10 @@ var map_init = {
 
             this_tooltip.show(); //show just this map's tooltip
 
-        }, function () {
+        }, function () {  //mouse out
 
             //return to all previous fill opacity
-            $(".map_svg path[loc_name], .map_svg circle[loc_name]").attr("fill-opacity", "1");
+            $("path, circle", map_display_area).attr("fill-opacity", "1");
 
             //hide tooltip
             $(".map_tooltip").hide();
@@ -363,14 +372,13 @@ var map_init = {
 
 
     /** set up hover functionality for the map legend **/
-    setUpMapLegendHover: function () {
-        $(".map_legend_item").hover(function () {
+    setUpMapLegendHover: function (map_display_area) {
+        $(".map_legend_item", map_display_area).hover(function () {
                 var this_color = $(this).children(".map_legend_color").css("background-color");
-                var this_map = $(this).parents(".map_outer_div");
                 $(".map_legend_text", this).css("color", "#B73438"); //make text red
 
                 //lower opacity on other areas
-                $("path, circle", this_map).each(function () {
+                $("path, circle", map_display_area).each(function () {
                     if ($(this).attr("fill") !== this_color && $(this).attr("stroke") !== this_color) {
                         $(this).attr("fill-opacity", ".1").attr("stroke-opacity", ".02");
                     }
@@ -380,8 +388,7 @@ var map_init = {
             function () {
 
                 //bring back opacity
-                var this_map = $(this).parents(".map_outer_div");
-                $("path, circle", this_map).each(function () {
+                $("path, circle", map_display_area).each(function () {
                     $(this).attr("fill-opacity", "1").attr("stroke-opacity", "1");
                 });
 
@@ -396,9 +403,9 @@ var map_init = {
 
     /** Set up state links to eag page if applicable **/
 
-    setUpMapStateLinks: function () {
+    setUpMapStateLinks: function (map_display_area) {
 
-        $(".map_svg path[loc_name], .map_svg circle[loc_name]").each(function () {
+        $("path[loc_name], circle[loc_name]", map_display_area).each(function () {
             var thisID = $(this).attr("id");
             if (thisID) {
                 $(this).css("cursor", "pointer")

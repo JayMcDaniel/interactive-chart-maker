@@ -157,16 +157,16 @@ jQuery.fn.extend({addCommas:' + $("string").addCommas.toString() + ' });';
 
 
             //call functions
-            "map_init.convertMapOptionsToSVG(all_map_options);\n\n" + //converts all_map_options to svg and puts it on page
+            "var map_display_area = map_init.convertMapOptionsToSVG(all_map_options);\n\n" + //converts all_map_options to svg and puts it on page
 
             //init tooltip and highlighting
-            "map_init.setUpMapHover(all_map_options);\n\n" +
+            "map_init.setUpMapHover(all_map_options, map_display_area);\n\n" +
 
             //init legend hovering
-            "map_init.setUpMapLegendHover();\n\n" +
+            "map_init.setUpMapLegendHover(map_display_area);\n\n" +
 
             //init state links to eag pages
-            "map_init.setUpMapStateLinks();\n\n" +
+            "map_init.setUpMapStateLinks(map_display_area);\n\n" +
 
             ///end of doc ready
             "});" +

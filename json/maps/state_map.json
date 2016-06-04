@@ -408,11 +408,15 @@
     "previous_fill": "",
     "enabled": "true",
     "style": ""
-}, {
+}, 
+
+ {
     "d": "M 211,493 V 548 L 247,593 M 0,425 H 144 L 211,493 H 297 L 350,547 V 593",
     "class": "border",
     "previous_fill": "",
     "enabled": "true",
     "style": ""
 }
+ 
+ 
 ]
