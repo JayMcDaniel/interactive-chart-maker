@@ -30,9 +30,6 @@ var map_colors_init = {
         var values_arr = utils_main.valueSort(all_map_options.areas);
 
 
-
-
-
         //divide values into ranges
         var value_ranges = []; //to be used to color areas
 

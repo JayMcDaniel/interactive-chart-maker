@@ -415,6 +415,11 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
     });
 
 
+        //is animated checkbox changed
+    $("#map_animated_checkbox").unbind().change(function () {
+        map_init.loadNewMap(chart, all_chart_options, all_map_options, true); // true to repopulate form
+    });
+    
     //circle size range slider changed
     $("#map_circle_size_range").unbind().on("input", function () {
         map_init.loadNewMap(chart, all_chart_options, all_map_options, true); // true to repopulate form

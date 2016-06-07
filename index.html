@@ -80,14 +80,30 @@
                     </div>
                     <div class="clearfloat"></div>
 
-                    <div class="show_map">
-                        <label for="chart_id_textinput">Unique ID:</label>
-                        <br>
-                        <span class="notes">Important if using one or more charts on a page. Make sure not to use spaces, hyphens, or start with a number.<br></span>
-                        <input type="text" id="chart_id_textinput" class="medium" value="chart1" />
+                    <label for="chart_id_textinput">Unique ID:</label>
+                    <br>
+                    <span class="notes">Important if using one or more charts on a page. Make sure not to use spaces, hyphens, or start with a number.<br></span>
+                    <input type="text" id="chart_id_textinput" class="medium" value="chart1" />
+
+                    <br>
+
+                    <div class="just_map">
+                        <label for="map_type_select">Map type: </label>
+                        <select id="map_type_select">
+                            <option value="state" selected>State</option>
+                            <option value="county">County</option>
+                            <option value="metro_area">Metro area</option>
+                        </select>
 
                         <br>
+                        <span class="notes">With animated maps, instead of extra values being loaded from columns after the first, these values will make up each stage in the animation. The title for each stage (i.e. "2010") will come from the column headers. <br></span>
+                        <label for="map_animated_checkbox">Animated map: </label>
+                        <input type="checkbox" id="map_animated_checkbox">
+                        <br>
+
+
                     </div>
+
 
                 </div>
 
@@ -405,13 +421,6 @@
 
                         <br>
 
-                        <label for="map_type_select">Map type: </label>
-                        <select id="map_type_select">
-                            <option value="state" selected>State</option>
-                            <option value="county">County</option>
-                            <option value="metro_area">Metro area</option>
-                        </select>
-                        <br>
 
                     </div>
 

@@ -28,6 +28,7 @@
         <article>
             <pre class="prettyprint source linenums"><code>var utils_forms = require("../../utils/utils_forms.js");
 var parseForMap = require("../../parsers/parse_for_map.js");
+var map_animation_init = require("./map_animation_init.js");
 var map_colors_init = require("./map_colors_init.js");
 var map_title_init = require("./map_title_init.js");
 var map_subtitle_init = require("./map_subtitle_init.js");
@@ -37,7 +38,6 @@ var map_credits_init = require("./map_credits_init.js");
 var map_circle_sizes_init = require("./map_circle_sizes_init.js");
 var update_map_individual_series = require("../../form_updates/update_map_individual_series.js");
 var update_template = require("../../form_updates/update_template.js");
-
 
 /** 
 Map initialization object
@@ -56,6 +56,7 @@ var map_init = {
             title: {},
             subtitle: {},
             colors: [],
+            is_animated: utils_forms.getCheckBoxValue($("#map_animated_checkbox")),
             legend: {
                 reversed: utils_forms.getCheckBoxValue($("#legend_reverse_layout_checkbox")),
                 x: Number($("#legend_placement_x").val()),
@@ -73,10 +74,12 @@ var map_init = {
                 na_text: ""
             },
             extra_value_titles: [],
+            animated_value_titles: [],
             areas: areas
 
         };
 
+     //   console.log(all_map_options);
 
         //set viewbox
         switch (map_type) {
@@ -147,7 +150,6 @@ var map_init = {
         var map_title = map_title_init.getMapTitle(all_map_options.title); //creates and returns a styled map h2 title with text
         var map_subtitle = map_subtitle_init.getMapSubtitle(all_map_options.subtitle); //creates and returns a styled map h3 title with text
         var map_credits = map_credits_init.getMapCredits(all_map_options.credits); //creates and returns a styled map div credits with text
-        var map_legend = map_legend_init.getMapLegend(all_map_options); //creates and returns a styled map div legend with color boxes and text
 
         var tooltip_div = map_tooltip_init.getMapTooltip(); //creates and returns an empty tooltip div template 
 
@@ -155,9 +157,24 @@ var map_init = {
         map_outer_div.appendChild(tooltip_div); //tooltip
         map_outer_div.appendChild(map_title); //title
         map_outer_div.appendChild(map_subtitle); //subtitle
+
+        // if it's animated, make and add the slider
+        if (all_map_options.is_animated) {
+            var map_animation_div = map_animation_init.getAnimationDiv(all_map_options);
+            map_outer_div.appendChild(map_animation_div);
+        }
+
+        var map_legend = map_legend_init.getMapLegend(all_map_options); //creates and returns a styled map div legend with color boxes and text
+
+
         map_outer_div.appendChild(map_outer_svg); //main svg
         map_outer_div.appendChild(map_legend); //legend
         map_outer_div.appendChild(map_credits); //credits
+
+
+
+
+
 
         map_display_area.append($(map_outer_div)); //put map on page
 
@@ -169,7 +186,7 @@ var map_init = {
             });
         }
 
-        return  map_display_area;
+        return map_display_area;
 
     },
 
@@ -226,7 +243,7 @@ var map_init = {
             $(".map_display_area").attr("id", all_map_options.render_ID);
 
             //convert all_map_options to svg and puts it on page, returns jquery object of map div
-            var map_display_area =  map_init.convertMapOptionsToSVG(all_map_options);
+            var map_display_area = map_init.convertMapOptionsToSVG(all_map_options);
 
             //adjust map_display_area size
             map_init.resizeMap();
@@ -236,6 +253,11 @@ var map_init = {
 
             //init legend hovering
             map_init.setUpMapLegendHover(map_display_area);
+
+            //init animation functionality if applicabla
+            if (all_map_options.is_animated) {
+                map_animation_init.setUpMapAnimation(all_map_options, map_display_area);
+            }
 
             //init state links to eag pages
             map_init.setUpMapStateLinks(map_display_area);
@@ -285,12 +307,12 @@ var map_init = {
                     el.setAttributeNS(null, "fill", this.color || "#E0E0E0");
                 }
 
-                if (this.loc_name) { //if it's a named area, set value and color
+                if (this.loc_name) { //if it's a named area, set values and color
                     el.setAttributeNS(null, "loc_value", this.value);
                     el.setAttributeNS(null, "fill", this.color || "#E0E0E0");
                     el.setAttributeNS(null, "stroke", "#646464");
                     el.setAttribute("loc_name", this.loc_name);
-                    this.extra_vals ? el.setAttributeNS(null, "extra_vals", this.extra_vals.join(";")) : null;
+
                 }
 
                 if (this.class === "border") {
@@ -322,6 +344,8 @@ var map_init = {
             }
 
             el.setAttribute("class", this.class);
+            this.extra_vals ? el.setAttributeNS(null, "extra_vals", this.extra_vals.join(";")) : null;
+            this.animated_vals ? el.setAttributeNS(null, "animated_vals", this.animated_vals.join(";")) : null;
 
             if (this.id) {
                 el.setAttribute("id", this.id);
@@ -363,15 +387,20 @@ var map_init = {
             if (this_loc_value) {
                 var value_html = "&lt;span style='font-size: 80%'>" + all_map_options.tooltip.dollar_sign + "&lt;/span>" + ($(this_loc_value).addCommas(all_map_options.tooltip.decimals || "")) + "&lt;span style='font-size: 80%'>" + all_map_options.tooltip.percent_sign + "&lt;/span>";
 
-                //add extra values to tooltip if applicable
-                var this_extra_vals = $this.attr("extra_vals"); //get extra values (if applicable)
-                if (this_extra_vals) {
-                    this_extra_vals = this_extra_vals.split(";");
-                    $.each(this_extra_vals, function (i) {
-                        value_html = value_html + "&lt;p style='font-size: 40%; line-height: 1.1; margin: 2px 0px 2px 0px;'>&lt;span style='color: black'>" + all_map_options.extra_value_titles[i] + ": &lt;/span>" + this_extra_vals[i] + "&lt;/p>";
-                    });
+                //add extra values to tooltip if applicable, and not animated
 
+                if (!all_map_options.is_animated) {
+
+                    var this_extra_vals = $this.attr("extra_vals"); //get extra values (if applicable)
+                    if (this_extra_vals) {
+                        this_extra_vals = this_extra_vals.split(";");
+                        $.each(this_extra_vals, function (i) {
+                            value_html = value_html + "&lt;p style='font-size: 40%; line-height: 1.1; margin: 2px 0px 2px 0px;'>&lt;span style='color: black'>" + all_map_options.extra_value_titles[i] + ": &lt;/span>" + this_extra_vals[i] + "&lt;/p>";
+                        });
+
+                    }
                 }
+
 
             } else { //if no loc_value
                 var value_html = "&lt;span style='font-size: 70%'>" + all_map_options.tooltip.na_text + "&lt;/span>";
@@ -384,7 +413,7 @@ var map_init = {
 
             this_tooltip.show(); //show just this map's tooltip
 
-        }, function () {  //mouse out
+        }, function () { //mouse out
 
             //return to all previous fill opacity
             $("path, circle", map_display_area).attr("fill-opacity", "1");
@@ -461,13 +490,13 @@ module.exports = map_init;</code></pre>
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-form_updates_all_form_updates.html">form_updates/all_form_updates</a></li><li><a href="module-form_updates_update_chart_type.html">form_updates/update_chart_type</a></li><li><a href="module-form_updates_update_colors.html">form_updates/update_colors</a></li><li><a href="module-form_updates_update_individual_series.html">form_updates/update_individual_series</a></li><li><a href="module-initializers_charts_all_chart_options_init.html">initializers/charts/all_chart_options_init</a></li><li><a href="module-initializers_charts_chart_init.html">initializers/charts/chart_init</a></li><li><a href="module-initializers_charts_colors_init.html">initializers/charts/colors_init</a></li><li><a href="module-initializers_charts_credits_init.html">initializers/charts/credits_init</a></li><li><a href="module-initializers_charts_exporting_init.html">initializers/charts/exporting_init</a></li><li><a href="module-initializers_charts_legend_init.html">initializers/charts/legend_init</a></li><li><a href="module-initializers_charts_plot_options_init.html">initializers/charts/plot_options_init</a></li><li><a href="module-initializers_charts_series_init.html">initializers/charts/series_init</a></li><li><a href="module-initializers_charts_subtitle_init.html">initializers/charts/subtitle_init</a></li><li><a href="module-initializers_charts_title_init.html">initializers/charts/title_init</a></li><li><a href="module-initializers_charts_tooltip_init.html">initializers/charts/tooltip_init</a></li><li><a href="module-initializers_charts_x_axis_init.html">initializers/charts/x_axis_init</a></li><li><a href="module-initializers_charts_y_axis_init.html">initializers/charts/y_axis_init</a></li><li><a href="module-initializers_maps_map_circle_sizes_init.html">initializers/maps/map_circle_sizes_init</a></li><li><a href="module-initializers_maps_map_colors_init.html">initializers/maps/map_colors_init</a></li><li><a href="module-initializers_maps_map_credits_init.html">initializers/maps/map_credits_init</a></li><li><a href="module-initializers_maps_map_title_init.html">initializers/maps/map_title_init</a></li><li><a href="module-parsers_parse_for_bubble.html">parsers/parse_for_bubble</a></li><li><a href="module-parsers_parse_for_drilldown.html">parsers/parse_for_drilldown</a></li><li><a href="module-parsers_parse_for_map.html">parsers/parse_for_map</a></li><li><a href="module-parsers_parse_for_scatter.html">parsers/parse_for_scatter</a></li><li><a href="module-parsers_parse_for_typical_chart.html">parsers/parse_for_typical_chart</a></li><li><a href="module-parsers_parse_table_input.html">parsers/parse_table_input</a></li><li><a href="module-utils_jq_extensions.html">utils/jq_extensions</a></li></ul><h3>Classes</h3><ul><li><a href="AllChartOptions.html">AllChartOptions</a></li><li><a href="ChartOptions.html">ChartOptions</a></li><li><a href="Colors.html">Colors</a></li><li><a href="Credits.html">Credits</a></li><li><a href="Exporting.html">Exporting</a></li><li><a href="Legend.html">Legend</a></li><li><a href="PlotOptions.html">PlotOptions</a></li><li><a href="Series.html">Series</a></li><li><a href="Subtitle.html">Subtitle</a></li><li><a href="Title.html">Title</a></li><li><a href="Tooltip.html">Tooltip</a></li><li><a href="XAxis.html">XAxis</a></li><li><a href="yAxis.html">yAxis</a></li></ul><h3>Namespaces</h3><ul><li><a href="calculate_recession_dates.html">calculate_recession_dates</a></li><li><a href="chart_recall.html">chart_recall</a></li><li><a href="draw_chart.html">draw_chart</a></li><li><a href="keyboard_inputs.html">keyboard_inputs</a></li><li><a href="map_init.html">map_init</a></li><li><a href="map_legend_init.html">map_legend_init</a></li><li><a href="map_subtitle_init.html">map_subtitle_init</a></li><li><a href="map_tooltip_init.html">map_tooltip_init</a></li><li><a href="navigation_setup.html">navigation_setup</a></li><li><a href="update_chart_options.html">update_chart_options</a></li><li><a href="update_credits.html">update_credits</a></li><li><a href="update_data.html">update_data</a></li><li><a href="update_legend.html">update_legend</a></li><li><a href="update_map_individual_series.html">update_map_individual_series</a></li><li><a href="update_map_palettes.html">update_map_palettes</a></li><li><a href="update_template.html">update_template</a></li><li><a href="update_tooltip.html">update_tooltip</a></li><li><a href="update_x_axis.html">update_x_axis</a></li><li><a href="update_y_axis.html">update_y_axis</a></li><li><a href="utils_forms.html">utils_forms</a></li><li><a href="utils_main.html">utils_main</a></li><li><a href="write_code.html">write_code</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-form_updates_all_form_updates.html">form_updates/all_form_updates</a></li><li><a href="module-form_updates_update_chart_type.html">form_updates/update_chart_type</a></li><li><a href="module-form_updates_update_colors.html">form_updates/update_colors</a></li><li><a href="module-form_updates_update_individual_series.html">form_updates/update_individual_series</a></li><li><a href="module-initializers_charts_all_chart_options_init.html">initializers/charts/all_chart_options_init</a></li><li><a href="module-initializers_charts_chart_init.html">initializers/charts/chart_init</a></li><li><a href="module-initializers_charts_colors_init.html">initializers/charts/colors_init</a></li><li><a href="module-initializers_charts_credits_init.html">initializers/charts/credits_init</a></li><li><a href="module-initializers_charts_exporting_init.html">initializers/charts/exporting_init</a></li><li><a href="module-initializers_charts_legend_init.html">initializers/charts/legend_init</a></li><li><a href="module-initializers_charts_plot_options_init.html">initializers/charts/plot_options_init</a></li><li><a href="module-initializers_charts_series_init.html">initializers/charts/series_init</a></li><li><a href="module-initializers_charts_subtitle_init.html">initializers/charts/subtitle_init</a></li><li><a href="module-initializers_charts_title_init.html">initializers/charts/title_init</a></li><li><a href="module-initializers_charts_tooltip_init.html">initializers/charts/tooltip_init</a></li><li><a href="module-initializers_charts_x_axis_init.html">initializers/charts/x_axis_init</a></li><li><a href="module-initializers_charts_y_axis_init.html">initializers/charts/y_axis_init</a></li><li><a href="module-initializers_maps_map_animation_init.html">initializers/maps/map_animation_init</a></li><li><a href="module-initializers_maps_map_circle_sizes_init.html">initializers/maps/map_circle_sizes_init</a></li><li><a href="module-initializers_maps_map_colors_init.html">initializers/maps/map_colors_init</a></li><li><a href="module-initializers_maps_map_credits_init.html">initializers/maps/map_credits_init</a></li><li><a href="module-initializers_maps_map_title_init.html">initializers/maps/map_title_init</a></li><li><a href="module-parsers_parse_for_bubble.html">parsers/parse_for_bubble</a></li><li><a href="module-parsers_parse_for_drilldown.html">parsers/parse_for_drilldown</a></li><li><a href="module-parsers_parse_for_map.html">parsers/parse_for_map</a></li><li><a href="module-parsers_parse_for_scatter.html">parsers/parse_for_scatter</a></li><li><a href="module-parsers_parse_for_typical_chart.html">parsers/parse_for_typical_chart</a></li><li><a href="module-parsers_parse_table_input.html">parsers/parse_table_input</a></li><li><a href="module-utils_jq_extensions.html">utils/jq_extensions</a></li></ul><h3>Classes</h3><ul><li><a href="AllChartOptions.html">AllChartOptions</a></li><li><a href="ChartOptions.html">ChartOptions</a></li><li><a href="Colors.html">Colors</a></li><li><a href="Credits.html">Credits</a></li><li><a href="Exporting.html">Exporting</a></li><li><a href="Legend.html">Legend</a></li><li><a href="PlotOptions.html">PlotOptions</a></li><li><a href="Series.html">Series</a></li><li><a href="Subtitle.html">Subtitle</a></li><li><a href="Title.html">Title</a></li><li><a href="Tooltip.html">Tooltip</a></li><li><a href="XAxis.html">XAxis</a></li><li><a href="yAxis.html">yAxis</a></li></ul><h3>Namespaces</h3><ul><li><a href="calculate_recession_dates.html">calculate_recession_dates</a></li><li><a href="chart_recall.html">chart_recall</a></li><li><a href="draw_chart.html">draw_chart</a></li><li><a href="keyboard_inputs.html">keyboard_inputs</a></li><li><a href="map_init.html">map_init</a></li><li><a href="map_legend_init.html">map_legend_init</a></li><li><a href="map_subtitle_init.html">map_subtitle_init</a></li><li><a href="map_tooltip_init.html">map_tooltip_init</a></li><li><a href="navigation_setup.html">navigation_setup</a></li><li><a href="update_chart_options.html">update_chart_options</a></li><li><a href="update_credits.html">update_credits</a></li><li><a href="update_data.html">update_data</a></li><li><a href="update_legend.html">update_legend</a></li><li><a href="update_map_individual_series.html">update_map_individual_series</a></li><li><a href="update_map_palettes.html">update_map_palettes</a></li><li><a href="update_template.html">update_template</a></li><li><a href="update_tooltip.html">update_tooltip</a></li><li><a href="update_x_axis.html">update_x_axis</a></li><li><a href="update_y_axis.html">update_y_axis</a></li><li><a href="utils_forms.html">utils_forms</a></li><li><a href="utils_main.html">utils_main</a></li><li><a href="write_code.html">write_code</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Fri Jun 03 2016 22:25:45 GMT-0400 (EDT)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Tue Jun 07 2016 18:19:19 GMT-0400 (EDT)
 </footer>
 
 <script> prettyPrint(); </script>

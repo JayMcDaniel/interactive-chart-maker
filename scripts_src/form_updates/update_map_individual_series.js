@@ -59,12 +59,12 @@ var update_map_individual_series = {
             range_text.innerHTML = "&nbsp; next value and lower"
 
         } else if (i === all_map_options.colors.length - 1) {
-            range.value = all_map_options.value_ranges[i - 1];
+            range.value = all_map_options.value_ranges[i - 1] || "";
             range_text.textContent = " and higher"
             map_ranges_div.appendChild(range);
 
         } else {
-            range.value = all_map_options.value_ranges[i - 1];
+            range.value = all_map_options.value_ranges[i - 1] || "";
             range_text.textContent = " to.."
             map_ranges_div.appendChild(range);
         }
