@@ -8,7 +8,7 @@ var write_code = {
 
     /** calls code writing functions and writes to code area*/
     writeCode: function writeCode(all_chart_options, all_map_options) {
-        
+
 
         var width = $("#chart_width_textinput").val();
         var height = $("#chart_height_textinput").val();
@@ -49,7 +49,7 @@ var write_code = {
     /** creates and returns map HTML code  **/
     writeMapHTMLCode: function (all_map_options, width, height, id) {
 
-        var html_string = '<div class="map_display_area" id="' + id + '" style = "width: ' + width + 'px; height: ' + height + 'px; margin: auto; padding: 0px;"> </div>';
+        var html_string = '<div class="map_display_area" id="' + id + '" style = "width: ' + width + 'px; height: ' + (height - 60) + 'px; margin: auto; padding: 0px;"> </div>';
 
         return html_string;
 
@@ -93,11 +93,90 @@ jQuery.fn.extend({addCommas:' + $("string").addCommas.toString() + ' });';
     /** creates and returns map JS code  **/
     writeMapJSCode: function (all_map_options) {
 
-        var map_options_js = utils_main.deepStringify(all_map_options);
-        
-        map_options_js.string = "var all_map_options = " + map_options_js.string + ";\n";
+        var map_init = require("../initializers/maps/map_init.js");
+        var map_subtitle_init = require("../initializers/maps/map_subtitle_init.js");
+        var map_title_init = require("../initializers/maps/map_title_init.js");
+        var map_credits_init = require("../initializers/maps/map_credits_init.js");
+        var map_legend_init = require("../initializers/maps/map_legend_init.js");
+        var map_tooltip_init = require("../initializers/maps/map_tooltip_init.js");
 
-        return map_options_js.string;
+
+        var map_js = utils_main.deepStringify(all_map_options);
+
+        //write out map options object
+        map_js.string = "$(document).ready(function(){\n" +
+
+            "var all_map_options = " + map_js.string + ";\n\n" +
+
+            //write out functions needed to convert all_map_options to svg //
+
+            //map_init
+
+            "var map_init = {}; \n" +
+
+            //map_init.getMapOuterDiv
+            "map_init.getMapOuterDiv = " + map_init.getMapOuterDiv.toString() + ";\n\n" +
+
+            //map_init.getMapOuterSVG
+            "map_init.getMapOuterSVG = " + map_init.getMapOuterSVG.toString() + ";\n\n" +
+
+            //map_init.populateSVGAreas
+            "map_init.populateSVGAreas = " + map_init.populateSVGAreas.toString() + ";\n\n" +
+
+            //map_title_init.getMapTitle
+            "var map_title_init = {}; \n map_title_init.getMapTitle = " + map_title_init.getMapTitle.toString() + ";\n\n" +
+
+            //map_subtitle_init.getMapSubtitle
+            "var map_subtitle_init = {}; \n map_subtitle_init.getMapSubtitle = " + map_subtitle_init.getMapSubtitle.toString() + ";\n\n" +
+
+            //map_credits_init.getMapCredits
+            "var map_credits_init = {}; \n map_credits_init.getMapCredits = " + map_credits_init.getMapCredits.toString() + ";\n\n" +
+
+
+            //map_legend_init.valueMod
+            "var map_legend_init = {}; \n map_legend_init.valueMod = " + map_legend_init.valueMod.toString() + ";\n\n" +
+
+            //map_legend_init.getMapLegend
+            "map_legend_init.getMapLegend = " + map_legend_init.getMapLegend.toString() + ";\n\n" +
+
+            //map_tooltip_init.getMapTooltip
+            "var map_tooltip_init = {}; \n map_tooltip_init.getMapTooltip = " + map_tooltip_init.getMapTooltip.toString() + ";\n\n" +
+
+            //map_init.convertMapOptionsToSVG 
+            "map_init.convertMapOptionsToSVG = " + map_init.convertMapOptionsToSVG.toString() + ";\n\n" +
+
+            //map_init.setUpMapHover
+            "map_init.setUpMapHover = " + map_init.setUpMapHover.toString() + ";\n\n" +
+
+            //map_init.setUpMapLegendHover
+            "map_init.setUpMapLegendHover = " + map_init.setUpMapLegendHover.toString() + ";\n\n" +
+
+
+            //map_init.setUpMapStateLinks
+            "map_init.setUpMapStateLinks = " + map_init.setUpMapStateLinks.toString() + ";\n\n" +
+
+
+            //call functions
+            "var map_display_area = map_init.convertMapOptionsToSVG(all_map_options);\n\n" + //converts all_map_options to svg and puts it on page
+
+            //init tooltip and highlighting
+            "map_init.setUpMapHover(all_map_options, map_display_area);\n\n" +
+
+            //init legend hovering
+            "map_init.setUpMapLegendHover(map_display_area);\n\n" +
+
+            //init state links to eag pages
+            "map_init.setUpMapStateLinks(map_display_area);\n\n" +
+
+            ///end of doc ready
+            "});" +
+
+            'jQuery.fn.extend({addCommas:' + $("string").addCommas.toString() + ' });';
+
+
+
+
+        return map_js.string;
     }
 
 

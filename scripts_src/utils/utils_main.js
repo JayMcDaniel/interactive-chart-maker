@@ -7,7 +7,15 @@ var utils_main = {
 
     /** check value - if 0 or not a number, return undefined **/
     checkforUndefined: function (val) {
-        return val === 0 || isNaN(val) ? undefined : val;
+        if(val === "0" ){
+            return 0;
+        }
+        
+        if (isNaN(val) || val === ""){
+            return undefined;
+        }
+        
+        return Number(val);
     },
 
 

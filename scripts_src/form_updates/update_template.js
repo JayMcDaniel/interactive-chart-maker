@@ -4,10 +4,10 @@
 var update_template = {
 
     /** change the chart's RenderTo ID (the div ID that the chart is loaded into)  **/
-    changeID: function (new_ID, all_chart_options) {
+    changeID: function (new_ID, all_chart_options, all_map_options) {
 
         new_ID = $.trim(new_ID).replace(/^[^a-zA-Z_]+/g, "");
-        if (!all_chart_options) {
+        if (!all_chart_options || all_map_options) {
             return new_ID;
         } else {
             all_chart_options.chart.renderTo = new_ID;

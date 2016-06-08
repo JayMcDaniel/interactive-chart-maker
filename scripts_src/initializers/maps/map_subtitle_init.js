@@ -9,7 +9,7 @@ var map_subtitle_init = {
     mapSubtitleInit: function (input) {
         var map_subtitle = {
             text: $.trim(input.val()),
-            style: "color: #000; font-family: sans-serif; font-weight: normal; font-size: 12px; padding: 10px; margin-bottom: 0px; "
+            style: "color: #000; font-family: sans-serif; font-weight: normal; font-size: 12px; padding: 10px; margin: 0px; "
         }
         return map_subtitle;
     },

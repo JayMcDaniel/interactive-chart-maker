@@ -8,7 +8,7 @@ $(document).ready(function () {
     //load test table into table_input_textarea
 
 
-    $("#table_input_textarea").load("./dev/test_tables/drilldown_table.htm", function () {
+    $("#table_input_textarea").load("./dev/test_tables/animated_map_table.htm", function () {
 
         //initial empty all map options
 
