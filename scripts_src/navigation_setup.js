@@ -147,7 +147,7 @@ var navigation_setup = {
 
 
     /** when areas of the chart are clicked, open that section **/
-    chartClicks: function (chart_type) {
+    chartClicks: function () {
 
         //give applicable chart areas pointer mouse
         $(".highcharts-yaxis-labels text, .highcharts-xaxis-labels text, .highcharts-tooltip, .highcharts-series-group, svg>text:last-child").unbind().css("cursor", "pointer");
@@ -187,7 +187,7 @@ var navigation_setup = {
 
         //tooltip
         $(".highcharts-series-group, .highcharts-tooltip").click(function () {
-            if (chart_type !== "drilldown") {
+            if ($("#chart_type_icons .selected").divVal() !== "drilldown") {
                 $("#tab_chart_tooltip").click();
             }
         });
@@ -201,13 +201,13 @@ var navigation_setup = {
 
 
     /** INIT ALL NAVIGATION that needs parameters, called from all_form_updates when page is loaded, and whenever a saved chart is loaded **/
-    initNavWithChart: function (chart, all_chart_options, all_map_options, chart_type) {
+    initNavWithChart: function (chart, all_chart_options, all_map_options) {
 
         //  navigation_setup.chartOutputCodeFocus(all_chart_options, all_map_options);
         navigation_setup.getCodeButtonClick(all_chart_options, all_map_options);
         navigation_setup.loadChartButtonClick(chart, all_chart_options);
         navigation_setup.sideNavTabsChange(chart, all_chart_options);
-        navigation_setup.chartClicks(chart_type);
+        navigation_setup.chartClicks();
 
         keyboard_inputs.initListeners(chart, all_chart_options);
         keyboard_inputs.sideNavTabShortcuts(chart, all_chart_options);
