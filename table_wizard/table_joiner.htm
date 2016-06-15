@@ -1,0 +1,319 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+<title>Table Joiner</title>
+<LINK REL="SHORTCUT ICON" HREF="images/ff1-sprite-icon.gif"> 
+
+   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js" type="text/javascript"></script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+
+<style type="text/css">
+@import url("http://www.bls.gov/stylesheets/bls_tables.css");
+
+p{
+	color:#000;
+	font-size:110%;
+}
+code{
+	color:#000;
+}
+
+textarea{
+	border: solid #1A6A97 2px;
+}
+
+h1 {
+     font-size: 500%;
+    font-weight: bold;
+	color:#1A6A97;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+h3 {
+    font-size: 110%;
+    font-weight: bold;
+    margin-top: 5px;
+	color:#000;
+}
+h4{
+	color:#000;
+}
+
+button {
+    color:#900;
+    font-weight:800;
+    padding: 5px 40px 5px 40px;
+    border: 2px solid #900;
+    margin-bottom: 10px;
+	margin-left: 20px;
+    background-color: #3cbcfc;
+    margin-right: 3px;
+    cursor:pointer;
+    float: left;
+}
+button:hover{
+background-color: #900;
+color:#FFFFFF;
+}
+
+
+form{
+	color:#000;
+}
+a{
+	color:#600;
+}
+
+.toBeMerged{
+	background-color: #FFC !important;
+	
+}
+
+#tableDisplay table th, #tableDisplay table td{
+	
+	cursor:pointer;
+}
+
+table p{
+	color:#000000;
+}
+table a{
+	color:#009
+}
+
+#tableDisplay table caption{
+	background-color:#fff !important;
+}
+
+
+
+</style> 
+
+
+<script type="text/javascript">
+
+
+///////add commas function
+function addCommas(val) {
+
+    while (/(\d+)(\d{3})/.test(val.toString())) {
+        val = val.toString().replace(/(\d+)(\d{3})/, '$1' + ',' + '$2');
+    }
+    return val;
+}
+
+
+
+
+$("document").ready(function () {
+	
+	$("#joinTablesButton").click(function(){
+		
+		$("#rawTableDiv").html("");
+		$("#joinedTableDiv").html("");
+		
+		var rawTableData = $("#tableData").val().replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi,"").replace(/<style\b[^<]*(?:(?!<\/style>)<[^<]*)*<\/style>/gi,""); ///get from box
+		$("#rawTableDiv").html(rawTableData); ///put all in div
+		
+		///count tables
+		var numTablesToBeJoined = $("#rawTableDiv #bodytext table.regular-data").length;
+	
+	///grab first table and place in joined tables div
+	
+	$("#rawTableDiv #bodytext table.regular-data:eq(0)").appendTo($("#joinedTableDiv"));
+	
+	
+	
+	
+	///add values columns (last columns) from other tables
+	
+	$("#rawTableDiv #bodytext table.regular-data tbody").each(function(){
+		var thisTable = $(this);
+		$("tr", thisTable).each(function(index, element) {
+            var thisRow = $(this);
+			$("td", thisRow).appendTo($("#joinedTableDiv table tbody tr:eq("+index+")"));
+			
+        });
+		
+	});
+	
+	
+	///add values column headers
+	$("#rawTableDiv #bodytext table.regular-data thead tr").each(function(){
+		var thisHead = $(this);
+		$("th:last", thisHead).appendTo($("#joinedTableDiv table thead tr"));
+	});
+	
+	
+	
+	//remove first series ID column
+		$("#joinedTableDiv table tr").each(function(index, element) {
+            var thisRow = $(this);
+			$("th:eq(0)", thisRow).remove();
+			
+        });
+		
+		
+
+		///add titles to headers
+	$("table.regular-data caption").each(function(index, element) {
+		var tableCaption = $(this).html();
+		console.log(index);
+		console.log(tableCaption);
+		newIndex = Number(index + 2);
+		//var table1Title = table1Caption.match(titleRegExp);
+		$("#joinedTableDiv table thead th:eq("+newIndex+")").html(tableCaption);
+		//console.log(table1Title);
+		
+		
+		
+	});
+	
+	
+		
+		///remove download links and extra br
+		$(".download").remove();	
+		$("#joinedTableDiv table thead th").each(function(index, element) {
+			var thisTH = $(this);
+			$("br:last", thisTH).remove();
+			
+		});
+		
+	///replace periods with month names	
+		$("#joinedTableDiv table tbody tr").each(function(index, element) {
+            var thisRow = $(this);
+			$("th:eq(1)", thisRow).each(function(index, element) {
+                $(this).text($(this).text().replace("M01","Jan").replace("M02","Feb").replace("M03","Mar").replace("M04","Apr").replace("M05","May").replace("M06","Jun").replace("M07","Jul").replace("M08","Aug").replace("M09","Sep").replace("M10","Oct").replace("M11","Nov").replace("M12","Dec"));
+            });
+      });
+	  
+	  
+	  ///join first and second column text (month, year)
+	  $("#joinedTableDiv table tr").each(function(index, element) {
+            var thisRow = $(this);
+			$("th:eq(0)", thisRow).each(function(index, element) {
+			$(this).text($("th:eq(1)", thisRow).text() + " " +$.trim($(this).text()) );
+			 ///remove leftover period column 
+			 $("th:eq(1)", thisRow).remove();
+										
+			});
+	  });
+	  ///rename date column header
+	  $("#joinedTableDiv table thead th:first").text("Date");
+	
+	
+	//remove extra caption element
+	$("#joinedTableDiv table caption").text("Bureau of Labor Statistics table");
+	 
+///format for thousands and commas if button checked
+	if ($('#multiplyByThousandCheckBox').attr('checked')){ 
+		var footNotesRegEx = /(\(\d+\))|(\(\D+\))/g; //match (1) or (p) etc
+	
+		$("#joinedTableDiv table tbody td").each(function(index, element) {
+            var thisValue = Number($(this).text().replace(footNotesRegEx,""));
+				thisValue = addCommas(Math.round((thisValue *1000)));
+				$(this).text(thisValue);
+			
+        });
+	///remove "in thousands" to avoid confusion
+	$("#joinedTableDiv table thead th").each(function(index, element) {
+     $(this).html($(this).html().replace("in thousands","").replace("THOUSANDS",""));
+		
+    });
+	$("#joinedTableDiv table tfoot").remove();
+	
+}
+
+
+
+///remove annual averages rows if box checked
+
+	if ($('#removeAnnualAveragesCheckBox').attr('checked')){ 
+		var avgToBeRemovedRegEx = /S01|S02|M13/gi;
+		$("#joinedTableDiv table tr").each(function(index, element) {
+            var thisRow = $(this);
+			var thisRowText = $("th:first", thisRow).text();
+				if (thisRowText.match(avgToBeRemovedRegEx)){
+						$(thisRow).remove();
+				}
+			
+        });
+		
+	
+	}
+
+
+
+
+//// add html code to bottom box
+
+$("#joinedTableCode").val($("#joinedTableDiv").html());
+
+	
+	
+	}); //end button click
+	
+
+
+
+
+	
+	
+	
+});
+
+
+
+</script>
+    
+</head>
+
+<body>
+<h1>Table joiner tool</h1>
+
+
+<p> Copy the entire source code (right click the page and "view source") from a labstat data page that has several column style tables, and paste it into this box to join them.</p>
+<p style="font-weight: bold; color:#CC0000;">WARNING: Your tables need to start have the same number of rows, or the resulting alignment will be wrong. CHECK YOUR RESULT CAREFULLY!</p>
+<textarea id="tableData" cols="100" rows="10">
+																																									
+</textarea>
+
+<br><br>
+ <span style="margin-left:20px; font-family:Verdana, Geneva, sans-serif; font-size:16px; font-weight:bold; color: #1A6A97"> Multiply values by thousand, remove footnotes, and add commas?
+<input type="checkbox"  id="multiplyByThousandCheckBox"> </span>
+<br><br>
+ <span style="margin-left:20px; font-family:Verdana, Geneva, sans-serif; font-size:16px; font-weight:bold; color: #1A6A97"> Remove rows with annual and semi-annual averages?
+<input type="checkbox"  id="removeAnnualAveragesCheckBox"> </span>
+<br><br>
+
+
+
+<button id="joinTablesButton">Join tables</button> 
+
+
+
+<div id="joinedTableDiv">
+
+</div>
+<br><br><br><br><br>
+<span style="margin-left:20px; font-family:Verdana, Geneva, sans-serif; font-size:16px; font-weight:bold; color: #000">Result table HTML:</span>
+<br>
+<textarea id="joinedTableCode" cols="100" rows="10">
+																																									
+</textarea>
+
+<div id="rawTableDiv" style="visibility: hidden;">
+
+</div>
+
+
+
+
+</body>
+
+</html>

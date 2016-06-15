@@ -35,7 +35,35 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
         $(selected).addClass("selected");
 
     };
+    
 
+
+    /** shows and hides elements depending on what chart type is selected **/
+    allFormUpdates.displayOptions = function (chart_type) {
+
+        $(".chart_tab, .display_options>*").not(".notes").show(); //start showing all, and might hide later if map selected
+        $(".just_map").hide(); //hide just map stuff
+
+        //hide stuff unrelated to that chart type (line, bar, column)
+        if (["area", "line", "bar", "column", "stacked_column", "stacked_bar"].indexOf(chart_type) > -1) { //if one of these
+            $(".show_line, .show_bar, .show_column").show();
+        } else {
+            $(".show_line, .show_bar, .show_column").hide();
+        }
+
+        //hide all classes with just_ ...
+        $(".just_drilldown, .just_scatter, .just_bubble, .just_column, .just_bar").hide();
+
+        //show just_...
+        if (["scatter", "drilldown", "bubble", "bar", "column"].indexOf(chart_type) > -1) {
+            $(".just_" + chart_type).show();
+            $(".show_" + chart_type).show();
+
+        }
+
+    };
+
+    
 
     /* when chart type icon is clicked and changed */
 
@@ -46,32 +74,18 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
         $(".highcharts-button").click();
 
 
-        $(".chart_tab, .display_options>*").not(".notes").show(); //start showing all, and might hide later if map selected
-        $(".just_map").hide(); //hide just map stuff
 
         allFormUpdates.selectChart(this);
         var chart_type = $(this).divVal();
 
-        //hide stuff unrelated to that chart type (line, bar, column)
-        if (["area", "line", "bar", "column", "stacked_column", "stacked_bar"].indexOf(chart_type) > -1) { //if one of these
-            $(".show_line, .show_bar, .show_column").show();
-        } else {
-            $(".show_line, .show_bar, .show_column").hide();
-        }
-
-        $(".just_drilldown, .just_scatter, .just_bubble").hide();
-        if (["scatter", "drilldown", "bubble"].indexOf(chart_type) > -1) {
-            $(".just_" + chart_type).show();
-            $(".show_" + chart_type).show();
-
-        }
+        allFormUpdates.displayOptions(chart_type);
 
         updateChartType(chart_type, chart, all_chart_options);
         if (chart_type === "map") {
             $(".chart_display_area").hide();
             $(".map_display_area").show();
 
-            map_colors_init.loadMapColorPalettes(4);
+            map_colors_init.loadMapColorPalettes(4); //loads color palettes then loads new map
 
 
         } else {
@@ -156,11 +170,19 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
             update_data.updateData(chart, all_chart_options); //for charts
         }
 
-
     });
 
 
 
+    //example table select menu
+    $("#example_table_select").unbind().change(function () {
+        var new_table_file = "./dev/test_tables/" + $(this).val() + ".htm";
+
+        $.get(new_table_file, function (table) {
+            $("#table_input_textarea").val(table);
+            $("#table_input_textarea").trigger("input");
+        });
+    });
 
 
     /* COLOR PALETTE CHANGES - defined and initiated in navigation setup*/
@@ -260,6 +282,15 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
         update_x_axis.updateTickmarkInterval(newInterval, chart, all_chart_options);
     });
 
+    
+    //x-axis formatter (only years) changed
+    $("#chart_x_axis_show_only_years, #chart_x_axis_add_commas").unbind().change(function(){
+        var only_numbers = utils_forms.getCheckBoxValue($("#chart_x_axis_show_only_years"));
+        var add_commas = utils_forms.getCheckBoxValue($("#chart_x_axis_add_commas"));
+        update_x_axis.updateFormatter(only_numbers, add_commas, chart, all_chart_options);
+    });
+    
+    
 
 
 
@@ -354,6 +385,25 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
     /* EXTRA OPTIONS CHANGES */
 
 
+    //Point padding change (only bar and column)
+
+    $("#point_padding_input").unbind().bind('input propertychange', function () {
+
+        var val = $(this).getValNumber();
+
+        update_chart_options.changePointPadding(val, chart, all_chart_options);
+    });
+
+
+    //group padding change (only bar and column)
+
+    $("#group_padding_input").unbind().bind('input propertychange', function () {
+        var val = $(this).getValNumber();
+
+        update_chart_options.changeGroupPadding(val, chart, all_chart_options);
+    });
+
+
     //Subtitle change
     $("#chart_subtitle_textarea").unbind().bind('input propertychange', function () {
 
@@ -415,11 +465,11 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
     });
 
 
-        //is animated checkbox changed
+    //is animated checkbox changed
     $("#map_animated_checkbox").unbind().change(function () {
         map_init.loadNewMap(chart, all_chart_options, all_map_options, true); // true to repopulate form
     });
-    
+
     //circle size range slider changed
     $("#map_circle_size_range").unbind().on("input", function () {
         map_init.loadNewMap(chart, all_chart_options, all_map_options, true); // true to repopulate form
@@ -453,7 +503,8 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
 
     //bind nav clicks and keys
     var navigation_setup = require("../navigation_setup.js");
-    navigation_setup.initNavWithChart(chart, all_chart_options, all_map_options); // rebinds chart and all_chart_options to form events
+    var chart_type = $("#chart_type_icons .selected").divVal(); 
+    navigation_setup.initNavWithChart(chart, all_chart_options, all_map_options, chart_type); // rebinds chart and all_chart_options to form events
 
 };
 

@@ -23,6 +23,7 @@ var update_template = {
 
         if (all_chart_options.chart.type !== "map") {
             chart.reflow();
+            $("#chart_credits_text_textarea").trigger("input"); //fix credits loacation
         }
     },
 

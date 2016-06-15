@@ -66,7 +66,7 @@ var update_y_axis = {
             y_signs_arr: y_signs_arr
         };
 
-        all_chart_options.yAxis.formatter = newYFormat;
+        all_chart_options.yAxis.labels.formatter = newYFormat;
 
 
     },

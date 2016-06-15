@@ -5,18 +5,26 @@ $(document).ready(function () {
     var jq_extensions = require("./utils/jq_extensions.js");
     var utils_main = require("./utils/utils_main");
 
+
+
+
+
     //load test table into table_input_textarea
 
+    $.get("./dev/test_tables/scatter_table.htm", function (table) {
+        $("#table_input_textarea").val(table);
 
-    $("#table_input_textarea").load("./dev/test_tables/animated_map_table.htm", function () {
+        //check if app was opened from the chart wizard (imediately invoked function)
+        var loadFromTableWizard = require("./utils/load_from_table_wizard");
 
         //initial empty all map options
 
         var all_map_options = {};
+        var chart_type = $("#chart_type_icons .selected").divVal();
 
         //initial all chart options init
         var allChartOptionsInit = require("./initializers/charts/all_chart_options_init.js");
-        var all_chart_options = allChartOptionsInit();
+        var all_chart_options = allChartOptionsInit(chart_type);
 
         //draw chart
         var draw_chart = require("./draw_chart.js");
@@ -30,8 +38,14 @@ $(document).ready(function () {
         //all form updates - when updates are made, update the chart. this also calls some nav and keyboard input inits
         var allFormUpdates = require("./form_updates/all_form_updates.js");
         allFormUpdates(chart, all_chart_options, all_map_options);
+        
+        //diplay only options related to chart type 
+        allFormUpdates.displayOptions(chart_type);
 
-
+        //click map if that was originally selected when page loaded (easy way to get all chart options done, then change to map)
+        if (chart_type === "map") {
+            $("#chart_type_map").click();
+        }
 
     });
 

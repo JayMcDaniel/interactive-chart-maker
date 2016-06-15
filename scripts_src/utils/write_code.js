@@ -90,6 +90,8 @@ jQuery.fn.extend({addCommas:' + $("string").addCommas.toString() + ' });';
     },
 
 
+
+
     /** creates and returns map JS code  **/
     writeMapJSCode: function (all_map_options) {
 
@@ -99,6 +101,7 @@ jQuery.fn.extend({addCommas:' + $("string").addCommas.toString() + ' });';
         var map_credits_init = require("../initializers/maps/map_credits_init.js");
         var map_legend_init = require("../initializers/maps/map_legend_init.js");
         var map_tooltip_init = require("../initializers/maps/map_tooltip_init.js");
+        var map_animation_init = require("../initializers/maps/map_animation_init.js");
 
 
         var map_js = utils_main.deepStringify(all_map_options);
@@ -151,9 +154,16 @@ jQuery.fn.extend({addCommas:' + $("string").addCommas.toString() + ' });';
             //map_init.setUpMapLegendHover
             "map_init.setUpMapLegendHover = " + map_init.setUpMapLegendHover.toString() + ";\n\n" +
 
-
             //map_init.setUpMapStateLinks
             "map_init.setUpMapStateLinks = " + map_init.setUpMapStateLinks.toString() + ";\n\n" +
+
+
+            //map_animation_init.getAnimationDiv (only if used)
+            "var map_animation_init = {}; \n map_animation_init.getAnimationDiv = " + (all_map_options.is_animated ? map_animation_init.getAnimationDiv.toString() : null) + ";\n\n" +
+
+
+            //map_animation_init.setUpMapAnimation (only if used)
+            "map_animation_init.setUpMapAnimation = " + (all_map_options.is_animated ? map_animation_init.setUpMapAnimation.toString() : null) + ";\n\n" +
 
 
             //call functions
@@ -168,9 +178,14 @@ jQuery.fn.extend({addCommas:' + $("string").addCommas.toString() + ' });';
             //init state links to eag pages
             "map_init.setUpMapStateLinks(map_display_area);\n\n" +
 
+
+            //init setup of animation functions (if used)
+            (all_map_options.is_animated ? "map_animation_init.setUpMapAnimation(all_map_options, map_display_area);\n\n" : "") +
+
             ///end of doc ready
             "});" +
 
+            //add jQuery addcommas extension
             'jQuery.fn.extend({addCommas:' + $("string").addCommas.toString() + ' });';
 
 

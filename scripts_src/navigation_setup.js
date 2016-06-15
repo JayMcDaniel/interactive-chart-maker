@@ -13,7 +13,7 @@ var navigation_setup = {
     sideNavTabsChange: function (chart, all_chart_options) {
 
         $("#side_nav_tabs .tab").unbind().click(function () {
-            //change selected menu tab
+            //change selected menu tabs
             $("#side_nav_tabs .selected_tab").removeClass("selected_tab");
             $(this).addClass("selected_tab");
 
@@ -25,8 +25,8 @@ var navigation_setup = {
             //if this is "Individual Series Options", run that setup function
             if (selectedID === "#display_series_options" && all_chart_options.chart.type != "map") { //for charts
 
-                    update_individual_series.populateForm(chart, all_chart_options);
-                
+                update_individual_series.populateForm(chart, all_chart_options);
+
             }
 
         });
@@ -34,11 +34,11 @@ var navigation_setup = {
 
 
     /** when chart code is hovered over, update DISABLED FOR NOW  **/
-//    chartOutputCodeFocus: function (all_chart_options, all_map_options) {
-//        $("#chart_output_code").unbind().mouseenter(function () {
-//            write_code.writeCode(all_chart_options, all_map_options);
-//        });
-//    },
+    //    chartOutputCodeFocus: function (all_chart_options, all_map_options) {
+    //        $("#chart_output_code").unbind().mouseenter(function () {
+    //            write_code.writeCode(all_chart_options, all_map_options);
+    //        });
+    //    },
 
 
 
@@ -80,7 +80,7 @@ var navigation_setup = {
             var $get_code_span = $("#get_code_text");
 
             if ($get_code_span.text() === "Get code") {
-                 //show loading
+                //show loading
                 $(".glyphicon-refresh-animate").css("visibility", "visible");
                 $("#main_result_code_div").slideDown(50, function () {
                     //write all_chart_options
@@ -145,13 +145,69 @@ var navigation_setup = {
 
 
 
-    /** INIT ALL NAVIGATION that needs parameters, called from all_form_updates when page is loaded, and whenever a saved chart is loaded **/
-    initNavWithChart: function (chart, all_chart_options, all_map_options) {
 
-      //  navigation_setup.chartOutputCodeFocus(all_chart_options, all_map_options);
+    /** when areas of the chart are clicked, open that section **/
+    chartClicks: function (chart_type) {
+
+        //give applicable chart areas pointer mouse
+        $(".highcharts-yaxis-labels text, .highcharts-xaxis-labels text, .highcharts-tooltip, .highcharts-series-group, svg>text:last-child").unbind().css("cursor", "pointer");
+
+        //subtitle	
+        //        $(".highcharts-subtitle").click(function () {
+        //            console.log("sub");
+        //        });
+
+        //y axis label
+        //        $(".highcharts-yaxis-title").click(function () {
+        //  console.log("y title");
+        //        });
+
+        $(".highcharts-yaxis-labels").click(function () {
+            $("#tab_chart_y_axis").click();
+            $("#chart_y_axis_title_textarea").select();
+        });
+
+        //x axis 
+        //        $(".highcharts-xaxis-title").click(function () {
+        //  console.log("x tit");
+        //        });
+
+        $(".highcharts-xaxis-labels").click(function () {
+            $("#tab_chart_x_axis").click();
+            $("#chart_x_axis_title_textarea").select();
+
+        });
+
+        //credits
+        $("svg>text:last-child").click(function (e) {
+            e.preventDefault();
+            $("#tab_chart_credits").click();
+            $("#chart_credits_text_textarea").select();
+        });
+
+        //tooltip
+        $(".highcharts-series-group, .highcharts-tooltip").click(function () {
+            if (chart_type !== "drilldown") {
+                $("#tab_chart_tooltip").click();
+            }
+        });
+
+
+
+    },
+
+
+
+
+
+    /** INIT ALL NAVIGATION that needs parameters, called from all_form_updates when page is loaded, and whenever a saved chart is loaded **/
+    initNavWithChart: function (chart, all_chart_options, all_map_options, chart_type) {
+
+        //  navigation_setup.chartOutputCodeFocus(all_chart_options, all_map_options);
         navigation_setup.getCodeButtonClick(all_chart_options, all_map_options);
         navigation_setup.loadChartButtonClick(chart, all_chart_options);
         navigation_setup.sideNavTabsChange(chart, all_chart_options);
+        navigation_setup.chartClicks(chart_type);
 
         keyboard_inputs.initListeners(chart, all_chart_options);
         keyboard_inputs.sideNavTabShortcuts(chart, all_chart_options);

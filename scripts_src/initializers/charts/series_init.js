@@ -10,6 +10,8 @@ var seriesInit = function seriesInit(series) {
 
 
     var series = new Series(options);
+    
+    console.log(series);
     return series.series;
 };
 
