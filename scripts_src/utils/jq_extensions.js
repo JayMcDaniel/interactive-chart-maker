@@ -50,6 +50,13 @@ var jq_extensions = (function () {
             var val = $.trim($(this).text().replace(/\(.*\)/, "").replace(/[^0-9\.\-]+/g, ''));
 
             return val === "" || isNaN(Number(val)) ? null : Number(val);
+        },
+        
+       
+        /** gets a .val() but returns 0 if isNaN **/
+        getValNumber: function(){
+            return isNaN(Number($(this).val())) ? 0 : Number($(this).val());
+        
         }
 
 

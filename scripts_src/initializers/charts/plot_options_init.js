@@ -43,9 +43,9 @@ var plotOptionsInit = function plotOptionsInit(legend_toggle_enabled) {
     /* unique chart options (choosing to keep these with every chart so I don't have to reload them with individual series when chart types are updated) */
 
     //bar or column options
-    options.series.groupPadding = 0.2;
-    options.series.pointPadding = 0.1;
-    options.series.pointPlacement = null;
+    options.series.groupPadding = $("#group_padding_input").getValNumber() || 0.2;
+    options.series.pointPadding = $("#point_padding_input").getValNumber() || 0.1;
+    options.series.pointPlacement = null; 
     options.series.stacking = null;
     options.series.minPointLength = 2;
 

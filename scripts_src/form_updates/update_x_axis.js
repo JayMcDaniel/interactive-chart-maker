@@ -5,6 +5,42 @@
 var update_x_axis = {
 
 
+
+    /** update x-axis formatter **/
+    /** update format when dollar / percent signs select is changed TODO!*/
+    updateFormatter: function (only_numbers, add_commas, chart, all_chart_options) {
+
+        var newXFormat = undefined;
+
+        if (only_numbers) {
+            newXFormat = function () {
+                return this.value.replace(/[^0-9\.\-]+/g, '') //hide non-numbers if show only years box is checked
+            }
+        }
+
+        if (add_commas) {
+            newXFormat = function () {
+                return $(Number(this.value.replace(/[^0-9\.\-]+/g, ''))).addCommas(); //hide non-numbers if show only years box is checked
+            }
+        }
+
+
+        if (!chart) { // called when this is used in y_axis_init
+            return newXFormat;
+        }
+
+        chart.xAxis[0].update({
+            labels: {
+                formatter: newXFormat
+            }
+        });
+
+
+        all_chart_options.xAxis.labels.formatter = newXFormat;
+
+
+    },
+
     /**makes x-axis MLR or standard style **/
     toggleMLRStyle: function (is_checked, chart, all_chart_options) {
 
@@ -34,14 +70,14 @@ var update_x_axis = {
         all_chart_options.xAxis.title.text = new_title;
 
     },
-    
+
 
     /** update x-axis type */
     updateType: function (chart_type, chart, all_chart_options) {
         chart.xAxis[0].update({
             type: chart_type === "drilldown" ? "category" : "linear"
         });
-        
+
         all_chart_options.xAxis.type = chart_type === "drilldown" ? "category" : "linear";
     },
 

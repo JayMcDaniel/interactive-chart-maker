@@ -18,8 +18,12 @@
  /** create and return an instance of all_chart_options 
  @module
  **/
- var allChartOptionsInit = function() {
-     var chart_type = $("#chart_type_icons .selected").divVal();
+ var allChartOptionsInit = function(chart_type) {
+     
+     if (chart_type === "map"){
+         chart_type = "line"; //create an initial line chart just to load the options, even if map is selected (will be clicked later in app.js)
+     }
+     
      var load_series_from = $("#table_input_load_series_from_icons .selected").divVal(); 
      var legend_toggle_enabled = utils_forms.getCheckBoxValue($("#legend_make_toggle_checkbox"));
      var input = $("#table_input_textarea").val();

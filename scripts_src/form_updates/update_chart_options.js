@@ -7,6 +7,35 @@ var utils_main = require("../utils/utils_main");
 var update_chart_options = {
 
 
+    /** when point padding is changed (only bar and column charts) **/
+    changePointPadding: function (val, chart, all_chart_options) {
+
+        $(chart.series).each(function () {
+            this.update({
+                pointPadding: val
+            });
+        });
+
+        all_chart_options.plotOptions.series.pointPadding = val;
+
+    },
+
+
+    /** when group padding is changed (only bar and column charts) **/
+    changeGroupPadding: function (val, chart, all_chart_options) {
+
+        $(chart.series).each(function () {
+            this.update({
+                groupPadding: val
+            });
+        });
+
+        all_chart_options.plotOptions.series.groupPadding = val;
+
+    },
+
+
+
     /** when zoon type dropdown is changed **/
     changeZoomType: function (val, chart, all_chart_options) {
 

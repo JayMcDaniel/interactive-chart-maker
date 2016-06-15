@@ -28,6 +28,7 @@ var map_init = {
             title: {},
             subtitle: {},
             colors: [],
+            circle_size_multiple: 1,
             is_animated: utils_forms.getCheckBoxValue($("#map_animated_checkbox")),
             legend: {
                 reversed: utils_forms.getCheckBoxValue($("#legend_reverse_layout_checkbox")),

@@ -14,7 +14,7 @@ var update_individual_series = {
 
     /** called when the series type icons are clicked. Binded at the end of populateForm **/
     seriesTypeIconChange: function (chart, all_chart_options) {
-        
+
         $(".series_type_icon").click(function () {
             //update series type
             var type = $(this).attr("type");
@@ -39,14 +39,14 @@ var update_individual_series = {
 
     /** called when series visible by default checkbox is changed.  Binded at the end of populateForm **/
     seriesVisibleChange: function (chart, all_chart_options) {
-        
+
         $(".series_visible_checkbox").change(function () {
             var is_visible = utils_forms.getCheckBoxValue($(this));
             var i = $(this).parents(".series_snippet").index();
             chart.series[i].update({
                 visible: is_visible
             });
-            
+
             //update all_chart_options
             all_chart_options.series[i].visible = is_visible;
         });
@@ -221,17 +221,58 @@ var update_individual_series = {
         var series_visible_label = document.createElement("label");
         series_visible_label.className = "series_visible_label";
         series_visible_label.textContent = "Visible by default: ";
+        series_visible_label.setAttribute("for", "series_visible_checkbox_" + i);
 
         var series_visible_checkbox = document.createElement("input");
         series_visible_checkbox.setAttribute("type", "checkbox");
         series_visible_checkbox.checked = all_chart_options.series[i].visible;
         series_visible_checkbox.id = "series_visible_checkbox_" + i;
+
+
         series_visible_checkbox.className = "series_visible_checkbox";
 
         series_visible_div.appendChild(series_visible_label);
         series_visible_div.appendChild(series_visible_checkbox);
 
         return series_visible_div;
+    },
+
+
+    makeSeriesExtraDataDiv: function (all_chart_options, i) {
+        var series_extra_data_div = document.createElement("div");
+        series_extra_data_div.className = "series_visible_div";
+
+
+
+        //make title box and label
+        var series_extra_data_title_label = document.createElement("label");
+        series_extra_data_title_label.className = "series_extra_data_title_label";
+        series_extra_data_title_label.textContent = "Extra data title for tooltip: ";
+
+        var series_extra_data_title_textarea = document.createElement("input");
+        series_extra_data_title_textarea.type = "text";
+        series_extra_data_title_textarea.style= "width: 100%";
+        series_extra_data_title_textarea.className = "series_extra_data_title_textarea";
+
+
+        //make values box and label
+        var series_extra_data_values_label = document.createElement("label");
+        series_extra_data_values_label.className = "series_extra_data_values_label";
+        series_extra_data_values_label.textContent = "Extra data values for tooltip: ";
+
+        var series_extra_data_values_textarea = document.createElement("textarea");
+        series_extra_data_values_textarea.className = "series_extra_data_values_textarea";
+
+
+        //add it all
+        series_extra_data_div.appendChild(series_extra_data_title_label);
+        series_extra_data_div.appendChild(series_extra_data_title_textarea);
+        series_extra_data_div.appendChild(series_extra_data_values_label);
+        series_extra_data_div.appendChild(series_extra_data_values_textarea);
+
+
+
+        return series_extra_data_div;
     },
 
 
@@ -273,6 +314,9 @@ var update_individual_series = {
             var series_visible_div = update_individual_series.makeSeriesVisibleDiv(all_chart_options, i);
             series_snippet.appendChild(series_visible_div);
 
+            //make extra data div text area
+            var series_extra_data_div = update_individual_series.makeSeriesExtraDataDiv();
+            series_snippet.appendChild(series_extra_data_div);
 
             //append all
             $(display_series_options_inner_div).append(series_snippet);

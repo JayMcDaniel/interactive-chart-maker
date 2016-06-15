@@ -301,7 +301,9 @@
     .just_scatter,
     .just_bubble,
     .just_drilldown,
-    .just_map {
+    .just_map,
+    .just_bar,
+    .just_column {
         display: none;
     }
     
@@ -532,8 +534,8 @@
                 &#side_nav_tab_icon_sizing {
                     background-image: url(../../images/icons/margins_icon.png);
                     background-size: 140% 140%;
-                    background-position-x: -4.8px;
-                    background-position-y: -4.5px;
+                    background-position-x: -3.8px;
+                    background-position-y: -3.5px;
                 }
                 &#side_nav_tab_icon_data {
                     background-image: url(../../images/icons/load_series_from_column_headers_icon.png);

@@ -1,0 +1,24 @@
+table.sortable_datatable caption {
+text-align: left;
+color: #660000;
+font-size:14px;
+font-family: tahoma, arial, sans-serif;
+
+}
+
+table.sortable_datatable td.footnotes {
+	padding: 4px;
+	text-align : left;
+}
+table.sortable_datatable td.footnotes p {
+	line-height: 140%;
+}
+table.sortable_datatable .footnotestitle {
+	font-weight: bold;
+}
+
+table tbody tr td.row-head {
+	font-weight: bold !important;
+	text-align:left !important;
+	
+}

@@ -22,7 +22,8 @@ var parseForScatter = function (input, chart_type, colors) {
                 type: chart_type,
                 lineWidth: 0,
                 marker: {
-                    enabled: true
+                    enabled: true,
+                    symbol: "circle"
                 },
                 color: colors[i],
                 _symbolIndex: i
@@ -32,8 +33,7 @@ var parseForScatter = function (input, chart_type, colors) {
             $("td:even", this_row).each(function (i) {
                 var x = $(this).getNumber();
                 var y = $(this).next().getNumber();
-                console.log(y);
-                if(y === null){
+                if(y === null || y === undefined){
                     $(".alert-danger").text("Sorry, the table wasn't formatted correctly for a scatter chart. Please see the example on the data tab.");
                     
                     setTimeout(function(){
@@ -42,7 +42,9 @@ var parseForScatter = function (input, chart_type, colors) {
                 }
                 
                 var xy_arr = [x, y];
+                
                 seriesObj.data.push(xy_arr);
+                
             });
 
             output.series.push(seriesObj);
