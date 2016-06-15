@@ -503,8 +503,7 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
 
     //bind nav clicks and keys
     var navigation_setup = require("../navigation_setup.js");
-    var chart_type = $("#chart_type_icons .selected").divVal(); 
-    navigation_setup.initNavWithChart(chart, all_chart_options, all_map_options, chart_type); // rebinds chart and all_chart_options to form events
+    navigation_setup.initNavWithChart(chart, all_chart_options, all_map_options); // rebinds chart and all_chart_options to form events
 
 };
 
