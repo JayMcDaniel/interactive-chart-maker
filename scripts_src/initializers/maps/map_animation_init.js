@@ -60,8 +60,8 @@ var map_animation_init = {
 
 
         //adjust legend placement
-        $("#legend_placement_y").val(70);
-        all_map_options.legend.y = 70;
+//        $("#legend_placement_y").val(70);
+//        all_map_options.legend.y = 70;
 
         return map_animation_div;
 

@@ -42,7 +42,6 @@ var write_code = {
         var html_string = '<div id="' + id + '" style = "width: ' + width + 'px; height: ' + height + 'px; margin: auto; padding: 0px;"> </div>';
 
         return html_string;
-
     },
 
 
@@ -52,14 +51,15 @@ var write_code = {
         var html_string = '<div class="map_display_area" id="' + id + '" style = "width: ' + width + 'px; height: ' + (height - 60) + 'px; margin: auto; padding: 0px;"> </div>';
 
         return html_string;
-
-
     },
 
 
 
     /** place code in chart_output_code and reinit highlight */
     writeChartJSCode: function (all_chart_options) {
+
+        var draw_chart = require("../draw_chart.js");
+
 
         //save chart input values
         all_chart_options.saved_values = chart_recall.saveValues();
@@ -74,13 +74,19 @@ var write_code = {
             .replace(/headers=\\"rowHead\d+ columnHead\d+\\"/g, "") //trim down table alt output to make it smaller
             .replace(/id=\\"(rowHead|columnHead)\d+\\"/g, "")
             .replace(/\s{2,} /g, " ")
-            .replace(/"null"/g, "null"); //replace "null" with null
+            .replace(/"null"/g, "null") //replace "null" with null
+            + ";\n\n";
+
+
+        //write callback function
+        chart_options_js.string = chart_options_js.string + "var chartCallback = " + draw_chart.chartCallback.toString(); + "\n";
+
 
         //add surrounding JS (doc ready, render chart, jq extensions...)
         chart_options_js.string = '$(document).ready(function(){\n\
              var all_chart_options = ' + chart_options_js.string + ';\n\
-Highcharts.setOptions({lang: {thousandsSep: ","}});\n\
-    var ' + all_chart_options.chart.renderTo + ' = new Highcharts.Chart(all_chart_options);\n\
+Highcharts.setOptions({lang: {thousandsSep: ","}});\n\n\
+    var ' + all_chart_options.chart.renderTo + ' = new Highcharts.Chart(all_chart_options, chartCallback());\n\
 });\n\
 jQuery.fn.extend({addCommas:' + $("string").addCommas.toString() + ' });';
 

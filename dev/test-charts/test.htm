@@ -13,7 +13,7 @@
 
 
 
-<div id="chart1" style = "width: 580px; height: 430px; margin: auto; padding: 0px;"> </div>
+    <div id="chart1" style="width: 580px; height: 430px; margin: auto; padding: 0px;"> </div>
 
 
 
@@ -29,34 +29,525 @@
 
 
     <script>
- $(document).ready(function(){
-             var all_chart_options = {"chart":{"renderTo":"chart1","margin":[100,40,80,80],"borderWidth":0,"plotBorderColor":"#000","plotBorderWidth":0,"type":"line","zoomType":null,"alignTicks":false,"ignoreHiddenSeries":true},"colors":["#7cb5ec","#434348","#90ed7d","#f7a35c","#8085e9","#f15c80","#e4d354","#2b908f","#f45b5b","#91e8e1","#2f7ed8","#0d233a","#8bbc21","#910000","#1aadce","#492970","#f28f43","#77a1e5","#c42525","#a6c96a"],"legend":{"align":"left","backgroundColor":"none","borderColor":"none","borderWidth":0,"enabled":true,"floating":false,"itemDistance":30,"layout":"horizontal","reversed":false,"shadow":false,"useHTML":false,"verticalAlign":"top","x":100,"y":40,"itemStyle":{"fontFamily":"Calibri, Verdana, Arial, Helvetica, sans-serif","color":"#000"},"itemHiddenStyle":{"color":"gray"},"itemHoverStyle":{"cursor":"pointer"}},"plotOptions":{"series":{"events":{"legendItemClick":function legendItemClick(event) {}},"dataLabels":{"enabled":true},"pointPlacement":null,"stacking":null,"pointPadding":0.1,"groupPadding":0.2,"minPointLength":2,"maxSize":50,"sizeBy":"width","lineWidth":1.5,"states":{"hover":{"lineWidth":4}},"marker":{"enabled":false,"states":{"hover":{"enabled":true,"radius":5}}}}},"series":[{"name":"Location quotient","data":[1.74,1.62,1.41,1.35,1.34,1.28,1.25,1.23,1.18,1.18,1.15,1.14,1.12,1.1,1.06,1.05,1.03,1.02,1.02,1,0.99,0.97,0.97,0.95,0.94,0.93,0.93,0.92,0.92,0.91,0.89,0.88,0.87,0.85,0.85,0.82,0.78,0.77,0.75,0.73,0.72,0.71,0.68,0.59,0.56,0.56,0.55,0.54,0.52,0.35,null,null],"type":"line","color":"#7cb5ec","_symbolIndex":0,"stacking":null,"visible":true},{"name":"Employment","data":[3730,1470,240,2920,1360,3920,2230,9920,1590,250,1160,1760,2160,1550,890,240,990,630,1310,72060,330,5880,670,680,290,1350,1360,3820,300,790,570,510,140,2350,210,1760,620,3630,380,300,240,1440,250,1770,760,820,130,130,510,50,null,null],"type":"line","color":"#434348","_symbolIndex":1,"stacking":null,"visible":true},{"name":"Annual mean wage","data":[41880,43630,54500,40760,31670,49740,58450,56170,46330,38350,30850,32670,39550,50270,38360,38020,40390,22340,57190,44730,35990,43390,51600,41790,40300,43640,48050,29470,56450,41940,50750,26940,51550,37030,null,43740,40220,58600,37720,36220,33780,42660,26500,42450,47520,39830,null,54060,29200,31720,null,37170],"type":"line","color":"#90ed7d","_symbolIndex":2,"stacking":null,"visible":true}],"drilldown":{},"subtitle":{"text":"","align":"left","style":{"color":"#000000","fontFamily":"sans-serif","fontWeight":"normal","fontSize":"12px"}},"title":{"text":"Location quotients of tax preparers by state, 2015","align":"left","style":{"color":"#000000","fontFamily":"sans-serif","fontWeight":"bold","fontSize":"14px"}},"tooltip":{"backgroundColor":"#FEFFEF","crosshairs":[false,false],"formatter":function newTooltip() { var s = "<b>" + this.series.name + "</b><br>" + this.x + ": "  + $(this.y).addCommas() ; return s.replace(/\$-/g, "-$"); },"style":{"color":"#000000","fontFamily":"Calibri, Verdana, Arial, Helvetica, sans-serif"},"useHTML":true},"xAxis":{"categories":["Georgia","Oregon","Alaska","Michigan","South Carolina","Illinois","Massachusetts","California","Arizona","South Dakota","Louisiana","Indiana","Virginia","Missouri","Oklahoma","Montana","Kentucky","Arkansas","Colorado","United States","New Hampshire","Texas","Utah","Kansas","Maine","Minnesota","Tennessee","Florida","Hawaii","Connecticut","Nevada","Mississippi","Vermont","Ohio","Rhode Island","North Carolina","Iowa","New York","Nebraska","New Mexico","Idaho","New Jersey","West Virginia","Pennsylvania","Maryland","Wisconsin","Delaware","North Dakota","Alabama","Wyoming","District of Columbia","Washington"],"gridLineColor":"#c0c0c0","gridLineWidth":0,"gridLineDashStyle":"Dot","labels":{"rotation":0,"style":{"color":"#000000","fontFamily":"Calibri, Verdana, Arial, Helvetica, sans-serif","fontWeight":"normal","backgroundColor":"#fff","fontSize":"12px"}},"lineWidth":1.2,"lineColor":"gray","plotBands":[],"plotLines":[{"value":0,"color":"#c0c0c0","dashStyle":"solid","width":0}],"tickInterval":null,"tickmarkPlacement":"on","tickPosition":"outside","tickColor":"#C0D0E0","title":{"align":"middle","useHTML":true,"text":"","margin":6,"rotation":0,"style":{"color":"#000000","fontFamily":"Calibri, Verdana, Arial, Helvetica, sans-serif","fontWeight":"normal","backgroundColor":"#fff","fontSize":"13px"},"x":0},"type":"linear"},"yAxis":{"gridLineColor":"#c0c0c0","gridLineWidth":1,"gridLineDashStyle":"Dot","labels":{"rotation":0,"style":{"color":"#000000","fontFamily":"Calibri, Verdana, Arial, Helvetica, sans-serif","fontWeight":"normal","backgroundColor":"#fff","fontSize":"12px"}},"lineColor":"gray","lineWidth":1,"max":null,"min":null,"opposite":false,"plotBands":[],"plotLines":[{"value":0,"color":"#c0c0c0","dashStyle":"solid","width":1}],"tickInterval":null,"tickmarkPlacement":"on","tickPosition":"outside","tickColor":"#C0D0E0","tickWidth":1,"title":{"useHTML":true,"text":"","margin":6,"align":"high","offset":20,"rotation":0,"x":35,"y":-20,"style":{"color":"#000000","fontFamily":"Calibri, Verdana, Arial, Helvetica, sans-serif","fontWeight":"normal","fontSize":"13px"}},"type":"linear","formatter":function newYFormat() { var s = this.value == parseInt(this.value) ? Highcharts.numberFormat(this.value, 0, ".", ",") : Highcharts.numberFormat(this.value, 1, ".", ","); return  s.replace(/\$-/g, "-$") ; }},"credits":{"href":"http://www.bls.gov","position":{"align":"left","x":10,"y":-11},"style":{"cursor":"default","color":"#2C2C2C"},"text":"Click legend items to change data display. Hover over chart to view data. Source: U.S. Bureau of Labor Statistics.","useHTML":true},"saved_values":[{"id":"chart_type_icons","val":"line"},{"id":"chart_id_textinput","val":"chart1"},{"id":"chart_width_textinput","val":"580"},{"id":"chart_height_textinput","val":"430"},{"id":"top_margin_textinput","val":"100"},{"id":"right_margin_textinput","val":"40"},{"id":"bottom_margin_textinput","val":"80"},{"id":"left_margin_textinput","val":"80"},{"id":"map_circle_size_range","val":"50"},{"id":"table_input_load_series_from_icons","val":"column_heads"},{"id":"map_type_select","val":"state"},{"id":"table_input_textarea","val":"<table id=\"BLS_table\" class=\"regular\" cellspacing=\"0\" cellpadding=\"0\" xborder=\"1\" style=\" width: 95%;\"><caption><span class=\"tableTitle\">Location quotients of tax preparers by state, 2015</span></caption><thead><tr><th rowspan=\"1\"  style=\" vertical-align: middle;\">State</th><th >Location quotient</th><th >Employment</th><th >Annual mean wage</th></tr></thead><tbody><tr><th ><p>Georgia</p></th><td >1.74</td><td >3,730</td><td >$41,880</td></tr><tr class=\"greenbar\"><th ><p>Oregon</p></th><td >1.62</td><td >1,470</td><td >43,630</td></tr><tr><th ><p>Alaska</p></th><td >1.41</td><td >240</td><td >54,500</td></tr><tr class=\"greenbar\"><th ><p>Michigan</p></th><td >1.35</td><td >2,920</td><td >40,760</td></tr><tr><th ><p>South Carolina</p></th><td >1.34</td><td >1,360</td><td >31,670</td></tr><tr class=\"greenbar\"><th ><p>Illinois</p></th><td >1.28</td><td >3,920</td><td >49,740</td></tr><tr><th ><p>Massachusetts</p></th><td >1.25</td><td >2,230</td><td >58,450</td></tr><tr class=\"greenbar\"><th ><p>California</p></th><td >1.23</td><td >9,920</td><td >56,170</td></tr><tr><th ><p>Arizona</p></th><td >1.18</td><td >1,590</td><td >46,330</td></tr><tr class=\"greenbar\"><th ><p>South Dakota</p></th><td >1.18</td><td >250</td><td >38,350</td></tr><tr><th ><p>Louisiana</p></th><td >1.15</td><td >1,160</td><td >30,850</td></tr><tr class=\"greenbar\"><th ><p>Indiana</p></th><td >1.14</td><td >1,760</td><td >32,670</td></tr><tr><th ><p>Virginia</p></th><td >1.12</td><td >2,160</td><td >39,550</td></tr><tr class=\"greenbar\"><th ><p>Missouri</p></th><td >1.10</td><td >1,550</td><td >50,270</td></tr><tr><th ><p>Oklahoma</p></th><td >1.06</td><td >890</td><td >38,360</td></tr><tr class=\"greenbar\"><th ><p>Montana</p></th><td >1.05</td><td >240</td><td >38,020</td></tr><tr><th ><p>Kentucky</p></th><td >1.03</td><td >990</td><td >40,390</td></tr><tr class=\"greenbar\"><th ><p>Arkansas</p></th><td >1.02</td><td >630</td><td >22,340</td></tr><tr><th ><p>Colorado</p></th><td >1.02</td><td >1,310</td><td >57,190</td></tr><tr class=\"greenbar\"><th ><p>United States</p></th><td >1.00</td><td >72,060</td><td >44,730</td></tr><tr><th ><p>New Hampshire</p></th><td >0.99</td><td >330</td><td >35,990</td></tr><tr class=\"greenbar\"><th ><p>Texas</p></th><td >0.97</td><td >5,880</td><td >43,390</td></tr><tr><th ><p>Utah</p></th><td >0.97</td><td >670</td><td >51,600</td></tr><tr class=\"greenbar\"><th ><p>Kansas</p></th><td >0.95</td><td >680</td><td >41,790</td></tr><tr><th ><p>Maine</p></th><td >0.94</td><td >290</td><td >40,300</td></tr><tr class=\"greenbar\"><th ><p>Minnesota</p></th><td >0.93</td><td >1,350</td><td >43,640</td></tr><tr><th ><p>Tennessee</p></th><td >0.93</td><td >1,360</td><td >48,050</td></tr><tr class=\"greenbar\"><th ><p>Florida</p></th><td >0.92</td><td >3,820</td><td >29,470</td></tr><tr><th ><p>Hawaii</p></th><td >0.92</td><td >300</td><td >56,450</td></tr><tr class=\"greenbar\"><th ><p>Connecticut</p></th><td >0.91</td><td >790</td><td >41,940</td></tr><tr><th ><p>Nevada</p></th><td >0.89</td><td >570</td><td >50,750</td></tr><tr class=\"greenbar\"><th ><p>Mississippi</p></th><td >0.88</td><td >510</td><td >26,940</td></tr><tr><th ><p>Vermont</p></th><td >0.87</td><td >140</td><td >51,550</td></tr><tr class=\"greenbar\"><th ><p>Ohio</p></th><td >0.85</td><td >2,350</td><td >37,030</td></tr><tr><th ><p>Rhode Island</p></th><td >0.85</td><td >210</td><td ><a href=\"#BLS_table_footnotes\" id=\"anch_181\"><sup>(1)</sup></a></td></tr><tr class=\"greenbar\"><th ><p>North Carolina</p></th><td >0.82</td><td >1,760</td><td >43,740</td></tr><tr><th ><p>Iowa</p></th><td >0.78</td><td >620</td><td >40,220</td></tr><tr class=\"greenbar\"><th ><p>New York</p></th><td >0.77</td><td >3,630</td><td >58,600</td></tr><tr><th ><p>Nebraska</p></th><td >0.75</td><td >380</td><td >37,720</td></tr><tr class=\"greenbar\"><th ><p>New Mexico</p></th><td >0.73</td><td >300</td><td >36,220</td></tr><tr><th ><p>Idaho</p></th><td >0.72</td><td >240</td><td >33,780</td></tr><tr class=\"greenbar\"><th ><p>New Jersey</p></th><td >0.71</td><td >1,440</td><td >42,660</td></tr><tr><th ><p>West Virginia</p></th><td >0.68</td><td >250</td><td >26,500</td></tr><tr class=\"greenbar\"><th ><p>Pennsylvania</p></th><td >0.59</td><td >1,770</td><td >42,450</td></tr><tr><th ><p>Maryland</p></th><td >0.56</td><td >760</td><td >47,520</td></tr><tr class=\"greenbar\"><th ><p>Wisconsin</p></th><td >0.56</td><td >820</td><td >39,830</td></tr><tr><th ><p>Delaware</p></th><td >0.55</td><td >130</td><td ><a href=\"#BLS_table_footnotes\" id=\"anch_182\"><sup>(1)</sup></a></td></tr><tr class=\"greenbar\"><th ><p>North Dakota</p></th><td >0.54</td><td >130</td><td >54,060</td></tr><tr><th ><p>Alabama</p></th><td >0.52</td><td >510</td><td >29,200</td></tr><tr class=\"greenbar\"><th ><p>Wyoming</p></th><td >0.35</td><td >50</td><td >31,720</td></tr><tr><th ><p>District of Columbia</p></th><td ><a href=\"#BLS_table_footnotes\" id=\"anch_183\"><sup>(1)</sup></a></td><td ><a href=\"#BLS_table_footnotes\" id=\"anch_184\"><sup>(1)</sup></a></td><td ><a href=\"#BLS_table_footnotes\" id=\"anch_185\"><sup>(1)</sup></a></td></tr><tr class=\"greenbar\"><th ><p>Washington</p></th><td ><a href=\"#BLS_table_footnotes\" id=\"anch_186\"><sup>(1)</sup></a></td><td ><a href=\"#BLS_table_footnotes\" id=\"anch_187\"><sup>(1)</sup></a></td><td >37,170</td></tr></tbody><tfoot><tr class=\"footnotes\" id=\"BLS_table_footnotes\"><td class=\"footnotes\" colspan=\"4\"><span class=\"footnotesTitle\">Footnotes:</span><br><p><a href=\"#BLS_table\" id=\"anch_188\"><sup>(1)</sup></a> Data not available</p></td></tr></tfoot></table>"},{"id":"color_palettes","val":-1},{"id":"legend_layout_select","val":"horizontal"},{"id":"legend_placement_x","val":"100"},{"id":"legend_placement_y","val":"40"},{"id":"legend_reverse_layout_checkbox","val":false},{"id":"legend_make_toggle_checkbox","val":false},{"id":"chart_x_axis_title_textarea","val":""},{"id":"chart_x_axis_tickmark_interval_input","val":""},{"id":"chart_x_axis_show_only_years","val":false},{"id":"chart_x_axis_add_commas","val":false},{"id":"chart_y_axis_title_textarea","val":""},{"id":"chart_y_axis_x_position_input","val":"35"},{"id":"chart_y_axis_tickmark_interval_input","val":""},{"id":"chart_y_axis_min_input","val":""},{"id":"chart_y_axis_max_input","val":""},{"id":"chart_y_axis_opposite_checkbox","val":false},{"id":"chart_y_axis_log_checkbox","val":false},{"id":"chart_y_axis_signs_select","val":"no_signs"},{"id":"chart_y_axis_decimals_select","val":null},{"id":"chart_y_axis_divide_select","val":"1"},{"id":"chart_tooltip_shared_checkbox","val":false},{"id":"chart_tooltip_force_decimals_select","val":"0"},{"id":"chart_tooltip_signs_select","val":"no_signs"},{"id":"map_tooltip_na_text_input","val":"N/A"},{"id":"chart_tooltip_y_multiple_select","val":"1"},{"id":"chart_credits_text_textarea","val":"Click legend items to change data display. Hover over chart to view data. Source: U.S. Bureau of Labor Statistics."},{"id":"chart_subtitle_textarea","val":""},{"id":"chart_mlr_styles_checkbox","val":false},{"id":"chart_zoom_select","val":"false,false,null"},{"id":"chart_show_data_labels_checkbox","val":true},{"id":"chart_add_recession_shading_select","val":"no_recession"}]};
-Highcharts.setOptions({lang: {thousandsSep: ","}});
-    var chart1 = new Highcharts.Chart(all_chart_options);
-});
-jQuery.fn.extend({addCommas:function addCommas(decimals) {
+        $(document).ready(function () {
+            var all_chart_options = {
+                "chart": {
+                    "renderTo": "chart1",
+                    "margin": [100, 40, 80, 80],
+                    "borderWidth": 0,
+                    "plotBorderColor": "#000",
+                    "plotBorderWidth": 0,
+                    "type": "scatter",
+                    "zoomType": null,
+                    "alignTicks": false,
+                    "ignoreHiddenSeries": true
+                },
+                "colors": ["#7cb5ec", "#434348", "#90ed7d", "#f7a35c", "#8085e9", "#f15c80", "#e4d354", "#2b908f", "#f45b5b", "#91e8e1", "#2f7ed8", "#0d233a", "#8bbc21", "#910000", "#1aadce", "#492970", "#f28f43", "#77a1e5", "#c42525", "#a6c96a"],
+                "legend": {
+                    "align": "left",
+                    "backgroundColor": "none",
+                    "borderColor": "none",
+                    "borderWidth": 0,
+                    "enabled": true,
+                    "floating": false,
+                    "itemDistance": 30,
+                    "layout": "horizontal",
+                    "reversed": false,
+                    "shadow": false,
+                    "useHTML": false,
+                    "verticalAlign": "top",
+                    "x": 100,
+                    "y": 40,
+                    "itemStyle": {
+                        "fontFamily": "Calibri, Verdana, Arial, Helvetica, sans-serif",
+                        "color": "#000"
+                    },
+                    "itemHiddenStyle": {
+                        "color": "gray"
+                    },
+                    "itemHoverStyle": {
+                        "cursor": "pointer"
+                    }
+                },
+                "plotOptions": {
+                    "series": {
+                        "events": {
+                            "legendItemClick": function legendItemClick(event) {}
+                        },
+                        "dataLabels": {
+                            "enabled": false
+                        },
+                        "pointPlacement": null,
+                        "stacking": null,
+                        "pointPadding": 0.1,
+                        "groupPadding": 0.2,
+                        "minPointLength": 2,
+                        "maxSize": 50,
+                        "sizeBy": "width",
+                        "lineWidth": 1.5,
+                        "states": {
+                            "hover": {
+                                "lineWidth": 4
+                            }
+                        },
+                        "marker": {
+                            "enabled": false,
+                            "states": {
+                                "hover": {
+                                    "enabled": true,
+                                    "radius": 5
+                                }
+                            }
+                        }
+                    }
+                },
+                "series": [{
+                    "name": "series 1",
+                    "data": [[1, 1], [3.9, 3], [5, 5], [6, 6]],
+                    "type": "scatter",
+                    "lineWidth": 0,
+                    "marker": {
+                        "enabled": true,
+                        "symbol": "circle"
+                    },
+                    "color": "#7cb5ec",
+                    "_symbolIndex": 0
+                }, {
+                    "name": "series 2",
+                    "data": [[2, 1], [4, 3], [8, 9], [10, 10]],
+                    "type": "scatter",
+                    "lineWidth": 0,
+                    "marker": {
+                        "enabled": true,
+                        "symbol": "circle"
+                    },
+                    "color": "#434348",
+                    "_symbolIndex": 1
+                }, {
+                    "name": "series 3",
+                    "data": [[2, 1], [4, 3], [8, 9], [10, 10]],
+                    "type": "scatter",
+                    "lineWidth": 0,
+                    "marker": {
+                        "enabled": true,
+                        "symbol": "circle"
+                    },
+                    "color": "#90ed7d",
+                    "_symbolIndex": 2
+                }, {
+                    "name": "series 4",
+                    "data": [[2, 1], [4, 3], [8, 9], [10, 10]],
+                    "type": "scatter",
+                    "lineWidth": 0,
+                    "marker": {
+                        "enabled": true,
+                        "symbol": "circle"
+                    },
+                    "color": "#f7a35c",
+                    "_symbolIndex": 3
+                }, {
+                    "name": "series 5",
+                    "data": [[2, 1], [4, 3], [8, 9], [10, 10]],
+                    "type": "scatter",
+                    "lineWidth": 0,
+                    "marker": {
+                        "enabled": true,
+                        "symbol": "circle"
+                    },
+                    "color": "#8085e9",
+                    "_symbolIndex": 4
+                }],
+                "drilldown": {},
+                "subtitle": {
+                    "text": "",
+                    "align": "left",
+                    "style": {
+                        "color": "#000000",
+                        "fontFamily": "sans-serif",
+                        "fontWeight": "normal",
+                        "fontSize": "12px"
+                    }
+                },
+                "title": {
+                    "text": "Test table data for scatter charts",
+                    "align": "left",
+                    "style": {
+                        "color": "#000000",
+                        "fontFamily": "sans-serif",
+                        "fontWeight": "bold",
+                        "fontSize": "14px"
+                    }
+                },
+                "tooltip": {
+                    "backgroundColor": "#FEFFEF",
+                    "crosshairs": [false, false],
+                    "formatter": function () {
+                        var y_axis_title = this.series.yAxis.axisTitle ? this.series.yAxis.axisTitle.textStr : "Y-Axis";
+                        var x_axis_title = this.series.xAxis.axisTitle ? this.series.xAxis.axisTitle.textStr : "X-Axis";
+                        var s = "<b>" + this.series.name + "</b><br>" + y_axis_title + ": <b>" + Highcharts.numberFormat(this.y, 0, ".", ",") + "</b><br>" + x_axis_title + ": <b>" + Highcharts.numberFormat(this.x * 1, 0, ".", ",") + "</b>";
+                        s = all_chart_options.tooltip.addExtraData(all_chart_options.series[this.series.index].extra_data, this.point, s);
+                        return s.replace(/\$-/g, "-$");
+                    },
+                    "style": {
+                        "color": "#000000",
+                        "fontFamily": "Calibri, Verdana, Arial, Helvetica, sans-serif"
+                    },
+                    "useHTML": true,
+                    "addExtraData": function (extra_data, point, s) {
+                        if (extra_data && extra_data[0].name) {
+                            $.each(extra_data, function (i) {
+                                if (extra_data[i].values[point.index]) {
+                                    s = s + "<br>&nbsp;&nbsp;" + extra_data[i].name + ": " + extra_data[i].values[point.index];
+                                }
+                            });
+                        }
+                        return s;
+                    }
+                },
+                "xAxis": {
+                    "gridLineColor": "#c0c0c0",
+                    "gridLineWidth": 0,
+                    "gridLineDashStyle": "Dot",
+                    "labels": {
+                        "rotation": 0,
+                        "style": {
+                            "color": "#000000",
+                            "fontFamily": "Calibri, Verdana, Arial, Helvetica, sans-serif",
+                            "fontWeight": "normal",
+                            "backgroundColor": "#fff",
+                            "fontSize": "12px"
+                        }
+                    },
+                    "lineWidth": 1.2,
+                    "lineColor": "gray",
+                    "plotBands": [],
+                    "plotLines": [{
+                        "value": 0,
+                        "color": "#c0c0c0",
+                        "dashStyle": "solid",
+                        "width": 1
+                    }],
+                    "tickInterval": null,
+                    "tickmarkPlacement": "on",
+                    "tickPosition": "outside",
+                    "tickColor": "#C0D0E0",
+                    "title": {
+                        "align": "middle",
+                        "useHTML": true,
+                        "text": "",
+                        "margin": 6,
+                        "rotation": 0,
+                        "style": {
+                            "color": "#000000",
+                            "fontFamily": "Calibri, Verdana, Arial, Helvetica, sans-serif",
+                            "fontWeight": "normal",
+                            "backgroundColor": "#fff",
+                            "fontSize": "13px"
+                        },
+                        "x": 0
+                    },
+                    "type": "linear"
+                },
+                "yAxis": {
+                    "gridLineColor": "#c0c0c0",
+                    "gridLineWidth": 1,
+                    "gridLineDashStyle": "Dot",
+                    "labels": {
+                        "formatter": function newYFormat() {
+                            var s = this.value == parseInt(this.value) ? Highcharts.numberFormat(this.value, 0, ".", ",") : Highcharts.numberFormat(this.value, 1, ".", ",");
+                            return s.replace(/\$-/g, "-$");
+                        },
+                        "rotation": 0,
+                        "style": {
+                            "color": "#000000",
+                            "fontFamily": "Calibri, Verdana, Arial, Helvetica, sans-serif",
+                            "fontWeight": "normal",
+                            "backgroundColor": "#fff",
+                            "fontSize": "12px"
+                        }
+                    },
+                    "lineColor": "gray",
+                    "lineWidth": 1,
+                    "max": null,
+                    "min": null,
+                    "opposite": false,
+                    "plotBands": [],
+                    "plotLines": [{
+                        "value": 0,
+                        "color": "#c0c0c0",
+                        "dashStyle": "solid",
+                        "width": 1
+                    }],
+                    "tickInterval": null,
+                    "tickmarkPlacement": "on",
+                    "tickPosition": "outside",
+                    "tickColor": "#C0D0E0",
+                    "tickWidth": 1,
+                    "title": {
+                        "useHTML": true,
+                        "text": "",
+                        "margin": 6,
+                        "align": "high",
+                        "offset": 20,
+                        "rotation": 0,
+                        "x": 35,
+                        "y": -20,
+                        "style": {
+                            "color": "#000000",
+                            "fontFamily": "Calibri, Verdana, Arial, Helvetica, sans-serif",
+                            "fontWeight": "normal",
+                            "fontSize": "13px"
+                        }
+                    },
+                    "type": "linear"
+                },
+                "credits": {
+                    "href": "http://www.bls.gov",
+                    "position": {
+                        "align": "left",
+                        "x": 10,
+                        "y": -11
+                    },
+                    "style": {
+                        "cursor": "default",
+                        "color": "#2C2C2C"
+                    },
+                    "text": "Click legend items to change data display. Hover over chart to view data. Source: U.S. Bureau of Labor Statistics.",
+                    "useHTML": true
+                },
+                "saved_values": [{
+                    "id": "chart_type_icons",
+                    "val": "scatter"
+                }, {
+                    "id": "chart_id_textinput",
+                    "val": "chart1"
+                }, {
+                    "id": "map_type_select",
+                    "val": "state"
+                }, {
+                    "id": "map_animated_checkbox",
+                    "val": false
+                }, {
+                    "id": "chart_width_textinput",
+                    "val": "580"
+                }, {
+                    "id": "chart_height_textinput",
+                    "val": "430"
+                }, {
+                    "id": "top_margin_textinput",
+                    "val": "100"
+                }, {
+                    "id": "right_margin_textinput",
+                    "val": "40"
+                }, {
+                    "id": "bottom_margin_textinput",
+                    "val": "80"
+                }, {
+                    "id": "left_margin_textinput",
+                    "val": "80"
+                }, {
+                    "id": "map_circle_size_range",
+                    "val": "50"
+                }, {
+                    "id": "table_input_load_series_from_icons",
+                    "val": "column_heads"
+                }, {
+                    "id": "table_input_textarea",
+                    "val": "  <table id=\"BLS_table\" class=\"regular\" cellspacing=\"0\" cellpadding=\"0\" xborder=\"1\" style=\"width: 95%\"> <caption><span class=\"tableTitle\">Test table data for scatter charts</span></caption> <thead> <tr> <th rowspan=\"1\"  style=\"vertical-align: middle;\">categories</th> <th >x1</th> <th >y1</th> <th >x2</th> <th >y2</th> <th >x3</th> <th >y3</th> <th >x4</th> <th >y4</th> </tr> </thead> <tbody> <tr> <th > <p>series 1</p> </th> <td >1</td> <td >1</td> <td >3.9</td> <td >3</td> <td >5</td> <td >5</td> <td >6</td> <td >6</td> </tr> <tr class=\"greenbar\"> <th > <p>series 2</p> </th> <td >2</td> <td >1</td> <td >4</td> <td >3</td> <td >8</td> <td >9</td> <td >10</td> <td >10</td> </tr> <tr class=\"greenbar\"> <th > <p>series 3</p> </th> <td >2</td> <td >1</td> <td >4</td> <td >3</td> <td >8</td> <td >9</td> <td >10</td> <td >10</td> </tr> <tr class=\"greenbar\"> <th > <p>series 4</p> </th> <td >2</td> <td >1</td> <td >4</td> <td >3</td> <td >8</td> <td >9</td> <td >10</td> <td >10</td> </tr> <tr class=\"greenbar\"> <th > <p>series 5</p> </th> <td >2</td> <td >1</td> <td >4</td> <td >3</td> <td >8</td> <td >9</td> <td >10</td> <td >10</td> </tr> </tbody> </table>"
+                }, {
+                    "id": "example_table_select",
+                    "val": ""
+                }, {
+                    "id": "color_palettes",
+                    "val": -1
+                }, {
+                    "id": "legend_layout_select",
+                    "val": "horizontal"
+                }, {
+                    "id": "legend_placement_x",
+                    "val": "100"
+                }, {
+                    "id": "legend_placement_y",
+                    "val": "40"
+                }, {
+                    "id": "legend_reverse_layout_checkbox",
+                    "val": false
+                }, {
+                    "id": "legend_make_toggle_checkbox",
+                    "val": false
+                }, {
+                    "id": "chart_x_axis_title_textarea",
+                    "val": ""
+                }, {
+                    "id": "chart_x_axis_tickmark_interval_input",
+                    "val": ""
+                }, {
+                    "id": "chart_x_axis_show_only_years",
+                    "val": false
+                }, {
+                    "id": "chart_x_axis_add_commas",
+                    "val": false
+                }, {
+                    "id": "chart_y_axis_title_textarea",
+                    "val": ""
+                }, {
+                    "id": "chart_y_axis_x_position_input",
+                    "val": "35"
+                }, {
+                    "id": "chart_y_axis_tickmark_interval_input",
+                    "val": ""
+                }, {
+                    "id": "chart_y_axis_min_input",
+                    "val": ""
+                }, {
+                    "id": "chart_y_axis_max_input",
+                    "val": ""
+                }, {
+                    "id": "chart_y_axis_opposite_checkbox",
+                    "val": false
+                }, {
+                    "id": "chart_y_axis_log_checkbox",
+                    "val": false
+                }, {
+                    "id": "chart_y_axis_signs_select",
+                    "val": "no_signs"
+                }, {
+                    "id": "chart_y_axis_decimals_select",
+                    "val": null
+                }, {
+                    "id": "chart_y_axis_divide_select",
+                    "val": "1"
+                }, {
+                    "id": "chart_tooltip_shared_checkbox",
+                    "val": false
+                }, {
+                    "id": "chart_tooltip_force_decimals_select",
+                    "val": "0"
+                }, {
+                    "id": "chart_tooltip_signs_select",
+                    "val": "no_signs"
+                }, {
+                    "id": "map_tooltip_na_text_input",
+                    "val": "N/A"
+                }, {
+                    "id": "chart_z_title_text_input",
+                    "val": ""
+                }, {
+                    "id": "chart_tooltip_y_multiple_select",
+                    "val": "1"
+                }, {
+                    "id": "chart_credits_text_textarea",
+                    "val": "Click legend items to change data display. Hover over chart to view data. Source: U.S. Bureau of Labor Statistics."
+                }, {
+                    "id": "point_padding_input",
+                    "val": ".1"
+                }, {
+                    "id": "group_padding_input",
+                    "val": ".2"
+                }, {
+                    "id": "chart_subtitle_textarea",
+                    "val": ""
+                }, {
+                    "id": "chart_mlr_styles_checkbox",
+                    "val": false
+                }, {
+                    "id": "chart_zoom_select",
+                    "val": "false,false,null"
+                }, {
+                    "id": "chart_show_data_labels_checkbox",
+                    "val": false
+                }, {
+                    "id": "chart_add_recession_shading_select",
+                    "val": "no_recession"
+                }]
+            };
 
-            var val = this[0];
-            if (isNaN(val) || val < 999 && val > -999 && decimals < 1) {
-                //small numbers auto decimals
+            var chartCallback = function chartCallback() {
+
+                $(".highcharts-legend-item").css("min-height", "0px").css("z-index", 100); //fix so CMS CSS doesn't make legend taller than it should
+                $(".highcharts-tooltip").css("z-index", 200);
+
+                /**
+                 * Highcharts plugin for setting a lower opacity for other series than the one that is hovered
+                 * in the legend
+                 */
+                (function (Highcharts) {
+                    var each = Highcharts.each;
+
+                    Highcharts.wrap(Highcharts.Legend.prototype, 'renderItem', function (proceed, item) {
+
+                        proceed.call(this, item);
+
+                        var isPoint = !!item.series,
+                            collection = isPoint ? item.series.points : this.chart.series,
+                            groups = isPoint ? ['graphic'] : ['group', 'markerGroup'],
+                            element = (this.options.useHTML ? item.legendItem : item.legendGroup).element;
+
+                        element.onmouseover = function () {
+                            each(collection, function (seriesItem) {
+                                if (seriesItem !== item) {
+                                    each(groups, function (group) {
+                                        seriesItem[group].animate({
+                                            opacity: 0.25
+                                        }, {
+                                            duration: 150
+                                        });
+                                    });
+                                }
+                            });
+                        };
+                        element.onmouseout = function () {
+                            each(collection, function (seriesItem) {
+                                if (seriesItem !== item) {
+                                    each(groups, function (group) {
+                                        seriesItem[group].animate({
+                                            opacity: 1
+                                        }, {
+                                            duration: 50
+                                        });
+                                    });
+                                }
+                            });
+                        };
+                    });
+                })(Highcharts); //end gray other series plugin
+            };
+            Highcharts.setOptions({
+                lang: {
+                    thousandsSep: ","
+                }
+            });
+
+            var chart1 = new Highcharts.Chart(all_chart_options, chartCallback());
+        });
+        jQuery.fn.extend({
+            addCommas: function addCommas(decimals) {
+
+                var val = this[0] || 0;
+
+                if (val == 0) {
+                    return 0;
+                } else if (isNaN(val) || val < 999 && val > -999 && decimals < 1) {
+                    //small numbers auto decimals
+                    return val;
+                } else if (val < 999 && val > -999 && decimals > 0) {
+                    //small numbers fixed decimals
+                    return val.toFixed(decimals);
+                } else if ((val > 999 || val < -999) && decimals > 0) {
+                    //big numbers fixed decimals
+                    while (/(\d+)(\d{3})/.test(val.toString())) {
+                        val = val.toFixed(decimals).replace(/(\d+)(\d{3})/, '$1' + ',' + '$2');
+                    }
+                } else if (val > 999 || val < -999) {
+                    //big number auto decimals
+                    while (/(\d+)(\d{3})/.test(val.toString())) {
+                        val = val.toString().replace(/(\d+)(\d{3})/, '$1' + ',' + '$2');
+                    }
+                }
+
                 return val;
-            } else if (val < 999 && val > -999 && decimals > 0) {
-                //small numbers fixed decimals
-                return val.toFixed(decimals);
-            } else if ((val > 999 || val < -999) && decimals > 0) {
-                //big numbers fixed decimals
-                while (/(\d+)(\d{3})/.test(val.toString())) {
-                    val = val.toFixed(decimals).replace(/(\d+)(\d{3})/, '$1' + ',' + '$2');
-                }
-            } else if (val > 999 || val < -999) {
-                //big number auto decimals
-                while (/(\d+)(\d{3})/.test(val.toString())) {
-                    val = val.toString().replace(/(\d+)(\d{3})/, '$1' + ',' + '$2');
-                }
             }
-
-            return val;
-        } });
+        });
     </script>
 
 
