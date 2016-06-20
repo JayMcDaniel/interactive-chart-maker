@@ -1,5 +1,6 @@
 var utils_main = require("../utils/utils_main.js");
 var utils_forms = require("../utils/utils_forms.js");
+var keyboard_inputs = require("../keyboard_inputs.js");
 
 /** methods for updating individual series options in  #display_series_options - called when its side nav tab is selected in navigation_setup.
 @module
@@ -11,6 +12,82 @@ var utils_forms = require("../utils/utils_forms.js");
 
 var update_individual_series = {
 
+
+    /** updates all the extra data titles and values. Called from  seriesExtraDataChange()**/
+    updateExtraData: function (chart, all_chart_options) {
+
+        $(".series_snippet").each(function (i) {
+
+            chart.series[i].extra_data = [];
+            all_chart_options.series[i].extra_data =[];
+
+            var $series_snippet = $(this);
+
+
+            //push names
+            $(".series_extra_data_title_textarea", $series_snippet).each(function (j) {
+                var extra_data_obj = {};
+
+                extra_data_obj.name = $(this).val();
+
+
+                //push values
+                
+                $(".series_extra_data_values_textarea:eq(" + j + ")", $series_snippet).each(function (k) {
+
+                    extra_data_obj.values = $(this).val().split("\n"); // TODO turn values into array
+                });
+
+
+                chart.series[i].extra_data.push(extra_data_obj);
+                all_chart_options.series[i].extra_data.push(extra_data_obj);
+
+            });
+
+
+        });
+
+
+    },
+
+    
+    
+
+    /** called when changes are made to the series extra data text areas and plus and minus buttons **/
+    seriesExtraDataChange: function (chart, all_chart_options) {
+
+        //bind keyboard listeners so they aren't triggered inside of new text boxes
+        keyboard_inputs.initListeners();
+
+        //always hide the first minus sign for each series. Show the rest
+        $(".series_extra_data_div:gt(0) .series_subtract_extra_data_button", $(".series_snippet")).show();
+
+        //when plus buttons are clicked, duplicate the extra data entry boxes
+        $(".series_add_extra_data_button").unbind().click(function () {
+            var $extra_data_div = $(this).parents(".series_extra_data_div");
+
+            $extra_data_div.clone().hide().insertAfter($extra_data_div).fadeIn();
+            //rebind extra data changes
+            update_individual_series.seriesExtraDataChange(chart, all_chart_options);
+        });
+
+        //when minius buttons are clicked, remove the extra data entry boxes
+        $(".series_subtract_extra_data_button").unbind().click(function () {
+            $(this).parents(".series_extra_data_div").fadeOut(300, function () {
+                $(this).remove();
+            });
+        });
+
+
+        //when extra data title text areas are changed
+        $(".series_extra_data_title_textarea, .series_extra_data_values_textarea").unbind('input propertychange').bind('input propertychange', function () {
+            update_individual_series.updateExtraData(chart, all_chart_options);
+        });
+
+    },
+
+    
+    
 
     /** called when the series type icons are clicked. Binded at the end of populateForm **/
     seriesTypeIconChange: function (chart, all_chart_options) {
@@ -36,6 +113,8 @@ var update_individual_series = {
         });
     },
 
+    
+    
 
     /** called when series visible by default checkbox is changed.  Binded at the end of populateForm **/
     seriesVisibleChange: function (chart, all_chart_options) {
@@ -52,6 +131,8 @@ var update_individual_series = {
         });
     },
 
+    
+    
     /** called when the jscolor selector is changed (mouse still down). Updates the actual chart object and all_chart_options code output object***/
     updateSeriesColor: function (chart, all_chart_options, i, jscolor) {
 
@@ -76,6 +157,8 @@ var update_individual_series = {
     },
 
 
+    
+    
     /** makes a color box, called from populateForm **/
     makeSeriesColorDiv: function (chart, all_chart_options, i) {
         var series_color_div = document.createElement("div");
@@ -174,6 +257,8 @@ var update_individual_series = {
     },
 
 
+    
+    
     /** makes and returns div with icons that let user choose line or bar type for that series **/
     makeSeriesTypeDiv: function (chart, all_chart_options, i) {
         var series_type_div = document.createElement("div");
@@ -237,11 +322,12 @@ var update_individual_series = {
         return series_visible_div;
     },
 
+    
+    /** makes and returns a div that has options to add extra data to a series for its tooltip **/
 
     makeSeriesExtraDataDiv: function (all_chart_options, i) {
         var series_extra_data_div = document.createElement("div");
-        series_extra_data_div.className = "series_visible_div";
-
+        series_extra_data_div.className = "series_extra_data_div";
 
 
         //make title box and label
@@ -249,26 +335,59 @@ var update_individual_series = {
         series_extra_data_title_label.className = "series_extra_data_title_label";
         series_extra_data_title_label.textContent = "Extra data title for tooltip: ";
 
-        var series_extra_data_title_textarea = document.createElement("input");
-        series_extra_data_title_textarea.type = "text";
-        series_extra_data_title_textarea.style= "width: 100%";
+        //title text area
+        var series_extra_data_title_textarea = document.createElement("textarea");
+        series_extra_data_title_textarea.style = "height: 30px";
         series_extra_data_title_textarea.className = "series_extra_data_title_textarea";
-
-
+        series_extra_data_title_textarea.id = "series_extra_data_title_textarea_" +i;
+        
         //make values box and label
         var series_extra_data_values_label = document.createElement("label");
         series_extra_data_values_label.className = "series_extra_data_values_label";
         series_extra_data_values_label.textContent = "Extra data values for tooltip: ";
 
+        //values text area
         var series_extra_data_values_textarea = document.createElement("textarea");
         series_extra_data_values_textarea.className = "series_extra_data_values_textarea";
+        series_extra_data_values_textarea.id = "series_extra_data_values_textarea_" + i;
+
+        //notes
+        var extra_data_notes = document.createElement("p");
+        extra_data_notes.className = "notes";
+        extra_data_notes.textContent = "For each point in a series, separate the extra value with a new line. Any formatting will be carried over, so if you want commas or a dollar sign in your value, make sure to include that here.";
+
+        //add button
+        var add_extra_data_button = document.createElement("div");
+        add_extra_data_button.textContent = "+";
+        add_extra_data_button.style = "cursor: pointer; float: left; font-size: 190%; color: #337ab7; line-height: .9;";
+        add_extra_data_button.className = "series_add_extra_data_button";
+
+        //subtract button
+        var subtract_extra_data_button = document.createElement("div");
+        subtract_extra_data_button.innerHTML = "&minus;";
+        subtract_extra_data_button.style = "cursor: pointer; float: left; font-size: 190%; margin-left: 10px; display: none; color: #337ab7; line-height: .9;";
+        subtract_extra_data_button.className = "series_subtract_extra_data_button";
+
+        var clear_div = utils_main.makeClearFloatDiv();
+
+
+        //horizontal rule
+        var extra_data_hr = document.createElement("hr");
+        extra_data_hr.style = "margin-bottom: 0px;"
 
 
         //add it all
+        series_extra_data_div.appendChild(extra_data_hr);
+
         series_extra_data_div.appendChild(series_extra_data_title_label);
         series_extra_data_div.appendChild(series_extra_data_title_textarea);
         series_extra_data_div.appendChild(series_extra_data_values_label);
         series_extra_data_div.appendChild(series_extra_data_values_textarea);
+        series_extra_data_div.appendChild(extra_data_notes);
+        series_extra_data_div.appendChild(add_extra_data_button);
+        series_extra_data_div.appendChild(subtract_extra_data_button);
+        series_extra_data_div.appendChild(clear_div);
+
 
 
 
@@ -315,7 +434,7 @@ var update_individual_series = {
             series_snippet.appendChild(series_visible_div);
 
             //make extra data div text area
-            var series_extra_data_div = update_individual_series.makeSeriesExtraDataDiv();
+            var series_extra_data_div = update_individual_series.makeSeriesExtraDataDiv(all_chart_options, i);
             series_snippet.appendChild(series_extra_data_div);
 
             //append all
@@ -330,10 +449,15 @@ var update_individual_series = {
 
         //bind series type changes
         update_individual_series.seriesTypeIconChange(chart, all_chart_options);
+
         //bind line style changes
         update_individual_series.lineStyleSelectChange(chart, all_chart_options);
+
         //bind is visible by default changes
         update_individual_series.seriesVisibleChange(chart, all_chart_options);
+
+        //bind extra data changes
+        update_individual_series.seriesExtraDataChange(chart, all_chart_options);
     }
 
 }

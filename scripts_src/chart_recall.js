@@ -83,44 +83,45 @@ var chart_recall = {
 
 
 
-       
-            var individual_series_options = setValues(input, false); //false to not set indivdual series yet
 
-            //initial all chart options init and redraw chart
-            var allChartOptionsInit = require("./initializers/charts/all_chart_options_init.js");
-            var draw_chart = require("./draw_chart.js");
-            all_chart_options = allChartOptionsInit();
-            chart = undefined;
-            chart = draw_chart.init(all_chart_options);
+        var individual_series_options = setValues(input, false); //false to not set indivdual series yet
 
-            //reinit form updates bindings
-            var allFormUpdates = require("./form_updates/all_form_updates.js");
-            allFormUpdates(chart, all_chart_options);
+        //initial all chart options init and redraw chart
+        var allChartOptionsInit = require("./initializers/charts/all_chart_options_init.js");
+        var draw_chart = require("./draw_chart.js");
+        var chart_type = $("#chart_type_icons .selected").divVal();
+        all_chart_options = allChartOptionsInit(chart_type);
+        chart = undefined;
+        chart = draw_chart.init(all_chart_options, draw_chart.chartCallback);
 
-            //re populate the individual series options forms
-            var update_individual_series = require("./form_updates/update_individual_series.js");
-            update_individual_series.populateForm(chart, all_chart_options);
-            setValues(individual_series_options, true); //true to set indivdual series now
+        //reinit form updates bindings
+        var allFormUpdates = require("./form_updates/all_form_updates.js");
+        allFormUpdates(chart, all_chart_options);
+
+        //re populate the individual series options forms
+        var update_individual_series = require("./form_updates/update_individual_series.js");
+        update_individual_series.populateForm(chart, all_chart_options);
+        setValues(individual_series_options, true); //true to set indivdual series now
 
 
-            /*  trigger changes to update chart  */
+        /*  trigger changes to update chart  */
 
-            //line style changes
-            $(".line_style_select").each(function () {
-                $(this).change();
-            });
+        //line style changes
+        $(".line_style_select").each(function () {
+            $(this).change();
+        });
 
-            //individual color changes
-            $(".jscolor").each(function (i) {
-                var color = "#" + $(this).val();
-                update_individual_series.updateSeriesColor(chart, all_chart_options, i, color);
-                $(this).focus().blur();
-            });
+        //individual color changes
+        $(".jscolor").each(function (i) {
+            var color = "#" + $(this).val();
+            update_individual_series.updateSeriesColor(chart, all_chart_options, i, color);
+            $(this).focus().blur();
+        });
 
-            //add recession shading
-            $("#chart_add_recession_shading_select").change();
+        //add recession shading
+        $("#chart_add_recession_shading_select").change();
 
-            window.scrollTo(0, 0); //scrolls to top
+        window.scrollTo(0, 0); //scrolls to top
 
     },
 
@@ -132,9 +133,9 @@ var chart_recall = {
     initLoad: function (chart, all_chart_options) {
 
         $("#load_chart_button").unbind().click(function () {
-            var re = /"saved_values":(\[.+}\])/;
+            var re = /"saved_values": *(\[[\s\S]+}\])/; //looks for saved values array of objects
             var input = $("#load_chart_textarea").val().match(re)[1]; //separate all_chart_options obj from textarea
-                        
+
             $("#load_chart_div").hide(function () { //hide this area (makes loading much faster)
                 if (input.length > 0) {
                     chart_recall.loadValues(chart, all_chart_options, input);

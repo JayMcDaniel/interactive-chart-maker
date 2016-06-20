@@ -399,8 +399,6 @@ var map_init = {
 
 
 
-
-
     /** set up hover functionality for the map legend **/
     setUpMapLegendHover: function (map_display_area) {
         $(".map_legend_item", map_display_area).hover(function () {

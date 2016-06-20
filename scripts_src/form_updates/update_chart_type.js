@@ -57,6 +57,8 @@ var updateChartType = function (chart_type, chart, all_chart_options) {
             "width": type === "scatter" || type === "bubble" ? 1 : 0
         }]
     }, false);
+    
+    all_chart_options.xAxis.plotLines = chart.xAxis[0].plotLines;
 
 
     chart.xAxis[0].setTitle({

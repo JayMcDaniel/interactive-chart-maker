@@ -1,4 +1,5 @@
 var calculate_recession_dates = require("../utils/calculate_recession_dates.js");
+var navigation_setup = require("../navigation_setup.js");
 var update_template = require("./update_template.js");
 var updateChartType = require("./update_chart_type.js");
 var updateColors = require("./update_colors.js");
@@ -35,7 +36,7 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
         $(selected).addClass("selected");
 
     };
-    
+
 
 
     /** shows and hides elements depending on what chart type is selected **/
@@ -58,12 +59,18 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
         if (["scatter", "drilldown", "bubble", "bar", "column"].indexOf(chart_type) > -1) {
             $(".just_" + chart_type).show();
             $(".show_" + chart_type).show();
-
+        }
+        
+        //if drilldown, hide unrelated
+        if (chart_type === "drilldown"){
+            $("#tab_series_options").hide();
+        }else{
+            $("#tab_series_options").show();
         }
 
     };
 
-    
+
 
     /* when chart type icon is clicked and changed */
 
@@ -73,25 +80,27 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
         //if drilled into a drilldown, click the up button to get out - prevents errors
         $(".highcharts-button").click();
 
-
-
         allFormUpdates.selectChart(this);
         var chart_type = $(this).divVal();
 
         allFormUpdates.displayOptions(chart_type);
 
         updateChartType(chart_type, chart, all_chart_options);
-        if (chart_type === "map") {
+        
+        
+        if (chart_type === "map") { //if map
             $(".chart_display_area").hide();
             $(".map_display_area").show();
 
             map_colors_init.loadMapColorPalettes(4); //loads color palettes then loads new map
 
 
-        } else {
+        } else { //if not map
             $(".map_display_area").hide();
             $(".chart_display_area").show();
             chart.reflow();
+            navigation_setup.chartClicks();
+
         }
 
     });
@@ -180,7 +189,7 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
 
         $.get(new_table_file, function (table) {
             $("#table_input_textarea").val(table);
-            $("#table_input_textarea").trigger("input");
+            map_colors_init.loadMapColorPalettes(4); //loads color palettes then loads new map
         });
     });
 
@@ -282,15 +291,15 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
         update_x_axis.updateTickmarkInterval(newInterval, chart, all_chart_options);
     });
 
-    
+
     //x-axis formatter (only years) changed
-    $("#chart_x_axis_show_only_years, #chart_x_axis_add_commas").unbind().change(function(){
+    $("#chart_x_axis_show_only_years, #chart_x_axis_add_commas").unbind().change(function () {
         var only_numbers = utils_forms.getCheckBoxValue($("#chart_x_axis_show_only_years"));
         var add_commas = utils_forms.getCheckBoxValue($("#chart_x_axis_add_commas"));
         update_x_axis.updateFormatter(only_numbers, add_commas, chart, all_chart_options);
     });
-    
-    
+
+
 
 
 

@@ -38,7 +38,7 @@ var keyboard_inputs = {
     },
 
 
-    /** when nothing is selected, pressing up or downchanges which side nav tab is selected */
+    /** when nothing is selected, pressing up or down changes which side nav tab is selected */
     sideNavTabShortcuts: function () {
         var keys = keyboard_inputs,
             $h = $("#chart_height_textinput"),
@@ -183,8 +183,10 @@ var keyboard_inputs = {
     when it leaves to main document, attach those. called from navigation_setup.InitNavWithChart()
     **/
     initListeners: function () {
+        
         $("input, textarea").focus(function () {
-            $(document).unbind();
+            $(document).unbind();      
+
             $(this).off("keydown"); //so it doesnt duplicate when moving from one entry to another
             $(".number_entry").on("keydown", keyboard_inputs.numberChange);
         });

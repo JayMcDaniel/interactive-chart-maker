@@ -28,7 +28,7 @@ $(document).ready(function () {
 
         //draw chart
         var draw_chart = require("./draw_chart.js");
-        var chart = draw_chart.init(all_chart_options);
+        var chart = draw_chart.init(all_chart_options, draw_chart.chartCallback);
 
         //page init (navigation and keyboard entries)
         var navigation_setup = require("./navigation_setup.js");
