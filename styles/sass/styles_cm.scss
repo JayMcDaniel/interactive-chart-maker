@@ -189,6 +189,14 @@
         font-size: 110%;
     }
     
+    .close_box_icon {
+        text-decoration: underline;
+        cursor: pointer;
+        float: right;
+        position: relative;
+        top: -10px;
+    }
+    
     .color_palette_cell,
     .map_color_palette_cell {
         width: 15px;
@@ -385,7 +393,8 @@
     }
     
     #main_result_code_div,
-    #load_chart_div {
+    #load_chart_div,
+    #areas_colored_report_div {
         display: none;
         position: relative;
         width: 100%;
@@ -393,6 +402,10 @@
         padding: 10px;
         background-color: $primary_light_color;
         border: solid 1px $highlight-color;
+    }
+    
+    #areas_colored_report_div textarea {
+        min-height: 400px;
     }
     
     #margins_outer_div {
