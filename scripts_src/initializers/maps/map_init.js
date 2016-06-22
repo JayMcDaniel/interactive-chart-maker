@@ -10,6 +10,7 @@ var map_credits_init = require("./map_credits_init.js");
 var map_circle_sizes_init = require("./map_circle_sizes_init.js");
 var update_map_individual_series = require("../../form_updates/update_map_individual_series.js");
 var update_template = require("../../form_updates/update_template.js");
+var areas_colored_report = require("../../utils/areas_colored_report.js");
 
 /** 
 Map initialization object
@@ -242,7 +243,9 @@ var map_init = {
 
             //reinit navigation get code button click so that load chart code button will work
             navigation_setup.getCodeButtonClick(all_chart_options, all_map_options);
-
+            
+            //generate areas colored report
+            areas_colored_report.generateReport(all_map_options);
 
         });
 

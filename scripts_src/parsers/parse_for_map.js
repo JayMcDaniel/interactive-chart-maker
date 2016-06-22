@@ -8,6 +8,7 @@
 
 var parseForMap = function (all_map_options, table_input) {
 
+    all_map_options.areas_not_found_from_table = [];
 
     $("tbody tr", $(table_input)).each(function () {
         //get location name, value, and extra values from table input
@@ -37,22 +38,31 @@ var parseForMap = function (all_map_options, table_input) {
         }
 
 
-
+        var found = false;
         //assign values on objs in all_map_options.areas array
         for (var i = 0, len = all_map_options.areas.length; i < len; i++) {
+
+
+
             if (all_map_options.areas[i].loc_name === row_loc_name) {
                 all_map_options.areas[i].value = row_val;
                 all_map_options.areas[i].extra_vals = extra_vals;
                 all_map_options.areas[i].animated_vals = animated_vals;
 
-
+                found = true;
                 break;
             }
+
+
+        }
+
+        //if an area from the table is not found in the map, push it to the array to show in the report
+        if (!found) {
+            all_map_options.areas_not_found_from_table.push(row_loc_name);
         }
 
     }); //end tbody tr loop
-
-
+    
 
     //adds titles to an array from THs
     var addTitles = function (i, arr) {

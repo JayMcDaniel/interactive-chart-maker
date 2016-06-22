@@ -51,6 +51,16 @@ var navigation_setup = {
     },
 
 
+    /**When a close box X is clicked, closes the containing popup div **/
+    closeBoxIconClick: function () {
+        $(".close_box_icon").click(function () {
+            $(this).parent().parent().slideUp(50);
+            $(".chart_display_area, .map_display_area").toggleClass("fixed");
+
+        });
+    },
+
+
 
 
     /** when #color_palette_reverse_icon is clicked, reverse the orders of each palette */
@@ -116,7 +126,7 @@ var navigation_setup = {
         $(".help_icon").click(function () {
             $(this).toggleClass("help_on");
 
-            $(".notes", $(this).parents(".display, #main_result_code_div, #load_chart_div, #side_nav_top")).toggle();
+            $(".notes", $(this).parents(".display, #main_result_code_div, #load_chart_div, #side_nav_top, #areas_colored_report_div")).toggle();
 
         });
 
@@ -218,6 +228,7 @@ var navigation_setup = {
     /** FIRST NAVIGATION INIT, called from app.js when page is loaded. These never need to be re-initialized **/
     firstNavInit: function () {
 
+        navigation_setup.closeBoxIconClick();
         navigation_setup.clearNextTextareaClick();
         navigation_setup.colorPaletteReverseIconClick();
         navigation_setup.helpIconClick();

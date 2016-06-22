@@ -66,7 +66,7 @@ var update_individual_series = {
         $(".series_add_extra_data_button").unbind().click(function () {
             var $extra_data_div = $(this).parents(".series_extra_data_div");
 
-            $extra_data_div.clone().hide().insertAfter($extra_data_div).fadeIn();
+            $extra_data_div.clone().hide().insertAfter($extra_data_div).fadeIn().children().val("");
             //rebind extra data changes
             update_individual_series.seriesExtraDataChange(chart, all_chart_options);
         });
