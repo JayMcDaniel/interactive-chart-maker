@@ -68,7 +68,7 @@ var parseForRange = function (input, chart_type, colors) {
             $("td:eq(" + (i + 1) + ")", this_row).each(function () {
                 var high = $(this).getNumber();
                 var low = $(this).next().getNumber();
-                rangeObj.data.push([high, low]);
+                rangeObj.data.push([low, high]);
             });
         });
 
