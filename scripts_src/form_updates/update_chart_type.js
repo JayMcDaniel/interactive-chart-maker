@@ -20,6 +20,11 @@ var updateChartType = function (chart_type, chart, all_chart_options) {
     //if not map
     var type = chart_type.replace("stacked_", "");
 
+    if (type === "drilldown") {
+
+        type = $("#drilldown_type_select").val();
+    }
+
     if (type === "bar") {
         //fix y axis position
         chart.inverted = true;
@@ -28,7 +33,7 @@ var updateChartType = function (chart_type, chart, all_chart_options) {
         all_chart_options.yAxis.title.x = 0;
         all_chart_options.yAxis.title.y = 8;
         all_chart_options.xAxis.title.y = -20;
-        all_chart_options.xAxis.title.x = 40;
+        all_chart_options.xAxis.title.x = Number($("#chart_x_axis_x_position_input").val());
 
         //hide non-relevant elements
         $(".not_bar").hide();
@@ -45,9 +50,8 @@ var updateChartType = function (chart_type, chart, all_chart_options) {
         $(".not_bar").show();
     }
 
-    if (type === "drilldown") {
-        type = "column";
-    }
+
+
 
     chart.xAxis[0].update({
         plotLines: [{
@@ -57,7 +61,7 @@ var updateChartType = function (chart_type, chart, all_chart_options) {
             "width": type === "scatter" || type === "bubble" ? 1 : 0
         }]
     }, false);
-    
+
     all_chart_options.xAxis.plotLines = chart.xAxis[0].plotLines;
 
 

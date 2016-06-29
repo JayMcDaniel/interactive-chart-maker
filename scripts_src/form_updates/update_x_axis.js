@@ -61,7 +61,7 @@ var update_x_axis = {
     },
 
 
-    /** update the x axis title */
+    /** update the x-axis title **/
     updateTitle: function (new_title, chart, all_chart_options) {
         chart.xAxis[0].setTitle({
             text: new_title
@@ -70,9 +70,20 @@ var update_x_axis = {
         all_chart_options.xAxis.title.text = new_title;
 
     },
+    
+    
+    /** update the x-axis title indent (bar charts only) **/
+    updateTitleIndent: function(new_indent, chart, all_chart_options){
+         chart.xAxis[0].setTitle({
+            x: new_indent
+        });
 
+        all_chart_options.xAxis.title.x = new_indent;
+        
+    },
+    
 
-    /** update x-axis type */
+    /** update x-axis type **/
     updateType: function (chart_type, chart, all_chart_options) {
         chart.xAxis[0].update({
             type: chart_type === "drilldown" ? "category" : "linear"
@@ -82,7 +93,7 @@ var update_x_axis = {
     },
 
 
-    /** update x axis tickmark interval */
+    /** update x axis tickmark interval **/
     updateTickmarkInterval: function (newInterval, chart, all_chart_options) {
 
 

@@ -11,7 +11,7 @@ $(document).ready(function () {
 
     //load test table into table_input_textarea
 
-    $.get("./dev/test_tables/state_map_table.htm", function (table) {
+    $.get("./dev/test_tables/area_range_table.htm", function (table) {
         $("#table_input_textarea").val(table);
 
         //check if app was opened from the chart wizard (imediately invoked function)

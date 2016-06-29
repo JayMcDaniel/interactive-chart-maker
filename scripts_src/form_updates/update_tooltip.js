@@ -64,11 +64,11 @@ var update_tooltip = {
                     var shared_tooltip_arr = ["<b>" + this.key + "</b>"];;
                     var point = this.point;
 
-                    $.each(chart.series, function () {
+                    $.each(chart.series, function (i) {
 
                         var s = this.name + ": " + signs_arr[0] + this.points[point.x].y + Highcharts.numberFormat((this.points[point.x].y * multiplier), decimals, ".", ",") + signs_arr[1];
 
-                        s = all_chart_options.tooltip.addExtraData(all_chart_options.series[this.series.index].extra_data, point, s);
+                        all_chart_options.series[i].extra_data ? s = all_chart_options.tooltip.addExtraData(all_chart_options.series[i].extra_data, point, s) : s = s;
 
                         shared_tooltip_arr.push(s);
 
@@ -87,7 +87,7 @@ var update_tooltip = {
                     $.each(chart.series, function (i) {
 
                         var s = this.name + ": " + signs_arr[0] + $(this.points[point.x].y * multiplier).addCommas() + signs_arr[1];
-                        s = all_chart_options.tooltip.addExtraData(all_chart_options.series[this.series.index].extra_data, point, s);
+                        all_chart_options.series[i].extra_data ? s = all_chart_options.tooltip.addExtraData(all_chart_options.series[i].extra_data, point, s) : s = s;
 
                         shared_tooltip_arr.push(s);
 
@@ -103,18 +103,30 @@ var update_tooltip = {
 
             if (decimals > 0) { //use decimal formatter
                 all_chart_options.tooltip.formatter = function () {
-                    var s = "<b>" + this.series.name + "</b><br>" + this.x + ": " + signs_arr[0] +
-                        Highcharts.numberFormat((this.y * multiplier), decimals, ".", ",") + signs_arr[1];
 
-                    s = all_chart_options.tooltip.addExtraData(all_chart_options.series[this.series.index].extra_data, this.point, s);
+                    
+                     //set y value, may be a range
+                    var y_val = this.point.high ? "High: " + Highcharts.numberFormat((this.point.high * multiplier), decimals, ".", ",") + " | Low: " + Highcharts.numberFormat((this.point.low * multiplier), decimals, ".", ",") : Highcharts.numberFormat((this.y * multiplier), decimals, ".", ",");
+                   
+                    var s = "<b>" + this.series.name + "</b><br>" + this.x + signs_arr[0] + y_val + signs_arr[1];
+
+
+                    //add extra data
+                    all_chart_options.series[this.series.index] ? s = all_chart_options.tooltip.addExtraData(all_chart_options.series[this.series.index].extra_data, this.point, s) : s = s;
+
                     return s.replace(/\$-/g, "-$");
                 }
+
             } else { //don't use decimal formatter
                 all_chart_options.tooltip.formatter = function () {
-                    var s = "<b>" + this.series.name + "</b><br>" + this.x + ": " + signs_arr[0] +
-                        $(this.y * multiplier).addCommas() + signs_arr[1];
 
-                    s = all_chart_options.tooltip.addExtraData(all_chart_options.series[this.series.index].extra_data, this.point, s);
+                    //set y value, may be a range
+                    var y_val = this.point.high ? "High: " + $(this.point.high * multiplier).addCommas() + " | Low: " + $(this.point.low * multiplier).addCommas() : $(this.y * multiplier).addCommas();
+
+                    var s = "<b>" + this.series.name + "</b><br>" + this.x + ": " + signs_arr[0] + y_val + signs_arr[1];
+
+                    //add extras
+                    all_chart_options.series[this.series.index] ? s = all_chart_options.tooltip.addExtraData(all_chart_options.series[this.series.index].extra_data, this.point, s) : s = s;
                     return s.replace(/\$-/g, "-$");
                 }
             }
@@ -129,7 +141,7 @@ var update_tooltip = {
     /** update tooltip - decide which kind of chart and call that get tooltip function **/
     updateToolTip: function (chart, all_chart_options) {
 
-        
+
         //extra data function
         all_chart_options.tooltip.addExtraData = function (extra_data, point, s) {
 
@@ -154,8 +166,9 @@ var update_tooltip = {
             z_title = $("#chart_z_title_text_input").val();
 
 
+
         //IF A TYPICAL CHART
-        if (["area", "line", "bar", "stacked_bar", "column", "stacked_column"].indexOf(chart_type) > -1) {
+        if (["area", "line", "bar", "stacked_bar", "column", "stacked_column", "arearange", "columnrange"].indexOf(chart_type) > -1) {
             update_tooltip.getTypicalTooltip(chart, is_shared, decimals, signs_arr, multiplier, chart_type, all_chart_options);
         }
 

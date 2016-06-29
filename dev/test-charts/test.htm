@@ -29,525 +29,89 @@
 
 
     <script>
-        $(document).ready(function () {
-            var all_chart_options = {
-                "chart": {
-                    "renderTo": "chart1",
-                    "margin": [100, 40, 80, 80],
-                    "borderWidth": 0,
-                    "plotBorderColor": "#000",
-                    "plotBorderWidth": 0,
-                    "type": "scatter",
-                    "zoomType": null,
-                    "alignTicks": false,
-                    "ignoreHiddenSeries": true
-                },
-                "colors": ["#7cb5ec", "#434348", "#90ed7d", "#f7a35c", "#8085e9", "#f15c80", "#e4d354", "#2b908f", "#f45b5b", "#91e8e1", "#2f7ed8", "#0d233a", "#8bbc21", "#910000", "#1aadce", "#492970", "#f28f43", "#77a1e5", "#c42525", "#a6c96a"],
-                "legend": {
-                    "align": "left",
-                    "backgroundColor": "none",
-                    "borderColor": "none",
-                    "borderWidth": 0,
-                    "enabled": true,
-                    "floating": false,
-                    "itemDistance": 30,
-                    "layout": "horizontal",
-                    "reversed": false,
-                    "shadow": false,
-                    "useHTML": false,
-                    "verticalAlign": "top",
-                    "x": 100,
-                    "y": 40,
-                    "itemStyle": {
-                        "fontFamily": "Calibri, Verdana, Arial, Helvetica, sans-serif",
-                        "color": "#000"
-                    },
-                    "itemHiddenStyle": {
-                        "color": "gray"
-                    },
-                    "itemHoverStyle": {
-                        "cursor": "pointer"
-                    }
-                },
-                "plotOptions": {
-                    "series": {
-                        "events": {
-                            "legendItemClick": function legendItemClick(event) {}
-                        },
-                        "dataLabels": {
-                            "enabled": false
-                        },
-                        "pointPlacement": null,
-                        "stacking": null,
-                        "pointPadding": 0.1,
-                        "groupPadding": 0.2,
-                        "minPointLength": 2,
-                        "maxSize": 50,
-                        "sizeBy": "width",
-                        "lineWidth": 1.5,
-                        "states": {
-                            "hover": {
-                                "lineWidth": 4
-                            }
-                        },
-                        "marker": {
-                            "enabled": false,
-                            "states": {
-                                "hover": {
-                                    "enabled": true,
-                                    "radius": 5
-                                }
-                            }
-                        }
-                    }
-                },
-                "series": [{
-                    "name": "series 1",
-                    "data": [[1, 1], [3.9, 3], [5, 5], [6, 6]],
-                    "type": "scatter",
-                    "lineWidth": 0,
-                    "marker": {
-                        "enabled": true,
-                        "symbol": "circle"
-                    },
-                    "color": "#7cb5ec",
-                    "_symbolIndex": 0
-                }, {
-                    "name": "series 2",
-                    "data": [[2, 1], [4, 3], [8, 9], [10, 10]],
-                    "type": "scatter",
-                    "lineWidth": 0,
-                    "marker": {
-                        "enabled": true,
-                        "symbol": "circle"
-                    },
-                    "color": "#434348",
-                    "_symbolIndex": 1
-                }, {
-                    "name": "series 3",
-                    "data": [[2, 1], [4, 3], [8, 9], [10, 10]],
-                    "type": "scatter",
-                    "lineWidth": 0,
-                    "marker": {
-                        "enabled": true,
-                        "symbol": "circle"
-                    },
-                    "color": "#90ed7d",
-                    "_symbolIndex": 2
-                }, {
-                    "name": "series 4",
-                    "data": [[2, 1], [4, 3], [8, 9], [10, 10]],
-                    "type": "scatter",
-                    "lineWidth": 0,
-                    "marker": {
-                        "enabled": true,
-                        "symbol": "circle"
-                    },
-                    "color": "#f7a35c",
-                    "_symbolIndex": 3
-                }, {
-                    "name": "series 5",
-                    "data": [[2, 1], [4, 3], [8, 9], [10, 10]],
-                    "type": "scatter",
-                    "lineWidth": 0,
-                    "marker": {
-                        "enabled": true,
-                        "symbol": "circle"
-                    },
-                    "color": "#8085e9",
-                    "_symbolIndex": 4
-                }],
-                "drilldown": {},
-                "subtitle": {
-                    "text": "",
-                    "align": "left",
-                    "style": {
-                        "color": "#000000",
-                        "fontFamily": "sans-serif",
-                        "fontWeight": "normal",
-                        "fontSize": "12px"
-                    }
-                },
-                "title": {
-                    "text": "Test table data for scatter charts",
-                    "align": "left",
-                    "style": {
-                        "color": "#000000",
-                        "fontFamily": "sans-serif",
-                        "fontWeight": "bold",
-                        "fontSize": "14px"
-                    }
-                },
-                "tooltip": {
-                    "backgroundColor": "#FEFFEF",
-                    "crosshairs": [false, false],
-                    "formatter": function () {
-                        var y_axis_title = this.series.yAxis.axisTitle ? this.series.yAxis.axisTitle.textStr : "Y-Axis";
-                        var x_axis_title = this.series.xAxis.axisTitle ? this.series.xAxis.axisTitle.textStr : "X-Axis";
-                        var s = "<b>" + this.series.name + "</b><br>" + y_axis_title + ": <b>" + Highcharts.numberFormat(this.y, 0, ".", ",") + "</b><br>" + x_axis_title + ": <b>" + Highcharts.numberFormat(this.x * 1, 0, ".", ",") + "</b>";
-                        s = all_chart_options.tooltip.addExtraData(all_chart_options.series[this.series.index].extra_data, this.point, s);
-                        return s.replace(/\$-/g, "-$");
-                    },
-                    "style": {
-                        "color": "#000000",
-                        "fontFamily": "Calibri, Verdana, Arial, Helvetica, sans-serif"
-                    },
-                    "useHTML": true,
-                    "addExtraData": function (extra_data, point, s) {
-                        if (extra_data && extra_data[0].name) {
-                            $.each(extra_data, function (i) {
-                                if (extra_data[i].values[point.index]) {
-                                    s = s + "<br>&nbsp;&nbsp;" + extra_data[i].name + ": " + extra_data[i].values[point.index];
-                                }
+    $(document).ready(function(){
+             var all_chart_options = {"chart":{"renderTo":"chart1","margin":[100,40,80,80],"borderWidth":0,"plotBorderColor":"#000","plotBorderWidth":0,"type":"line","zoomType":null,"alignTicks":false,"ignoreHiddenSeries":true},"colors":["#7cb5ec","#434348","#90ed7d","#f7a35c","#8085e9","#f15c80","#e4d354","#2b908f","#f45b5b","#91e8e1","#2f7ed8","#0d233a","#8bbc21","#910000","#1aadce","#492970","#f28f43","#77a1e5","#c42525","#a6c96a"],"legend":{"align":"left","backgroundColor":"none","borderColor":"none","borderWidth":0,"enabled":true,"floating":false,"itemDistance":30,"layout":"horizontal","reversed":false,"shadow":false,"useHTML":false,"verticalAlign":"top","x":100,"y":40,"itemStyle":{"fontFamily":"Calibri, Verdana, Arial, Helvetica, sans-serif","color":"#000"},"itemHiddenStyle":{"color":"gray"},"itemHoverStyle":{"cursor":"pointer"}},"plotOptions":{"series":{"events":{"legendItemClick":function legendItemClick(event) {}},"dataLabels":{"enabled":false},"pointPlacement":null,"stacking":null,"pointPadding":0.1,"groupPadding":0.2,"minPointLength":2,"maxSize":50,"sizeBy":"width","lineWidth":1.5,"states":{"hover":{"lineWidth":4}},"marker":{"enabled":false,"states":{"hover":{"enabled":true,"radius":5}}}}},"series":[{"name":"Total private","data":[6.9,6.9,6.6,6.7,6.6,6.6,6.6],"type":"column","color":"#7cb5ec","_symbolIndex":0,"stacking":null,"visible":true,"lineWidth":0,"zIndex":-1,"marker":{"enabled":false}},{"name":"Construction","data":[13.1,14,13.2,14.1,13.9,13.9,13.9],"type":"column","color":"#434348","_symbolIndex":1,"stacking":null,"visible":true,"lineWidth":0,"zIndex":-1,"marker":{"enabled":false}},{"name":"Manufacturing","data":[10.7,10.5,9.6,10.1,9.7,9.7,9.7],"type":"column","color":"#90ed7d","_symbolIndex":2,"stacking":null,"visible":true,"lineWidth":0,"zIndex":-1,"marker":{"enabled":false}},{"name":"Retail trade","data":[4.7,4.9,4.6,4.6,4.4,4.4,4.4],"type":"line","color":"#f7a35c","_symbolIndex":3,"stacking":null,"visible":true,"lineWidth":1,"zIndex":3,"marker":{"enabled":false}},{"name":"trade","data":[13.1,13.1,13.1,13.1,13.1,13.1,13.1],"type":"column","color":"#8085e9","_symbolIndex":4,"stacking":null,"visible":true,"lineWidth":0,"zIndex":-1,"marker":{"enabled":false}},{"name":"trade 2","data":[10.7,10.7,10.7,10.7,10.7,10.7,10.7],"type":"line","color":"#f15c80","_symbolIndex":5,"stacking":null,"visible":true}],"drilldown":{},"subtitle":{"text":"","align":"left","style":{"color":"#000000","fontFamily":"sans-serif","fontWeight":"normal","fontSize":"12px"}},"title":{"text":"Union membership rates of employed wage and salary workers, annual averages, 2000–15","align":"left","style":{"color":"#000000","fontFamily":"sans-serif","fontWeight":"bold","fontSize":"14px"}},"tooltip":{"backgroundColor":"#FEFFEF","crosshairs":[false,false],"formatter":function () { var s = "<b>" + this.series.name + "</b><br>" + this.x + ": "  + $(this.y).addCommas() ; all_chart_options.series[this.series.index] ? s = all_chart_options.tooltip.addExtraData(all_chart_options.series[this.series.index].extra_data, this.point, s) : s = s; return s.replace(/\$-/g, "-$"); },"style":{"color":"#000000","fontFamily":"Calibri, Verdana, Arial, Helvetica, sans-serif"},"useHTML":true,"addExtraData":function (extra_data, point, s) { if (extra_data && extra_data[0].name) { $.each(extra_data, function (i) { if (extra_data[i].values[point.index]) { s = s + "<br>&nbsp;&nbsp;" + extra_data[i].name + ": " + extra_data[i].values[point.index]; } }); } return s; }},"xAxis":{"categories":["2010","2011","2012","2013","2014","2015","2016"],"gridLineColor":"#c0c0c0","gridLineWidth":0,"gridLineDashStyle":"Dot","labels":{"rotation":0,"style":{"color":"#000000","fontFamily":"Calibri, Verdana, Arial, Helvetica, sans-serif","fontWeight":"normal","backgroundColor":"#fff","fontSize":"12px"}},"lineWidth":1.2,"lineColor":"gray","plotBands":[],"plotLines":[{"value":0,"color":"#c0c0c0","dashStyle":"solid","width":0}],"tickInterval":null,"tickmarkPlacement":"on","tickPosition":"outside","tickColor":"#C0D0E0","title":{"align":"middle","useHTML":true,"text":"","margin":6,"rotation":0,"style":{"color":"#000000","fontFamily":"Calibri, Verdana, Arial, Helvetica, sans-serif","fontWeight":"normal","backgroundColor":"#fff","fontSize":"13px"},"x":0},"type":"linear"},"yAxis":{"gridLineColor":"#c0c0c0","gridLineWidth":1,"gridLineDashStyle":"Dot","labels":{"formatter":function newYFormat() { var s = this.value == parseInt(this.value) ? Highcharts.numberFormat(this.value, 0, ".", ",") : Highcharts.numberFormat(this.value, 1, ".", ","); return  s.replace(/\$-/g, "-$") ; },"rotation":0,"style":{"color":"#000000","fontFamily":"Calibri, Verdana, Arial, Helvetica, sans-serif","fontWeight":"normal","backgroundColor":"#fff","fontSize":"12px"}},"lineColor":"gray","lineWidth":1,"max":null,"min":null,"opposite":false,"plotBands":[],"plotLines":[{"value":0,"color":"#c0c0c0","dashStyle":"solid","width":1}],"tickInterval":null,"tickmarkPlacement":"on","tickPosition":"outside","tickColor":"#C0D0E0","tickWidth":1,"title":{"useHTML":true,"text":"","margin":6,"align":"high","offset":20,"rotation":0,"x":35,"y":-20,"style":{"color":"#000000","fontFamily":"Calibri, Verdana, Arial, Helvetica, sans-serif","fontWeight":"normal","fontSize":"13px"}},"type":"linear"},"credits":{"href":"http://www.bls.gov","position":{"align":"left","x":10,"y":-11},"style":{"cursor":"default","color":"#2C2C2C"},"text":"Click legend items to change data display. Hover over chart to view data. Source: U.S. Bureau of Labor Statistics.","useHTML":true},"saved_values":[{"id":"chart_type_icons","val":"line"},{"id":"chart_id_textinput","val":"chart1"},{"id":"map_type_select","val":"state"},{"id":"map_animated_checkbox","val":false},{"id":"drilldown_type_select","val":"column"},{"id":"chart_width_textinput","val":"580"},{"id":"chart_height_textinput","val":"430"},{"id":"top_margin_textinput","val":"100"},{"id":"right_margin_textinput","val":"40"},{"id":"bottom_margin_textinput","val":"80"},{"id":"left_margin_textinput","val":"80"},{"id":"map_circle_size_range","val":"50"},{"id":"table_input_load_series_from_icons","val":"column_heads"},{"id":"table_input_textarea","val":"<table id=\"BLS_table\" class=\"regular\" cellspacing=\"0\" cellpadding=\"0\" xborder=\"1\" style=\" width: 95%;\"> <caption><span class=\"tableTitle\">Union membership rates of employed wage and salary workers, annual averages, 2000–15</span></caption> <thead> <tr> <th rowspan=\"1\"  style=\" vertical-align: middle;\">Year</th> <th >Total private</th> <th >Construction</th> <th >Manufacturing</th> <th >Retail trade</th> <th >trade</th> <th >trade 2</th> </tr> </thead> <tbody> <tr> <th > <p>2010</p> </th> <td >6.9</td> <td >13.1</td> <td >10.7</td> <td >4.7</td> <td >13.1</td> <td >10.7</td> </tr> <tr class=\"greenbar\"> <th > <p>2011</p> </th> <td >6.9</td> <td >14.0</td> <td >10.5</td> <td >4.9</td> <td >13.1</td> <td >10.7</td> </tr> <tr> <th > <p>2012</p> </th> <td >6.6</td> <td >13.2</td> <td >9.6</td> <td >4.6</td> <td >13.1</td> <td >10.7</td> </tr> <tr class=\"greenbar\"> <th > <p>2013</p> </th> <td >6.7</td> <td >14.1</td> <td >10.1</td> <td >4.6</td> <td >13.1</td> <td >10.7</td> </tr> <tr> <th > <p>2014</p> </th> <td >6.6</td> <td >13.9</td> <td >9.7</td> <td >4.4</td> <td >13.1</td> <td >10.7</td> </tr> <tr> <th > <p>2015</p> </th> <td >6.6</td> <td >13.9</td> <td >9.7</td> <td >4.4</td> <td >13.1</td> <td >10.7</td> </tr> <tr> <th > <p>2016</p> </th> <td >6.6</td> <td >13.9</td> <td >9.7</td> <td >4.4</td> <td >13.1</td> <td >10.7</td> </tr> </tbody></table>"},{"id":"example_table_select","val":""},{"id":"color_palettes","val":-1},{"id":"series_color_0","val":"7CB5EC"},{"id":"series_type_div_0","val":"column"},{"id":"line_style_select_0","val":"Solid"},{"id":"series_visible_checkbox_0","val":true},{"id":"series_extra_data_title_textarea_0","val":""},{"id":"series_extra_data_values_textarea_0","val":""},{"id":"series_color_1","val":"434348"},{"id":"series_type_div_1","val":"column"},{"id":"line_style_select_1","val":"Solid"},{"id":"series_visible_checkbox_1","val":true},{"id":"series_extra_data_title_textarea_1","val":""},{"id":"series_extra_data_values_textarea_1","val":""},{"id":"series_color_2","val":"90ED7D"},{"id":"series_type_div_2","val":"column"},{"id":"line_style_select_2","val":"Solid"},{"id":"series_visible_checkbox_2","val":true},{"id":"series_extra_data_title_textarea_2","val":""},{"id":"series_extra_data_values_textarea_2","val":""},{"id":"series_color_3","val":"F7A35C"},{"id":"series_type_div_3","val":"line"},{"id":"line_style_select_3","val":"Solid"},{"id":"series_visible_checkbox_3","val":true},{"id":"series_extra_data_title_textarea_3","val":""},{"id":"series_extra_data_values_textarea_3","val":""},{"id":"series_color_4","val":"8085E9"},{"id":"series_type_div_4","val":"column"},{"id":"line_style_select_4","val":"Solid"},{"id":"series_visible_checkbox_4","val":true},{"id":"series_extra_data_title_textarea_4","val":""},{"id":"series_extra_data_values_textarea_4","val":""},{"id":"series_color_5","val":"F15C80"},{"id":"series_type_div_5","val":"line"},{"id":"line_style_select_5","val":"Solid"},{"id":"series_visible_checkbox_5","val":true},{"id":"series_extra_data_title_textarea_5","val":""},{"id":"series_extra_data_values_textarea_5","val":""},{"id":"legend_layout_select","val":"horizontal"},{"id":"legend_placement_x","val":"100"},{"id":"legend_placement_y","val":"40"},{"id":"legend_reverse_layout_checkbox","val":false},{"id":"legend_make_toggle_checkbox","val":false},{"id":"chart_x_axis_title_textarea","val":""},{"id":"chart_x_axis_tickmark_interval_input","val":""},{"id":"chart_x_axis_show_only_years","val":false},{"id":"chart_x_axis_add_commas","val":false},{"id":"chart_y_axis_title_textarea","val":""},{"id":"chart_y_axis_x_position_input","val":"35"},{"id":"chart_y_axis_tickmark_interval_input","val":""},{"id":"chart_y_axis_min_input","val":""},{"id":"chart_y_axis_max_input","val":""},{"id":"chart_y_axis_opposite_checkbox","val":false},{"id":"chart_y_axis_log_checkbox","val":false},{"id":"chart_y_axis_signs_select","val":"no_signs"},{"id":"chart_y_axis_decimals_select","val":null},{"id":"chart_y_axis_divide_select","val":"1"},{"id":"chart_tooltip_shared_checkbox","val":false},{"id":"chart_tooltip_force_decimals_select","val":"0"},{"id":"chart_tooltip_signs_select","val":"no_signs"},{"id":"map_tooltip_na_text_input","val":"N/A"},{"id":"chart_z_title_text_input","val":""},{"id":"chart_tooltip_y_multiple_select","val":"1"},{"id":"chart_credits_text_textarea","val":"Click legend items to change data display. Hover over chart to view data. Source: U.S. Bureau of Labor Statistics."},{"id":"point_padding_input","val":".1"},{"id":"group_padding_input","val":".2"},{"id":"chart_subtitle_textarea","val":""},{"id":"chart_mlr_styles_checkbox","val":false},{"id":"chart_zoom_select","val":"false,false,null"},{"id":"chart_show_data_labels_checkbox","val":false},{"id":"chart_add_recession_shading_select","val":"no_recession"}]};
+
+var chartCallback = function chartCallback() {
+
+        $(".highcharts-legend-item").css("min-height", "0px").css("z-index", 100); //fix so CMS CSS doesn't make legend taller than it should
+        $(".highcharts-tooltip").css("z-index", 200);
+
+        /**
+         * Highcharts plugin for setting a lower opacity for other series than the one that is hovered
+         * in the legend
+         */
+        (function (Highcharts) {
+            var each = Highcharts.each;
+
+            Highcharts.wrap(Highcharts.Legend.prototype, 'renderItem', function (proceed, item) {
+
+                proceed.call(this, item);
+
+                var isPoint = !!item.series,
+                    collection = isPoint ? item.series.points : this.chart.series,
+                    groups = isPoint ? ['graphic'] : ['group', 'markerGroup'],
+                    element = (this.options.useHTML ? item.legendItem : item.legendGroup).element;
+
+                element.onmouseover = function () {
+                    each(collection, function (seriesItem) {
+                        if (seriesItem !== item) {
+                            each(groups, function (group) {
+                                seriesItem[group].animate({
+                                    opacity: 0.25
+                                }, {
+                                    duration: 150
+                                });
                             });
                         }
-                        return s;
-                    }
-                },
-                "xAxis": {
-                    "gridLineColor": "#c0c0c0",
-                    "gridLineWidth": 0,
-                    "gridLineDashStyle": "Dot",
-                    "labels": {
-                        "rotation": 0,
-                        "style": {
-                            "color": "#000000",
-                            "fontFamily": "Calibri, Verdana, Arial, Helvetica, sans-serif",
-                            "fontWeight": "normal",
-                            "backgroundColor": "#fff",
-                            "fontSize": "12px"
-                        }
-                    },
-                    "lineWidth": 1.2,
-                    "lineColor": "gray",
-                    "plotBands": [],
-                    "plotLines": [{
-                        "value": 0,
-                        "color": "#c0c0c0",
-                        "dashStyle": "solid",
-                        "width": 1
-                    }],
-                    "tickInterval": null,
-                    "tickmarkPlacement": "on",
-                    "tickPosition": "outside",
-                    "tickColor": "#C0D0E0",
-                    "title": {
-                        "align": "middle",
-                        "useHTML": true,
-                        "text": "",
-                        "margin": 6,
-                        "rotation": 0,
-                        "style": {
-                            "color": "#000000",
-                            "fontFamily": "Calibri, Verdana, Arial, Helvetica, sans-serif",
-                            "fontWeight": "normal",
-                            "backgroundColor": "#fff",
-                            "fontSize": "13px"
-                        },
-                        "x": 0
-                    },
-                    "type": "linear"
-                },
-                "yAxis": {
-                    "gridLineColor": "#c0c0c0",
-                    "gridLineWidth": 1,
-                    "gridLineDashStyle": "Dot",
-                    "labels": {
-                        "formatter": function newYFormat() {
-                            var s = this.value == parseInt(this.value) ? Highcharts.numberFormat(this.value, 0, ".", ",") : Highcharts.numberFormat(this.value, 1, ".", ",");
-                            return s.replace(/\$-/g, "-$");
-                        },
-                        "rotation": 0,
-                        "style": {
-                            "color": "#000000",
-                            "fontFamily": "Calibri, Verdana, Arial, Helvetica, sans-serif",
-                            "fontWeight": "normal",
-                            "backgroundColor": "#fff",
-                            "fontSize": "12px"
-                        }
-                    },
-                    "lineColor": "gray",
-                    "lineWidth": 1,
-                    "max": null,
-                    "min": null,
-                    "opposite": false,
-                    "plotBands": [],
-                    "plotLines": [{
-                        "value": 0,
-                        "color": "#c0c0c0",
-                        "dashStyle": "solid",
-                        "width": 1
-                    }],
-                    "tickInterval": null,
-                    "tickmarkPlacement": "on",
-                    "tickPosition": "outside",
-                    "tickColor": "#C0D0E0",
-                    "tickWidth": 1,
-                    "title": {
-                        "useHTML": true,
-                        "text": "",
-                        "margin": 6,
-                        "align": "high",
-                        "offset": 20,
-                        "rotation": 0,
-                        "x": 35,
-                        "y": -20,
-                        "style": {
-                            "color": "#000000",
-                            "fontFamily": "Calibri, Verdana, Arial, Helvetica, sans-serif",
-                            "fontWeight": "normal",
-                            "fontSize": "13px"
-                        }
-                    },
-                    "type": "linear"
-                },
-                "credits": {
-                    "href": "http://www.bls.gov",
-                    "position": {
-                        "align": "left",
-                        "x": 10,
-                        "y": -11
-                    },
-                    "style": {
-                        "cursor": "default",
-                        "color": "#2C2C2C"
-                    },
-                    "text": "Click legend items to change data display. Hover over chart to view data. Source: U.S. Bureau of Labor Statistics.",
-                    "useHTML": true
-                },
-                "saved_values": [{
-                    "id": "chart_type_icons",
-                    "val": "scatter"
-                }, {
-                    "id": "chart_id_textinput",
-                    "val": "chart1"
-                }, {
-                    "id": "map_type_select",
-                    "val": "state"
-                }, {
-                    "id": "map_animated_checkbox",
-                    "val": false
-                }, {
-                    "id": "chart_width_textinput",
-                    "val": "580"
-                }, {
-                    "id": "chart_height_textinput",
-                    "val": "430"
-                }, {
-                    "id": "top_margin_textinput",
-                    "val": "100"
-                }, {
-                    "id": "right_margin_textinput",
-                    "val": "40"
-                }, {
-                    "id": "bottom_margin_textinput",
-                    "val": "80"
-                }, {
-                    "id": "left_margin_textinput",
-                    "val": "80"
-                }, {
-                    "id": "map_circle_size_range",
-                    "val": "50"
-                }, {
-                    "id": "table_input_load_series_from_icons",
-                    "val": "column_heads"
-                }, {
-                    "id": "table_input_textarea",
-                    "val": "  <table id=\"BLS_table\" class=\"regular\" cellspacing=\"0\" cellpadding=\"0\" xborder=\"1\" style=\"width: 95%\"> <caption><span class=\"tableTitle\">Test table data for scatter charts</span></caption> <thead> <tr> <th rowspan=\"1\"  style=\"vertical-align: middle;\">categories</th> <th >x1</th> <th >y1</th> <th >x2</th> <th >y2</th> <th >x3</th> <th >y3</th> <th >x4</th> <th >y4</th> </tr> </thead> <tbody> <tr> <th > <p>series 1</p> </th> <td >1</td> <td >1</td> <td >3.9</td> <td >3</td> <td >5</td> <td >5</td> <td >6</td> <td >6</td> </tr> <tr class=\"greenbar\"> <th > <p>series 2</p> </th> <td >2</td> <td >1</td> <td >4</td> <td >3</td> <td >8</td> <td >9</td> <td >10</td> <td >10</td> </tr> <tr class=\"greenbar\"> <th > <p>series 3</p> </th> <td >2</td> <td >1</td> <td >4</td> <td >3</td> <td >8</td> <td >9</td> <td >10</td> <td >10</td> </tr> <tr class=\"greenbar\"> <th > <p>series 4</p> </th> <td >2</td> <td >1</td> <td >4</td> <td >3</td> <td >8</td> <td >9</td> <td >10</td> <td >10</td> </tr> <tr class=\"greenbar\"> <th > <p>series 5</p> </th> <td >2</td> <td >1</td> <td >4</td> <td >3</td> <td >8</td> <td >9</td> <td >10</td> <td >10</td> </tr> </tbody> </table>"
-                }, {
-                    "id": "example_table_select",
-                    "val": ""
-                }, {
-                    "id": "color_palettes",
-                    "val": -1
-                }, {
-                    "id": "legend_layout_select",
-                    "val": "horizontal"
-                }, {
-                    "id": "legend_placement_x",
-                    "val": "100"
-                }, {
-                    "id": "legend_placement_y",
-                    "val": "40"
-                }, {
-                    "id": "legend_reverse_layout_checkbox",
-                    "val": false
-                }, {
-                    "id": "legend_make_toggle_checkbox",
-                    "val": false
-                }, {
-                    "id": "chart_x_axis_title_textarea",
-                    "val": ""
-                }, {
-                    "id": "chart_x_axis_tickmark_interval_input",
-                    "val": ""
-                }, {
-                    "id": "chart_x_axis_show_only_years",
-                    "val": false
-                }, {
-                    "id": "chart_x_axis_add_commas",
-                    "val": false
-                }, {
-                    "id": "chart_y_axis_title_textarea",
-                    "val": ""
-                }, {
-                    "id": "chart_y_axis_x_position_input",
-                    "val": "35"
-                }, {
-                    "id": "chart_y_axis_tickmark_interval_input",
-                    "val": ""
-                }, {
-                    "id": "chart_y_axis_min_input",
-                    "val": ""
-                }, {
-                    "id": "chart_y_axis_max_input",
-                    "val": ""
-                }, {
-                    "id": "chart_y_axis_opposite_checkbox",
-                    "val": false
-                }, {
-                    "id": "chart_y_axis_log_checkbox",
-                    "val": false
-                }, {
-                    "id": "chart_y_axis_signs_select",
-                    "val": "no_signs"
-                }, {
-                    "id": "chart_y_axis_decimals_select",
-                    "val": null
-                }, {
-                    "id": "chart_y_axis_divide_select",
-                    "val": "1"
-                }, {
-                    "id": "chart_tooltip_shared_checkbox",
-                    "val": false
-                }, {
-                    "id": "chart_tooltip_force_decimals_select",
-                    "val": "0"
-                }, {
-                    "id": "chart_tooltip_signs_select",
-                    "val": "no_signs"
-                }, {
-                    "id": "map_tooltip_na_text_input",
-                    "val": "N/A"
-                }, {
-                    "id": "chart_z_title_text_input",
-                    "val": ""
-                }, {
-                    "id": "chart_tooltip_y_multiple_select",
-                    "val": "1"
-                }, {
-                    "id": "chart_credits_text_textarea",
-                    "val": "Click legend items to change data display. Hover over chart to view data. Source: U.S. Bureau of Labor Statistics."
-                }, {
-                    "id": "point_padding_input",
-                    "val": ".1"
-                }, {
-                    "id": "group_padding_input",
-                    "val": ".2"
-                }, {
-                    "id": "chart_subtitle_textarea",
-                    "val": ""
-                }, {
-                    "id": "chart_mlr_styles_checkbox",
-                    "val": false
-                }, {
-                    "id": "chart_zoom_select",
-                    "val": "false,false,null"
-                }, {
-                    "id": "chart_show_data_labels_checkbox",
-                    "val": false
-                }, {
-                    "id": "chart_add_recession_shading_select",
-                    "val": "no_recession"
-                }]
-            };
-
-            var chartCallback = function chartCallback() {
-
-                $(".highcharts-legend-item").css("min-height", "0px").css("z-index", 100); //fix so CMS CSS doesn't make legend taller than it should
-                $(".highcharts-tooltip").css("z-index", 200);
-
-                /**
-                 * Highcharts plugin for setting a lower opacity for other series than the one that is hovered
-                 * in the legend
-                 */
-                (function (Highcharts) {
-                    var each = Highcharts.each;
-
-                    Highcharts.wrap(Highcharts.Legend.prototype, 'renderItem', function (proceed, item) {
-
-                        proceed.call(this, item);
-
-                        var isPoint = !!item.series,
-                            collection = isPoint ? item.series.points : this.chart.series,
-                            groups = isPoint ? ['graphic'] : ['group', 'markerGroup'],
-                            element = (this.options.useHTML ? item.legendItem : item.legendGroup).element;
-
-                        element.onmouseover = function () {
-                            each(collection, function (seriesItem) {
-                                if (seriesItem !== item) {
-                                    each(groups, function (group) {
-                                        seriesItem[group].animate({
-                                            opacity: 0.25
-                                        }, {
-                                            duration: 150
-                                        });
-                                    });
-                                }
-                            });
-                        };
-                        element.onmouseout = function () {
-                            each(collection, function (seriesItem) {
-                                if (seriesItem !== item) {
-                                    each(groups, function (group) {
-                                        seriesItem[group].animate({
-                                            opacity: 1
-                                        }, {
-                                            duration: 50
-                                        });
-                                    });
-                                }
-                            });
-                        };
                     });
-                })(Highcharts); //end gray other series plugin
-            };
-            Highcharts.setOptions({
-                lang: {
-                    thousandsSep: ","
-                }
+                };
+                element.onmouseout = function () {
+                    each(collection, function (seriesItem) {
+                        if (seriesItem !== item) {
+                            each(groups, function (group) {
+                                seriesItem[group].animate({
+                                    opacity: 1
+                                }, {
+                                    duration: 50
+                                });
+                            });
+                        }
+                    });
+                };
             });
+        })(Highcharts); //end gray other series plugin
+    };
+Highcharts.setOptions({lang: {thousandsSep: ","}});
 
-            var chart1 = new Highcharts.Chart(all_chart_options, chartCallback());
-        });
-        jQuery.fn.extend({
-            addCommas: function addCommas(decimals) {
+    var chart1 = new Highcharts.Chart(all_chart_options, chartCallback());
+});
+jQuery.fn.extend({addCommas:function addCommas(decimals) {
 
-                var val = this[0] || 0;
+            var val = this[0] || 0;
 
-                if (val == 0) {
-                    return 0;
-                } else if (isNaN(val) || val < 999 && val > -999 && decimals < 1) {
-                    //small numbers auto decimals
-                    return val;
-                } else if (val < 999 && val > -999 && decimals > 0) {
-                    //small numbers fixed decimals
-                    return val.toFixed(decimals);
-                } else if ((val > 999 || val < -999) && decimals > 0) {
-                    //big numbers fixed decimals
-                    while (/(\d+)(\d{3})/.test(val.toString())) {
-                        val = val.toFixed(decimals).replace(/(\d+)(\d{3})/, '$1' + ',' + '$2');
-                    }
-                } else if (val > 999 || val < -999) {
-                    //big number auto decimals
-                    while (/(\d+)(\d{3})/.test(val.toString())) {
-                        val = val.toString().replace(/(\d+)(\d{3})/, '$1' + ',' + '$2');
-                    }
-                }
-
+            if (val == 0) {
+                return 0;
+            } else if (isNaN(val) || val < 999 && val > -999 && decimals < 1) {
+                //small numbers auto decimals
                 return val;
+            } else if (val < 999 && val > -999 && decimals > 0) {
+                //small numbers fixed decimals
+                return val.toFixed(decimals);
+            } else if ((val > 999 || val < -999) && decimals > 0) {
+                //big numbers fixed decimals
+                while (/(\d+)(\d{3})/.test(val.toString())) {
+                    val = val.toFixed(decimals).replace(/(\d+)(\d{3})/, '$1' + ',' + '$2');
+                }
+            } else if (val > 999 || val < -999) {
+                //big number auto decimals
+                while (/(\d+)(\d{3})/.test(val.toString())) {
+                    val = val.toString().replace(/(\d+)(\d{3})/, '$1' + ',' + '$2');
+                }
             }
-        });
+
+            return val;
+        } });
     </script>
 
 

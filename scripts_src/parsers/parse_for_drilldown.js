@@ -1,10 +1,10 @@
 /** Parsing function for drilldown charts. See http://api.highcharts.com/highcharts#drilldown for more.
  * @module
  * @param input {element} input jquery table element retrieved from textarea
- * @param chart_type {string} type of chart (column or bar)
+ * @param drill_type {string} type of drilldown (column or bar)
  * @param colors {array}
  * @returns {object} Object with series array and drilldown series array of objects*/
-var parseForDrilldown = function (input, chart_type, colors) {
+var parseForDrilldown = function (input, drill_type, colors) {
     var output = {};
     output.x_axis_categories = [];
 
@@ -12,7 +12,7 @@ var parseForDrilldown = function (input, chart_type, colors) {
         name: "test",
         colorByPoint: true,
         data: [],
-        type: "column"
+        type: drill_type
     }];
 
     output.drilldown = {};
@@ -32,7 +32,7 @@ var parseForDrilldown = function (input, chart_type, colors) {
                 name: this_name,
                 y: this_val,
                 color: colors[output.series[0].data.length],
-                type: "column",
+                type: drill_type,
                 drilldown: this_drilldown
             });
             
@@ -44,7 +44,7 @@ var parseForDrilldown = function (input, chart_type, colors) {
             output.drilldown.series[output.drilldown.series.length - 1].data.push({  //push to last drilldown series in array (last one made).
                 name: this_name,
                 y: this_val,
-                type: "column",
+                type: drill_type,
                 drilldown: this_drilldown
             });
         } //end if sub or not
@@ -55,7 +55,7 @@ var parseForDrilldown = function (input, chart_type, colors) {
                 name: this_name,
                 id: this_name,
                 data: [],
-                type: "column"
+                type: drill_type
             });
         }
     });

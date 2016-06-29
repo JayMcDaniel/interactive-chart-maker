@@ -100,6 +100,10 @@
         &#chart_type_area {
             background-image: url(../../images/icons/area_chart_icon.png);
         }
+        &#chart_type_area_range {
+            background-image: url(../../images/icons/area_range_chart_icon.png);
+            background-size: 114%;
+        }
         &#chart_type_bar {
             background-image: url(../../images/icons/bar_chart_icon.png);
         }
@@ -109,6 +113,11 @@
         &#chart_type_column {
             background-image: url(../../images/icons/column_chart_icon.png);
         }
+         &#chart_type_column_range {
+            background-image: url(../../images/icons/column_range_chart_icon.png);
+        }
+        
+        
         &#chart_type_drilldown {
             background-image: url(../../images/icons/drilldown_chart_icon.png);
         }
@@ -311,7 +320,9 @@
     .just_drilldown,
     .just_map,
     .just_bar,
-    .just_column {
+    .just_column,
+    .just_arearange,
+    .just_columnrange {
         display: none;
     }
     
@@ -493,6 +504,9 @@
         }
         &.series_type_line {
             background-image: url(../../images/icons/line_chart_icon.png);
+        }
+        &.series_type_scatter {
+            background-image: url(../../images/icons/scatter_chart_icon.png);
         }
     }
     
