@@ -7,7 +7,7 @@ var utils_forms = require("../utils/utils_forms.js");
 
 var update_data = {
 
-    /** called when #chart_type_icons .selected or #table_input_textarea is changed - calls functions to reparse data */
+    /** called when .chart_type_icons .selected or #table_input_textarea is changed - calls functions to reparse data */
     updateData: function (chart, all_chart_options) {
 
         var chart_type = $("#chart_type_icons .selected").divVal();
@@ -15,7 +15,7 @@ var update_data = {
 
         var legend_toggle_enabled = utils_forms.getCheckBoxValue($("#legend_make_toggle_checkbox"));
         var load_series_from = $("#table_input_load_series_from_icons .selected").divVal();
-        var parsed_table_output = parseTableInput(input, load_series_from, chart_type, legend_toggle_enabled, all_chart_options.colors, all_chart_options);
+        var parsed_table_output = parseTableInput(input, load_series_from, chart_type, legend_toggle_enabled, all_chart_options.colors);
 
         //update x-axis categories
         chart.xAxis[0].update({

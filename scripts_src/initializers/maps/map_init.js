@@ -191,7 +191,7 @@ var map_init = {
         svg.setAttribute("width", 680);
         svg.setAttribute("class", "map_svg");
         svg.setAttribute("viewBox", all_map_options.viewbox);
-        svg.setAttribute("style", "z-index: 400; position: relative; left: 13px; top: 0px; background-color: #fff;");
+        svg.setAttribute("style", "z-index: 400; position: relative; left: 13px; top: -9px; background-color: #fff;");
 
         return svg;
     },

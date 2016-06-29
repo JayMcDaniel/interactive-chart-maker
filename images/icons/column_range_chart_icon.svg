@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 744.09448819 1052.3622047"
+   id="svg4163"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="column_range_chart_icon.svg">
+  <defs
+     id="defs4165">
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="Arrow1Lend"
+       style="overflow:visible;"
+       inkscape:isstock="true">
+      <path
+         id="path4720"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1.0pt;"
+         transform="scale(0.8) rotate(180) translate(12.5,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lstart"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="marker4997"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         id="path4999"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1.0pt"
+         transform="scale(0.8) translate(12.5,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lstart"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="marker4981"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         id="path4983"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1.0pt"
+         transform="scale(0.8) translate(12.5,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lstart"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="Arrow1Lstart"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         id="path4717"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1.0pt"
+         transform="scale(0.8) translate(12.5,0)" />
+    </marker>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.7"
+     inkscape:cx="84.061017"
+     inkscape:cy="683.76726"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     inkscape:window-width="1440"
+     inkscape:window-height="851"
+     inkscape:window-x="0"
+     inkscape:window-y="1"
+     inkscape:window-maximized="1">
+    <sodipodi:guide
+       position="480,305.71429"
+       orientation="0,1"
+       id="guide5045" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata4168">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       inkscape:export-ydpi="44.950001"
+       inkscape:export-xdpi="44.950001"
+       y="451.77118"
+       x="72.411308"
+       height="205.55872"
+       width="97.373886"
+       id="rect4419"
+       style="opacity:1;fill:#88b5dd;fill-opacity:1;stroke:#88b5dd;stroke-width:10.03139877;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <rect
+       style="opacity:1;fill:#88b5dd;fill-opacity:1;stroke:#88b5dd;stroke-width:10.03139877;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect4826"
+       width="97.373886"
+       height="205.55872"
+       x="218.60179"
+       y="209.19974"
+       inkscape:export-xdpi="44.950001"
+       inkscape:export-ydpi="44.950001" />
+    <rect
+       inkscape:export-ydpi="44.950001"
+       inkscape:export-xdpi="44.950001"
+       y="325.77118"
+       x="364.79224"
+       height="205.55872"
+       width="97.373886"
+       id="rect4828"
+       style="opacity:1;fill:#88b5dd;fill-opacity:1;stroke:#88b5dd;stroke-width:10.03139877;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <rect
+       style="opacity:1;fill:#88b5dd;fill-opacity:1;stroke:#88b5dd;stroke-width:10.03139877;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect4830"
+       width="97.373886"
+       height="205.55872"
+       x="510.98276"
+       y="120.0569"
+       inkscape:export-xdpi="44.950001"
+       inkscape:export-ydpi="44.950001" />
+    <ellipse
+       ry="26.894598"
+       rx="25.46603"
+       cy="222.83624"
+       cx="558.57141"
+       id="ellipse4838"
+       style="opacity:0.98999999;fill:#337ab7;fill-opacity:1;stroke:#337ab7;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <ellipse
+       style="opacity:0.98999999;fill:#337ab7;fill-opacity:1;stroke:#337ab7;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="ellipse4840"
+       cx="412.85712"
+       cy="429.21933"
+       rx="25.46603"
+       ry="26.894598" />
+    <ellipse
+       ry="26.894598"
+       rx="25.46603"
+       cy="315.50504"
+       cx="267.14282"
+       id="ellipse4842"
+       style="opacity:0.98999999;fill:#337ab7;fill-opacity:1;stroke:#337ab7;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <ellipse
+       style="opacity:0.98999999;fill:#337ab7;fill-opacity:1;stroke:#337ab7;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="ellipse4844"
+       cx="119.99998"
+       cy="552.36218"
+       rx="25.46603"
+       ry="26.894598" />
+  </g>
+</svg>

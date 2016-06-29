@@ -42,6 +42,9 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
     /** shows and hides elements depending on what chart type is selected **/
     allFormUpdates.displayOptions = function (chart_type) {
 
+        //reset alert message to nothing
+        $(".alert-danger").text("");
+
         $(".chart_tab, .display_options>*").not(".notes").show(); //start showing all, and might hide later if map selected
         $(".just_map").hide(); //hide just map stuff
 
@@ -53,18 +56,18 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
         }
 
         //hide all classes with just_ ...
-        $(".just_drilldown, .just_scatter, .just_bubble, .just_column, .just_bar").hide();
+        $(".just_drilldown, .just_scatter, .just_bubble, .just_column, .just_bar, .just_arearange, .just_columnrange").hide();
 
         //show just_...
-        if (["scatter", "drilldown", "bubble", "bar", "column"].indexOf(chart_type) > -1) {
-            $(".just_" + chart_type).show();
-            $(".show_" + chart_type).show();
+        if (["scatter", "drilldown", "bubble", "bar", "column", "stacked_column", "stacked_bar", "arearange", "columnrange"].indexOf(chart_type) > -1) {
+            $(".just_" + chart_type.replace("stacked_","")).show();
+            $(".show_" + chart_type.replace("stacked_","")).show();
         }
-        
+
         //if drilldown, hide unrelated
-        if (chart_type === "drilldown"){
+        if (chart_type === "drilldown") {
             $("#tab_series_options").hide();
-        }else{
+        } else {
             $("#tab_series_options").show();
         }
 
@@ -76,18 +79,16 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
 
     $('.chart_type_icon').unbind().click(function () {
 
-
         //if drilled into a drilldown, click the up button to get out - prevents errors
         $(".highcharts-button").click();
 
         allFormUpdates.selectChart(this);
         var chart_type = $(this).divVal();
-
         allFormUpdates.displayOptions(chart_type);
 
         updateChartType(chart_type, chart, all_chart_options);
-        
-        
+
+
         if (chart_type === "map") { //if map
             $(".chart_display_area").hide();
             $(".map_display_area").show();
@@ -107,13 +108,21 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
 
 
 
-    /* when map type icon is clicked */
-    $('#chart_type_map').click(function () {
+    /* when map type icon is clicked don't unbind this */
+    $("#chart_type_map").click(function () {
         allFormUpdates.selectChart(this);
         $(".chart_tab").not(".map_tab").hide();
         $(".display_options:gt(0)>*").not(".notes").not(".show_map").hide(); //hide everything except map relevent options
         $(".just_map").show();
         $("#chart_credits_text_textarea").val("Hover over an area to see data.\nHover over legend items to see areas in a category.\nSource: U.S. Bureau of Labor Statistics."); //update credits area
+
+    });
+
+
+    /* when drilldown type dropdown is changed */
+
+    $("#drilldown_type_select").unbind().change(function () {
+        updateChartType("drilldown", chart, all_chart_options);
 
     });
 
@@ -189,7 +198,6 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
 
         $.get(new_table_file, function (table) {
             $("#table_input_textarea").val(table);
-            map_colors_init.loadMapColorPalettes(4); //loads color palettes then loads new map
         });
     });
 
@@ -281,14 +289,20 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
 
     //x-axis title textarea changed
     $("#chart_x_axis_title_textarea").unbind().keyup(function () {
-        var newTitle = $(this).val();
-        update_x_axis.updateTitle(newTitle, chart, all_chart_options);
+        var new_title = $(this).val();
+        update_x_axis.updateTitle(new_title, chart, all_chart_options);
+    });
+
+    //x-axis title indent input changed (bar charts only)
+    $("#chart_x_axis_x_position_input").unbind().keyup(function () {
+        var new_indent = Number($(this).val());
+        update_x_axis.updateTitleIndent(new_indent, chart, all_chart_options);
     });
 
     //x-axis tickmark interval input changed
     $("#chart_x_axis_tickmark_interval_input").unbind().keyup(function () {
-        var newInterval = Number($(this).val());
-        update_x_axis.updateTickmarkInterval(newInterval, chart, all_chart_options);
+        var new_interval = Number($(this).val());
+        update_x_axis.updateTickmarkInterval(new_interval, chart, all_chart_options);
     });
 
 
@@ -433,7 +447,6 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
         update_y_axis.toggleMLRStyle(is_checked, chart, all_chart_options);
         update_chart_options.toggleMLRStyle(is_checked, all_chart_options); //draw_chart is called from here to update plotBorder
         if (is_checked) {
-            console.log("check");
             $("#color_palette_mlr").click(); //click MLR color palette
         }
     });
@@ -476,6 +489,7 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
 
     //is animated checkbox changed
     $("#map_animated_checkbox").unbind().change(function () {
+        $("#legend_placement_y").val(70); // set legend y value so legend is lower for animated maps
         map_init.loadNewMap(chart, all_chart_options, all_map_options, true); // true to repopulate form
     });
 

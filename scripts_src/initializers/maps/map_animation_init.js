@@ -15,7 +15,7 @@ var map_animation_init = {
 
         //play button
         var play_button = document.createElement("div");
-        play_button.style = "float: left; margin-right: 10px; color: #337ab7; font-size: 26px; cursor: pointer";
+        play_button.style = "float: left; margin-right: 10px; color: #337ab7; font-size: 32px; cursor: pointer; position: relative; top: -6px;";
         play_button.innerHTML = "\u25B6";
         play_button.className = "map_play_button";
 
@@ -23,13 +23,13 @@ var map_animation_init = {
         //step backward button
         var step_backward_button = document.createElement("div");
         step_backward_button.style = "float: left; margin-right: 10px; color: #337ab7; font-size: 26px; cursor: pointer";
-        step_backward_button.innerHTML = "<span style='font-size:90%'>|</span><span style='position: relative; top: -2px; margin-left: -3px;'><</span>";
+        step_backward_button.innerHTML = "<span class='glyphicon glyphicon-step-backward'></span>";
         step_backward_button.className = "map_step_backward_button";
 
         //step forward button
         var step_forward_button = document.createElement("div");
-        step_forward_button.style = "float: left; margin-right: 10px; color: #337ab7; font-size: 26px; cursor: pointer";
-        step_forward_button.innerHTML = "<span style='position: relative; top: -2px; margin-right: -3px;'>></span><span style='font-size:90%'>|</span>";
+        step_forward_button.style = "float: left; margin-right: 10px; margin-left: -5px; color: #337ab7; font-size: 26px; cursor: pointer";
+        step_forward_button.innerHTML = "<span class='glyphicon glyphicon-step-forward'></span>";
         step_forward_button.className = "map_step_forward_button";
 
 

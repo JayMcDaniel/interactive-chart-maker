@@ -67,16 +67,18 @@
                 <div class="display_options">
 
                     <div id="chart_type_icons">
-                        <div class="chart_type_icon" id="chart_type_line" value="line" title="line"></div>
+                        <div class="chart_type_icon selected" id="chart_type_line" value="line" title="line"></div>
                         <div class="chart_type_icon" id="chart_type_area" value="area" title="area"></div>
+                        <div class="chart_type_icon" id="chart_type_area_range" value="arearange" title="area range"></div>
                         <div class="chart_type_icon" id="chart_type_bar" value="bar" title="bar"></div>
                         <div class="chart_type_icon" id="chart_type_stacked_bar" value="stacked_bar" title="stacked bar"></div>
                         <div class="chart_type_icon" id="chart_type_column" value="column" title="column"></div>
                         <div class="chart_type_icon" id="chart_type_stacked_column" value="stacked_column" title="stacked column"></div>
+                        <div class="chart_type_icon" id="chart_type_column_range" value="columnrange" title="column range"></div>
                         <div class="chart_type_icon" id="chart_type_bubble" value="bubble" title="bubble"></div>
                         <div class="chart_type_icon" id="chart_type_scatter" value="scatter" title="scatter"></div>
                         <div class="chart_type_icon" id="chart_type_drilldown" value="drilldown" title="drilldown"></div>
-                        <div class="chart_type_icon selected" id="chart_type_map" value="map" title="map"></div>
+                        <div class="chart_type_icon" id="chart_type_map" value="map" title="map"></div>
                     </div>
                     <div class="clearfloat"></div>
 
@@ -101,6 +103,15 @@
                         <input type="checkbox" id="map_animated_checkbox">
                         <br>
 
+
+                    </div>
+
+                    <div class="just_drilldown">
+                        <label for="drilldown_type_select">Drilldown type: </label>
+                        <select id="drilldown_type_select">
+                            <option value="column" selected>Column</option>
+                            <option value="bar">Bar</option>
+                        </select>
 
                     </div>
 
@@ -207,6 +218,15 @@
                         <br> For this to work, it needs to be a properly formatted, 508-compliant table (using thead, tbody, caption, th and td tags where appropriate). It also needs to have a title and be a simple table with only one column header per column and one row header per row. You can convert spreadsheets to 508-compliant tables with the <a href="table_wizard/better_table_wizard.htm" target="_blank">Table Wizard</a>.
 
                     </p>
+
+
+
+                    <div class="just_arearange">
+
+
+                        <p>With area range charts, values in your first column will load as a line. Then, values from the second column will load as the top range, and values from the third column will load as the bottom range. To load more lines with ranges, just add more columns.</p>
+                    </div>
+
 
                     <!-- scatter chart example table in load data section -->
                     <div class="just_scatter">
@@ -444,6 +464,7 @@
                         <option value="drilldown_table">Drilldown</option>
                         <option value="metro_area_map_table">Metro area map</option>
                         <option value="recession_dates_table">Recession dates</option>
+                        <option value="area_range_table">Range</option>
                         <option value="scatter_table">Scatter</option>
                         <option value="state_map_table">State map</option>
                         <option value="test_table">Test small table</option>
@@ -565,6 +586,13 @@
                     <textarea id="chart_x_axis_title_textarea"></textarea>
                     <br>
 
+                    <span id="chart_x_axis_x_position_span" class="just_bar">
+                    <label for="chart_x_axis_x_position_input">Title indent: </label>
+                    <input type="text" id="chart_x_axis_x_position_input" class="small number_entry" value="40" />
+                    <span class="notes">(higher value moves title to the right)</span>
+                    <br>
+                    </span>
+
                     <label for="chart_x_axis_tickmark_interval_input">Tick mark (label) interval: </label>
                     <input type="text" id="chart_x_axis_tickmark_interval_input" class="small number_entry" value="" placeholder="(Auto)" />
                     <br>
@@ -667,7 +695,7 @@
                 <h4>Tooltip (hover infobox) <sup class = "help_icon">?</sup></h4>
                 <div class="display_options">
 
-                    <span class="show_line show_bar show_column">
+                    <span class="show_line show_bar show_column show_arearange show_area">
                         <label for="chart_tooltip_shared_checkbox">Show all series: </label>
                         <input type="checkbox" id="chart_tooltip_shared_checkbox" />
                         <span class="notes">This makes the tooltip "shared" and shows all series on hover instead of just one.</span>
@@ -718,7 +746,7 @@
                     </select>
                     <br>
 -->
-                    <span class="show_bar show_line show_scatter show_bubble show_drilldown show_column">
+                    <span class="show_bar show_line show_scatter show_bubble show_drilldown show_column show_arearange">
                     
                     
                     <label for="chart_tooltip_y_multiple_select">Multiply values by: </label>

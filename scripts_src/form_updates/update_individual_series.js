@@ -19,7 +19,7 @@ var update_individual_series = {
         $(".series_snippet").each(function (i) {
 
             chart.series[i].extra_data = [];
-            all_chart_options.series[i].extra_data =[];
+            all_chart_options.series[i].extra_data = [];
 
             var $series_snippet = $(this);
 
@@ -32,7 +32,7 @@ var update_individual_series = {
 
 
                 //push values
-                
+
                 $(".series_extra_data_values_textarea:eq(" + j + ")", $series_snippet).each(function (k) {
 
                     extra_data_obj.values = $(this).val().split("\n"); // TODO turn values into array
@@ -50,8 +50,8 @@ var update_individual_series = {
 
     },
 
-    
-    
+
+
 
     /** called when changes are made to the series extra data text areas and plus and minus buttons **/
     seriesExtraDataChange: function (chart, all_chart_options) {
@@ -86,19 +86,57 @@ var update_individual_series = {
 
     },
 
-    
-    
+
+
 
     /** called when the series type icons are clicked. Binded at the end of populateForm **/
     seriesTypeIconChange: function (chart, all_chart_options) {
 
         $(".series_type_icon").click(function () {
             //update series type
-            var type = $(this).attr("type");
             var i = $(this).parents(".series_snippet").index();
+            var type = $(this).attr("type");
+            var marker,
+                lineWidth,
+                zIndex;
+
+        
+            //if scatter chosen, make it a line chart with markers but no line
+
+            if (type === "scatter") {
+                lineWidth = 0;
+                zIndex = 500;
+                marker = {
+                    enabled: true,
+                    symbol: "circle"
+                };
+
+
+            } else { //not scatter
+
+                zIndex = type === "column" ? -1 : i;
+                marker = {
+                    enabled: false
+                };
+                lineWidth = type === "line" ? 1 : 0;
+
+            }
+
+
             chart.series[i].update({
-                type: type
+                type: type,
+                lineWidth: lineWidth,
+                zIndex: zIndex,
+                marker: marker
             });
+
+            //update all_chart_options
+            all_chart_options.series[i].type = type;
+            all_chart_options.series[i].lineWidth = lineWidth;
+            all_chart_options.series[i].zIndex = zIndex;
+            all_chart_options.series[i].marker = marker;
+
+
 
             //highlight clicked icon
             $(".selected", $(this).parent()).removeClass("selected");
@@ -107,14 +145,11 @@ var update_individual_series = {
             //hide or show the line styles for that series
             type === "line" ? $(".line_style_div:eq(" + i + ")").show() : $(".line_style_div:eq(" + i + ")").hide();
 
-            //update all_chart_options
-            all_chart_options.series[i].type = type;
-
         });
     },
 
-    
-    
+
+
 
     /** called when series visible by default checkbox is changed.  Binded at the end of populateForm **/
     seriesVisibleChange: function (chart, all_chart_options) {
@@ -131,8 +166,8 @@ var update_individual_series = {
         });
     },
 
-    
-    
+
+
     /** called when the jscolor selector is changed (mouse still down). Updates the actual chart object and all_chart_options code output object***/
     updateSeriesColor: function (chart, all_chart_options, i, jscolor) {
 
@@ -157,8 +192,8 @@ var update_individual_series = {
     },
 
 
-    
-    
+
+
     /** makes a color box, called from populateForm **/
     makeSeriesColorDiv: function (chart, all_chart_options, i) {
         var series_color_div = document.createElement("div");
@@ -257,40 +292,52 @@ var update_individual_series = {
     },
 
 
-    
-    
+
+
     /** makes and returns div with icons that let user choose line or bar type for that series **/
     makeSeriesTypeDiv: function (chart, all_chart_options, i) {
         var series_type_div = document.createElement("div");
         series_type_div.className = "series_type_div";
         series_type_div.id = "series_type_div_" + i;
 
+        //label
         var series_type_label = document.createElement("label");
         series_type_label.className = "series_type_label";
         series_type_label.textContent = "Type: ";
 
 
+        //column icon
         var series_type_column = document.createElement("div");
         $(series_type_column).addClass("series_type_icon series_type_column")
-            .attr("type", "column");
+            .attr("type", "column").attr("title","Column");
         if (chart.series[i].type === "column") {
             $(series_type_column).addClass("selected");
         }
 
+        //line icon
         var series_type_line = document.createElement("div");
         $(series_type_line).addClass("series_type_icon series_type_line")
-            .attr("type", "line");
+            .attr("type", "line").attr("title","Line");
         if (chart.series[i].type === "line") {
             $(series_type_line).addClass("selected");
 
         }
 
+        //scatter icon
+        var series_type_scatter = document.createElement("div");
+        $(series_type_scatter).addClass("series_type_icon series_type_scatter")
+            .attr("type", "scatter").attr("title","Just markers");
+
+
 
         var clear_div = utils_main.makeClearFloatDiv();
 
+
+        //put it together
         series_type_div.appendChild(series_type_label);
         series_type_div.appendChild(series_type_line);
         series_type_div.appendChild(series_type_column);
+        series_type_div.appendChild(series_type_scatter);
         series_type_div.appendChild(clear_div);
 
         return series_type_div;
@@ -312,6 +359,7 @@ var update_individual_series = {
         series_visible_checkbox.setAttribute("type", "checkbox");
         series_visible_checkbox.checked = all_chart_options.series[i].visible;
         series_visible_checkbox.id = "series_visible_checkbox_" + i;
+        series_visible_checkbox.checked = "checked";
 
 
         series_visible_checkbox.className = "series_visible_checkbox";
@@ -322,7 +370,7 @@ var update_individual_series = {
         return series_visible_div;
     },
 
-    
+
     /** makes and returns a div that has options to add extra data to a series for its tooltip **/
 
     makeSeriesExtraDataDiv: function (all_chart_options, i) {
@@ -339,8 +387,8 @@ var update_individual_series = {
         var series_extra_data_title_textarea = document.createElement("textarea");
         series_extra_data_title_textarea.style = "height: 30px";
         series_extra_data_title_textarea.className = "series_extra_data_title_textarea";
-        series_extra_data_title_textarea.id = "series_extra_data_title_textarea_" +i;
-        
+        series_extra_data_title_textarea.id = "series_extra_data_title_textarea_" + i;
+
         //make values box and label
         var series_extra_data_values_label = document.createElement("label");
         series_extra_data_values_label.className = "series_extra_data_values_label";

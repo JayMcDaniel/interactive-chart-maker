@@ -26,7 +26,7 @@ var areas_colored_report = {
 
 
         //bind to link and popup box
-        $(".alert-danger").text(areas_colored.length + " areas colored. Click for details.").css({
+        $(".alert-danger").text($(areas_colored.length).addCommas() + " areas colored. Click for details.").css({
             "cursor": "pointer",
             "text-decoration": "underline"
         }).unbind().click(function () {

@@ -105,12 +105,17 @@ var navigation_setup = {
                 $("#main_result_code_div").slideUp(50);
                 $get_code_span.text("Get code");
                 $("#chart_output_code, #chart_html_code").val("");
-
-
             }
 
             $(this).toggleClass("code_on");
-            $(".chart_display_area, .map_display_area").toggleClass("fixed");
+            
+            $(".chart_display_area, .map_display_area").toggleClass("fixed"); //so chart will go down to still be visible
+
+            //scroll to top of page
+            $("html, body").animate({
+                scrollTop: 0
+            }, "slow");
+
 
         });
 
