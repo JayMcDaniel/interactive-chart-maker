@@ -37,7 +37,7 @@
                     "borderWidth": 0,
                     "plotBorderColor": "#000",
                     "plotBorderWidth": 0,
-                    "type": "line",
+                    "type": "column",
                     "zoomType": null,
                     "alignTicks": false,
                     "ignoreHiddenSeries": true
@@ -102,31 +102,158 @@
                     }
                 },
                 "series": [{
-                    "name": "Series 1",
-                    "data": [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110],
-                    "type": "line",
-                    "color": "#7cb5ec",
-                    "_symbolIndex": 0,
-                    "stacking": null,
-                    "visible": true
-                }, {
-                    "name": "Series 1 top",
-                    "data": [20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120],
-                    "type": "line",
-                    "color": "#434348",
-                    "_symbolIndex": 1,
-                    "stacking": null,
-                    "visible": true
-                }, {
-                    "name": "Series 1 bottom",
-                    "data": [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
-                    "type": "line",
-                    "color": "#90ed7d",
-                    "_symbolIndex": 2,
-                    "stacking": null,
-                    "visible": true
+                    "name": "test",
+                    "colorByPoint": true,
+                    "data": [{
+                        "name": "series 1",
+                        "x": 2,
+                        "y": 1,
+                        "r": 3,
+                        "color": "#7cb5ec",
+                        "type": "bubble",
+                        "drilldown": "series 1",
+                        "lineWidth": 0
+                    }, {
+                        "name": "series 2",
+                        "x": 16,
+                        "y": 2,
+                        "r": 24,
+                        "color": "#434348",
+                        "type": "bubble",
+                        "drilldown": "series 2",
+                        "lineWidth": 0
+                    }, {
+                        "name": "series 3",
+                        "x": 24,
+                        "y": 6,
+                        "r": 36,
+                        "color": "#90ed7d",
+                        "type": "bubble",
+                        "drilldown": "series 3",
+                        "lineWidth": 0
+                    }],
+                    "type": "bubble",
+                    "_symbolIndex": 0
                 }],
-                "drilldown": {},
+                "drilldown": {
+                    "series": [{
+                        "name": "series 1",
+                        "id": "series 1",
+                        "data": [{
+                            "name": "series 1a",
+                            "x": 4,
+                            "y": 2,
+                            "r": 6,
+                            "type": "bubble",
+                            "lineWidth": 0
+                        }, {
+                            "name": "series 1b",
+                            "x": 6,
+                            "y": 3,
+                            "r": 9,
+                            "type": "bubble",
+                            "lineWidth": 0
+                        }, {
+                            "name": "series 1c",
+                            "x": 8,
+                            "y": 4,
+                            "r": 12,
+                            "type": "bubble",
+                            "drilldown": "series 1c",
+                            "lineWidth": 0
+                        }],
+                        "type": "bubble",
+                        "lineWidth": 0
+                    }, {
+                        "name": "series 1c",
+                        "id": "series 1c",
+                        "data": [{
+                            "name": "series 1ci",
+                            "x": 10,
+                            "y": 5,
+                            "r": 15,
+                            "type": "bubble",
+                            "lineWidth": 0
+                        }, {
+                            "name": "series 1cii",
+                            "x": 12,
+                            "y": 6,
+                            "r": 18,
+                            "type": "bubble",
+                            "lineWidth": 0
+                        }, {
+                            "name": "series 1ciii",
+                            "x": 14,
+                            "y": 7,
+                            "r": 21,
+                            "type": "bubble",
+                            "lineWidth": 0
+                        }],
+                        "type": "bubble",
+                        "lineWidth": 0
+                    }, {
+                        "name": "series 2",
+                        "id": "series 2",
+                        "data": [{
+                            "name": "series 2a",
+                            "x": 18,
+                            "y": 3,
+                            "r": 27,
+                            "type": "bubble",
+                            "lineWidth": 0
+                        }, {
+                            "name": "series 2b",
+                            "x": 20,
+                            "y": 4,
+                            "r": 30,
+                            "type": "bubble",
+                            "lineWidth": 0
+                        }, {
+                            "name": "series 2c",
+                            "x": 22,
+                            "y": 5,
+                            "r": 33,
+                            "type": "bubble",
+                            "lineWidth": 0
+                        }],
+                        "type": "bubble",
+                        "lineWidth": 0
+                    }, {
+                        "name": "series 3",
+                        "id": "series 3",
+                        "data": [{
+                            "name": "series 3a",
+                            "x": 26,
+                            "y": 3,
+                            "r": 39,
+                            "type": "bubble",
+                            "lineWidth": 0
+                        }, {
+                            "name": "series 3b",
+                            "x": 28,
+                            "y": 4,
+                            "r": 42,
+                            "type": "bubble",
+                            "lineWidth": 0
+                        }, {
+                            "name": "series 3c",
+                            "x": 30,
+                            "y": 2,
+                            "r": 45,
+                            "type": "bubble",
+                            "lineWidth": 0
+                        }, {
+                            "name": "series 3d",
+                            "x": 32,
+                            "y": 3,
+                            "r": 48,
+                            "type": "bubble",
+                            "lineWidth": 0
+                        }],
+                        "type": "bubble",
+                        "lineWidth": 0
+                    }]
+                },
                 "subtitle": {
                     "text": "",
                     "align": "left",
@@ -138,7 +265,7 @@
                     }
                 },
                 "title": {
-                    "text": "Test table for area range charts",
+                    "text": "Test table data for bubble drilldown charts",
                     "align": "left",
                     "style": {
                         "color": "#000000",
@@ -151,15 +278,10 @@
                     "backgroundColor": "#FEFFEF",
                     "crosshairs": [false, false],
                     "formatter": function () {
-                        var shared_tooltip_arr = ["<b>" + this.key + "</b>"];
-                        var point = this.point;
-                        $.each(this.series.chart.series, function (i) {
-                            var y_val = this.points[point.x].high ? " High: " + "$" + Highcharts.numberFormat(this.points[point.x].high * 1, 2, ".", ",") + " | Low: " + "$" + Highcharts.numberFormat(this.points[point.x].low * 1, 2, ".", ",") : "$" + Highcharts.numberFormat(this.points[point.x].y, 2, ".", ",");
-                            var s = this.name + ": " + y_val;
-                            all_chart_options.series[i].extra_data ? s = all_chart_options.tooltip.addExtraData(all_chart_options.series[i].extra_data, point, s) : s = s;
-                            shared_tooltip_arr.push(s);
-                        });
-                        return shared_tooltip_arr.join('<br/>').replace(/\$-/g, "-$");
+                        var y_val = this.point.high ? "High: " + $(this.point.high * 1).addCommas() + " | Low: " + $(this.point.low * 1).addCommas() : $(this.y).addCommas();
+                        var s = "<b>" + this.series.name + "</b><br>" + this.x + ": " + y_val;
+                        all_chart_options.series[this.series.index] ? s = all_chart_options.tooltip.addExtraData(all_chart_options.series[this.series.index].extra_data, this.point, s) : s = s;
+                        return s.replace(/\$-/g, "-$");
                     },
                     "style": {
                         "color": "#000000",
@@ -178,7 +300,6 @@
                     }
                 },
                 "xAxis": {
-                    "categories": ["Jan 05", "Jan 06", "Jan 07", "Jan 08", "Jan 09", "Jan 10", "Jan 11", "Jan 12", "Jan 13", "Jan 14", "Jan 15"],
                     "gridLineColor": "#c0c0c0",
                     "gridLineWidth": 0,
                     "gridLineDashStyle": "Dot",
@@ -291,7 +412,7 @@
                 },
                 "saved_values": [{
                     "id": "chart_type_icons",
-                    "val": "line"
+                    "val": "drilldown"
                 }, {
                     "id": "chart_id_textinput",
                     "val": "chart1"
@@ -303,7 +424,7 @@
                     "val": false
                 }, {
                     "id": "drilldown_type_select",
-                    "val": "column"
+                    "val": "bubble"
                 }, {
                     "id": "chart_width_textinput",
                     "val": "580"
@@ -330,7 +451,7 @@
                     "val": "column_heads"
                 }, {
                     "id": "table_input_textarea",
-                    "val": "<table id=\"BLS_table\" class=\"regular\" cellspacing=\"0\" cellpadding=\"0\" xborder=\"1\" style=\"width: 95%\"><caption><span class=\"tableTitle\">Test table for area range charts</span></caption><thead><tr><th rowspan=\"1\"  style=\"vertical-align: middle;\">Date</th><th >Series 1</th><th >Series 1 top</th><th >Series 1 bottom</th></tr></thead><tbody><tr><th ><p>Jan 05</p></th><td >10</td><td >20</td><td >0</td></tr><tr class=\"greenbar\"><th ><p>Jan 06</p></th><td >20</td><td >30</td><td >10</td></tr><tr><th ><p>Jan 07</p></th><td >30</td><td >40</td><td >20</td></tr><tr class=\"greenbar\"><th ><p>Jan 08</p></th><td >40</td><td >50</td><td >30</td></tr><tr><th ><p>Jan 09</p></th><td >50</td><td >60</td><td >40</td></tr><tr class=\"greenbar\"><th ><p>Jan 10</p></th><td >60</td><td >70</td><td >50</td></tr><tr><th ><p>Jan 11</p></th><td >70</td><td >80</td><td >60</td></tr><tr class=\"greenbar\"><th ><p>Jan 12</p></th><td >80</td><td >90</td><td >70</td></tr><tr><th ><p>Jan 13</p></th><td >90</td><td >100</td><td >80</td></tr><tr class=\"greenbar\"><th ><p>Jan 14</p></th><td >100</td><td >110</td><td >90</td></tr><tr><th ><p>Jan 15</p></th><td >110</td><td >120</td><td >100</td></tr></tbody></table>"
+                    "val": "<table id=\"BLS_table\" class=\"regular\" cellspacing=\"0\" cellpadding=\"0\" xborder=\"1\" style=\"width: 95%\"><caption><span class=\"tableTitle\">Test table data for bubble drilldown charts</span></caption><thead><tr><th rowspan=\"1\"  style=\"vertical-align: middle;\">categories</th><th >y val</th><th >x val</th><th >r val</th></tr></thead><tbody><tr><th ><p>series 1</p></th><td >1</td><td >2</td><td >3</td></tr><tr class=\"greenbar\"><th ><p class=\"sub1\">series 1a</p></th><td >2</td><td >4</td><td >6</td></tr><tr><th ><p class=\"sub1\">series 1b</p></th><td >3</td><td >6</td><td >9</td></tr><tr class=\"greenbar\"><th ><p class=\"sub1\">series 1c</p></th><td >4</td><td >8</td><td >12</td></tr><tr><th ><p class=\"sub2\">series 1ci</p></th><td >5</td><td >10</td><td >15</td></tr><tr class=\"greenbar\"><th ><p class=\"sub2\">series 1cii</p></th><td >6</td><td >12</td><td >18</td></tr><tr><th ><p class=\"sub2\">series 1ciii</p></th><td >7</td><td >14</td><td >21</td></tr><tr class=\"greenbar\"><th ><p>series 2</p></th><td >2</td><td >16</td><td >24</td></tr><tr><th ><p class=\"sub1\">series 2a</p></th><td >3</td><td >18</td><td >27</td></tr><tr class=\"greenbar\"><th ><p class=\"sub1\">series 2b</p></th><td >4</td><td >20</td><td >30</td></tr><tr><th ><p class=\"sub1\">series 2c</p></th><td >5</td><td >22</td><td >33</td></tr><tr class=\"greenbar\"><th ><p>series 3</p></th><td >6</td><td >24</td><td >36</td></tr><tr><th ><p class=\"sub1\">series 3a</p></th><td >3</td><td >26</td><td >39</td></tr><tr class=\"greenbar\"><th ><p class=\"sub1\">series 3b</p></th><td >4</td><td >28</td><td >42</td></tr><tr><th ><p class=\"sub1\">series 3c</p></th><td >2</td><td >30</td><td >45</td></tr><tr class=\"greenbar\"><th ><p class=\"sub1\">series 3d</p></th><td >3</td><td >32</td><td >48</td></tr></tbody></table>"
                 }, {
                     "id": "example_table_select",
                     "val": ""
@@ -399,13 +520,13 @@
                     "val": "1"
                 }, {
                     "id": "chart_tooltip_shared_checkbox",
-                    "val": true
+                    "val": false
                 }, {
                     "id": "chart_tooltip_force_decimals_select",
-                    "val": "2"
+                    "val": "0"
                 }, {
                     "id": "chart_tooltip_signs_select",
-                    "val": "$"
+                    "val": "no_signs"
                 }, {
                     "id": "map_tooltip_na_text_input",
                     "val": "N/A"

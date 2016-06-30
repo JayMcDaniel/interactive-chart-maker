@@ -13,7 +13,7 @@ var Tooltip = function (o) {
         fontFamily: 'Calibri, Verdana, Arial, Helvetica, sans-serif'
     };
     
-    this.useHTML = true;
+    this.useHTML = false;
 
 }
 

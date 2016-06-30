@@ -83,16 +83,6 @@ var update_x_axis = {
     },
     
 
-    /** update x-axis type **/
-    updateType: function (chart_type, chart, all_chart_options) {
-        chart.xAxis[0].update({
-            type: chart_type === "drilldown" ? "category" : "linear"
-        });
-
-        all_chart_options.xAxis.type = chart_type === "drilldown" ? "category" : "linear";
-    },
-
-
     /** update x axis tickmark interval **/
     updateTickmarkInterval: function (newInterval, chart, all_chart_options) {
 
