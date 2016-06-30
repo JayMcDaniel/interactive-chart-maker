@@ -67,6 +67,10 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
         //if drilldown, hide unrelated
         if (chart_type === "drilldown") {
             $("#tab_series_options").hide();
+            if ($("#drilldown_type_select").val() === "bubble"){
+                $(".just_bubble").show();
+            }
+            
         } else {
             $("#tab_series_options").show();
         }
