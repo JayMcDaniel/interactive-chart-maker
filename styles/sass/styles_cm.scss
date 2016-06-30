@@ -113,11 +113,9 @@
         &#chart_type_column {
             background-image: url(../../images/icons/column_chart_icon.png);
         }
-         &#chart_type_column_range {
+        &#chart_type_column_range {
             background-image: url(../../images/icons/column_range_chart_icon.png);
         }
-        
-        
         &#chart_type_drilldown {
             background-image: url(../../images/icons/drilldown_chart_icon.png);
         }
@@ -208,7 +206,7 @@
     
     .color_palette_cell,
     .map_color_palette_cell {
-        width: 15px;
+        width: 17px;
         height: 17px;
         float: left;
     }
@@ -217,7 +215,7 @@
     .map_color_palette_row {
         margin-bottom: 5px;
         cursor: pointer;
-        width: 233px;
+        width: 100%;
         height: 25px;
         padding: 4px;
         &.selected {
@@ -732,12 +730,31 @@
         height: 25px;
         float: none;
         position: relative;
+        cursor: pointer;
         top: 19px;
         left: 193px;
         background-size: 98% 98%;
         margin: 0px;
         background-repeat: no-repeat;
         background-image: url(../../images/icons/ff1-sprite.gif);
+    }
+    
+    #open_code_editor_button {
+        float: right;
+        position: inherit;
+        border: solid 1px $highlight_color;
+        cursor: pointer;
+        border-radius: 2px;
+        width: 31px;
+        height: 31px;
+        background-size: 93% 93%;
+        background-repeat: no-repeat;
+        background-position-x: 1px;
+        background-position-y: 1px;
+        background-image: url(../../images/icons/code_editor_icon.png);
+        &:hover {
+            background-image: url(../../images/icons/code_editor_hover_icon.png);
+        }
     }
     
     #top_nav_bar_filler {

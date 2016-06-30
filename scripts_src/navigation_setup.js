@@ -108,7 +108,7 @@ var navigation_setup = {
             }
 
             $(this).toggleClass("code_on");
-            
+
             $(".chart_display_area, .map_display_area").toggleClass("fixed"); //so chart will go down to still be visible
 
             //scroll to top of page
@@ -207,8 +207,19 @@ var navigation_setup = {
             }
         });
 
+    },
 
 
+    /** Bind open code editor button **/
+
+    openCodeEditorClick: function () {
+
+        $("#open_code_editor_button").click(function () {
+            sessionStorage.setItem("export_code_html", $("#chart_html_code").val());
+            sessionStorage.setItem("export_code_js", $("#chart_output_code").val());
+
+            var newChartWindow = window.open("code_editor/code-editor.htm", "_blank");
+        });
     },
 
 
@@ -237,6 +248,7 @@ var navigation_setup = {
         navigation_setup.clearNextTextareaClick();
         navigation_setup.colorPaletteReverseIconClick();
         navigation_setup.helpIconClick();
+        navigation_setup.openCodeEditorClick();
 
     }
 
