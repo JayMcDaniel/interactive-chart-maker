@@ -86,8 +86,6 @@ var updateChartType = function (chart_type, chart, all_chart_options) {
     //update tooltip
     update_tooltip.updateToolTip(chart, all_chart_options);
 
-    //update x-axis type
-    update_x_axis.updateType(chart_type, chart, all_chart_options);
 
 }
 

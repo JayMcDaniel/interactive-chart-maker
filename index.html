@@ -67,7 +67,7 @@
                 <div class="display_options">
 
                     <div id="chart_type_icons">
-                        <div class="chart_type_icon selected" id="chart_type_line" value="line" title="line"></div>
+                        <div class="chart_type_icon" id="chart_type_line" value="line" title="line"></div>
                         <div class="chart_type_icon" id="chart_type_area" value="area" title="area"></div>
                         <div class="chart_type_icon" id="chart_type_area_range" value="arearange" title="area range"></div>
                         <div class="chart_type_icon" id="chart_type_bar" value="bar" title="bar"></div>
@@ -77,7 +77,7 @@
                         <div class="chart_type_icon" id="chart_type_column_range" value="columnrange" title="column range"></div>
                         <div class="chart_type_icon" id="chart_type_bubble" value="bubble" title="bubble"></div>
                         <div class="chart_type_icon" id="chart_type_scatter" value="scatter" title="scatter"></div>
-                        <div class="chart_type_icon" id="chart_type_drilldown" value="drilldown" title="drilldown"></div>
+                        <div class="chart_type_icon selected" id="chart_type_drilldown" value="drilldown" title="drilldown"></div>
                         <div class="chart_type_icon" id="chart_type_map" value="map" title="map"></div>
                     </div>
                     <div class="clearfloat"></div>
@@ -109,8 +109,9 @@
                     <div class="just_drilldown">
                         <label for="drilldown_type_select">Drilldown type: </label>
                         <select id="drilldown_type_select">
-                            <option value="column" selected>Column</option>
+                            <option value="column">Column</option>
                             <option value="bar">Bar</option>
+                            <option value="bubble" selected>Bubble</option>
                         </select>
 
                     </div>
@@ -460,6 +461,7 @@
                         <option value="animated_map_table">Animated state map</option>
                         <option value="animated_metro_area_map_table">Animated metro area map</option>
                         <option value="bubble_table">Bubble</option>
+                        <option value="bubble_drilldown_table">Bubble drilldown</option>
                         <option value="county_map_table">County map</option>
                         <option value="drilldown_table">Drilldown</option>
                         <option value="metro_area_map_table">Metro area map</option>

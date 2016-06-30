@@ -28,7 +28,7 @@ var xAxisInit = function xAxisInit(categories, chart_type) {
             x: chart_type === "bar" || chart_type === "stacked_bar" ? Number($("#chart_x_axis_x_position_input").val()) : 0
         },
         tickInterval: update_x_axis.updateTickmarkInterval(Number($("#chart_x_axis_tickmark_interval_input").val())),
-        type: chart_type === "drilldown" ? "category" : "linear"
+        type: "linear"
 
     };
 

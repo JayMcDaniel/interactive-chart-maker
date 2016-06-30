@@ -5,8 +5,9 @@
  * @param colors {array}
  * @returns {object} Object with series array and drilldown series array of objects*/
 var parseForDrilldown = function (input, drill_type, colors) {
+    // drill_type = "bubble";
     var output = {};
-    output.x_axis_categories = [];
+    output.x_axis_categories = drill_type === "bubble" ? null : [];
 
     output.series = [{
         name: "test",
@@ -25,27 +26,42 @@ var parseForDrilldown = function (input, drill_type, colors) {
         var this_drilldown = $("tbody th:eq(" + (i + 1) + ") p", input).is('[class*="' + next_sub + '"]') ? this_name : undefined;
         var this_val = $(this).parent().next().getNumber();
 
+        //bubble specific
+        if (drill_type === "bubble") {
+            var x_val = $(this).parent().next().next().getNumber();
+            var z_val = $(this).parent().next().next().next().getNumber();
+           
+        }
+
+
+
         if (!$(this).is('[class*="sub"]')) { //if this doesn't countain "sub" as a class, it's a top level
 
             //make top level series
             output.series[0].data.push({
                 name: this_name,
+                x: x_val,
                 y: this_val,
+                z: z_val,
                 color: colors[output.series[0].data.length],
                 type: drill_type,
-                drilldown: this_drilldown
+                drilldown: this_drilldown,
+                lineWidth: 0
             });
-            
+
             //push top level categories name
-        //    output.x_axis_categories.push(this_name);
+            //    output.x_axis_categories.push(this_name);
 
         } else if ($(this).is('[class*="sub"]')) { //if this is a sub1 sub2 etc
 
-            output.drilldown.series[output.drilldown.series.length - 1].data.push({  //push to last drilldown series in array (last one made).
+            output.drilldown.series[output.drilldown.series.length - 1].data.push({ //push to last drilldown series in array (last one made).
                 name: this_name,
+                x: x_val,
                 y: this_val,
+                z: z_val,
                 type: drill_type,
-                drilldown: this_drilldown
+                drilldown: this_drilldown,
+                lineWidth: 0
             });
         } //end if sub or not
 
@@ -55,11 +71,12 @@ var parseForDrilldown = function (input, drill_type, colors) {
                 name: this_name,
                 id: this_name,
                 data: [],
-                type: drill_type
+                type: drill_type,
+                lineWidth: 0
             });
         }
     });
-    
+
     return output;
 };
 

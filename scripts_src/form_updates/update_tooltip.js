@@ -21,7 +21,9 @@ var update_tooltip = {
                 x_axis_title + ": <b>" + signs_arr[0] + Highcharts.numberFormat((this.x * multiplier), decimals, ".", ",") + signs_arr[1] + "</b><br/>" +
                 z_title + ": <b>" + signs_arr[0] + Highcharts.numberFormat((this.x * multiplier), decimals, ".", ",") + signs_arr[1] + "</b>";
 
-            s = all_chart_options.tooltip.addExtraData(all_chart_options.series[this.series.index].extra_data, this.point, s);
+           
+             all_chart_options.series[this.series.index] ? s = all_chart_options.tooltip.addExtraData(all_chart_options.series[this.series.index].extra_data, this.point, s) : s = s;
+            
 
             return s.replace(/\$-/g, "-$");
         };
@@ -42,7 +44,9 @@ var update_tooltip = {
                 Highcharts.numberFormat((this.y * multiplier), decimals, ".", ",") + signs_arr[1] + "</b><br>" +
                 x_axis_title + ": <b>" + signs_arr[0] + Highcharts.numberFormat((this.x * multiplier), decimals, ".", ",") + signs_arr[1] + "</b>";
 
-            s = all_chart_options.tooltip.addExtraData(all_chart_options.series[this.series.index].extra_data, this.point, s);
+            
+             all_chart_options.series[this.series.index] ? s = all_chart_options.tooltip.addExtraData(all_chart_options.series[this.series.index].extra_data, this.point, s) : s = s;
+            
 
             return s.replace(/\$-/g, "-$");
         };
