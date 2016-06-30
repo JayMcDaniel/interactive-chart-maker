@@ -26,7 +26,7 @@ var parseForDrilldown = function (input, drill_type, colors) {
         var this_drilldown = $("tbody th:eq(" + (i + 1) + ") p", input).is('[class*="' + next_sub + '"]') ? this_name : undefined;
         var this_val = $(this).parent().next().getNumber();
 
-        //bubble specific
+        //bubble specific, x value comes from second column, z value comes from third
         if (drill_type === "bubble") {
             var x_val = $(this).parent().next().next().getNumber();
             var z_val = $(this).parent().next().next().next().getNumber();
