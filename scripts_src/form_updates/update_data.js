@@ -15,7 +15,7 @@ var update_data = {
 
         var legend_toggle_enabled = utils_forms.getCheckBoxValue($("#legend_make_toggle_checkbox"));
         var load_series_from = $("#table_input_load_series_from_icons .selected").divVal();
-        var parsed_table_output = parseTableInput(input, load_series_from, chart_type, legend_toggle_enabled, all_chart_options.colors, chart);
+        var parsed_table_output = parseTableInput(input, load_series_from, chart_type, legend_toggle_enabled, all_chart_options.colors, chart, all_chart_options);
 
         //update x-axis categories
         chart.xAxis[0].update({
@@ -55,8 +55,7 @@ var update_data = {
 
         chart.redraw(true);
 
-        //add timeline if an animated bubble
-        all_chart_options.timeline = chart.options.timeline = parsed_table_output.timeline;
+        
         
         //update chart options for code output
         all_chart_options.series = parsed_table_output.series;

@@ -325,7 +325,7 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
         update_x_axis.updateMax(newMax, chart, all_chart_options);
     });
 
-    //y-axis min input changed
+    //x-axis min input changed
     $("#chart_x_axis_min_input").unbind().keyup(function () {
         var newMin = $(this).val();
         update_x_axis.updateMin(newMin, chart, all_chart_options);

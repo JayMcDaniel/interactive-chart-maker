@@ -30,7 +30,7 @@ var parseForDrilldown = require("./parse_for_drilldown.js");
  * @returns {object} Object with chart title, X-axis categories and series array of objects
  */
 
-var parseTableInput = function (input, load_series_from, chart_type, legend_toggle_enabled, colors, chart) {
+var parseTableInput = function (input, load_series_from, chart_type, legend_toggle_enabled, colors, chart, all_chart_options) {
     var output = {};
     /** Depending on the chart type, start that parsing */
     if (["area", "line", "bar", "stacked_bar", "column", "stacked_column"].indexOf(chart_type) > -1) {
@@ -41,7 +41,7 @@ var parseTableInput = function (input, load_series_from, chart_type, legend_togg
 
     } else if (chart_type == "bubble") {
         if ($("#bubble_animated_checkbox").is(':checked')) {
-            output = parseForAnimatedBubble(input, chart_type, colors, chart);
+            output = parseForAnimatedBubble(input, chart_type, colors, chart, all_chart_options);
             
         } else {
             output = parseForBubble(input, chart_type, colors);

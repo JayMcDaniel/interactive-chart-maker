@@ -4,7 +4,11 @@
 
 var draw_chart = {
 
-    chartCallback: function () {
+    chartCallback: function (all_chart_options) {
+        
+        if (all_chart_options.timeline){ //call animation if applicable
+            all_chart_options.timeline.animation();
+        }
 
         $(".highcharts-legend-item").css("min-height", "0px").css("z-index", 100); //fix so CMS CSS doesn't make legend taller than it should
         $(".highcharts-tooltip").css("z-index", 200);
@@ -71,7 +75,7 @@ var draw_chart = {
             }
         });
 
-        var chart = new Highcharts.Chart(all_chart_options, draw_chart.chartCallback());
+        var chart = new Highcharts.Chart(all_chart_options, draw_chart.chartCallback(all_chart_options));
         return chart;
     },
 

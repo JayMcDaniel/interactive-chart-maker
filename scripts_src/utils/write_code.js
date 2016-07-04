@@ -86,7 +86,7 @@ var write_code = {
         chart_options_js.string = '$(document).ready(function(){\n\
              var all_chart_options = ' + chart_options_js.string + ';\n\
 Highcharts.setOptions({lang: {thousandsSep: ","}});\n\n\
-    var ' + all_chart_options.chart.renderTo + ' = new Highcharts.Chart(all_chart_options, chartCallback());\n\
+    var chart = new Highcharts.Chart(all_chart_options, chartCallback(all_chart_options));\n\
 });\n\
 jQuery.fn.extend({addCommas:' + $("string").addCommas.toString() + ' });';
 
