@@ -119,8 +119,6 @@ var update_y_axis = {
 
 
 
-
-
     /** update y-axis min */
     updateMin: function (newMin, chart, all_chart_options) {
         newMin = utils_main.checkforUndefined(newMin);

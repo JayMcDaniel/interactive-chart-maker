@@ -24,6 +24,8 @@ var XAxis = function (o) {
 
     this.lineWidth = o.lineWidth || 1.2;
     this.lineColor = o.lineColor || 'gray';
+    this.max = o.max || null;
+    this.min = o.min || null;
     this.plotBands = o.plotBands || [];
     this.plotLines = o.plotLines || [{
         "value": 0,

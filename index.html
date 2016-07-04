@@ -75,9 +75,9 @@
                         <div class="chart_type_icon" id="chart_type_column" value="column" title="column"></div>
                         <div class="chart_type_icon" id="chart_type_stacked_column" value="stacked_column" title="stacked column"></div>
                         <div class="chart_type_icon" id="chart_type_column_range" value="columnrange" title="column range"></div>
-                        <div class="chart_type_icon" id="chart_type_bubble" value="bubble" title="bubble"></div>
+                        <div class="chart_type_icon selected" id="chart_type_bubble" value="bubble" title="bubble"></div>
                         <div class="chart_type_icon" id="chart_type_scatter" value="scatter" title="scatter"></div>
-                        <div class="chart_type_icon selected" id="chart_type_drilldown" value="drilldown" title="drilldown"></div>
+                        <div class="chart_type_icon" id="chart_type_drilldown" value="drilldown" title="drilldown"></div>
                         <div class="chart_type_icon" id="chart_type_map" value="map" title="map"></div>
                     </div>
                     <div class="clearfloat"></div>
@@ -103,15 +103,98 @@
                         <input type="checkbox" id="map_animated_checkbox">
                         <br>
 
+                    </div>
+
+
+
+                    <div class="just_bubble">
+                        <label for="bubble_animated_checkbox">Animated bubble chart: </label>
+                        <input type="checkbox" id="bubble_animated_checkbox">
+                        <br>
+                        <span class="notes">
+                        With animated bubble charts, each stage of the animation will load from rows in the table body. Each series can only have one bubble, so each set of three columns in the table body will load a series x,y and z-values.
+                            <table id="BLS_table" class="regular" cellspacing="0" cellpadding="0" xborder="1" style="width: 95%"><caption><span class="tableTitle">Example table data for animated bubble charts</span></caption>
+                        <thead>
+                            <tr>
+                                <th rowspan="2" id="columnHead0" style="vertical-align: middle;">Years</th>
+                                <th id="columnHead0" class="" colspan="3" style="text-align: center;">Series 1</th>
+                                <th id="columnHead0" class="" colspan="3" style="text-align: center;">Series 2</th>
+                                <th id="columnHead0" class="" colspan="3" style="text-align: center;">Series 3</th>
+                            </tr>
+                            <tr>
+                                <th id="columnHead1">x1</th>
+                                <th id="columnHead2">y1</th>
+                                <th id="columnHead3">z1</th>
+                                <th id="columnHead4">x2</th>
+                                <th id="columnHead5">y2</th>
+                                <th id="columnHead6">z2</th>
+                                <th id="columnHead7">x3</th>
+                                <th id="columnHead8">y3</th>
+                                <th id="columnHead9">z3</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th id="rowHead0">
+                                    <p>2001</p>
+                                </th>
+                                <td headers="rowHead0 columnHead1">1</td>
+                                <td headers="rowHead0 columnHead2">2</td>
+                                <td headers="rowHead0 columnHead3">3</td>
+                                <td headers="rowHead0 columnHead4">3</td>
+                                <td headers="rowHead0 columnHead5">3</td>
+                                <td headers="rowHead0 columnHead6">4</td>
+                                <td headers="rowHead0 columnHead7">5</td>
+                                <td headers="rowHead0 columnHead8">5</td>
+                                <td headers="rowHead0 columnHead9">8</td>
+
+                            </tr>
+                            <tr class="greenbar">
+                                <th id="rowHead1">
+                                    <p>2002</p>
+                                </th>
+                                <td headers="rowHead1 columnHead1">2</td>
+                                <td headers="rowHead1 columnHead2">4</td>
+                                <td headers="rowHead1 columnHead3">6</td>
+                                <td headers="rowHead1 columnHead4">4</td>
+                                <td headers="rowHead1 columnHead5">6</td>
+                                <td headers="rowHead1 columnHead6">5</td>
+                                <td headers="rowHead1 columnHead7">8</td>
+                                <td headers="rowHead1 columnHead8">9</td>
+                                <td headers="rowHead1 columnHead9">9</td>
+
+                            </tr>
+                            <tr>
+                                <th id="rowHead2">
+                                    <p>2003</p>
+                                </th>
+                                <td headers="rowHead2 columnHead1">3</td>
+                                <td headers="rowHead2 columnHead2">6</td>
+                                <td headers="rowHead2 columnHead3">9</td>
+                                <td headers="rowHead2 columnHead4">5</td>
+                                <td headers="rowHead2 columnHead5">9</td>
+                                <td headers="rowHead2 columnHead6">6</td>
+                                <td headers="rowHead2 columnHead7">11</td>
+                                <td headers="rowHead2 columnHead8">13</td>
+                                <td headers="rowHead2 columnHead9">10</td>
+
+                            </tr>
+
+                        </tbody>
+                        </table>
+
+                        </span>
 
                     </div>
+
 
                     <div class="just_drilldown">
                         <label for="drilldown_type_select">Drilldown type: </label>
                         <select id="drilldown_type_select">
-                            <option value="column">Column</option>
+                            <option value="column" selected>Column</option>
                             <option value="bar">Bar</option>
-                            <option value="bubble" selected>Bubble</option>
+                            <option value="bubble">Bubble</option>
                         </select>
 
                     </div>
@@ -278,7 +361,7 @@
                     <div class="just_bubble">
                         <p> With bubble charts, series names will be loaded from the row headers. For each set of three columns in the table body, a bubble will be drawn &mdash; its x-value coming from the first column, its y-value coming from the second column, and its z-value (circle area) coming from the third column.</p>
                         <table id="BLS_table" class="regular" cellspacing="0" cellpadding="0" xborder="1" style="width: 95%">
-                            <caption><span class="tableTitle">Test table data for scatter charts</span></caption>
+                            <caption><span class="tableTitle">Example table for bubble charts</span></caption>
                             <thead>
                                 <tr>
                                     <th rowspan="1" id="columnHead0" style="vertical-align: middle;">categories</th>
@@ -461,6 +544,7 @@
                         <option value="animated_map_table">Animated state map</option>
                         <option value="animated_metro_area_map_table">Animated metro area map</option>
                         <option value="bubble_table">Bubble</option>
+                        <option value="animated_bubble_table">Bubble animated</option>
                         <option value="bubble_drilldown_table">Bubble drilldown</option>
                         <option value="county_map_table">County map</option>
                         <option value="drilldown_table">Drilldown</option>
@@ -599,7 +683,17 @@
                     <input type="text" id="chart_x_axis_tickmark_interval_input" class="small number_entry" value="" placeholder="(Auto)" />
                     <br>
 
+                    <span class="just_scatter just_bubble">
+                        <label for="chart_x_axis_min_input">Min value: </label>
+                        <input type="text" id="chart_x_axis_min_input" class="medium number_entry" placeholder="Auto if empty" value="" />
+                        <br>
 
+
+                        <label for="chart_x_axis_max_input">Max value: </label>
+                        <input type="text" id="chart_x_axis_max_input" class="medium number_entry" placeholder="Auto if empty" value="" />
+                        <br>
+                    </span>
+                    
                     <label for="chart_x_axis_show_only_years">Show only years for dates: </label>
                     <input type="checkbox" id="chart_x_axis_show_only_years" />
                     <br>
@@ -904,9 +998,6 @@
 
             </p>
             <textarea class="js" id="chart_output_code"></textarea>
-
-            <!--hidden textarea, used to copy code to clipboard with JS -->
-            <textarea id="chart_output_code_hidden_textarea"></textarea>
 
 
 

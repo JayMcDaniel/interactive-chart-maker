@@ -37,7 +37,7 @@
                     "borderWidth": 0,
                     "plotBorderColor": "#000",
                     "plotBorderWidth": 0,
-                    "type": "column",
+                    "type": "bubble",
                     "zoomType": null,
                     "alignTicks": false,
                     "ignoreHiddenSeries": true
@@ -99,161 +99,58 @@
                                 }
                             }
                         }
+                    },
+                    "bubble": {
+                        "tooltip": {
+                            "followPointer": true
+                        }
                     }
                 },
                 "series": [{
-                    "name": "test",
-                    "colorByPoint": true,
-                    "data": [{
-                        "name": "series 1",
-                        "x": 2,
-                        "y": 1,
-                        "r": 3,
-                        "color": "#7cb5ec",
-                        "type": "bubble",
-                        "drilldown": "series 1",
-                        "lineWidth": 0
-                    }, {
-                        "name": "series 2",
-                        "x": 16,
-                        "y": 2,
-                        "r": 24,
-                        "color": "#434348",
-                        "type": "bubble",
-                        "drilldown": "series 2",
-                        "lineWidth": 0
-                    }, {
-                        "name": "series 3",
-                        "x": 24,
-                        "y": 6,
-                        "r": 36,
-                        "color": "#90ed7d",
-                        "type": "bubble",
-                        "drilldown": "series 3",
-                        "lineWidth": 0
-                    }],
+                    "name": "Series 1",
+                    "data": [[1, 2, 3]],
+                    "date": "2001",
                     "type": "bubble",
+                    "lineWidth": 0,
+                    "marker": {
+                        "enabled": true
+                    },
+                    "color": "#7cb5ec",
                     "_symbolIndex": 0
+                }, {
+                    "name": "Series 2",
+                    "data": [[3, 3, 4]],
+                    "date": "2001",
+                    "type": "bubble",
+                    "lineWidth": 0,
+                    "marker": {
+                        "enabled": true
+                    },
+                    "color": "#434348",
+                    "_symbolIndex": 1
+                }, {
+                    "name": "Series 3",
+                    "data": [[5, 5, 8]],
+                    "date": "2001",
+                    "type": "bubble",
+                    "lineWidth": 0,
+                    "marker": {
+                        "enabled": true
+                    },
+                    "color": "#90ed7d",
+                    "_symbolIndex": 2
+                }, {
+                    "name": "Series 4",
+                    "data": [[3, 2, 1]],
+                    "date": "2001",
+                    "type": "bubble",
+                    "lineWidth": 0,
+                    "marker": {
+                        "enabled": true
+                    },
+                    "color": "#f7a35c",
+                    "_symbolIndex": 3
                 }],
-                "drilldown": {
-                    "series": [{
-                        "name": "series 1",
-                        "id": "series 1",
-                        "data": [{
-                            "name": "series 1a",
-                            "x": 4,
-                            "y": 2,
-                            "r": 6,
-                            "type": "bubble",
-                            "lineWidth": 0
-                        }, {
-                            "name": "series 1b",
-                            "x": 6,
-                            "y": 3,
-                            "r": 9,
-                            "type": "bubble",
-                            "lineWidth": 0
-                        }, {
-                            "name": "series 1c",
-                            "x": 8,
-                            "y": 4,
-                            "r": 12,
-                            "type": "bubble",
-                            "drilldown": "series 1c",
-                            "lineWidth": 0
-                        }],
-                        "type": "bubble",
-                        "lineWidth": 0
-                    }, {
-                        "name": "series 1c",
-                        "id": "series 1c",
-                        "data": [{
-                            "name": "series 1ci",
-                            "x": 10,
-                            "y": 5,
-                            "r": 15,
-                            "type": "bubble",
-                            "lineWidth": 0
-                        }, {
-                            "name": "series 1cii",
-                            "x": 12,
-                            "y": 6,
-                            "r": 18,
-                            "type": "bubble",
-                            "lineWidth": 0
-                        }, {
-                            "name": "series 1ciii",
-                            "x": 14,
-                            "y": 7,
-                            "r": 21,
-                            "type": "bubble",
-                            "lineWidth": 0
-                        }],
-                        "type": "bubble",
-                        "lineWidth": 0
-                    }, {
-                        "name": "series 2",
-                        "id": "series 2",
-                        "data": [{
-                            "name": "series 2a",
-                            "x": 18,
-                            "y": 3,
-                            "r": 27,
-                            "type": "bubble",
-                            "lineWidth": 0
-                        }, {
-                            "name": "series 2b",
-                            "x": 20,
-                            "y": 4,
-                            "r": 30,
-                            "type": "bubble",
-                            "lineWidth": 0
-                        }, {
-                            "name": "series 2c",
-                            "x": 22,
-                            "y": 5,
-                            "r": 33,
-                            "type": "bubble",
-                            "lineWidth": 0
-                        }],
-                        "type": "bubble",
-                        "lineWidth": 0
-                    }, {
-                        "name": "series 3",
-                        "id": "series 3",
-                        "data": [{
-                            "name": "series 3a",
-                            "x": 26,
-                            "y": 3,
-                            "r": 39,
-                            "type": "bubble",
-                            "lineWidth": 0
-                        }, {
-                            "name": "series 3b",
-                            "x": 28,
-                            "y": 4,
-                            "r": 42,
-                            "type": "bubble",
-                            "lineWidth": 0
-                        }, {
-                            "name": "series 3c",
-                            "x": 30,
-                            "y": 2,
-                            "r": 45,
-                            "type": "bubble",
-                            "lineWidth": 0
-                        }, {
-                            "name": "series 3d",
-                            "x": 32,
-                            "y": 3,
-                            "r": 48,
-                            "type": "bubble",
-                            "lineWidth": 0
-                        }],
-                        "type": "bubble",
-                        "lineWidth": 0
-                    }]
-                },
                 "subtitle": {
                     "text": "",
                     "align": "left",
@@ -265,7 +162,7 @@
                     }
                 },
                 "title": {
-                    "text": "Test table data for bubble drilldown charts",
+                    "text": "Test table data for animated bubble charts",
                     "align": "left",
                     "style": {
                         "color": "#000000",
@@ -278,8 +175,9 @@
                     "backgroundColor": "#FEFFEF",
                     "crosshairs": [false, false],
                     "formatter": function () {
-                        var y_val = this.point.high ? "High: " + $(this.point.high * 1).addCommas() + " | Low: " + $(this.point.low * 1).addCommas() : $(this.y).addCommas();
-                        var s = "<b>" + this.series.name + "</b><br>" + this.x + ": " + y_val;
+                        var y_axis_title = this.series.yAxis.axisTitle ? this.series.yAxis.axisTitle.textStr : "Y-Axis";
+                        var x_axis_title = this.series.xAxis.axisTitle ? this.series.xAxis.axisTitle.textStr : "X-Axis";
+                        var s = "<b>" + this.series.name + "</b><br>" + y_axis_title + ": <b>" + Highcharts.numberFormat(this.y, 0, ".", ",") + "</b><br/>" + x_axis_title + ": <b>" + Highcharts.numberFormat(this.x * 1, 0, ".", ",") + "</b><br/>" + "Z" + ": <b>" + Highcharts.numberFormat(this.point.z * 1, 0, ".", ",") + "</b>";
                         all_chart_options.series[this.series.index] ? s = all_chart_options.tooltip.addExtraData(all_chart_options.series[this.series.index].extra_data, this.point, s) : s = s;
                         return s.replace(/\$-/g, "-$");
                     },
@@ -287,7 +185,7 @@
                         "color": "#000000",
                         "fontFamily": "Calibri, Verdana, Arial, Helvetica, sans-serif"
                     },
-                    "useHTML": true,
+                    "useHTML": false,
                     "addExtraData": function (extra_data, point, s) {
                         if (extra_data && extra_data[0].name) {
                             $.each(extra_data, function (i) {
@@ -315,13 +213,9 @@
                     },
                     "lineWidth": 1.2,
                     "lineColor": "gray",
+                    "max": null,
+                    "min": null,
                     "plotBands": [],
-                    "plotLines": [{
-                        "value": 0,
-                        "color": "#c0c0c0",
-                        "dashStyle": "solid",
-                        "width": 0
-                    }],
                     "tickInterval": null,
                     "tickmarkPlacement": "on",
                     "tickPosition": "outside",
@@ -339,7 +233,8 @@
                             "backgroundColor": "#fff",
                             "fontSize": "13px"
                         },
-                        "x": 0
+                        "x": 0,
+                        "y": 0
                     },
                     "type": "linear"
                 },
@@ -410,9 +305,66 @@
                     "text": "Click legend items to change data display. Hover over chart to view data. Source: U.S. Bureau of Labor Statistics.",
                     "useHTML": true
                 },
+                "timeline": {
+                    "data": [[[1, 2, 3], [3, 3, 4], [5, 5, 8], [3, 2, 1]], [[2, 4, 6], [4, 6, 5], [8, 9, 9], [6, 4, 4]], [[3, 6, 9], [5, 9, 6], [11, 13, 10], [9, 6, 7]], [[4, 8, 12], [6, 12, 7], [14, 17, 11], [12, 8, 10]], [[5, 10, 15], [7, 15, 8], [17, 21, 12], [15, 10, 13]], [[6, 12, 18], [8, 18, 9], [20, 25, 13], [18, 12, 16]], [[7, 14, 21], [9, 21, 10], [23, 29, 14], [21, 14, 19]], [[8, 16, 24], [10, 24, 11], [26, 33, 15], [24, 16, 22]], [[9, 18, 27], [11, 27, 12], [29, 37, 16], [27, 18, 25]], [[10, 20, 30], [12, 30, 13], [32, 41, 17], [30, 20, 28]], [[11, 22, 33], [13, 33, 14], [35, 45, 18], [33, 22, 31]], [[12, 24, 36], [14, 36, 15], [38, 49, 19], [36, 24, 34]], [[13, 26, 39], [15, 39, 16], [41, 53, 20], [39, 26, 37]], [[14, 28, 42], [16, 42, 17], [44, 57, 21], [42, 28, 40]], [[15, 30, 45], [17, 45, 18], [47, 61, 22], [45, 30, 43]]],
+                    "dates": ["2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015"],
+                    "animation": function () {
+                        var chart_animation_div = document.createElement("div");
+                        chart_animation_div.style = "position: absolute; top: 28px; margin-left: 20px; z-index: 500; margin-bottom: -6px; -webkit-user-select: none;";
+                        var animation_title = document.createElement("h3");
+                        animation_title.textContent = all_chart_options.timeline.dates[0];
+                        animation_title.style = "margin: 0px; font-family: sans-serif; font-weight: 200; color: #337ab7; font-size: 18px; position: relative; top: 8px; float: left;";
+                        animation_title.className = "animation_title";
+                        var chart_slider = document.createElement("input");
+                        chart_slider.setAttribute("type", "range");
+                        chart_slider.setAttribute("min", "0");
+                        chart_slider.setAttribute("max", all_chart_options.timeline.dates.length - 1);
+                        chart_slider.setAttribute("value", "0");
+                        chart_slider.style = "float: left; margin-right: 10px; color: #337ab7; font-size: 18px; cursor: pointer; width: 350px; position: relative; top: 12px;";
+                        chart_slider.className = "chart_slider";
+                        chart_slider.oninput = function () {
+                            var new_time_index = this.value;
+                            $.each(chart1.series, function (i, e) {
+                                e.update({
+                                    data: [all_chart_options.timeline.data[new_time_index][i]]
+                                });
+                            });
+                            animation_title.textContent = all_chart_options.timeline.dates[new_time_index];
+                        };
+                        var playing;
+                        var stepForward = function stepForward() {
+                            var $chart_slider = $(chart_slider);
+                            $chart_slider.val() === $chart_slider.attr("max") ? $chart_slider.val(0).trigger("input") : $chart_slider.val(Number($chart_slider.val()) + 1).trigger("input");
+                        };
+                        var play_button = document.createElement("div");
+                        play_button.style = "float: left; margin-right: 10px; color: #337ab7; font-size: 24px; cursor: pointer; position: relative; top: 4px;";
+                        play_button.innerHTML = "▶";
+                        play_button.className = "chart_play_button";
+                        play_button.onclick = function () {
+                            if ($(this).hasClass("playing")) {
+                                $(this).removeClass("playing");
+                                clearInterval(playing);
+                                this.innerHTML = "▶";
+                            } else {
+                                playing = setInterval(function () {
+                                    stepForward();
+                                }, 500);
+                                this.innerHTML = "&nbsp; ||";
+                                $(this).addClass("playing");
+                            }
+                        };
+                        chart_animation_div.appendChild(play_button);
+                        chart_animation_div.appendChild(chart_slider);
+                        chart_animation_div.appendChild(animation_title);
+                        var chart_id = "#" + all_chart_options.chart.renderTo;
+                        setTimeout(function () {
+                            $(chart_id).prepend(chart_animation_div);
+                        }, 100);
+                    }
+                },
                 "saved_values": [{
                     "id": "chart_type_icons",
-                    "val": "drilldown"
+                    "val": "bubble"
                 }, {
                     "id": "chart_id_textinput",
                     "val": "chart1"
@@ -423,8 +375,11 @@
                     "id": "map_animated_checkbox",
                     "val": false
                 }, {
+                    "id": "bubble_animated_checkbox",
+                    "val": true
+                }, {
                     "id": "drilldown_type_select",
-                    "val": "bubble"
+                    "val": "column"
                 }, {
                     "id": "chart_width_textinput",
                     "val": "580"
@@ -451,7 +406,7 @@
                     "val": "column_heads"
                 }, {
                     "id": "table_input_textarea",
-                    "val": "<table id=\"BLS_table\" class=\"regular\" cellspacing=\"0\" cellpadding=\"0\" xborder=\"1\" style=\"width: 95%\"><caption><span class=\"tableTitle\">Test table data for bubble drilldown charts</span></caption><thead><tr><th rowspan=\"1\"  style=\"vertical-align: middle;\">categories</th><th >y val</th><th >x val</th><th >r val</th></tr></thead><tbody><tr><th ><p>series 1</p></th><td >1</td><td >2</td><td >3</td></tr><tr class=\"greenbar\"><th ><p class=\"sub1\">series 1a</p></th><td >2</td><td >4</td><td >6</td></tr><tr><th ><p class=\"sub1\">series 1b</p></th><td >3</td><td >6</td><td >9</td></tr><tr class=\"greenbar\"><th ><p class=\"sub1\">series 1c</p></th><td >4</td><td >8</td><td >12</td></tr><tr><th ><p class=\"sub2\">series 1ci</p></th><td >5</td><td >10</td><td >15</td></tr><tr class=\"greenbar\"><th ><p class=\"sub2\">series 1cii</p></th><td >6</td><td >12</td><td >18</td></tr><tr><th ><p class=\"sub2\">series 1ciii</p></th><td >7</td><td >14</td><td >21</td></tr><tr class=\"greenbar\"><th ><p>series 2</p></th><td >2</td><td >16</td><td >24</td></tr><tr><th ><p class=\"sub1\">series 2a</p></th><td >3</td><td >18</td><td >27</td></tr><tr class=\"greenbar\"><th ><p class=\"sub1\">series 2b</p></th><td >4</td><td >20</td><td >30</td></tr><tr><th ><p class=\"sub1\">series 2c</p></th><td >5</td><td >22</td><td >33</td></tr><tr class=\"greenbar\"><th ><p>series 3</p></th><td >6</td><td >24</td><td >36</td></tr><tr><th ><p class=\"sub1\">series 3a</p></th><td >3</td><td >26</td><td >39</td></tr><tr class=\"greenbar\"><th ><p class=\"sub1\">series 3b</p></th><td >4</td><td >28</td><td >42</td></tr><tr><th ><p class=\"sub1\">series 3c</p></th><td >2</td><td >30</td><td >45</td></tr><tr class=\"greenbar\"><th ><p class=\"sub1\">series 3d</p></th><td >3</td><td >32</td><td >48</td></tr></tbody></table>"
+                    "val": "<table id=\"BLS_table\" class=\"regular\" cellspacing=\"0\" cellpadding=\"0\" xborder=\"1\" style=\"width: 95%\"> <caption><span class=\"tableTitle\">Test table data for animated bubble charts</span></caption> <thead> <tr> <th rowspan=\"2\"  style=\"vertical-align: middle;\">Years</th> <th  class=\"\" colspan=\"3\" style=\"text-align: center;\">Series 1</th> <th  class=\"\" colspan=\"3\" style=\"text-align: center;\">Series 2</th> <th  class=\"\" colspan=\"3\" style=\"text-align: center;\">Series 3</th> <th  class=\"\" colspan=\"3\" style=\"text-align: center;\">Series 4</th> </tr> <tr> <th >x1</th> <th >y1</th> <th >z1</th> <th >x2</th> <th >y2</th> <th >z2</th> <th >x3</th> <th >y3</th> <th >z3</th> <th >x4</th> <th >y4</th> <th >z4</th> </tr> </thead> <tbody> <tr> <th > <p>2001</p> </th> <td >1</td> <td >2</td> <td >3</td> <td >3</td> <td >3</td> <td >4</td> <td >5</td> <td >5</td> <td >8</td> <td >3</td> <td >2</td> <td >1</td> </tr> <tr class=\"greenbar\"> <th > <p>2002</p> </th> <td >2</td> <td >4</td> <td >6</td> <td >4</td> <td >6</td> <td >5</td> <td >8</td> <td >9</td> <td >9</td> <td >6</td> <td >4</td> <td >4</td> </tr> <tr> <th > <p>2003</p> </th> <td >3</td> <td >6</td> <td >9</td> <td >5</td> <td >9</td> <td >6</td> <td >11</td> <td >13</td> <td >10</td> <td >9</td> <td >6</td> <td >7</td> </tr> <tr class=\"greenbar\"> <th > <p>2004</p> </th> <td >4</td> <td >8</td> <td >12</td> <td >6</td> <td >12</td> <td >7</td> <td >14</td> <td >17</td> <td >11</td> <td >12</td> <td >8</td> <td >10</td> </tr> <tr> <th > <p>2005</p> </th> <td >5</td> <td >10</td> <td >15</td> <td >7</td> <td >15</td> <td >8</td> <td >17</td> <td >21</td> <td >12</td> <td >15</td> <td >10</td> <td >13</td> </tr> <tr class=\"greenbar\"> <th > <p>2006</p> </th> <td >6</td> <td >12</td> <td >18</td> <td >8</td> <td >18</td> <td >9</td> <td >20</td> <td >25</td> <td >13</td> <td >18</td> <td >12</td> <td >16</td> </tr> <tr> <th > <p>2007</p> </th> <td >7</td> <td >14</td> <td >21</td> <td >9</td> <td >21</td> <td >10</td> <td >23</td> <td >29</td> <td >14</td> <td >21</td> <td >14</td> <td >19</td> </tr> <tr class=\"greenbar\"> <th > <p>2008</p> </th> <td >8</td> <td >16</td> <td >24</td> <td >10</td> <td >24</td> <td >11</td> <td >26</td> <td >33</td> <td >15</td> <td >24</td> <td >16</td> <td >22</td> </tr> <tr> <th > <p>2009</p> </th> <td >9</td> <td >18</td> <td >27</td> <td >11</td> <td >27</td> <td >12</td> <td >29</td> <td >37</td> <td >16</td> <td >27</td> <td >18</td> <td >25</td> </tr> <tr class=\"greenbar\"> <th > <p>2010</p> </th> <td >10</td> <td >20</td> <td >30</td> <td >12</td> <td >30</td> <td >13</td> <td >32</td> <td >41</td> <td >17</td> <td >30</td> <td >20</td> <td >28</td> </tr> <tr> <th > <p>2011</p> </th> <td >11</td> <td >22</td> <td >33</td> <td >13</td> <td >33</td> <td >14</td> <td >35</td> <td >45</td> <td >18</td> <td >33</td> <td >22</td> <td >31</td> </tr> <tr class=\"greenbar\"> <th > <p>2012</p> </th> <td >12</td> <td >24</td> <td >36</td> <td >14</td> <td >36</td> <td >15</td> <td >38</td> <td >49</td> <td >19</td> <td >36</td> <td >24</td> <td >34</td> </tr> <tr> <th > <p>2013</p> </th> <td >13</td> <td >26</td> <td >39</td> <td >15</td> <td >39</td> <td >16</td> <td >41</td> <td >53</td> <td >20</td> <td >39</td> <td >26</td> <td >37</td> </tr> <tr class=\"greenbar\"> <th > <p>2014</p> </th> <td >14</td> <td >28</td> <td >42</td> <td >16</td> <td >42</td> <td >17</td> <td >44</td> <td >57</td> <td >21</td> <td >42</td> <td >28</td> <td >40</td> </tr> <tr> <th > <p>2015</p> </th> <td >15</td> <td >30</td> <td >45</td> <td >17</td> <td >45</td> <td >18</td> <td >47</td> <td >61</td> <td >22</td> <td >45</td> <td >30</td> <td >43</td> </tr> </tbody></table>"
                 }, {
                     "id": "example_table_select",
                     "val": ""
@@ -481,6 +436,12 @@
                     "val": "40"
                 }, {
                     "id": "chart_x_axis_tickmark_interval_input",
+                    "val": ""
+                }, {
+                    "id": "chart_x_axis_min_input",
+                    "val": ""
+                }, {
+                    "id": "chart_x_axis_max_input",
                     "val": ""
                 }, {
                     "id": "chart_x_axis_show_only_years",
@@ -564,6 +525,8 @@
             };
 
             var chartCallback = function chartCallback() {
+                
+                all_chart_options.timeline.animation();
 
                 $(".highcharts-legend-item").css("min-height", "0px").css("z-index", 100); //fix so CMS CSS doesn't make legend taller than it should
                 $(".highcharts-tooltip").css("z-index", 200);

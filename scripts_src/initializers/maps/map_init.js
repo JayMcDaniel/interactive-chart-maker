@@ -173,7 +173,7 @@ var map_init = {
     getMapOuterDiv: function () {
 
         var div = document.createElement("div");
-        div.setAttribute("style", "position: relative; width: 695px; min-height: 580px; margin: auto; background-color:#FFFFFF;");
+        div.setAttribute("style", "position: relative; width: 695px; min-height: 610px; margin: auto; background-color:#FFFFFF;");
         div.setAttribute("class", "map_outer_div");
 
         return div;

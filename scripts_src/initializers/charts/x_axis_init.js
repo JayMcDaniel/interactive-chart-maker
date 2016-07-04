@@ -16,6 +16,9 @@ var xAxisInit = function xAxisInit(categories, chart_type) {
             formatter: update_x_axis.updateFormatter(utils_forms.getCheckBoxValue($("#chart_x_axis_show_only_years")))
         },
 
+        max: update_x_axis.updateMax(Number($("#chart_x_axis_max_input").val())),
+        min: update_x_axis.updateMin(Number($("#chart_x_axis_min_input").val())),
+
         plotLines: [{
             "value": 0,
             "color": "#c0c0c0",

@@ -55,7 +55,7 @@ var navigation_setup = {
     closeBoxIconClick: function () {
         $(".close_box_icon").click(function () {
             $(this).parent().parent().slideUp(50);
-            $(".chart_display_area, .map_display_area").toggleClass("fixed");
+       //     $(".chart_display_area, .map_display_area").toggleClass("fixed");
 
         });
     },
@@ -109,7 +109,7 @@ var navigation_setup = {
 
             $(this).toggleClass("code_on");
 
-            $(".chart_display_area, .map_display_area").toggleClass("fixed"); //so chart will go down to still be visible
+        //    $(".chart_display_area, .map_display_area").toggleClass("fixed"); //so chart will go down to still be visible
 
             //scroll to top of page
             $("html, body").animate({
@@ -149,7 +149,7 @@ var navigation_setup = {
                 $("#load_chart_div").slideToggle(50);
                 $(".code_on").removeClass("code_on");
                 $("#get_code_text").text("Get code");
-                $(".chart_display_area").toggleClass("fixed");
+               // $(".chart_display_area").toggleClass("fixed");
             });
 
             $(this).toggleClass("load_chart_showing");

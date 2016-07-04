@@ -39,7 +39,7 @@ var write_code = {
     /** creates and returns chart HTML code  **/
     writeChartHTMLCode: function (all_chart_options, width, height, id) {
 
-        var html_string = '<div id="' + id + '" style = "width: ' + width + 'px; height: ' + height + 'px; margin: auto; padding: 0px;"> </div>';
+        var html_string = '<div id="' + id + '" style = "position: relative; width: ' + width + 'px; height: ' + height + 'px; margin: auto; padding: 0px;"> </div>';
 
         return html_string;
     },

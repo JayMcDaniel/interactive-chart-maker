@@ -44,7 +44,7 @@ var areas_colored_report = {
             $("#areas_colored_textarea").val(areas_colored.join("\n"));
             $("#areas_not_colored_textarea").val(areas_not_colored.join("\n"));
             $("#areas_not_found_from_table_textarea").val(all_map_options.areas_not_found_from_table.join("\n"));
-            $(".chart_display_area, .map_display_area").toggleClass("fixed");
+           // $(".chart_display_area, .map_display_area").toggleClass("fixed");
 
 
         });

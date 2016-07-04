@@ -19,7 +19,7 @@ var update_tooltip = {
             var s = "<b>" + this.series.name + "</b><br>" + y_axis_title + ": <b>" + signs_arr[0] +
                 Highcharts.numberFormat((this.y * multiplier), decimals, ".", ",") + signs_arr[1] + "</b><br/>" +
                 x_axis_title + ": <b>" + signs_arr[0] + Highcharts.numberFormat((this.x * multiplier), decimals, ".", ",") + signs_arr[1] + "</b><br/>" +
-                z_title + ": <b>" + signs_arr[0] + Highcharts.numberFormat((this.x * multiplier), decimals, ".", ",") + signs_arr[1] + "</b>";
+                z_title + ": <b>" + signs_arr[0] + Highcharts.numberFormat((this.point.z * multiplier), decimals, ".", ",") + signs_arr[1] + "</b>";
 
            
              all_chart_options.series[this.series.index] ? s = all_chart_options.tooltip.addExtraData(all_chart_options.series[this.series.index].extra_data, this.point, s) : s = s;
@@ -178,7 +178,7 @@ var update_tooltip = {
             multiplier = Number($("#chart_tooltip_y_multiple_select").val()),
             chart_type = all_chart_options.chart.type,
             signs_arr = [signs === "$" ? "$" : "", signs === "%" ? "%" : ""],
-            z_title = $("#chart_z_title_text_input").val();
+            z_title = $("#chart_z_title_text_input").val() === "" ? "Z" : $("#chart_z_title_text_input").val();
 
 
 
