@@ -68,6 +68,7 @@
             //outer div//
             var chart_animation_div = document.createElement("div");
             chart_animation_div.style = "position: absolute; top: 28px; margin-left: 20px; z-index: 500; margin-bottom: -6px; -webkit-user-select: none;";
+            chart_animation_div.className = "chart_animation_div";
 
 
             //animation title (i.e. date shown)//
