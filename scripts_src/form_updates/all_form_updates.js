@@ -60,17 +60,17 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
 
         //show just_...
         if (["scatter", "drilldown", "bubble", "bar", "column", "stacked_column", "stacked_bar", "arearange", "columnrange"].indexOf(chart_type) > -1) {
-            $(".just_" + chart_type.replace("stacked_","")).show();
-            $(".show_" + chart_type.replace("stacked_","")).show();
+            $(".just_" + chart_type.replace("stacked_", "")).show();
+            $(".show_" + chart_type.replace("stacked_", "")).show();
         }
 
         //if drilldown, hide unrelated
         if (chart_type === "drilldown") {
             $("#tab_series_options").hide();
-            if ($("#drilldown_type_select").val() === "bubble"){
+            if ($("#drilldown_type_select").val() === "bubble") {
                 $(".just_bubble").show();
             }
-            
+
         } else {
             $("#tab_series_options").show();
         }
@@ -85,6 +85,9 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
 
         //if drilled into a drilldown, click the up button to get out - prevents errors
         $(".highcharts-button").click();
+        //if animated map is playing, stop it - also prevents errors
+        $(".map_play_button.playing").click();
+        $(".chart_animation_div").remove();
 
         allFormUpdates.selectChart(this);
         var chart_type = $(this).divVal();
@@ -130,6 +133,14 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
 
     });
 
+    /* when animated bubble checkbox is clicked */
+
+
+    $("#bubble_animated_checkbox").unbind().change(function () {
+        $(".chart_animation_div").remove();
+        updateChartType("bubble", chart, all_chart_options);
+
+    });
 
 
 
@@ -206,6 +217,8 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
     });
 
 
+    
+    
     /* COLOR PALETTE CHANGES - defined and initiated in navigation setup*/
 
     //chart color palettes
@@ -230,8 +243,6 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
 
 
     }
-
-
 
 
     // when page loads, load the chart palettes
@@ -307,6 +318,19 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
     $("#chart_x_axis_tickmark_interval_input").unbind().keyup(function () {
         var new_interval = Number($(this).val());
         update_x_axis.updateTickmarkInterval(new_interval, chart, all_chart_options);
+    });
+
+
+    //x-axis max input changed
+    $("#chart_x_axis_max_input").unbind().keyup(function () {
+        var newMax = $(this).val();
+        update_x_axis.updateMax(newMax, chart, all_chart_options);
+    });
+
+    //x-axis min input changed
+    $("#chart_x_axis_min_input").unbind().keyup(function () {
+        var newMin = $(this).val();
+        update_x_axis.updateMin(newMin, chart, all_chart_options);
     });
 
 
@@ -494,6 +518,7 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
     //is animated checkbox changed
     $("#map_animated_checkbox").unbind().change(function () {
         $("#legend_placement_y").val(70); // set legend y value so legend is lower for animated maps
+        $(".map_play_button.playing").click(); //if animated map is playing, stop it - prevents errors
         map_init.loadNewMap(chart, all_chart_options, all_map_options, true); // true to repopulate form
     });
 

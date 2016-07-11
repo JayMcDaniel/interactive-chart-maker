@@ -1,3 +1,5 @@
+var utils_main = require("../utils/utils_main.js");
+
 /** when X-axis options are changed in the side area, these methods are called 
 @namespace
 */
@@ -40,6 +42,38 @@ var update_x_axis = {
 
 
     },
+    
+    
+     /** update x-axis max */
+    updateMax: function (newMax, chart, all_chart_options) {
+        newMax = utils_main.checkforUndefined(newMax);
+        if (!chart) { // called when this is used in x_axis_init
+            return newMax;
+        }
+
+        chart.xAxis[0].update({
+            max: newMax
+        });
+
+        all_chart_options.xAxis.max = newMax;
+    },
+
+
+
+    /** update y-axis min */
+    updateMin: function (newMin, chart, all_chart_options) {
+        newMin = utils_main.checkforUndefined(newMin);
+        if (!chart) { // called when this is used in x_axis_init
+            return newMin;
+        }
+
+        chart.xAxis[0].update({
+            min: newMin
+        });
+
+        all_chart_options.xAxis.min = newMin;
+    },
+    
 
     /**makes x-axis MLR or standard style **/
     toggleMLRStyle: function (is_checked, chart, all_chart_options) {

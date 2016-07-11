@@ -39,6 +39,7 @@ var utils_main = {
             //functions are named "function1, function2" and later replaced with the real function after the rest of the json has been stringified
             if (typeof value === 'function') {
 
+                
                 //combine y axis and tooltip replacement objs
                 var replacements_obj = $.extend({}, update_tooltip.replacement_obj, update_y_axis.replacement_obj);
 
@@ -116,7 +117,7 @@ var utils_main = {
     /** stringify tooltip / y-axis formatter function **/
     stringifyFormatter: function (formatter, replacement_obj) {
 
-        var formatter_str = formatter.toString();
+        var formatter_str = formatter.toString().replace(/\/\/.*\/\//g,""); //replace notes in between //...//
 
 
         for (name in replacement_obj) {

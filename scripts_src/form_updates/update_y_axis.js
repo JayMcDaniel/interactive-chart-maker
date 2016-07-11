@@ -40,9 +40,8 @@ var update_y_axis = {
             }
 
         } else { //if decimals are null
-
             var newYFormat = function () {
-                var s = (this.value / dividend == parseInt(this.value / dividend)) ? Highcharts.numberFormat(this.value, 0, ".", ",") : Highcharts.numberFormat(this.value / dividend, 1, ".", ",");
+                var s = (this.value / dividend == parseInt(this.value / dividend)) ? Highcharts.numberFormat(this.value / dividend, 0, ".", ",") : Highcharts.numberFormat(this.value / dividend, 1, ".", ",");
                 return y_signs_arr[0] + s.replace(/\$-/g, "-$") + y_signs_arr[1];
             }
 
@@ -116,8 +115,6 @@ var update_y_axis = {
 
         all_chart_options.yAxis.max = newMax;
     },
-
-
 
 
 

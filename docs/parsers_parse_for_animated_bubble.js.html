@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: parsers/parse_for_animated_bubble.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: parsers/parse_for_animated_bubble.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>    var chart_animation_init = require("../initializers/charts/chart_animation_init.js");
+
+
+    /** 
+     * Parsing function for animated bubble charts
+     * @module
+     * @param input {element} input jquery table element retrieved from textarea
+     * @param chart_type {string} type of chart (line, bar etc.)
+     * @returns {object} Object with chart title, X-axis categories and series array of objects
+     */
+    var parseForAnimatedBubble = function (input, chart_type, colors, chart, all_chart_options) {
+        var output = {}; //obj that gets returned
+        output.x_axis_categories = undefined; //resets this in case there were previous categories
+
+        //set up array of data arrays to be used in the timeline. this data[time] will replace data in the initial series array when it's animated
+        all_chart_options.timeline = {};
+        all_chart_options.timeline.data = [];
+        all_chart_options.timeline.dates = []; //e.g. years - to be populated by each row header.
+        output.series = []; //initial series array - gets a seriesObj for each series
+
+
+
+        //get data for each bubble and push to and timeline.dates
+
+        $("tbody tr", input).each(function (i, row) {
+            all_chart_options.timeline.dates.push($.trim($("th:eq(0)", row).text()));
+
+
+            //    get data values from each row's td cells (every third cell for xyz groups)
+            all_chart_options.timeline.data.push([]);
+            $("td:nth-child(3n - 1)", row).each(function (j) {
+                var x = $(this).getNumber();
+                var y = $(this).next().getNumber();
+                var z = $(this).next().next().getNumber();
+                var xyz_arr = [x, y, z];
+                all_chart_options.timeline.data[i].push(xyz_arr);
+            });
+
+        });
+
+
+
+        //for each series name in the top row of the table header make a series with a bubble for the first row in the tbody
+        $("thead tr:eq(0) th:gt(0)", input).each(function (i) {
+            var seriesObj = {
+                name: $.trim($(this).text()),
+                data: [all_chart_options.timeline.data[0][i]],
+                date: all_chart_options.timeline.dates[0],
+                type: chart_type,
+                lineWidth: 0,
+                marker: {
+                    enabled: true
+                },
+                color: colors[i],
+                _symbolIndex: i
+            };
+            output.series.push(seriesObj);
+        });
+
+
+
+
+
+        /** Creates and places a div containing a slider and play and pause buttons to animated the chart. Also set their functions  **/
+        all_chart_options.timeline.animation = function () {
+
+
+            //outer div//
+            var chart_animation_div = document.createElement("div");
+            chart_animation_div.style = "position: absolute; top: 28px; margin-left: 20px; z-index: 500; margin-bottom: -6px; -webkit-user-select: none;";
+            chart_animation_div.className = "chart_animation_div";
+
+
+            //animation title (i.e. date shown)//
+            var animation_title = document.createElement("h3");
+            animation_title.textContent = all_chart_options.timeline.dates[0];
+            animation_title.style = "margin: 0px; font-family: sans-serif; font-weight: 200; color: #337ab7; font-size: 18px; position: relative; top: 8px; float: left;";
+            animation_title.className = "animation_title";
+
+
+
+            //slider//
+            var chart_slider = document.createElement("input");
+            chart_slider.setAttribute("type", "range");
+            chart_slider.setAttribute("min", "0");
+            chart_slider.setAttribute("max", all_chart_options.timeline.dates.length - 1);
+            chart_slider.setAttribute("value", "0");
+            chart_slider.style = "float: left; margin-right: 10px; color: #337ab7; font-size: 18px; cursor: pointer; width: 350px; position: relative; top: 12px;";
+            chart_slider.className = "chart_slider";
+
+            //set up slider change//
+            chart_slider.oninput = function () {
+                var new_time_index = this.value;
+
+                $.each(chart.series, function (i, e) {
+                    e.update({
+                        data: [all_chart_options.timeline.data[new_time_index][i]]
+                    });
+                });
+
+                animation_title.textContent = all_chart_options.timeline.dates[new_time_index];
+
+            };
+
+
+            var playing; //becomes setTimeout function playing stepForward//
+
+            //set step forward function//
+            var stepForward = function () {
+
+                var $chart_slider = $(chart_slider);
+                $chart_slider.val() === $chart_slider.attr("max") ? $chart_slider.val(0).trigger("input") : $chart_slider.val(Number($chart_slider.val()) + 1).trigger("input");
+            };
+
+
+            //play button//
+            var play_button = document.createElement("div");
+            play_button.style = "float: left; margin-right: 10px; color: #337ab7; font-size: 24px; cursor: pointer; position: relative; top: 4px;";
+            play_button.innerHTML = "\u25B6";
+            play_button.className = "chart_play_button";
+
+            //click to play//
+            play_button.onclick = function () {
+
+                if ($(this).hasClass("playing")) { //if playing, stop//
+                    $(this).removeClass("playing");
+                    clearInterval(playing);
+                    this.innerHTML = "\u25B6";
+
+
+                } else { //if stopped, start playing//
+                    playing = setInterval(function () {
+                        stepForward();
+                    }, 500);
+
+                    this.innerHTML = "&amp;nbsp; ||";
+                    $(this).addClass("playing");
+                }
+            };
+
+
+
+
+            //put it all together in the div//
+            chart_animation_div.appendChild(play_button);
+
+            chart_animation_div.appendChild(chart_slider);
+            chart_animation_div.appendChild(animation_title);
+
+            var chart_id = "#" + all_chart_options.chart.renderTo;
+            setTimeout(function () {
+                $(chart_id).prepend(chart_animation_div);
+            }, 100);
+
+        };
+        all_chart_options.timeline.animation();
+
+
+
+        return output;
+    };
+
+    module.exports = parseForAnimatedBubble;</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-form_updates_all_form_updates.html">form_updates/all_form_updates</a></li><li><a href="module-form_updates_update_chart_type.html">form_updates/update_chart_type</a></li><li><a href="module-form_updates_update_colors.html">form_updates/update_colors</a></li><li><a href="module-form_updates_update_individual_series.html">form_updates/update_individual_series</a></li><li><a href="module-initializers_charts_all_chart_options_init.html">initializers/charts/all_chart_options_init</a></li><li><a href="module-initializers_charts_chart_init.html">initializers/charts/chart_init</a></li><li><a href="module-initializers_charts_colors_init.html">initializers/charts/colors_init</a></li><li><a href="module-initializers_charts_credits_init.html">initializers/charts/credits_init</a></li><li><a href="module-initializers_charts_exporting_init.html">initializers/charts/exporting_init</a></li><li><a href="module-initializers_charts_legend_init.html">initializers/charts/legend_init</a></li><li><a href="module-initializers_charts_plot_options_init.html">initializers/charts/plot_options_init</a></li><li><a href="module-initializers_charts_series_init.html">initializers/charts/series_init</a></li><li><a href="module-initializers_charts_subtitle_init.html">initializers/charts/subtitle_init</a></li><li><a href="module-initializers_charts_title_init.html">initializers/charts/title_init</a></li><li><a href="module-initializers_charts_tooltip_init.html">initializers/charts/tooltip_init</a></li><li><a href="module-initializers_charts_x_axis_init.html">initializers/charts/x_axis_init</a></li><li><a href="module-initializers_charts_y_axis_init.html">initializers/charts/y_axis_init</a></li><li><a href="module-initializers_maps_map_animation_init.html">initializers/maps/map_animation_init</a></li><li><a href="module-initializers_maps_map_circle_sizes_init.html">initializers/maps/map_circle_sizes_init</a></li><li><a href="module-initializers_maps_map_colors_init.html">initializers/maps/map_colors_init</a></li><li><a href="module-initializers_maps_map_credits_init.html">initializers/maps/map_credits_init</a></li><li><a href="module-initializers_maps_map_title_init.html">initializers/maps/map_title_init</a></li><li><a href="module-parsers_parse_for_animated_bubble.html">parsers/parse_for_animated_bubble</a></li><li><a href="module-parsers_parse_for_bubble.html">parsers/parse_for_bubble</a></li><li><a href="module-parsers_parse_for_drilldown.html">parsers/parse_for_drilldown</a></li><li><a href="module-parsers_parse_for_map.html">parsers/parse_for_map</a></li><li><a href="module-parsers_parse_for_range.html">parsers/parse_for_range</a></li><li><a href="module-parsers_parse_for_scatter.html">parsers/parse_for_scatter</a></li><li><a href="module-parsers_parse_for_typical_chart.html">parsers/parse_for_typical_chart</a></li><li><a href="module-parsers_parse_table_input.html">parsers/parse_table_input</a></li><li><a href="module-utils_areas_colored_report.html">utils/areas_colored_report</a></li><li><a href="module-utils_jq_extensions.html">utils/jq_extensions</a></li><li><a href="module-utils_load_from_table_wizard.html">utils/load_from_table_wizard</a></li></ul><h3>Classes</h3><ul><li><a href="AllChartOptions.html">AllChartOptions</a></li><li><a href="ChartOptions.html">ChartOptions</a></li><li><a href="Colors.html">Colors</a></li><li><a href="Credits.html">Credits</a></li><li><a href="Exporting.html">Exporting</a></li><li><a href="Legend.html">Legend</a></li><li><a href="PlotOptions.html">PlotOptions</a></li><li><a href="Series.html">Series</a></li><li><a href="Subtitle.html">Subtitle</a></li><li><a href="Title.html">Title</a></li><li><a href="Tooltip.html">Tooltip</a></li><li><a href="XAxis.html">XAxis</a></li><li><a href="yAxis.html">yAxis</a></li></ul><h3>Namespaces</h3><ul><li><a href="calculate_recession_dates.html">calculate_recession_dates</a></li><li><a href="chart_animation_init.html">chart_animation_init</a></li><li><a href="chart_recall.html">chart_recall</a></li><li><a href="draw_chart.html">draw_chart</a></li><li><a href="keyboard_inputs.html">keyboard_inputs</a></li><li><a href="map_init.html">map_init</a></li><li><a href="map_legend_init.html">map_legend_init</a></li><li><a href="map_subtitle_init.html">map_subtitle_init</a></li><li><a href="map_tooltip_init.html">map_tooltip_init</a></li><li><a href="navigation_setup.html">navigation_setup</a></li><li><a href="update_chart_options.html">update_chart_options</a></li><li><a href="update_credits.html">update_credits</a></li><li><a href="update_data.html">update_data</a></li><li><a href="update_legend.html">update_legend</a></li><li><a href="update_map_individual_series.html">update_map_individual_series</a></li><li><a href="update_map_palettes.html">update_map_palettes</a></li><li><a href="update_template.html">update_template</a></li><li><a href="update_tooltip.html">update_tooltip</a></li><li><a href="update_x_axis.html">update_x_axis</a></li><li><a href="update_y_axis.html">update_y_axis</a></li><li><a href="utils_forms.html">utils_forms</a></li><li><a href="utils_main.html">utils_main</a></li><li><a href="write_code.html">write_code</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Mon Jul 11 2016 10:12:57 GMT-0400 (EDT)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

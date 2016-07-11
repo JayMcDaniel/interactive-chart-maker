@@ -39,7 +39,7 @@ var write_code = {
     /** creates and returns chart HTML code  **/
     writeChartHTMLCode: function (all_chart_options, width, height, id) {
 
-        var html_string = '<div id="' + id + '" style = "width: ' + width + 'px; height: ' + height + 'px; margin: auto; padding: 0px;"> </div>';
+        var html_string = '<div id="' + id + '" style = "position: relative; width: ' + width + 'px; height: ' + height + 'px; margin: auto; padding: 0px;"> </div>';
 
         return html_string;
     },
@@ -86,7 +86,7 @@ var write_code = {
         chart_options_js.string = '$(document).ready(function(){\n\
              var all_chart_options = ' + chart_options_js.string + ';\n\
 Highcharts.setOptions({lang: {thousandsSep: ","}});\n\n\
-    var ' + all_chart_options.chart.renderTo + ' = new Highcharts.Chart(all_chart_options, chartCallback());\n\
+    var chart = new Highcharts.Chart(all_chart_options, chartCallback(all_chart_options));\n\
 });\n\
 jQuery.fn.extend({addCommas:' + $("string").addCommas.toString() + ' });';
 

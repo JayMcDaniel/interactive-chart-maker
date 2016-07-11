@@ -151,31 +151,10 @@
     
     #chart_output_code,
     #chart_html_code {
-        height: 200px;
+        height: 290px;
         color: $primary_color;
     }
     
-    #chart_output_code_hidden_textarea {
-        /*NOT USING THIS NOW */
-        //hidden but can't actually hide to make this .select able
-        // display: block;
-        // Place in top-left corner of screen regardless of scroll position.
-        position: fixed;
-        top: 0;
-        left: 0;
-        // Ensure it has a small width and height. Setting to 1px / 1em
-        // doesn't work as this gives a negative w/h on some browsers.
-        width: 2em;
-        height: 2em;
-        // We don't need padding, reducing the size if it does flash render.
-        padding: 0;
-        // Clean up any borders.
-        border: none;
-        outline: none;
-        boxShadow: none;
-        // Avoid flash of white box if rendered for any reason.
-        background: transparent;
-    }
     
     .clearfloat {
         clear: both;
@@ -405,9 +384,10 @@
     #load_chart_div,
     #areas_colored_report_div {
         display: none;
-        position: relative;
+        position: absolute;
         width: 100%;
-        min-height: 500px;
+        min-height: 750px;
+        z-index: 200;
         padding: 10px;
         background-color: $primary_light_color;
         border: solid 1px $highlight-color;
