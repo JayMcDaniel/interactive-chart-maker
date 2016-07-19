@@ -9,6 +9,9 @@ var updateColors = function (chart, all_chart_options, chart_type) {
     all_chart_options.colors = colorsInit();
     chart.options.colors = all_chart_options.colors;
 
+
+
+
     if (chart_type === "drilldown") { //drilldowns color by point
 
         $(chart.series[0].data).each(function (i) {
@@ -22,14 +25,28 @@ var updateColors = function (chart, all_chart_options, chart_type) {
 
     } else { //other charts color by series
 
+        var start_coloring_index = 0;
+        var color_index_mod = 0;
+
+        if (chart_type === "bubble" && $("#bubble_animated_checkbox").is(":checked")) {
+            start_coloring_index = 2;
+            color_index_mod = 2;
+        }
+
         $(chart.series).each(function (i) {
-            //update chart
-            this.update({
-                color: all_chart_options.colors[i]
-            }, false);
-            //update all_chart_options.series colors
-            all_chart_options.series[i].color = all_chart_options.colors[i];
+
+            if (i >= start_coloring_index) {
+                //update chart
+                this.update({
+                    color: all_chart_options.colors[i-color_index_mod]
+                }, false);
+                //update all_chart_options.series colors
+                all_chart_options.series[i-color_index_mod].color = all_chart_options.colors[i-color_index_mod];
+
+            }
         });
+
+
 
 
     }

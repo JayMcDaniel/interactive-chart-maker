@@ -27,7 +27,7 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>    var chart_animation_init = require("../initializers/charts/chart_animation_init.js");
-
+    var utils_main = require("../utils/utils_main.js");
 
     /** 
      * Parsing function for animated bubble charts
@@ -46,6 +46,8 @@
         all_chart_options.timeline.dates = []; //e.g. years - to be populated by each row header.
         output.series = []; //initial series array - gets a seriesObj for each series
 
+        //reset mins and maxes (used for placing invisible min and max sized bubbles so other bubbles aren't resized when animated)
+        utils_main.limits.resetMax();
 
 
         //get data for each bubble and push to and timeline.dates
@@ -60,7 +62,13 @@
                 var x = $(this).getNumber();
                 var y = $(this).next().getNumber();
                 var z = $(this).next().next().getNumber();
+
+                //get min and max bubble sizes to use later for invisible bubbles.
+                utils_main.limits.setMax(z);
+                utils_main.limits.setMin(z);
+
                 var xyz_arr = [x, y, z];
+
                 all_chart_options.timeline.data[i].push(xyz_arr);
             });
 
@@ -68,9 +76,10 @@
 
 
 
+
         //for each series name in the top row of the table header make a series with a bubble for the first row in the tbody
         $("thead tr:eq(0) th:gt(0)", input).each(function (i) {
-            var seriesObj = {
+            var series_obj = {
                 name: $.trim($(this).text()),
                 data: [all_chart_options.timeline.data[0][i]],
                 date: all_chart_options.timeline.dates[0],
@@ -82,9 +91,41 @@
                 color: colors[i],
                 _symbolIndex: i
             };
-            output.series.push(seriesObj);
+            output.series.push(series_obj);
         });
 
+
+
+        //put in the invisible placeholder series that are based on the min/max values - this way bubbles resize against a constant
+
+        //put min and max arrays in
+        for (var i = 0, len = all_chart_options.timeline.data.length; i &lt; len; i++) {
+            all_chart_options.timeline.data[i].unshift([0, 0, utils_main.limits.getMin()], [0, 0, utils_main.limits.getMax()]);
+        }
+
+
+        var min_size_placeholder = {
+            name: "invisible min size placeholder series",
+            data: [all_chart_options.timeline.data[0][0]],
+            date: all_chart_options.timeline.dates[0],
+            type: chart_type,
+            lineWidth: 0,
+            marker: {
+                enabled: false
+            },
+            color: "none",
+            showInLegend: false,
+            zIndex: -1
+        };
+
+
+
+        var max_size_placeholder = $.extend({}, min_size_placeholder, {
+            name: "invisible max size placeholder series",
+            data: [all_chart_options.timeline.data[0][1]]
+        });
+
+        output.series.unshift(min_size_placeholder, max_size_placeholder);
 
 
 
@@ -92,43 +133,72 @@
         /** Creates and places a div containing a slider and play and pause buttons to animated the chart. Also set their functions  **/
         all_chart_options.timeline.animation = function () {
 
-
             //outer div//
             var chart_animation_div = document.createElement("div");
-            chart_animation_div.style = "position: absolute; top: 28px; margin-left: 20px; z-index: 500; margin-bottom: -6px; -webkit-user-select: none;";
-            chart_animation_div.className = "chart_animation_div";
-
+            $(chart_animation_div).css({
+                position: "absolute",
+                top: "33px",
+                "margin-left": "20px",
+                "z-index": "500",
+                "margin-bottom": "-6px",
+                "-webkit-user-select": "none"  
+            })
+            .addClass("chart_animation_div");
+            
 
             //animation title (i.e. date shown)//
             var animation_title = document.createElement("h3");
-            animation_title.textContent = all_chart_options.timeline.dates[0];
-            animation_title.style = "margin: 0px; font-family: sans-serif; font-weight: 200; color: #337ab7; font-size: 18px; position: relative; top: 8px; float: left;";
-            animation_title.className = "animation_title";
-
+           
+            $(animation_title).text(all_chart_options.timeline.dates[0])
+            .css({
+                margin: "0px",
+                "font-family": "sans-serif",
+                "font-weight": "200",
+                color: "#337ab7",
+                "font-size": "20px",
+                position: "relative",
+                top: "10px",
+                float: "left"
+            })
+            .addClass("animation_title");
+            
 
 
             //slider//
             var chart_slider = document.createElement("input");
-            chart_slider.setAttribute("type", "range");
-            chart_slider.setAttribute("min", "0");
-            chart_slider.setAttribute("max", all_chart_options.timeline.dates.length - 1);
-            chart_slider.setAttribute("value", "0");
-            chart_slider.style = "float: left; margin-right: 10px; color: #337ab7; font-size: 18px; cursor: pointer; width: 350px; position: relative; top: 12px;";
-            chart_slider.className = "chart_slider";
 
-            //set up slider change//
-            chart_slider.oninput = function () {
-                var new_time_index = this.value;
+            $(chart_slider).attr({
+                    type: "range",
+                    min: "0",
+                    max: all_chart_options.timeline.dates.length - 1,
+                    value: "0",
+                    class: "chart_slider"
+                })
+                .css({
+                    float: "left",
+                    "margin-right": "10px",
+                    color: "#337ab7",
+                    "font-size": "18px",
+                    cursor: "pointer",
+                    width: "350px",
+                    position: "relative",
+                    top: "15px"
+                })
+                .on("input change", function () {
+                    var new_time_index = this.value;
 
-                $.each(chart.series, function (i, e) {
-                    e.update({
-                        data: [all_chart_options.timeline.data[new_time_index][i]]
+                    $.each(chart.series, function (i, e) {
+                        e.update({
+                            data: [all_chart_options.timeline.data[new_time_index][i]]
+                        });
                     });
+
+                    animation_title.textContent = all_chart_options.timeline.dates[new_time_index];
                 });
 
-                animation_title.textContent = all_chart_options.timeline.dates[new_time_index];
 
-            };
+
+
 
 
             var playing; //becomes setTimeout function playing stepForward//
@@ -143,35 +213,37 @@
 
             //play button//
             var play_button = document.createElement("div");
-            play_button.style = "float: left; margin-right: 10px; color: #337ab7; font-size: 24px; cursor: pointer; position: relative; top: 4px;";
-            play_button.innerHTML = "\u25B6";
-            play_button.className = "chart_play_button";
 
-            //click to play//
-            play_button.onclick = function () {
+            $(play_button).css({
+                    float: "left",
+                    "margin-right": "10px",
+                    color: "#337ab7",
+                    "font-size": "24px",
+                    cursor: "pointer",
+                    position: "relative",
+                    top: "4px"
+                })
+                .html("\u25B6")
+                .addClass("chart_play_button")
+                .click(function () {
 
-                if ($(this).hasClass("playing")) { //if playing, stop//
-                    $(this).removeClass("playing");
-                    clearInterval(playing);
-                    this.innerHTML = "\u25B6";
+                    if ($(this).hasClass("playing")) { //if playing, stop//
+                        $(this).removeClass("playing").html("\u25B6");
+                        clearInterval(playing);
+                    } else { //if stopped, start playing//
+                        playing = setInterval(function () {
+                            stepForward();
+                        }, 500);
 
-
-                } else { //if stopped, start playing//
-                    playing = setInterval(function () {
-                        stepForward();
-                    }, 500);
-
-                    this.innerHTML = "&amp;nbsp; ||";
-                    $(this).addClass("playing");
-                }
-            };
+                        $(this).addClass("playing").html("&amp;nbsp; ||");
+                    }
+                });
 
 
 
 
             //put it all together in the div//
             chart_animation_div.appendChild(play_button);
-
             chart_animation_div.appendChild(chart_slider);
             chart_animation_div.appendChild(animation_title);
 
@@ -204,7 +276,7 @@
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Mon Jul 11 2016 10:12:57 GMT-0400 (EDT)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Tue Jul 19 2016 08:40:33 GMT-0400 (EDT)
 </footer>
 
 <script> prettyPrint(); </script>
