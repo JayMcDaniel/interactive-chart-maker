@@ -1,4 +1,3 @@
-
 /**
  * Main utility object, contains functions that get reused often, including the code writing
  * @namespace
@@ -7,14 +6,14 @@ var utils_main = {
 
     /** check value - if 0 or not a number, return undefined **/
     checkforUndefined: function (val) {
-        if(val === "0" ){
+        if (val === "0") {
             return 0;
         }
-        
-        if (isNaN(val) || val === ""){
+
+        if (isNaN(val) || val === "") {
             return undefined;
         }
-        
+
         return Number(val);
     },
 
@@ -39,7 +38,7 @@ var utils_main = {
             //functions are named "function1, function2" and later replaced with the real function after the rest of the json has been stringified
             if (typeof value === 'function') {
 
-                
+
                 //combine y axis and tooltip replacement objs
                 var replacements_obj = $.extend({}, update_tooltip.replacement_obj, update_y_axis.replacement_obj);
 
@@ -59,6 +58,41 @@ var utils_main = {
 
         return stringified_obj;
 
+    },
+
+    /** functions to set or return min max values **/
+    limits: {
+
+        max: 0,
+        min: undefined,
+
+        setMax: function (val) {
+            utils_main.limits.max = val > utils_main.limits.max ? val : utils_main.limits.max;
+        },
+
+        setMin: function (val) {
+            if (utils_main.limits.min === undefined) {
+                utils_main.limits.min = val;
+            } else {
+                utils_main.limits.min = val < utils_main.limits.min ? val : utils_main.limits.min;
+            }
+        },
+
+        resetMax: function () {
+            utils_main.limits.max = 0;
+        },
+
+        resetMin: function () {
+            utils_main.limits.min = undefined;
+        },
+
+        getMax: function () {
+            return utils_main.limits.max;
+        },
+
+        getMin: function () {
+            return utils_main.limits.min;
+        }
     },
 
 
@@ -117,7 +151,7 @@ var utils_main = {
     /** stringify tooltip / y-axis formatter function **/
     stringifyFormatter: function (formatter, replacement_obj) {
 
-        var formatter_str = formatter.toString().replace(/\/\/.*\/\//g,""); //replace notes in between //...//
+        var formatter_str = formatter.toString().replace(/\/\/.*\/\//g, ""); //replace notes in between //...//
 
 
         for (name in replacement_obj) {

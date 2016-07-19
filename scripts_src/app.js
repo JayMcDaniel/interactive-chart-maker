@@ -42,10 +42,9 @@ $(document).ready(function () {
         //diplay only options related to chart type 
         allFormUpdates.displayOptions(chart_type);
 
-        //click map if that was originally selected when page loaded (easy way to get all chart options done, then change to map)
-        if (chart_type === "map") {
-            $("#chart_type_map").click();
-        }
+        //click selected icon to make sure everything in the chart loads correctly
+       $("#chart_type_icons .selected").click();
+        
 
     });
 

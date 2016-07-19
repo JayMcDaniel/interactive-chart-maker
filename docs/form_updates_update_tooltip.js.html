@@ -40,20 +40,45 @@ var update_tooltip = {
     /** gets a tooltip for bubble charts. Called from updateToolTip **/
     getBubbleTooltip: function (chart, decimals, signs_arr, multiplier, chart_type, z_title, all_chart_options) {
 
-        all_chart_options.tooltip.formatter = function () {
-            var y_axis_title = this.series.yAxis.axisTitle ? this.series.yAxis.axisTitle.textStr : "Y-Axis";
-            var x_axis_title = this.series.xAxis.axisTitle ? this.series.xAxis.axisTitle.textStr : "X-Axis";
 
-            var s = "&lt;b>" + this.series.name + "&lt;/b>&lt;br>" + y_axis_title + ": &lt;b>" + signs_arr[0] +
-                Highcharts.numberFormat((this.y * multiplier), decimals, ".", ",") + signs_arr[1] + "&lt;/b>&lt;br/>" +
-                x_axis_title + ": &lt;b>" + signs_arr[0] + Highcharts.numberFormat((this.x * multiplier), decimals, ".", ",") + signs_arr[1] + "&lt;/b>&lt;br/>" +
-                z_title + ": &lt;b>" + signs_arr[0] + Highcharts.numberFormat((this.point.z * multiplier), decimals, ".", ",") + signs_arr[1] + "&lt;/b>";
+        if (decimals > 0) { //use decimal formatter//
 
-           
-             all_chart_options.series[this.series.index] ? s = all_chart_options.tooltip.addExtraData(all_chart_options.series[this.series.index].extra_data, this.point, s) : s = s;
-            
+            all_chart_options.tooltip.formatter = function () {
+                var y_axis_title = this.series.yAxis.axisTitle ? this.series.yAxis.axisTitle.textStr : "Y-Axis";
+                var x_axis_title = this.series.xAxis.axisTitle ? this.series.xAxis.axisTitle.textStr : "X-Axis";
 
-            return s.replace(/\$-/g, "-$");
+
+                var s = "&lt;b>" + this.series.name + "&lt;/b>&lt;br>" + y_axis_title + ": &lt;b>" + signs_arr[0] +
+                    Highcharts.numberFormat((this.y * multiplier), decimals, ".", ",") + signs_arr[1] + "&lt;/b>&lt;br/>" +
+                    x_axis_title + ": &lt;b>" + signs_arr[0] + Highcharts.numberFormat((this.x * multiplier), decimals, ".", ",") + signs_arr[1] + "&lt;/b>&lt;br/>" +
+                    z_title + ": &lt;b>" + signs_arr[0] + Highcharts.numberFormat((this.point.z * multiplier), decimals, ".", ",") + signs_arr[1] + "&lt;/b>";
+
+                all_chart_options.series[this.series.index] ? s = all_chart_options.tooltip.addExtraData(all_chart_options.series[this.series.index].extra_data, this.point, s) : s = s;
+
+                return s.replace(/\$-/g, "-$");
+            };
+        } else { //don't use decimal formatter//
+
+            all_chart_options.tooltip.formatter = function () {
+                var y_axis_title = this.series.yAxis.axisTitle ? this.series.yAxis.axisTitle.textStr : "Y-Axis";
+                var x_axis_title = this.series.xAxis.axisTitle ? this.series.xAxis.axisTitle.textStr : "X-Axis";
+
+
+
+                var s = "&lt;b>" + this.series.name + "&lt;/b>&lt;br>" + y_axis_title + ": &lt;b>" + signs_arr[0] +
+                    $(this.y * multiplier).addCommas() + signs_arr[1] + "&lt;/b>&lt;br/>" +
+                    x_axis_title + ": &lt;b>" + signs_arr[0] + $(this.x * multiplier).addCommas() + signs_arr[1] + "&lt;/b>&lt;br/>" +
+                    z_title + ": &lt;b>" + signs_arr[0] + $(this.point.z * multiplier).addCommas() + signs_arr[1] + "&lt;/b>";
+
+                all_chart_options.series[this.series.index] ? s = all_chart_options.tooltip.addExtraData(all_chart_options.series[this.series.index].extra_data, this.point, s) : s = s;
+
+                return s.replace(/\$-/g, "-$");
+
+            };
+
+
+
+
         };
 
 
@@ -64,20 +89,40 @@ var update_tooltip = {
     /** gets a tooltip for scatter charts. Called from updateToolTip**/
     getScatterTooltip: function (chart, decimals, signs_arr, multiplier, chart_type, all_chart_options) {
 
-        all_chart_options.tooltip.formatter = function () {
-            var y_axis_title = this.series.yAxis.axisTitle ? this.series.yAxis.axisTitle.textStr : "Y-Axis";
-            var x_axis_title = this.series.xAxis.axisTitle ? this.series.xAxis.axisTitle.textStr : "X-Axis";
+        if (decimals > 0) { //use decimal formatter//
+            all_chart_options.tooltip.formatter = function () {
 
-            var s = "&lt;b>" + this.series.name + "&lt;/b>&lt;br>" + y_axis_title + ": &lt;b>" + signs_arr[0] +
-                Highcharts.numberFormat((this.y * multiplier), decimals, ".", ",") + signs_arr[1] + "&lt;/b>&lt;br>" +
-                x_axis_title + ": &lt;b>" + signs_arr[0] + Highcharts.numberFormat((this.x * multiplier), decimals, ".", ",") + signs_arr[1] + "&lt;/b>";
+                var y_axis_title = this.series.yAxis.axisTitle ? this.series.yAxis.axisTitle.textStr : "Y-Axis";
+                var x_axis_title = this.series.xAxis.axisTitle ? this.series.xAxis.axisTitle.textStr : "X-Axis";
 
-            
-             all_chart_options.series[this.series.index] ? s = all_chart_options.tooltip.addExtraData(all_chart_options.series[this.series.index].extra_data, this.point, s) : s = s;
-            
 
-            return s.replace(/\$-/g, "-$");
-        };
+                var s = "&lt;b>" + this.series.name + "&lt;/b>&lt;br>" + y_axis_title + ": &lt;b>" + signs_arr[0] +
+                    Highcharts.numberFormat((this.y * multiplier), decimals, ".", ",") + signs_arr[1] + "&lt;/b>&lt;br>" +
+                    x_axis_title + ": &lt;b>" + signs_arr[0] + Highcharts.numberFormat((this.x * multiplier), decimals, ".", ",") + signs_arr[1] + "&lt;/b>";
+
+
+                //add extra data//
+                all_chart_options.series[this.series.index] ? s = all_chart_options.tooltip.addExtraData(all_chart_options.series[this.series.index].extra_data, this.point, s) : s = s;
+
+                return s.replace(/\$-/g, "-$");
+            };
+        } else { //no decimal formatter //
+
+            all_chart_options.tooltip.formatter = function () {
+                var y_axis_title = this.series.yAxis.axisTitle ? this.series.yAxis.axisTitle.textStr : "Y-Axis";
+                var x_axis_title = this.series.xAxis.axisTitle ? this.series.xAxis.axisTitle.textStr : "X-Axis";
+
+                var s = "&lt;b>" + this.series.name + "&lt;/b>&lt;br>" + y_axis_title + ": &lt;b>" + signs_arr[0] +
+                    $(this.y * multiplier).addCommas() + signs_arr[1] + "&lt;/b>&lt;br>" +
+                    x_axis_title + ": &lt;b>" + signs_arr[0] + $(this.x * multiplier).addCommas() + signs_arr[1] + "&lt;/b>";
+
+                //add extra data//
+                all_chart_options.series[this.series.index] ? s = all_chart_options.tooltip.addExtraData(all_chart_options.series[this.series.index].extra_data, this.point, s) : s = s;
+
+                return s.replace(/\$-/g, "-$");
+
+            };
+        }
 
     },
 
@@ -265,7 +310,7 @@ module.exports = update_tooltip;</code></pre>
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Mon Jul 11 2016 10:12:57 GMT-0400 (EDT)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Tue Jul 19 2016 08:40:33 GMT-0400 (EDT)
 </footer>
 
 <script> prettyPrint(); </script>

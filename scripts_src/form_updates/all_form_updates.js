@@ -85,9 +85,7 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
 
         //if drilled into a drilldown, click the up button to get out - prevents errors
         $(".highcharts-button").click();
-        //if animated map is playing, stop it - also prevents errors
-        $(".map_play_button.playing").click();
-        $(".chart_animation_div").remove();
+       
 
         allFormUpdates.selectChart(this);
         var chart_type = $(this).divVal();

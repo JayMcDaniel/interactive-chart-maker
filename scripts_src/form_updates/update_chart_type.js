@@ -54,6 +54,7 @@ var updateChartType = function (chart_type, chart, all_chart_options) {
 
 
     chart.xAxis[0].update({
+        gridLineWidth: type === "scatter" || type === "bubble" ? 1 : 0,
         plotLines: [{
             "value": 0,
             "color": "#c0c0c0",
