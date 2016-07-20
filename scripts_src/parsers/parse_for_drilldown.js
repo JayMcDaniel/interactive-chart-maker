@@ -10,7 +10,7 @@ var parseForDrilldown = function (input, drill_type, colors) {
     output.x_axis_categories = drill_type === "bubble" ? null : [];
 
     output.series = [{
-        name: "test",
+        name: $.trim($("thead tr:first th:first", input).text()),
         colorByPoint: true,
         data: [],
         type: drill_type

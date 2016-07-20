@@ -17,7 +17,8 @@ var XAxis = function (o) {
             fontFamily: 'Calibri, Verdana, Arial, Helvetica, sans-serif',
             fontWeight: 'normal',
             backgroundColor: '#fff',
-            fontSize: '12px'
+            fontSize: '12px',
+            textOverflow: 'none'
         }
 
     };
