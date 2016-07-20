@@ -35,8 +35,6 @@ var update_tooltip = {
                 var y_axis_title = this.series.yAxis.axisTitle ? this.series.yAxis.axisTitle.textStr : "Y-Axis";
                 var x_axis_title = this.series.xAxis.axisTitle ? this.series.xAxis.axisTitle.textStr : "X-Axis";
 
-
-
                 var s = "<b>" + this.series.name + "</b><br>" + y_axis_title + ": <b>" + signs_arr[0] +
                     $(this.y * multiplier).addCommas() + signs_arr[1] + "</b><br/>" +
                     x_axis_title + ": <b>" + signs_arr[0] + $(this.x * multiplier).addCommas() + signs_arr[1] + "</b><br/>" +
@@ -52,6 +50,38 @@ var update_tooltip = {
 
 
         };
+
+
+    },
+
+
+    /** gets a tooltip for drilldown charts. Called from updateToolTip**/
+    getDrilldownTooltip: function (chart, decimals, signs_arr, multiplier, chart_type, all_chart_options) {
+
+        if (decimals > 0) { //use decimal formatter
+            all_chart_options.tooltip.formatter = function () {
+
+                var y_val = signs_arr[0] + Highcharts.numberFormat((this.y * multiplier), decimals, ".", ",") + signs_arr[1];
+
+                var s = "<b>" + this.series.name + "</b><br>" + this.key + ": " + y_val;
+
+                this.point.drilldown ? s = s + "<br>(Click to drill down)" : s = s;
+
+                return s.replace(/\$-/g, "-$");
+            }
+
+        } else { //don't use decimal formatter
+            all_chart_options.tooltip.formatter = function () {
+
+                var y_val = signs_arr[0] + $(this.y * multiplier).addCommas() + signs_arr[1];
+
+                var s = "<b>" + this.series.name + "</b><br>" + this.key + ": " + y_val;
+
+                this.point.drilldown ? s = s + "<br>(Click to drill down)" : s = s;
+
+                return s.replace(/\$-/g, "-$");
+            }
+        }
 
 
     },
@@ -221,10 +251,9 @@ var update_tooltip = {
             decimals = Number($("#chart_tooltip_force_decimals_select").val()),
             signs = $("#chart_tooltip_signs_select").val(),
             multiplier = Number($("#chart_tooltip_y_multiple_select").val()),
-            chart_type = all_chart_options.chart.type,
+            chart_type = $("#chart_type_icons .selected").divVal(),
             signs_arr = [signs === "$" ? "$" : "", signs === "%" ? "%" : ""],
             z_title = $("#chart_z_title_text_input").val() === "" ? "Z" : $("#chart_z_title_text_input").val();
-
 
 
         //IF A TYPICAL CHART
@@ -232,6 +261,10 @@ var update_tooltip = {
             update_tooltip.getTypicalTooltip(chart, is_shared, decimals, signs_arr, multiplier, chart_type, all_chart_options);
         }
 
+        //IF A DRILLDOWN CHART
+        else if (chart_type === "drilldown") {
+            update_tooltip.getDrilldownTooltip(chart, decimals, signs_arr, multiplier, chart_type, all_chart_options);
+        }
 
 
         //IF A SCATTER CHART
