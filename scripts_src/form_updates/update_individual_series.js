@@ -30,9 +30,7 @@ var update_individual_series = {
 
                 extra_data_obj.name = $(this).val();
 
-
                 //push values
-
                 $(".series_extra_data_values_textarea:eq(" + j + ")", $series_snippet).each(function (k) {
 
                     extra_data_obj.values = $(this).val().split("\n"); // TODO turn values into array
@@ -44,9 +42,7 @@ var update_individual_series = {
 
             });
 
-
         });
-
 
     },
 
@@ -185,6 +181,9 @@ var update_individual_series = {
         $(".line_style_select").change(function () {
             var line_style = $(this).val();
             var i = $(this).parents(".series_snippet").index();
+            
+            all_chart_options.series[i].dashStyle = line_style;
+            
             chart.series[i].update({
                 dashStyle: line_style
             });
