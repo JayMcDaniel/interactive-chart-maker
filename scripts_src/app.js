@@ -6,12 +6,9 @@ $(document).ready(function () {
     var utils_main = require("./utils/utils_main");
 
 
-
-
-
     //load test table into table_input_textarea
 
-    $.get("./dev/test_tables/drilldown_table.htm", function (table) {
+    $.get("./dev/test_tables/test_table.htm", function (table) {
         $("#table_input_textarea").val(table);
 
         //check if app was opened from the chart wizard (imediately invoked function)
