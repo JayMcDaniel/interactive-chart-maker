@@ -51,7 +51,7 @@ var update_legend = {
 
         //update all_chart_options
         if (toggle_enabled) {
-            
+
             var legendItemClick = function (event) {
                 var selected = this.index;
                 var allSeries = this.chart.series;
@@ -60,26 +60,30 @@ var update_legend = {
                 });
                 return false;
             }
-            
+
         } else {
-            var legendItemClick = function (event) {
-            }
+            var legendItemClick = function (event) {}
         }
-        
-        if(!chart){
+
+        if (!chart) {
             return legendItemClick;
-        }else{
+        } else {
             all_chart_options.plotOptions.series.events.legendItemClick = legendItemClick;
         }
-        
+
         //update in current chart
-        $(chart.series).each(function(i){
-           this.update({
-               visible: i > 0 && toggle_enabled === true ? false : true,
-               events:{
-                   legendItemClick: all_chart_options.plotOptions.series.events.legendItemClick
-               }
-           }) 
+        $(chart.series).each(function (i) {
+            var is_visible = i > 0 && toggle_enabled === true ? false : true;
+
+            this.update({
+                visible: is_visible,
+                events: {
+                    legendItemClick: all_chart_options.plotOptions.series.events.legendItemClick
+                }
+            })
+
+            all_chart_options.series[i].visible = is_visible;
+
         });
     },
 

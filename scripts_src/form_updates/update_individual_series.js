@@ -356,9 +356,8 @@ var update_individual_series = {
 
         var series_visible_checkbox = document.createElement("input");
         series_visible_checkbox.setAttribute("type", "checkbox");
-        series_visible_checkbox.checked = all_chart_options.series[i].visible;
+        series_visible_checkbox.checked = all_chart_options.series[i].visible ? "checked" : null;
         series_visible_checkbox.id = "series_visible_checkbox_" + i;
-        series_visible_checkbox.checked = "checked";
 
 
         series_visible_checkbox.className = "series_visible_checkbox";

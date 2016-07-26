@@ -17,7 +17,7 @@ var map_title_init = {
     mapTitleInit: function titleInit(table_input) {
         var map_title = {
             text: $.trim($("caption", $(table_input)).text()),
-            style: "color: #000; font-family: sans-serif; font-weight: bold; font-size:14px; padding: 10px; margin-bottom: 0px;"
+            style: "color: #000; font-family: sans-serif; font-weight: bold; font-size:14px; padding: 10px; margin-bottom: 0px; text-align: left; border-bottom: none"
         }
         return map_title;
     }
