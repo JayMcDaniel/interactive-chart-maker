@@ -16,13 +16,13 @@ var update_x_axis = {
 
         if (only_numbers) {
             newXFormat = function () {
-                return this.value.replace(/[^0-9\.\-]+/g, '') //hide non-numbers if show only years box is checked
+                return this.value.replace(/[^0-9\.\-]+/g, '') //hide non-numbers if show only years box is checked//
             }
         }
 
         if (add_commas) {
             newXFormat = function () {
-                return $(Number(this.value.replace(/[^0-9\.\-]+/g, ''))).addCommas(); //hide non-numbers if show only years box is checked
+                return $(Number(this.value.replace(/[^0-9\.\-]+/g, ''))).addCommas(); //hide non-numbers if show only years box is checked//
             }
         }
 
