@@ -155,7 +155,6 @@
         color: $primary_color;
     }
     
-    
     .clearfloat {
         clear: both;
         height: 0px;
@@ -612,6 +611,18 @@
             font-family: "sinkin_sans200_x_light";
         }
     }
+    
+//    #top_nav_bar:after {
+//        content: "";
+//        position: absolute;
+//        width: 100%;
+//        bottom: 0;
+//        height: 15px;
+//        margin-bottom: -15px;
+//        z-index: 4999999;
+//        left: 0;
+//        background: linear-gradient(rgba(0, 0, 0, .2), transparent);
+//    }
     
     #get_code_button,
     #show_load_chart_area_button,
