@@ -5,10 +5,10 @@ var update_template = require("../../form_updates/update_template.js");
 @module
 */
 var chartInit = function chartInit(chart_type) {
-    
-        if (chart_type === "drilldown"){
-            chart_type = "column";
-        }
+
+    if (chart_type === "drilldown") {
+        chart_type = "column";
+    }
 
     //load options from user inputs
     var options = {
@@ -18,9 +18,19 @@ var chartInit = function chartInit(chart_type) {
                   Number($("#left_margin_textinput").val()),
                  ],
         renderTo: update_template.changeID($("#chart_id_textinput").val()),
-        type: chart_type
+        type: chart_type,
+        events: {
+            load: function () {
+                this.credits.element.onclick = function () {
+                    window.open(
+                        'http://www.bls.gov',
+                        '_blank'
+                    );
+                }
+            }
+        }
     }
-    
+
     var chart_options = new ChartOptions(options);
     return chart_options;
 };
