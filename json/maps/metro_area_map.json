@@ -634,6 +634,14 @@
     "cx": "60.9811628463867",
     "r": "2",
     "class": "metro-area-circle",
+    "loc_name": "Tacoma-Lakewood, WA",
+    "previous_fill": "",
+    "style": ""
+}, {
+    "cy": "33.88492375507548",
+    "cx": "60.9811628463867",
+    "r": "2",
+    "class": "metro-area-circle",
     "loc_name": "Seattle-Bellevue-Everett, WA",
     "previous_fill": "",
     "style": ""
@@ -1314,6 +1322,14 @@
     "cx": "657.023023267511",
     "r": "2",
     "class": "metro-area-circle",
+    "loc_name": "Newark, NJ-PA",
+    "previous_fill": "",
+    "style": ""
+}, {
+    "cy": "133.7545923249102",
+    "cx": "657.023023267511",
+    "r": "2",
+    "class": "metro-area-circle",
     "loc_name": "New York-Northern New Jersey-Long Island, NY-NJ-PA",
     "previous_fill": "",
     "style": ""
@@ -1891,6 +1907,14 @@
     "r": "2",
     "class": "metro-area-circle",
     "loc_name": "Lexington-Fayette, KY",
+    "previous_fill": "",
+    "style": ""
+}, {
+    "cy": "157.2841384834498",
+    "cx": "482.8150410185298",
+    "r": "2",
+    "class": "metro-area-circle",
+    "loc_name": "Gary, IN",
     "previous_fill": "",
     "style": ""
 }, {
@@ -3651,6 +3675,14 @@
     "r": "2",
     "class": "metro-area-circle",
     "loc_name": "Chicago-Joliet-Naperville, IL",
+    "previous_fill": "",
+    "style": ""
+}, {
+    "cy": "154.07438068820096",
+    "cx": "476.0896632051535",
+    "r": "2",
+    "class": "metro-area-circle",
+    "loc_name": "Chicago-Naperville-Arlington Heights, IL",
     "previous_fill": "",
     "style": ""
 }, {
