@@ -3,7 +3,6 @@
 *  @param o {object} credits options object
 */
 var Credits = function (o) {
-    this.href = "http://www.bls.gov";
 
     this.position = {
         align: 'left',

@@ -10,6 +10,7 @@ var ChartOptions = function (o) {
     this.plotBorderColor = o.plotBorderColor || '#000';
     this.plotBorderWidth = o.plotBorderWidth || 0;
     this.type = o.type || 'line';
+    this.events = o.events;
     this.zoomType = 'xy';
     this.alignTicks = o.alignTicks || false;
     this.ignoreHiddenSeries = o.ignoreHiddenSeries || true; //false for bubble charts so bubbles won't resize
