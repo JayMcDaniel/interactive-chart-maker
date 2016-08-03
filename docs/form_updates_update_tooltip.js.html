@@ -166,22 +166,26 @@ var update_tooltip = {
 
         if (is_shared) { //SHARED TOOLTIP
 
+            all_chart_options.tooltip.shared = true;
+            chart.tooltip.shared = true;
+
+
             if (decimals > 0) { //use decimal formatter
 
                 all_chart_options.tooltip.formatter = function () {
 
-                    var shared_tooltip_arr = ["&lt;b>" + this.key + "&lt;/b>"];
-                    var point = this.point;
+                    var shared_tooltip_arr = ["&lt;b>" + this.x + "&lt;/b>"];
+              
 
-                    $.each(this.series.chart.series, function (i) {
+                    $.each(this.points, function (i) {
 
-                        var y_val = this.points[point.x].high ? " High: " + signs_arr[0] + Highcharts.numberFormat((this.points[point.x].high * multiplier), decimals, ".", ",") + signs_arr[1] + " | Low: " + signs_arr[0] + Highcharts.numberFormat((this.points[point.x].low * multiplier), decimals, ".", ",") + signs_arr[1] :
-                            signs_arr[0] + Highcharts.numberFormat((this.points[point.x].y * multiplier), decimals, ".", ",") + signs_arr[1];
+                        var y_val = this.point.high ? " High: " + signs_arr[0] + Highcharts.numberFormat((this.point.high * multiplier), decimals, ".", ",") + signs_arr[1] + " | Low: " + signs_arr[0] + Highcharts.numberFormat((this.point.low * multiplier), decimals, ".", ",") + signs_arr[1] :
+                            signs_arr[0] + Highcharts.numberFormat((this.point.y * multiplier), decimals, ".", ",") + signs_arr[1];
 
 
-                        var s = this.name + ": " + y_val;
+                        var s = this.series.name + ": " + y_val;
 
-                        all_chart_options.series[i].extra_data ? s = all_chart_options.tooltip.addExtraData(all_chart_options.series[i].extra_data, point, s) : s = s;
+                        all_chart_options.series[i].extra_data ? s = all_chart_options.tooltip.addExtraData(all_chart_options.series[i].extra_data, this.point, s) : s = s;
 
                         shared_tooltip_arr.push(s);
 
@@ -196,21 +200,21 @@ var update_tooltip = {
 
                 all_chart_options.tooltip.formatter = function () {
 
-                    var shared_tooltip_arr = ["&lt;b>" + this.key + "&lt;/b>"];
-                    var point = this.point;
+                    var shared_tooltip_arr = ["&lt;b>" + this.x + "&lt;/b>"];
+                 
 
-                    $.each(this.series.chart.series, function (i) {
+                    $.each(this.points, function (i) {
 
-                        var y_val = this.points[point.x].high ? " High: " + signs_arr[0] + $(this.points[point.x].high * multiplier).addCommas() + signs_arr[1] + " | Low: " + signs_arr[0] + $(this.points[point.x].low * multiplier).addCommas() + signs_arr[1] :
-                            signs_arr[0] + $(this.points[point.x].y * multiplier).addCommas() + signs_arr[1];
-
-
-                        var s = this.name + ": " + y_val;
-
-                        all_chart_options.series[i].extra_data ? s = all_chart_options.tooltip.addExtraData(all_chart_options.series[i].extra_data, point, s) : s = s;
+                        var y_val = this.point.high ? " High: " + signs_arr[0] + $(this.point.high * multiplier).addCommas() + signs_arr[1] + " | Low: " + signs_arr[0] + $(this.point.low * multiplier).addCommas() + signs_arr[1] :
+                            signs_arr[0] + $(this.point.y * multiplier).addCommas() + signs_arr[1];
 
 
-                        var s = this.name + ": " + y_val;
+                        var s = this.series.name + ": " + y_val;
+
+                        all_chart_options.series[i].extra_data ? s = all_chart_options.tooltip.addExtraData(all_chart_options.series[i].extra_data, this.point, s) : s = s;
+
+
+                        var s = this.series.name + ": " + y_val;
 
                         shared_tooltip_arr.push(s);
 
@@ -223,6 +227,8 @@ var update_tooltip = {
 
 
         } else { //NOT SHARED TOOLTIP
+
+
 
             if (decimals > 0) { //use decimal formatter
                 all_chart_options.tooltip.formatter = function () {
@@ -258,7 +264,10 @@ var update_tooltip = {
 
     /** update tooltip - decide which kind of chart and call that get tooltip function **/
     updateToolTip: function (chart, all_chart_options) {
-
+        
+        //default to single point tooltip
+        all_chart_options.tooltip.shared = false;
+        chart.tooltip.shared = false;
 
         //extra data function
         all_chart_options.tooltip.addExtraData = function (extra_data, point, s) {
@@ -267,7 +276,7 @@ var update_tooltip = {
 
                 $.each(extra_data, function (i) {
                     if (extra_data[i].values[point.index]) {
-                        s = s + "&lt;br>&amp;nbsp;&amp;nbsp;" + extra_data[i].name + ": " + extra_data[i].values[point.index];
+                        s = s + "&lt;br>  " + extra_data[i].name + ": " + extra_data[i].values[point.index];
                     }
 
                 });
@@ -343,7 +352,7 @@ module.exports = update_tooltip;</code></pre>
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Tue Aug 02 2016 11:55:17 GMT-0400 (EDT)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Tue Aug 02 2016 21:56:55 GMT-0400 (EDT)
 </footer>
 
 <script> prettyPrint(); </script>
