@@ -124,7 +124,7 @@ var update_individual_series = {
                 lineWidth,
                 zIndex;
 
-        
+
             //if scatter chosen, make it a line chart with markers but no line
 
             if (type === "scatter") {
@@ -209,9 +209,9 @@ var update_individual_series = {
         $(".line_style_select").change(function () {
             var line_style = $(this).val();
             var i = $(this).parents(".series_snippet").index();
-            
+
             all_chart_options.series[i].dashStyle = line_style;
-            
+
             chart.series[i].update({
                 dashStyle: line_style
             });
@@ -228,13 +228,13 @@ var update_individual_series = {
 
         // make a color label
         var series_color_label = document.createElement("label");
-        series_color_label.className = "series_color_label";
-        series_color_label.textContent = "Color: ";
+        $(series_color_label).addClass("series_color_label")
+            .text("Color: ");
 
         //make color input box
         var series_color = document.createElement('input');
-        $(series_color).addClass("jscolor {valueElement:null}");
-        series_color.id = "series_color_" + i;
+        $(series_color).addClass("jscolor {valueElement:null}")
+            .attr("id", "series_color_" + i);
 
         //init with color, using jscolor.js
         var picker = new jscolor(series_color, {
@@ -262,9 +262,7 @@ var update_individual_series = {
         //make clear float div
         var clear_div = utils_main.makeClearFloatDiv();
 
-        series_color_div.appendChild(series_color_label);
-        series_color_div.appendChild(series_color);
-        series_color_div.appendChild(clear_div);
+        $(series_color_div).append(series_color_label, series_color, clear_div);
 
         return series_color_div;
     },
@@ -275,44 +273,39 @@ var update_individual_series = {
     makeLineStyleDiv: function (i) {
 
         var line_style_div = document.createElement("div");
-        line_style_div.className = "line_style_div";
+        $(line_style_div).addClass("line_style_div");
 
         var line_style_label = document.createElement("label");
-        line_style_label.className = "line_style_label";
-        line_style_label.textContent = "Line style: ";
+        $(line_style_label).addClass("line_style_label")
+            .text("Line style: ");
 
         var line_style_select = document.createElement("select");
-        line_style_select.className = "line_style_select";
-        line_style_select.id = "line_style_select_" + i;
+        $(line_style_select).addClass("line_style_select")
+            .attr("id", "line_style_select_" + i);
 
         var line_style_option_solid = document.createElement("option");
-        line_style_option_solid.textContent = "Solid";
-        line_style_option_solid.value = "Solid";
+        $(line_style_option_solid).text("Solid")
+            .val("Solid");
 
         var line_style_option_dash = document.createElement("option");
-        line_style_option_dash.textContent = "Dash";
-        line_style_option_dash.value = "Dash";
+        $(line_style_option_dash).text("Dash")
+            .val("Dash");
 
         var line_style_option_dot = document.createElement("option");
-        line_style_option_dot.textContent = "Dot";
-        line_style_option_dot.value = "Dot";
+        $(line_style_option_dot).text("Dot")
+            .val("Dot");
 
         var line_style_option_long_dash = document.createElement("option");
-        line_style_option_long_dash.textContent = "Long dash";
-        line_style_option_long_dash.value = "LongDash";
+        $(line_style_option_long_dash).text("Long dash")
+            .val("LongDash");
 
         var line_style_option_dash_dot = document.createElement("option");
-        line_style_option_dash_dot.textContent = "Dash-dot";
-        line_style_option_dash_dot.value = "DashDot";
+        $(line_style_option_dash_dot).text("Dash-dot")
+            .val("DashDot");
 
-        line_style_select.appendChild(line_style_option_solid);
-        line_style_select.appendChild(line_style_option_dash);
-        line_style_select.appendChild(line_style_option_dot);
-        line_style_select.appendChild(line_style_option_long_dash);
-        line_style_select.appendChild(line_style_option_dash_dot);
+        $(line_style_select).append(line_style_option_solid, line_style_option_dash, line_style_option_dot, line_style_option_long_dash, line_style_option_dash_dot);
 
-        line_style_div.appendChild(line_style_label);
-        line_style_div.appendChild(line_style_select);
+        $(line_style_div).append(line_style_label, line_style_select);
 
         return line_style_div;
 
@@ -336,7 +329,7 @@ var update_individual_series = {
         //column icon
         var series_type_column = document.createElement("div");
         $(series_type_column).addClass("series_type_icon series_type_column")
-            .attr("type", "column").attr("title","Column");
+            .attr("type", "column").attr("title", "Column");
         if (chart.series[i].type === "column") {
             $(series_type_column).addClass("selected");
         }
@@ -344,7 +337,7 @@ var update_individual_series = {
         //line icon
         var series_type_line = document.createElement("div");
         $(series_type_line).addClass("series_type_icon series_type_line")
-            .attr("type", "line").attr("title","Line");
+            .attr("type", "line").attr("title", "Line");
         if (chart.series[i].type === "line") {
             $(series_type_line).addClass("selected");
 
@@ -353,22 +346,16 @@ var update_individual_series = {
         //scatter icon
         var series_type_scatter = document.createElement("div");
         $(series_type_scatter).addClass("series_type_icon series_type_scatter")
-            .attr("type", "scatter").attr("title","Just markers");
-
+            .attr("type", "scatter").attr("title", "Just markers");
 
 
         var clear_div = utils_main.makeClearFloatDiv();
 
 
         //put it together
-        series_type_div.appendChild(series_type_label);
-        series_type_div.appendChild(series_type_line);
-        series_type_div.appendChild(series_type_column);
-        series_type_div.appendChild(series_type_scatter);
-        series_type_div.appendChild(clear_div);
+        $(series_type_div).append(series_type_label, series_type_line, series_type_column, series_type_scatter, clear_div);
 
         return series_type_div;
-
     },
 
     /** makes and returns a div with a checkbox that lets user determine whether the series should be visible by default **/
@@ -399,21 +386,27 @@ var update_individual_series = {
 
     /** makes and returns a div that has options to add extra data to a series for its tooltip **/
 
-    makeSeriesExtraDataDiv: function (all_chart_options, i) {
+    makeSeriesExtraDataDiv: function (all_chart_options, i, j) {
+        var j = j || 0;
+
         var series_extra_data_div = document.createElement("div");
-        series_extra_data_div.className = "series_extra_data_div";
+        $(series_extra_data_div).addClass("series_extra_data_div");
+
 
 
         //make title box and label
         var series_extra_data_title_label = document.createElement("label");
-        series_extra_data_title_label.className = "series_extra_data_title_label";
-        series_extra_data_title_label.textContent = "Extra data title for tooltip: ";
+        $(series_extra_data_title_label).addClass("series_extra_data_title_label")
+            .text("Extra data title for tooltip: ");
+
 
         //title text area
         var series_extra_data_title_textarea = document.createElement("textarea");
+
         series_extra_data_title_textarea.style = "height: 30px";
         series_extra_data_title_textarea.className = "series_extra_data_title_textarea";
         series_extra_data_title_textarea.id = "series_extra_data_title_textarea_" + i;
+        series_extra_data_title_textarea.value = all_chart_options.series[i].extra_data ? all_chart_options.series[i].extra_data[j].name : "";
 
         //make values box and label
         var series_extra_data_values_label = document.createElement("label");
@@ -424,24 +417,46 @@ var update_individual_series = {
         var series_extra_data_values_textarea = document.createElement("textarea");
         series_extra_data_values_textarea.className = "series_extra_data_values_textarea";
         series_extra_data_values_textarea.id = "series_extra_data_values_textarea_" + i;
+        series_extra_data_values_textarea.value = all_chart_options.series[i].extra_data ? all_chart_options.series[i].extra_data[j].values.join("\n") : ""; ///need to make this LOPP THROUGH EACH EXTRA DATA IN ARRAY
+
 
         //notes
         var extra_data_notes = document.createElement("p");
-        extra_data_notes.className = "notes";
-        extra_data_notes.textContent = "For each point in a series, separate the extra value with a new line. Any formatting will be carried over, so if you want commas or a dollar sign in your value, make sure to include that here.";
+
+        $(extra_data_notes).addClass("notes")
+            .text("For each point in a series, separate the extra value with a new line. Any formatting will be carried over, so if you want commas or a dollar sign in your value, make sure to include that here.");
 
         //add button
         var add_extra_data_button = document.createElement("div");
-        add_extra_data_button.textContent = "+";
-        add_extra_data_button.style = "cursor: pointer; float: left; font-size: 190%; color: #337ab7; line-height: .9;";
-        add_extra_data_button.className = "series_add_extra_data_button";
+        $(add_extra_data_button)
+            .addClass("series_add_extra_data_button")
+            .text("+")
+            .css({
+                cursor: "pointer",
+                float: "left",
+                "font-size": "190%",
+                color: "#337ab7",
+                "line-height": ".9"
+            });
+
 
         //subtract button
         var subtract_extra_data_button = document.createElement("div");
-        subtract_extra_data_button.innerHTML = "&amp;minus;";
-        subtract_extra_data_button.style = "cursor: pointer; float: left; font-size: 190%; margin-left: 10px; display: none; color: #337ab7; line-height: .9;";
-        subtract_extra_data_button.className = "series_subtract_extra_data_button";
+        $(subtract_extra_data_button)
+            .addClass("series_subtract_extra_data_button")
+            .html("&amp;minus;")
+            .css({
+                cursor: "pointer",
+                float: "left",
+                marginLeft: "10px",
+                "font-size": "190%",
+                color: "#337ab7",
+                "line-height": ".9",
+                display: "none"
+            });
 
+
+        //clearfloat div
         var clear_div = utils_main.makeClearFloatDiv();
 
 
@@ -450,20 +465,17 @@ var update_individual_series = {
         extra_data_hr.style = "margin-bottom: 0px;"
 
 
-        //add it all
-        series_extra_data_div.appendChild(extra_data_hr);
+        //put it all together
 
-        series_extra_data_div.appendChild(series_extra_data_title_label);
-        series_extra_data_div.appendChild(series_extra_data_title_textarea);
-        series_extra_data_div.appendChild(series_extra_data_values_label);
-        series_extra_data_div.appendChild(series_extra_data_values_textarea);
-        series_extra_data_div.appendChild(extra_data_notes);
-        series_extra_data_div.appendChild(add_extra_data_button);
-        series_extra_data_div.appendChild(subtract_extra_data_button);
-        series_extra_data_div.appendChild(clear_div);
-
-
-
+        $(series_extra_data_div).append(extra_data_hr,
+            series_extra_data_title_label,
+            series_extra_data_title_textarea,
+            series_extra_data_values_label,
+            series_extra_data_values_textarea,
+            extra_data_notes,
+            add_extra_data_button,
+            subtract_extra_data_button,
+            clear_div);
 
         return series_extra_data_div;
     },
@@ -477,7 +489,7 @@ var update_individual_series = {
         var display_series_options_inner_div = $("#display_series_options_inner_div");
         display_series_options_inner_div.empty();
 
-        $(chart.series).each(function (i) {
+        $(chart.series).each(function (i, series) {
 
             //make series name header
             var series_name = document.createElement('h5');
@@ -507,9 +519,19 @@ var update_individual_series = {
             var series_visible_div = update_individual_series.makeSeriesVisibleDiv(all_chart_options, i);
             series_snippet.appendChild(series_visible_div);
 
-            //make extra data div text area
-            var series_extra_data_div = update_individual_series.makeSeriesExtraDataDiv(all_chart_options, i);
-            series_snippet.appendChild(series_extra_data_div);
+            //make extra data div text area (default of 1, but can be more if series already has extra_data)
+            if (series.extra_data) {
+                $.each(series.extra_data, function (j) {
+                    var series_extra_data_div = update_individual_series.makeSeriesExtraDataDiv(all_chart_options, i, j);
+                    series_snippet.appendChild(series_extra_data_div);
+                });
+            } else {
+                var series_extra_data_div = update_individual_series.makeSeriesExtraDataDiv(all_chart_options, i);
+                series_snippet.appendChild(series_extra_data_div);
+            }
+
+
+
 
             //append all
             $(display_series_options_inner_div).append(series_snippet);
@@ -554,7 +576,7 @@ module.exports = update_individual_series;</code></pre>
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Tue Aug 02 2016 21:56:55 GMT-0400 (EDT)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Thu Aug 04 2016 22:30:35 GMT-0400 (EDT)
 </footer>
 
 <script> prettyPrint(); </script>

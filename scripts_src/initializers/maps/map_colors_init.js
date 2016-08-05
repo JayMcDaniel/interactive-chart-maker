@@ -35,7 +35,6 @@ var map_colors_init = {
 
 
         //use custom input if available
-
         if ($(".map_range_input").length > 0) { //grab from custom if available
 
             $.each($(".map_range_input"), function () {
@@ -49,29 +48,30 @@ var map_colors_init = {
                 value_ranges.push(values_arr[Math.floor(values_arr.length * i)]);
             }
         }
-        
+
         //set new cached array
-        map_colors_init.cached_value_ranges = value_ranges; 
+        map_colors_init.cached_value_ranges = value_ranges;
 
 
         //add color property to each obj in map_objs depending on its value
         $.each(all_map_options.areas, function () {
             if (this.value === null || this.value === "N/A") {
                 this.color = "rgb(223, 223, 223)" //gray
-            }
 
-            if (this.value <= value_ranges[0]) {
-                this.color = colors[0];
+            } else { //not N/A
 
-            }
+                if (this.value <= value_ranges[0]) {
+                    this.color = colors[0];
 
-            for (i = 0; i < value_ranges.length; i++) { //for length of value_ranges array, assign colors
-                if (this.value > value_ranges[i]) {
-                    this.color = colors[i + 1];
                 }
+
+                for (i = 0; i < value_ranges.length; i++) { //for length of value_ranges array, assign colors
+                    if (this.value > value_ranges[i]) {
+                        this.color = colors[i + 1];
+                    }
+                }
+
             }
-
-
         });
 
 
@@ -108,10 +108,10 @@ var map_colors_init = {
     },
 
 
+
     /** load map color palette boxes into #map_color_palettes **/
     loadMapColorPalettes(val) {
 
-    
         var selected_index = utils_forms.getSelectedIndex($(".map_color_palette_row")); //get current selected index to click later
         var allFormUpdates = require("../../form_updates/all_form_updates.js");
 
