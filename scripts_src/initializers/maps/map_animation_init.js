@@ -10,58 +10,105 @@ var map_animation_init = {
 
         //outer div
         var map_animation_div = document.createElement("div");
-        map_animation_div.style = "position: relative; margin-left: 20px; z-index: 500; margin-bottom: -6px; -webkit-user-select: none;";
+        $(map_animation_div).css({
+            position: "relative",
+            "margin-left": "20px",
+            "z-index": "500",
+            "margin-bottom": "-6px",
+            "-webkit-user-select": "none"
+        });
 
 
         //play button
         var play_button = document.createElement("div");
-        play_button.style = "float: left; margin-right: 10px; color: #337ab7; font-size: 32px; cursor: pointer; position: relative; top: -6px;";
-        play_button.innerHTML = "\u25B6";
-        play_button.className = "map_play_button";
+        $(play_button).css({
+                float: "left",
+                "margin-right": "10px",
+                color: "#337ab7",
+                "font-size": "32px",
+                cursor: "pointer",
+                position: "relative",
+                top: "-6px"
+            })
+            .html("\u25B6")
+            .addClass("map_play_button");
 
 
         //step backward button
         var step_backward_button = document.createElement("div");
-        step_backward_button.style = "float: left; margin-right: 10px; color: #337ab7; font-size: 26px; cursor: pointer";
-        step_backward_button.innerHTML = "<span class='glyphicon glyphicon-step-backward'></span>";
-        step_backward_button.className = "map_step_backward_button";
+        $(step_backward_button).css({
+                float: "left",
+                "margin-right": "10px",
+                color: "#337ab7",
+                "font-size": "26px",
+                cursor: "pointer",
+                position: "relative",
+                top: "-5px"
+            })
+            .html("&lt")
+            .addClass("map_step_backward_button");
 
         //step forward button
         var step_forward_button = document.createElement("div");
-        step_forward_button.style = "float: left; margin-right: 10px; margin-left: -5px; color: #337ab7; font-size: 26px; cursor: pointer";
-        step_forward_button.innerHTML = "<span class='glyphicon glyphicon-step-forward'></span>";
-        step_forward_button.className = "map_step_forward_button";
+        $(step_forward_button).css({
+                float: "left",
+                "margin-right": "10px",
+                "margin-left": "-2px",
+                color: "#337ab7",
+                "font-size": "26px",
+                cursor: "pointer",
+                position: "relative",
+                top: "-5px"
+            })
+            .html("&gt")
+            .addClass("map_step_forward_button");
 
 
         //slider
         var map_slider = document.createElement("input");
-        map_slider.setAttribute("type", "range");
-        map_slider.setAttribute("min", "0");
-        map_slider.setAttribute("max", all_map_options.animated_value_titles.length - 1);
-        map_slider.setAttribute("value", "0");
-        map_slider.style = "float: left; margin-right: 10px; color: #337ab7; font-size: 26px; cursor: pointer; width: 400px; position: relative; top: 10px;";
-        map_slider.className = "map_slider";
+        $(map_slider).attr({
+                "type": "range",
+                "min": "0",
+                "max": all_map_options.animated_value_titles.length - 1,
+                "value": "0"
+            })
+            .css({
+                float: "left",
+                "margin-right": "10px",
+                color: "#337ab7",
+                "font-size": "26px",
+                cursor: "pointer",
+                width: all_map_options.sized_for_spotlight ? "310px" : "400px",
+                position: "relative",
+                top: "10px"
+            })
+            .addClass("map_slider")
+
+
 
         //animation title (i.e. date shown)
         var animation_title = document.createElement("h3");
-        animation_title.textContent = all_map_options.animated_value_titles[0];
-        animation_title.style = "margin: 0px; font-family: sans-serif; font-weight: 200; color: #337ab7; font-size: 24px; position: relative; top: 5px; float: left;";
-        animation_title.className = "animation_title";
+        $(animation_title).text(all_map_options.animated_value_titles[0])
+            .css({
+                margin: "0px",
+                "font-family": "sans-serif",
+                "font-weight": "200",
+                color: "#337ab7",
+                "font-size": "24px",
+                position: "relative",
+                top: "5px",
+                float: "left"
+            })
+            .addClass("animation_title");
 
 
         //put it all together in the div
-        map_animation_div.appendChild(play_button);
-        map_animation_div.appendChild(step_backward_button);
-        map_animation_div.appendChild(step_forward_button);
-        map_animation_div.appendChild(map_slider);
-        //  map_animation_div.appendChild(clear_div);
-        map_animation_div.appendChild(animation_title);
-
+        $(map_animation_div).append(play_button, step_backward_button, step_forward_button, map_slider, animation_title);
 
 
         //adjust legend placement
-//        $("#legend_placement_y").val(70);
-//        all_map_options.legend.y = 70;
+        //        $("#legend_placement_y").val(70);
+        //        all_map_options.legend.y = 70;
 
         return map_animation_div;
 
@@ -71,7 +118,6 @@ var map_animation_init = {
 
     /** sets up the play, pause, and slider functionality in animated maps **/
     setUpMapAnimation: function (all_map_options, map_display_area) {
-
 
 
         //when slider changes, change the values displayed in the map and the animation title
@@ -108,10 +154,11 @@ var map_animation_init = {
 
                 //if a circle, resize and give opacity
 
-                if ($this.attr("r")) {
+                if ($this.attr("r") && all_map_options.map_type !== "state") {
 
                     var this_area = new_val ? (Math.abs(new_val) / all_map_options.circle_size_multiple) || 0 : 0;
                     $this.attr("r", Math.sqrt(this_area / Math.PI));
+                    
                     $this.attr("fill", new_fill.replace(')', ', 0.75)').replace('rgb', 'rgba'));
                 } else { //for paths, no resize or opacity
                     $this.attr("fill", new_fill);
@@ -140,7 +187,7 @@ var map_animation_init = {
             playing = setInterval(function (map_display_area) {
                 //increase slider value by one unless at max. If at max, make 0
                 moveSlider(1);
-            }, 500);
+            }, all_map_options.animation_delay);
         }
 
 
@@ -168,7 +215,6 @@ var map_animation_init = {
             if ($this.hasClass("playing")) { //if user clicked it to play, start animation, and show pause button
                 $this.html("&nbsp;||");
 
-
                 playMap(map_display_area);
 
             } else { //if user click it to pause, show play button and stop animation
@@ -183,7 +229,7 @@ var map_animation_init = {
         $(".map_step_forward_button", map_display_area).click(function () {
             moveSlider(1);
         });
-        
+
         //step back button click
         $(".map_step_backward_button", map_display_area).click(function () {
             moveSlider(-1);

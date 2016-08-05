@@ -85,7 +85,7 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
 
         //if drilled into a drilldown, click the up button to get out - prevents errors
         $(".highcharts-button").click();
-       
+
 
         allFormUpdates.selectChart(this);
         var chart_type = $(this).divVal();
@@ -211,12 +211,13 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
 
         $.get(new_table_file, function (table) {
             $("#table_input_textarea").val(table);
+            $("#chart_type_icons .selected").click();
         });
     });
 
 
-    
-    
+
+
     /* COLOR PALETTE CHANGES - defined and initiated in navigation setup*/
 
     //chart color palettes
@@ -516,7 +517,6 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
     //is animated checkbox changed
     $("#map_animated_checkbox").unbind().change(function () {
         $("#legend_placement_y").val(70); // set legend y value so legend is lower for animated maps
-        $(".map_play_button.playing").click(); //if animated map is playing, stop it - prevents errors
         map_init.loadNewMap(chart, all_chart_options, all_map_options, true); // true to repopulate form
     });
 
@@ -531,10 +531,20 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
         map_init.loadNewMap(chart, all_chart_options, all_map_options, true); // true to repopulate form
     });
 
+    //map size for spotlight checkbox changed
+    $("#map_spotlight_size_checkbox").unbind().change(function () {
+        map_init.loadNewMap(chart, all_chart_options, all_map_options, true); // true to repopulate form
+    });
+
+    //map animation delay input changed
+    $("#map_animation_speed_range").unbind().on("input", function () {
+        map_init.loadNewMap(chart, all_chart_options, all_map_options, true); // true to repopulate form
+    });
+
+
 
     //map palette + / - buttons clicked to change amount of colors
     $("#add_map_color, #minus_map_color").unbind().click(function () {
-
         update_map_palettes.changeAmount($(this));
 
     });

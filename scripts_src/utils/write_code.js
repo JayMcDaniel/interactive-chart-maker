@@ -197,8 +197,8 @@ jQuery.fn.extend({addCommas:' + $("string").addCommas.toString() + ' });';
             //add jQuery addcommas extension
             'jQuery.fn.extend({addCommas:' + $("string").addCommas.toString() + ' });';
 
-
-
+        //replacements
+        map_js.string = map_js.string.replace(/▶/g, "\\u25B6");
 
         return map_js.string;
     }

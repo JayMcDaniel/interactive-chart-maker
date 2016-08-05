@@ -1,726 +1,113 @@
-
-
-
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
+
+
 <html>
-    <head>
+
+<head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Code editor for interactive charts</title>
-    
+
 
     <LINK REL="SHORTCUT ICON" HREF="images/code-icon.png">
-    
+
     <link rel="stylesheet" media="screen" type="text/css" href="../styles/css/bls_tables.css" />
-        <link rel="stylesheet" media="screen" type="text/css" href="../styles/css/styles_cm.css" />
+    <link rel="stylesheet" media="screen" type="text/css" href="../styles/css/styles_cm.css" />
+
+    <style type="text/css">
+        .map_display_area {
+            display: block;
+        }
+    </style>
 
 
-<script src="../libraries/jquery/jquery-2.2.0.min.js"></script>
-   
-   
-	<script  type="text/javascript" src="http:www.bls.gov/javascripts/bls.js"></script>
-  
-        <script src="../libraries/Highcharts-4.2.3/js/highcharts.js"></script>
+    <script src="../libraries/jquery/jquery-2.2.0.min.js"></script>
+
+
+    <!--	<script  type="text/javascript" src="http:www.bls.gov/javascripts/bls.js"></script>-->
+
+    <script src="../libraries/Highcharts-4.2.3/js/highcharts.js"></script>
     <script src="../libraries/Highcharts-4.2.3/js/highcharts-more.src.js"></script>
     <script src="../libraries/Highcharts-4.2.3/js/modules/drilldown.src.js"></script>
 
-	
+
     <script>
-	$(document).ready(function(e) {
+        $(document).ready(function (e) {
 
-	    var loadChart;
-
-
-	    $("#refreshChart").click(function() {
-	        ///load html from HTMLcodeText box into outerChartContainer box
-	        $("#outerChartContainer").html($("#HTMLcodeText").val());
-
-	        loadChart = $("#JScodeText").val();
-	        eval(loadChart);
+            var loadChart;
 
 
-	    });
+            $("#refreshChart").click(function () {
+                ///load html from HTMLcodeText box into outerChartContainer box
+                $("#outerChartContainer").html($("#HTMLcodeText").val());
+
+                loadChart = $("#JScodeText").val();
+                eval(loadChart);
+
+
+            });
 
 
 
 
-	    ///function to look to see if window was opened from table wizard
+            ///function to look to see if window was opened from table wizard
 
 
-	    var checkIfOpenedFromChartMaker = function() {
-	        var exportCodeHTML = "";
-	        var exportCodeJS = "";
+            var checkIfOpenedFromChartMaker = function () {
+                var exportCodeHTML = "";
+                var exportCodeJS = "";
 
-	        if (window.opener) {
+                if (window.opener) {
 
-	            exportCodeHTML = sessionStorage.getItem("export_code_html");
-	            exportCodeJS = sessionStorage.getItem("export_code_js");
-	        }
-
-
-	        if (exportCodeHTML.length > 0) {
-	            $("#HTMLcodeText").val(exportCodeHTML);
-	            $("#JScodeText").val(exportCodeJS);
+                    exportCodeHTML = sessionStorage.getItem("export_code_html");
+                    exportCodeJS = sessionStorage.getItem("export_code_js");
+                }
 
 
-	        }
-
-	        $("#refreshChart").click();
-
-	    }
+                if (exportCodeHTML.length > 0) {
+                    $("#HTMLcodeText").val(exportCodeHTML);
+                    $("#JScodeText").val(exportCodeJS);
 
 
-	    checkIfOpenedFromChartMaker();
+                }
+
+                $("#refreshChart").click();
+
+            }
 
 
-	});
-	
-	</script>
-    
-    
-    </head>
+            checkIfOpenedFromChartMaker();
 
-    <body>
-      <h2 style="font-size: 160%;">Code editor for interactive charts</h2>
+
+        });
+    </script>
+
+
+</head>
+
+<body>
+    <h2 style="font-size: 160%;">Code editor for interactive charts</h2>
+    <br> Resulting chart:
     <br>
-	Resulting chart:<br>
     <div id="outerChartContainer" style="margin: 0 0 0 0; min-height:300px; width:860px;">
-    
+
     </div>
     <br>
     <button id="refreshChart">Refresh chart</button>
     <br>
+    <br> HTML code:
+    <br><span class="notes">Warning: If the Div ID in this HTML and the renderTo value in the JS below are changed to not match, the chart will not render until you refresh the browser.</span>
     <br>
-    HTML code: <br><span class="notes">Warning: If the Div ID in this HTML and the renderTo value in the JS below are changed to not match, the chart will not render until you refresh the browser.</span><br>
-    <textarea id="HTMLcodeText" style="height: 200px; width:860px; background-color:#fff;"><div id="chart0" style="width: 580px; height: 450px; margin: auto; padding: 0px"></div></textarea>
+    <textarea id="HTMLcodeText" style="height: 200px; width:860px; background-color:#fff;">
+        <div id="chart0" style="width: 580px; height: 450px; margin: auto; padding: 0px"></div>
+    </textarea>
+    <br> JS code:
     <br>
-    JS code:<br>
     <textarea id="JScodeText" style="height: 400px; width:860px; background-color:#fff;">
-        
-        $(document).ready(function(){
 
-        ///////add commas function
-
-        function addCommas(val) {
-            if ((val > 999) || (val < -999)) {
-                while (/(\d+)(\d{3})/.test(val.toString())) {
-                    val = val.toString().replace(/(\d+)(\d{3})/, '$1' + ',' + '$2');
-                }
-            }
-            return val;
-        }
-		
-		
-	   /////function to add dollarsigns if needed, and correctly do it for neg values
-
-var negDollarFormat = function(val) {
-
-                            if (false == true) { //if using dollars == true
-
-                                ///convert to number again
-
-                                val = Number(val.replace(/,/g, ""));
-
-                                if (val >= 0) {
-
-                                    return "$" + Highcharts.numberFormat(val, 0);
-
-                                } else {
-
-                                    return "-$" + Highcharts.numberFormat(Math.abs(val), 0);
-
-                                }
-
-                            } else { ///not using dollars
-
-                                return val;
-
-                            }
-
-         }		
-					
-					
-					
-					
-					
-					
-					
-		///initialize chart with options////
-
-        var chart0_chart = new Highcharts.Chart({
-
-                chart: {
-
-                    renderTo: "chart0",
-
-                    spacingLeft: 20,
-
-                    spacingRight: 0,
-
-                    // margin: [110, 60, 70, 70], //[top, right, bottom, left], the higher the number the more pushed in
-
-                    marginBottom: 80,
-
-                    marginTop: 110,
-
-                    marginLeft: 75,
-
-                    marginRight: 40,
-
-                    borderColor: 'white',
-
-                    plotBorderColor: 'none',
-
-                    plotBorderWidth: 1,
-
-                    defaultSeriesType: 'line', //line, bar, etc...
-
-                    zoomType: null,
-
-                    alignTicks: false,
-
-                    inverted: false,
-
-                    ignoreHiddenSeries: true  //false for bubble so bubbles won't resize
-
-                },
-
-                title: {
-
-                    text: "Title Goes Here",
-
-                    align: 'left',
-
-                    margin: 20,
-
-                    x: 0,
-
-                    width: '540px',
-
-                    style: {
-
-                        color: '#000000',
-
-                        fontFamily: 'sans-serif',
-
-                        fontWeight: 'bold',
-
-                        fontSize: '14px'
-
-                    }
-
-                },
-
-                subtitle: {
-
-                    text: "",
-
-                    align: 'left',
-
-                    x: 0,
-
-                    style: {
-
-                        color: '#000000',
-
-                        fontFamily: 'sans-serif',
-
-                        fontWeight: 'normal',
-
-                        backgroundColor: '#fff',
-
-                        fontSize: '12px'
-
-                    }
-
-                },
-
-                ///////series data//////////////////        
-
-                series: [{"name":"Series 1","visible":true,"color":"rgb(47, 126, 216)","dashStyle":"Solid","type":"line","lineWidth":1.5,"marker":{"enabled":false},"data":[40,23,13,15,18,40,45,32,10,20,5,10,40,40],"_symbolIndex":0},{"name":"Series 2","visible":true,"color":"rgb(176, 76, 76)","dashStyle":"Solid","type":"line","lineWidth":1.5,"marker":{"enabled":false},"data":[40,40,40,23,13,32,10,20,5,10,15,18,40,45],"_symbolIndex":1}],
-
-                ///////////////x axis/////////////////////
-
-                xAxis: {
-
-                    title: {
-						
-						useHTML: true,
-
-                        text: '',
-
-                        margin: 6,
-
-                        style: {
-
-                            color: '#000000',
-
-                            fontFamily: 'Calibri, Verdana, Arial, Helvetica, sans-serif',
-
-                            fontWeight: 'normal',
-
-                            backgroundColor: '#fff',
-
-                            fontSize: '13px'
-
-                        }
-
-                    },
-
-                    tickInterval: null,
-
-                    tickmarkPlacement: 'on',
-
-                    tickPosition: 'outside',
-
-                    tickColor: '#C0D0E0',
-
-                    lineWidth: 1.2,
-
-                    lineColor: 'gray',
-					
-					gridLineColor: '#c0c0c0',
-					
-					gridLineWidth: 0,
-					
-					gridLineDashStyle: 'Dot',
-
-                    labels: {
-
-                        //   formatter: function() {return Highcharts.numberFormat(this.value,0)},
-
-                        formatter: function() {
-
-                            var hideMonths = false;
-
-                            if (hideMonths == true) {
-                                return this.value.replace(/\D+/g, '');
-                            } else if (this.chart.options.chart.defaultSeriesType =="bubble"){
-								return addCommas(this.value);
-							}else{
-                                return this.value;
-                            }
-
-                        },
-
-                        rotation: 0,
-
-                        //	overflow: 'justify',
-
-                        // x: -2,
-
-                        //   y: 18,
-
-                        style: {
-
-                            color: '#000000',
-
-                            fontFamily: 'Calibri, Verdana, Arial, Helvetica, sans-serif',
-
-                            fontWeight: 'normal',
-
-                            backgroundColor: '#fff',
-
-                            fontSize: '12px'
-
-                        }
-
-                    },
-
-                    plotBands: [],
-
-                    categories: ["Dec 2012","Jan 2013","Feb 2013","Mar 2013","Apr 2013","May 2013","Jun 2013","Jul 2013","Aug 2013","Sep 2013","Oct 2013","Nov 2013","Dec 2013","Jan 2014"]
-
-                },
-
-                //end xaxis
-
-                //////////// Y AXIS ////////////////////////////////////
-
-                yAxis: [
-
-                    {
-                        title: {
-							
-							useHTML: true,
-
-                            text: 'Y-axis title',
-
-                            align: 'high',
-
-                            offset: 0,
-							
-							rotation: 0,
-
-                            y: -15,
-
-                            x: 35,
-
-                            style: {
-
-                                color: '#000000',
-
-                                fontFamily: 'Calibri, Verdana, Arial, Helvetica, sans-serif',
-
-                                fontWeight: 'normal',
-
-                                backgroundColor: '#fff',
-
-                                fontSize: '13px'
-
-                            }
-
-                        },
-
-                        type: 'linear',
-
-                        labels: {
-
-                            formatter: function() {
-
-                                ///////if butterfly chart ///////////////////////////
-
-                                if (false == true) {
-
-                                    if (this.value > 0) { ///don't show positive values on this y axis for butterfly charts
-
-                                        return "";
-
-                                    } else {
-
-                                        return Math.abs(this.value);
-
-                                    }
-
-                                    /////////end if butterfly chart///////////
-
-                                    ///ALL Other types of charts , show all values at specified decimal and divisor ////////////////////////
-
-                                } else {
-
-                                    if (false == true) { // if forced decimals chosen
-
-                                        var val = ' '.replace(' ', '') + Highcharts.numberFormat(this.value / 1, 0) + '';
-                                        val = val.replace("$-", "-$");
-                                        return val;
-
-                                    } else {
-
-                                        var val = ' '.replace(' ', '') + addCommas(this.value / 1) + '';
-                                        val = val.replace("$-", "-$");
-                                        return val;
-                                    }
-
-                                }
-
-                                /// end y axis formatter
-
-                            },
-
-                            style: {
-
-                                color: '#000000',
-
-                                fontWeight: 'normal',
-
-                                backgroundColor: '#fff',
-
-                                fontSize: '12px',
-
-                                fontFamily: 'Calibri, Verdana, Arial, Helvetica, sans-serif'
-
-                            }
-
-                        },
-						
-						opposite: false,
-
-                        tickInterval: null,
-
-                        tickWidth: 1,
-
-                        lineWidth: 1,
-
-                        lineColor: 'gray',
-
-                        gridLineColor: '#c0c0c0',
-
-                        gridLineWidth: 1.0,
-
-                        gridLineDashStyle: 'Dot',
-
-                        min: null,
-
-                        max: null,
-
-                        plotLines: [{"value":0,"color":"#c0c0c0","dashStyle":"solid","width":1}]
-
-                    },
-
-                    ///second y axis (for recession or butterfly)!
-
-                    {"max":20,"labels":{formatter: function() {if (this.value < 0){return "";}else{return Math.abs(this.value);}},"style":{"color":"#fff"}},"lineWidth":0,"gridLineWidth":0,"plotLines":null,"title":{"text":""},"linkedTo":0,"opposite":true,"index":1}
-
-                    //end second y axis
-
-                ],
-
-                ////////////////////LEGEND////////////////////
-
-                legend: {
-
-                    layout: 'horizontal',
-
-                    //make vertical or horizontal
-
-                    useHTML: true,
-
-                    enabled: true,
-
-                    backgroundColor: 'none',
-
-                    borderWidth: 0,
-
-                    borderColor: 'none',
-
-                    shadow: false,
-
-                    align: 'center',
-
-                    //alignment of legend items
-
-                    verticalAlign: 'top',
-
-                    x: 0,
-
-                    //Higher number moves legend right
-
-                    y: 30,
-
-                    //Higher number moves legend down
-
-                    // width: 590,
-
-                    //small widths will cause horizontal layouts to stack
-
-                    floating: false,
-
-                    //true makes legend independent of chart objects
-
-                    reversed: false,
-
-                    //reverses legend item order - handy to line up with column order
-
-                    //  itemWidth: 195,
-
-                    // symbolWidth: 30,
-					
-					itemDistance: 30,
-
-                itemStyle: { //Three legend item styles for active, hover, and deselected - setting these specifically fixes browser differences
-
-                    fontFamily: 'Calibri, Verdana, Arial, Helvetica, sans-serif',
-					width: 580,
-                    color: '#000'
-
-                },
-
-                itemHiddenStyle: {
-
-                    color: 'gray'
-
-                },
-
-                itemHoverStyle: {
-
-                    //	cursor: "default"  ///un note when legend click is disabled
-
-                }
-                },
-
-                ///////////////////////TOOLTIP///////////////////// (making from manual entry)
-
-                tooltip: {
-
-                    backgroundColor: '#FEFFEF',
-
-                    useHTML: true,
-					
-					crosshairs: [false,false],
-
-                    style: {
-
-                        color: '#000000',
-
-                        fontFamily: 'Calibri, Verdana, Arial, Helvetica, sans-serif'
-
-                    },
-
-                    //tooltip is what shows on hover
-
-                    formatter: function () {
-    var s = "";
-    if (this.point.high) { ///for ranges
-        var s = '<b>' + this.series.name + '</b><br>' + this.x + "<br>High: <b>" + negDollarFormat(Highcharts.numberFormat(this.point.high * 1, 0)) + '' + '</b>' + "<br>Low: <b>" + negDollarFormat(Highcharts.numberFormat(this.point.low * 1, 0)) + '' + '</b>';
-
-    } else { ///for not ranges
-        var s = '<b>' + this.series.name + '</b><br>' + this.x + ": <b>" + negDollarFormat(Highcharts.numberFormat(this.y * 1, 0)) + '' + '</b>';
-    }
-
-    return s;
-},
-
-                    shared: false
-
-                },
-
-                /////////////////PLOT OPTIONS///////////////////
-
-                   plotOptions: {
-
-           series: {
-
-               events: {
-                   legendItemClick: function(event) {
-					  var legendToggleEnabled = false; 
-					   
-					  if(legendToggleEnabled == true){
-                       var selected = this.index;
-                       var allSeries = this.chart.series;
-
-                       $.each(allSeries, function(index, series) {
-                           selected == index ? series.show() : series.hide();
-                       });
-
-                       return false;
-                     }
-				   }
-				   
-               },
-
-               dataLabels: {
-
-                   enabled: false
-
-               },
-
-               pointPadding: 0.1, //padding between points in bar charts  (0 is tight)1 is loose
-
-               groupPadding: 0.2, // padding between groups in bar charts (0 is tight)1 is loose
-
-               maxSize: 50, //for bubble sizes
-
-               sizeBy: 'width', //for bubble sizing, instead of 'area'
-
-               pointPlacement: null,
-
-               borderWidth: 0,
-
-               shadow: false,
-
-               animation: true
-
-           },
-
-				bar:{
-					stacking: null,
-					pointPadding: 0.1, //padding between points in bar charts  (0 is tight)1 is loose
-                    groupPadding: 0.2, // padding between groups in bar charts (0 is tight)1 is loose
-	                minPointLength: 3
-
-				},  
-				column:{
-					stacking: null,
-					pointPadding: 0.1, //padding between points in bar charts  (0 is tight)1 is loose
-                    groupPadding: 0.2, // padding between groups in bar charts (0 is tight)1 is loose
-					minPointLength: 3
-				},                                                                      
-
-           line: {
-
-               lineWidth: 1.5,
-
-               states: {
-
-                   hover: {
-
-                       lineWidth: 4
-
-                   }
-
-               },
-
-               marker: {
-
-                   enabled: true,
-
-                   //status of tick symbols
-
-                   states: {
-
-                       hover: {
-
-                           enabled: true,
-
-                           radius: 5
-
-                       }
-
-                   }
-
-               }
-
-           }
-
-       },
-
-                credits: {
-					useHTML: true,
-
-                    text: "Click legend items to change data display. Hover over chart to view data.<br>Source: U.S. Bureau of Labor Statistics.",
-
-                    position: {
-
-                        align: 'left',
-
-                        x: 10,
-
-                        y: -20
-
-                    },
-
-                    style: {
-
-                        cursor: "default",
-                        color: "#2C2C2C"
-
-                    },
-
-                    href: ""
-
-                },
-
-                exporting: {
-
-                    buttons: {
-
-                        contextButton: {
-
-                            enabled: true,
-
-                            verticalAlign: 'bottom',
-
-                            x: -10
-
-                        }
-
-                    }
-
-                }
-
-            }, function() {
-				
-				$(".highcharts-legend-item").css("min-height", "0px").css("z-index",100); //fix so CMS CSS doesn't make legend taller than it should
+        $(document).ready(function(){ ///////add commas function function addCommas(val) { if ((val > 999) || (val
+        < -999)) { while (/(\d+)(\d{3})/.test(val.toString())) { val=v al.toString().replace(/(\d+)(\d{3})/, '$1' + ',' + '$2'); } } return val; } /////function to add dollarsigns if needed, and correctly do it for neg values var negDollarFormat=f unction(val) { if (false==t rue) { //if using dollars==t rue ///convert to number again val=N umber(val.replace(/,/g, "")); if (val>= 0) { return "$" + Highcharts.numberFormat(val, 0); } else { return "-$" + Highcharts.numberFormat(Math.abs(val), 0); } } else { ///not using dollars return val; } } ///initialize chart with options//// var chart0_chart = new Highcharts.Chart({ chart: { renderTo: "chart0", spacingLeft: 20, spacingRight: 0, // margin: [110, 60, 70, 70], //[top, right, bottom, left], the higher the number the more pushed in marginBottom: 80, marginTop: 110, marginLeft: 75, marginRight: 40, borderColor: 'white', plotBorderColor: 'none', plotBorderWidth: 1, defaultSeriesType: 'line', //line, bar, etc... zoomType: null, alignTicks: false, inverted: false, ignoreHiddenSeries: true //false for bubble so bubbles won't resize }, title: { text: "Title Goes Here", align: 'left', margin: 20, x: 0, width: '540px', style: { color: '#000000', fontFamily: 'sans-serif', fontWeight: 'bold', fontSize: '14px' } }, subtitle: { text: "", align: 'left', x: 0, style: { color: '#000000', fontFamily: 'sans-serif', fontWeight: 'normal', backgroundColor: '#fff', fontSize: '12px' } }, ///////series data////////////////// series: [{"name":"Series 1","visible":true,"color":"rgb(47, 126, 216)","dashStyle":"Solid","type":"line","lineWidth":1.5,"marker":{"enabled":false},"data":[40,23,13,15,18,40,45,32,10,20,5,10,40,40],"_symbolIndex":0},{"name":"Series 2","visible":true,"color":"rgb(176, 76, 76)","dashStyle":"Solid","type":"line","lineWidth":1.5,"marker":{"enabled":false},"data":[40,40,40,23,13,32,10,20,5,10,15,18,40,45],"_symbolIndex":1}], ///////////////x axis///////////////////// xAxis: { title: { useHTML: true, text: '', margin: 6, style: { color: '#000000', fontFamily: 'Calibri, Verdana, Arial, Helvetica, sans-serif', fontWeight: 'normal', backgroundColor: '#fff', fontSize: '13px' } }, tickInterval: null, tickmarkPlacement: 'on', tickPosition: 'outside', tickColor: '#C0D0E0', lineWidth: 1.2, lineColor: 'gray', gridLineColor: '#c0c0c0', gridLineWidth: 0, gridLineDashStyle: 'Dot', labels: { // formatter: function() {return Highcharts.numberFormat(this.value,0)}, formatter: function() { var hideMonths = false; if (hideMonths == true) { return this.value.replace(/\D+/g, ''); } else if (this.chart.options.chart.defaultSeriesType =="bubble"){ return addCommas(this.value); }else{ return this.value; } }, rotation: 0, // overflow: 'justify', // x: -2, // y: 18, style: { color: '#000000', fontFamily: 'Calibri, Verdana, Arial, Helvetica, sans-serif', fontWeight: 'normal', backgroundColor: '#fff', fontSize: '12px' } }, plotBands: [], categories: ["Dec 2012","Jan 2013","Feb 2013","Mar 2013","Apr 2013","May 2013","Jun 2013","Jul 2013","Aug 2013","Sep 2013","Oct 2013","Nov 2013","Dec 2013","Jan 2014"] }, //end xaxis //////////// Y AXIS //////////////////////////////////// yAxis: [ { title: { useHTML: true, text: 'Y-axis title', align: 'high', offset: 0, rotation: 0, y: -15, x: 35, style: { color: '#000000', fontFamily: 'Calibri, Verdana, Arial, Helvetica, sans-serif', fontWeight: 'normal', backgroundColor: '#fff', fontSize: '13px' } }, type: 'linear', labels: { formatter: function() { ///////if butterfly chart /////////////////////////// if (false == true) { if (this.value > 0) { ///don't show positive values on this y axis for butterfly charts return ""; } else { return Math.abs(this.value); } /////////end if butterfly chart/////////// ///ALL Other types of charts , show all values at specified decimal and divisor //////////////////////// } else { if (false == true) { // if forced decimals chosen var val = ' '.replace(' ', '') + Highcharts.numberFormat(this.value / 1, 0) + ''; val = val.replace("$-", "-$"); return val; } else { var val = ' '.replace(' ', '') + addCommas(this.value / 1) + ''; val = val.replace("$-", "-$"); return val; } } /// end y axis formatter }, style: { color: '#000000', fontWeight: 'normal', backgroundColor: '#fff', fontSize: '12px', fontFamily: 'Calibri, Verdana, Arial, Helvetica, sans-serif' } }, opposite: false, tickInterval: null, tickWidth: 1, lineWidth: 1, lineColor: 'gray', gridLineColor: '#c0c0c0', gridLineWidth: 1.0, gridLineDashStyle: 'Dot', min: null, max: null, plotLines: [{"value":0,"color":"#c0c0c0","dashStyle":"solid","width":1}] }, ///second y axis (for recession or butterfly)! {"max":20,"labels":{formatter: function() {if (this.value
+            < 0){return "";}else{return Math.abs(this.value);}}, "style":{ "color": "#fff"}}, "lineWidth":0, "gridLineWidth":0, "plotLines":null, "title":{ "text": ""}, "linkedTo":0, "opposite":true, "index":1} //end second y axis ], ////////////////////LEGEND//////////////////// legend: { layout: 'horizontal', //make vertical or horizontal useHTML: true, enabled: true, backgroundColor: 'none', borderWidth: 0, borderColor: 'none', shadow: false, align: 'center', //alignment of legend items verticalAlign: 'top', x: 0, //Higher number moves legend right y: 30, //Higher number moves legend down // width: 590, //small widths will cause horizontal layouts to stack floating: false, //true makes legend independent of chart objects reversed: false, //reverses legend item order - handy to line up with column order // itemWidth: 195, // symbolWidth: 30, itemDistance: 30, itemStyle: { //Three legend item styles for active, hover, and deselected - setting these specifically fixes browser differences fontFamily: 'Calibri, Verdana, Arial, Helvetica, sans-serif', width: 580, color: '#000' }, itemHiddenStyle: { color: 'gray' }, itemHoverStyle: { // cursor: "default" ///un note when legend click is disabled } }, ///////////////////////TOOLTIP///////////////////// (making from manual entry) tooltip: { backgroundColor: '#FEFFEF', useHTML: true, crosshairs: [false,false], style: { color: '#000000', fontFamily: 'Calibri, Verdana, Arial, Helvetica, sans-serif' }, //tooltip is what shows on hover formatter: function () { var s="" ; if (this.point.high) { ///for ranges var s='<b>' + this.series.name + '</b><br>' + this.x + "<br>High: <b>" + negDollarFormat(Highcharts.numberFormat(this.point.high * 1, 0)) + '' + '</b>' + "<br>Low: <b>" + negDollarFormat(Highcharts.numberFormat(this.point.low * 1, 0)) + '' + '</b>'; } else { ///for not ranges var s='<b>' + this.series.name + '</b><br>' + this.x + ": <b>" + negDollarFormat(Highcharts.numberFormat(this.y * 1, 0)) + '' + '</b>'; } return s; }, shared: false }, /////////////////PLOT OPTIONS/////////////////// plotOptions: { series: { events: { legendItemClick: function(event) { var legendToggleEnabled=f alse; if(legendToggleEnabled==t rue){ var selected=t his.index; var allSeries=t his.chart.series; $.each(allSeries, function(index, series) { selected==i ndex ? series.show() : series.hide(); }); return false; } } }, dataLabels: { enabled: false }, pointPadding: 0.1, //padding between points in bar charts (0 is tight)1 is loose groupPadding: 0.2, // padding between groups in bar charts (0 is tight)1 is loose maxSize: 50, //for bubble sizes sizeBy: 'width', //for bubble sizing, instead of 'area' pointPlacement: null, borderWidth: 0, shadow: false, animation: true }, bar:{ stacking: null, pointPadding: 0.1, //padding between points in bar charts (0 is tight)1 is loose groupPadding: 0.2, // padding between groups in bar charts (0 is tight)1 is loose minPointLength: 3 }, column:{ stacking: null, pointPadding: 0.1, //padding between points in bar charts (0 is tight)1 is loose groupPadding: 0.2, // padding between groups in bar charts (0 is tight)1 is loose minPointLength: 3 }, line: { lineWidth: 1.5, states: { hover: { lineWidth: 4 } }, marker: { enabled: true, //status of tick symbols states: { hover: { enabled: true, radius: 5 } } } } }, credits: { useHTML: true, text: "Click legend items to change data display. Hover over chart to view data.<br>Source: U.S. Bureau of Labor Statistics.", position: { align: 'left', x: 10, y: -20 }, style: { cursor: "default", color: "#2C2C2C" }, href: "" }, exporting: { buttons: { contextButton: { enabled: true, verticalAlign: 'bottom', x: -10 } } } }, function() { $( ".highcharts-legend-item").css( "min-height", "0px").css( "z-index",100); //fix so CMS CSS doesn 't make legend taller than it should
 				$(".highcharts-tooltip").css("z-index",200);
 
                 //		 * Callback function for setting a lower opacity for other series than the one that is hovered in the legend

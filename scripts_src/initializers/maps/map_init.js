@@ -31,6 +31,7 @@ var map_init = {
             colors: [],
             circle_size_multiple: 1,
             is_animated: utils_forms.getCheckBoxValue($("#map_animated_checkbox")),
+            animation_delay: Number($("#map_animation_speed_range").val()),
             legend: {
                 reversed: utils_forms.getCheckBoxValue($("#legend_reverse_layout_checkbox")),
                 x: Number($("#legend_placement_x").val()),
@@ -38,6 +39,7 @@ var map_init = {
             },
             map_type: map_type,
             viewbox: "",
+            sized_for_spotlight: $("#map_spotlight_size_checkbox").is(":checked"),
             ranges_amount: $(".map_color_palette_row.selected .map_color_palette_cell").length,
             value_ranges: [],
             credits: {},
@@ -53,7 +55,7 @@ var map_init = {
 
         };
 
-     //   console.log(all_map_options);
+        //   console.log(all_map_options);
 
         //set viewbox
         switch (map_type) {
@@ -112,11 +114,12 @@ var map_init = {
     /** converts all_map_options (actually an array of objects by now after the .get() auto conversion) to svg and puts it on page **/
     convertMapOptionsToSVG: function (all_map_options) {
         var map_display_area = $("#" + all_map_options.render_ID + ".map_display_area");
+        
 
         //  var map_display_area = $(".map_display_area");
         map_display_area.empty();
 
-        var map_outer_div = map_init.getMapOuterDiv(); //creates and returns outer map div
+        var map_outer_div = map_init.getMapOuterDiv(all_map_options); //creates and returns outer map div
 
         var map_outer_svg = map_init.getMapOuterSVG(all_map_options); //creates and returns empty map svg tag
         map_init.populateSVGAreas(all_map_options, map_outer_svg); //colorizes paths, sets circle attributes, appends g elements to svg
@@ -128,9 +131,8 @@ var map_init = {
         var tooltip_div = map_tooltip_init.getMapTooltip(); //creates and returns an empty tooltip div template 
 
         //put elements together
-        map_outer_div.appendChild(tooltip_div); //tooltip
-        map_outer_div.appendChild(map_title); //title
-        map_outer_div.appendChild(map_subtitle); //subtitle
+        $(map_outer_div).append(tooltip_div, map_title, map_subtitle); //tooltip
+       
 
         // if it's animated, make and add the slider
         if (all_map_options.is_animated) {
@@ -140,15 +142,9 @@ var map_init = {
 
         var map_legend = map_legend_init.getMapLegend(all_map_options); //creates and returns a styled map div legend with color boxes and text
 
-
-        map_outer_div.appendChild(map_outer_svg); //main svg
-        map_outer_div.appendChild(map_legend); //legend
-        map_outer_div.appendChild(map_credits); //credits
-
-
-
-
-
+        //put more together
+        $(map_outer_div).append(map_outer_svg, map_legend, map_credits); 
+       
 
         map_display_area.append($(map_outer_div)); //put map on page
 
@@ -170,12 +166,20 @@ var map_init = {
 
     /** creates and returns an empty map outer div. This will hold the map svg, tooltip box, legend, title, etc. **/
 
-    getMapOuterDiv: function () {
+    getMapOuterDiv: function (all_map_options) {
 
         var div = document.createElement("div");
-        div.setAttribute("style", "position: relative; width: 695px; min-height: 590px; text-align: left; margin: auto; background-color:#FFFFFF;");
-        div.setAttribute("class", "map_outer_div");
-
+        
+        $(div).css({
+            position: "relative",
+            width: all_map_options.sized_for_spotlight ? "595px" : "695px",
+            "min-height": all_map_options.sized_for_spotlight ? "530px" : "590px",
+            "text-align": "left",
+            margin: "auto",
+            "background-color":"#FFFFFF"
+        })
+        .addClass("map_outer_div");
+        
         return div;
     },
 
@@ -186,12 +190,20 @@ var map_init = {
     getMapOuterSVG: function (all_map_options) {
 
         var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+        $(svg).css({
+            "z-index": "400",
+            position: "relative",
+            left: "13px",
+            top: "-9px",
+            "background-color": "#fff",
+            "height": all_map_options.sized_for_spotlight ? "382px" : "450px",
+            "width": all_map_options.sized_for_spotlight ? "578px" : "680px"
 
-        svg.setAttribute("height", 450);
-        svg.setAttribute("width", 680);
-        svg.setAttribute("class", "map_svg");
+
+        })
+        .addClass("map_svg")
+        
         svg.setAttribute("viewBox", all_map_options.viewbox);
-        svg.setAttribute("style", "z-index: 400; position: relative; left: 13px; top: -9px; background-color: #fff;");
 
         return svg;
     },
@@ -203,10 +215,12 @@ var map_init = {
     /** Initial Function (called from map icon click) - calls functions to loads the map json, convert it to svg, loads options and displays map in .map_display_area **/
     loadNewMap: function (chart, all_chart_options, all_map_options, repopulate_form) {
 
+        $(".map_play_button.playing").click(); //if animated map is playing, stop it - prevents errors
+        
         var navigation_setup = require("../../navigation_setup.js");
 
         var map_type = $("#map_type_select").val();
-
+        
         var filename = "json/maps/" + map_type + "_map.json";
 
         $.get(filename, function (areas) {
@@ -220,7 +234,7 @@ var map_init = {
             var map_display_area = map_init.convertMapOptionsToSVG(all_map_options);
 
             //adjust map_display_area size
-            map_init.resizeMap();
+            map_init.resizeMap(all_map_options);
 
             //init tooltip and highlighting
             map_init.setUpMapHover(all_map_options, map_display_area);
@@ -243,7 +257,7 @@ var map_init = {
 
             //reinit navigation get code button click so that load chart code button will work
             navigation_setup.getCodeButtonClick(all_chart_options, all_map_options);
-            
+
             //generate areas colored report
             areas_colored_report.generateReport(all_map_options);
 
@@ -255,9 +269,11 @@ var map_init = {
 
 
     /** resizes chart_display_area by changing input values and triggering keyup **/
-    resizeMap: function () {
-        $("#chart_width_textinput").val(710).keyup();
-        $("#chart_height_textinput").val(650).keyup();
+    resizeMap: function (all_map_options) {
+        var new_width = all_map_options.sized_for_spotlight ? 615 : 710;
+        var new_height = all_map_options.sized_for_spotlight ? 590 : 650;
+        $("#chart_width_textinput").val(new_width).keyup();
+        $("#chart_height_textinput").val(new_height).keyup();
     },
 
 
@@ -304,7 +320,14 @@ var map_init = {
                 el.setAttributeNS(null, "cx", this.cx); //x pos
                 el.setAttributeNS(null, "cy", this.cy); //y pos
                 el.setAttributeNS(null, "stroke", this.color ? this.color : "#337ab7"); //stroke
-                el.setAttributeNS(null, "fill", this.color ? this.color.replace(')', ', 0.75)').replace('rgb', 'rgba') : "#337ab7"); //fill
+
+                if (all_map_options.map_type === "metro_area") {
+                    el.setAttributeNS(null, "fill", this.color ? this.color.replace(')', ', 0.75)').replace('rgb', 'rgba') : "#337ab7"); //fill
+                } else {
+                    el.setAttributeNS(null, "fill", this.color ? this.color : "#337ab7"); //fill
+
+                }
+
 
 
                 if (this.loc_name) { //if it's a named area, set value and color
