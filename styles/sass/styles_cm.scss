@@ -353,7 +353,7 @@
     
     .circle {
 //        opacity: 1;
-        fill: #E0E0E0;
+  //      fill: #E0E0E0;
         stroke: #646464;
         stroke-width: 1;
     }
@@ -384,7 +384,7 @@
     #areas_colored_report_div {
         display: none;
         position: absolute;
-        width: 70%;
+        width: 100%;
         min-height: 750px;
         z-index: 200;
         padding: 10px;

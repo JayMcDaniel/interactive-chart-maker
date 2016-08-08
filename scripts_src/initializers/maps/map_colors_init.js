@@ -102,8 +102,6 @@ var map_colors_init = {
         }
 
 
-
-
         return selected_colors;
     },
 

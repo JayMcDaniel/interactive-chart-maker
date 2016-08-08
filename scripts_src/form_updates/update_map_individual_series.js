@@ -9,7 +9,7 @@ var update_map_individual_series = {
 
 
     /** makes a color box, called from populateForm **/
-    makeMapColorDiv: function (all_map_options, color, i) {
+    makeMapColorDiv: function (chart, all_chart_options, all_map_options, color, i) {
 
         var map_color_div = document.createElement("div");
         map_color_div.className = "map_color_div";
@@ -22,7 +22,7 @@ var update_map_individual_series = {
         //init with color, using jscolor.js
         var picker = new jscolor(map_color_input, {
             onFineChange: function () {
-                update_map_individual_series.updateMapColor(all_map_options, i, this);
+                update_map_individual_series.updateMapColor(chart, all_chart_options, all_map_options, i, this);
             }
 
         });
@@ -80,14 +80,14 @@ var update_map_individual_series = {
 
 
     /** main function that loads the individual series area with color and range boxes **/
-    populateForm: function (all_map_options) {
+    populateForm: function (chart, all_chart_options, all_map_options) {
 
         var $display_series_options_inner_div = $("#display_series_options_inner_div");
         $display_series_options_inner_div.empty();
 
         $.each(all_map_options.colors, function (i) {
 
-            var map_color_box = update_map_individual_series.makeMapColorDiv(all_map_options, this, i);
+            var map_color_box = update_map_individual_series.makeMapColorDiv(chart, all_chart_options, all_map_options, this, i);
 
             var map_range_input = update_map_individual_series.makeMapRangeInput(all_map_options, i);
 
@@ -108,11 +108,11 @@ var update_map_individual_series = {
     },
 
     /** when range color boxes are changed, this is fired to change the colors in the map **/
-    updateMapColor: function (all_map_options, i, jscolor) {
+    updateMapColor: function (chart, all_chart_options, all_map_options, i, jscolor) {
         var map_init = require("../initializers/maps/map_init.js");
 
         all_map_options.colors[i] = typeof jscolor === "string" ? jscolor : jscolor.toRGBString();
-        map_init.loadNewMap(false); //false for don't repopulate form
+        map_init.loadNewMap(chart, all_chart_options, all_map_options, false); // false to not repopulate form
     },
 
     /** when custom value range input boxes are changed, this is fired **/
