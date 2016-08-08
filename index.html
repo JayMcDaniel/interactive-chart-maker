@@ -94,7 +94,7 @@
                     <div class="just_map">
                         <label for="map_type_select">Map type: </label>
                         <select id="map_type_select">
-                            <option value="state" selected>State</option>
+                            <option value="state">State</option>
                             <option value="county">County</option>
                             <option value="metro_area">Metro area</option>
                         </select>
@@ -273,8 +273,8 @@
                             <svg style="height: 20px; width: 20px; float: left; position: relative; top: -1px;">
                                 <circle r="7" cx="8" cy="8" fill="#337ab7"></circle>
                             </svg>
-                            <input type="range" id="map_circle_size_range" min = "0" max="100" style="float: left; width: 75%;"/>
-                            <svg style="height: 45px; width: 45px; float: left; position: relative; left:  5px; top: -13px;">
+                            <input type="range" id="map_circle_size_range" min = "0" max="20" step = ".5" style="float: left; width: 75%;"/>
+                            <svg style="height: 45px; width: 45px; float: left; position: relative; left:  5px; top: -13px; transform: rotateY(180deg);">
                                 <circle r="20" cx="22" cy="22" fill="#337ab7"></circle>
                             </svg>
                         </span>
@@ -809,7 +809,7 @@
                     </span>
 
                     <span class="show_map">
-                    <label for="chart_tooltip_force_decimals_select">Decimal points: </label>
+                        <label for="chart_tooltip_force_decimals_select">Decimal points<span class="just_bubble just_scatter"> (Y value)</span>: </label>
                     <select id="chart_tooltip_force_decimals_select">
                         <option value="0">Auto</option>
                         <option value="1">1</option>
@@ -819,7 +819,7 @@
                     <span class="notes">This will force the values shown to the selected decimal point, so "5" will be "5.0".</span>
                     <br>
 
-                    <label for="chart_tooltip_signs_select">Dollar / percent signs: </label>
+                    <label for="chart_tooltip_signs_select">Dollar / percent signs<span class="just_bubble just_scatter"> (Y value)</span>: </label>
                     <select id="chart_tooltip_signs_select">
                         <option value="no_signs" selected>&nbsp;</option>
                         <option value="$">$</option>
@@ -829,6 +829,49 @@
                     <br>
                     </span>
 
+<!--
+                    <span class="just_bubble just_scatter">
+                        <label for="chart_tooltip_force_decimals_x_select">Decimal points (X value): </label>
+                        <select id="chart_tooltip_force_decimals_x_select">
+                            <option value="0">Auto</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                        </select>
+                        <br>
+
+                        <label for="chart_tooltip_signs_x_select">Dollar / percent signs (X value): </label>
+                        <select id="chart_tooltip_signs_x_select">
+                            <option value="no_signs" selected>&nbsp;</option>
+                            <option value="$">$</option>
+                            <option value="%">%</option>
+                        </select>
+                        <br>
+                        
+                    </span>
+
+
+                    <span class="just_bubble">
+                    
+                          <label for="chart_tooltip_force_decimals_z_select">Decimal points (Z value): </label>
+                        <select id="chart_tooltip_force_decimals_z_select">
+                            <option value="0">Auto</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                        </select>
+                        <br>
+
+                        <label for="chart_tooltip_signs_z_select">Dollar / percent signs (Z value): </label>
+                        <select id="chart_tooltip_signs_z_select">
+                            <option value="no_signs" selected>&nbsp;</option>
+                            <option value="$">$</option>
+                            <option value="%">%</option>
+                        </select>
+                        <br>
+                    </span>
+
+-->
                     <span class="just_map">
                         <label for="map_tooltip_na_text_input">Text if data not available: </label>
                         <br>
@@ -987,12 +1030,7 @@
     <!-- side nav bar end -->
 
 
-
-    <!-- main content div (shows the chart / map / code to the right of the side nav)-->
-
-    <div id="main_content_div">
-
-        <!-- chart / map code boxes -->
+   <!-- chart / map code boxes -->
         <div id="main_result_code_div">
             <h3>Chart code <sup class = "help_icon">?</sup> <span id="open_code_editor_button" title="Open in code editor"></span></h3>
 
@@ -1029,6 +1067,12 @@
 
 
         </div>
+    
+    
+    <!-- main content div (shows the chart / map / code to the right of the side nav)-->
+
+    <div id="main_content_div">
+
 
 
         <!-- load code area -->

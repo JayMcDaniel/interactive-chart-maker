@@ -252,7 +252,7 @@ var map_init = {
 
             //init individual series range setup
             if (repopulate_form === true) {
-                update_map_individual_series.populateForm(all_map_options);
+                update_map_individual_series.populateForm(chart, all_chart_options, all_map_options);
             }
 
             //reinit navigation get code button click so that load chart code button will work
@@ -319,7 +319,7 @@ var map_init = {
                 el.setAttributeNS(null, "r", this.r); //radius
                 el.setAttributeNS(null, "cx", this.cx); //x pos
                 el.setAttributeNS(null, "cy", this.cy); //y pos
-                el.setAttributeNS(null, "stroke", this.color ? this.color : "#337ab7"); //stroke
+                el.setAttributeNS(null, "stroke", this.color ? "rgba(67, 67, 72, .8)" : "#337ab7"); //stroke
 
                 if (all_map_options.map_type === "metro_area") {
                     el.setAttributeNS(null, "fill", this.color ? this.color.replace(')', ', 0.75)').replace('rgb', 'rgba') : "#337ab7"); //fill
@@ -433,7 +433,10 @@ var map_init = {
 
                 //lower opacity on other areas
                 $("path, circle", map_display_area).each(function () {
-                    if ($(this).attr("fill") !== this_color && $(this).attr("stroke") !== this_color) {
+                    
+                    var this_fill = $(this).attr("fill");
+                        
+                    if ( this_fill !== this_color && this_fill.replace(', 0.75)', ')').replace('rgba', 'rgb') !== this_color) {
                         $(this).attr("fill-opacity", ".1").attr("stroke-opacity", ".02");
                     }
                 });

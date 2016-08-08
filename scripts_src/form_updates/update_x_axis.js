@@ -22,7 +22,7 @@ var update_x_axis = {
 
         if (add_commas) {
             newXFormat = function () {
-                return $(Number(this.value.replace(/[^0-9\.\-]+/g, ''))).addCommas(); //hide non-numbers if show only years box is checked//
+                return $(Number(this.value)).addCommas(); //hide non-numbers if show only years box is checked//
             }
         }
 

@@ -52,18 +52,21 @@ var updateChartType = function (chart_type, chart, all_chart_options) {
 
 
 
+    all_chart_options.xAxis.plotLines = [{
+        "value": 0,
+        "color": "#c0c0c0",
+        "dashStyle": "solid",
+        "width": type === "scatter" || type === "bubble" ? 1 : 0
+        }];
+
+    all_chart_options.xAxis.gridLineWidth = type === "scatter" || type === "bubble" ? 1 : 0;
+
 
     chart.xAxis[0].update({
-        gridLineWidth: type === "scatter" || type === "bubble" ? 1 : 0,
-        plotLines: [{
-            "value": 0,
-            "color": "#c0c0c0",
-            "dashStyle": "solid",
-            "width": type === "scatter" || type === "bubble" ? 1 : 0
-        }]
+        gridLineWidth: all_chart_options.xAxis.gridLineWidth,
+        plotLines: all_chart_options.xAxis.plotLines
     }, false);
 
-    all_chart_options.xAxis.plotLines = chart.xAxis[0].plotLines;
 
 
     chart.xAxis[0].setTitle({
