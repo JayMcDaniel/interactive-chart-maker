@@ -87,7 +87,7 @@ var map_animation_init = {
 
 
         //animation title (i.e. date shown)
-        var animation_title = document.createElement("h3");
+        var animation_title = document.createElement("span");
         $(animation_title).text(all_map_options.animated_value_titles[0])
             .css({
                 margin: "0px",
