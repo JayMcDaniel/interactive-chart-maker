@@ -63,6 +63,7 @@
             });
 
             return map_legend_div;
+            
         },
 
 

@@ -85,6 +85,7 @@ var update_map_individual_series = {
         var $display_series_options_inner_div = $("#display_series_options_inner_div");
         $display_series_options_inner_div.empty();
 
+        
         $.each(all_map_options.colors, function (i) {
 
             var map_color_box = update_map_individual_series.makeMapColorDiv(chart, all_chart_options, all_map_options, this, i);

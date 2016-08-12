@@ -69,7 +69,7 @@
                 <div class="display_options">
 
                     <div id="chart_type_icons">
-                        <div class="chart_type_icon" id="chart_type_line" value="line" title="line"></div>
+                        <div class="chart_type_icon selected" id="chart_type_line" value="line" title="line"></div>
                         <div class="chart_type_icon" id="chart_type_area" value="area" title="area"></div>
                         <div class="chart_type_icon" id="chart_type_area_range" value="arearange" title="area range"></div>
                         <div class="chart_type_icon" id="chart_type_bar" value="bar" title="bar"></div>
@@ -80,7 +80,7 @@
                         <div class="chart_type_icon" id="chart_type_bubble" value="bubble" title="bubble"></div>
                         <div class="chart_type_icon" id="chart_type_scatter" value="scatter" title="scatter"></div>
                         <div class="chart_type_icon" id="chart_type_drilldown" value="drilldown" title="drilldown"></div>
-                        <div class="chart_type_icon selected" id="chart_type_map" value="map" title="map"></div>
+                        <div class="chart_type_icon" id="chart_type_map" value="map" title="map"></div>
                     </div>
                     <div class="clearfloat"></div>
 
@@ -637,6 +637,7 @@
             <div class="display chart_display" id="display_chart_legend">
                 <h4>Legend <sup class = "help_icon">?</sup></h4>
                 <div class="display_options">
+                    <span class="notes">For maps, some of the legend formatting (decimals, dollar signs) will mimic the tooltip.<br></span>
 
                     <label for="legend_layout_select">Layout: </label>
                     <select id="legend_layout_select">
@@ -647,8 +648,17 @@
                     <br>
 
                     <span class="show_map">
+                        
+                    <span class="just_map">
+                        <label for="map_legend_enabled_checkbox">Enabled: </label>
+                        <input type="checkbox" id="map_legend_enabled_checkbox" checked />
+                        <br>
+                    </span>
+                    
+
                     <label>Placement:</label> <span class="notes" style="margin-bottom: -5px;">(higher values push legend right and down)</span>
                     <br>
+
                     <label for="legend_placement_x">&rarr; <sup>(X)</sup> </label>
                     <input type="text" id="legend_placement_x" value="100" class="small number_entry" />
                     <label for="legend_placement_y">&darr; <sup>(Y)</sup> </label>
@@ -656,8 +666,9 @@
                     <br>
 
                     <label for="legend_reverse_layout_checkbox">Reverse order: </label>
-                    <input type="checkbox" id="legend_reverse_layout_checkbox">
+                    <input type="checkbox" id="legend_reverse_layout_checkbox" />
                     <br>
+
                     </span>
 
                     <span class="show_bar show_line show_scatter show_bubble show_drilldown show_column">
@@ -829,7 +840,7 @@
                     <br>
                     </span>
 
-<!--
+                    <!--
                     <span class="just_bubble just_scatter">
                         <label for="chart_tooltip_force_decimals_x_select">Decimal points (X value): </label>
                         <select id="chart_tooltip_force_decimals_x_select">
@@ -1030,45 +1041,45 @@
     <!-- side nav bar end -->
 
 
-   <!-- chart / map code boxes -->
-        <div id="main_result_code_div">
-            <h3>Chart code <sup class = "help_icon">?</sup> <span id="open_code_editor_button" title="Open in code editor"></span></h3>
+    <!-- chart / map code boxes -->
+    <div id="main_result_code_div">
+        <h3>Chart code <sup class = "help_icon">?</sup> <span id="open_code_editor_button" title="Open in code editor"></span></h3>
 
 
 
-            <!--HTML  Code box -->
-            <div class="copy_to_clipboard_button" style="position: relative;
+        <!--HTML  Code box -->
+        <div class="copy_to_clipboard_button" style="position: relative;
     top: -5px;"></div>
-            <h4>HTML <span class="copy_message"></span></h4>
-            <p class="notes">The chart HTML is where the chart will load into on your page. Copy this into your HTML file where you want the chart to appear. Or, in the BLS CMS, this is what you put in the "chart template" section.</p>
+        <h4>HTML <span class="copy_message"></span></h4>
+        <p class="notes">The chart HTML is where the chart will load into on your page. Copy this into your HTML file where you want the chart to appear. Or, in the BLS CMS, this is what you put in the "chart template" section.</p>
 
-            <textarea class="html" id="chart_html_code"></textarea>
+        <textarea class="html" id="chart_html_code"></textarea>
 
-            <br>
-            <!--JS  Code box -->
-            <div class="copy_to_clipboard_button" style="position: relative;
+        <br>
+        <!--JS  Code box -->
+        <div class="copy_to_clipboard_button" style="position: relative;
     top: 5px;"></div>
-            <h4>JavaScript <span class="copy_message"></span></h4>
+        <h4>JavaScript <span class="copy_message"></span></h4>
 
-            <p class="notes">The JS comes packed by default. If you need to unpack it, most code editors will do the trick, or use this tool: <a href="http://jsbeautifier.org/" target="_blank">http://jsbeautifier.org/</a>.
-                <br> For these interactive charts to work on your web page, you need to first link to the supporting libraries from your HTML document:
-                <br>
+        <p class="notes">The JS comes packed by default. If you need to unpack it, most code editors will do the trick, or use this tool: <a href="http://jsbeautifier.org/" target="_blank">http://jsbeautifier.org/</a>.
+            <br> For these interactive charts to work on your web page, you need to first link to the supporting libraries from your HTML document:
+            <br>
 
-                <span class="code"> &lt;script src="http://www.bls.gov/javascripts/jquery-1.11.0.min.js"&gt;&lt;/script&gt;<br>
+            <span class="code"> &lt;script src="http://www.bls.gov/javascripts/jquery-1.11.0.min.js"&gt;&lt;/script&gt;<br>
     &lt;script src="http://www.bls.gov/assets/highcharts/3.0.10/highcharts.js"&gt;&lt;/script&gt;<br>
     &lt;script src="http://www.bls.gov/assets/highcharts/3.0.10/highcharts-more.js"&gt;&lt;/script&gt;<br>
     &lt;script src="http://www.bls.gov/assets/highcharts/3.0.10/modules/exporting.js"&gt;&lt;/script&gt;<br>
     </span>
-                <br> Save the following code in a .js file with any text editor, and link to it from your HTML document like the other files.
+            <br> Save the following code in a .js file with any text editor, and link to it from your HTML document like the other files.
 
-            </p>
-            <textarea class="js" id="chart_output_code"></textarea>
+        </p>
+        <textarea class="js" id="chart_output_code"></textarea>
 
 
 
-        </div>
-    
-    
+    </div>
+
+
     <!-- main content div (shows the chart / map / code to the right of the side nav)-->
 
     <div id="main_content_div">

@@ -33,6 +33,7 @@ var map_init = {
             is_animated: utils_forms.getCheckBoxValue($("#map_animated_checkbox")),
             animation_delay: Number($("#map_animation_speed_range").val()),
             legend: {
+                enabled: utils_forms.getCheckBoxValue($("#map_legend_enabled_checkbox")),
                 reversed: utils_forms.getCheckBoxValue($("#legend_reverse_layout_checkbox")),
                 x: Number($("#legend_placement_x").val()),
                 y: Number($("#legend_placement_y").val())
@@ -114,7 +115,7 @@ var map_init = {
     /** converts all_map_options (actually an array of objects by now after the .get() auto conversion) to svg and puts it on page **/
     convertMapOptionsToSVG: function (all_map_options) {
         var map_display_area = $("#" + all_map_options.render_ID + ".map_display_area");
-        
+
 
         //  var map_display_area = $(".map_display_area");
         map_display_area.empty();
@@ -132,7 +133,7 @@ var map_init = {
 
         //put elements together
         $(map_outer_div).append(tooltip_div, map_title, map_subtitle); //tooltip
-       
+
 
         // if it's animated, make and add the slider
         if (all_map_options.is_animated) {
@@ -140,11 +141,11 @@ var map_init = {
             map_outer_div.appendChild(map_animation_div);
         }
 
-        var map_legend = map_legend_init.getMapLegend(all_map_options); //creates and returns a styled map div legend with color boxes and text
+        var map_legend = all_map_options.legend.enabled ? map_legend_init.getMapLegend(all_map_options) : undefined; //creates and returns a styled map div legend with color boxes and text
 
         //put more together
-        $(map_outer_div).append(map_outer_svg, map_legend, map_credits); 
-       
+        $(map_outer_div).append(map_outer_svg, map_legend, map_credits);
+
 
         map_display_area.append($(map_outer_div)); //put map on page
 
@@ -169,17 +170,17 @@ var map_init = {
     getMapOuterDiv: function (all_map_options) {
 
         var div = document.createElement("div");
-        
+
         $(div).css({
-            position: "relative",
-            width: all_map_options.sized_for_spotlight ? "595px" : "695px",
-            "min-height": all_map_options.sized_for_spotlight ? "530px" : "590px",
-            "text-align": "left",
-            margin: "auto",
-            "background-color":"#FFFFFF"
-        })
-        .addClass("map_outer_div");
-        
+                position: "relative",
+                width: all_map_options.sized_for_spotlight ? "595px" : "695px",
+                "min-height": all_map_options.sized_for_spotlight ? "530px" : "590px",
+                "text-align": "left",
+                margin: "auto",
+                "background-color": "#FFFFFF"
+            })
+            .addClass("map_outer_div");
+
         return div;
     },
 
@@ -191,18 +192,18 @@ var map_init = {
 
         var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
         $(svg).css({
-            "z-index": "400",
-            position: "relative",
-            left: "13px",
-            top: "-9px",
-            "background-color": "#fff",
-            "height": all_map_options.sized_for_spotlight ? "382px" : "450px",
-            "width": all_map_options.sized_for_spotlight ? "578px" : "680px"
+                "z-index": "400",
+                position: "relative",
+                left: "13px",
+                top: "-9px",
+                "background-color": "#fff",
+                "height": all_map_options.sized_for_spotlight ? "382px" : "450px",
+                "width": all_map_options.sized_for_spotlight ? "578px" : "680px"
 
 
-        })
-        .addClass("map_svg")
-        
+            })
+            .addClass("map_svg")
+
         svg.setAttribute("viewBox", all_map_options.viewbox);
 
         return svg;
@@ -216,11 +217,11 @@ var map_init = {
     loadNewMap: function (chart, all_chart_options, all_map_options, repopulate_form) {
 
         $(".map_play_button.playing").click(); //if animated map is playing, stop it - prevents errors
-        
+
         var navigation_setup = require("../../navigation_setup.js");
 
         var map_type = $("#map_type_select").val();
-        
+
         var filename = "json/maps/" + map_type + "_map.json";
 
         $.get(filename, function (areas) {
@@ -252,7 +253,10 @@ var map_init = {
 
             //init individual series range setup
             if (repopulate_form === true) {
-                update_map_individual_series.populateForm(chart, all_chart_options, all_map_options);
+                setTimeout(function () {
+                    update_map_individual_series.populateForm(chart, all_chart_options, all_map_options);
+                }, 1000)
+
             }
 
             //reinit navigation get code button click so that load chart code button will work
@@ -433,10 +437,10 @@ var map_init = {
 
                 //lower opacity on other areas
                 $("path, circle", map_display_area).each(function () {
-                    
+
                     var this_fill = $(this).attr("fill");
-                        
-                    if ( this_fill !== this_color && this_fill.replace(', 0.75)', ')').replace('rgba', 'rgb') !== this_color) {
+
+                    if (this_fill !== this_color && this_fill.replace(', 0.75)', ')').replace('rgba', 'rgb') !== this_color) {
                         $(this).attr("fill-opacity", ".1").attr("stroke-opacity", ".02");
                     }
                 });

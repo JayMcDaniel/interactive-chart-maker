@@ -267,7 +267,7 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
 
 
     //legend reverse ceckbox changed
-    $("#legend_reverse_layout_checkbox").unbind().change(function () {
+    $("#legend_reverse_layout_checkbox, #map_legend_enabled_checkbox").unbind().change(function () {
         if (all_chart_options.chart.type === "map") { //for maps
             map_init.loadNewMap(chart, all_chart_options, all_map_options, true); // true to repopulate form
         } else {
