@@ -57,7 +57,7 @@ var write_code = {
 
     /** place code in chart_output_code and reinit highlight */
     writeChartJSCode: function (all_chart_options) {
-
+        
         var draw_chart = require("../draw_chart.js");
 
 

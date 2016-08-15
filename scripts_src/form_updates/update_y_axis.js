@@ -28,21 +28,21 @@ var update_y_axis = {
 
 
     /** update format when dollar / percent signs select is changed */
-    updateFormatter: function (sign, y_decimals, dividend, chart, all_chart_options) {
+    updateFormatter: function (sign, y_axis_decimals, dividend, chart, all_chart_options) {
 
-        var y_signs_arr = [sign === "$" ? "$" : "", sign === "%" ? "%" : ""];
+        var y_axis_signs_arr = [sign === "$" ? "$" : "", sign === "%" ? "%" : ""];
 
-        if (y_decimals !== "null") { //if decimals are not null   
+        if (y_axis_decimals !== "null") { //if decimals are not null   
 
             var newYFormat = function () {
-                var s = Highcharts.numberFormat(this.value / dividend, y_decimals, ".", ",");
-                return y_signs_arr[0] + s.replace(/\$-/g, "-$") + y_signs_arr[1];
+                var s = Highcharts.numberFormat(this.value / dividend, y_axis_decimals, ".", ",");
+                return y_axis_signs_arr[0] + s.replace(/\$-/g, "-$") + y_axis_signs_arr[1];
             }
 
         } else { //if decimals are null
             var newYFormat = function () {
                 var s = (this.value / dividend == parseInt(this.value / dividend)) ? Highcharts.numberFormat(this.value / dividend, 0, ".", ",") : Highcharts.numberFormat(this.value / dividend, 1, ".", ",");
-                return y_signs_arr[0] + s.replace(/\$-/g, "-$") + y_signs_arr[1];
+                return y_axis_signs_arr[0] + s.replace(/\$-/g, "-$") + y_axis_signs_arr[1];
             }
 
         }
@@ -60,9 +60,9 @@ var update_y_axis = {
 
 
         update_y_axis.replacement_obj = {
-            y_decimals: y_decimals,
+            y_axis_decimals: y_axis_decimals,
             dividend: dividend,
-            y_signs_arr: y_signs_arr
+            y_axis_signs_arr: y_axis_signs_arr
         };
 
         all_chart_options.yAxis.labels.formatter = newYFormat;
