@@ -40,7 +40,7 @@ var parseForBubble = function (input, chart_type, colors) {
 
     });
 
-
+    
     return output;
 };
 

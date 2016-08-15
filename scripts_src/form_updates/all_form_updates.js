@@ -137,6 +137,8 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
     $("#bubble_animated_checkbox").unbind().change(function () {
         $(".chart_animation_div").remove();
         updateChartType("bubble", chart, all_chart_options);
+        all_chart_options.timeline = null;
+        update_data.updateData(chart, all_chart_options);
 
     });
 
