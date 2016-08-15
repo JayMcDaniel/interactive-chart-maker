@@ -14,7 +14,7 @@ var map_circle_sizes_init = {
         //get multiple and adjust for big numbers
          all_map_options.circle_size_multiple = $("#map_circle_size_range").val();
         if(circle_values_arr[circle_values_arr.length-1] > 100){
-           all_map_options.circle_size_multiple = all_map_options.circle_size_multiple * .1;
+           all_map_options.circle_size_multiple = all_map_options.circle_size_multiple * .05;
         }
         
         //assign R value to each circle area
