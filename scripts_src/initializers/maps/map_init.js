@@ -295,6 +295,7 @@ var map_init = {
 
                 var el = document.createElementNS("http://www.w3.org/2000/svg", "path");
                 el.setAttributeNS(null, "d", this.d); //sets path outline
+                el.setAttributeNS(null, "stroke", "#646464"); //set path stroke
 
 
                 if (all_map_options.map_type === "metro_area") {
@@ -306,7 +307,6 @@ var map_init = {
                 if (this.loc_name) { //if it's a named area, set values and color
                     el.setAttributeNS(null, "loc_value", this.value);
                     el.setAttributeNS(null, "fill", this.color || "#E0E0E0");
-                    el.setAttributeNS(null, "stroke", "#646464");
                     el.setAttribute("loc_name", this.loc_name);
 
                 }
@@ -435,12 +435,17 @@ var map_init = {
                 var this_color = $(this).children(".map_legend_color").css("background-color");
                 $(".map_legend_text", this).css("color", "#B73438"); //make text red
 
-                //lower opacity on other areas
-                $("path, circle", map_display_area).each(function () {
-
+                //lower opacity on other areas (paths)
+                $("path", map_display_area).each(function () {
                     var this_fill = $(this).attr("fill");
-
-                    if (this_fill !== this_color && this_fill.replace(', 0.75)', ')').replace('rgba', 'rgb') !== this_color) {
+                    if (this_fill !== this_color !== this_color) {
+                        $(this).attr("fill-opacity", ".1");
+                    }
+                });
+                //lower opacity on other areas (circles)
+                $("circle", map_display_area).each(function () {
+                    var this_fill = $(this).attr("fill");
+                    if (this_fill.replace(', 0.75)', ')').replace('rgba', 'rgb') !== this_color) {
                         $(this).attr("fill-opacity", ".1").attr("stroke-opacity", ".02");
                     }
                 });
