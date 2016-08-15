@@ -151,8 +151,22 @@ var utils_main = {
     /** stringify tooltip / y-axis formatter function **/
     stringifyFormatter: function (formatter, replacement_obj) {
 
+
+
         var formatter_str = formatter.toString().replace(/\/\/.*\/\//g, ""); //replace notes in between //...//
 
+
+        //x,y,z signs array replacements
+
+        formatter_str = formatter_str
+            .replace(/y_signs_arr\[0\]/g, '"' + replacement_obj.y_signs_arr[0] + '"')
+            .replace(/y_signs_arr\[1\]/g, '"' + replacement_obj.y_signs_arr[1] + '"')
+            .replace(/x_signs_arr\[0\]/g, '"' + replacement_obj.x_signs_arr[0] + '"')
+            .replace(/x_signs_arr\[1\]/g, '"' + replacement_obj.x_signs_arr[1] + '"')
+            .replace(/z_signs_arr\[0\]/g, '"' + replacement_obj.z_signs_arr[0] + '"')
+            .replace(/z_signs_arr\[1\]/g, '"' + replacement_obj.z_signs_arr[1] + '"')
+            .replace(/y_axis_signs_arr\[0\]/g, '"' + replacement_obj.y_axis_signs_arr[0] + '"')
+            .replace(/y_axis_signs_arr\[1\]/g, '"' + replacement_obj.y_axis_signs_arr[1] + '"');
 
         for (name in replacement_obj) {
             var re = new RegExp("\\b" + name, "g");
@@ -164,15 +178,7 @@ var utils_main = {
             }
 
 
-            if (replacement_obj.y_signs_arr) { //replace signs array (["$","%"]) with symbols 
-                formatter_str = formatter_str.replace(/y_signs_arr\[0\]/g, '"' + replacement_obj.y_signs_arr[0] + '"')
-                    .replace(/y_signs_arr\[1\]/g, '"' + replacement_obj.y_signs_arr[1] + '"');
-            }
 
-            if (replacement_obj.signs_arr) { //replace signs array (["$","%"]) with symbols 
-                formatter_str = formatter_str.replace(/signs_arr\[0\]/g, '"' + replacement_obj.signs_arr[0] + '"')
-                    .replace(/signs_arr\[1\]/g, '"' + replacement_obj.signs_arr[1] + '"');
-            }
 
             formatter_str = formatter_str.replace('+ ""', "")
                 .replace('"" +', "")

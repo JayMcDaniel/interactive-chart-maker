@@ -401,7 +401,7 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
     /* TOOLTIP CHANGES */
 
     //change shared tooltip checkbox, decimals, signs, or mulitplier selects
-    $("#chart_tooltip_shared_checkbox, #chart_tooltip_force_decimals_select, #chart_tooltip_signs_select, #chart_tooltip_y_multiple_select").unbind().change(function () {
+    $("#chart_tooltip_shared_checkbox, #chart_tooltip_force_decimals_select, #chart_tooltip_force_decimals_x_select, #chart_tooltip_force_decimals_z_select, #chart_tooltip_signs_select, #chart_tooltip_signs_x_select, #chart_tooltip_signs_z_select, #chart_tooltip_y_multiple_select").unbind().change(function () {
         if (all_chart_options.chart.type === "map") { //for maps
             map_init.loadNewMap(chart, all_chart_options, all_map_options, true); // true to repopulate form
         } else {
