@@ -35,7 +35,7 @@ var parseForDrilldown = function (input, drill_type, colors) {
 
 
 
-        if (!$(this).is('[class*="sub"]')) { //if this doesn't countain "sub" as a class, it's a top level
+        if (!$(this).is('[class*="sub"]') || $(this).is('[class*="sub0"]')) { //if this doesn't countain "sub" as a class or is sub0, it's a top level
 
             //make top level series
             output.series[0].data.push({
