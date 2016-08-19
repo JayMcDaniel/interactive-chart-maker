@@ -153,6 +153,16 @@ $(document).ready(function () {
                     "y": 5,
                     "type": "column",
                     "lineWidth": 0
+                }, {
+                    "name": "series 1bi",
+                    "y": 5,
+                    "type": "column",
+                    "lineWidth": 0
+                }, {
+                    "name": "series 1bii",
+                    "y": 6,
+                    "type": "column",
+                    "lineWidth": 0
                 }],
                 "type": "column",
                 "lineWidth": 0
@@ -177,6 +187,21 @@ $(document).ready(function () {
                 }, {
                     "name": "series 3d",
                     "y": 3,
+                    "type": "column",
+                    "lineWidth": 0
+                }, {
+                    "name": "series 1ci",
+                    "y": 5,
+                    "type": "column",
+                    "lineWidth": 0
+                }, {
+                    "name": "series 1cii",
+                    "y": 6,
+                    "type": "column",
+                    "lineWidth": 0
+                }, {
+                    "name": "series 1ciii",
+                    "y": 7,
                     "type": "column",
                     "lineWidth": 0
                 }],

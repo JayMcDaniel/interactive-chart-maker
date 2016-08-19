@@ -37,9 +37,7 @@ var parseTableInput = function (input, load_series_from, chart_type, legend_togg
     $(".chart_animation_div").remove();
 
     var output = {};
-        //add chart title (same for all types of charts)
-    output.title_text = $("caption", input).text();
-
+ 
 
     /** Depending on the chart type, start that parsing */
     if (["area", "line", "bar", "stacked_bar", "column", "stacked_column"].indexOf(chart_type) > -1) {
@@ -65,6 +63,8 @@ var parseTableInput = function (input, load_series_from, chart_type, legend_togg
         output = parseForDrilldown(input, drill_type, colors);
     }
 
+       //add chart title (same for all types of charts)
+    output.title_text = $("caption", input).text();
 
 
     return output;
