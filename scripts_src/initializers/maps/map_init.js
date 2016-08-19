@@ -438,7 +438,7 @@ var map_init = {
                 //lower opacity on other areas (paths)
                 $("path", map_display_area).each(function () {
                     var this_fill = $(this).attr("fill");
-                    if (this_fill !== this_color !== this_color) {
+                    if (this_fill !== this_color) {
                         $(this).attr("fill-opacity", ".1");
                     }
                 });
