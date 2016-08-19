@@ -369,7 +369,6 @@ var map_init = {
     /** sets up hover functionality for the map **/
     setUpMapHover: function (all_map_options, map_display_area) {
 
-
         //other areas fade out when an area is hovered
         $("path[loc_name], circle[loc_name]", map_display_area).hover(function () {
 
@@ -386,8 +385,10 @@ var map_init = {
 
 
             //add main value to tooltip if applicable
-            var this_loc_value = Number($this.attr("loc_value")); //get main value
-            if (this_loc_value) {
+            var this_loc_value = $this.attr("loc_value"); //get main value
+            if (this_loc_value !== "null") {
+                this_loc_value = Number(this_loc_value);
+                
                 var value_html = "<span style='font-size: 80%'>" + all_map_options.tooltip.dollar_sign + "</span>" + ($(this_loc_value).addCommas(all_map_options.tooltip.decimals || "")) + "<span style='font-size: 80%'>" + all_map_options.tooltip.percent_sign + "</span>";
 
                 //add extra values to tooltip if applicable, and not animated
@@ -412,7 +413,6 @@ var map_init = {
 
             //set main value
             $(".tooltip_main_value", this_tooltip).html(value_html);
-
 
             this_tooltip.show(); //show just this map's tooltip
 
