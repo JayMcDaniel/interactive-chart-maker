@@ -1,0 +1,632 @@
+$(document).ready(function () {
+    var all_chart_options = {
+        "chart": {
+            "renderTo": "chart1",
+            "margin": [100, 40, 80, 80],
+            "borderWidth": 0,
+            "plotBorderColor": "#000",
+            "plotBorderWidth": 0,
+            "type": "column",
+            "events": {
+                "load": function load() {
+                    this.credits.element.onclick = function () {
+                        window.open('http://www.bls.gov', '_blank');
+                    };
+                }
+            },
+            "zoomType": null,
+            "alignTicks": false,
+            "ignoreHiddenSeries": true
+        },
+        "colors": ["#7cb5ec", "#434348", "#90ed7d", "#f7a35c", "#8085e9", "#f15c80", "#e4d354", "#2b908f", "#f45b5b", "#91e8e1", "#2f7ed8", "#0d233a", "#8bbc21", "#910000", "#1aadce", "#492970", "#f28f43", "#77a1e5", "#c42525", "#a6c96a"],
+        "legend": {
+            "align": "left",
+            "backgroundColor": "none",
+            "borderColor": "none",
+            "borderWidth": 0,
+            "enabled": true,
+            "floating": false,
+            "itemDistance": 30,
+            "layout": "horizontal",
+            "reversed": false,
+            "shadow": false,
+            "useHTML": false,
+            "verticalAlign": "top",
+            "x": 100,
+            "y": 40,
+            "itemStyle": {
+                "fontFamily": "Calibri, Verdana, Arial, Helvetica, sans-serif",
+                "color": "#000"
+            },
+            "itemHiddenStyle": {
+                "color": "gray"
+            },
+            "itemHoverStyle": {
+                "cursor": "pointer"
+            }
+        },
+        "plotOptions": {
+            "series": {
+                "events": {
+                    "legendItemClick": function legendItemClick(event) {}
+                },
+                "dataLabels": {
+                    "enabled": false
+                },
+                "pointPlacement": null,
+                "stacking": null,
+                "pointPadding": 0.1,
+                "groupPadding": 0.2,
+                "minPointLength": 2,
+                "maxSize": 90,
+                "minSize": 4,
+                "sizeBy": "width",
+                "lineWidth": 1.5,
+                "states": {
+                    "hover": {
+                        "lineWidth": 4
+                    }
+                },
+                "marker": {
+                    "enabled": false,
+                    "states": {
+                        "hover": {
+                            "enabled": true,
+                            "radius": 5
+                        }
+                    }
+                }
+            },
+            "bubble": {
+                "tooltip": {
+                    "followPointer": true
+                }
+            }
+        },
+        "series": [{
+            "name": "categories",
+            "colorByPoint": true,
+            "data": [{
+                "name": "series 1",
+                "y": 1,
+                "color": "#7cb5ec",
+                "type": "column",
+                "drilldown": "series 1",
+                "lineWidth": 0
+            }, {
+                "name": "series 2",
+                "y": 2,
+                "color": "#434348",
+                "type": "column",
+                "drilldown": "series 2",
+                "lineWidth": 0
+            }, {
+                "name": "series 3",
+                "y": 6,
+                "color": "#90ed7d",
+                "type": "column",
+                "drilldown": "series 3",
+                "lineWidth": 0
+            }],
+            "type": "column",
+            "visible": true
+        }],
+        "drilldown": {
+            "series": [{
+                "name": "series 1",
+                "id": "series 1",
+                "data": [{
+                    "name": "series 1a",
+                    "y": 2,
+                    "type": "column",
+                    "lineWidth": 0
+                }, {
+                    "name": "series 1b",
+                    "y": 3,
+                    "type": "column",
+                    "drilldown": "series 1b",
+                    "lineWidth": 0
+                }, {
+                    "name": "series 1c",
+                    "y": 4,
+                    "type": "column",
+                    "drilldown": "series 1c",
+                    "lineWidth": 0
+                }],
+                "type": "column",
+                "lineWidth": 0
+            }, {
+                "name": "series 2",
+                "id": "series 2",
+                "data": [{
+                    "name": "series 2a",
+                    "y": 3,
+                    "type": "column",
+                    "lineWidth": 0
+                }, {
+                    "name": "series 2b",
+                    "y": 4,
+                    "type": "column",
+                    "lineWidth": 0
+                }, {
+                    "name": "series 2c",
+                    "y": 5,
+                    "type": "column",
+                    "lineWidth": 0
+                }],
+                "type": "column",
+                "lineWidth": 0
+            }, {
+                "name": "series 3",
+                "id": "series 3",
+                "data": [{
+                    "name": "series 3a",
+                    "y": 3,
+                    "type": "column",
+                    "lineWidth": 0
+                }, {
+                    "name": "series 3b",
+                    "y": 4,
+                    "type": "column",
+                    "lineWidth": 0
+                }, {
+                    "name": "series 3c",
+                    "y": 2,
+                    "type": "column",
+                    "lineWidth": 0
+                }, {
+                    "name": "series 3d",
+                    "y": 3,
+                    "type": "column",
+                    "lineWidth": 0
+                }],
+                "type": "column",
+                "lineWidth": 0
+            }, {
+                "name": "series 1b",
+                "id": "series 1b",
+                "data": [],
+                "type": "column",
+                "lineWidth": 0
+            }, {
+                "name": "series 1c",
+                "id": "series 1c",
+                "data": [],
+                "type": "column",
+                "lineWidth": 0
+            }]
+        },
+        "subtitle": {
+            "text": "",
+            "align": "left",
+            "style": {
+                "color": "#000000",
+                "fontFamily": "sans-serif",
+                "fontWeight": "normal",
+                "fontSize": "12px"
+            }
+        },
+        "title": {
+            "align": "left",
+            "style": {
+                "color": "#000000",
+                "fontFamily": "sans-serif",
+                "fontWeight": "bold",
+                "fontSize": "14px"
+            }
+        },
+        "tooltip": {
+            "backgroundColor": "#FEFFEF",
+            "crosshairs": [false, false],
+            "formatter": function () {
+                var y_val = $(this.y).addCommas(0);
+                var s = "<b>" + this.series.name + "</b><br>" + this.key + ": " + y_val;
+                this.point.drilldown ? s = s + "<br>(Click to drill down)" : s = s;
+                return s.replace(/\$-/g, "-$");
+            },
+            "style": {
+                "color": "#000000",
+                "fontFamily": "Calibri, Verdana, Arial, Helvetica, sans-serif"
+            },
+            "useHTML": false,
+            "shared": false,
+            "addExtraData": function (extra_data, point, s) {
+                if (extra_data && extra_data[0].name) {
+                    $.each(extra_data, function (i) {
+                        if (extra_data[i].values[point.index]) {
+                            s = s + "<br>  " + extra_data[i].name + ": " + extra_data[i].values[point.index];
+                        }
+                    });
+                }
+                return s;
+            }
+        },
+        "xAxis": {
+            "categories": [],
+            "gridLineColor": "#c0c0c0",
+            "gridLineWidth": 0,
+            "gridLineDashStyle": "Dot",
+            "labels": {
+                "rotation": 0,
+                "style": {
+                    "color": "#000000",
+                    "fontFamily": "Calibri, Verdana, Arial, Helvetica, sans-serif",
+                    "fontWeight": "normal",
+                    "backgroundColor": "#fff",
+                    "fontSize": "12px",
+                    "textOverflow": "none"
+                }
+            },
+            "lineWidth": 1.2,
+            "lineColor": "gray",
+            "max": null,
+            "min": null,
+            "plotBands": [],
+            "plotLines": [{
+                "value": 0,
+                "color": "#c0c0c0",
+                "dashStyle": "solid",
+                "width": 0
+            }],
+            "tickInterval": null,
+            "tickmarkPlacement": "on",
+            "tickPosition": "outside",
+            "tickColor": "#C0D0E0",
+            "title": {
+                "align": "middle",
+                "useHTML": true,
+                "text": "",
+                "margin": 6,
+                "rotation": 0,
+                "style": {
+                    "color": "#000000",
+                    "fontFamily": "Calibri, Verdana, Arial, Helvetica, sans-serif",
+                    "fontWeight": "normal",
+                    "backgroundColor": "#fff",
+                    "fontSize": "13px"
+                },
+                "x": 0,
+                "y": 0
+            },
+            "type": "linear"
+        },
+        "yAxis": {
+            "gridLineColor": "#c0c0c0",
+            "gridLineWidth": 1,
+            "gridLineDashStyle": "Dot",
+            "labels": {
+                "formatter": function newYFormat() {
+                    var s = this.value == parseInt(this.value) ? Highcharts.numberFormat(this.value, 0, ".", ",") : Highcharts.numberFormat(this.value, 1, ".", ",");
+                    return s.replace(/\$-/g, "-$");
+                },
+                "rotation": 0,
+                "style": {
+                    "color": "#000000",
+                    "fontFamily": "Calibri, Verdana, Arial, Helvetica, sans-serif",
+                    "fontWeight": "normal",
+                    "backgroundColor": "#fff",
+                    "fontSize": "12px"
+                }
+            },
+            "lineColor": "gray",
+            "lineWidth": 1,
+            "max": null,
+            "min": null,
+            "opposite": false,
+            "plotBands": [],
+            "plotLines": [{
+                "value": 0,
+                "color": "#c0c0c0",
+                "dashStyle": "solid",
+                "width": 1
+            }],
+            "tickInterval": null,
+            "tickmarkPlacement": "on",
+            "tickPosition": "outside",
+            "tickColor": "#C0D0E0",
+            "tickWidth": 1,
+            "title": {
+                "useHTML": true,
+                "text": "",
+                "margin": 6,
+                "align": "high",
+                "offset": 20,
+                "rotation": 0,
+                "x": 35,
+                "y": -20,
+                "style": {
+                    "color": "#000000",
+                    "fontFamily": "Calibri, Verdana, Arial, Helvetica, sans-serif",
+                    "fontWeight": "normal",
+                    "fontSize": "13px"
+                }
+            },
+            "type": "linear"
+        },
+        "credits": {
+            "position": {
+                "align": "left",
+                "x": 10,
+                "y": -22
+            },
+            "style": {
+                "cursor": "default",
+                "color": "#2C2C2C"
+            },
+            "text": "Click legend items to change data display. Hover over chart to view data.<br>Source: U.S. Bureau of Labor Statistics.",
+            "useHTML": true
+        },
+        "saved_values": [{
+            "id": "chart_type_icons",
+            "val": "drilldown"
+        }, {
+            "id": "chart_id_textinput",
+            "val": "chart1"
+        }, {
+            "id": "map_type_select",
+            "val": "state"
+        }, {
+            "id": "map_animated_checkbox",
+            "val": false
+        }, {
+            "id": "bubble_animated_checkbox",
+            "val": false
+        }, {
+            "id": "drilldown_type_select",
+            "val": "column"
+        }, {
+            "id": "chart_width_textinput",
+            "val": "580"
+        }, {
+            "id": "chart_height_textinput",
+            "val": "430"
+        }, {
+            "id": "top_margin_textinput",
+            "val": "100"
+        }, {
+            "id": "right_margin_textinput",
+            "val": "40"
+        }, {
+            "id": "bottom_margin_textinput",
+            "val": "80"
+        }, {
+            "id": "left_margin_textinput",
+            "val": "80"
+        }, {
+            "id": "map_spotlight_size_checkbox",
+            "val": false
+        }, {
+            "id": "map_circle_size_range",
+            "val": "10"
+        }, {
+            "id": "table_input_load_series_from_icons",
+            "val": "column_heads"
+        }, {
+            "id": "table_input_textarea",
+            "val": "<table id=\"BLS_table\" class=\"regular\" cellspacing=\"0\" cellpadding=\"0\" xborder=\"1\" style=\"width: 95%\"> <caption><span class=\"tableTitle\">Test table data for drill down charts</span></caption> <thead> <tr> <th rowspan=\"1\"  style=\"vertical-align: middle;\">categories</th> <th >value</th> </tr> </thead> <tbody> <tr> <th > <p>series 1</p> </th> <td >1</td> </tr> <tr class=\"greenbar\"> <th > <p class=\"sub1\">series 1a</p> </th> <td >2</td> </tr> <tr> <th > <p class=\"sub1\">series 1b</p> </th> <td >3</td> </tr> <tr class=\"greenbar\"> <th > <p class=\"sub2\">series 1bi</p> </th> <td >5</td> </tr> <tr> <th > <p class=\"sub2\">series 1bii</p> </th> <td >6</td> </tr> <tr class=\"greenbar\"> <th > <p class=\"sub1\">series 1c</p> </th> <td >4</td> </tr> <tr> <th > <p class=\"sub2\">series 1ci</p> </th> <td >5</td> </tr> <tr class=\"greenbar\"> <th > <p class=\"sub2\">series 1cii</p> </th> <td >6</td> </tr> <tr> <th > <p class=\"sub2\">series 1ciii</p> </th> <td >7</td> </tr> <tr class=\"greenbar\"> <th > <p>series 2</p> </th> <td >2</td> </tr> <tr> <th > <p class=\"sub1\">series 2a</p> </th> <td >3</td> </tr> <tr class=\"greenbar\"> <th > <p class=\"sub1\">series 2b</p> </th> <td >4</td> </tr> <tr> <th > <p class=\"sub1\">series 2c</p> </th> <td >5</td> </tr> <tr class=\"greenbar\"> <th > <p>series 3</p> </th> <td >6</td> </tr> <tr> <th > <p class=\"sub1\">series 3a</p> </th> <td >3</td> </tr> <tr class=\"greenbar\"> <th > <p class=\"sub1\">series 3b</p> </th> <td >4</td> </tr> <tr> <th > <p class=\"sub1\">series 3c</p> </th> <td >2</td> </tr> <tr class=\"greenbar\"> <th > <p class=\"sub1\">series 3d</p> </th> <td >3</td> </tr> </tbody></table>"
+        }, {
+            "id": "example_table_select",
+            "val": ""
+        }, {
+            "id": "color_palettes",
+            "val": -1
+        }, {
+            "id": "legend_layout_select",
+            "val": "horizontal"
+        }, {
+            "id": "map_legend_enabled_checkbox",
+            "val": true
+        }, {
+            "id": "legend_placement_x",
+            "val": "100"
+        }, {
+            "id": "legend_placement_y",
+            "val": "40"
+        }, {
+            "id": "legend_reverse_layout_checkbox",
+            "val": false
+        }, {
+            "id": "legend_make_toggle_checkbox",
+            "val": false
+        }, {
+            "id": "chart_x_axis_title_textarea",
+            "val": ""
+        }, {
+            "id": "chart_x_axis_x_position_input",
+            "val": "40"
+        }, {
+            "id": "chart_x_axis_tickmark_interval_input",
+            "val": ""
+        }, {
+            "id": "chart_x_axis_min_input",
+            "val": ""
+        }, {
+            "id": "chart_x_axis_max_input",
+            "val": ""
+        }, {
+            "id": "chart_x_axis_show_only_years",
+            "val": false
+        }, {
+            "id": "chart_x_axis_add_commas",
+            "val": false
+        }, {
+            "id": "chart_y_axis_title_textarea",
+            "val": ""
+        }, {
+            "id": "chart_y_axis_x_position_input",
+            "val": "35"
+        }, {
+            "id": "chart_y_axis_tickmark_interval_input",
+            "val": ""
+        }, {
+            "id": "chart_y_axis_min_input",
+            "val": ""
+        }, {
+            "id": "chart_y_axis_max_input",
+            "val": ""
+        }, {
+            "id": "chart_y_axis_opposite_checkbox",
+            "val": false
+        }, {
+            "id": "chart_y_axis_log_checkbox",
+            "val": false
+        }, {
+            "id": "chart_y_axis_signs_select",
+            "val": "no_signs"
+        }, {
+            "id": "chart_y_axis_decimals_select",
+            "val": null
+        }, {
+            "id": "chart_y_axis_divide_select",
+            "val": "1"
+        }, {
+            "id": "chart_tooltip_shared_checkbox",
+            "val": false
+        }, {
+            "id": "chart_tooltip_force_decimals_select",
+            "val": "0"
+        }, {
+            "id": "chart_tooltip_signs_select",
+            "val": "no_signs"
+        }, {
+            "id": "chart_tooltip_force_decimals_x_select",
+            "val": "0"
+        }, {
+            "id": "chart_tooltip_signs_x_select",
+            "val": "no_signs"
+        }, {
+            "id": "chart_tooltip_force_decimals_z_select",
+            "val": "0"
+        }, {
+            "id": "chart_tooltip_signs_z_select",
+            "val": "no_signs"
+        }, {
+            "id": "map_tooltip_na_text_input",
+            "val": "N/A"
+        }, {
+            "id": "chart_z_title_text_input",
+            "val": ""
+        }, {
+            "id": "chart_tooltip_y_multiple_select",
+            "val": "1"
+        }, {
+            "id": "chart_credits_text_textarea",
+            "val": "Click legend items to change data display. Hover over chart to view data.Source: U.S. Bureau of Labor Statistics."
+        }, {
+            "id": "point_padding_input",
+            "val": ".1"
+        }, {
+            "id": "group_padding_input",
+            "val": ".2"
+        }, {
+            "id": "chart_subtitle_textarea",
+            "val": ""
+        }, {
+            "id": "map_animation_speed_range",
+            "val": "500"
+        }, {
+            "id": "chart_mlr_styles_checkbox",
+            "val": false
+        }, {
+            "id": "chart_zoom_select",
+            "val": "false,false,null"
+        }, {
+            "id": "chart_show_data_labels_checkbox",
+            "val": false
+        }, {
+            "id": "chart_add_recession_shading_select",
+            "val": "no_recession"
+        }]
+    };
+
+    var chartCallback = function chartCallback(all_chart_options) {
+
+        if (all_chart_options.timeline) {
+            //call animation if applicable
+            all_chart_options.timeline.animation();
+        }
+
+        $(".highcharts-legend-item").css("min-height", "0px").css("z-index", 100); //fix so CMS CSS doesn't make legend taller than it should
+        $(".highcharts-tooltip").css("z-index", 200);
+
+        /**
+         * Highcharts plugin for setting a lower opacity for other series than the one that is hovered
+         * in the legend
+         */
+        (function (Highcharts) {
+            var each = Highcharts.each;
+
+            Highcharts.wrap(Highcharts.Legend.prototype, 'renderItem', function (proceed, item) {
+
+                proceed.call(this, item);
+
+                var isPoint = !!item.series,
+                    collection = isPoint ? item.series.points : this.chart.series,
+                    groups = isPoint ? ['graphic'] : ['group', 'markerGroup'],
+                    element = (this.options.useHTML ? item.legendItem : item.legendGroup).element;
+
+                element.onmouseover = function () {
+                    each(collection, function (seriesItem) {
+                        if (seriesItem !== item) {
+                            each(groups, function (group) {
+                                seriesItem[group].animate({
+                                    opacity: 0.25
+                                }, {
+                                    duration: 150
+                                });
+                            });
+                        }
+                    });
+                };
+                element.onmouseout = function () {
+                    each(collection, function (seriesItem) {
+                        if (seriesItem !== item) {
+                            each(groups, function (group) {
+                                seriesItem[group].animate({
+                                    opacity: 1
+                                }, {
+                                    duration: 50
+                                });
+                            });
+                        }
+                    });
+                };
+            });
+        })(Highcharts); //end gray other series plugin
+    };
+    Highcharts.setOptions({
+        lang: {
+            thousandsSep: ","
+        }
+    });
+
+    var chart = new Highcharts.Chart(all_chart_options, chartCallback(all_chart_options));
+});
+jQuery.fn.extend({
+    addCommas: function addCommas(decimals) {
+
+        var val = this[0] || 0;
+
+        if (val == 0) {
+            return 0;
+        } else if (isNaN(val) || val < 999 && val > -999 && decimals < 1) {
+            //small numbers auto decimals
+            return val;
+        } else if (val < 999 && val > -999 && decimals > 0) {
+            //small numbers fixed decimals
+            return val.toFixed(decimals);
+        } else if ((val > 999 || val < -999) && decimals > 0) {
+            //big numbers fixed decimals
+            while (/(\d+)(\d{3})/.test(val.toString())) {
+                val = val.toFixed(decimals).replace(/(\d+)(\d{3})/, '$1' + ',' + '$2');
+            }
+        } else if (val > 999 || val < -999) {
+            //big number auto decimals
+            while (/(\d+)(\d{3})/.test(val.toString())) {
+                val = val.toString().replace(/(\d+)(\d{3})/, '$1' + ',' + '$2');
+            }
+        }
+
+        return val;
+    }
+});
