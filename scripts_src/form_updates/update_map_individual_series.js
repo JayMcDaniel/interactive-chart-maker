@@ -104,7 +104,7 @@ var update_map_individual_series = {
 
 
         $("#display_series_options_inner_div").show();
-        update_map_individual_series.updateMapRange(); //binds value input boxes
+        update_map_individual_series.updateMapRange(chart, all_chart_options, all_map_options); //binds value input boxes
 
     },
 
@@ -117,11 +117,11 @@ var update_map_individual_series = {
     },
 
     /** when custom value range input boxes are changed, this is fired **/
-    updateMapRange: function (all_map_options) {
+    updateMapRange: function (chart, all_chart_options, all_map_options) {
         var map_init = require("../initializers/maps/map_init.js");
 
         $(".map_range_input").keyup(function () {
-            map_init.loadNewMap(false); //false for don't repopulate form
+            map_init.loadNewMap(chart, all_chart_options, all_map_options, false); //false for don't repopulate form
         });
 
     }
