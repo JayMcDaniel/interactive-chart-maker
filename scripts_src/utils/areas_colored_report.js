@@ -11,9 +11,12 @@ var areas_colored_report = {
         var areas_not_colored = [];
 
         $.each(all_map_options.areas, function (i, e) {
-            if (e.loc_name && e.value) {
+            
+            console.log(e.loc_name, e.value, typeof e.value);
+            
+            if (e.loc_name && typeof e.value === "number") { //if the area has a value
                 areas_colored.push(e.loc_name);
-            } else if (e.loc_name && !e.value) {
+            } else if (e.loc_name && typeof e.value === "object") { //if it's null or undefined
                 areas_not_colored.push(e.loc_name)
             }
 
@@ -44,8 +47,6 @@ var areas_colored_report = {
             $("#areas_colored_textarea").val(areas_colored.join("\n"));
             $("#areas_not_colored_textarea").val(areas_not_colored.join("\n"));
             $("#areas_not_found_from_table_textarea").val(all_map_options.areas_not_found_from_table.join("\n"));
-           // $(".chart_display_area, .map_display_area").toggleClass("fixed");
-
 
         });
 
