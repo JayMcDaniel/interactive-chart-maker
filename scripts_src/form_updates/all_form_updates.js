@@ -60,8 +60,8 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
 
         //show just_...
         if (["scatter", "drilldown", "bubble", "bar", "column", "stacked_column", "stacked_bar", "arearange", "columnrange"].indexOf(chart_type) > -1) {
-            $(".just_" + chart_type.replace("stacked_", "")).show();
-            $(".show_" + chart_type.replace("stacked_", "")).show();
+            $(".just_" + chart_type.replace("stacked_", "").replace("range", "")).show();
+            $(".show_" + chart_type.replace("stacked_", "").replace("range", "")).show();
         }
 
         //if drilldown, hide unrelated
