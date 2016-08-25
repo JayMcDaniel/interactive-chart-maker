@@ -1,4 +1,6 @@
 var Legend = require("../../constructors/charts/legend.js");
+var utils_forms = require("../../utils/utils_forms.js");
+var utils_main = require("../../utils/utils_main.js");
 
 /** Initializer for "legend" options section of all_chart_options. Creates and returns a new instance 
 @module
@@ -17,7 +19,9 @@ var Legend = require("../../constructors/charts/legend.js");
      var options = {
          layout: getLegendLayout(),
          x: Number($("#legend_placement_x").val()),
-         y: Number($("#legend_placement_y").val())
+         y: Number($("#legend_placement_y").val()),
+         reversed: utils_forms.getCheckBoxValue($("#legend_reverse_layout_checkbox")),
+         itemWidth: utils_main.checkForUndefined($("#legend_item_width_input").val()) 
 
      };
 

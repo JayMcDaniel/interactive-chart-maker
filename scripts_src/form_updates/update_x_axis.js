@@ -46,7 +46,7 @@ var update_x_axis = {
     
      /** update x-axis max */
     updateMax: function (newMax, chart, all_chart_options) {
-        newMax = utils_main.checkforUndefined(newMax);
+        newMax = utils_main.checkForUndefined(newMax);
         if (!chart) { // called when this is used in x_axis_init
             return newMax;
         }
@@ -62,7 +62,7 @@ var update_x_axis = {
 
     /** update y-axis min */
     updateMin: function (newMin, chart, all_chart_options) {
-        newMin = utils_main.checkforUndefined(newMin);
+        newMin = utils_main.checkForUndefined(newMin);
         if (!chart) { // called when this is used in x_axis_init
             return newMin;
         }
