@@ -5,7 +5,7 @@
 var utils_main = {
 
     /** check value - if 0 or not a number, return undefined **/
-    checkforUndefined: function (val) {
+    checkForUndefined: function (val) {
         if (val === "0") {
             return 0;
         }

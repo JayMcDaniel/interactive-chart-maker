@@ -11,6 +11,7 @@ var Legend = function (o) {
     this.enabled = o.enabled || true;
     this.floating = o.floating || false;
     this.itemDistance = o.itemDistance || 30;
+    this.itemWidth = o.itemWidth;
     this.layout = o.layout || 'horizontal';
     this.reversed = o.reversed || false;
     this.shadow = o.shadow || false;

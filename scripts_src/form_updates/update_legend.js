@@ -11,8 +11,19 @@ var update_legend = {
         legend.options.reversed = val;
         legend.render();
 
-
         all_chart_options.legend.reversed = val;
+    },
+    
+    
+    
+    /** updates legend item width - usefull for making legends with lots of items look more aligned */
+    updateItemWidth: function(newItemWidth, chart, all_chart_options){
+        
+        var legend = chart.legend;
+        legend.options.itemWidth = newItemWidth;
+        legend.render(false);
+        
+        all_chart_options.legend.itemWidth = newItemWidth;
     },
 
 

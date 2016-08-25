@@ -320,7 +320,7 @@
 
                         <p>With area range charts, values in your first column will load as a line. Then, values from the second column will load as the top range, and values from the third column will load as the bottom range. To load more lines with ranges, just add more columns.</p>
                     </div>
-                    
+
                     <div class="just_columnrange">
 
 
@@ -545,14 +545,8 @@
                     </div>
 
                     <a class="show_map" href="table_wizard/better_table_wizard.htm" target="_blank" title="Open Table Wizard (new tab)"><span id="open_table_wizard_button"></span>Open Table Wizard (new tab)</a>
-
-                    <div class="clear_next_textarea_button show_map" title="Clear the text area">X</div>
-
-                    <textarea id="table_input_textarea" class="large show_map" placeholder="Insert table html here">
-                    </textarea>
-
-                    <span class="show_map">
                     <br>
+
                     <label for="example_table_select">Load an example table: </label>
                     <select id="example_table_select">
                         <option value=""></option>
@@ -570,10 +564,19 @@
                         <option value="scatter_table">Scatter</option>
                         <option value="state_map_table">State map</option>
                         <option value="test_table">Test small table</option>
-                        
+
 
                     </select>
                     <br>
+
+                    <div class="clear_next_textarea_button show_map" title="Clear the text area">X</div>
+
+                    <textarea id="table_input_textarea" class="large show_map" placeholder="Insert table html here">
+                    </textarea>
+
+                    <span class="show_map">
+                    <br>
+               
 </span>
                 </div>
 
@@ -643,7 +646,6 @@
             <div class="display chart_display" id="display_chart_legend">
                 <h4>Legend <sup class = "help_icon">?</sup></h4>
                 <div class="display_options">
-                    <span class="notes">For maps, some of the legend formatting (decimals, dollar signs) will mimic the tooltip.<br></span>
 
                     <label for="legend_layout_select">Layout: </label>
                     <select id="legend_layout_select">
@@ -656,17 +658,20 @@
                     <span class="show_map">
                         
                     <span class="just_map">
-                        <label for="map_legend_enabled_checkbox">Enabled: </label>
-                        <input type="checkbox" id="map_legend_enabled_checkbox" checked />
-                        <br>
+                    <span class="notes">For maps, some of the legend formatting (decimals, dollar signs) will mimic the tooltip.<br></span>
+
+                    <label for="map_legend_enabled_checkbox">Enabled: </label>
+                    <input type="checkbox" id="map_legend_enabled_checkbox" checked />
+                    <br>
                     </span>
-                    
+
 
                     <label>Placement:</label> <span class="notes" style="margin-bottom: -5px;">(higher values push legend right and down)</span>
                     <br>
 
                     <label for="legend_placement_x">&rarr; <sup>(X)</sup> </label>
                     <input type="text" id="legend_placement_x" value="100" class="small number_entry" />
+
                     <label for="legend_placement_y">&darr; <sup>(Y)</sup> </label>
                     <input type="text" id="legend_placement_y" value="40" class="small number_entry" />
                     <br>
@@ -674,6 +679,12 @@
                     <label for="legend_reverse_layout_checkbox">Reverse order: </label>
                     <input type="checkbox" id="legend_reverse_layout_checkbox" />
                     <br>
+
+                    <label for="legend_item_width_input">Item width</label>
+                    <input type="text" id="legend_item_width_input" value="" placeholder="Auto" class="small number_entry" />
+                    <br>
+                    <span class="notes">This can be helpful for making legends with multiple items look neater.<br></span>
+
 
                     </span>
 
@@ -846,7 +857,7 @@
                     <br>
                     </span>
 
-                    
+
                     <span class="just_bubble just_scatter">
                         <label for="chart_tooltip_force_decimals_x_select">Decimal points (X value): </label>
                         <select id="chart_tooltip_force_decimals_x_select">
