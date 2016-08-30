@@ -3,12 +3,19 @@ var plotOptionsInit = require("../initializers/charts/plot_options_init.js");
 var update_data = require("./update_data.js");
 var update_tooltip = require("./update_tooltip.js");
 var update_x_axis = require("./update_x_axis.js");
+var utils_main = require("../utils/utils_main.js");
 
 
 /** when a chart icon is clicked, this function is called - changes the chart type shown 
 @module
 */
 var updateChartType = function (chart_type, chart, all_chart_options) {
+
+
+
+
+    //if drilled into a drilldown, click the up button to get out - prevents errors
+    utils_main.drillUp();
 
     //if map
     if (chart_type === "map") {

@@ -60,6 +60,15 @@ var utils_main = {
 
     },
 
+
+    /** if drilled into a drilldown, click the up button to get out - prevents errors **/
+    drillUp: function () {
+        while ($(".highcharts-button").length > 0) {
+            $(".highcharts-button").click();
+        }
+    },
+
+
     /** functions to set or return min max values **/
     limits: {
 

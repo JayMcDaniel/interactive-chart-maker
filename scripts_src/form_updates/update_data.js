@@ -1,5 +1,6 @@
 var parseTableInput = require("../parsers/parse_table_input.js");
 var utils_forms = require("../utils/utils_forms.js");
+var utils_main = require("../utils/utils_main.js");
 
 /** called when #chart_type_icons .selected or #table_input_textarea is changed - calls functions to reparse data
 @namespace
@@ -15,20 +16,26 @@ var update_data = {
 
         var legend_toggle_enabled = utils_forms.getCheckBoxValue($("#legend_make_toggle_checkbox"));
         var load_series_from = $("#table_input_load_series_from_icons .selected").divVal();
+
+        //if drilled into a drilldown, click the up button to get out - prevents errors
+        utils_main.drillUp();
+
+        ///parse data //
         var parsed_table_output = parseTableInput(input, load_series_from, chart_type, legend_toggle_enabled, all_chart_options.colors, chart, all_chart_options);
+
 
         //update x-axis categories
         chart.xAxis[0].update({
             categories: parsed_table_output.x_axis_categories
         }, false);
 
-        
+
         //remove existing series array
         $(chart.series).each(function () {
             this.remove(false); //false to not redraw yet
         });
-        
-        
+
+
 
         //add new series
         $(parsed_table_output.series).each(function () {
@@ -42,7 +49,7 @@ var update_data = {
         //add drilldown series if applicable
         if (parsed_table_output.drilldown) {
             chart.options.drilldown.series = [];
-            
+
             $(parsed_table_output.drilldown.series).each(function () {
                 chart.options.drilldown.series.push(this);
             });
@@ -55,8 +62,8 @@ var update_data = {
 
         chart.redraw(true);
 
-        
-        
+
+
         //update chart options for code output
         all_chart_options.series = parsed_table_output.series;
         all_chart_options.xAxis.categories = parsed_table_output.x_axis_categories;
