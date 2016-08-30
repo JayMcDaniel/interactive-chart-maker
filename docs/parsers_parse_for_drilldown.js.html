@@ -34,7 +34,23 @@
         if (str === "z") {
             return $(this).parent().next().next().next().getNumber();
         }
-    }
+
+    };
+
+
+    //creates and pushes a new series object into the drilldown.series array
+    var pushDrillSeries = function (output, drill_type, this_name, next_sub) {
+
+        output.drilldown.series.push({
+            name: this_name,
+            id: this_name,
+            data: [],
+            type: drill_type,
+            lineWidth: 0,
+            sub: next_sub
+        });
+    };
+
 
 
     /** Parsing function for drilldown charts. See http://api.highcharts.com/highcharts#drilldown for more.
@@ -49,6 +65,7 @@
 
             //main obj that gets a series and drilldown.series arrays and is returned
             var output = {};
+
 
             output.x_axis_categories = drill_type === "bubble" ? null : [];
 
@@ -74,150 +91,127 @@
 
 
 
-            ///////make the top level series /////
+            /** parsing function for top level series **/
             var parseTopLevel = function () {
-                var top_indexes = [];
-                $("tbody th p", input).each(function (i) {
-                    if (!$(this).is('[class*="sub"]') || $(this).is('[class*="sub0"]')) { //if class is sub0 or nothing
-
-                        var this_name = $.trim($(this).text());
-                        var this_val = $(this).parent().next().getNumber();
-
-                        //check if there's levels beneath this
-                        var this_drilldown = $("tbody th:eq(" + (i + 1) + ") p", input).is('[class="sub1"]') ? this_name : null;
-
-
-                        //if so, set up a drilldown series obj
-                        if (this_drilldown) {
-                            top_indexes.push({
-                                name: this_name,
-                                index: i
-                            });
-
-                            output.drilldown.series.push({
-                                name: this_name,
-                                id: this_name,
-                                data: [],
-                                type: drill_type,
-                                lineWidth: 0
-                            });
-                        }
-
-
-                        output.series[0].data.push({
-                            name: this_name,
-                            x: drill_type === "bubble" ? getBubbleVal("x") : undefined,
-                            y: this_val,
-                            z: drill_type === "bubble" ? getBubbleVal("z") : undefined,
-                            color: colors[output.series[0].data.length],
-                            type: drill_type,
-                            drilldown: this_drilldown,
-                            lineWidth: 0
-                        });
-
-                    }
-
-                });
-
-                return top_indexes;
-
-            }
-
-            var top_indexes = parseTopLevel();
-
-
-            ///////make first sub indexes /////
-            var parseSubs = function (indexes, sub_level, skip_num) {
-
-                var sub_indexes = [];
-                var next_sub_level = "sub" + Number(Number(sub_level.replace("sub", "")) + 1);
-                console.log(next_sub_level);
-
-                $(indexes).each(function (i) {
-                    //get high and low row indexes from array - this is the subset
-                    var high_i = indexes[i + 1] ? indexes[i + 1].index : 10000000;
-                    var low_i = indexes[i].index;
-
-                    $("tbody th:lt(" + high_i + "):gt(" + low_i + ") p", input).each(function (j, e) {
-
-
-                        //look only at the .sub1 th p's
-                        if ($(this).is('[class*="' + sub_level + '"]')) {
-
-                            var row_index = $(this).parent().parent().index();
-                            var next_index = row_index + 1;
-                            var next_row_p_class = $("tbody tr:eq(" + next_index + ") th p", input).attr("class");
-                            var next_row_title = $("tbody tr:eq(" + next_index + ") th p", input).text();
+                    var top_indexes = [];
+                    $("tbody th p", input).each(function (i) {
+                        if (!$(this).is('[class*="sub"]') || $(this).is('[class*="sub0"]')) { //if class is sub0 or nothing
 
                             var this_name = $.trim($(this).text());
                             var this_val = $(this).parent().next().getNumber();
 
-
-                            //look if this has a sub under it, if so, add drilldown
-                            if (next_row_p_class === next_sub_level) {
-
-                                sub_indexes.push({
-                                    name: this_name,
-                                    index: row_index
-                                });
+                            //check if there's levels beneath this
+                            var this_drilldown = $("tbody th:eq(" + (i + 1) + ") p", input).is('[class="sub1"]') ? this_name : null;
 
 
-                                var this_drilldown = this_name;
-
-
-                                //add a drilldown series object to the end
-                                output.drilldown.series.push({
-                                    name: this_name,
-                                    id: this_name,
-                                    data: [],
-                                    type: drill_type,
-                                    lineWidth: 0
-                                });
-
+                            //if so, set up a drilldown series obj
+                            if (this_drilldown) {
+                                top_indexes.push(i);
+                                pushDrillSeries(output, drill_type, this_name, "sub1");
                             }
 
 
-
-                            //add the data to the recently set up drilldown series obj (i is an index of the loop through indexes)
-                            output.drilldown.series[i + skip_num].data.push({
+                            output.series[0].data.push({
                                 name: this_name,
                                 x: drill_type === "bubble" ? getBubbleVal("x") : undefined,
                                 y: this_val,
                                 z: drill_type === "bubble" ? getBubbleVal("z") : undefined,
+                                color: colors[output.series[0].data.length],
                                 type: drill_type,
-                                drilldown: this_drilldown || undefined,
-                                lineWidth: 0
-
+                                drilldown: this_drilldown,
+                                lineWidth: 0,
+                                sub: "sub0"
                             });
 
                         }
 
-
                     });
 
+                    return top_indexes;
 
-
-                });
-
-                return sub_indexes;
-            }
+                } //end parseTopLevel
 
 
 
 
-            ///DO the sub level parsing if applicable ////
-            if (top_indexes.length > 0) {
-                //first round of subs
-                var sub_indexes = parseSubs(top_indexes, "sub1", 0); //(index obj, current sub level, number to skip when pushing to drilldown.series[i+skip_num].data)
+            /**parsing function for sub levels **/
+            var drill_series_index = 0; // output.drilldown.series index (increments after this_sub === current_sub statement)
 
-                //next rounds of subs
-                var sub_num = 1;
-                while (sub_indexes.length > 0) {
-                    var skip_num = sub_indexes.length + 1;
-                    sub_num++;
-                    sub_indexes = parseSubs(sub_indexes, "sub" + sub_num, skip_num);
+            var parseSubLevel = function (current_sub, indexes) {
+                    var drill_found = false; //if returned false, loop will stop calling this func
+                    var indexes_count = 0; // gets incremented to move through indexes array
+                    var new_indexes = []; //keeps track of row indexes for start of each sub
 
-                }
+                    ///go through drilldown series array and populate with data
+
+                    $(output.drilldown.series).each(function (i, e) {
+
+                        var this_sub = this.sub;
+
+                        if (this_sub === current_sub) {
+                            var high_i = indexes[indexes_count + 1] ? indexes[indexes_count + 1] : 10000000;
+                            var low_i = indexes[indexes_count];
+
+                            //go through each row with this sub and add them as an obj to that drilldown series data array
+                            $("tbody th:lt(" + high_i + "):gt(" + low_i + ") p." + this_sub, input).each(function () {
+                                var this_name = $(this).text();
+
+                                var this_row = $(this).parent().parent();
+                                var this_row_index = this_row.index();
+                                var this_y = $("td:eq(0)", this_row).getNumber();
+
+                                //check if there's a level beneath this
+                                var next_sub = "sub" + Number(Number(this_sub.replace("sub", "")) + 1);
+                                var this_drilldown = $("p", this_row.next()).is('[class="' + next_sub + '"]') ? this_name : null;
+
+                                output.drilldown.series[drill_series_index].data.push({
+                                    name: this_name,
+                                    x: drill_type === "bubble" ? getBubbleVal("x") : undefined,
+                                    y: this_y,
+                                    z: drill_type === "bubble" ? getBubbleVal("z") : undefined,
+                                    sub: next_sub,
+                                    type: drill_type,
+                                    lineWidth: 0,
+                                    drilldown: this_drilldown
+                                });
+
+                                //if there was a next sub level found, create that drilldown series with an id, name, and empty data array
+                                if (this_drilldown) {
+                                    drill_found = true;
+                                    new_indexes.push(this_row_index);
+
+                                    pushDrillSeries(output, drill_type, this_name, next_sub);
+
+                                }
+
+                            }); //end loop through p.[sub]
+
+                            drill_series_index++;
+                            indexes_count++;
+                        } // end if specfific sub
+                    }); //end loop through output.drilldown.series
+
+                    // console.log(output.drilldown.series);
+
+                    return {
+                        drill_found: drill_found,
+                        indexes: new_indexes
+                    }
+
+                } //end parseSubLevel
+
+
+
+            //make the top level series 
+            var top_indexes = parseTopLevel();
+
+            //  loop through sub levels until no more drilldowns found
+            var current_sub = 1;
+            var drill_stat = parseSubLevel("sub" + current_sub, top_indexes);
+
+            while (drill_stat.drill_found) {
+                current_sub++;
+                drill_stat = parseSubLevel("sub" + current_sub, drill_stat.indexes);
             }
 
 
@@ -250,7 +244,7 @@
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Thu Aug 25 2016 09:38:20 GMT-0400 (EDT)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Tue Aug 30 2016 10:16:24 GMT-0400 (EDT)
 </footer>
 
 <script> prettyPrint(); </script>

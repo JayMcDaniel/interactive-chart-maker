@@ -84,9 +84,6 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
 
     $('.chart_type_icon').unbind().click(function () {
 
-        //if drilled into a drilldown, click the up button to get out - prevents errors
-        $(".highcharts-button").click();
-
 
         allFormUpdates.selectChart(this);
         var chart_type = $(this).divVal();
@@ -196,7 +193,7 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
 
 
     //table input textarea
-    $("#table_input_textarea").unbind().bind('input propertychange', function () {
+    $("#table_input_textarea").unbind().bind('blur paste', function () {
 
         if (all_chart_options.chart.type === "map") { //for maps
             map_init.loadNewMap(chart, all_chart_options, all_map_options, true); // true to repopulate form
