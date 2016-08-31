@@ -18,17 +18,7 @@ var chartInit = function chartInit(chart_type) {
                   Number($("#left_margin_textinput").val()),
                  ],
         renderTo: update_template.changeID($("#chart_id_textinput").val()),
-        type: chart_type,
-        events: {
-            load: function () {
-                this.credits.element.onclick = function () {
-                    window.open(
-                        'http://www.bls.gov',
-                        '_blank'
-                    );
-                }
-            }
-        }
+        type: chart_type
     }
 
     var chart_options = new ChartOptions(options);

@@ -1,8 +1,10 @@
 /** Credits options constructor. Info at http://api.highcharts.com/highcharts#credits
-* @constructor Credits 
-*  @param o {object} credits options object
-*/
+ * @constructor Credits 
+ *  @param o {object} credits options object
+ */
 var Credits = function (o) {
+
+    this.href = "/";
 
     this.position = {
         align: 'left',
@@ -14,7 +16,8 @@ var Credits = function (o) {
         cursor: "default",
         color: "#2C2C2C"
     };
-
+  
+    this.target = "_blank";
     this.text = o.text || "";
     this.useHTML = true;
 }
