@@ -41,14 +41,11 @@ var update_data = {
         $(parsed_table_output.series).each(function () {
             chart.addSeries(this, false); //false to not redraw yet
         });
-
-        $(chart.options.drilldown.series).each(function () {
-            delete this;
-        });
+       
+        chart.options.drilldown.series = [];
 
         //add drilldown series if applicable
         if (parsed_table_output.drilldown) {
-            chart.options.drilldown.series = [];
 
             $(parsed_table_output.drilldown.series).each(function () {
                 chart.options.drilldown.series.push(this);
@@ -61,7 +58,6 @@ var update_data = {
         });
 
         chart.redraw(true);
-
 
 
         //update chart options for code output

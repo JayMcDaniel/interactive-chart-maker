@@ -15,9 +15,10 @@ var parseForBubble = require("./parse_for_bubble.js");
 /* parsing function for animated bubble charts */
 var parseForAnimatedBubble = require("./parse_for_animated_bubble.js");
 
-
 /* parsing function for drilldown charts */
 var parseForDrilldown = require("./parse_for_drilldown.js");
+
+var utils_main = require("../utils/utils_main.js");
 
 
 
@@ -32,42 +33,53 @@ var parseForDrilldown = require("./parse_for_drilldown.js");
 
 var parseTableInput = function (input, load_series_from, chart_type, legend_toggle_enabled, colors, chart, all_chart_options) {
 
-    //if animated map is playing, stop it and remove - also prevents errors
-    $(".map_play_button.playing").click();
-    $(".chart_animation_div").remove();
+ //   try {
 
-    var output = {};
- 
+      
+                //if animated map is playing, stop it and remove - also prevents errors
+                $(".map_play_button.playing").click();
+                $(".chart_animation_div").remove();
 
-    /** Depending on the chart type, start that parsing */
-    if (["area", "line", "bar", "stacked_bar", "column", "stacked_column"].indexOf(chart_type) > -1) {
-        output = parseForTypicalChart(input, load_series_from, chart_type, legend_toggle_enabled, colors);
-
-    } else if (chart_type == "arearange" || chart_type == "columnrange") {
-        output = parseForRange(input, chart_type, colors);
-
-    } else if (chart_type == "bubble") {
-        if ($("#bubble_animated_checkbox").is(':checked')) {
-            output = parseForAnimatedBubble(input, chart_type, colors, chart, all_chart_options);
-
-        } else {
-            output = parseForBubble(input, chart_type, colors);
-        }
+                var output = {};
 
 
-    } else if (chart_type == "scatter") {
-        output = parseForScatter(input, chart_type, colors);
+                /** Depending on the chart type, start that parsing */
+                if (["area", "line", "bar", "stacked_bar", "column", "stacked_column"].indexOf(chart_type) > -1) {
+                    output = parseForTypicalChart(input, load_series_from, chart_type, legend_toggle_enabled, colors);
 
-    } else if (chart_type == "drilldown") {
-        var drill_type = $("#drilldown_type_select").val();
-        output = parseForDrilldown(input, drill_type, colors);
-    }
+                } else if (chart_type == "arearange" || chart_type == "columnrange") {
+                    output = parseForRange(input, chart_type, colors);
 
-       //add chart title (same for all types of charts)
-    output.title_text = $("caption", input).text();
+                } else if (chart_type == "bubble") {
+                    if ($("#bubble_animated_checkbox").is(':checked')) {
+                        output = parseForAnimatedBubble(input, chart_type, colors, chart, all_chart_options);
+
+                    } else {
+                        output = parseForBubble(input, chart_type, colors);
+                    }
 
 
-    return output;
+                } else if (chart_type == "scatter") {
+                    output = parseForScatter(input, chart_type, colors);
+
+                } else if (chart_type == "drilldown") {
+                    var drill_type = $("#drilldown_type_select").val();
+                    output = parseForDrilldown(input, drill_type, colors);
+                }
+
+                //add chart title (same for all types of charts)
+                output.title_text = $("caption", input).text();
+
+
+                return output;
+
+
+//    } catch (e) {
+//        console.log(e);
+//        utils_main.showError("Sorry, the table wasn't formatted correctly for a " + chart_type + " chart. Please see the example on the data tab.")
+//
+//    }
+
 
 };
 

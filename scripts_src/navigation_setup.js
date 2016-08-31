@@ -91,13 +91,13 @@ var navigation_setup = {
 
             if ($get_code_span.text() === "Get code") {
                 //show loading
-                $(".glyphicon-refresh-animate").css("visibility", "visible");
+                $("#get_code_button .glyphicon-refresh-animate").css("visibility", "visible");
                 $("#main_result_code_div").slideDown(50, function () {
                     //write all_chart_options
                     $get_code_span.text("Hide code");
                     write_code.writeCode(all_chart_options, all_map_options);
                     //hide loading
-                    $(".glyphicon-refresh-animate").css("visibility", "hidden");
+                    $("#get_code_button .glyphicon-refresh-animate").css("visibility", "hidden");
 
                 });
 

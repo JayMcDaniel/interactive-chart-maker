@@ -154,9 +154,7 @@ var utils_main = {
 
     },
 
-
-
-
+    
     /** stringify tooltip / y-axis formatter function **/
     stringifyFormatter: function (formatter, replacement_obj) {
 

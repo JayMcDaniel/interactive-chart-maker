@@ -15,6 +15,7 @@ var parseForTypicalChart = function (input, load_series_from, chart_type, legend
     var output = {};
     output.series = [];
 
+console.time();
     /** If loading series names from column heads is selected*/
     if (load_series_from === "column_heads") {
         //load x-axis categories from row heads
@@ -23,8 +24,8 @@ var parseForTypicalChart = function (input, load_series_from, chart_type, legend
             output.x_axis_categories.push($.trim($(this).text()));
         });
 
-        //load series object names from column heads, and data from each column tds
 
+        //load series object names from column heads
         $("thead tr:last th:gt(0)", input).each(function (i) {
             var seriesObj = {
                 name: $.trim($(this).text()),
@@ -37,19 +38,32 @@ var parseForTypicalChart = function (input, load_series_from, chart_type, legend
 
             };
 
-            //data from each column's tds
-            $("tbody tr", input).each(function () {
-                var this_row = $(this);
-                $("td:eq(" + i + ")", this_row).each(function () {
-                    seriesObj.data.push($(this).getNumber());
-                });
-            });
-
             output.series.push(seriesObj);
 
         });
 
 
+        //make matrix from table body tds
+        var matrix = [];
+
+        $("tbody tr", input).each(function (row_index, row) {
+            matrix.push([]);
+            $("td", row).each(function (td_index, td) {
+                matrix[row_index].push($(td).getNumber());
+
+            });
+
+        });
+        
+        
+        //populate series data arrays from the matrix
+        output.series.forEach(function (series, i) {
+            matrix.forEach(function (arr, j) {
+                series.data.push(arr[i]);
+            });
+        });
+        
+       
 
         /** Else if loading series names from row heads is selected*/
     } else {
@@ -61,16 +75,11 @@ var parseForTypicalChart = function (input, load_series_from, chart_type, legend
         });
 
         //load series object names from row heads, and data from row tds
-        $("tbody tr", input).each(function (i) {
-
-            var this_row = $(this);
+        $("tbody tr", input).each(function (i, this_row) {
 
             var seriesObj = {
                 name: $.trim($("th:eq(0)", this_row).text()),
                 data: [],
-//                dataLabels: {
-//                    enabled: all_chart_options ? all_chart_options.plotOptions.series.dataLabels.enabled : false
-//                },
                 type: type,
                 color: colors[i],
                 _symbolIndex: i,

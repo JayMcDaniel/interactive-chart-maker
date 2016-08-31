@@ -40,7 +40,7 @@ $(document).ready(function () {
         allFormUpdates.displayOptions(chart_type);
 
         //click selected icon to make sure everything in the chart loads correctly
-       $("#chart_type_icons .selected").click();
+      // $("#chart_type_icons .selected").click();
         
 
     });

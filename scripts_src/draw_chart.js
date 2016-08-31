@@ -58,8 +58,6 @@ var draw_chart = {
 
             });
         }(Highcharts)); //end gray other series plugin
-
-
     },
 
 

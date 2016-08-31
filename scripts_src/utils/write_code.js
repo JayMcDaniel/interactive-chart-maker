@@ -1,4 +1,4 @@
-var chart_recall = require("../chart_recall.js");
+var chart_recall = require("./chart_recall.js");
 var utils_main = require("./utils_main.js");
 /** functions for chart / map code output 
 @namespace
@@ -111,6 +111,9 @@ jQuery.fn.extend({addCommas:' + $("string").addCommas.toString() + ' });';
         var map_legend_init = require("../initializers/maps/map_legend_init.js");
         var map_tooltip_init = require("../initializers/maps/map_tooltip_init.js");
         var map_animation_init = require("../initializers/maps/map_animation_init.js");
+        
+        //save chart input values
+        all_chart_options.saved_values = chart_recall.saveValues();
 
 
         var map_js = utils_main.deepStringify(all_map_options);
