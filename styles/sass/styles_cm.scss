@@ -149,6 +149,10 @@
         margin-bottom: 0px;
     }
     
+    #chart_loading_icon {
+        display: none;
+    }
+    
     #chart_output_code,
     #chart_html_code {
         height: 290px;
@@ -352,8 +356,8 @@
     }
     
     .circle {
-//        opacity: 1;
-  //      fill: #E0E0E0;
+        //        opacity: 1;
+        //      fill: #E0E0E0;
         stroke: #646464;
         stroke-width: 1;
     }
@@ -612,18 +616,6 @@
         }
     }
     
-//    #top_nav_bar:after {
-//        content: "";
-//        position: absolute;
-//        width: 100%;
-//        bottom: 0;
-//        height: 15px;
-//        margin-bottom: -15px;
-//        z-index: 4999999;
-//        left: 0;
-//        background: linear-gradient(rgba(0, 0, 0, .2), transparent);
-//    }
-    
     #get_code_button,
     #show_load_chart_area_button,
     .copy_to_clipboard_button,
@@ -649,27 +641,30 @@
         #get_code_text {
             font-size: 100%;
         }
-        .glyphicon-refresh-animate {
-            margin-left: 3px;
-            -animation: spin .7s infinite linear;
-            -webkit-animation: spin2 .7s infinite linear;
-            visibility: hidden;
+    }
+    
+    .glyphicon-refresh-animate {
+        margin-left: 3px;
+        -animation: spin .7s infinite linear;
+        -webkit-animation: spin2 .7s infinite linear;
+        visibility: hidden;
+    }
+    
+    @-webkit-keyframes spin2 {
+        from {
+            -webkit-transform: rotate(0deg);
         }
-        @-webkit-keyframes spin2 {
-            from {
-                -webkit-transform: rotate(0deg);
-            }
-            to {
-                -webkit-transform: rotate(360deg);
-            }
+        to {
+            -webkit-transform: rotate(360deg);
         }
-        @keyframes spin {
-            from {
-                transform: scale(1) rotate(0deg);
-            }
-            to {
-                transform: scale(1) rotate(360deg);
-            }
+    }
+    
+    @keyframes spin {
+        from {
+            transform: scale(1) rotate(0deg);
+        }
+        to {
+            transform: scale(1) rotate(360deg);
         }
     }
     

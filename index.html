@@ -29,7 +29,7 @@
     <div id="top_nav_bar_filler"></div>
     <div id="top_nav_bar">
         <h1>Interactive Chart Maker</h1>
-        <span id="app_version">v2.0.0</span>
+        <span id="app_version">v2.0.1</span>
         <span id="get_code_button" title="Get chart/map code"><span id="get_code_icon">&lt; / &gt;</span> <span id="get_code_text">Get code</span><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span></span>
         <span id="show_load_chart_area_button" title="Load saved chart" alt="Load chart"></span>
 
@@ -543,7 +543,7 @@
 
 
                     </div>
-
+                    <span class="show_map">
                     <a class="show_map" href="table_wizard/better_table_wizard.htm" target="_blank" title="Open Table Wizard (new tab)"><span id="open_table_wizard_button"></span>Open Table Wizard (new tab)</a>
                     <br>
 
@@ -574,10 +574,10 @@
                     <textarea id="table_input_textarea" class="large show_map" placeholder="Insert table html here">
                     </textarea>
 
-                    <span class="show_map">
+
                     <br>
-               
-</span>
+
+                    </span>
                 </div>
 
             </div>
@@ -1137,10 +1137,12 @@
         <!-- chart / map display area -->
         <div id="chart1" class="chart_display_area fixed">
         </div>
-
+<div id="chart_loading_icon" class="loading glyphicon glyphicon-refresh glyphicon-refresh-animate"></div>
         <div id="map1" class="map_display_area fixed">
         </div>
+        
         <p class="alert-danger"></p>
+        
 
     </div>
     <!-- main_content_div end -->

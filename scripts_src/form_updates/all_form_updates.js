@@ -12,7 +12,7 @@ var update_tooltip = require("./update_tooltip.js");
 var update_data = require("./update_data.js");
 var update_credits = require("./update_credits.js");
 var update_chart_options = require("./update_chart_options.js");
-var chart_recall = require("../chart_recall.js");
+var chart_recall = require("../utils/chart_recall.js");
 var update_individual_series = require("./update_individual_series.js");
 var update_map_palettes = require("./update_map_palettes.js");
 
@@ -105,6 +105,10 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
             chart.reflow();
             navigation_setup.chartClicks();
 
+            //update tickmark interval (recalculates if not set)
+            var new_x_interval = $("#chart_x_axis_tickmark_interval_input").val();
+            update_x_axis.updateTickmarkInterval(new_x_interval, chart, all_chart_options, all_chart_options.xAxis.categories);
+
         }
 
     });
@@ -182,10 +186,12 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
         $("#table_input_load_series_from_icons .selected").removeClass("selected");
         $(this).addClass("selected");
 
-
         update_data.updateData(chart, all_chart_options);
         update_individual_series.populateForm(chart, all_chart_options);
 
+        //update tickmark interval (recalculates if not set)
+        var new_x_interval = $("#chart_x_axis_tickmark_interval_input").val();
+        update_x_axis.updateTickmarkInterval(new_x_interval, chart, all_chart_options, all_chart_options.xAxis.categories);
 
     });
 
@@ -200,14 +206,13 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
         } else {
             update_data.updateData(chart, all_chart_options); //for charts
         }
-
     });
 
 
 
     //example table select menu
     $("#example_table_select").unbind().change(function () {
-        
+
         var new_table_file = "./dev/test_tables/" + $(this).val() + ".htm";
 
         $.get(new_table_file, function (table) {
@@ -223,7 +228,7 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
 
     //chart color palettes
     allFormUpdates.colorPaletteRowClick = function () {
-        
+
         $(".color_palette_row").unbind().click(function () {
             var chart_type = $("#chart_type_icons .selected").divVal(); //need chart type because drill is colored differently
             $(".color_palette_row").removeClass("selected");
@@ -234,7 +239,7 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
 
         //map color palettes
         $(".map_color_palette_row").unbind().click(function () {
-            
+
             $(".map_color_palette_row").removeClass("selected");
             var color_palette = $(this);
             color_palette.addClass("selected");
@@ -280,7 +285,7 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
 
     //legend reverse ceckbox changed
     $("#legend_reverse_layout_checkbox, #map_legend_enabled_checkbox").unbind().change(function () {
-        
+
         if (all_chart_options.chart.type === "map") { //for maps
             map_init.loadNewMap(chart, all_chart_options, all_map_options, true); // true to repopulate form
         } else {
@@ -329,7 +334,7 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
     //x-axis tickmark interval input changed
     $("#chart_x_axis_tickmark_interval_input").unbind().keyup(function () {
         var new_interval = Number($(this).val());
-        update_x_axis.updateTickmarkInterval(new_interval, chart, all_chart_options);
+        update_x_axis.updateTickmarkInterval(new_interval, chart, all_chart_options, all_chart_options.xAxis.categories);
     });
 
 

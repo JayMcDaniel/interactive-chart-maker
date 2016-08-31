@@ -42,9 +42,9 @@ var update_x_axis = {
 
 
     },
-    
-    
-     /** update x-axis max */
+
+
+    /** update x-axis max */
     updateMax: function (newMax, chart, all_chart_options) {
         newMax = utils_main.checkForUndefined(newMax);
         if (!chart) { // called when this is used in x_axis_init
@@ -73,7 +73,7 @@ var update_x_axis = {
 
         all_chart_options.xAxis.min = newMin;
     },
-    
+
 
     /**makes x-axis MLR or standard style **/
     toggleMLRStyle: function (is_checked, chart, all_chart_options) {
@@ -104,39 +104,44 @@ var update_x_axis = {
         all_chart_options.xAxis.title.text = new_title;
 
     },
-    
-    
+
+
     /** update the x-axis title indent (bar charts only) **/
-    updateTitleIndent: function(new_indent, chart, all_chart_options){
-         chart.xAxis[0].setTitle({
+    updateTitleIndent: function (new_indent, chart, all_chart_options) {
+        chart.xAxis[0].setTitle({
             x: new_indent
         });
 
         all_chart_options.xAxis.title.x = new_indent;
-        
+
     },
-    
+
 
     /** update x axis tickmark interval **/
-    updateTickmarkInterval: function (newInterval, chart, all_chart_options) {
+    updateTickmarkInterval: function (new_interval, chart, all_chart_options, categories) {
+        
+        if (isNaN(Number(new_interval)) || Number(new_interval) === 0) {
 
+            if (!categories) {
+                new_interval = null;
+            } else {
+                new_interval = categories.length * .2 > 1 ? Math.floor(categories.length * .2) : null;
+            }
 
-        if (isNaN(newInterval) || newInterval === 0) {
-            newInterval = undefined;
         };
 
         if (!chart) { // called when this is used in x_axis_init
-            return newInterval;
+            return new_interval;
         }
 
-        if (newInterval > chart.xAxis[0].dataMax) {
-            newInterval = chart.xAxis[0].dataMax;
+        if (new_interval > chart.xAxis[0].dataMax) {
+            new_interval = chart.xAxis[0].dataMax;
         }
-
+        
         chart.xAxis[0].update({
-            tickInterval: newInterval
+            tickInterval: new_interval
         });
-        all_chart_options.xAxis.tickInterval = newInterval;
+        all_chart_options.xAxis.tickInterval = new_interval;
 
     }
 

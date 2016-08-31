@@ -1,4 +1,4 @@
-var utils_forms = require("./utils/utils_forms.js");
+var utils_forms = require("./utils_forms.js");
 
 
 
@@ -42,7 +42,7 @@ var chart_recall = {
     /** takes input (originally from #load_chart_textarea, parses it, and sets option values accordingly, to load a saved chart) **/
 
     loadValues: function (chart, all_chart_options, input) {
-        var utils_main = require("./utils/utils_main.js");
+        var utils_main = require("./utils_main.js");
         try {
             input = JSON.parse(input);
         } catch (e) {
@@ -87,19 +87,19 @@ var chart_recall = {
         var individual_series_options = setValues(input, false); //false to not set indivdual series yet
 
         //initial all chart options init and redraw chart
-        var allChartOptionsInit = require("./initializers/charts/all_chart_options_init.js");
-        var draw_chart = require("./draw_chart.js");
+        var allChartOptionsInit = require("../initializers/charts/all_chart_options_init.js");
+        var draw_chart = require("../draw_chart.js");
         var chart_type = $("#chart_type_icons .selected").divVal();
         all_chart_options = allChartOptionsInit(chart_type);
         chart = undefined;
         chart = draw_chart.init(all_chart_options, draw_chart.chartCallback);
 
         //reinit form updates bindings
-        var allFormUpdates = require("./form_updates/all_form_updates.js");
+        var allFormUpdates = require("../form_updates/all_form_updates.js");
         allFormUpdates(chart, all_chart_options);
 
         //re populate the individual series options forms
-        var update_individual_series = require("./form_updates/update_individual_series.js");
+        var update_individual_series = require("../form_updates/update_individual_series.js");
         update_individual_series.populateForm(chart, all_chart_options);
         setValues(individual_series_options, true); //true to set indivdual series now
 

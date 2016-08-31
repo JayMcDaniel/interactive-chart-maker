@@ -1,3 +1,5 @@
+    var utils_main = require("../utils/utils_main.js");
+
     //get x or z val for bubbles
     var getBubbleVal = function (str) {
         if (str === "x") {
@@ -190,12 +192,8 @@
             return output;
 
         } catch (e) {
-            console.log(e);
-            $(".alert-danger").text("Sorry, the table wasn't formatted correctly for a drilldown chart. Please see the example on the data tab.");
-
-            setTimeout(function () {
-                $(".alert-danger").text("");
-            }, 10000);
+            console.log(e);      
+            utils_main.showError("Sorry, the table wasn't formatted correctly for a drilldown chart. Please see the example on the data tab.")
         }
     };
 

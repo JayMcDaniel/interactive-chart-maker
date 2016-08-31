@@ -28,685 +28,94 @@
 
 
     <script>
-        $(document).ready(function () {
-            var all_chart_options = {
-                "chart": {
-                    "renderTo": "chart1",
-                    "margin": [100, 40, 80, 80],
-                    "borderWidth": 0,
-                    "plotBorderColor": "#000",
-                    "plotBorderWidth": 0,
-                    "type": "column",
-                    "events": {
-                        "load": function load() {
-                            this.credits.element.onclick = function () {
-                                window.open('http://www.bls.gov', '_blank');
-                            };
-                        }
-                    },
-                    "zoomType": null,
-                    "alignTicks": false,
-                    "ignoreHiddenSeries": true
-                },
-                "colors": ["#7cb5ec", "#434348", "#90ed7d", "#f7a35c", "#8085e9", "#f15c80", "#e4d354", "#2b908f", "#f45b5b", "#91e8e1", "#2f7ed8", "#0d233a", "#8bbc21", "#910000", "#1aadce", "#492970", "#f28f43", "#77a1e5", "#c42525", "#a6c96a"],
-                "legend": {
-                    "align": "left",
-                    "backgroundColor": "none",
-                    "borderColor": "none",
-                    "borderWidth": 0,
-                    "enabled": true,
-                    "floating": false,
-                    "itemDistance": 30,
-                    "layout": "horizontal",
-                    "reversed": false,
-                    "shadow": false,
-                    "useHTML": false,
-                    "verticalAlign": "top",
-                    "x": 100,
-                    "y": 40,
-                    "itemStyle": {
-                        "fontFamily": "Calibri, Verdana, Arial, Helvetica, sans-serif",
-                        "color": "#000"
-                    },
-                    "itemHiddenStyle": {
-                        "color": "gray"
-                    },
-                    "itemHoverStyle": {
-                        "cursor": "pointer"
-                    }
-                },
-                "plotOptions": {
-                    "series": {
-                        "events": {
-                            "legendItemClick": function legendItemClick(event) {}
-                        },
-                        "dataLabels": {
-                            "enabled": false
-                        },
-                        "pointPlacement": null,
-                        "stacking": null,
-                        "pointPadding": 0.1,
-                        "groupPadding": 0.2,
-                        "minPointLength": 2,
-                        "maxSize": 90,
-                        "minSize": 4,
-                        "sizeBy": "width",
-                        "lineWidth": 1.5,
-                        "states": {
-                            "hover": {
-                                "lineWidth": 4
-                            }
-                        },
-                        "marker": {
-                            "enabled": false,
-                            "states": {
-                                "hover": {
-                                    "enabled": true,
-                                    "radius": 5
-                                }
-                            }
-                        }
-                    },
-                    "bubble": {
-                        "tooltip": {
-                            "followPointer": true
-                        }
-                    }
-                },
-                "series": [{
-                    "name": "categories",
-                    "colorByPoint": true,
-                    "data": [{
-                        "name": "series 1",
-                        "y": 1,
-                        "color": "#7cb5ec",
-                        "type": "column",
-                        "drilldown": "series 1",
-                        "lineWidth": 0
-                    }, {
-                        "name": "series 2",
-                        "y": 2,
-                        "color": "#434348",
-                        "type": "column",
-                        "drilldown": "series 2",
-                        "lineWidth": 0
-                    }, {
-                        "name": "series 3",
-                        "y": 6,
-                        "color": "#90ed7d",
-                        "type": "column",
-                        "drilldown": "series 3",
-                        "lineWidth": 0
-                    }],
-                    "type": "column",
-                    "visible": true
-                }],
-                "drilldown": {
-                    "series": [{
-                            "name": "series 1",
-                            "id": "series 1",
-                            "data": [{
-                                "name": "series 1a",
-                                "y": 2,
-                                "type": "column",
-                                "drilldown": null,
-                                "lineWidth": 0
-                        }, {
-                                "name": "series 1b",
-                                "y": 3,
-                                "type": "column",
-                                "drilldown": "series 1b",
-                                "lineWidth": 0
-                        }, {
-                                "name": "series 1c",
-                                "y": 4,
-                                "type": "column",
-                                "drilldown": "series 1c",
-                                "lineWidth": 0
-                        }],
-                            "type": "column",
-                            "lineWidth": 0
-                    },
+  $(document).ready(function(){
+             var all_chart_options = {"chart":{"renderTo":"chart1","margin":[100,40,80,80],"borderWidth":0,"plotBorderColor":"#000","plotBorderWidth":0,"type":"line","events":{"load":function load() { this.credits.element.onclick = function () { window.open('http://www.bls.gov', '_blank'); }; }},"zoomType":null,"alignTicks":false,"ignoreHiddenSeries":true},"colors":["#7cb5ec","#434348","#90ed7d","#f7a35c","#8085e9","#f15c80","#e4d354","#2b908f","#f45b5b","#91e8e1","#2f7ed8","#0d233a","#8bbc21","#910000","#1aadce","#492970","#f28f43","#77a1e5","#c42525","#a6c96a"],"legend":{"align":"left","backgroundColor":"none","borderColor":"none","borderWidth":0,"enabled":false,"floating":false,"itemDistance":30,"reversed":false,"shadow":false,"useHTML":false,"verticalAlign":"top","x":100,"y":40,"itemStyle":{"fontFamily":"Calibri, Verdana, Arial, Helvetica, sans-serif","color":"#000"},"itemHiddenStyle":{"color":"gray"},"itemHoverStyle":{"cursor":"pointer"}},"plotOptions":{"series":{"events":{"legendItemClick":function legendItemClick(event) {}},"dataLabels":{"enabled":false},"pointPlacement":null,"stacking":null,"pointPadding":0.1,"groupPadding":0.2,"minPointLength":2,"maxSize":90,"minSize":4,"sizeBy":"width","lineWidth":1.5,"states":{"hover":{"lineWidth":4}},"marker":{"enabled":false,"states":{"hover":{"enabled":true,"radius":5}}}},"bubble":{"tooltip":{"followPointer":true}}},"series":[{"name":"Jan 00","data":[2,4,5,8],"type":"line","color":"#7cb5ec","_symbolIndex":0,"stacking":null,"visible":true},{"name":"Feb 00","data":[4,6,8,10],"type":"line","color":"#434348","_symbolIndex":1,"stacking":null,"visible":true},{"name":"Mar 00","data":[6,8,11,12],"type":"line","color":"#90ed7d","_symbolIndex":2,"stacking":null,"visible":true},{"name":"Apr 00","data":[8,10,14,14],"type":"line","color":"#f7a35c","_symbolIndex":3,"stacking":null,"visible":true},{"name":"May 00","data":[10,12,17,16],"type":"line","color":"#8085e9","_symbolIndex":4,"stacking":null,"visible":true},{"name":"Jun 00","data":[12,14,20,18],"type":"line","color":"#f15c80","_symbolIndex":5,"stacking":null,"visible":true},{"name":"Jul 00","data":[14,16,23,20],"type":"line","color":"#e4d354","_symbolIndex":6,"stacking":null,"visible":true},{"name":"Aug 00","data":[16,18,26,22],"type":"line","color":"#2b908f","_symbolIndex":7,"stacking":null,"visible":true},{"name":"Sep 00","data":[18,20,29,24],"type":"line","color":"#f45b5b","_symbolIndex":8,"stacking":null,"visible":true},{"name":"Oct 00","data":[20,22,32,26],"type":"line","color":"#91e8e1","_symbolIndex":9,"stacking":null,"visible":true},{"name":"Nov 00","data":[22,24,35,28],"type":"line","color":"#2f7ed8","_symbolIndex":10,"stacking":null,"visible":true},{"name":"Dec 00","data":[24,26,38,30],"type":"line","color":"#0d233a","_symbolIndex":11,"stacking":null,"visible":true},{"name":"Jan 01","data":[26,28,41,32],"type":"line","color":"#8bbc21","_symbolIndex":12,"stacking":null,"visible":true},{"name":"Feb 01","data":[28,30,44,34],"type":"line","color":"#910000","_symbolIndex":13,"stacking":null,"visible":true},{"name":"Mar 01","data":[30,32,47,36],"type":"line","color":"#1aadce","_symbolIndex":14,"stacking":null,"visible":true},{"name":"Apr 01","data":[32,34,50,38],"type":"line","color":"#492970","_symbolIndex":15,"stacking":null,"visible":true},{"name":"May 01","data":[34,36,53,40],"type":"line","color":"#f28f43","_symbolIndex":16,"stacking":null,"visible":true},{"name":"Jun 01","data":[36,38,56,42],"type":"line","color":"#77a1e5","_symbolIndex":17,"stacking":null,"visible":true},{"name":"Jul 01","data":[38,40,59,44],"type":"line","color":"#c42525","_symbolIndex":18,"stacking":null,"visible":true},{"name":"Aug 01","data":[40,42,62,46],"type":"line","color":"#a6c96a","_symbolIndex":19,"stacking":null,"visible":true},{"name":"Sep 01","data":[42,44,65,48],"type":"line","_symbolIndex":20,"stacking":null,"visible":true,"_colorIndex":16},{"name":"Oct 01","data":[44,46,68,50],"type":"line","_symbolIndex":21,"stacking":null,"visible":true,"_colorIndex":17},{"name":"Nov 01","data":[46,48,71,52],"type":"line","_symbolIndex":22,"stacking":null,"visible":true,"_colorIndex":18},{"name":"Dec 01","data":[48,50,74,54],"type":"line","_symbolIndex":23,"stacking":null,"visible":true,"_colorIndex":19},{"name":"Jan 02","data":[50,52,77,56],"type":"line","_symbolIndex":24,"stacking":null,"visible":true,"_colorIndex":0},{"name":"Feb 02","data":[52,54,80,58],"type":"line","_symbolIndex":25,"stacking":null,"visible":true,"_colorIndex":1},{"name":"Mar 02","data":[54,56,83,60],"type":"line","_symbolIndex":26,"stacking":null,"visible":true,"_colorIndex":2},{"name":"Apr 02","data":[56,58,86,62],"type":"line","_symbolIndex":27,"stacking":null,"visible":true,"_colorIndex":3},{"name":"May 02","data":[58,60,89,64],"type":"line","_symbolIndex":28,"stacking":null,"visible":true,"_colorIndex":4},{"name":"Jun 02","data":[60,62,92,66],"type":"line","_symbolIndex":29,"stacking":null,"visible":true,"_colorIndex":5},{"name":"Jul 02","data":[62,64,95,68],"type":"line","_symbolIndex":30,"stacking":null,"visible":true,"_colorIndex":6},{"name":"Aug 02","data":[64,66,98,70],"type":"line","_symbolIndex":31,"stacking":null,"visible":true,"_colorIndex":7},{"name":"Sep 02","data":[66,68,101,72],"type":"line","_symbolIndex":32,"stacking":null,"visible":true,"_colorIndex":8},{"name":"Oct 02","data":[68,70,104,74],"type":"line","_symbolIndex":33,"stacking":null,"visible":true,"_colorIndex":9},{"name":"Nov 02","data":[70,72,107,76],"type":"line","_symbolIndex":34,"stacking":null,"visible":true,"_colorIndex":10},{"name":"Dec 02","data":[72,74,110,78],"type":"line","_symbolIndex":35,"stacking":null,"visible":true,"_colorIndex":11},{"name":"Jan 03","data":[74,76,113,80],"type":"line","_symbolIndex":36,"stacking":null,"visible":true,"_colorIndex":12},{"name":"Feb 03","data":[76,78,116,82],"type":"line","_symbolIndex":37,"stacking":null,"visible":true,"_colorIndex":13},{"name":"Mar 03","data":[78,80,119,84],"type":"line","_symbolIndex":38,"stacking":null,"visible":true,"_colorIndex":14},{"name":"Apr 03","data":[80,82,122,86],"type":"line","_symbolIndex":39,"stacking":null,"visible":true,"_colorIndex":15},{"name":"May 03","data":[82,84,125,88],"type":"line","_symbolIndex":40,"stacking":null,"visible":true,"_colorIndex":16},{"name":"Jun 03","data":[84,86,128,90],"type":"line","_symbolIndex":41,"stacking":null,"visible":true,"_colorIndex":17},{"name":"Jul 03","data":[86,88,131,92],"type":"line","_symbolIndex":42,"stacking":null,"visible":true,"_colorIndex":18},{"name":"Aug 03","data":[88,90,134,94],"type":"line","_symbolIndex":43,"stacking":null,"visible":true,"_colorIndex":19},{"name":"Sep 03","data":[90,92,137,96],"type":"line","_symbolIndex":44,"stacking":null,"visible":true,"_colorIndex":0},{"name":"Oct 03","data":[92,94,140,98],"type":"line","_symbolIndex":45,"stacking":null,"visible":true,"_colorIndex":1},{"name":"Nov 03","data":[94,96,143,100],"type":"line","_symbolIndex":46,"stacking":null,"visible":true,"_colorIndex":2},{"name":"Dec 03","data":[96,98,146,102],"type":"line","_symbolIndex":47,"stacking":null,"visible":true,"_colorIndex":3},{"name":"Jan 04","data":[98,100,149,104],"type":"line","_symbolIndex":48,"stacking":null,"visible":true,"_colorIndex":4},{"name":"Feb 04","data":[100,102,152,106],"type":"line","_symbolIndex":49,"stacking":null,"visible":true,"_colorIndex":5},{"name":"Mar 04","data":[102,104,155,108],"type":"line","_symbolIndex":50,"stacking":null,"visible":true,"_colorIndex":6},{"name":"Apr 04","data":[104,106,158,110],"type":"line","_symbolIndex":51,"stacking":null,"visible":true,"_colorIndex":7},{"name":"May 04","data":[106,108,161,112],"type":"line","_symbolIndex":52,"stacking":null,"visible":true,"_colorIndex":8},{"name":"Jun 04","data":[108,110,164,114],"type":"line","_symbolIndex":53,"stacking":null,"visible":true,"_colorIndex":9},{"name":"Jul 04","data":[110,112,167,116],"type":"line","_symbolIndex":54,"stacking":null,"visible":true,"_colorIndex":10},{"name":"Aug 04","data":[112,114,170,118],"type":"line","_symbolIndex":55,"stacking":null,"visible":true,"_colorIndex":11},{"name":"Sep 04","data":[114,116,173,120],"type":"line","_symbolIndex":56,"stacking":null,"visible":true,"_colorIndex":12},{"name":"Oct 04","data":[116,118,176,122],"type":"line","_symbolIndex":57,"stacking":null,"visible":true,"_colorIndex":13},{"name":"Nov 04","data":[118,120,179,124],"type":"line","_symbolIndex":58,"stacking":null,"visible":true,"_colorIndex":14},{"name":"Dec 04","data":[120,122,182,126],"type":"line","_symbolIndex":59,"stacking":null,"visible":true,"_colorIndex":15},{"name":"Jan 05","data":[122,124,185,128],"type":"line","_symbolIndex":60,"stacking":null,"visible":true,"_colorIndex":16},{"name":"Feb 05","data":[124,126,188,130],"type":"line","_symbolIndex":61,"stacking":null,"visible":true,"_colorIndex":17},{"name":"Mar 05","data":[126,128,191,132],"type":"line","_symbolIndex":62,"stacking":null,"visible":true,"_colorIndex":18},{"name":"Apr 05","data":[128,130,194,134],"type":"line","_symbolIndex":63,"stacking":null,"visible":true,"_colorIndex":19},{"name":"May 05","data":[130,132,197,136],"type":"line","_symbolIndex":64,"stacking":null,"visible":true,"_colorIndex":0},{"name":"Jun 05","data":[132,134,200,138],"type":"line","_symbolIndex":65,"stacking":null,"visible":true,"_colorIndex":1},{"name":"Jul 05","data":[134,136,203,140],"type":"line","_symbolIndex":66,"stacking":null,"visible":true,"_colorIndex":2},{"name":"Aug 05","data":[136,138,206,142],"type":"line","_symbolIndex":67,"stacking":null,"visible":true,"_colorIndex":3},{"name":"Sep 05","data":[138,140,209,144],"type":"line","_symbolIndex":68,"stacking":null,"visible":true,"_colorIndex":4},{"name":"Oct 05","data":[140,142,212,146],"type":"line","_symbolIndex":69,"stacking":null,"visible":true,"_colorIndex":5},{"name":"Nov 05","data":[142,144,215,148],"type":"line","_symbolIndex":70,"stacking":null,"visible":true,"_colorIndex":6},{"name":"Dec 05","data":[144,146,218,150],"type":"line","_symbolIndex":71,"stacking":null,"visible":true,"_colorIndex":7},{"name":"Jan 06","data":[146,148,221,152],"type":"line","_symbolIndex":72,"stacking":null,"visible":true,"_colorIndex":8},{"name":"Feb 06","data":[148,150,224,154],"type":"line","_symbolIndex":73,"stacking":null,"visible":true,"_colorIndex":9},{"name":"Mar 06","data":[150,152,227,156],"type":"line","_symbolIndex":74,"stacking":null,"visible":true,"_colorIndex":10},{"name":"Apr 06","data":[152,154,230,158],"type":"line","_symbolIndex":75,"stacking":null,"visible":true,"_colorIndex":11},{"name":"May 06","data":[154,156,233,160],"type":"line","_symbolIndex":76,"stacking":null,"visible":true,"_colorIndex":12},{"name":"Jun 06","data":[156,158,236,162],"type":"line","_symbolIndex":77,"stacking":null,"visible":true,"_colorIndex":13},{"name":"Jul 06","data":[158,160,239,164],"type":"line","_symbolIndex":78,"stacking":null,"visible":true,"_colorIndex":14},{"name":"Aug 06","data":[160,162,242,166],"type":"line","_symbolIndex":79,"stacking":null,"visible":true,"_colorIndex":15},{"name":"Sep 06","data":[162,164,245,168],"type":"line","_symbolIndex":80,"stacking":null,"visible":true,"_colorIndex":16},{"name":"Oct 06","data":[164,166,248,170],"type":"line","_symbolIndex":81,"stacking":null,"visible":true,"_colorIndex":17},{"name":"Nov 06","data":[166,168,251,172],"type":"line","_symbolIndex":82,"stacking":null,"visible":true,"_colorIndex":18},{"name":"Dec 06","data":[168,170,254,174],"type":"line","_symbolIndex":83,"stacking":null,"visible":true,"_colorIndex":19},{"name":"Jan 07","data":[170,172,257,176],"type":"line","_symbolIndex":84,"stacking":null,"visible":true,"_colorIndex":0},{"name":"Feb 07","data":[172,174,260,178],"type":"line","_symbolIndex":85,"stacking":null,"visible":true,"_colorIndex":1},{"name":"Mar 07","data":[174,176,263,180],"type":"line","_symbolIndex":86,"stacking":null,"visible":true,"_colorIndex":2},{"name":"Apr 07","data":[176,178,266,182],"type":"line","_symbolIndex":87,"stacking":null,"visible":true,"_colorIndex":3},{"name":"May 07","data":[178,180,269,184],"type":"line","_symbolIndex":88,"stacking":null,"visible":true,"_colorIndex":4},{"name":"Jun 07","data":[180,182,272,186],"type":"line","_symbolIndex":89,"stacking":null,"visible":true,"_colorIndex":5},{"name":"Jul 07","data":[182,184,275,188],"type":"line","_symbolIndex":90,"stacking":null,"visible":true,"_colorIndex":6},{"name":"Aug 07","data":[184,186,278,190],"type":"line","_symbolIndex":91,"stacking":null,"visible":true,"_colorIndex":7},{"name":"Sep 07","data":[186,188,281,192],"type":"line","_symbolIndex":92,"stacking":null,"visible":true,"_colorIndex":8},{"name":"Oct 07","data":[188,190,284,194],"type":"line","_symbolIndex":93,"stacking":null,"visible":true,"_colorIndex":9},{"name":"Nov 07","data":[190,192,287,196],"type":"line","_symbolIndex":94,"stacking":null,"visible":true,"_colorIndex":10},{"name":"Dec 07","data":[192,194,290,198],"type":"line","_symbolIndex":95,"stacking":null,"visible":true,"_colorIndex":11},{"name":"Jan 08","data":[194,196,293,200],"type":"line","_symbolIndex":96,"stacking":null,"visible":true,"_colorIndex":12},{"name":"Feb 08","data":[196,198,296,202],"type":"line","_symbolIndex":97,"stacking":null,"visible":true,"_colorIndex":13},{"name":"Mar 08","data":[198,200,299,204],"type":"line","_symbolIndex":98,"stacking":null,"visible":true,"_colorIndex":14},{"name":"Apr 08","data":[200,202,302,206],"type":"line","_symbolIndex":99,"stacking":null,"visible":true,"_colorIndex":15},{"name":"May 08","data":[202,204,305,208],"type":"line","_symbolIndex":100,"stacking":null,"visible":true,"_colorIndex":16},{"name":"Jun 08","data":[204,206,308,210],"type":"line","_symbolIndex":101,"stacking":null,"visible":true,"_colorIndex":17},{"name":"Jul 08","data":[206,208,311,212],"type":"line","_symbolIndex":102,"stacking":null,"visible":true,"_colorIndex":18},{"name":"Aug 08","data":[208,210,314,214],"type":"line","_symbolIndex":103,"stacking":null,"visible":true,"_colorIndex":19},{"name":"Sep 08","data":[210,212,317,216],"type":"line","_symbolIndex":104,"stacking":null,"visible":true,"_colorIndex":0},{"name":"Oct 08","data":[212,214,320,218],"type":"line","_symbolIndex":105,"stacking":null,"visible":true,"_colorIndex":1},{"name":"Nov 08","data":[214,216,323,220],"type":"line","_symbolIndex":106,"stacking":null,"visible":true,"_colorIndex":2},{"name":"Dec 08","data":[216,218,326,222],"type":"line","_symbolIndex":107,"stacking":null,"visible":true,"_colorIndex":3},{"name":"Jan 09","data":[218,220,329,224],"type":"line","_symbolIndex":108,"stacking":null,"visible":true,"_colorIndex":4},{"name":"Feb 09","data":[220,222,332,226],"type":"line","_symbolIndex":109,"stacking":null,"visible":true,"_colorIndex":5},{"name":"Mar 09","data":[222,224,335,228],"type":"line","_symbolIndex":110,"stacking":null,"visible":true,"_colorIndex":6},{"name":"Apr 09","data":[224,226,338,230],"type":"line","_symbolIndex":111,"stacking":null,"visible":true,"_colorIndex":7},{"name":"May 09","data":[226,228,341,232],"type":"line","_symbolIndex":112,"stacking":null,"visible":true,"_colorIndex":8},{"name":"Jun 09","data":[228,230,344,234],"type":"line","_symbolIndex":113,"stacking":null,"visible":true,"_colorIndex":9},{"name":"Jul 09","data":[230,232,347,236],"type":"line","_symbolIndex":114,"stacking":null,"visible":true,"_colorIndex":10},{"name":"Aug 09","data":[232,234,350,238],"type":"line","_symbolIndex":115,"stacking":null,"visible":true,"_colorIndex":11},{"name":"Sep 09","data":[234,236,353,240],"type":"line","_symbolIndex":116,"stacking":null,"visible":true,"_colorIndex":12},{"name":"Oct 09","data":[236,238,356,242],"type":"line","_symbolIndex":117,"stacking":null,"visible":true,"_colorIndex":13},{"name":"Nov 09","data":[238,240,359,244],"type":"line","_symbolIndex":118,"stacking":null,"visible":true,"_colorIndex":14},{"name":"Dec 09","data":[240,242,362,246],"type":"line","_symbolIndex":119,"stacking":null,"visible":true,"_colorIndex":15},{"name":"Jan 10","data":[242,244,365,248],"type":"line","_symbolIndex":120,"stacking":null,"visible":true,"_colorIndex":16},{"name":"Feb 10","data":[244,246,368,250],"type":"line","_symbolIndex":121,"stacking":null,"visible":true,"_colorIndex":17},{"name":"Mar 10","data":[246,248,371,252],"type":"line","_symbolIndex":122,"stacking":null,"visible":true,"_colorIndex":18},{"name":"Apr 10","data":[248,250,374,254],"type":"line","_symbolIndex":123,"stacking":null,"visible":true,"_colorIndex":19},{"name":"May 10","data":[250,252,377,256],"type":"line","_symbolIndex":124,"stacking":null,"visible":true,"_colorIndex":0},{"name":"Jun 10","data":[252,254,380,258],"type":"line","_symbolIndex":125,"stacking":null,"visible":true,"_colorIndex":1},{"name":"Jul 10","data":[254,256,383,260],"type":"line","_symbolIndex":126,"stacking":null,"visible":true,"_colorIndex":2},{"name":"Aug 10","data":[256,258,386,262],"type":"line","_symbolIndex":127,"stacking":null,"visible":true,"_colorIndex":3},{"name":"Sep 10","data":[258,260,389,264],"type":"line","_symbolIndex":128,"stacking":null,"visible":true,"_colorIndex":4},{"name":"Oct 10","data":[260,262,392,266],"type":"line","_symbolIndex":129,"stacking":null,"visible":true,"_colorIndex":5},{"name":"Nov 10","data":[262,264,395,268],"type":"line","_symbolIndex":130,"stacking":null,"visible":true,"_colorIndex":6},{"name":"Dec 10","data":[264,266,398,270],"type":"line","_symbolIndex":131,"stacking":null,"visible":true,"_colorIndex":7},{"name":"Jan 11","data":[266,268,401,272],"type":"line","_symbolIndex":132,"stacking":null,"visible":true,"_colorIndex":8},{"name":"Feb 11","data":[268,270,404,274],"type":"line","_symbolIndex":133,"stacking":null,"visible":true,"_colorIndex":9},{"name":"Mar 11","data":[270,272,407,276],"type":"line","_symbolIndex":134,"stacking":null,"visible":true,"_colorIndex":10},{"name":"Apr 11","data":[272,274,410,278],"type":"line","_symbolIndex":135,"stacking":null,"visible":true,"_colorIndex":11},{"name":"May 11","data":[274,276,413,280],"type":"line","_symbolIndex":136,"stacking":null,"visible":true,"_colorIndex":12},{"name":"Jun 11","data":[276,278,416,282],"type":"line","_symbolIndex":137,"stacking":null,"visible":true,"_colorIndex":13},{"name":"Jul 11","data":[278,280,419,284],"type":"line","_symbolIndex":138,"stacking":null,"visible":true,"_colorIndex":14},{"name":"Aug 11","data":[280,282,422,286],"type":"line","_symbolIndex":139,"stacking":null,"visible":true,"_colorIndex":15},{"name":"Sep 11","data":[282,284,425,288],"type":"line","_symbolIndex":140,"stacking":null,"visible":true,"_colorIndex":16},{"name":"Oct 11","data":[284,286,428,290],"type":"line","_symbolIndex":141,"stacking":null,"visible":true,"_colorIndex":17},{"name":"Nov 11","data":[286,288,431,292],"type":"line","_symbolIndex":142,"stacking":null,"visible":true,"_colorIndex":18},{"name":"Dec 11","data":[288,290,434,294],"type":"line","_symbolIndex":143,"stacking":null,"visible":true,"_colorIndex":19},{"name":"Jan 12","data":[290,292,437,296],"type":"line","_symbolIndex":144,"stacking":null,"visible":true,"_colorIndex":0},{"name":"Feb 12","data":[292,294,440,298],"type":"line","_symbolIndex":145,"stacking":null,"visible":true,"_colorIndex":1},{"name":"Mar 12","data":[294,296,443,300],"type":"line","_symbolIndex":146,"stacking":null,"visible":true,"_colorIndex":2},{"name":"Apr 12","data":[296,298,446,302],"type":"line","_symbolIndex":147,"stacking":null,"visible":true,"_colorIndex":3},{"name":"May 12","data":[298,300,449,304],"type":"line","_symbolIndex":148,"stacking":null,"visible":true,"_colorIndex":4},{"name":"Jun 12","data":[300,302,452,306],"type":"line","_symbolIndex":149,"stacking":null,"visible":true,"_colorIndex":5},{"name":"Jul 12","data":[302,304,455,308],"type":"line","_symbolIndex":150,"stacking":null,"visible":true,"_colorIndex":6},{"name":"Aug 12","data":[304,306,458,310],"type":"line","_symbolIndex":151,"stacking":null,"visible":true,"_colorIndex":7},{"name":"Sep 12","data":[306,308,461,312],"type":"line","_symbolIndex":152,"stacking":null,"visible":true,"_colorIndex":8},{"name":"Oct 12","data":[308,310,464,314],"type":"line","_symbolIndex":153,"stacking":null,"visible":true,"_colorIndex":9},{"name":"Nov 12","data":[310,312,467,316],"type":"line","_symbolIndex":154,"stacking":null,"visible":true,"_colorIndex":10},{"name":"Dec 12","data":[312,314,470,318],"type":"line","_symbolIndex":155,"stacking":null,"visible":true,"_colorIndex":11},{"name":"Jan 13","data":[314,316,473,320],"type":"line","_symbolIndex":156,"stacking":null,"visible":true,"_colorIndex":12},{"name":"Feb 13","data":[316,318,476,322],"type":"line","_symbolIndex":157,"stacking":null,"visible":true,"_colorIndex":13},{"name":"Mar 13","data":[318,320,479,324],"type":"line","_symbolIndex":158,"stacking":null,"visible":true,"_colorIndex":14},{"name":"Apr 13","data":[320,322,482,326],"type":"line","_symbolIndex":159,"stacking":null,"visible":true,"_colorIndex":15},{"name":"May 13","data":[322,324,485,328],"type":"line","_symbolIndex":160,"stacking":null,"visible":true,"_colorIndex":16},{"name":"Jun 13","data":[324,326,488,330],"type":"line","_symbolIndex":161,"stacking":null,"visible":true,"_colorIndex":17},{"name":"Jul 13","data":[326,328,491,332],"type":"line","_symbolIndex":162,"stacking":null,"visible":true,"_colorIndex":18},{"name":"Aug 13","data":[328,330,494,334],"type":"line","_symbolIndex":163,"stacking":null,"visible":true,"_colorIndex":19},{"name":"Sep 13","data":[330,332,497,336],"type":"line","_symbolIndex":164,"stacking":null,"visible":true,"_colorIndex":0},{"name":"Oct 13","data":[332,334,500,338],"type":"line","_symbolIndex":165,"stacking":null,"visible":true,"_colorIndex":1},{"name":"Nov 13","data":[334,336,503,340],"type":"line","_symbolIndex":166,"stacking":null,"visible":true,"_colorIndex":2},{"name":"Dec 13","data":[336,338,506,342],"type":"line","_symbolIndex":167,"stacking":null,"visible":true,"_colorIndex":3},{"name":"Jan 14","data":[338,340,509,344],"type":"line","_symbolIndex":168,"stacking":null,"visible":true,"_colorIndex":4},{"name":"Feb 14","data":[340,342,512,346],"type":"line","_symbolIndex":169,"stacking":null,"visible":true,"_colorIndex":5},{"name":"Mar 14","data":[342,344,515,348],"type":"line","_symbolIndex":170,"stacking":null,"visible":true,"_colorIndex":6},{"name":"Apr 14","data":[344,346,518,350],"type":"line","_symbolIndex":171,"stacking":null,"visible":true,"_colorIndex":7},{"name":"May 14","data":[346,348,521,352],"type":"line","_symbolIndex":172,"stacking":null,"visible":true,"_colorIndex":8},{"name":"Jun 14","data":[348,350,524,354],"type":"line","_symbolIndex":173,"stacking":null,"visible":true,"_colorIndex":9},{"name":"Jul 14","data":[350,352,527,356],"type":"line","_symbolIndex":174,"stacking":null,"visible":true,"_colorIndex":10},{"name":"Aug 14","data":[352,354,530,358],"type":"line","_symbolIndex":175,"stacking":null,"visible":true,"_colorIndex":11},{"name":"Sep 14","data":[354,356,533,360],"type":"line","_symbolIndex":176,"stacking":null,"visible":true,"_colorIndex":12},{"name":"Oct 14","data":[356,358,536,362],"type":"line","_symbolIndex":177,"stacking":null,"visible":true,"_colorIndex":13},{"name":"Nov 14","data":[358,360,539,364],"type":"line","_symbolIndex":178,"stacking":null,"visible":true,"_colorIndex":14},{"name":"Dec 14","data":[360,362,542,366],"type":"line","_symbolIndex":179,"stacking":null,"visible":true,"_colorIndex":15},{"name":"Jan 15","data":[362,364,545,368],"type":"line","_symbolIndex":180,"stacking":null,"visible":true,"_colorIndex":16},{"name":"Feb 15","data":[364,366,548,370],"type":"line","_symbolIndex":181,"stacking":null,"visible":true,"_colorIndex":17},{"name":"Mar 15","data":[366,368,551,372],"type":"line","_symbolIndex":182,"stacking":null,"visible":true,"_colorIndex":18},{"name":"Apr 15","data":[368,370,554,374],"type":"line","_symbolIndex":183,"stacking":null,"visible":true,"_colorIndex":19},{"name":"May 15","data":[370,372,557,376],"type":"line","_symbolIndex":184,"stacking":null,"visible":true,"_colorIndex":0},{"name":"Jun 15","data":[372,374,560,378],"type":"line","_symbolIndex":185,"stacking":null,"visible":true,"_colorIndex":1},{"name":"Jul 15","data":[374,376,563,380],"type":"line","_symbolIndex":186,"stacking":null,"visible":true,"_colorIndex":2},{"name":"Aug 15","data":[376,378,566,382],"type":"line","_symbolIndex":187,"stacking":null,"visible":true,"_colorIndex":3}],"subtitle":{"text":"","align":"left","style":{"color":"#000000","fontFamily":"sans-serif","fontWeight":"normal","fontSize":"12px"}},"title":{"text":"Wide table test","align":"left","style":{"color":"#000000","fontFamily":"sans-serif","fontWeight":"bold","fontSize":"14px"}},"tooltip":{"backgroundColor":"#FEFFEF","crosshairs":[false,false],"formatter":function () { var y_val = this.point.high ? "High: "  + $(this.point.high * 1).addCommas(0) +  " | Low: "  + $(this.point.low * 1).addCommas(0)  :  $(this.y).addCommas(0) ; var s = "<b>" + this.series.name + "</b><br>" + this.x + ": " + y_val; all_chart_options.series[this.series.index] ? s = all_chart_options.tooltip.addExtraData(all_chart_options.series[this.series.index].extra_data, this.point, s) : s = s; return s.replace(/\$-/g, "-$"); },"style":{"color":"#000000","fontFamily":"Calibri, Verdana, Arial, Helvetica, sans-serif"},"useHTML":false,"shared":false,"addExtraData":function (extra_data, point, s) { if (extra_data && extra_data[0].name) { $.each(extra_data, function (i) { if (extra_data[i].values[point.index]) { s = s + "<br>  " + extra_data[i].name + ": " + extra_data[i].values[point.index]; } }); } return s; }},"xAxis":{"categories":["cat 1","cat 2","cat 3","cat 4"],"gridLineColor":"#c0c0c0","gridLineWidth":0,"gridLineDashStyle":"Dot","labels":{"rotation":0,"style":{"color":"#000000","fontFamily":"Calibri, Verdana, Arial, Helvetica, sans-serif","fontWeight":"normal","backgroundColor":"#fff","fontSize":"12px","textOverflow":"none"}},"lineWidth":1.2,"lineColor":"gray","max":null,"min":null,"plotBands":[],"plotLines":[{"value":0,"color":"#c0c0c0","dashStyle":"solid","width":0}],"tickInterval":"","tickmarkPlacement":"on","tickPosition":"outside","tickColor":"#C0D0E0","title":{"align":"middle","useHTML":true,"text":"","margin":6,"rotation":0,"style":{"color":"#000000","fontFamily":"Calibri, Verdana, Arial, Helvetica, sans-serif","fontWeight":"normal","backgroundColor":"#fff","fontSize":"13px"},"x":0,"y":0},"type":"linear"},"yAxis":{"gridLineColor":"#c0c0c0","gridLineWidth":1,"gridLineDashStyle":"Dot","labels":{"formatter":function newYFormat() { var s = this.value == parseInt(this.value) ? Highcharts.numberFormat(this.value, 0, ".", ",") : Highcharts.numberFormat(this.value, 1, ".", ","); return  s.replace(/\$-/g, "-$") ; },"rotation":0,"style":{"color":"#000000","fontFamily":"Calibri, Verdana, Arial, Helvetica, sans-serif","fontWeight":"normal","backgroundColor":"#fff","fontSize":"12px"}},"lineColor":"gray","lineWidth":1,"max":null,"min":null,"opposite":false,"plotBands":[],"plotLines":[{"value":0,"color":"#c0c0c0","dashStyle":"solid","width":1}],"tickInterval":null,"tickmarkPlacement":"on","tickPosition":"outside","tickColor":"#C0D0E0","tickWidth":1,"title":{"useHTML":true,"text":"","margin":6,"align":"high","offset":20,"rotation":0,"x":35,"y":-20,"style":{"color":"#000000","fontFamily":"Calibri, Verdana, Arial, Helvetica, sans-serif","fontWeight":"normal","fontSize":"13px"}},"type":"linear"},"credits":{"position":{"align":"left","x":10,"y":-22},"style":{"cursor":"default","color":"#2C2C2C"},"text":"Click legend items to change data display. Hover over chart to view data.<br>Source: U.S. Bureau of Labor Statistics.","useHTML":true},"saved_values":[{"id":"chart_type_icons","val":"line"},{"id":"chart_id_textinput","val":"chart1"},{"id":"map_type_select","val":"state"},{"id":"map_animated_checkbox","val":false},{"id":"bubble_animated_checkbox","val":false},{"id":"drilldown_type_select","val":"bar"},{"id":"chart_width_textinput","val":"580"},{"id":"chart_height_textinput","val":"430"},{"id":"top_margin_textinput","val":"100"},{"id":"right_margin_textinput","val":"40"},{"id":"bottom_margin_textinput","val":"80"},{"id":"left_margin_textinput","val":"80"},{"id":"map_spotlight_size_checkbox","val":false},{"id":"map_circle_size_range","val":"10"},{"id":"table_input_load_series_from_icons","val":"column_heads"},{"id":"example_table_select","val":""},{"id":"table_input_textarea","val":"<table id=\"BLS_table\" class=\"regular\" cellspacing=\"0\" cellpadding=\"0\" xborder=\"1\" style=\"width: 95%\"> <caption><span class=\"tableTitle\">Wide table test</span></caption> <thead> <tr> <th rowspan=\"1\"  style=\"vertical-align: middle;\">category</th> <th >Jan 00</th> <th >Feb 00</th> <th >Mar 00</th> <th >Apr 00</th> <th >May 00</th> <th >Jun 00</th> <th >Jul 00</th> <th >Aug 00</th> <th >Sep 00</th> <th >Oct 00</th> <th >Nov 00</th> <th >Dec 00</th> <th >Jan 01</th> <th >Feb 01</th> <th >Mar 01</th> <th >Apr 01</th> <th >May 01</th> <th >Jun 01</th> <th >Jul 01</th> <th >Aug 01</th> <th >Sep 01</th> <th >Oct 01</th> <th >Nov 01</th> <th >Dec 01</th> <th >Jan 02</th> <th >Feb 02</th> <th >Mar 02</th> <th >Apr 02</th> <th >May 02</th> <th >Jun 02</th> <th >Jul 02</th> <th >Aug 02</th> <th >Sep 02</th> <th >Oct 02</th> <th >Nov 02</th> <th >Dec 02</th> <th >Jan 03</th> <th >Feb 03</th> <th >Mar 03</th> <th >Apr 03</th> <th >May 03</th> <th >Jun 03</th> <th >Jul 03</th> <th >Aug 03</th> <th >Sep 03</th> <th >Oct 03</th> <th >Nov 03</th> <th >Dec 03</th> <th >Jan 04</th> <th >Feb 04</th> <th >Mar 04</th> <th >Apr 04</th> <th >May 04</th> <th >Jun 04</th> <th >Jul 04</th> <th >Aug 04</th> <th >Sep 04</th> <th >Oct 04</th> <th >Nov 04</th> <th >Dec 04</th> <th >Jan 05</th> <th >Feb 05</th> <th >Mar 05</th> <th >Apr 05</th> <th >May 05</th> <th >Jun 05</th> <th >Jul 05</th> <th >Aug 05</th> <th >Sep 05</th> <th >Oct 05</th> <th >Nov 05</th> <th >Dec 05</th> <th >Jan 06</th> <th >Feb 06</th> <th >Mar 06</th> <th >Apr 06</th> <th >May 06</th> <th >Jun 06</th> <th >Jul 06</th> <th >Aug 06</th> <th >Sep 06</th> <th >Oct 06</th> <th >Nov 06</th> <th >Dec 06</th> <th >Jan 07</th> <th >Feb 07</th> <th >Mar 07</th> <th >Apr 07</th> <th >May 07</th> <th >Jun 07</th> <th >Jul 07</th> <th >Aug 07</th> <th >Sep 07</th> <th >Oct 07</th> <th >Nov 07</th> <th >Dec 07</th> <th >Jan 08</th> <th >Feb 08</th> <th >Mar 08</th> <th >Apr 08</th> <th >May 08</th> <th >Jun 08</th> <th >Jul 08</th> <th >Aug 08</th> <th >Sep 08</th> <th >Oct 08</th> <th >Nov 08</th> <th >Dec 08</th> <th >Jan 09</th> <th >Feb 09</th> <th >Mar 09</th> <th >Apr 09</th> <th >May 09</th> <th >Jun 09</th> <th >Jul 09</th> <th >Aug 09</th> <th >Sep 09</th> <th >Oct 09</th> <th >Nov 09</th> <th >Dec 09</th> <th >Jan 10</th> <th >Feb 10</th> <th >Mar 10</th> <th >Apr 10</th> <th >May 10</th> <th >Jun 10</th> <th >Jul 10</th> <th >Aug 10</th> <th >Sep 10</th> <th >Oct 10</th> <th >Nov 10</th> <th >Dec 10</th> <th >Jan 11</th> <th >Feb 11</th> <th >Mar 11</th> <th >Apr 11</th> <th >May 11</th> <th >Jun 11</th> <th >Jul 11</th> <th >Aug 11</th> <th >Sep 11</th> <th >Oct 11</th> <th >Nov 11</th> <th >Dec 11</th> <th >Jan 12</th> <th >Feb 12</th> <th >Mar 12</th> <th >Apr 12</th> <th >May 12</th> <th >Jun 12</th> <th >Jul 12</th> <th >Aug 12</th> <th >Sep 12</th> <th >Oct 12</th> <th >Nov 12</th> <th >Dec 12</th> <th >Jan 13</th> <th >Feb 13</th> <th >Mar 13</th> <th >Apr 13</th> <th >May 13</th> <th >Jun 13</th> <th >Jul 13</th> <th >Aug 13</th> <th >Sep 13</th> <th >Oct 13</th> <th >Nov 13</th> <th >Dec 13</th> <th >Jan 14</th> <th >Feb 14</th> <th >Mar 14</th> <th >Apr 14</th> <th >May 14</th> <th >Jun 14</th> <th >Jul 14</th> <th >Aug 14</th> <th >Sep 14</th> <th >Oct 14</th> <th >Nov 14</th> <th >Dec 14</th> <th >Jan 15</th> <th >Feb 15</th> <th >Mar 15</th> <th >Apr 15</th> <th >May 15</th> <th >Jun 15</th> <th >Jul 15</th> <th >Aug 15</th> </tr> </thead> <tbody> <tr> <th > <p>cat 1</p> </th> <td >2</td> <td >4</td> <td >6</td> <td >8</td> <td >10</td> <td >12</td> <td >14</td> <td >16</td> <td >18</td> <td >20</td> <td >22</td> <td >24</td> <td >26</td> <td >28</td> <td >30</td> <td >32</td> <td >34</td> <td >36</td> <td >38</td> <td >40</td> <td >42</td> <td >44</td> <td >46</td> <td >48</td> <td >50</td> <td >52</td> <td >54</td> <td >56</td> <td >58</td> <td >60</td> <td >62</td> <td >64</td> <td >66</td> <td >68</td> <td >70</td> <td >72</td> <td >74</td> <td >76</td> <td >78</td> <td >80</td> <td >82</td> <td >84</td> <td >86</td> <td >88</td> <td >90</td> <td >92</td> <td >94</td> <td >96</td> <td >98</td> <td >100</td> <td >102</td> <td >104</td> <td >106</td> <td >108</td> <td >110</td> <td >112</td> <td >114</td> <td >116</td> <td >118</td> <td >120</td> <td >122</td> <td >124</td> <td >126</td> <td >128</td> <td >130</td> <td >132</td> <td >134</td> <td >136</td> <td >138</td> <td >140</td> <td >142</td> <td >144</td> <td >146</td> <td >148</td> <td >150</td> <td >152</td> <td >154</td> <td >156</td> <td >158</td> <td >160</td> <td >162</td> <td >164</td> <td >166</td> <td >168</td> <td >170</td> <td >172</td> <td >174</td> <td >176</td> <td >178</td> <td >180</td> <td >182</td> <td >184</td> <td >186</td> <td >188</td> <td >190</td> <td >192</td> <td >194</td> <td >196</td> <td >198</td> <td >200</td> <td >202</td> <td >204</td> <td >206</td> <td >208</td> <td >210</td> <td >212</td> <td >214</td> <td >216</td> <td >218</td> <td >220</td> <td >222</td> <td >224</td> <td >226</td> <td >228</td> <td >230</td> <td >232</td> <td >234</td> <td >236</td> <td >238</td> <td >240</td> <td >242</td> <td >244</td> <td >246</td> <td >248</td> <td >250</td> <td >252</td> <td >254</td> <td >256</td> <td >258</td> <td >260</td> <td >262</td> <td >264</td> <td >266</td> <td >268</td> <td >270</td> <td >272</td> <td >274</td> <td >276</td> <td >278</td> <td >280</td> <td >282</td> <td >284</td> <td >286</td> <td >288</td> <td >290</td> <td >292</td> <td >294</td> <td >296</td> <td >298</td> <td >300</td> <td >302</td> <td >304</td> <td >306</td> <td >308</td> <td >310</td> <td >312</td> <td >314</td> <td >316</td> <td >318</td> <td >320</td> <td >322</td> <td >324</td> <td >326</td> <td >328</td> <td >330</td> <td >332</td> <td >334</td> <td >336</td> <td >338</td> <td >340</td> <td >342</td> <td >344</td> <td >346</td> <td >348</td> <td >350</td> <td >352</td> <td >354</td> <td >356</td> <td >358</td> <td >360</td> <td >362</td> <td >364</td> <td >366</td> <td >368</td> <td >370</td> <td >372</td> <td >374</td> <td >376</td> </tr> <tr class=\"greenbar\"> <th > <p>cat 2</p> </th> <td >4</td> <td >6</td> <td >8</td> <td >10</td> <td >12</td> <td >14</td> <td >16</td> <td >18</td> <td >20</td> <td >22</td> <td >24</td> <td >26</td> <td >28</td> <td >30</td> <td >32</td> <td >34</td> <td >36</td> <td >38</td> <td >40</td> <td >42</td> <td >44</td> <td >46</td> <td >48</td> <td >50</td> <td >52</td> <td >54</td> <td >56</td> <td >58</td> <td >60</td> <td >62</td> <td >64</td> <td >66</td> <td >68</td> <td >70</td> <td >72</td> <td >74</td> <td >76</td> <td >78</td> <td >80</td> <td >82</td> <td >84</td> <td >86</td> <td >88</td> <td >90</td> <td >92</td> <td >94</td> <td >96</td> <td >98</td> <td >100</td> <td >102</td> <td >104</td> <td >106</td> <td >108</td> <td >110</td> <td >112</td> <td >114</td> <td >116</td> <td >118</td> <td >120</td> <td >122</td> <td >124</td> <td >126</td> <td >128</td> <td >130</td> <td >132</td> <td >134</td> <td >136</td> <td >138</td> <td >140</td> <td >142</td> <td >144</td> <td >146</td> <td >148</td> <td >150</td> <td >152</td> <td >154</td> <td >156</td> <td >158</td> <td >160</td> <td >162</td> <td >164</td> <td >166</td> <td >168</td> <td >170</td> <td >172</td> <td >174</td> <td >176</td> <td >178</td> <td >180</td> <td >182</td> <td >184</td> <td >186</td> <td >188</td> <td >190</td> <td >192</td> <td >194</td> <td >196</td> <td >198</td> <td >200</td> <td >202</td> <td >204</td> <td >206</td> <td >208</td> <td >210</td> <td >212</td> <td >214</td> <td >216</td> <td >218</td> <td >220</td> <td >222</td> <td >224</td> <td >226</td> <td >228</td> <td >230</td> <td >232</td> <td >234</td> <td >236</td> <td >238</td> <td >240</td> <td >242</td> <td >244</td> <td >246</td> <td >248</td> <td >250</td> <td >252</td> <td >254</td> <td >256</td> <td >258</td> <td >260</td> <td >262</td> <td >264</td> <td >266</td> <td >268</td> <td >270</td> <td >272</td> <td >274</td> <td >276</td> <td >278</td> <td >280</td> <td >282</td> <td >284</td> <td >286</td> <td >288</td> <td >290</td> <td >292</td> <td >294</td> <td >296</td> <td >298</td> <td >300</td> <td >302</td> <td >304</td> <td >306</td> <td >308</td> <td >310</td> <td >312</td> <td >314</td> <td >316</td> <td >318</td> <td >320</td> <td >322</td> <td >324</td> <td >326</td> <td >328</td> <td >330</td> <td >332</td> <td >334</td> <td >336</td> <td >338</td> <td >340</td> <td >342</td> <td >344</td> <td >346</td> <td >348</td> <td >350</td> <td >352</td> <td >354</td> <td >356</td> <td >358</td> <td >360</td> <td >362</td> <td >364</td> <td >366</td> <td >368</td> <td >370</td> <td >372</td> <td >374</td> <td >376</td> <td >378</td> </tr> <tr> <th > <p>cat 3</p> </th> <td >5</td> <td >8</td> <td >11</td> <td >14</td> <td >17</td> <td >20</td> <td >23</td> <td >26</td> <td >29</td> <td >32</td> <td >35</td> <td >38</td> <td >41</td> <td >44</td> <td >47</td> <td >50</td> <td >53</td> <td >56</td> <td >59</td> <td >62</td> <td >65</td> <td >68</td> <td >71</td> <td >74</td> <td >77</td> <td >80</td> <td >83</td> <td >86</td> <td >89</td> <td >92</td> <td >95</td> <td >98</td> <td >101</td> <td >104</td> <td >107</td> <td >110</td> <td >113</td> <td >116</td> <td >119</td> <td >122</td> <td >125</td> <td >128</td> <td >131</td> <td >134</td> <td >137</td> <td >140</td> <td >143</td> <td >146</td> <td >149</td> <td >152</td> <td >155</td> <td >158</td> <td >161</td> <td >164</td> <td >167</td> <td >170</td> <td >173</td> <td >176</td> <td >179</td> <td >182</td> <td >185</td> <td >188</td> <td >191</td> <td >194</td> <td >197</td> <td >200</td> <td >203</td> <td >206</td> <td >209</td> <td >212</td> <td >215</td> <td >218</td> <td >221</td> <td >224</td> <td >227</td> <td >230</td> <td >233</td> <td >236</td> <td >239</td> <td >242</td> <td >245</td> <td >248</td> <td >251</td> <td >254</td> <td >257</td> <td >260</td> <td >263</td> <td >266</td> <td >269</td> <td >272</td> <td >275</td> <td >278</td> <td >281</td> <td >284</td> <td >287</td> <td >290</td> <td >293</td> <td >296</td> <td >299</td> <td >302</td> <td >305</td> <td >308</td> <td >311</td> <td >314</td> <td >317</td> <td >320</td> <td >323</td> <td >326</td> <td >329</td> <td >332</td> <td >335</td> <td >338</td> <td >341</td> <td >344</td> <td >347</td> <td >350</td> <td >353</td> <td >356</td> <td >359</td> <td >362</td> <td >365</td> <td >368</td> <td >371</td> <td >374</td> <td >377</td> <td >380</td> <td >383</td> <td >386</td> <td >389</td> <td >392</td> <td >395</td> <td >398</td> <td >401</td> <td >404</td> <td >407</td> <td >410</td> <td >413</td> <td >416</td> <td >419</td> <td >422</td> <td >425</td> <td >428</td> <td >431</td> <td >434</td> <td >437</td> <td >440</td> <td >443</td> <td >446</td> <td >449</td> <td >452</td> <td >455</td> <td >458</td> <td >461</td> <td >464</td> <td >467</td> <td >470</td> <td >473</td> <td >476</td> <td >479</td> <td >482</td> <td >485</td> <td >488</td> <td >491</td> <td >494</td> <td >497</td> <td >500</td> <td >503</td> <td >506</td> <td >509</td> <td >512</td> <td >515</td> <td >518</td> <td >521</td> <td >524</td> <td >527</td> <td >530</td> <td >533</td> <td >536</td> <td >539</td> <td >542</td> <td >545</td> <td >548</td> <td >551</td> <td >554</td> <td >557</td> <td >560</td> <td >563</td> <td >566</td> </tr> <tr class=\"greenbar\"> <th > <p>cat 4</p> </th> <td >8</td> <td >10</td> <td >12</td> <td >14</td> <td >16</td> <td >18</td> <td >20</td> <td >22</td> <td >24</td> <td >26</td> <td >28</td> <td >30</td> <td >32</td> <td >34</td> <td >36</td> <td >38</td> <td >40</td> <td >42</td> <td >44</td> <td >46</td> <td >48</td> <td >50</td> <td >52</td> <td >54</td> <td >56</td> <td >58</td> <td >60</td> <td >62</td> <td >64</td> <td >66</td> <td >68</td> <td >70</td> <td >72</td> <td >74</td> <td >76</td> <td >78</td> <td >80</td> <td >82</td> <td >84</td> <td >86</td> <td >88</td> <td >90</td> <td >92</td> <td >94</td> <td >96</td> <td >98</td> <td >100</td> <td >102</td> <td >104</td> <td >106</td> <td >108</td> <td >110</td> <td >112</td> <td >114</td> <td >116</td> <td >118</td> <td >120</td> <td >122</td> <td >124</td> <td >126</td> <td >128</td> <td >130</td> <td >132</td> <td >134</td> <td >136</td> <td >138</td> <td >140</td> <td >142</td> <td >144</td> <td >146</td> <td >148</td> <td >150</td> <td >152</td> <td >154</td> <td >156</td> <td >158</td> <td >160</td> <td >162</td> <td >164</td> <td >166</td> <td >168</td> <td >170</td> <td >172</td> <td >174</td> <td >176</td> <td >178</td> <td >180</td> <td >182</td> <td >184</td> <td >186</td> <td >188</td> <td >190</td> <td >192</td> <td >194</td> <td >196</td> <td >198</td> <td >200</td> <td >202</td> <td >204</td> <td >206</td> <td >208</td> <td >210</td> <td >212</td> <td >214</td> <td >216</td> <td >218</td> <td >220</td> <td >222</td> <td >224</td> <td >226</td> <td >228</td> <td >230</td> <td >232</td> <td >234</td> <td >236</td> <td >238</td> <td >240</td> <td >242</td> <td >244</td> <td >246</td> <td >248</td> <td >250</td> <td >252</td> <td >254</td> <td >256</td> <td >258</td> <td >260</td> <td >262</td> <td >264</td> <td >266</td> <td >268</td> <td >270</td> <td >272</td> <td >274</td> <td >276</td> <td >278</td> <td >280</td> <td >282</td> <td >284</td> <td >286</td> <td >288</td> <td >290</td> <td >292</td> <td >294</td> <td >296</td> <td >298</td> <td >300</td> <td >302</td> <td >304</td> <td >306</td> <td >308</td> <td >310</td> <td >312</td> <td >314</td> <td >316</td> <td >318</td> <td >320</td> <td >322</td> <td >324</td> <td >326</td> <td >328</td> <td >330</td> <td >332</td> <td >334</td> <td >336</td> <td >338</td> <td >340</td> <td >342</td> <td >344</td> <td >346</td> <td >348</td> <td >350</td> <td >352</td> <td >354</td> <td >356</td> <td >358</td> <td >360</td> <td >362</td> <td >364</td> <td >366</td> <td >368</td> <td >370</td> <td >372</td> <td >374</td> <td >376</td> <td >378</td> <td >380</td> <td >382</td> </tr> </tbody></table>"},{"id":"color_palettes","val":-1},{"id":"series_color_0","val":"7CB5EC"},{"id":"series_type_div_0","val":"line"},{"id":"line_style_select_0","val":"Solid"},{"id":"series_visible_checkbox_0","val":true},{"id":"series_extra_data_title_textarea_0","val":""},{"id":"series_extra_data_values_textarea_0","val":""},{"id":"series_color_1","val":"434348"},{"id":"series_type_div_1","val":"line"},{"id":"line_style_select_1","val":"Solid"},{"id":"series_visible_checkbox_1","val":true},{"id":"series_extra_data_title_textarea_1","val":""},{"id":"series_extra_data_values_textarea_1","val":""},{"id":"series_color_2","val":"90ED7D"},{"id":"series_type_div_2","val":"line"},{"id":"line_style_select_2","val":"Solid"},{"id":"series_visible_checkbox_2","val":true},{"id":"series_extra_data_title_textarea_2","val":""},{"id":"series_extra_data_values_textarea_2","val":""},{"id":"series_color_3","val":"F7A35C"},{"id":"series_type_div_3","val":"line"},{"id":"line_style_select_3","val":"Solid"},{"id":"series_visible_checkbox_3","val":true},{"id":"series_extra_data_title_textarea_3","val":""},{"id":"series_extra_data_values_textarea_3","val":""},{"id":"series_color_4","val":"8085E9"},{"id":"series_type_div_4","val":"line"},{"id":"line_style_select_4","val":"Solid"},{"id":"series_visible_checkbox_4","val":true},{"id":"series_extra_data_title_textarea_4","val":""},{"id":"series_extra_data_values_textarea_4","val":""},{"id":"series_color_5","val":"F15C80"},{"id":"series_type_div_5","val":"line"},{"id":"line_style_select_5","val":"Solid"},{"id":"series_visible_checkbox_5","val":true},{"id":"series_extra_data_title_textarea_5","val":""},{"id":"series_extra_data_values_textarea_5","val":""},{"id":"series_color_6","val":"E4D354"},{"id":"series_type_div_6","val":"line"},{"id":"line_style_select_6","val":"Solid"},{"id":"series_visible_checkbox_6","val":true},{"id":"series_extra_data_title_textarea_6","val":""},{"id":"series_extra_data_values_textarea_6","val":""},{"id":"series_color_7","val":"2B908F"},{"id":"series_type_div_7","val":"line"},{"id":"line_style_select_7","val":"Solid"},{"id":"series_visible_checkbox_7","val":true},{"id":"series_extra_data_title_textarea_7","val":""},{"id":"series_extra_data_values_textarea_7","val":""},{"id":"series_color_8","val":"F45B5B"},{"id":"series_type_div_8","val":"line"},{"id":"line_style_select_8","val":"Solid"},{"id":"series_visible_checkbox_8","val":true},{"id":"series_extra_data_title_textarea_8","val":""},{"id":"series_extra_data_values_textarea_8","val":""},{"id":"series_color_9","val":"91E8E1"},{"id":"series_type_div_9","val":"line"},{"id":"line_style_select_9","val":"Solid"},{"id":"series_visible_checkbox_9","val":true},{"id":"series_extra_data_title_textarea_9","val":""},{"id":"series_extra_data_values_textarea_9","val":""},{"id":"series_color_10","val":"2F7ED8"},{"id":"series_type_div_10","val":"line"},{"id":"line_style_select_10","val":"Solid"},{"id":"series_visible_checkbox_10","val":true},{"id":"series_extra_data_title_textarea_10","val":""},{"id":"series_extra_data_values_textarea_10","val":""},{"id":"series_color_11","val":"0D233A"},{"id":"series_type_div_11","val":"line"},{"id":"line_style_select_11","val":"Solid"},{"id":"series_visible_checkbox_11","val":true},{"id":"series_extra_data_title_textarea_11","val":""},{"id":"series_extra_data_values_textarea_11","val":""},{"id":"series_color_12","val":"8BBC21"},{"id":"series_type_div_12","val":"line"},{"id":"line_style_select_12","val":"Solid"},{"id":"series_visible_checkbox_12","val":true},{"id":"series_extra_data_title_textarea_12","val":""},{"id":"series_extra_data_values_textarea_12","val":""},{"id":"series_color_13","val":"910000"},{"id":"series_type_div_13","val":"line"},{"id":"line_style_select_13","val":"Solid"},{"id":"series_visible_checkbox_13","val":true},{"id":"series_extra_data_title_textarea_13","val":""},{"id":"series_extra_data_values_textarea_13","val":""},{"id":"series_color_14","val":"1AADCE"},{"id":"series_type_div_14","val":"line"},{"id":"line_style_select_14","val":"Solid"},{"id":"series_visible_checkbox_14","val":true},{"id":"series_extra_data_title_textarea_14","val":""},{"id":"series_extra_data_values_textarea_14","val":""},{"id":"series_color_15","val":"7CB5EC"},{"id":"series_type_div_15","val":"line"},{"id":"line_style_select_15","val":"Solid"},{"id":"series_visible_checkbox_15","val":true},{"id":"series_extra_data_title_textarea_15","val":""},{"id":"series_extra_data_values_textarea_15","val":""},{"id":"series_color_16","val":"434348"},{"id":"series_type_div_16","val":"line"},{"id":"line_style_select_16","val":"Solid"},{"id":"series_visible_checkbox_16","val":true},{"id":"series_extra_data_title_textarea_16","val":""},{"id":"series_extra_data_values_textarea_16","val":""},{"id":"series_color_17","val":"90ED7D"},{"id":"series_type_div_17","val":"line"},{"id":"line_style_select_17","val":"Solid"},{"id":"series_visible_checkbox_17","val":true},{"id":"series_extra_data_title_textarea_17","val":""},{"id":"series_extra_data_values_textarea_17","val":""},{"id":"series_color_18","val":"F7A35C"},{"id":"series_type_div_18","val":"line"},{"id":"line_style_select_18","val":"Solid"},{"id":"series_visible_checkbox_18","val":true},{"id":"series_extra_data_title_textarea_18","val":""},{"id":"series_extra_data_values_textarea_18","val":""},{"id":"series_color_19","val":"8085E9"},{"id":"series_type_div_19","val":"line"},{"id":"line_style_select_19","val":"Solid"},{"id":"series_visible_checkbox_19","val":true},{"id":"series_extra_data_title_textarea_19","val":""},{"id":"series_extra_data_values_textarea_19","val":""},{"id":"series_color_20","val":"F15C80"},{"id":"series_type_div_20","val":"line"},{"id":"line_style_select_20","val":"Solid"},{"id":"series_visible_checkbox_20","val":true},{"id":"series_extra_data_title_textarea_20","val":""},{"id":"series_extra_data_values_textarea_20","val":""},{"id":"series_color_21","val":"E4D354"},{"id":"series_type_div_21","val":"line"},{"id":"line_style_select_21","val":"Solid"},{"id":"series_visible_checkbox_21","val":true},{"id":"series_extra_data_title_textarea_21","val":""},{"id":"series_extra_data_values_textarea_21","val":""},{"id":"series_color_22","val":"2B908F"},{"id":"series_type_div_22","val":"line"},{"id":"line_style_select_22","val":"Solid"},{"id":"series_visible_checkbox_22","val":true},{"id":"series_extra_data_title_textarea_22","val":""},{"id":"series_extra_data_values_textarea_22","val":""},{"id":"series_color_23","val":"F45B5B"},{"id":"series_type_div_23","val":"line"},{"id":"line_style_select_23","val":"Solid"},{"id":"series_visible_checkbox_23","val":true},{"id":"series_extra_data_title_textarea_23","val":""},{"id":"series_extra_data_values_textarea_23","val":""},{"id":"series_color_24","val":"91E8E1"},{"id":"series_type_div_24","val":"line"},{"id":"line_style_select_24","val":"Solid"},{"id":"series_visible_checkbox_24","val":true},{"id":"series_extra_data_title_textarea_24","val":""},{"id":"series_extra_data_values_textarea_24","val":""},{"id":"series_color_25","val":"2F7ED8"},{"id":"series_type_div_25","val":"line"},{"id":"line_style_select_25","val":"Solid"},{"id":"series_visible_checkbox_25","val":true},{"id":"series_extra_data_title_textarea_25","val":""},{"id":"series_extra_data_values_textarea_25","val":""},{"id":"series_color_26","val":"0D233A"},{"id":"series_type_div_26","val":"line"},{"id":"line_style_select_26","val":"Solid"},{"id":"series_visible_checkbox_26","val":true},{"id":"series_extra_data_title_textarea_26","val":""},{"id":"series_extra_data_values_textarea_26","val":""},{"id":"series_color_27","val":"8BBC21"},{"id":"series_type_div_27","val":"line"},{"id":"line_style_select_27","val":"Solid"},{"id":"series_visible_checkbox_27","val":true},{"id":"series_extra_data_title_textarea_27","val":""},{"id":"series_extra_data_values_textarea_27","val":""},{"id":"series_color_28","val":"910000"},{"id":"series_type_div_28","val":"line"},{"id":"line_style_select_28","val":"Solid"},{"id":"series_visible_checkbox_28","val":true},{"id":"series_extra_data_title_textarea_28","val":""},{"id":"series_extra_data_values_textarea_28","val":""},{"id":"series_color_29","val":"1AADCE"},{"id":"series_type_div_29","val":"line"},{"id":"line_style_select_29","val":"Solid"},{"id":"series_visible_checkbox_29","val":true},{"id":"series_extra_data_title_textarea_29","val":""},{"id":"series_extra_data_values_textarea_29","val":""},{"id":"series_color_30","val":"492970"},{"id":"series_type_div_30","val":"line"},{"id":"line_style_select_30","val":"Solid"},{"id":"series_visible_checkbox_30","val":true},{"id":"series_extra_data_title_textarea_30","val":""},{"id":"series_extra_data_values_textarea_30","val":""},{"id":"series_color_31","val":"F28F43"},{"id":"series_type_div_31","val":"line"},{"id":"line_style_select_31","val":"Solid"},{"id":"series_visible_checkbox_31","val":true},{"id":"series_extra_data_title_textarea_31","val":""},{"id":"series_extra_data_values_textarea_31","val":""},{"id":"series_color_32","val":"77A1E5"},{"id":"series_type_div_32","val":"line"},{"id":"line_style_select_32","val":"Solid"},{"id":"series_visible_checkbox_32","val":true},{"id":"series_extra_data_title_textarea_32","val":""},{"id":"series_extra_data_values_textarea_32","val":""},{"id":"series_color_33","val":"C42525"},{"id":"series_type_div_33","val":"line"},{"id":"line_style_select_33","val":"Solid"},{"id":"series_visible_checkbox_33","val":true},{"id":"series_extra_data_title_textarea_33","val":""},{"id":"series_extra_data_values_textarea_33","val":""},{"id":"series_color_34","val":"A6C96A"},{"id":"series_type_div_34","val":"line"},{"id":"line_style_select_34","val":"Solid"},{"id":"series_visible_checkbox_34","val":true},{"id":"series_extra_data_title_textarea_34","val":""},{"id":"series_extra_data_values_textarea_34","val":""},{"id":"series_color_35","val":"000000"},{"id":"series_type_div_35","val":"line"},{"id":"line_style_select_35","val":"Solid"},{"id":"series_visible_checkbox_35","val":true},{"id":"series_extra_data_title_textarea_35","val":""},{"id":"series_extra_data_values_textarea_35","val":""},{"id":"series_color_36","val":"000000"},{"id":"series_type_div_36","val":"line"},{"id":"line_style_select_36","val":"Solid"},{"id":"series_visible_checkbox_36","val":true},{"id":"series_extra_data_title_textarea_36","val":""},{"id":"series_extra_data_values_textarea_36","val":""},{"id":"series_color_37","val":"000000"},{"id":"series_type_div_37","val":"line"},{"id":"line_style_select_37","val":"Solid"},{"id":"series_visible_checkbox_37","val":true},{"id":"series_extra_data_title_textarea_37","val":""},{"id":"series_extra_data_values_textarea_37","val":""},{"id":"series_color_38","val":"000000"},{"id":"series_type_div_38","val":"line"},{"id":"line_style_select_38","val":"Solid"},{"id":"series_visible_checkbox_38","val":true},{"id":"series_extra_data_title_textarea_38","val":""},{"id":"series_extra_data_values_textarea_38","val":""},{"id":"series_color_39","val":"000000"},{"id":"series_type_div_39","val":"line"},{"id":"line_style_select_39","val":"Solid"},{"id":"series_visible_checkbox_39","val":true},{"id":"series_extra_data_title_textarea_39","val":""},{"id":"series_extra_data_values_textarea_39","val":""},{"id":"series_color_40","val":"000000"},{"id":"series_type_div_40","val":"line"},{"id":"line_style_select_40","val":"Solid"},{"id":"series_visible_checkbox_40","val":true},{"id":"series_extra_data_title_textarea_40","val":""},{"id":"series_extra_data_values_textarea_40","val":""},{"id":"series_color_41","val":"000000"},{"id":"series_type_div_41","val":"line"},{"id":"line_style_select_41","val":"Solid"},{"id":"series_visible_checkbox_41","val":true},{"id":"series_extra_data_title_textarea_41","val":""},{"id":"series_extra_data_values_textarea_41","val":""},{"id":"series_color_42","val":"000000"},{"id":"series_type_div_42","val":"line"},{"id":"line_style_select_42","val":"Solid"},{"id":"series_visible_checkbox_42","val":true},{"id":"series_extra_data_title_textarea_42","val":""},{"id":"series_extra_data_values_textarea_42","val":""},{"id":"series_color_43","val":"000000"},{"id":"series_type_div_43","val":"line"},{"id":"line_style_select_43","val":"Solid"},{"id":"series_visible_checkbox_43","val":true},{"id":"series_extra_data_title_textarea_43","val":""},{"id":"series_extra_data_values_textarea_43","val":""},{"id":"series_color_44","val":"000000"},{"id":"series_type_div_44","val":"line"},{"id":"line_style_select_44","val":"Solid"},{"id":"series_visible_checkbox_44","val":true},{"id":"series_extra_data_title_textarea_44","val":""},{"id":"series_extra_data_values_textarea_44","val":""},{"id":"series_color_45","val":"000000"},{"id":"series_type_div_45","val":"line"},{"id":"line_style_select_45","val":"Solid"},{"id":"series_visible_checkbox_45","val":true},{"id":"series_extra_data_title_textarea_45","val":""},{"id":"series_extra_data_values_textarea_45","val":""},{"id":"series_color_46","val":"000000"},{"id":"series_type_div_46","val":"line"},{"id":"line_style_select_46","val":"Solid"},{"id":"series_visible_checkbox_46","val":true},{"id":"series_extra_data_title_textarea_46","val":""},{"id":"series_extra_data_values_textarea_46","val":""},{"id":"series_color_47","val":"000000"},{"id":"series_type_div_47","val":"line"},{"id":"line_style_select_47","val":"Solid"},{"id":"series_visible_checkbox_47","val":true},{"id":"series_extra_data_title_textarea_47","val":""},{"id":"series_extra_data_values_textarea_47","val":""},{"id":"series_color_48","val":"000000"},{"id":"series_type_div_48","val":"line"},{"id":"line_style_select_48","val":"Solid"},{"id":"series_visible_checkbox_48","val":true},{"id":"series_extra_data_title_textarea_48","val":""},{"id":"series_extra_data_values_textarea_48","val":""},{"id":"series_color_49","val":"000000"},{"id":"series_type_div_49","val":"line"},{"id":"line_style_select_49","val":"Solid"},{"id":"series_visible_checkbox_49","val":true},{"id":"series_extra_data_title_textarea_49","val":""},{"id":"series_extra_data_values_textarea_49","val":""},{"id":"series_color_50","val":"000000"},{"id":"series_type_div_50","val":"line"},{"id":"line_style_select_50","val":"Solid"},{"id":"series_visible_checkbox_50","val":true},{"id":"series_extra_data_title_textarea_50","val":""},{"id":"series_extra_data_values_textarea_50","val":""},{"id":"series_color_51","val":"000000"},{"id":"series_type_div_51","val":"line"},{"id":"line_style_select_51","val":"Solid"},{"id":"series_visible_checkbox_51","val":true},{"id":"series_extra_data_title_textarea_51","val":""},{"id":"series_extra_data_values_textarea_51","val":""},{"id":"series_color_52","val":"000000"},{"id":"series_type_div_52","val":"line"},{"id":"line_style_select_52","val":"Solid"},{"id":"series_visible_checkbox_52","val":true},{"id":"series_extra_data_title_textarea_52","val":""},{"id":"series_extra_data_values_textarea_52","val":""},{"id":"series_color_53","val":"000000"},{"id":"series_type_div_53","val":"line"},{"id":"line_style_select_53","val":"Solid"},{"id":"series_visible_checkbox_53","val":true},{"id":"series_extra_data_title_textarea_53","val":""},{"id":"series_extra_data_values_textarea_53","val":""},{"id":"series_color_54","val":"000000"},{"id":"series_type_div_54","val":"line"},{"id":"line_style_select_54","val":"Solid"},{"id":"series_visible_checkbox_54","val":true},{"id":"series_extra_data_title_textarea_54","val":""},{"id":"series_extra_data_values_textarea_54","val":""},{"id":"series_color_55","val":"000000"},{"id":"series_type_div_55","val":"line"},{"id":"line_style_select_55","val":"Solid"},{"id":"series_visible_checkbox_55","val":true},{"id":"series_extra_data_title_textarea_55","val":""},{"id":"series_extra_data_values_textarea_55","val":""},{"id":"series_color_56","val":"000000"},{"id":"series_type_div_56","val":"line"},{"id":"line_style_select_56","val":"Solid"},{"id":"series_visible_checkbox_56","val":true},{"id":"series_extra_data_title_textarea_56","val":""},{"id":"series_extra_data_values_textarea_56","val":""},{"id":"series_color_57","val":"000000"},{"id":"series_type_div_57","val":"line"},{"id":"line_style_select_57","val":"Solid"},{"id":"series_visible_checkbox_57","val":true},{"id":"series_extra_data_title_textarea_57","val":""},{"id":"series_extra_data_values_textarea_57","val":""},{"id":"series_color_58","val":"000000"},{"id":"series_type_div_58","val":"line"},{"id":"line_style_select_58","val":"Solid"},{"id":"series_visible_checkbox_58","val":true},{"id":"series_extra_data_title_textarea_58","val":""},{"id":"series_extra_data_values_textarea_58","val":""},{"id":"series_color_59","val":"000000"},{"id":"series_type_div_59","val":"line"},{"id":"line_style_select_59","val":"Solid"},{"id":"series_visible_checkbox_59","val":true},{"id":"series_extra_data_title_textarea_59","val":""},{"id":"series_extra_data_values_textarea_59","val":""},{"id":"series_color_60","val":"000000"},{"id":"series_type_div_60","val":"line"},{"id":"line_style_select_60","val":"Solid"},{"id":"series_visible_checkbox_60","val":true},{"id":"series_extra_data_title_textarea_60","val":""},{"id":"series_extra_data_values_textarea_60","val":""},{"id":"series_color_61","val":"000000"},{"id":"series_type_div_61","val":"line"},{"id":"line_style_select_61","val":"Solid"},{"id":"series_visible_checkbox_61","val":true},{"id":"series_extra_data_title_textarea_61","val":""},{"id":"series_extra_data_values_textarea_61","val":""},{"id":"series_color_62","val":"000000"},{"id":"series_type_div_62","val":"line"},{"id":"line_style_select_62","val":"Solid"},{"id":"series_visible_checkbox_62","val":true},{"id":"series_extra_data_title_textarea_62","val":""},{"id":"series_extra_data_values_textarea_62","val":""},{"id":"series_color_63","val":"000000"},{"id":"series_type_div_63","val":"line"},{"id":"line_style_select_63","val":"Solid"},{"id":"series_visible_checkbox_63","val":true},{"id":"series_extra_data_title_textarea_63","val":""},{"id":"series_extra_data_values_textarea_63","val":""},{"id":"series_color_64","val":"000000"},{"id":"series_type_div_64","val":"line"},{"id":"line_style_select_64","val":"Solid"},{"id":"series_visible_checkbox_64","val":true},{"id":"series_extra_data_title_textarea_64","val":""},{"id":"series_extra_data_values_textarea_64","val":""},{"id":"series_color_65","val":"000000"},{"id":"series_type_div_65","val":"line"},{"id":"line_style_select_65","val":"Solid"},{"id":"series_visible_checkbox_65","val":true},{"id":"series_extra_data_title_textarea_65","val":""},{"id":"series_extra_data_values_textarea_65","val":""},{"id":"series_color_66","val":"000000"},{"id":"series_type_div_66","val":"line"},{"id":"line_style_select_66","val":"Solid"},{"id":"series_visible_checkbox_66","val":true},{"id":"series_extra_data_title_textarea_66","val":""},{"id":"series_extra_data_values_textarea_66","val":""},{"id":"series_color_67","val":"000000"},{"id":"series_type_div_67","val":"line"},{"id":"line_style_select_67","val":"Solid"},{"id":"series_visible_checkbox_67","val":true},{"id":"series_extra_data_title_textarea_67","val":""},{"id":"series_extra_data_values_textarea_67","val":""},{"id":"series_color_68","val":"000000"},{"id":"series_type_div_68","val":"line"},{"id":"line_style_select_68","val":"Solid"},{"id":"series_visible_checkbox_68","val":true},{"id":"series_extra_data_title_textarea_68","val":""},{"id":"series_extra_data_values_textarea_68","val":""},{"id":"series_color_69","val":"000000"},{"id":"series_type_div_69","val":"line"},{"id":"line_style_select_69","val":"Solid"},{"id":"series_visible_checkbox_69","val":true},{"id":"series_extra_data_title_textarea_69","val":""},{"id":"series_extra_data_values_textarea_69","val":""},{"id":"series_color_70","val":"000000"},{"id":"series_type_div_70","val":"line"},{"id":"line_style_select_70","val":"Solid"},{"id":"series_visible_checkbox_70","val":true},{"id":"series_extra_data_title_textarea_70","val":""},{"id":"series_extra_data_values_textarea_70","val":""},{"id":"series_color_71","val":"000000"},{"id":"series_type_div_71","val":"line"},{"id":"line_style_select_71","val":"Solid"},{"id":"series_visible_checkbox_71","val":true},{"id":"series_extra_data_title_textarea_71","val":""},{"id":"series_extra_data_values_textarea_71","val":""},{"id":"series_color_72","val":"000000"},{"id":"series_type_div_72","val":"line"},{"id":"line_style_select_72","val":"Solid"},{"id":"series_visible_checkbox_72","val":true},{"id":"series_extra_data_title_textarea_72","val":""},{"id":"series_extra_data_values_textarea_72","val":""},{"id":"series_color_73","val":"000000"},{"id":"series_type_div_73","val":"line"},{"id":"line_style_select_73","val":"Solid"},{"id":"series_visible_checkbox_73","val":true},{"id":"series_extra_data_title_textarea_73","val":""},{"id":"series_extra_data_values_textarea_73","val":""},{"id":"series_color_74","val":"000000"},{"id":"series_type_div_74","val":"line"},{"id":"line_style_select_74","val":"Solid"},{"id":"series_visible_checkbox_74","val":true},{"id":"series_extra_data_title_textarea_74","val":""},{"id":"series_extra_data_values_textarea_74","val":""},{"id":"series_color_75","val":"000000"},{"id":"series_type_div_75","val":"line"},{"id":"line_style_select_75","val":"Solid"},{"id":"series_visible_checkbox_75","val":true},{"id":"series_extra_data_title_textarea_75","val":""},{"id":"series_extra_data_values_textarea_75","val":""},{"id":"series_color_76","val":"000000"},{"id":"series_type_div_76","val":"line"},{"id":"line_style_select_76","val":"Solid"},{"id":"series_visible_checkbox_76","val":true},{"id":"series_extra_data_title_textarea_76","val":""},{"id":"series_extra_data_values_textarea_76","val":""},{"id":"series_color_77","val":"000000"},{"id":"series_type_div_77","val":"line"},{"id":"line_style_select_77","val":"Solid"},{"id":"series_visible_checkbox_77","val":true},{"id":"series_extra_data_title_textarea_77","val":""},{"id":"series_extra_data_values_textarea_77","val":""},{"id":"series_color_78","val":"000000"},{"id":"series_type_div_78","val":"line"},{"id":"line_style_select_78","val":"Solid"},{"id":"series_visible_checkbox_78","val":true},{"id":"series_extra_data_title_textarea_78","val":""},{"id":"series_extra_data_values_textarea_78","val":""},{"id":"series_color_79","val":"000000"},{"id":"series_type_div_79","val":"line"},{"id":"line_style_select_79","val":"Solid"},{"id":"series_visible_checkbox_79","val":true},{"id":"series_extra_data_title_textarea_79","val":""},{"id":"series_extra_data_values_textarea_79","val":""},{"id":"series_color_80","val":"000000"},{"id":"series_type_div_80","val":"line"},{"id":"line_style_select_80","val":"Solid"},{"id":"series_visible_checkbox_80","val":true},{"id":"series_extra_data_title_textarea_80","val":""},{"id":"series_extra_data_values_textarea_80","val":""},{"id":"series_color_81","val":"000000"},{"id":"series_type_div_81","val":"line"},{"id":"line_style_select_81","val":"Solid"},{"id":"series_visible_checkbox_81","val":true},{"id":"series_extra_data_title_textarea_81","val":""},{"id":"series_extra_data_values_textarea_81","val":""},{"id":"series_color_82","val":"000000"},{"id":"series_type_div_82","val":"line"},{"id":"line_style_select_82","val":"Solid"},{"id":"series_visible_checkbox_82","val":true},{"id":"series_extra_data_title_textarea_82","val":""},{"id":"series_extra_data_values_textarea_82","val":""},{"id":"series_color_83","val":"000000"},{"id":"series_type_div_83","val":"line"},{"id":"line_style_select_83","val":"Solid"},{"id":"series_visible_checkbox_83","val":true},{"id":"series_extra_data_title_textarea_83","val":""},{"id":"series_extra_data_values_textarea_83","val":""},{"id":"series_color_84","val":"000000"},{"id":"series_type_div_84","val":"line"},{"id":"line_style_select_84","val":"Solid"},{"id":"series_visible_checkbox_84","val":true},{"id":"series_extra_data_title_textarea_84","val":""},{"id":"series_extra_data_values_textarea_84","val":""},{"id":"series_color_85","val":"000000"},{"id":"series_type_div_85","val":"line"},{"id":"line_style_select_85","val":"Solid"},{"id":"series_visible_checkbox_85","val":true},{"id":"series_extra_data_title_textarea_85","val":""},{"id":"series_extra_data_values_textarea_85","val":""},{"id":"series_color_86","val":"000000"},{"id":"series_type_div_86","val":"line"},{"id":"line_style_select_86","val":"Solid"},{"id":"series_visible_checkbox_86","val":true},{"id":"series_extra_data_title_textarea_86","val":""},{"id":"series_extra_data_values_textarea_86","val":""},{"id":"series_color_87","val":"000000"},{"id":"series_type_div_87","val":"line"},{"id":"line_style_select_87","val":"Solid"},{"id":"series_visible_checkbox_87","val":true},{"id":"series_extra_data_title_textarea_87","val":""},{"id":"series_extra_data_values_textarea_87","val":""},{"id":"series_color_88","val":"000000"},{"id":"series_type_div_88","val":"line"},{"id":"line_style_select_88","val":"Solid"},{"id":"series_visible_checkbox_88","val":true},{"id":"series_extra_data_title_textarea_88","val":""},{"id":"series_extra_data_values_textarea_88","val":""},{"id":"series_color_89","val":"000000"},{"id":"series_type_div_89","val":"line"},{"id":"line_style_select_89","val":"Solid"},{"id":"series_visible_checkbox_89","val":true},{"id":"series_extra_data_title_textarea_89","val":""},{"id":"series_extra_data_values_textarea_89","val":""},{"id":"series_color_90","val":"000000"},{"id":"series_type_div_90","val":"line"},{"id":"line_style_select_90","val":"Solid"},{"id":"series_visible_checkbox_90","val":true},{"id":"series_extra_data_title_textarea_90","val":""},{"id":"series_extra_data_values_textarea_90","val":""},{"id":"series_color_91","val":"000000"},{"id":"series_type_div_91","val":"line"},{"id":"line_style_select_91","val":"Solid"},{"id":"series_visible_checkbox_91","val":true},{"id":"series_extra_data_title_textarea_91","val":""},{"id":"series_extra_data_values_textarea_91","val":""},{"id":"series_color_92","val":"000000"},{"id":"series_type_div_92","val":"line"},{"id":"line_style_select_92","val":"Solid"},{"id":"series_visible_checkbox_92","val":true},{"id":"series_extra_data_title_textarea_92","val":""},{"id":"series_extra_data_values_textarea_92","val":""},{"id":"series_color_93","val":"000000"},{"id":"series_type_div_93","val":"line"},{"id":"line_style_select_93","val":"Solid"},{"id":"series_visible_checkbox_93","val":true},{"id":"series_extra_data_title_textarea_93","val":""},{"id":"series_extra_data_values_textarea_93","val":""},{"id":"series_color_94","val":"000000"},{"id":"series_type_div_94","val":"line"},{"id":"line_style_select_94","val":"Solid"},{"id":"series_visible_checkbox_94","val":true},{"id":"series_extra_data_title_textarea_94","val":""},{"id":"series_extra_data_values_textarea_94","val":""},{"id":"series_color_95","val":"000000"},{"id":"series_type_div_95","val":"line"},{"id":"line_style_select_95","val":"Solid"},{"id":"series_visible_checkbox_95","val":true},{"id":"series_extra_data_title_textarea_95","val":""},{"id":"series_extra_data_values_textarea_95","val":""},{"id":"series_color_96","val":"000000"},{"id":"series_type_div_96","val":"line"},{"id":"line_style_select_96","val":"Solid"},{"id":"series_visible_checkbox_96","val":true},{"id":"series_extra_data_title_textarea_96","val":""},{"id":"series_extra_data_values_textarea_96","val":""},{"id":"series_color_97","val":"000000"},{"id":"series_type_div_97","val":"line"},{"id":"line_style_select_97","val":"Solid"},{"id":"series_visible_checkbox_97","val":true},{"id":"series_extra_data_title_textarea_97","val":""},{"id":"series_extra_data_values_textarea_97","val":""},{"id":"series_color_98","val":"000000"},{"id":"series_type_div_98","val":"line"},{"id":"line_style_select_98","val":"Solid"},{"id":"series_visible_checkbox_98","val":true},{"id":"series_extra_data_title_textarea_98","val":""},{"id":"series_extra_data_values_textarea_98","val":""},{"id":"series_color_99","val":"000000"},{"id":"series_type_div_99","val":"line"},{"id":"line_style_select_99","val":"Solid"},{"id":"series_visible_checkbox_99","val":true},{"id":"series_extra_data_title_textarea_99","val":""},{"id":"series_extra_data_values_textarea_99","val":""},{"id":"series_color_100","val":"000000"},{"id":"series_type_div_100","val":"line"},{"id":"line_style_select_100","val":"Solid"},{"id":"series_visible_checkbox_100","val":true},{"id":"series_extra_data_title_textarea_100","val":""},{"id":"series_extra_data_values_textarea_100","val":""},{"id":"series_color_101","val":"000000"},{"id":"series_type_div_101","val":"line"},{"id":"line_style_select_101","val":"Solid"},{"id":"series_visible_checkbox_101","val":true},{"id":"series_extra_data_title_textarea_101","val":""},{"id":"series_extra_data_values_textarea_101","val":""},{"id":"series_color_102","val":"000000"},{"id":"series_type_div_102","val":"line"},{"id":"line_style_select_102","val":"Solid"},{"id":"series_visible_checkbox_102","val":true},{"id":"series_extra_data_title_textarea_102","val":""},{"id":"series_extra_data_values_textarea_102","val":""},{"id":"series_color_103","val":"000000"},{"id":"series_type_div_103","val":"line"},{"id":"line_style_select_103","val":"Solid"},{"id":"series_visible_checkbox_103","val":true},{"id":"series_extra_data_title_textarea_103","val":""},{"id":"series_extra_data_values_textarea_103","val":""},{"id":"series_color_104","val":"000000"},{"id":"series_type_div_104","val":"line"},{"id":"line_style_select_104","val":"Solid"},{"id":"series_visible_checkbox_104","val":true},{"id":"series_extra_data_title_textarea_104","val":""},{"id":"series_extra_data_values_textarea_104","val":""},{"id":"series_color_105","val":"000000"},{"id":"series_type_div_105","val":"line"},{"id":"line_style_select_105","val":"Solid"},{"id":"series_visible_checkbox_105","val":true},{"id":"series_extra_data_title_textarea_105","val":""},{"id":"series_extra_data_values_textarea_105","val":""},{"id":"series_color_106","val":"000000"},{"id":"series_type_div_106","val":"line"},{"id":"line_style_select_106","val":"Solid"},{"id":"series_visible_checkbox_106","val":true},{"id":"series_extra_data_title_textarea_106","val":""},{"id":"series_extra_data_values_textarea_106","val":""},{"id":"series_color_107","val":"000000"},{"id":"series_type_div_107","val":"line"},{"id":"line_style_select_107","val":"Solid"},{"id":"series_visible_checkbox_107","val":true},{"id":"series_extra_data_title_textarea_107","val":""},{"id":"series_extra_data_values_textarea_107","val":""},{"id":"series_color_108","val":"000000"},{"id":"series_type_div_108","val":"line"},{"id":"line_style_select_108","val":"Solid"},{"id":"series_visible_checkbox_108","val":true},{"id":"series_extra_data_title_textarea_108","val":""},{"id":"series_extra_data_values_textarea_108","val":""},{"id":"series_color_109","val":"000000"},{"id":"series_type_div_109","val":"line"},{"id":"line_style_select_109","val":"Solid"},{"id":"series_visible_checkbox_109","val":true},{"id":"series_extra_data_title_textarea_109","val":""},{"id":"series_extra_data_values_textarea_109","val":""},{"id":"series_color_110","val":"000000"},{"id":"series_type_div_110","val":"line"},{"id":"line_style_select_110","val":"Solid"},{"id":"series_visible_checkbox_110","val":true},{"id":"series_extra_data_title_textarea_110","val":""},{"id":"series_extra_data_values_textarea_110","val":""},{"id":"series_color_111","val":"000000"},{"id":"series_type_div_111","val":"line"},{"id":"line_style_select_111","val":"Solid"},{"id":"series_visible_checkbox_111","val":true},{"id":"series_extra_data_title_textarea_111","val":""},{"id":"series_extra_data_values_textarea_111","val":""},{"id":"series_color_112","val":"000000"},{"id":"series_type_div_112","val":"line"},{"id":"line_style_select_112","val":"Solid"},{"id":"series_visible_checkbox_112","val":true},{"id":"series_extra_data_title_textarea_112","val":""},{"id":"series_extra_data_values_textarea_112","val":""},{"id":"series_color_113","val":"000000"},{"id":"series_type_div_113","val":"line"},{"id":"line_style_select_113","val":"Solid"},{"id":"series_visible_checkbox_113","val":true},{"id":"series_extra_data_title_textarea_113","val":""},{"id":"series_extra_data_values_textarea_113","val":""},{"id":"series_color_114","val":"000000"},{"id":"series_type_div_114","val":"line"},{"id":"line_style_select_114","val":"Solid"},{"id":"series_visible_checkbox_114","val":true},{"id":"series_extra_data_title_textarea_114","val":""},{"id":"series_extra_data_values_textarea_114","val":""},{"id":"series_color_115","val":"000000"},{"id":"series_type_div_115","val":"line"},{"id":"line_style_select_115","val":"Solid"},{"id":"series_visible_checkbox_115","val":true},{"id":"series_extra_data_title_textarea_115","val":""},{"id":"series_extra_data_values_textarea_115","val":""},{"id":"series_color_116","val":"000000"},{"id":"series_type_div_116","val":"line"},{"id":"line_style_select_116","val":"Solid"},{"id":"series_visible_checkbox_116","val":true},{"id":"series_extra_data_title_textarea_116","val":""},{"id":"series_extra_data_values_textarea_116","val":""},{"id":"series_color_117","val":"000000"},{"id":"series_type_div_117","val":"line"},{"id":"line_style_select_117","val":"Solid"},{"id":"series_visible_checkbox_117","val":true},{"id":"series_extra_data_title_textarea_117","val":""},{"id":"series_extra_data_values_textarea_117","val":""},{"id":"series_color_118","val":"000000"},{"id":"series_type_div_118","val":"line"},{"id":"line_style_select_118","val":"Solid"},{"id":"series_visible_checkbox_118","val":true},{"id":"series_extra_data_title_textarea_118","val":""},{"id":"series_extra_data_values_textarea_118","val":""},{"id":"series_color_119","val":"000000"},{"id":"series_type_div_119","val":"line"},{"id":"line_style_select_119","val":"Solid"},{"id":"series_visible_checkbox_119","val":true},{"id":"series_extra_data_title_textarea_119","val":""},{"id":"series_extra_data_values_textarea_119","val":""},{"id":"series_color_120","val":"000000"},{"id":"series_type_div_120","val":"line"},{"id":"line_style_select_120","val":"Solid"},{"id":"series_visible_checkbox_120","val":true},{"id":"series_extra_data_title_textarea_120","val":""},{"id":"series_extra_data_values_textarea_120","val":""},{"id":"series_color_121","val":"000000"},{"id":"series_type_div_121","val":"line"},{"id":"line_style_select_121","val":"Solid"},{"id":"series_visible_checkbox_121","val":true},{"id":"series_extra_data_title_textarea_121","val":""},{"id":"series_extra_data_values_textarea_121","val":""},{"id":"series_color_122","val":"000000"},{"id":"series_type_div_122","val":"line"},{"id":"line_style_select_122","val":"Solid"},{"id":"series_visible_checkbox_122","val":true},{"id":"series_extra_data_title_textarea_122","val":""},{"id":"series_extra_data_values_textarea_122","val":""},{"id":"series_color_123","val":"000000"},{"id":"series_type_div_123","val":"line"},{"id":"line_style_select_123","val":"Solid"},{"id":"series_visible_checkbox_123","val":true},{"id":"series_extra_data_title_textarea_123","val":""},{"id":"series_extra_data_values_textarea_123","val":""},{"id":"series_color_124","val":"000000"},{"id":"series_type_div_124","val":"line"},{"id":"line_style_select_124","val":"Solid"},{"id":"series_visible_checkbox_124","val":true},{"id":"series_extra_data_title_textarea_124","val":""},{"id":"series_extra_data_values_textarea_124","val":""},{"id":"series_color_125","val":"000000"},{"id":"series_type_div_125","val":"line"},{"id":"line_style_select_125","val":"Solid"},{"id":"series_visible_checkbox_125","val":true},{"id":"series_extra_data_title_textarea_125","val":""},{"id":"series_extra_data_values_textarea_125","val":""},{"id":"series_color_126","val":"000000"},{"id":"series_type_div_126","val":"line"},{"id":"line_style_select_126","val":"Solid"},{"id":"series_visible_checkbox_126","val":true},{"id":"series_extra_data_title_textarea_126","val":""},{"id":"series_extra_data_values_textarea_126","val":""},{"id":"series_color_127","val":"000000"},{"id":"series_type_div_127","val":"line"},{"id":"line_style_select_127","val":"Solid"},{"id":"series_visible_checkbox_127","val":true},{"id":"series_extra_data_title_textarea_127","val":""},{"id":"series_extra_data_values_textarea_127","val":""},{"id":"series_color_128","val":"000000"},{"id":"series_type_div_128","val":"line"},{"id":"line_style_select_128","val":"Solid"},{"id":"series_visible_checkbox_128","val":true},{"id":"series_extra_data_title_textarea_128","val":""},{"id":"series_extra_data_values_textarea_128","val":""},{"id":"series_color_129","val":"000000"},{"id":"series_type_div_129","val":"line"},{"id":"line_style_select_129","val":"Solid"},{"id":"series_visible_checkbox_129","val":true},{"id":"series_extra_data_title_textarea_129","val":""},{"id":"series_extra_data_values_textarea_129","val":""},{"id":"series_color_130","val":"000000"},{"id":"series_type_div_130","val":"line"},{"id":"line_style_select_130","val":"Solid"},{"id":"series_visible_checkbox_130","val":true},{"id":"series_extra_data_title_textarea_130","val":""},{"id":"series_extra_data_values_textarea_130","val":""},{"id":"series_color_131","val":"000000"},{"id":"series_type_div_131","val":"line"},{"id":"line_style_select_131","val":"Solid"},{"id":"series_visible_checkbox_131","val":true},{"id":"series_extra_data_title_textarea_131","val":""},{"id":"series_extra_data_values_textarea_131","val":""},{"id":"series_color_132","val":"000000"},{"id":"series_type_div_132","val":"line"},{"id":"line_style_select_132","val":"Solid"},{"id":"series_visible_checkbox_132","val":true},{"id":"series_extra_data_title_textarea_132","val":""},{"id":"series_extra_data_values_textarea_132","val":""},{"id":"series_color_133","val":"000000"},{"id":"series_type_div_133","val":"line"},{"id":"line_style_select_133","val":"Solid"},{"id":"series_visible_checkbox_133","val":true},{"id":"series_extra_data_title_textarea_133","val":""},{"id":"series_extra_data_values_textarea_133","val":""},{"id":"series_color_134","val":"000000"},{"id":"series_type_div_134","val":"line"},{"id":"line_style_select_134","val":"Solid"},{"id":"series_visible_checkbox_134","val":true},{"id":"series_extra_data_title_textarea_134","val":""},{"id":"series_extra_data_values_textarea_134","val":""},{"id":"series_color_135","val":"000000"},{"id":"series_type_div_135","val":"line"},{"id":"line_style_select_135","val":"Solid"},{"id":"series_visible_checkbox_135","val":true},{"id":"series_extra_data_title_textarea_135","val":""},{"id":"series_extra_data_values_textarea_135","val":""},{"id":"series_color_136","val":"000000"},{"id":"series_type_div_136","val":"line"},{"id":"line_style_select_136","val":"Solid"},{"id":"series_visible_checkbox_136","val":true},{"id":"series_extra_data_title_textarea_136","val":""},{"id":"series_extra_data_values_textarea_136","val":""},{"id":"series_color_137","val":"000000"},{"id":"series_type_div_137","val":"line"},{"id":"line_style_select_137","val":"Solid"},{"id":"series_visible_checkbox_137","val":true},{"id":"series_extra_data_title_textarea_137","val":""},{"id":"series_extra_data_values_textarea_137","val":""},{"id":"series_color_138","val":"000000"},{"id":"series_type_div_138","val":"line"},{"id":"line_style_select_138","val":"Solid"},{"id":"series_visible_checkbox_138","val":true},{"id":"series_extra_data_title_textarea_138","val":""},{"id":"series_extra_data_values_textarea_138","val":""},{"id":"series_color_139","val":"000000"},{"id":"series_type_div_139","val":"line"},{"id":"line_style_select_139","val":"Solid"},{"id":"series_visible_checkbox_139","val":true},{"id":"series_extra_data_title_textarea_139","val":""},{"id":"series_extra_data_values_textarea_139","val":""},{"id":"series_color_140","val":"000000"},{"id":"series_type_div_140","val":"line"},{"id":"line_style_select_140","val":"Solid"},{"id":"series_visible_checkbox_140","val":true},{"id":"series_extra_data_title_textarea_140","val":""},{"id":"series_extra_data_values_textarea_140","val":""},{"id":"series_color_141","val":"000000"},{"id":"series_type_div_141","val":"line"},{"id":"line_style_select_141","val":"Solid"},{"id":"series_visible_checkbox_141","val":true},{"id":"series_extra_data_title_textarea_141","val":""},{"id":"series_extra_data_values_textarea_141","val":""},{"id":"series_color_142","val":"000000"},{"id":"series_type_div_142","val":"line"},{"id":"line_style_select_142","val":"Solid"},{"id":"series_visible_checkbox_142","val":true},{"id":"series_extra_data_title_textarea_142","val":""},{"id":"series_extra_data_values_textarea_142","val":""},{"id":"series_color_143","val":"000000"},{"id":"series_type_div_143","val":"line"},{"id":"line_style_select_143","val":"Solid"},{"id":"series_visible_checkbox_143","val":true},{"id":"series_extra_data_title_textarea_143","val":""},{"id":"series_extra_data_values_textarea_143","val":""},{"id":"series_color_144","val":"000000"},{"id":"series_type_div_144","val":"line"},{"id":"line_style_select_144","val":"Solid"},{"id":"series_visible_checkbox_144","val":true},{"id":"series_extra_data_title_textarea_144","val":""},{"id":"series_extra_data_values_textarea_144","val":""},{"id":"series_color_145","val":"000000"},{"id":"series_type_div_145","val":"line"},{"id":"line_style_select_145","val":"Solid"},{"id":"series_visible_checkbox_145","val":true},{"id":"series_extra_data_title_textarea_145","val":""},{"id":"series_extra_data_values_textarea_145","val":""},{"id":"series_color_146","val":"000000"},{"id":"series_type_div_146","val":"line"},{"id":"line_style_select_146","val":"Solid"},{"id":"series_visible_checkbox_146","val":true},{"id":"series_extra_data_title_textarea_146","val":""},{"id":"series_extra_data_values_textarea_146","val":""},{"id":"series_color_147","val":"000000"},{"id":"series_type_div_147","val":"line"},{"id":"line_style_select_147","val":"Solid"},{"id":"series_visible_checkbox_147","val":true},{"id":"series_extra_data_title_textarea_147","val":""},{"id":"series_extra_data_values_textarea_147","val":""},{"id":"series_color_148","val":"000000"},{"id":"series_type_div_148","val":"line"},{"id":"line_style_select_148","val":"Solid"},{"id":"series_visible_checkbox_148","val":true},{"id":"series_extra_data_title_textarea_148","val":""},{"id":"series_extra_data_values_textarea_148","val":""},{"id":"series_color_149","val":"000000"},{"id":"series_type_div_149","val":"line"},{"id":"line_style_select_149","val":"Solid"},{"id":"series_visible_checkbox_149","val":true},{"id":"series_extra_data_title_textarea_149","val":""},{"id":"series_extra_data_values_textarea_149","val":""},{"id":"series_color_150","val":"000000"},{"id":"series_type_div_150","val":"line"},{"id":"line_style_select_150","val":"Solid"},{"id":"series_visible_checkbox_150","val":true},{"id":"series_extra_data_title_textarea_150","val":""},{"id":"series_extra_data_values_textarea_150","val":""},{"id":"series_color_151","val":"000000"},{"id":"series_type_div_151","val":"line"},{"id":"line_style_select_151","val":"Solid"},{"id":"series_visible_checkbox_151","val":true},{"id":"series_extra_data_title_textarea_151","val":""},{"id":"series_extra_data_values_textarea_151","val":""},{"id":"series_color_152","val":"000000"},{"id":"series_type_div_152","val":"line"},{"id":"line_style_select_152","val":"Solid"},{"id":"series_visible_checkbox_152","val":true},{"id":"series_extra_data_title_textarea_152","val":""},{"id":"series_extra_data_values_textarea_152","val":""},{"id":"series_color_153","val":"000000"},{"id":"series_type_div_153","val":"line"},{"id":"line_style_select_153","val":"Solid"},{"id":"series_visible_checkbox_153","val":true},{"id":"series_extra_data_title_textarea_153","val":""},{"id":"series_extra_data_values_textarea_153","val":""},{"id":"series_color_154","val":"000000"},{"id":"series_type_div_154","val":"line"},{"id":"line_style_select_154","val":"Solid"},{"id":"series_visible_checkbox_154","val":true},{"id":"series_extra_data_title_textarea_154","val":""},{"id":"series_extra_data_values_textarea_154","val":""},{"id":"series_color_155","val":"000000"},{"id":"series_type_div_155","val":"line"},{"id":"line_style_select_155","val":"Solid"},{"id":"series_visible_checkbox_155","val":true},{"id":"series_extra_data_title_textarea_155","val":""},{"id":"series_extra_data_values_textarea_155","val":""},{"id":"series_color_156","val":"000000"},{"id":"series_type_div_156","val":"line"},{"id":"line_style_select_156","val":"Solid"},{"id":"series_visible_checkbox_156","val":true},{"id":"series_extra_data_title_textarea_156","val":""},{"id":"series_extra_data_values_textarea_156","val":""},{"id":"series_color_157","val":"000000"},{"id":"series_type_div_157","val":"line"},{"id":"line_style_select_157","val":"Solid"},{"id":"series_visible_checkbox_157","val":true},{"id":"series_extra_data_title_textarea_157","val":""},{"id":"series_extra_data_values_textarea_157","val":""},{"id":"series_color_158","val":"000000"},{"id":"series_type_div_158","val":"line"},{"id":"line_style_select_158","val":"Solid"},{"id":"series_visible_checkbox_158","val":true},{"id":"series_extra_data_title_textarea_158","val":""},{"id":"series_extra_data_values_textarea_158","val":""},{"id":"series_color_159","val":"000000"},{"id":"series_type_div_159","val":"line"},{"id":"line_style_select_159","val":"Solid"},{"id":"series_visible_checkbox_159","val":true},{"id":"series_extra_data_title_textarea_159","val":""},{"id":"series_extra_data_values_textarea_159","val":""},{"id":"series_color_160","val":"000000"},{"id":"series_type_div_160","val":"line"},{"id":"line_style_select_160","val":"Solid"},{"id":"series_visible_checkbox_160","val":true},{"id":"series_extra_data_title_textarea_160","val":""},{"id":"series_extra_data_values_textarea_160","val":""},{"id":"series_color_161","val":"000000"},{"id":"series_type_div_161","val":"line"},{"id":"line_style_select_161","val":"Solid"},{"id":"series_visible_checkbox_161","val":true},{"id":"series_extra_data_title_textarea_161","val":""},{"id":"series_extra_data_values_textarea_161","val":""},{"id":"series_color_162","val":"000000"},{"id":"series_type_div_162","val":"line"},{"id":"line_style_select_162","val":"Solid"},{"id":"series_visible_checkbox_162","val":true},{"id":"series_extra_data_title_textarea_162","val":""},{"id":"series_extra_data_values_textarea_162","val":""},{"id":"series_color_163","val":"000000"},{"id":"series_type_div_163","val":"line"},{"id":"line_style_select_163","val":"Solid"},{"id":"series_visible_checkbox_163","val":true},{"id":"series_extra_data_title_textarea_163","val":""},{"id":"series_extra_data_values_textarea_163","val":""},{"id":"series_color_164","val":"000000"},{"id":"series_type_div_164","val":"line"},{"id":"line_style_select_164","val":"Solid"},{"id":"series_visible_checkbox_164","val":true},{"id":"series_extra_data_title_textarea_164","val":""},{"id":"series_extra_data_values_textarea_164","val":""},{"id":"series_color_165","val":"000000"},{"id":"series_type_div_165","val":"line"},{"id":"line_style_select_165","val":"Solid"},{"id":"series_visible_checkbox_165","val":true},{"id":"series_extra_data_title_textarea_165","val":""},{"id":"series_extra_data_values_textarea_165","val":""},{"id":"series_color_166","val":"000000"},{"id":"series_type_div_166","val":"line"},{"id":"line_style_select_166","val":"Solid"},{"id":"series_visible_checkbox_166","val":true},{"id":"series_extra_data_title_textarea_166","val":""},{"id":"series_extra_data_values_textarea_166","val":""},{"id":"series_color_167","val":"000000"},{"id":"series_type_div_167","val":"line"},{"id":"line_style_select_167","val":"Solid"},{"id":"series_visible_checkbox_167","val":true},{"id":"series_extra_data_title_textarea_167","val":""},{"id":"series_extra_data_values_textarea_167","val":""},{"id":"series_color_168","val":"000000"},{"id":"series_type_div_168","val":"line"},{"id":"line_style_select_168","val":"Solid"},{"id":"series_visible_checkbox_168","val":true},{"id":"series_extra_data_title_textarea_168","val":""},{"id":"series_extra_data_values_textarea_168","val":""},{"id":"series_color_169","val":"000000"},{"id":"series_type_div_169","val":"line"},{"id":"line_style_select_169","val":"Solid"},{"id":"series_visible_checkbox_169","val":true},{"id":"series_extra_data_title_textarea_169","val":""},{"id":"series_extra_data_values_textarea_169","val":""},{"id":"series_color_170","val":"000000"},{"id":"series_type_div_170","val":"line"},{"id":"line_style_select_170","val":"Solid"},{"id":"series_visible_checkbox_170","val":true},{"id":"series_extra_data_title_textarea_170","val":""},{"id":"series_extra_data_values_textarea_170","val":""},{"id":"series_color_171","val":"000000"},{"id":"series_type_div_171","val":"line"},{"id":"line_style_select_171","val":"Solid"},{"id":"series_visible_checkbox_171","val":true},{"id":"series_extra_data_title_textarea_171","val":""},{"id":"series_extra_data_values_textarea_171","val":""},{"id":"series_color_172","val":"000000"},{"id":"series_type_div_172","val":"line"},{"id":"line_style_select_172","val":"Solid"},{"id":"series_visible_checkbox_172","val":true},{"id":"series_extra_data_title_textarea_172","val":""},{"id":"series_extra_data_values_textarea_172","val":""},{"id":"series_color_173","val":"000000"},{"id":"series_type_div_173","val":"line"},{"id":"line_style_select_173","val":"Solid"},{"id":"series_visible_checkbox_173","val":true},{"id":"series_extra_data_title_textarea_173","val":""},{"id":"series_extra_data_values_textarea_173","val":""},{"id":"series_color_174","val":"000000"},{"id":"series_type_div_174","val":"line"},{"id":"line_style_select_174","val":"Solid"},{"id":"series_visible_checkbox_174","val":true},{"id":"series_extra_data_title_textarea_174","val":""},{"id":"series_extra_data_values_textarea_174","val":""},{"id":"series_color_175","val":"000000"},{"id":"series_type_div_175","val":"line"},{"id":"line_style_select_175","val":"Solid"},{"id":"series_visible_checkbox_175","val":true},{"id":"series_extra_data_title_textarea_175","val":""},{"id":"series_extra_data_values_textarea_175","val":""},{"id":"series_color_176","val":"000000"},{"id":"series_type_div_176","val":"line"},{"id":"line_style_select_176","val":"Solid"},{"id":"series_visible_checkbox_176","val":true},{"id":"series_extra_data_title_textarea_176","val":""},{"id":"series_extra_data_values_textarea_176","val":""},{"id":"series_color_177","val":"000000"},{"id":"series_type_div_177","val":"line"},{"id":"line_style_select_177","val":"Solid"},{"id":"series_visible_checkbox_177","val":true},{"id":"series_extra_data_title_textarea_177","val":""},{"id":"series_extra_data_values_textarea_177","val":""},{"id":"series_color_178","val":"000000"},{"id":"series_type_div_178","val":"line"},{"id":"line_style_select_178","val":"Solid"},{"id":"series_visible_checkbox_178","val":true},{"id":"series_extra_data_title_textarea_178","val":""},{"id":"series_extra_data_values_textarea_178","val":""},{"id":"series_color_179","val":"000000"},{"id":"series_type_div_179","val":"line"},{"id":"line_style_select_179","val":"Solid"},{"id":"series_visible_checkbox_179","val":true},{"id":"series_extra_data_title_textarea_179","val":""},{"id":"series_extra_data_values_textarea_179","val":""},{"id":"series_color_180","val":"000000"},{"id":"series_type_div_180","val":"line"},{"id":"line_style_select_180","val":"Solid"},{"id":"series_visible_checkbox_180","val":true},{"id":"series_extra_data_title_textarea_180","val":""},{"id":"series_extra_data_values_textarea_180","val":""},{"id":"series_color_181","val":"000000"},{"id":"series_type_div_181","val":"line"},{"id":"line_style_select_181","val":"Solid"},{"id":"series_visible_checkbox_181","val":true},{"id":"series_extra_data_title_textarea_181","val":""},{"id":"series_extra_data_values_textarea_181","val":""},{"id":"series_color_182","val":"000000"},{"id":"series_type_div_182","val":"line"},{"id":"line_style_select_182","val":"Solid"},{"id":"series_visible_checkbox_182","val":true},{"id":"series_extra_data_title_textarea_182","val":""},{"id":"series_extra_data_values_textarea_182","val":""},{"id":"series_color_183","val":"000000"},{"id":"series_type_div_183","val":"line"},{"id":"line_style_select_183","val":"Solid"},{"id":"series_visible_checkbox_183","val":true},{"id":"series_extra_data_title_textarea_183","val":""},{"id":"series_extra_data_values_textarea_183","val":""},{"id":"series_color_184","val":"000000"},{"id":"series_type_div_184","val":"line"},{"id":"line_style_select_184","val":"Solid"},{"id":"series_visible_checkbox_184","val":true},{"id":"series_extra_data_title_textarea_184","val":""},{"id":"series_extra_data_values_textarea_184","val":""},{"id":"series_color_185","val":"000000"},{"id":"series_type_div_185","val":"line"},{"id":"line_style_select_185","val":"Solid"},{"id":"series_visible_checkbox_185","val":true},{"id":"series_extra_data_title_textarea_185","val":""},{"id":"series_extra_data_values_textarea_185","val":""},{"id":"series_color_186","val":"000000"},{"id":"series_type_div_186","val":"line"},{"id":"line_style_select_186","val":"Solid"},{"id":"series_visible_checkbox_186","val":true},{"id":"series_extra_data_title_textarea_186","val":""},{"id":"series_extra_data_values_textarea_186","val":""},{"id":"series_color_187","val":"000000"},{"id":"series_type_div_187","val":"line"},{"id":"line_style_select_187","val":"Solid"},{"id":"series_visible_checkbox_187","val":true},{"id":"series_extra_data_title_textarea_187","val":""},{"id":"series_extra_data_values_textarea_187","val":""},{"id":"legend_layout_select","val":"no_legend"},{"id":"map_legend_enabled_checkbox","val":true},{"id":"legend_placement_x","val":"100"},{"id":"legend_placement_y","val":"40"},{"id":"legend_reverse_layout_checkbox","val":false},{"id":"legend_item_width_input","val":""},{"id":"legend_make_toggle_checkbox","val":false},{"id":"chart_x_axis_title_textarea","val":""},{"id":"chart_x_axis_x_position_input","val":"40"},{"id":"chart_x_axis_tickmark_interval_input","val":""},{"id":"chart_x_axis_min_input","val":""},{"id":"chart_x_axis_max_input","val":""},{"id":"chart_x_axis_show_only_years","val":false},{"id":"chart_x_axis_add_commas","val":false},{"id":"chart_y_axis_title_textarea","val":""},{"id":"chart_y_axis_x_position_input","val":"35"},{"id":"chart_y_axis_tickmark_interval_input","val":""},{"id":"chart_y_axis_min_input","val":""},{"id":"chart_y_axis_max_input","val":""},{"id":"chart_y_axis_opposite_checkbox","val":false},{"id":"chart_y_axis_log_checkbox","val":false},{"id":"chart_y_axis_signs_select","val":"no_signs"},{"id":"chart_y_axis_decimals_select","val":null},{"id":"chart_y_axis_divide_select","val":"1"},{"id":"chart_tooltip_shared_checkbox","val":false},{"id":"chart_tooltip_force_decimals_select","val":"0"},{"id":"chart_tooltip_signs_select","val":"no_signs"},{"id":"chart_tooltip_force_decimals_x_select","val":"0"},{"id":"chart_tooltip_signs_x_select","val":"no_signs"},{"id":"chart_tooltip_force_decimals_z_select","val":"0"},{"id":"chart_tooltip_signs_z_select","val":"no_signs"},{"id":"map_tooltip_na_text_input","val":"N/A"},{"id":"chart_z_title_text_input","val":""},{"id":"chart_tooltip_y_multiple_select","val":"1"},{"id":"chart_credits_text_textarea","val":"Click legend items to change data display. Hover over chart to view data.Source: U.S. Bureau of Labor Statistics."},{"id":"point_padding_input","val":".1"},{"id":"group_padding_input","val":".2"},{"id":"chart_subtitle_textarea","val":""},{"id":"map_animation_speed_range","val":"500"},{"id":"chart_mlr_styles_checkbox","val":false},{"id":"chart_zoom_select","val":"false,false,null"},{"id":"chart_show_data_labels_checkbox","val":false},{"id":"chart_add_recession_shading_select","val":"no_recession"}]};
 
+var chartCallback = function chartCallback(all_chart_options) {
 
+        if (all_chart_options.timeline) {
+            //call animation if applicable
+            all_chart_options.timeline.animation();
+        }
 
+        $(".highcharts-legend-item").css("min-height", "0px").css("z-index", 100); //fix so CMS CSS doesn't make legend taller than it should
+        $(".highcharts-tooltip").css("z-index", 200);
 
-                        {
-                            "name": "series 1b",
-                            "id": "series 1b",
-                            "data": [{
-                                "name": "series 1bi",
-                                "y": 5,
-                                "type": "column",
-                                "drilldown": null,
-                                "lineWidth": 0
-                        }, {
-                                "name": "series 1bii",
-                                "y": 6,
-                                "type": "column",
-                                "drilldown": null,
-                                "lineWidth": 0
-                        }],
-                            "type": "column",
-                            "lineWidth": 0
-                    }, 
-                               
-                               
-                               {
-                            "name": "series 1c",
-                            "id": "series 1c",
-                            "data": [{
-                                "name": "series 1ci",
-                                "y": 5,
-                                "type": "column",
-                                "drilldown": null,
-                                "lineWidth": 0
-                        }, {
-                                "name": "series 1cii",
-                                "y": 6,
-                                "type": "column",
-                                "drilldown": null,
-                                "lineWidth": 0
-                        }, {
-                                "name": "series 1ciii",
-                                "y": 7,
-                                "type": "column",
-                                "drilldown": null,
-                                "lineWidth": 0
-                        }],
-                            "type": "column",
-                            "lineWidth": 0
-                    }, {
-                            "name": "series 2",
-                            "id": "series 2",
-                            "data": [{
-                                "name": "series 2a",
-                                "y": 3,
-                                "type": "column",
-                                "drilldown": null,
-                                "lineWidth": 0
-                        }, {
-                                "name": "series 2b",
-                                "y": 4,
-                                "type": "column",
-                                "drilldown": null,
-                                "lineWidth": 0
-                        }, {
-                                "name": "series 2c",
-                                "y": 5,
-                                "type": "column",
-                                "drilldown": null,
-                                "lineWidth": 0
-                        }],
-                            "type": "column",
-                            "lineWidth": 0
-                    }, {
-                            "name": "series 3",
-                            "id": "series 3",
-                            "data": [{
-                                "name": "series 3a",
-                                "y": 3,
-                                "type": "column",
-                                "drilldown": null,
-                                "lineWidth": 0
-                        }, {
-                                "name": "series 3b",
-                                "y": 4,
-                                "type": "column",
-                                "drilldown": null,
-                                "lineWidth": 0
-                        }, {
-                                "name": "series 3c",
-                                "y": 2,
-                                "type": "column",
-                                "drilldown": null,
-                                "lineWidth": 0
-                        }, {
-                                "name": "series 3d",
-                                "y": 3,
-                                "type": "column",
-                                "drilldown": null,
-                                "lineWidth": 0
-                        }],
-                            "type": "column",
-                            "lineWidth": 0
-                    }]
-                },
-                "subtitle": {
-                    "text": "",
-                    "align": "left",
-                    "style": {
-                        "color": "#000000",
-                        "fontFamily": "sans-serif",
-                        "fontWeight": "normal",
-                        "fontSize": "12px"
-                    }
-                },
-                "title": {
-                    "text": "Test table data for drill down charts",
-                    "align": "left",
-                    "style": {
-                        "color": "#000000",
-                        "fontFamily": "sans-serif",
-                        "fontWeight": "bold",
-                        "fontSize": "14px"
-                    }
-                },
-                "tooltip": {
-                    "backgroundColor": "#FEFFEF",
-                    "crosshairs": [false, false],
-                    "formatter": function () {
-                        var y_val = $(this.y).addCommas(0);
-                        var s = "<b>" + this.series.name + "</b><br>" + this.key + ": " + y_val;
-                        this.point.drilldown ? s = s + "<br>(Click to drill down)" : s = s;
-                        return s.replace(/\$-/g, "-$");
-                    },
-                    "style": {
-                        "color": "#000000",
-                        "fontFamily": "Calibri, Verdana, Arial, Helvetica, sans-serif"
-                    },
-                    "useHTML": false,
-                    "shared": false,
-                    "addExtraData": function (extra_data, point, s) {
-                        if (extra_data && extra_data[0].name) {
-                            $.each(extra_data, function (i) {
-                                if (extra_data[i].values[point.index]) {
-                                    s = s + "<br>  " + extra_data[i].name + ": " + extra_data[i].values[point.index];
-                                }
+        /**
+         * Highcharts plugin for setting a lower opacity for other series than the one that is hovered
+         * in the legend
+         */
+        (function (Highcharts) {
+            var each = Highcharts.each;
+
+            Highcharts.wrap(Highcharts.Legend.prototype, 'renderItem', function (proceed, item) {
+
+                proceed.call(this, item);
+
+                var isPoint = !!item.series,
+                    collection = isPoint ? item.series.points : this.chart.series,
+                    groups = isPoint ? ['graphic'] : ['group', 'markerGroup'],
+                    element = (this.options.useHTML ? item.legendItem : item.legendGroup).element;
+
+                element.onmouseover = function () {
+                    each(collection, function (seriesItem) {
+                        if (seriesItem !== item) {
+                            each(groups, function (group) {
+                                seriesItem[group].animate({
+                                    opacity: 0.25
+                                }, {
+                                    duration: 150
+                                });
                             });
                         }
-                        return s;
-                    }
-                },
-                "xAxis": {
-                    "categories": [],
-                    "gridLineColor": "#c0c0c0",
-                    "gridLineWidth": 0,
-                    "gridLineDashStyle": "Dot",
-                    "labels": {
-                        "rotation": 0,
-                        "style": {
-                            "color": "#000000",
-                            "fontFamily": "Calibri, Verdana, Arial, Helvetica, sans-serif",
-                            "fontWeight": "normal",
-                            "backgroundColor": "#fff",
-                            "fontSize": "12px",
-                            "textOverflow": "none"
-                        }
-                    },
-                    "lineWidth": 1.2,
-                    "lineColor": "gray",
-                    "max": null,
-                    "min": null,
-                    "plotBands": [],
-                    "plotLines": [{
-                        "value": 0,
-                        "color": "#c0c0c0",
-                        "dashStyle": "solid",
-                        "width": 0
-                    }],
-                    "tickInterval": null,
-                    "tickmarkPlacement": "on",
-                    "tickPosition": "outside",
-                    "tickColor": "#C0D0E0",
-                    "title": {
-                        "align": "middle",
-                        "useHTML": true,
-                        "text": "",
-                        "margin": 6,
-                        "rotation": 0,
-                        "style": {
-                            "color": "#000000",
-                            "fontFamily": "Calibri, Verdana, Arial, Helvetica, sans-serif",
-                            "fontWeight": "normal",
-                            "backgroundColor": "#fff",
-                            "fontSize": "13px"
-                        },
-                        "x": 0,
-                        "y": 0
-                    },
-                    "type": "linear"
-                },
-                "yAxis": {
-                    "gridLineColor": "#c0c0c0",
-                    "gridLineWidth": 1,
-                    "gridLineDashStyle": "Dot",
-                    "labels": {
-                        "formatter": function newYFormat() {
-                            var s = this.value == parseInt(this.value) ? Highcharts.numberFormat(this.value, 0, ".", ",") : Highcharts.numberFormat(this.value, 1, ".", ",");
-                            return s.replace(/\$-/g, "-$");
-                        },
-                        "rotation": 0,
-                        "style": {
-                            "color": "#000000",
-                            "fontFamily": "Calibri, Verdana, Arial, Helvetica, sans-serif",
-                            "fontWeight": "normal",
-                            "backgroundColor": "#fff",
-                            "fontSize": "12px"
-                        }
-                    },
-                    "lineColor": "gray",
-                    "lineWidth": 1,
-                    "max": null,
-                    "min": null,
-                    "opposite": false,
-                    "plotBands": [],
-                    "plotLines": [{
-                        "value": 0,
-                        "color": "#c0c0c0",
-                        "dashStyle": "solid",
-                        "width": 1
-                    }],
-                    "tickInterval": null,
-                    "tickmarkPlacement": "on",
-                    "tickPosition": "outside",
-                    "tickColor": "#C0D0E0",
-                    "tickWidth": 1,
-                    "title": {
-                        "useHTML": true,
-                        "text": "",
-                        "margin": 6,
-                        "align": "high",
-                        "offset": 20,
-                        "rotation": 0,
-                        "x": 35,
-                        "y": -20,
-                        "style": {
-                            "color": "#000000",
-                            "fontFamily": "Calibri, Verdana, Arial, Helvetica, sans-serif",
-                            "fontWeight": "normal",
-                            "fontSize": "13px"
-                        }
-                    },
-                    "type": "linear"
-                },
-                "credits": {
-                    "position": {
-                        "align": "left",
-                        "x": 10,
-                        "y": -22
-                    },
-                    "style": {
-                        "cursor": "default",
-                        "color": "#2C2C2C"
-                    },
-                    "text": "Click legend items to change data display. Hover over chart to view data.<br>Source: U.S. Bureau of Labor Statistics.",
-                    "useHTML": true
-                },
-                "saved_values": [{
-                    "id": "chart_type_icons",
-                    "val": "drilldown"
-                }, {
-                    "id": "chart_id_textinput",
-                    "val": "chart1"
-                }, {
-                    "id": "map_type_select",
-                    "val": "state"
-                }, {
-                    "id": "map_animated_checkbox",
-                    "val": false
-                }, {
-                    "id": "bubble_animated_checkbox",
-                    "val": false
-                }, {
-                    "id": "drilldown_type_select",
-                    "val": "column"
-                }, {
-                    "id": "chart_width_textinput",
-                    "val": "580"
-                }, {
-                    "id": "chart_height_textinput",
-                    "val": "430"
-                }, {
-                    "id": "top_margin_textinput",
-                    "val": "100"
-                }, {
-                    "id": "right_margin_textinput",
-                    "val": "40"
-                }, {
-                    "id": "bottom_margin_textinput",
-                    "val": "80"
-                }, {
-                    "id": "left_margin_textinput",
-                    "val": "80"
-                }, {
-                    "id": "map_spotlight_size_checkbox",
-                    "val": false
-                }, {
-                    "id": "map_circle_size_range",
-                    "val": "10"
-                }, {
-                    "id": "table_input_load_series_from_icons",
-                    "val": "column_heads"
-                }, {
-                    "id": "table_input_textarea",
-                    "val": "<table id=\"BLS_table\" class=\"regular\" cellspacing=\"0\" cellpadding=\"0\" xborder=\"1\" style=\"width: 95%\"><caption><span class=\"tableTitle\">Test table data for drill down charts</span></caption><thead><tr><th rowspan=\"1\"  style=\"vertical-align: middle;\">categories</th><th >value</th></tr></thead><tbody><tr><th ><p>series 1</p></th><td >1</td></tr><tr class=\"greenbar\"><th ><p class=\"sub1\">series 1a</p></th><td >2</td></tr><tr><th ><p class=\"sub1\">series 1b</p></th><td >3</td></tr><tr class=\"greenbar\"><th ><p class=\"sub2\">series 1bi</p></th><td >5</td></tr><tr><th ><p class=\"sub2\">series 1bii</p></th><td >6</td></tr><tr class=\"greenbar\"><th ><p class=\"sub1\">series 1c</p></th><td >4</td></tr><tr><th ><p class=\"sub2\">series 1ci</p></th><td >5</td></tr><tr class=\"greenbar\"><th ><p class=\"sub2\">series 1cii</p></th><td >6</td></tr><tr><th ><p class=\"sub2\">series 1ciii</p></th><td >7</td></tr><tr class=\"greenbar\"><th ><p>series 2</p></th><td >2</td></tr><tr><th ><p class=\"sub1\">series 2a</p></th><td >3</td></tr><tr class=\"greenbar\"><th ><p class=\"sub1\">series 2b</p></th><td >4</td></tr><tr><th ><p class=\"sub1\">series 2c</p></th><td >5</td></tr><tr class=\"greenbar\"><th ><p>series 3</p></th><td >6</td></tr><tr><th ><p class=\"sub1\">series 3a</p></th><td >3</td></tr><tr class=\"greenbar\"><th ><p class=\"sub1\">series 3b</p></th><td >4</td></tr><tr><th ><p class=\"sub1\">series 3c</p></th><td >2</td></tr><tr class=\"greenbar\"><th ><p class=\"sub1\">series 3d</p></th><td >3</td></tr></tbody></table>"
-                }, {
-                    "id": "example_table_select",
-                    "val": ""
-                }, {
-                    "id": "color_palettes",
-                    "val": -1
-                }, {
-                    "id": "legend_layout_select",
-                    "val": "horizontal"
-                }, {
-                    "id": "map_legend_enabled_checkbox",
-                    "val": true
-                }, {
-                    "id": "legend_placement_x",
-                    "val": "100"
-                }, {
-                    "id": "legend_placement_y",
-                    "val": "40"
-                }, {
-                    "id": "legend_reverse_layout_checkbox",
-                    "val": false
-                }, {
-                    "id": "legend_make_toggle_checkbox",
-                    "val": false
-                }, {
-                    "id": "chart_x_axis_title_textarea",
-                    "val": ""
-                }, {
-                    "id": "chart_x_axis_x_position_input",
-                    "val": "40"
-                }, {
-                    "id": "chart_x_axis_tickmark_interval_input",
-                    "val": ""
-                }, {
-                    "id": "chart_x_axis_min_input",
-                    "val": ""
-                }, {
-                    "id": "chart_x_axis_max_input",
-                    "val": ""
-                }, {
-                    "id": "chart_x_axis_show_only_years",
-                    "val": false
-                }, {
-                    "id": "chart_x_axis_add_commas",
-                    "val": false
-                }, {
-                    "id": "chart_y_axis_title_textarea",
-                    "val": ""
-                }, {
-                    "id": "chart_y_axis_x_position_input",
-                    "val": "35"
-                }, {
-                    "id": "chart_y_axis_tickmark_interval_input",
-                    "val": ""
-                }, {
-                    "id": "chart_y_axis_min_input",
-                    "val": ""
-                }, {
-                    "id": "chart_y_axis_max_input",
-                    "val": ""
-                }, {
-                    "id": "chart_y_axis_opposite_checkbox",
-                    "val": false
-                }, {
-                    "id": "chart_y_axis_log_checkbox",
-                    "val": false
-                }, {
-                    "id": "chart_y_axis_signs_select",
-                    "val": "no_signs"
-                }, {
-                    "id": "chart_y_axis_decimals_select",
-                    "val": null
-                }, {
-                    "id": "chart_y_axis_divide_select",
-                    "val": "1"
-                }, {
-                    "id": "chart_tooltip_shared_checkbox",
-                    "val": false
-                }, {
-                    "id": "chart_tooltip_force_decimals_select",
-                    "val": "0"
-                }, {
-                    "id": "chart_tooltip_signs_select",
-                    "val": "no_signs"
-                }, {
-                    "id": "chart_tooltip_force_decimals_x_select",
-                    "val": "0"
-                }, {
-                    "id": "chart_tooltip_signs_x_select",
-                    "val": "no_signs"
-                }, {
-                    "id": "chart_tooltip_force_decimals_z_select",
-                    "val": "0"
-                }, {
-                    "id": "chart_tooltip_signs_z_select",
-                    "val": "no_signs"
-                }, {
-                    "id": "map_tooltip_na_text_input",
-                    "val": "N/A"
-                }, {
-                    "id": "chart_z_title_text_input",
-                    "val": ""
-                }, {
-                    "id": "chart_tooltip_y_multiple_select",
-                    "val": "1"
-                }, {
-                    "id": "chart_credits_text_textarea",
-                    "val": "Click legend items to change data display. Hover over chart to view data.Source: U.S. Bureau of Labor Statistics."
-                }, {
-                    "id": "point_padding_input",
-                    "val": ".1"
-                }, {
-                    "id": "group_padding_input",
-                    "val": ".2"
-                }, {
-                    "id": "chart_subtitle_textarea",
-                    "val": ""
-                }, {
-                    "id": "map_animation_speed_range",
-                    "val": "500"
-                }, {
-                    "id": "chart_mlr_styles_checkbox",
-                    "val": false
-                }, {
-                    "id": "chart_zoom_select",
-                    "val": "false,false,null"
-                }, {
-                    "id": "chart_show_data_labels_checkbox",
-                    "val": false
-                }, {
-                    "id": "chart_add_recession_shading_select",
-                    "val": "no_recession"
-                }]
-            };
-
-            var chartCallback = function chartCallback(all_chart_options) {
-
-                if (all_chart_options.timeline) {
-                    //call animation if applicable
-                    all_chart_options.timeline.animation();
-                }
-
-                $(".highcharts-legend-item").css("min-height", "0px").css("z-index", 100); //fix so CMS CSS doesn't make legend taller than it should
-                $(".highcharts-tooltip").css("z-index", 200);
-
-                /**
-                 * Highcharts plugin for setting a lower opacity for other series than the one that is hovered
-                 * in the legend
-                 */
-                (function (Highcharts) {
-                    var each = Highcharts.each;
-
-                    Highcharts.wrap(Highcharts.Legend.prototype, 'renderItem', function (proceed, item) {
-
-                        proceed.call(this, item);
-
-                        var isPoint = !!item.series,
-                            collection = isPoint ? item.series.points : this.chart.series,
-                            groups = isPoint ? ['graphic'] : ['group', 'markerGroup'],
-                            element = (this.options.useHTML ? item.legendItem : item.legendGroup).element;
-
-                        element.onmouseover = function () {
-                            each(collection, function (seriesItem) {
-                                if (seriesItem !== item) {
-                                    each(groups, function (group) {
-                                        seriesItem[group].animate({
-                                            opacity: 0.25
-                                        }, {
-                                            duration: 150
-                                        });
-                                    });
-                                }
-                            });
-                        };
-                        element.onmouseout = function () {
-                            each(collection, function (seriesItem) {
-                                if (seriesItem !== item) {
-                                    each(groups, function (group) {
-                                        seriesItem[group].animate({
-                                            opacity: 1
-                                        }, {
-                                            duration: 50
-                                        });
-                                    });
-                                }
-                            });
-                        };
                     });
-                })(Highcharts); //end gray other series plugin
-            };
-            Highcharts.setOptions({
-                lang: {
-                    thousandsSep: ","
-                }
+                };
+                element.onmouseout = function () {
+                    each(collection, function (seriesItem) {
+                        if (seriesItem !== item) {
+                            each(groups, function (group) {
+                                seriesItem[group].animate({
+                                    opacity: 1
+                                }, {
+                                    duration: 50
+                                });
+                            });
+                        }
+                    });
+                };
             });
+        })(Highcharts); //end gray other series plugin
+    };
+Highcharts.setOptions({lang: {thousandsSep: ","}});
 
-            var chart = new Highcharts.Chart(all_chart_options, chartCallback(all_chart_options));
-        });
-        jQuery.fn.extend({
-            addCommas: function addCommas(decimals) {
+    var chart = new Highcharts.Chart(all_chart_options, chartCallback(all_chart_options));
+});
+jQuery.fn.extend({addCommas:function addCommas(decimals) {
 
-                var val = this[0] || 0;
+            var val = this[0] || 0;
 
-                if (val == 0) {
-                    return 0;
-                } else if (isNaN(val) || val < 999 && val > -999 && decimals < 1) {
-                    //small numbers auto decimals
-                    return val;
-                } else if (val < 999 && val > -999 && decimals > 0) {
-                    //small numbers fixed decimals
-                    return val.toFixed(decimals);
-                } else if ((val > 999 || val < -999) && decimals > 0) {
-                    //big numbers fixed decimals
-                    while (/(\d+)(\d{3})/.test(val.toString())) {
-                        val = val.toFixed(decimals).replace(/(\d+)(\d{3})/, '$1' + ',' + '$2');
-                    }
-                } else if (val > 999 || val < -999) {
-                    //big number auto decimals
-                    while (/(\d+)(\d{3})/.test(val.toString())) {
-                        val = val.toString().replace(/(\d+)(\d{3})/, '$1' + ',' + '$2');
-                    }
-                }
-
+            if (val == 0) {
+                return 0;
+            } else if (isNaN(val) || val < 999 && val > -999 && decimals < 1) {
+                //small numbers auto decimals
                 return val;
+            } else if (val < 999 && val > -999 && decimals > 0) {
+                //small numbers fixed decimals
+                return val.toFixed(decimals);
+            } else if ((val > 999 || val < -999) && decimals > 0) {
+                //big numbers fixed decimals
+                while (/(\d+)(\d{3})/.test(val.toString())) {
+                    val = val.toFixed(decimals).replace(/(\d+)(\d{3})/, '$1' + ',' + '$2');
+                }
+            } else if (val > 999 || val < -999) {
+                //big number auto decimals
+                while (/(\d+)(\d{3})/.test(val.toString())) {
+                    val = val.toString().replace(/(\d+)(\d{3})/, '$1' + ',' + '$2');
+                }
             }
-        });
+
+            return val;
+        } });
     </script>
 
 

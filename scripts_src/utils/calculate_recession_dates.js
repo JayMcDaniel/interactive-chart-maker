@@ -88,7 +88,7 @@ var calculate_recession_dates = {
         });
 
         //add note about recession shading if applicable
-        if (plot_bands_arr.length > 1) {
+        if (plot_bands_arr.length > 0) {
             var credits = "Shaded areas represent recessions as determined by the National Bureau of Economic Research.\nClick legend items to change data display. Hover over chart to view data.\nSource: U.S. Bureau of Labor Statistics.";
 
         } else {
