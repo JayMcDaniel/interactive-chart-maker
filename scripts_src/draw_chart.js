@@ -5,8 +5,8 @@
 var draw_chart = {
 
     chartCallback: function (all_chart_options) {
-        
-        if (all_chart_options.timeline){ //call animation if applicable
+
+        if (all_chart_options.timeline) { //call animation if applicable
             all_chart_options.timeline.animation();
         }
 
@@ -57,6 +57,21 @@ var draw_chart = {
                 }
 
             });
+
+            Highcharts.wrap(Highcharts.Chart.prototype, 'showCredits', function (proceed, credits) {
+                proceed.call(this, credits);
+
+                if (this.credits && credits.target) {
+                    this.credits.on('click', function () {
+                        $('<a>').attr({
+                            href: credits.href,
+                            target: credits.target
+                        })[0].click();
+                    });
+                }
+            });
+
+
         }(Highcharts)); //end gray other series plugin
     },
 
