@@ -26,6 +26,7 @@
         h4 {
             color: $highlight_color;
             font-family: "sinkin_sans200_x_light";
+            font-weight: bold;
         }
         p {
             margin: 5px 0px 5px 0px;
@@ -223,6 +224,7 @@
         margin-bottom: 20px;
         font-family: "sinkin_sans200_x_light";
         color: $primary_color;
+        font-weight: bold;
     }
     
     h5 {
@@ -640,6 +642,17 @@
         }
         #get_code_text {
             font-size: 100%;
+        }
+    }
+    
+    #beautify_code_button {
+        text-decoration: underline;
+        cursor: pointer;
+        float: right;
+        position: relative;
+        top: 20px;
+        &:hover {
+            color: $highlight_color;
         }
     }
     

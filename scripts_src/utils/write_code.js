@@ -20,7 +20,7 @@ var write_code = {
             var js_string = write_code.writeChartJSCode(all_chart_options);
         } else { //map
             var html_string = write_code.writeMapHTMLCode(all_map_options, width, height, id);
-            var js_string = write_code.writeMapJSCode(all_map_options);
+            var js_string = write_code.writeMapJSCode(all_map_options, all_chart_options);
         }
 
         //put code in the <code>
@@ -102,7 +102,7 @@ jQuery.fn.extend({addCommas:' + $("string").addCommas.toString() + ' });';
 
 
     /** creates and returns map JS code  **/
-    writeMapJSCode: function (all_map_options) {
+    writeMapJSCode: function (all_map_options, all_chart_options) {
 
         var map_init = require("../initializers/maps/map_init.js");
         var map_subtitle_init = require("../initializers/maps/map_subtitle_init.js");
@@ -113,7 +113,7 @@ jQuery.fn.extend({addCommas:' + $("string").addCommas.toString() + ' });';
         var map_animation_init = require("../initializers/maps/map_animation_init.js");
         
         //save chart input values
-        all_chart_options.saved_values = chart_recall.saveValues();
+        all_map_options.saved_values = chart_recall.saveValues();
 
 
         var map_js = utils_main.deepStringify(all_map_options);

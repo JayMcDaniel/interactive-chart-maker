@@ -936,7 +936,7 @@
                         <option value="100000">100,000</option>
                         <option value="1000000">1,000,000</option>
                     </select>
-                    <span class="notes show_line">This can be useful when using data from a table that shows its values divided by a number.</span>
+                    <span class="notes">This can be useful when using data from a table that shows its values divided by a number.</span>
                     </span>
                 </div>
 
@@ -1076,6 +1076,9 @@
         <!--JS  Code box -->
         <div class="copy_to_clipboard_button" style="position: relative;
     top: 5px;"></div>
+
+        <div id="beautify_code_button">Unpack</div>
+
         <h4>JavaScript <span class="copy_message"></span></h4>
 
         <p class="notes">The JS comes packed by default. If you need to unpack it, most code editors will do the trick, or use this tool: <a href="http://jsbeautifier.org/" target="_blank">http://jsbeautifier.org/</a>.
@@ -1137,12 +1140,12 @@
         <!-- chart / map display area -->
         <div id="chart1" class="chart_display_area fixed">
         </div>
-<div id="chart_loading_icon" class="loading glyphicon glyphicon-refresh glyphicon-refresh-animate"></div>
+        <div id="chart_loading_icon" class="loading glyphicon glyphicon-refresh glyphicon-refresh-animate"></div>
         <div id="map1" class="map_display_area fixed">
         </div>
-        
+
         <p class="alert-danger"></p>
-        
+
 
     </div>
     <!-- main_content_div end -->
@@ -1160,12 +1163,20 @@
     <script src="libraries/Highcharts-4.2.3/js/modules/drilldown.src.js"></script>
     <!--    <script src="libraries/Highcharts-4.2.3/js/modules/exporting.js"></script>-->
 
+    <!--JS Color for color picker boxes -->
+    <script src="libraries/jscolor-2.0.4/jscolor.min.js"></script>
+
+    <!--requirejs, used for code display unpacking -->
+    <script src="libraries/beautify/beautify.js"></script>
+    <script src="libraries/beautify/beautify-css.js"></script>
+    <script src="libraries/beautify/beautify-html.js"></script>
+    
+
 
     <!-- Chart Maker main JS file, compiled from scripts_src folder -->
     <script src="scripts_build/main.min.js"></script>
 
-    <!--JS Color for color picker boxes -->
-    <script src="libraries/jscolor-2.0.4/jscolor.min.js"></script>
+
 
     <!-- code highlighting -->
     <!--
