@@ -84,32 +84,40 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
 
     $('.chart_type_icon').unbind().click(function () {
 
+        var clicked_icon = this;
 
-        allFormUpdates.selectChart(this);
-        var chart_type = $(this).divVal();
-        allFormUpdates.displayOptions(chart_type);
+        $("#chart_loading_icon").removeClass("invisible");
+        setTimeout(function () {
+            allFormUpdates.selectChart(clicked_icon);
+            var chart_type = $(clicked_icon).divVal();
+            allFormUpdates.displayOptions(chart_type);
 
-        updateChartType(chart_type, chart, all_chart_options);
-
-
-        if (chart_type === "map") { //if map
-            $(".chart_display_area").hide();
-            $(".map_display_area").show();
-
-            map_colors_init.loadMapColorPalettes(4); //loads color palettes then loads new map
+            updateChartType(chart_type, chart, all_chart_options);
 
 
-        } else { //if not map
-            $(".map_display_area").hide();
-            $(".chart_display_area").show();
-            chart.reflow();
-            navigation_setup.chartClicks();
+            if (chart_type === "map") { //if map
+                $(".chart_display_area").hide();
+                $(".map_display_area").show();
 
-            //update tickmark interval (recalculates if not set)
-            var new_x_interval = $("#chart_x_axis_tickmark_interval_input").val();
-            update_x_axis.updateTickmarkInterval(new_x_interval, chart, all_chart_options, all_chart_options.xAxis.categories);
+                map_colors_init.loadMapColorPalettes(4); //loads color palettes then loads new map
 
-        }
+
+            } else { //if not map
+                $(".map_display_area").hide();
+                $(".chart_display_area").show();
+                chart.reflow();
+                navigation_setup.chartClicks();
+
+                //update tickmark interval (recalculates if not set)
+                var new_x_interval = $("#chart_x_axis_tickmark_interval_input").val();
+                update_x_axis.updateTickmarkInterval(new_x_interval, chart, all_chart_options, all_chart_options.xAxis.categories);
+
+            }
+
+
+            $("#chart_loading_icon").addClass("invisible");
+        }, 10);
+
 
     });
 
@@ -182,16 +190,29 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
 
     //"series names loaded from" icon clicked
     $("#table_input_load_series_from_icons .load_series_from_icon").unbind().click(function () {
-        //change selected icon
-        $("#table_input_load_series_from_icons .selected").removeClass("selected");
-        $(this).addClass("selected");
 
-        update_data.updateData(chart, all_chart_options);
-        update_individual_series.populateForm(chart, all_chart_options);
+     var clicked_icon = this;
+        
+        $("#chart_loading_icon").removeClass("invisible"); //show loading icon
 
-        //update tickmark interval (recalculates if not set)
-        var new_x_interval = $("#chart_x_axis_tickmark_interval_input").val();
-        update_x_axis.updateTickmarkInterval(new_x_interval, chart, all_chart_options, all_chart_options.xAxis.categories);
+        setTimeout(function () { //wraping in a setTimeout keeps the loading icon up for the duration
+            //change selected icon
+            $("#table_input_load_series_from_icons .selected").removeClass("selected");
+            $(clicked_icon).addClass("selected");
+
+            update_data.updateData(chart, all_chart_options);
+            update_individual_series.populateForm(chart, all_chart_options);
+
+            //update tickmark interval (recalculates if not set)
+            var new_x_interval = $("#chart_x_axis_tickmark_interval_input").val();
+            update_x_axis.updateTickmarkInterval(new_x_interval, chart, all_chart_options, all_chart_options.xAxis.categories);
+
+            $("#chart_loading_icon").addClass("invisible"); //show loading icon
+
+
+        }, 10);
+
+
 
     });
 
