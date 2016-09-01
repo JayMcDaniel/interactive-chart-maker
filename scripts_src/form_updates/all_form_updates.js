@@ -373,10 +373,12 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
 
 
     //x-axis formatter (only years) changed
-    $("#chart_x_axis_show_only_years, #chart_x_axis_add_commas").unbind().change(function () {
+    $("#chart_x_axis_show_only_years, #chart_x_axis_add_commas, #chart_x_axis_signs_select, #chart_x_axis_decimals_select").unbind().change(function () {
         var only_numbers = utils_forms.getCheckBoxValue($("#chart_x_axis_show_only_years"));
         var add_commas = utils_forms.getCheckBoxValue($("#chart_x_axis_add_commas"));
-        update_x_axis.updateFormatter(only_numbers, add_commas, chart, all_chart_options);
+        var sign = $("#chart_x_axis_signs_select").val();
+        var decimals = $("#chart_x_axis_decimals_select").val();
+        update_x_axis.updateFormatter(only_numbers, add_commas, sign, decimals, chart, all_chart_options);
     });
 
 

@@ -6,14 +6,22 @@ var utils_forms = require("../../utils/utils_forms.js");
 @module
 */
 var xAxisInit = function xAxisInit(categories, chart_type) {
-    
+
+    var only_numbers = utils_forms.getCheckBoxValue($("#chart_x_axis_show_only_years"));
+    var add_commas = utils_forms.getCheckBoxValue($("#chart_x_axis_add_commas"));
+    var sign = $("#chart_x_axis_signs_select").val();
+    var decimals = $("#chart_x_axis_decimals_select").val();
+
     //load options from user inputs
     var options = {
 
         categories: categories || undefined,
-
+        only_numbers,
+        add_commas,
+        sign,
+        decimals,
         labels: {
-            formatter: update_x_axis.updateFormatter(utils_forms.getCheckBoxValue($("#chart_x_axis_show_only_years")))
+            formatter: update_x_axis.updateFormatter(only_numbers, add_commas, sign, decimals)
         },
 
         max: update_x_axis.updateMax(Number($("#chart_x_axis_max_input").val())),
@@ -25,6 +33,9 @@ var xAxisInit = function xAxisInit(categories, chart_type) {
             "dashStyle": "solid",
             "width": chart_type === "scatter" || chart_type === "bubble" ? 1 : 0
         }],
+
+        startOnTick: chart_type === "bubble" || chart_type === "scatter" ? true : false,
+
         title: {
             align: chart_type === "bar" || chart_type === "stacked_bar" ? "high" : "middle",
             text: $("#chart_x_axis_title_textarea").val(),

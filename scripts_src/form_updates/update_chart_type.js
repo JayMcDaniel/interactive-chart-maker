@@ -65,11 +65,12 @@ var updateChartType = function (chart_type, chart, all_chart_options) {
         }];
 
     all_chart_options.xAxis.gridLineWidth = type === "scatter" || type === "bubble" ? 1 : 0;
-
+    all_chart_options.xAxis.startOnTick = type === "scatter" || type === "bubble" ? true : false;
 
     chart.xAxis[0].update({
         gridLineWidth: all_chart_options.xAxis.gridLineWidth,
-        plotLines: all_chart_options.xAxis.plotLines
+        plotLines: all_chart_options.xAxis.plotLines,
+        startOnTick : all_chart_options.xAxis.startOnTick
     }, false);
 
 

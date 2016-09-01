@@ -34,7 +34,8 @@ var XAxis = function (o) {
         "dashStyle": "solid",
         "width": 0
     }];
-
+    
+    this.startOnTick = o.startOnTick;
     this.tickInterval = o.tickInterval || null;
     this.tickmarkPlacement = o.tickmarkPlacement || 'on';
     this.tickPosition = o.tickPosition || 'outside';

@@ -25,6 +25,7 @@ var utils_main = {
     deepStringify: function deepStringify(obj) {
         var update_tooltip = require("../form_updates/update_tooltip.js");
         var update_y_axis = require("../form_updates/update_y_axis.js");
+        var update_x_axis = require("../form_updates/update_x_axis.js");
 
         var fn_count = 0;
 
@@ -40,7 +41,9 @@ var utils_main = {
 
 
                 //combine y axis and tooltip replacement objs
-                var replacements_obj = $.extend({}, update_tooltip.replacement_obj, update_y_axis.replacement_obj);
+                var replacements_obj = $.extend({}, update_tooltip.replacement_obj, update_x_axis.replacement_obj, update_y_axis.replacement_obj);
+                
+                console.log("replace", replacements_obj);
 
                 //put these string functions in the array for later
                 stringified_obj.functions_arr.push(utils_main.stringifyFormatter(value, replacements_obj));
@@ -154,10 +157,9 @@ var utils_main = {
 
     },
 
-    
+
     /** stringify tooltip / y-axis formatter function **/
     stringifyFormatter: function (formatter, replacement_obj) {
-
 
 
         var formatter_str = formatter.toString().replace(/\/\/.*\/\//g, ""); //replace notes in between //...//
@@ -172,6 +174,8 @@ var utils_main = {
             .replace(/x_signs_arr\[1\]/g, '"' + replacement_obj.x_signs_arr[1] + '"')
             .replace(/z_signs_arr\[0\]/g, '"' + replacement_obj.z_signs_arr[0] + '"')
             .replace(/z_signs_arr\[1\]/g, '"' + replacement_obj.z_signs_arr[1] + '"')
+            .replace(/x_axis_signs_arr\[0\]/g, '"' + replacement_obj.x_axis_signs_arr[0] + '"')
+            .replace(/x_axis_signs_arr\[1\]/g, '"' + replacement_obj.x_axis_signs_arr[1] + '"')
             .replace(/y_axis_signs_arr\[0\]/g, '"' + replacement_obj.y_axis_signs_arr[0] + '"')
             .replace(/y_axis_signs_arr\[1\]/g, '"' + replacement_obj.y_axis_signs_arr[1] + '"');
 

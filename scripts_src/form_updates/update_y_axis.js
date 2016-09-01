@@ -36,13 +36,15 @@ var update_y_axis = {
 
             var newYFormat = function () {
                 var s = Highcharts.numberFormat(this.value / dividend, y_axis_decimals, ".", ",");
-                return y_axis_signs_arr[0] + s.replace(/\$-/g, "-$") + y_axis_signs_arr[1];
+                s = y_axis_signs_arr[0] + s + y_axis_signs_arr[1];
+                return s.replace(/\$-/g, "-$");
             }
 
         } else { //if decimals are null
             var newYFormat = function () {
                 var s = (this.value / dividend == parseInt(this.value / dividend)) ? Highcharts.numberFormat(this.value / dividend, 0, ".", ",") : Highcharts.numberFormat(this.value / dividend, 1, ".", ",");
-                return y_axis_signs_arr[0] + s.replace(/\$-/g, "-$") + y_axis_signs_arr[1];
+                s = y_axis_signs_arr[0] + s + y_axis_signs_arr[1];
+                return s.replace(/\$-/g, "-$");
             }
 
         }
@@ -58,7 +60,7 @@ var update_y_axis = {
             }
         });
 
-
+        //replacement_obj is used to replace stings with values when writing the output code in utils_main
         update_y_axis.replacement_obj = {
             y_axis_decimals: y_axis_decimals,
             dividend: dividend,
@@ -98,7 +100,7 @@ var update_y_axis = {
         all_chart_options.yAxis.opposite = val;
 
         //update y axis title position
-        $("#chart_y_axis_x_position_input").val($("#chart_y_axis_x_position_input").val()*-1).keyup();
+        $("#chart_y_axis_x_position_input").val($("#chart_y_axis_x_position_input").val() * -1).keyup();
 
     },
 
