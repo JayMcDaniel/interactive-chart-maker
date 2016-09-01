@@ -10,9 +10,10 @@ var update_x_axis = {
 
     /** update x-axis formatter **/
     /** update format when dollar / percent signs select is changed TODO!*/
-    updateFormatter: function (only_numbers, add_commas, chart, all_chart_options) {
+    updateFormatter: function (only_numbers, add_commas, sign, x_axis_decimals, chart, all_chart_options) {
 
         var newXFormat = undefined;
+        var x_axis_signs_arr = [sign === "$" ? "$" : "", sign === "%" ? "%" : ""];
 
         if (only_numbers) {
             newXFormat = function () {
@@ -20,11 +21,20 @@ var update_x_axis = {
             }
         }
 
-        if (add_commas) {
+        if (add_commas || sign != "no_signs" || x_axis_decimals != "null") {
             newXFormat = function () {
-                return $(Number(this.value)).addCommas(); //hide non-numbers if show only years box is checked//
+                var s = x_axis_signs_arr[0] + $(Number(this.value)).addCommas(x_axis_decimals) + x_axis_signs_arr[1];
+
+                return s.replace(/\$-/g, "-$");
             }
         }
+
+
+        //replacement_obj is used to replace stings with values when writing the output code in utils_main
+        update_x_axis.replacement_obj = {
+            x_axis_decimals: x_axis_decimals || null,
+            x_axis_signs_arr: x_axis_signs_arr || ["", ""]
+        };
 
 
         if (!chart) { // called when this is used in y_axis_init
@@ -40,9 +50,10 @@ var update_x_axis = {
 
         all_chart_options.xAxis.labels.formatter = newXFormat;
 
-
     },
 
+    
+    
 
     /** update x-axis max */
     updateMax: function (newMax, chart, all_chart_options) {
@@ -119,7 +130,7 @@ var update_x_axis = {
 
     /** update x axis tickmark interval **/
     updateTickmarkInterval: function (new_interval, chart, all_chart_options, categories) {
-        
+
         if (isNaN(Number(new_interval)) || Number(new_interval) === 0) {
 
             if (!categories) {
@@ -137,7 +148,7 @@ var update_x_axis = {
         if (new_interval > chart.xAxis[0].dataMax) {
             new_interval = chart.xAxis[0].dataMax;
         }
-        
+
         chart.xAxis[0].update({
             tickInterval: new_interval
         });
