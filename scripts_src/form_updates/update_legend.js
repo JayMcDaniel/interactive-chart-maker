@@ -34,9 +34,12 @@ var update_legend = {
         if (val === "no_legend") {
             legend.group.hide();
             legend.box.hide();
+            legend.pager.hide();
+            legend.up.hide();
+            legend.down.hide();
             legend.display = false;
             legend.options.enabled = false;
-            legend.render(false);
+            legend.render(true);
 
             val = undefined;
 
@@ -46,6 +49,9 @@ var update_legend = {
             legend.render(false);
             legend.group.show();
             legend.box.show();
+            legend.pager.show();
+            legend.up.show();
+            legend.down.show();
             legend.display = true;
             legend.options.enabled = true;
         }
