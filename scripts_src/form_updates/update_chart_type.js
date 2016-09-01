@@ -12,8 +12,6 @@ var utils_main = require("../utils/utils_main.js");
 var updateChartType = function (chart_type, chart, all_chart_options) {
 
 
-
-
     //if drilled into a drilldown, click the up button to get out - prevents errors
     utils_main.drillUp();
 

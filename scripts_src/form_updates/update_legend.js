@@ -95,6 +95,8 @@ var update_legend = {
             all_chart_options.series[i].visible = is_visible;
 
         });
+        
+        
     },
 
 
