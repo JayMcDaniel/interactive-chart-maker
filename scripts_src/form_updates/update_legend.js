@@ -60,8 +60,10 @@ var update_legend = {
     /** set if when one legend item is clicked, the others hide */
     updateToggle: function (toggle_enabled, chart, all_chart_options) {
 
+        
         //update all_chart_options
         if (toggle_enabled) {
+            
             var legendItemClick = function (event) {
                 var selected = this.index;
                 var allSeries = this.chart.series;
@@ -96,7 +98,7 @@ var update_legend = {
 
         });
         
-        
+        chart.redraw(true);
     },
 
 
