@@ -87,9 +87,9 @@
 
                             output.series[0].data.push({
                                 name: this_name,
-                                x: drill_type === "bubble" ? getBubbleVal("x") : undefined,
+                                x: drill_type === "bubble" ? getBubbleVal.call($(this),"x") : undefined,
                                 y: this_val,
-                                z: drill_type === "bubble" ? getBubbleVal("z") : undefined,
+                                z: drill_type === "bubble" ? getBubbleVal.call($(this),"z") : undefined,
                                 color: colors[output.series[0].data.length],
                                 type: drill_type,
                                 drilldown: this_drilldown,
@@ -140,9 +140,9 @@
 
                                 output.drilldown.series[drill_series_index].data.push({
                                     name: this_name,
-                                    x: drill_type === "bubble" ? getBubbleVal("x") : undefined,
+                                    x: drill_type === "bubble" ? getBubbleVal.call($(this),"x") : undefined,
                                     y: this_y,
-                                    z: drill_type === "bubble" ? getBubbleVal("z") : undefined,
+                                    z: drill_type === "bubble" ? getBubbleVal.call($(this),"z") : undefined,
                                     sub: next_sub,
                                     type: drill_type,
                                     lineWidth: 0,
@@ -188,7 +188,7 @@
                 drill_stat = parseSubLevel("sub" + current_sub, drill_stat.indexes);
             }
 
-
+console.log(output);
             return output;
 
         } catch (e) {

@@ -222,11 +222,7 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
     //table input textarea
     $("#table_input_textarea").unbind().bind('blur paste', function () {
 
-        if (all_chart_options.chart.type === "map") { //for maps
-            map_init.loadNewMap(chart, all_chart_options, all_map_options, true); // true to repopulate form
-        } else {
-            update_data.updateData(chart, all_chart_options); //for charts
-        }
+      $("#chart_type_icons .selected").click();
     });
 
 
