@@ -43,7 +43,6 @@ var utils_main = {
                 //combine y axis and tooltip replacement objs
                 var replacements_obj = $.extend({}, update_tooltip.replacement_obj, update_x_axis.replacement_obj, update_y_axis.replacement_obj);
                 
-                console.log("replace", replacements_obj);
 
                 //put these string functions in the array for later
                 stringified_obj.functions_arr.push(utils_main.stringifyFormatter(value, replacements_obj));
