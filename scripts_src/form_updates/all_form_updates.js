@@ -315,7 +315,7 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
     //legend toggle (hide others) checkbox changed
     $("#legend_make_toggle_checkbox").unbind().change(function () {
         var toggle_enabled = utils_forms.getCheckBoxValue($(this));
-        update_legend.updateToggle(toggle_enabled, chart, all_chart_options);
+        update_legend.updateToggle(toggle_enabled, chart, all_chart_options, $("#chart_type_icons .selected").divVal());
     });
 
     //legend X or Y placement values changed

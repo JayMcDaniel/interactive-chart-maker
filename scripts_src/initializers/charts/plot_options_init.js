@@ -5,14 +5,14 @@ var utils_forms = require("../../utils/utils_forms.js");
 /** Initializer for "plotOptions" options section of all_chart_options. Creates and returns a new instance 
 @module
 */
-var plotOptionsInit = function plotOptionsInit(legend_toggle_enabled) {
+var plotOptionsInit = function plotOptionsInit(chart_type, legend_toggle_enabled) {
 
     //load options from user inputs
     var options = {
         series: {
             events: {
                 // when one legend item is clicked, the others hide
-                legendItemClick: update_legend.updateToggle(legend_toggle_enabled)
+                legendItemClick: update_legend.updateToggle(legend_toggle_enabled, null, null, chart_type)
             },
 
             dataLabels: {

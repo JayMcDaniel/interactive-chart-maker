@@ -188,7 +188,6 @@
                 drill_stat = parseSubLevel("sub" + current_sub, drill_stat.indexes);
             }
 
-console.log(output);
             return output;
 
         } catch (e) {

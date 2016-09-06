@@ -1,7 +1,7 @@
 /** Legend options constructor. Info at http://api.highcharts.com/highcharts#legend 
-* @constructor Legend 
-* @param o {object} legend options object
-*/
+ * @constructor Legend 
+ * @param o {object} legend options object
+ */
 var Legend = function (o) {
 
     this.align = o.align || 'left';
@@ -23,13 +23,14 @@ var Legend = function (o) {
 
     this.itemStyle = {
         fontFamily: 'Calibri, Verdana, Arial, Helvetica, sans-serif',
-        color: '#000'
+        color: '#000',
+        cursor: o.itemStyle.cursor
     };
     this.itemHiddenStyle = {
         color: 'gray'
     };
     this.itemHoverStyle = {
-        cursor: o.itemHoverStyle ? o.itemHoverStyle.cursor || "pointer" : "pointer"
+        cursor: o.itemHoverStyle.cursor
     }
 
 }
