@@ -13,16 +13,16 @@ var update_legend = {
 
         all_chart_options.legend.reversed = val;
     },
-    
-    
-    
+
+
+
     /** updates legend item width - usefull for making legends with lots of items look more aligned */
-    updateItemWidth: function(newItemWidth, chart, all_chart_options){
-        
+    updateItemWidth: function (newItemWidth, chart, all_chart_options) {
+
         var legend = chart.legend;
         legend.options.itemWidth = newItemWidth;
         legend.render(false);
-        
+
         all_chart_options.legend.itemWidth = newItemWidth;
     },
 
@@ -64,12 +64,11 @@ var update_legend = {
 
 
     /** set if when one legend item is clicked, the others hide */
-    updateToggle: function (toggle_enabled, chart, all_chart_options) {
+    updateToggle: function (toggle_enabled, chart, all_chart_options, chart_type) {
 
-        
         //update all_chart_options
         if (toggle_enabled) {
-            
+
             var legendItemClick = function (event) {
                 var selected = this.index;
                 var allSeries = this.chart.series;
@@ -79,14 +78,37 @@ var update_legend = {
                 return false;
             };
 
+            var cursor_style = "pointer";
+
+
+        } else if (chart_type === "drilldown") {
+            var legendItemClick = function (event) {
+                return false;
+            };
+
+            var cursor_style = "default";
+
+
         } else {
             var legendItemClick = function (event) {};
+
+            var cursor_style = "pointer";
+
         }
 
         if (!chart) {
             return legendItemClick;
-        } else {
+        } else { //if chart already made, update
             all_chart_options.plotOptions.series.events.legendItemClick = legendItemClick;
+
+            all_chart_options.legend.itemHoverStyle.cursor =
+                all_chart_options.legend.itemStyle.cursor =
+                chart.legend.options.itemHoverStyle.cursor =
+                chart.legend.options.itemStyle.cursor = cursor_style;
+            
+           // all_chart_options.legend.symbolWidth = chart.legend.options.symbolWidth = symbol_width;
+
+            chart.legend.render(false);
         }
 
         //update in current chart
@@ -99,11 +121,11 @@ var update_legend = {
                     legendItemClick: all_chart_options.plotOptions.series.events.legendItemClick
                 }
             }, false);
-            
+
             all_chart_options.series[i].visible = is_visible;
 
         });
-        
+
         chart.redraw(true);
     },
 

@@ -37,8 +37,8 @@
          credits: creditsInit(),
          colors: colors,
          // exporting: exportingInit(),
-         legend: legendInit(),
-         plotOptions: plotOptionsInit(legend_toggle_enabled),
+         legend: legendInit(chart_type),
+         plotOptions: plotOptionsInit(chart_type, legend_toggle_enabled),
          series: parsed_table_output.series, //removed seriesInit(parsed_table_output.series)
          drilldown: parsed_table_output.drilldown || {},
          subtitle: subtitleInit(),
