@@ -99,6 +99,11 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
                 $(".chart_display_area").hide();
                 $(".map_display_area").show();
 
+                $(".chart_tab").not(".map_tab").hide();
+                $(".display_options:gt(0)>*").not(".notes").not(".show_map").hide(); //hide everything except map relevent options
+                $(".just_map").show();
+                $("#chart_credits_text_textarea").val("Hover over an area to see data.\nHover over legend items to see areas in a category.\nSource: U.S. Bureau of Labor Statistics."); //update credits area
+
                 map_colors_init.loadMapColorPalettes(4); //loads color palettes then loads new map
 
 
@@ -118,21 +123,12 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
             $("#chart_loading_icon").addClass("invisible");
         }, 10);
 
-
     });
 
 
-
-    /* when map type icon is clicked don't unbind this */
-    $("#chart_type_map").click(function () {
-        allFormUpdates.selectChart(this);
-        $(".chart_tab").not(".map_tab").hide();
-        $(".display_options:gt(0)>*").not(".notes").not(".show_map").hide(); //hide everything except map relevent options
-        $(".just_map").show();
-        $("#chart_credits_text_textarea").val("Hover over an area to see data.\nHover over legend items to see areas in a category.\nSource: U.S. Bureau of Labor Statistics."); //update credits area
-
-    });
-
+    
+    
+    
 
     /* when drilldown type dropdown is changed */
 
@@ -191,8 +187,8 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
     //"series names loaded from" icon clicked
     $("#table_input_load_series_from_icons .load_series_from_icon").unbind().click(function () {
 
-     var clicked_icon = this;
-        
+        var clicked_icon = this;
+
         $("#chart_loading_icon").removeClass("invisible"); //show loading icon
 
         setTimeout(function () { //wraping in a setTimeout keeps the loading icon up for the duration
@@ -222,7 +218,7 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
     //table input textarea
     $("#table_input_textarea").unbind().bind('blur paste', function () {
 
-      $("#chart_type_icons .selected").click();
+        $("#chart_type_icons .selected").click();
     });
 
 
