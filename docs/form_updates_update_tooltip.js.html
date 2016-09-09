@@ -40,7 +40,33 @@ var update_tooltip = {
     /** gets a tooltip for bubble charts. Called from updateToolTip **/
     getBubbleTooltip: function (chart, y_decimals, x_decimals, z_decimals, y_signs_arr, x_signs_arr, z_signs_arr, multiplier, chart_type, z_title, all_chart_options) {
 
+        all_chart_options.tooltip.formatter = function () {
+            var y_axis_title = this.series.yAxis.axisTitle ? this.series.yAxis.axisTitle.textStr : "Y-Axis";
+            var x_axis_title = this.series.xAxis.axisTitle ? this.series.xAxis.axisTitle.textStr : "X-Axis";
+
+            var s = "&lt;b>" + this.series.name + "&lt;/b>&lt;br>" + y_axis_title + ": &lt;b>" + y_signs_arr[0] +
+                $(this.y * multiplier).addCommas(y_decimals) + y_signs_arr[1] + "&lt;/b>&lt;br/>" +
+                x_axis_title + ": &lt;b>" + x_signs_arr[0] + $(this.x * multiplier).addCommas(x_decimals) + x_signs_arr[1] + "&lt;/b>&lt;br/>" +
+                z_title + ": &lt;b>" + z_signs_arr[0] + $(this.point.z * multiplier).addCommas(z_decimals) + z_signs_arr[1] + "&lt;/b>";
+
+            //extra data//
+            all_chart_options.series[this.series.index] ? s = all_chart_options.tooltip.addExtraData(all_chart_options.series[this.series.index].extra_data, this.point, s) : s = s;
+
+            return s.replace(/\$-/g, "-$");
+
+        };
+
+    },
+
+
+    /** gets a tooltip for drilldown charts. Called from updateToolTip**/
+    getDrilldownTooltip: function (chart, y_decimals, x_decimals, z_decimals, y_signs_arr, x_signs_arr, z_signs_arr, multiplier, chart_type, z_title, all_chart_options) {
+
+        //if a bubble drilldown//
+        if ($("#drilldown_type_select").val() === "bubble") {
+
             all_chart_options.tooltip.formatter = function () {
+
                 var y_axis_title = this.series.yAxis.axisTitle ? this.series.yAxis.axisTitle.textStr : "Y-Axis";
                 var x_axis_title = this.series.xAxis.axisTitle ? this.series.xAxis.axisTitle.textStr : "X-Axis";
 
@@ -49,30 +75,20 @@ var update_tooltip = {
                     x_axis_title + ": &lt;b>" + x_signs_arr[0] + $(this.x * multiplier).addCommas(x_decimals) + x_signs_arr[1] + "&lt;/b>&lt;br/>" +
                     z_title + ": &lt;b>" + z_signs_arr[0] + $(this.point.z * multiplier).addCommas(z_decimals) + z_signs_arr[1] + "&lt;/b>";
 
-                all_chart_options.series[this.series.index] ? s = all_chart_options.tooltip.addExtraData(all_chart_options.series[this.series.index].extra_data, this.point, s) : s = s;
-
-                return s.replace(/\$-/g, "-$");
-
-            };
-
-    },
-
-
-    /** gets a tooltip for drilldown charts. Called from updateToolTip**/
-    getDrilldownTooltip: function (chart, y_decimals, y_signs_arr, multiplier, chart_type, all_chart_options) {
-
-      
-            all_chart_options.tooltip.formatter = function () {
-
-                var y_val = y_signs_arr[0] + $(this.y * multiplier).addCommas(y_decimals) + y_signs_arr[1];
-
-                var s = "&lt;b>" + this.series.name + "&lt;/b>&lt;br>" + this.key + ": " + y_val;
-
                 this.point.drilldown ? s = s + "&lt;br>(Click to drill down)" : s = s;
-
                 return s.replace(/\$-/g, "-$");
             }
 
+        } else {
+
+            all_chart_options.tooltip.formatter = function () {
+
+                var y_val = y_signs_arr[0] + $(this.y * multiplier).addCommas(y_decimals) + y_signs_arr[1];
+                var s = "&lt;b>" + this.series.name + "&lt;/b>&lt;br>" + this.key + ": " + y_val;
+                this.point.drilldown ? s = s + "&lt;br>(Click to drill down)" : s = s;
+                return s.replace(/\$-/g, "-$");
+            }
+        }
 
     },
 
@@ -81,21 +97,21 @@ var update_tooltip = {
     /** gets a tooltip for scatter charts. Called from updateToolTip**/
     getScatterTooltip: function (chart, y_decimals, x_decimals, y_signs_arr, x_signs_arr, multiplier, chart_type, all_chart_options) {
 
-            all_chart_options.tooltip.formatter = function () {
-                var y_axis_title = this.series.yAxis.axisTitle ? this.series.yAxis.axisTitle.textStr : "Y-Axis";
-                var x_axis_title = this.series.xAxis.axisTitle ? this.series.xAxis.axisTitle.textStr : "X-Axis";
+        all_chart_options.tooltip.formatter = function () {
+            var y_axis_title = this.series.yAxis.axisTitle ? this.series.yAxis.axisTitle.textStr : "Y-Axis";
+            var x_axis_title = this.series.xAxis.axisTitle ? this.series.xAxis.axisTitle.textStr : "X-Axis";
 
-                var s = "&lt;b>" + this.series.name + "&lt;/b>&lt;br>" + y_axis_title + ": &lt;b>" + y_signs_arr[0] +
-                    $(this.y * multiplier).addCommas(y_decimals) + y_signs_arr[1] + "&lt;/b>&lt;br>" +
-                    x_axis_title + ": &lt;b>" + x_signs_arr[0] + $(this.x * multiplier).addCommas(x_decimals) + x_signs_arr[1] + "&lt;/b>";
+            var s = "&lt;b>" + this.series.name + "&lt;/b>&lt;br>" + y_axis_title + ": &lt;b>" + y_signs_arr[0] +
+                $(this.y * multiplier).addCommas(y_decimals) + y_signs_arr[1] + "&lt;/b>&lt;br>" +
+                x_axis_title + ": &lt;b>" + x_signs_arr[0] + $(this.x * multiplier).addCommas(x_decimals) + x_signs_arr[1] + "&lt;/b>";
 
-                //add extra data//
-                all_chart_options.series[this.series.index] ? s = all_chart_options.tooltip.addExtraData(all_chart_options.series[this.series.index].extra_data, this.point, s) : s = s;
+            //add extra data//
+            all_chart_options.series[this.series.index] ? s = all_chart_options.tooltip.addExtraData(all_chart_options.series[this.series.index].extra_data, this.point, s) : s = s;
 
-                return s.replace(/\$-/g, "-$");
+            return s.replace(/\$-/g, "-$");
 
-            };
-      
+        };
+
 
     },
 
@@ -113,45 +129,45 @@ var update_tooltip = {
             chart.tooltip.shared = true;
 
 
-                all_chart_options.tooltip.formatter = function () {
+            all_chart_options.tooltip.formatter = function () {
 
-                    var shared_tooltip_arr = ["&lt;b>" + this.x + "&lt;/b>"];
+                var shared_tooltip_arr = ["&lt;b>" + this.x + "&lt;/b>"];
 
-                    $.each(this.points, function (i) {
+                $.each(this.points, function (i) {
 
-                        var y_val = this.point.high ? " High: " + y_signs_arr[0] + $(this.point.high * multiplier).addCommas(y_decimals) + y_signs_arr[1] + " | Low: " + y_signs_arr[0] + $(this.point.low * multiplier).addCommas(y_decimals) + y_signs_arr[1] :
-                            y_signs_arr[0] + $(this.point.y * multiplier).addCommas(y_decimals) + y_signs_arr[1];
-
-
-                        var s = this.series.name + ": " + y_val;
-
-                        all_chart_options.series[i].extra_data ? s = all_chart_options.tooltip.addExtraData(all_chart_options.series[i].extra_data, this.point, s) : s = s;
+                    var y_val = this.point.high ? " High: " + y_signs_arr[0] + $(this.point.high * multiplier).addCommas(y_decimals) + y_signs_arr[1] + " | Low: " + y_signs_arr[0] + $(this.point.low * multiplier).addCommas(y_decimals) + y_signs_arr[1] :
+                        y_signs_arr[0] + $(this.point.y * multiplier).addCommas(y_decimals) + y_signs_arr[1];
 
 
-                        var s = this.series.name + ": " + y_val;
+                    var s = this.series.name + ": " + y_val;
 
-                        shared_tooltip_arr.push(s);
+                    all_chart_options.series[i].extra_data ? s = all_chart_options.tooltip.addExtraData(all_chart_options.series[i].extra_data, this.point, s) : s = s;
 
-                    });
 
-                    return shared_tooltip_arr.join('&lt;br/>').replace(/\$-/g, "-$");
+                    var s = this.series.name + ": " + y_val;
 
-                }
+                    shared_tooltip_arr.push(s);
+
+                });
+
+                return shared_tooltip_arr.join('&lt;br/>').replace(/\$-/g, "-$");
+
+            }
 
 
         } else { //NOT SHARED TOOLTIP
 
 
-                all_chart_options.tooltip.formatter = function () {
+            all_chart_options.tooltip.formatter = function () {
 
-                    var y_val = this.point.high ? "High: " + y_signs_arr[0] + $(this.point.high * multiplier).addCommas(y_decimals) + y_signs_arr[1] + " | Low: " + y_signs_arr[0] + $(this.point.low * multiplier).addCommas(y_decimals) + y_signs_arr[1] :
-                        y_signs_arr[0] + $(this.y * multiplier).addCommas(y_decimals) + y_signs_arr[1];
+                var y_val = this.point.high ? "High: " + y_signs_arr[0] + $(this.point.high * multiplier).addCommas(y_decimals) + y_signs_arr[1] + " | Low: " + y_signs_arr[0] + $(this.point.low * multiplier).addCommas(y_decimals) + y_signs_arr[1] :
+                    y_signs_arr[0] + $(this.y * multiplier).addCommas(y_decimals) + y_signs_arr[1];
 
-                    var s = "&lt;b>" + this.series.name + "&lt;/b>&lt;br>" + this.x + ": " + y_val;
+                var s = "&lt;b>" + this.series.name + "&lt;/b>&lt;br>" + this.x + ": " + y_val;
 
-                    all_chart_options.series[this.series.index] ? s = all_chart_options.tooltip.addExtraData(all_chart_options.series[this.series.index].extra_data, this.point, s) : s = s;
-                    return s.replace(/\$-/g, "-$");
-              
+                all_chart_options.series[this.series.index] ? s = all_chart_options.tooltip.addExtraData(all_chart_options.series[this.series.index].extra_data, this.point, s) : s = s;
+                return s.replace(/\$-/g, "-$");
+
             }
         }
 
@@ -195,7 +211,7 @@ var update_tooltip = {
 
             //y value signs
             y_signs = $("#chart_tooltip_signs_select").val(),
-            
+
             y_signs_arr = [y_signs === "$" ? "$" : "", y_signs === "%" ? "%" : ""],
             //x value signs
             x_signs = $("#chart_tooltip_signs_x_select").val(),
@@ -217,7 +233,7 @@ var update_tooltip = {
 
         //IF A DRILLDOWN CHART
         else if (chart_type === "drilldown") {
-            update_tooltip.getDrilldownTooltip(chart, y_decimals, y_signs_arr, multiplier, chart_type, all_chart_options);
+            update_tooltip.getDrilldownTooltip(chart, y_decimals, x_decimals, z_decimals, y_signs_arr, x_signs_arr, z_signs_arr, multiplier, chart_type, z_title, all_chart_options);
         }
 
 
@@ -273,7 +289,7 @@ module.exports = update_tooltip;</code></pre>
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Wed Sep 07 2016 22:28:58 GMT-0400 (EDT)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Fri Sep 09 2016 10:58:23 GMT-0400 (EDT)
 </footer>
 
 <script> prettyPrint(); </script>

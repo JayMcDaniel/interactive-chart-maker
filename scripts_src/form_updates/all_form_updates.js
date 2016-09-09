@@ -69,7 +69,7 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
         if (chart_type === "drilldown") {
             $("#tab_series_options").hide();
             if ($("#drilldown_type_select").val() === "bubble") {
-                $(".just_bubble").show();
+                $("#display_chart_tooltip .just_bubble").show();
             }
 
         } else {
@@ -110,7 +110,7 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
             } else { //if not map
                 $(".map_display_area").hide();
                 $(".chart_display_area").show();
-                chart.reflow();
+                chart.reflow(); //fits chart to size
                 navigation_setup.chartClicks();
 
                 //update tickmark interval (recalculates if not set)
@@ -133,6 +133,14 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
     /* when drilldown type dropdown is changed */
 
     $("#drilldown_type_select").unbind().change(function () {
+        
+        //show bubble tooltip options if selected
+        if($(this).val() === "bubble"){
+            $("#display_chart_tooltip .just_bubble").show();
+        }else{
+            $(".just_bubble").hide();
+        }
+        
         updateChartType("drilldown", chart, all_chart_options);
 
     });
