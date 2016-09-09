@@ -112,11 +112,8 @@ var update_tooltip = {
 
 
                     var s = this.series.name + ": " + y_val;
-
+                    
                     all_chart_options.series[i].extra_data ? s = all_chart_options.tooltip.addExtraData(all_chart_options.series[i].extra_data, this.point, s) : s = s;
-
-
-                    var s = this.series.name + ": " + y_val;
 
                     shared_tooltip_arr.push(s);
 
@@ -160,17 +157,21 @@ var update_tooltip = {
         all_chart_options.tooltip.addExtraData = function (extra_data, point, s) {
 
             if (extra_data && extra_data[0].name) {
-
                 $.each(extra_data, function (i) {
                     if (extra_data[i].values[point.index]) {
+
                         s = s + "<br>  " + extra_data[i].name + ": " + extra_data[i].values[point.index];
+                        
                     }
 
                 });
             }
             return s;
         };
-
+        
+        
+        
+        //tooltip vars//
         var is_shared = utils_forms.getCheckBoxValue($("#chart_tooltip_shared_checkbox")),
             chart_type = $("#chart_type_icons .selected").divVal(),
 
