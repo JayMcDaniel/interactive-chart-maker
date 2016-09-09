@@ -193,9 +193,9 @@ var map_init = {
         var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
         $(svg).css({
                 "z-index": "400",
-                position: "relative",
+                position: "absolute",
                 left: "13px",
-                top: "-9px",
+                top: all_map_options.is_animated ? "93px" : "65px",
                 "background-color": "#fff",
                 "height": all_map_options.sized_for_spotlight ? "382px" : "450px",
                 "width": all_map_options.sized_for_spotlight ? "578px" : "680px"

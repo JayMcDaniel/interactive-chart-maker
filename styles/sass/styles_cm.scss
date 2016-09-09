@@ -151,7 +151,10 @@
     
     #chart_loading_icon {
         position: fixed;
-        top: 44px;
+        top: 23%;
+        left: 50%;
+        font-size: 686%;
+        color: $secondary_color;
     }
     
     #chart_output_code,
