@@ -41,19 +41,19 @@ var parseForMap = function (all_map_options, table_input) {
         var found = false;
         //assign values on objs in all_map_options.areas array
         for (var i = 0, len = all_map_options.areas.length; i < len; i++) {
+            if (all_map_options.areas[i].loc_name) {
 
+                //match table row names to area names from map json (replace to match different format styles)
+                if (all_map_options.areas[i].loc_name.replace(" County", "").replace(" Parish", "").replace("St. ", "St ") === row_loc_name.replace(" County", "").replace(" Parish", "").replace("St. ", "St ").replace(/Washington, D\.*C\.*/, "District of Columbia")) {
+                    all_map_options.areas[i].value = row_val;
+                    all_map_options.areas[i].extra_vals = extra_vals;
+                    all_map_options.areas[i].animated_vals = animated_vals;
 
+                    found = true;
+                    break;
+                }
 
-            if (all_map_options.areas[i].loc_name === row_loc_name) {
-                all_map_options.areas[i].value = row_val;
-                all_map_options.areas[i].extra_vals = extra_vals;
-                all_map_options.areas[i].animated_vals = animated_vals;
-
-                found = true;
-                break;
             }
-
-
         }
 
         //if an area from the table is not found in the map, push it to the array to show in the report
@@ -62,7 +62,7 @@ var parseForMap = function (all_map_options, table_input) {
         }
 
     }); //end tbody tr loop
-    
+
 
     //adds titles to an array from THs
     var addTitles = function (i, arr) {
