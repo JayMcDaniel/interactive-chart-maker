@@ -195,7 +195,7 @@ var map_init = {
                 "z-index": "400",
                 position: "absolute",
                 left: "13px",
-                top: all_map_options.is_animated ? "93px" : "65px",
+                top: all_map_options.is_animated ? "93px" : "45px",
                 "background-color": "#fff",
                 "height": all_map_options.sized_for_spotlight ? "382px" : "450px",
                 "width": all_map_options.sized_for_spotlight ? "578px" : "680px"
@@ -386,7 +386,10 @@ var map_init = {
 
             //add main value to tooltip if applicable
             var this_loc_value = $this.attr("loc_value"); //get main value
-            if (this_loc_value !== "null") {
+            console.log("loc_val", typeof this_loc_value);
+            
+            if (this_loc_value != "null" && this_loc_value != "undefined") {
+                
                 this_loc_value = Number(this_loc_value);
                 
                 var value_html = "<span style='font-size: 80%'>" + all_map_options.tooltip.dollar_sign + "</span>" + ($(this_loc_value).addCommas(all_map_options.tooltip.decimals || "")) + "<span style='font-size: 80%'>" + all_map_options.tooltip.percent_sign + "</span>";

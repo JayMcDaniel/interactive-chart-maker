@@ -11,11 +11,13 @@ var map_animation_init = {
         //outer div
         var map_animation_div = document.createElement("div");
         $(map_animation_div).css({
-            position: "relative",
+            position: "absolute",
             "margin-left": "20px",
             "z-index": "500",
             "margin-bottom": "-6px",
-            "-webkit-user-select": "none"
+            "-webkit-user-select": "none",
+            top: "55px",
+            zIndex: 500,
         });
 
 
