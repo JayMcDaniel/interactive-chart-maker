@@ -25,7 +25,7 @@ var update_x_axis = {
             newXFormat = function () {
                 var s = x_axis_signs_arr[0] + $(Number(this.value)).addCommas(x_axis_decimals) + x_axis_signs_arr[1];
 
-                return s.replace(/\$-/g, "-$");
+                return s.toString().replace(/\$-/g, "-$");
             }
         }
 
