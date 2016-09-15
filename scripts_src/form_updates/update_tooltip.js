@@ -42,7 +42,9 @@ var update_tooltip = {
                 var y_axis_title = this.series.yAxis.axisTitle ? this.series.yAxis.axisTitle.textStr : "Y-Axis";
                 var x_axis_title = this.series.xAxis.axisTitle ? this.series.xAxis.axisTitle.textStr : "X-Axis";
 
-                var s = "<b>" + this.series.name + "</b><br>" + y_axis_title + ": <b>" + y_signs_arr[0] +
+                var s = "<b>" + this.series.name + "</b><br>" +
+                    this.key + "<br>" +
+                    y_axis_title + ": <b>" + y_signs_arr[0] +
                     $(this.y * multiplier).addCommas(y_decimals) + y_signs_arr[1] + "</b><br/>" +
                     x_axis_title + ": <b>" + x_signs_arr[0] + $(this.x * multiplier).addCommas(x_decimals) + x_signs_arr[1] + "</b><br/>" +
                     z_title + ": <b>" + z_signs_arr[0] + $(this.point.z * multiplier).addCommas(z_decimals) + z_signs_arr[1] + "</b>";
