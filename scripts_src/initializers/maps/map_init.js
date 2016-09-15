@@ -301,12 +301,12 @@ var map_init = {
                 if (all_map_options.map_type === "metro_area") {
                     //transform smaller for metro area maps
                     el.setAttributeNS(null, "transform", "scale(0.8) translate(0, 5.471371609992666)");
-                    el.setAttributeNS(null, "fill", this.color || "#E0E0E0");
+                    el.setAttributeNS(null, "fill", this.color || "#f7f7f7"); //light gray if NA val
                 }
 
                 if (this.loc_name) { //if it's a named area, set values and color
                     el.setAttributeNS(null, "loc_value", this.value);
-                    el.setAttributeNS(null, "fill", this.color || "#E0E0E0");
+                    el.setAttributeNS(null, "fill", this.color || "#f7f7f7"); //light gray if NA val
                     el.setAttribute("loc_name", this.loc_name);
 
                 }

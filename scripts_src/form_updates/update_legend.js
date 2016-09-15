@@ -34,12 +34,15 @@ var update_legend = {
         if (val === "no_legend") {
             legend.group.hide();
             legend.box.hide();
-            legend.pager.hide();
-            legend.up.hide();
-            legend.down.hide();
             legend.display = false;
             legend.options.enabled = false;
             legend.render(true);
+
+            if (legend.pager) {
+                legend.pager.hide();
+                legend.up.hide();
+                legend.down.hide();
+            }
 
             val = undefined;
 
@@ -49,15 +52,21 @@ var update_legend = {
             legend.render(false);
             legend.group.show();
             legend.box.show();
-            legend.pager.show();
-            legend.up.show();
-            legend.down.show();
+
             legend.display = true;
+
+            if (legend.pager) {
+                legend.pager.show();
+                legend.up.show();
+                legend.down.show();
+            }
+
             legend.options.enabled = true;
         }
 
         all_chart_options.legend.layout = val;
         all_chart_options.legend.enabled = legend.options.enabled;
+        console.log(all_chart_options.legend.enabled);
 
     },
 
@@ -105,8 +114,8 @@ var update_legend = {
                 all_chart_options.legend.itemStyle.cursor =
                 chart.legend.options.itemHoverStyle.cursor =
                 chart.legend.options.itemStyle.cursor = cursor_style;
-            
-           // all_chart_options.legend.symbolWidth = chart.legend.options.symbolWidth = symbol_width;
+
+            // all_chart_options.legend.symbolWidth = chart.legend.options.symbolWidth = symbol_width;
 
             chart.legend.render(false);
         }
