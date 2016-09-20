@@ -38,10 +38,10 @@ var updateColors = function (chart, all_chart_options, chart_type) {
             if (i >= start_coloring_index) {
                 //update chart
                 this.update({
-                    color: all_chart_options.colors[i-color_index_mod]
+                    color: all_chart_options.colors[(i - color_index_mod) - Math.floor((i -color_index_mod) / 15) * 15]
                 }, false);
                 //update all_chart_options.series colors
-                all_chart_options.series[i-color_index_mod].color = all_chart_options.colors[i-color_index_mod];
+                all_chart_options.series[i-color_index_mod].color = all_chart_options.colors[(i - color_index_mod) - Math.floor((i -color_index_mod) / 15) * 15];
 
             }
         });
