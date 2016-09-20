@@ -31,27 +31,27 @@
         $(document).ready(function () {
             var all_chart_options = {
                 "chart": {
-
-                    events: {
-
-                        redraw: function () {
-                            $.each(chart.series, function (j, serie) {
-                                $.each(serie.data, function (j, point) {
-                                    if (point.options.cursor === "pointer") {
-                                        point.graphic.attr({
-                                            cursor: 'pointer'
-                                        });
-                                    }
-                                });
-                            });
-                        }
-                    },
                     "renderTo": "chart1",
                     "margin": [100, 40, 80, 80],
                     "borderWidth": 0,
                     "plotBorderColor": "#000",
                     "plotBorderWidth": 0,
-                    "type": "bubble",
+                    "type": "line",
+                    "events": {
+                        "redraw": function redraw() {
+                            if (chart) {
+                                $.each(chart.series, function (j, serie) {
+                                    $.each(serie.data, function (j, point) {
+                                        if (point.options.cursor === "pointer") {
+                                            point.graphic.attr({
+                                                cursor: 'pointer'
+                                            });
+                                        }
+                                    });
+                                });
+                            }
+                        }
+                    },
                     "zoomType": null,
                     "alignTicks": false,
                     "ignoreHiddenSeries": true
@@ -75,21 +75,19 @@
                     "itemStyle": {
                         "fontFamily": "Calibri, Verdana, Arial, Helvetica, sans-serif",
                         "color": "#000",
-                        "cursor": "default"
+                        "cursor": "pointer"
                     },
                     "itemHiddenStyle": {
                         "color": "gray"
                     },
                     "itemHoverStyle": {
-                        "cursor": "default"
+                        "cursor": "pointer"
                     }
                 },
                 "plotOptions": {
                     "series": {
                         "events": {
-                            "legendItemClick": function legendItemClick(event) {
-                                return false;
-                            }
+                            "legendItemClick": function legendItemClick(event) {}
                         },
                         "dataLabels": {
                             "enabled": false
@@ -125,220 +123,55 @@
                     }
                 },
                 "series": [{
-                    "name": "categories",
-                    "colorByPoint": true,
-                    "data": [{
-                        "name": "series 1",
-                        "x": 2,
-                        "y": 1,
-                        "z": 3,
-                        "color": "#7cb5ec",
-                        "cursor": "pointer",
-                        "type": "bubble",
-                        "drilldown": "series 1",
-                        "lineWidth": 0,
-                        "sub": "sub0"
-                }, {
-                        "name": "series 2",
-                        "x": 16,
-                        "y": 2,
-                        "z": 24,
-                        "color": "#434348",
-                        "cursor": "pointer",
-                        "type": "bubble",
-                        "drilldown": "series 2",
-                        "lineWidth": 0,
-                        "sub": "sub0"
-                }, {
-                        "name": "series 3",
-                        "x": 24,
-                        "y": 6,
-                        "z": 36,
-                        "color": "#90ed7d",
-                        "cursor": "pointer",
-                        "type": "bubble",
-                        "drilldown": "series 3",
-                        "lineWidth": 0,
-                        "sub": "sub0"
-                }],
-                    "type": "bubble",
-                    "_symbolIndex": 1,
+                    "name": "Total private",
+                    "data": [6.9, 6.9, 6.6, 6.7, 6.6, 6.6, 6.6],
+                    "type": "line",
+                    "color": "#7cb5ec",
+                    "_symbolIndex": 0,
+                    "stacking": null,
                     "visible": true
-            }],
-                "drilldown": {
-                    "drillUpButton": {
-                        "relativeTo": "spacingBox",
-                        "position": {
-                            "align": "right",
-                            "y": 0,
-                            "x": 0
-                        }
-                    },
-                    "activeAxisLabelStyle": {
-                        "cursor": "default",
-                        "fontWeight": "normal",
-                        "textDecoration": "none"
-                    },
-                    "series": [{
-                        "name": "series 1",
-                        "id": "series 1",
-                        "data": [{
-                            "name": "series 1a",
-                            "x": 4,
-                            "y": 2,
-                            "z": 6,
-                            "sub": "sub2",
-                            "type": "bubble",
-                            "cursor": "default",
-                            "lineWidth": 0,
-                            "drilldown": null
-                    }, {
-                            "name": "series 1b",
-                            "x": 6,
-                            "y": 3,
-                            "z": 9,
-                            "sub": "sub2",
-                            "type": "bubble",
-                            "cursor": "default",
-                            "lineWidth": 0,
-                            "drilldown": null
-                    }, {
-                            "name": "series 1c",
-                            "x": 8,
-                            "y": 4,
-                            "z": 12,
-                            "sub": "sub2",
-                            "type": "bubble",
-                            "cursor": "pointer",
-                            "lineWidth": 0,
-                            "drilldown": "series 1c"
-                    }],
-                        "type": "bubble",
-                        "lineWidth": 0,
-                        "sub": "sub1"
                 }, {
-                        "name": "series 2",
-                        "id": "series 2",
-                        "data": [{
-                            "name": "series 2a",
-                            "x": 18,
-                            "y": 3,
-                            "z": 27,
-                            "sub": "sub2",
-                            "type": "bubble",
-                            "cursor": "default",
-                            "lineWidth": 0,
-                            "drilldown": null
-                    }, {
-                            "name": "series 2b",
-                            "x": 20,
-                            "y": 4,
-                            "z": 30,
-                            "sub": "sub2",
-                            "type": "bubble",
-                            "cursor": "default",
-                            "lineWidth": 0,
-                            "drilldown": null
-                    }, {
-                            "name": "series 2c",
-                            "x": 22,
-                            "y": 5,
-                            "z": 33,
-                            "sub": "sub2",
-                            "type": "bubble",
-                            "cursor": "default",
-                            "lineWidth": 0,
-                            "drilldown": null
-                    }],
-                        "type": "bubble",
-                        "lineWidth": 0,
-                        "sub": "sub1"
+                    "name": "Construction",
+                    "data": [13.1, 14, 13.2, 14.1, 13.9, 13.9, 13.9],
+                    "type": "line",
+                    "color": "#434348",
+                    "_symbolIndex": 1,
+                    "stacking": null,
+                    "visible": true
                 }, {
-                        "name": "series 3",
-                        "id": "series 3",
-                        "data": [{
-                            "name": "series 3a",
-                            "x": 26,
-                            "y": 3,
-                            "z": 39,
-                            "sub": "sub2",
-                            "type": "bubble",
-                            "cursor": "default",
-                            "lineWidth": 0,
-                            "drilldown": null
-                    }, {
-                            "name": "series 3b",
-                            "x": 28,
-                            "y": 4,
-                            "z": 42,
-                            "sub": "sub2",
-                            "type": "bubble",
-                            "cursor": "default",
-                            "lineWidth": 0,
-                            "drilldown": null
-                    }, {
-                            "name": "series 3c",
-                            "x": 30,
-                            "y": 2,
-                            "z": 45,
-                            "sub": "sub2",
-                            "type": "bubble",
-                            "cursor": "default",
-                            "lineWidth": 0,
-                            "drilldown": null
-                    }, {
-                            "name": "series 3d",
-                            "x": 32,
-                            "y": 3,
-                            "z": 48,
-                            "sub": "sub2",
-                            "type": "bubble",
-                            "cursor": "default",
-                            "lineWidth": 0,
-                            "drilldown": null
-                    }],
-                        "type": "bubble",
-                        "lineWidth": 0,
-                        "sub": "sub1"
+                    "name": "Manufacturing",
+                    "data": [10.7, 10.5, 9.6, 10.1, 9.7, 9.7, 9.7],
+                    "type": "line",
+                    "color": "#90ed7d",
+                    "_symbolIndex": 2,
+                    "stacking": null,
+                    "visible": true
                 }, {
-                        "name": "series 1c",
-                        "id": "series 1c",
-                        "data": [{
-                            "name": "series 1ci",
-                            "x": 10,
-                            "y": 5,
-                            "z": 15,
-                            "sub": "sub3",
-                            "type": "bubble",
-                            "cursor": "default",
-                            "lineWidth": 0,
-                            "drilldown": null
-                    }, {
-                            "name": "series 1cii",
-                            "x": 12,
-                            "y": 6,
-                            "z": 18,
-                            "sub": "sub3",
-                            "type": "bubble",
-                            "cursor": "default",
-                            "lineWidth": 0,
-                            "drilldown": null
-                    }, {
-                            "name": "series 1ciii",
-                            "x": 14,
-                            "y": 7,
-                            "z": 21,
-                            "sub": "sub3",
-                            "type": "bubble",
-                            "cursor": "default",
-                            "lineWidth": 0,
-                            "drilldown": null
-                    }],
-                        "type": "bubble",
-                        "lineWidth": 0,
-                        "sub": "sub2"
-                }]
-                },
+                    "name": "Retail trade",
+                    "data": [4.7, 4.9, 4.6, 4.6, 4.4, 4.4, 4.4],
+                    "type": "line",
+                    "color": "#f7a35c",
+                    "_symbolIndex": 3,
+                    "stacking": null,
+                    "visible": true
+                }, {
+                    "name": "trade",
+                    "data": [13.1, 13.1, 13.1, 13.1, 13.1, 13.1, 13.1],
+                    "type": "line",
+                    "color": "#8085e9",
+                    "_symbolIndex": 4,
+                    "stacking": null,
+                    "visible": true
+                }, {
+                    "name": "trade 2",
+                    "data": [10.7, 10.7, 10.7, 10.7, 10.7, 10.7, 10.7],
+                    "type": "line",
+                    "color": "#f15c80",
+                    "_symbolIndex": 5,
+                    "stacking": null,
+                    "visible": true
+                }],
+                ,
                 "subtitle": {
                     "text": "",
                     "align": "left",
@@ -350,7 +183,7 @@
                     }
                 },
                 "title": {
-                    "text": "Test table data for bubble drilldown charts",
+                    "text": "Union membership rates of employed wage and salary workers, annual averages, 2000\u201315",
                     "align": "left",
                     "style": {
                         "color": "#000000",
@@ -363,10 +196,9 @@
                     "backgroundColor": "#FEFFEF",
                     "crosshairs": [false, false],
                     "formatter": function () {
-                        var y_axis_title = this.series.yAxis.axisTitle ? this.series.yAxis.axisTitle.textStr : "Y-Axis";
-                        var x_axis_title = this.series.xAxis.axisTitle ? this.series.xAxis.axisTitle.textStr : "X-Axis";
-                        var s = "<b>" + this.series.name + "</b><br>" + this.key + "<br>" + y_axis_title + ": <b>" + $(this.y).addCommas(0) + "</b><br/>" + x_axis_title + ": <b>" + $(this.x * 1).addCommas(0) + "</b><br/>" + "Z" + ": <b>" + $(this.point.z * 1).addCommas(0) + "</b>";
-                        this.point.drilldown ? s = s + "<br>(Click to drill down)" : s = s;
+                        var y_val = this.point.high ? "High: " + $(this.point.high * 1).addCommas(0) + " | Low: " + $(this.point.low * 1).addCommas(0) : $(this.y).addCommas(0);
+                        var s = "<b>" + this.series.name + "</b><br>" + this.x + ": " + y_val;
+                        all_chart_options.series[this.series.index] ? s = all_chart_options.tooltip.addExtraData(all_chart_options.series[this.series.index].extra_data, this.point, s) : s = s;
                         return s.replace(/\$-/g, "-$");
                     },
                     "style": {
@@ -387,9 +219,9 @@
                     }
                 },
                 "xAxis": {
-                    "categories": null,
+                    "categories": ["2010", "2011", "2012", "2013", "2014", "2015", "2016"],
                     "gridLineColor": "#c0c0c0",
-                    "gridLineWidth": 1,
+                    "gridLineWidth": 0,
                     "gridLineDashStyle": "Dot",
                     "labels": {
                         "rotation": 0,
@@ -411,10 +243,10 @@
                         "value": 0,
                         "color": "#c0c0c0",
                         "dashStyle": "solid",
-                        "width": 1
-                }],
-                    "startOnTick": true,
-                    "tickInterval": null,
+                        "width": 0
+                    }],
+                    "startOnTick": false,
+                    "tickInterval": 1,
                     "tickmarkPlacement": "on",
                     "tickPosition": "outside",
                     "tickColor": "#C0D0E0",
@@ -431,8 +263,7 @@
                             "backgroundColor": "#fff",
                             "fontSize": "13px"
                         },
-                        "x": 0,
-                        "y": 0
+                        "x": 0
                     },
                     "type": "linear"
                 },
@@ -466,7 +297,7 @@
                         "color": "#c0c0c0",
                         "dashStyle": "solid",
                         "width": 1
-                }],
+                    }],
                     "tickInterval": null,
                     "tickmarkPlacement": "on",
                     "tickPosition": "outside",
@@ -507,203 +338,197 @@
                 },
                 "saved_values": [{
                     "id": "chart_type_icons",
-                    "val": "drilldown"
-            }, {
+                    "val": "line"
+                }, {
                     "id": "chart_id_textinput",
                     "val": "chart1"
-            }, {
+                }, {
                     "id": "map_type_select",
                     "val": "state"
-            }, {
+                }, {
                     "id": "map_animated_checkbox",
                     "val": false
-            }, {
+                }, {
                     "id": "bubble_animated_checkbox",
                     "val": false
-            }, {
+                }, {
                     "id": "drilldown_type_select",
-                    "val": "bubble"
-            }, {
+                    "val": "bar"
+                }, {
                     "id": "chart_width_textinput",
                     "val": "580"
-            }, {
+                }, {
                     "id": "chart_height_textinput",
                     "val": "430"
-            }, {
+                }, {
                     "id": "top_margin_textinput",
                     "val": "100"
-            }, {
+                }, {
                     "id": "right_margin_textinput",
                     "val": "40"
-            }, {
+                }, {
                     "id": "bottom_margin_textinput",
                     "val": "80"
-            }, {
+                }, {
                     "id": "left_margin_textinput",
                     "val": "80"
-            }, {
+                }, {
                     "id": "map_spotlight_size_checkbox",
                     "val": false
-            }, {
+                }, {
                     "id": "map_circle_size_range",
                     "val": "10"
-            }, {
+                }, {
                     "id": "table_input_load_series_from_icons",
                     "val": "column_heads"
-            }, {
+                }, {
                     "id": "example_table_select",
-                    "val": "bubble_drilldown_table"
-            }, {
+                    "val": ""
+                }, {
                     "id": "table_input_textarea",
-                    "val": "<table id=\"BLS_table\" class=\"regular\" cellspacing=\"0\" cellpadding=\"0\" xborder=\"1\" style=\"width: 95%\"><caption><span class=\"tableTitle\">Test table data for bubble drilldown charts</span></caption><thead><tr><th rowspan=\"1\"  style=\"vertical-align: middle;\">categories</th><th >y val</th><th >x val</th><th >r val</th></tr></thead><tbody><tr><th ><p>series 1</p></th><td >1</td><td >2</td><td >3</td></tr><tr class=\"greenbar\"><th ><p class=\"sub1\">series 1a</p></th><td >2</td><td >4</td><td >6</td></tr><tr><th ><p class=\"sub1\">series 1b</p></th><td >3</td><td >6</td><td >9</td></tr><tr class=\"greenbar\"><th ><p class=\"sub1\">series 1c</p></th><td >4</td><td >8</td><td >12</td></tr><tr><th ><p class=\"sub2\">series 1ci</p></th><td >5</td><td >10</td><td >15</td></tr><tr class=\"greenbar\"><th ><p class=\"sub2\">series 1cii</p></th><td >6</td><td >12</td><td >18</td></tr><tr><th ><p class=\"sub2\">series 1ciii</p></th><td >7</td><td >14</td><td >21</td></tr><tr class=\"greenbar\"><th ><p>series 2</p></th><td >2</td><td >16</td><td >24</td></tr><tr><th ><p class=\"sub1\">series 2a</p></th><td >3</td><td >18</td><td >27</td></tr><tr class=\"greenbar\"><th ><p class=\"sub1\">series 2b</p></th><td >4</td><td >20</td><td >30</td></tr><tr><th ><p class=\"sub1\">series 2c</p></th><td >5</td><td >22</td><td >33</td></tr><tr class=\"greenbar\"><th ><p>series 3</p></th><td >6</td><td >24</td><td >36</td></tr><tr><th ><p class=\"sub1\">series 3a</p></th><td >3</td><td >26</td><td >39</td></tr><tr class=\"greenbar\"><th ><p class=\"sub1\">series 3b</p></th><td >4</td><td >28</td><td >42</td></tr><tr><th ><p class=\"sub1\">series 3c</p></th><td >2</td><td >30</td><td >45</td></tr><tr class=\"greenbar\"><th ><p class=\"sub1\">series 3d</p></th><td >3</td><td >32</td><td >48</td></tr></tbody></table>"
-            }, {
+                    "val": "<table id=\"BLS_table\" class=\"regular\" cellspacing=\"0\" cellpadding=\"0\" xborder=\"1\" style=\" width: 95%;\"> <caption><span class=\"tableTitle\">Union membership rates of employed wage and salary workers, annual averages, 2000–15</span></caption> <thead> <tr> <th rowspan=\"1\"  style=\" vertical-align: middle;\">Year</th> <th >Total private</th> <th >Construction</th> <th >Manufacturing</th> <th >Retail trade</th> <th >trade</th> <th >trade 2</th> </tr> </thead> <tbody> <tr> <th > <p>2010</p> </th> <td >6.9</td> <td >13.1</td> <td >10.7</td> <td >4.7</td> <td >13.1</td> <td >10.7</td> </tr> <tr class=\"greenbar\"> <th > <p>2011</p> </th> <td >6.9</td> <td >14.0</td> <td >10.5</td> <td >4.9</td> <td >13.1</td> <td >10.7</td> </tr> <tr> <th > <p>2012</p> </th> <td >6.6</td> <td >13.2</td> <td >9.6</td> <td >4.6</td> <td >13.1</td> <td >10.7</td> </tr> <tr class=\"greenbar\"> <th > <p>2013</p> </th> <td >6.7</td> <td >14.1</td> <td >10.1</td> <td >4.6</td> <td >13.1</td> <td >10.7</td> </tr> <tr> <th > <p>2014</p> </th> <td >6.6</td> <td >13.9</td> <td >9.7</td> <td >4.4</td> <td >13.1</td> <td >10.7</td> </tr> <tr> <th > <p>2015</p> </th> <td >6.6</td> <td >13.9</td> <td >9.7</td> <td >4.4</td> <td >13.1</td> <td >10.7</td> </tr> <tr> <th > <p>2016</p> </th> <td >6.6</td> <td >13.9</td> <td >9.7</td> <td >4.4</td> <td >13.1</td> <td >10.7</td> </tr> </tbody></table>"
+                }, {
                     "id": "color_palettes",
                     "val": -1
-            }, {
+                }, {
                     "id": "legend_layout_select",
                     "val": "horizontal"
-            }, {
+                }, {
                     "id": "map_legend_enabled_checkbox",
                     "val": true
-            }, {
+                }, {
                     "id": "legend_placement_x",
                     "val": "100"
-            }, {
+                }, {
                     "id": "legend_placement_y",
                     "val": "40"
-            }, {
+                }, {
                     "id": "legend_reverse_layout_checkbox",
                     "val": false
-            }, {
+                }, {
                     "id": "legend_item_width_input",
                     "val": ""
-            }, {
+                }, {
                     "id": "legend_make_toggle_checkbox",
                     "val": false
-            }, {
+                }, {
                     "id": "chart_x_axis_title_textarea",
                     "val": ""
-            }, {
+                }, {
                     "id": "chart_x_axis_x_position_input",
                     "val": "40"
-            }, {
+                }, {
                     "id": "chart_x_axis_tickmark_interval_input",
                     "val": ""
-            }, {
+                }, {
                     "id": "chart_x_axis_min_input",
                     "val": ""
-            }, {
+                }, {
                     "id": "chart_x_axis_max_input",
                     "val": ""
-            }, {
+                }, {
                     "id": "chart_x_axis_show_only_years",
                     "val": false
-            }, {
+                }, {
                     "id": "chart_x_axis_add_commas",
                     "val": false
-            }, {
+                }, {
                     "id": "chart_x_axis_signs_select",
                     "val": "no_signs"
-            }, {
+                }, {
                     "id": "chart_x_axis_decimals_select",
                     "val": null
-            }, {
+                }, {
                     "id": "chart_y_axis_title_textarea",
                     "val": ""
-            }, {
+                }, {
                     "id": "chart_y_axis_x_position_input",
                     "val": "35"
-            }, {
+                }, {
                     "id": "chart_y_axis_tickmark_interval_input",
                     "val": ""
-            }, {
+                }, {
                     "id": "chart_y_axis_min_input",
                     "val": ""
-            }, {
+                }, {
                     "id": "chart_y_axis_max_input",
                     "val": ""
-            }, {
+                }, {
                     "id": "chart_y_axis_opposite_checkbox",
                     "val": false
-            }, {
+                }, {
                     "id": "chart_y_axis_log_checkbox",
                     "val": false
-            }, {
+                }, {
                     "id": "chart_y_axis_signs_select",
                     "val": "no_signs"
-            }, {
+                }, {
                     "id": "chart_y_axis_decimals_select",
                     "val": null
-            }, {
+                }, {
                     "id": "chart_y_axis_divide_select",
                     "val": "1"
-            }, {
+                }, {
                     "id": "chart_tooltip_shared_checkbox",
                     "val": false
-            }, {
+                }, {
                     "id": "chart_tooltip_force_decimals_select",
                     "val": "0"
-            }, {
+                }, {
                     "id": "chart_tooltip_signs_select",
                     "val": "no_signs"
-            }, {
+                }, {
                     "id": "chart_tooltip_force_decimals_x_select",
                     "val": "0"
-            }, {
+                }, {
                     "id": "chart_tooltip_signs_x_select",
                     "val": "no_signs"
-            }, {
+                }, {
                     "id": "chart_tooltip_force_decimals_z_select",
                     "val": "0"
-            }, {
+                }, {
                     "id": "chart_tooltip_signs_z_select",
                     "val": "no_signs"
-            }, {
+                }, {
                     "id": "map_tooltip_na_text_input",
                     "val": "N/A"
-            }, {
+                }, {
                     "id": "chart_z_title_text_input",
                     "val": ""
-            }, {
+                }, {
                     "id": "chart_tooltip_y_multiple_select",
                     "val": "1"
-            }, {
+                }, {
                     "id": "chart_credits_text_textarea",
                     "val": "Click legend items to change data display. Hover over chart to view data.Source: U.S. Bureau of Labor Statistics."
-            }, {
+                }, {
                     "id": "point_padding_input",
                     "val": ".1"
-            }, {
+                }, {
                     "id": "group_padding_input",
                     "val": ".2"
-            }, {
+                }, {
                     "id": "chart_subtitle_textarea",
                     "val": ""
-            }, {
+                }, {
                     "id": "map_animation_speed_range",
                     "val": "500"
-            }, {
+                }, {
                     "id": "chart_mlr_styles_checkbox",
                     "val": false
-            }, {
+                }, {
                     "id": "chart_zoom_select",
                     "val": "false,false,null"
-            }, {
+                }, {
                     "id": "chart_show_data_labels_checkbox",
                     "val": false
-            }, {
+                }, {
                     "id": "chart_add_recession_shading_select",
                     "val": "no_recession"
-            }]
+                }]
             };
 
             var chartCallback = function chartCallback(all_chart_options) {
-
-
-                //     console.log(chart)
-
-
-
 
                 if (all_chart_options.timeline) {
                     //call animation if applicable
@@ -778,15 +603,7 @@
             });
 
             var chart = new Highcharts.Chart(all_chart_options, chartCallback(all_chart_options));
-            $.each(chart.series[0].data, function (i, point) {
-                if (point.cursor === "pointer") {
-                    point.graphic.attr({
-                        cursor: 'pointer'
-                    });
-                }
-            });
-
-            console.log(chart);
+            chart.redraw(false);
         });
         jQuery.fn.extend({
             addCommas: function addCommas(decimals) {

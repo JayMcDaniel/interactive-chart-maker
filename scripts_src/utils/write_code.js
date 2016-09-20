@@ -57,7 +57,7 @@ var write_code = {
 
     /** place code in chart_output_code and reinit highlight */
     writeChartJSCode: function (all_chart_options) {
-        
+
         var draw_chart = require("../draw_chart.js");
 
 
@@ -78,7 +78,7 @@ var write_code = {
             .replace(/—/, "\\u2014") //mdash
             .replace(/\s{2,} /g, " ") //replace several spaces with one
             .replace(/"null"/g, "null") //replace "null" with null
-            .replace('"drilldown":{}', "")  //replace empty drilldown obj with nothing
+            .replace('"drilldown":{},', "") //replace empty drilldown obj with nothing
             + ";\n\n";
 
 
@@ -90,15 +90,15 @@ var write_code = {
         chart_options_js.string = '$(document).ready(function(){\n\
              var all_chart_options = ' + chart_options_js.string + ';\n\
 Highcharts.setOptions({lang: {thousandsSep: ","}});\n\n\
-    var chart = new Highcharts.Chart(all_chart_options, chartCallback(all_chart_options));\n\
-       //redraw the chart if its a drilldown (to customize individual points)\n\
-        if (all_chart_options.drilldown){\n\
-            chart.redraw(false);\n\
-            }\n\
-    });\n\
+    var chart = new Highcharts.Chart(all_chart_options, chartCallback(all_chart_options));\n';
+
+        //redraw the chart if its a drilldown (to customize individual points)\n\
+        if (Object.keys(all_chart_options.drilldown).length > 0) {
+            chart_options_js.string += 'chart.redraw(false);//redraw the chart if its a drilldown (to customize individual points)\n'
+        }
+
+        chart_options_js.string += '});\n\
 jQuery.fn.extend({addCommas:' + $("string").addCommas.toString() + ' });';
-        
-        
 
         return chart_options_js.string;
 
@@ -118,7 +118,7 @@ jQuery.fn.extend({addCommas:' + $("string").addCommas.toString() + ' });';
         var map_legend_init = require("../initializers/maps/map_legend_init.js");
         var map_tooltip_init = require("../initializers/maps/map_tooltip_init.js");
         var map_animation_init = require("../initializers/maps/map_animation_init.js");
-        
+
         //save chart input values
         all_map_options.saved_values = chart_recall.saveValues();
 
