@@ -78,6 +78,7 @@ var write_code = {
             .replace(/—/, "\\u2014") //mdash
             .replace(/\s{2,} /g, " ") //replace several spaces with one
             .replace(/"null"/g, "null") //replace "null" with null
+            .replace('"drilldown":{}', "")  //replace empty drilldown obj with nothing
             + ";\n\n";
 
 
@@ -90,8 +91,14 @@ var write_code = {
              var all_chart_options = ' + chart_options_js.string + ';\n\
 Highcharts.setOptions({lang: {thousandsSep: ","}});\n\n\
     var chart = new Highcharts.Chart(all_chart_options, chartCallback(all_chart_options));\n\
-});\n\
+       //redraw the chart if its a drilldown (to customize individual points)\n\
+        if (all_chart_options.drilldown){\n\
+            chart.redraw(false);\n\
+            }\n\
+    });\n\
 jQuery.fn.extend({addCommas:' + $("string").addCommas.toString() + ' });';
+        
+        
 
         return chart_options_js.string;
 

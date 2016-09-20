@@ -30,10 +30,10 @@
     /** Parsing function for drilldown charts. See http://api.highcharts.com/highcharts#drilldown for more.
      * @module
      * @param input {element} input jquery table element retrieved from textarea
-     * @param drill_type {string} type of drilldown (column or bar)
+     * @param drill_type {string} type of drilldown (column or bar or bubble)
      * @param colors {array}
      * @returns {object} Object with series array and drilldown series array of objects*/
-    var parseForDrilldown = function (input, drill_type, colors) {
+    var parseForDrilldown = function (chart, input, drill_type, colors) {
 
         try {
 
@@ -52,16 +52,31 @@
             }];
 
             //drilldown object with a series array of objects - that will have a name, id, and data array
+            
+            
+            //drilldown options, contains drilldown.series
             output.drilldown = {
                 drillUpButton: {
                     relativeTo: 'spacingBox',
                     position: {
+                        align: "right",
                         y: 0,
                         x: 0
                     }
                 },
+
+                activeAxisLabelStyle: {
+                    cursor: drill_type === "bubble" ? "default" : "cursor",
+                    fontWeight: drill_type === "bubble" ? "normal" : "bold",
+                    textDecoration: drill_type === "bubble" ? "none" : "underline"
+                },
+
                 series: []
             };
+        
+        //set for current chart
+        chart.options.drilldown.drillUpButton = output.drilldown.drillUpButton;
+        chart.options.drilldown.activeAxisLabelStyle = output.drilldown.activeAxisLabelStyle;
 
 
 
@@ -87,10 +102,11 @@
 
                             output.series[0].data.push({
                                 name: this_name,
-                                x: drill_type === "bubble" ? getBubbleVal.call($(this),"x") : undefined,
+                                x: drill_type === "bubble" ? getBubbleVal.call($(this), "x") : undefined,
                                 y: this_val,
-                                z: drill_type === "bubble" ? getBubbleVal.call($(this),"z") : undefined,
+                                z: drill_type === "bubble" ? getBubbleVal.call($(this), "z") : undefined,
                                 color: colors[output.series[0].data.length],
+                                cursor: this_drilldown ? "pointer" : "default",
                                 type: drill_type,
                                 drilldown: this_drilldown,
                                 lineWidth: 0,
@@ -140,11 +156,12 @@
 
                                 output.drilldown.series[drill_series_index].data.push({
                                     name: this_name,
-                                    x: drill_type === "bubble" ? getBubbleVal.call($(this),"x") : undefined,
+                                    x: drill_type === "bubble" ? getBubbleVal.call($(this), "x") : undefined,
                                     y: this_y,
-                                    z: drill_type === "bubble" ? getBubbleVal.call($(this),"z") : undefined,
+                                    z: drill_type === "bubble" ? getBubbleVal.call($(this), "z") : undefined,
                                     sub: next_sub,
                                     type: drill_type,
+                                    cursor: this_drilldown ? "pointer" : "default",
                                     lineWidth: 0,
                                     drilldown: this_drilldown
                                 });
@@ -191,7 +208,7 @@
             return output;
 
         } catch (e) {
-            console.log(e);      
+            console.log(e);
             utils_main.showError("Sorry, the table wasn't formatted correctly for a drilldown chart. Please see the example on the data tab.")
         }
     };
