@@ -93,8 +93,10 @@ Highcharts.setOptions({lang: {thousandsSep: ","}});\n\n\
     var chart = new Highcharts.Chart(all_chart_options, chartCallback(all_chart_options));\n';
 
         //redraw the chart if its a drilldown (to customize individual points)\n\
-        if (Object.keys(all_chart_options.drilldown).length > 0) {
-            chart_options_js.string += 'chart.redraw(false);//redraw the chart if its a drilldown (to customize individual points)\n'
+        if (all_chart_options.drilldown) {
+            if (Object.keys(all_chart_options.drilldown).length > 0) {
+                chart_options_js.string += 'chart.redraw(false);//redraw the chart if its a drilldown (to customize individual points)\n';
+            }
         }
 
         chart_options_js.string += '});\n\

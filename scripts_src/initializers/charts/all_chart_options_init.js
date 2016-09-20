@@ -12,24 +12,26 @@
      xAxisInit = require("./x_axis_init.js"),
      yAxisInit = require("./y_axis_init.js"),
      parseTableInput = require("../../parsers/parse_table_input.js"),
-     utils_forms = require("../../utils/utils_forms.js"); 
+     utils_forms = require("../../utils/utils_forms.js");
 
 
  /** create and return an instance of all_chart_options 
  @module
  **/
- var allChartOptionsInit = function(chart_type) {
-     
-     if (chart_type === "map"){
+ var allChartOptionsInit = function (chart_type) {
+
+     if (chart_type === "map") {
          chart_type = "line"; //create an initial line chart just to load the options, even if map is selected (will be clicked later in app.js)
      }
-     
-     var load_series_from = $("#table_input_load_series_from_icons .selected").divVal(); 
+
+     var load_series_from = $("#table_input_load_series_from_icons .selected").divVal();
      var legend_toggle_enabled = utils_forms.getCheckBoxValue($("#legend_make_toggle_checkbox"));
      var input = $("#table_input_textarea").val();
      var colors = colorsInit();
-     
-     var parsed_table_output = parseTableInput(input, load_series_from, chart_type, legend_toggle_enabled, colors);
+
+     var parsed_table_output = parseTableInput(input, load_series_from, chart_type, legend_toggle_enabled, colors) || {};
+
+
 
      //get options from individual inits
      var options = {

@@ -40,7 +40,68 @@
     };
 
 
-    //creates and pushes a new series object into the drilldown.series array
+
+
+    /** get an invisible bubble (so sizes are constant between drills) **/
+
+    var getInvisibleBubble = function (size, output) {
+
+        //given a series, calls utils_main.limits.setMin() for each data.z
+        var getZ = function (series, func) {
+            $.each(series, function (i, serie) {
+                $.each(serie.data, function (j, val) {
+                    func(val.z);
+                });
+            });
+        }
+
+
+        var invisible_bubble_series = {
+            name: "invisible size placeholder series",
+            x: 0,
+            y: 0,
+            z: 0,
+            type: "bubble",
+            lineWidth: 0,
+            marker: {
+                enabled: false
+            },
+            color: "none",
+            showInLegend: false,
+            visible: false,
+            zIndex: -1
+        };
+
+
+        //if min, return a min size bubble
+        if (size === "min") {
+
+            utils_main.limits.resetMin();
+
+            getZ(output.drilldown.series, utils_main.limits.setMin);
+            getZ(output.series, utils_main.limits.setMin);
+
+            invisible_bubble_series.z = utils_main.limits.getMin();
+
+        } else { //else get max
+
+            utils_main.limits.resetMax();
+
+            getZ(output.drilldown.series, utils_main.limits.setMax);
+            getZ(output.series, utils_main.limits.setMax);
+
+            invisible_bubble_series.z = utils_main.limits.getMax();
+
+        }
+
+        return invisible_bubble_series;
+    };
+
+
+
+
+
+    /** creates and pushes a new series object into the drilldown.series array **/
     var pushDrillSeries = function (output, drill_type, this_name, next_sub) {
 
         output.drilldown.series.push({
@@ -80,8 +141,8 @@
             }];
 
             //drilldown object with a series array of objects - that will have a name, id, and data array
-            
-            
+
+
             //drilldown options, contains drilldown.series
             output.drilldown = {
                 drillUpButton: {
@@ -101,11 +162,12 @@
 
                 series: []
             };
-        
-        //set for current chart
-        chart.options.drilldown.drillUpButton = output.drilldown.drillUpButton;
-        chart.options.drilldown.activeAxisLabelStyle = output.drilldown.activeAxisLabelStyle;
 
+            //set for current chart
+            if (chart) {
+                chart.options.drilldown.drillUpButton = output.drilldown.drillUpButton;
+                chart.options.drilldown.activeAxisLabelStyle = output.drilldown.activeAxisLabelStyle;
+            }
 
 
             /** parsing function for top level series **/
@@ -210,7 +272,6 @@
                         } // end if specfific sub
                     }); //end loop through output.drilldown.series
 
-                    // console.log(output.drilldown.series);
 
                     return {
                         drill_found: drill_found,
@@ -233,10 +294,33 @@
                 drill_stat = parseSubLevel("sub" + current_sub, drill_stat.indexes);
             }
 
+
+            //if this is a bubble drilldown, make a min and max size bubble so sizing is constant between drills
+            if (drill_type === "bubble") {
+                var min_invisible_bubble = getInvisibleBubble("min", output);
+                var max_invisible_bubble = getInvisibleBubble("max", output);
+
+                //apend invisible series to each series and drilldown.series array
+                function appendToEachSeries(series, obj) {
+                    $.each(series, function (i, serie) {
+                        serie.data.push(obj);
+                    });
+                }
+
+                output.series.push(min_invisible_bubble);
+                output.series.push(max_invisible_bubble);
+
+                //  output.drilldown.series.push(max_invisible_bubble);
+
+                appendToEachSeries(output.drilldown.series, max_invisible_bubble);
+                appendToEachSeries(output.drilldown.series, min_invisible_bubble);
+
+            }
+
             return output;
 
         } catch (e) {
-            console.log(e);
+            console.log(e.line, e.stack, e);
             utils_main.showError("Sorry, the table wasn't formatted correctly for a drilldown chart. Please see the example on the data tab.")
         }
     };
@@ -252,13 +336,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-form_updates_all_form_updates.html">form_updates/all_form_updates</a></li><li><a href="module-form_updates_update_chart_type.html">form_updates/update_chart_type</a></li><li><a href="module-form_updates_update_colors.html">form_updates/update_colors</a></li><li><a href="module-form_updates_update_individual_series.html">form_updates/update_individual_series</a></li><li><a href="module-initializers_charts_all_chart_options_init.html">initializers/charts/all_chart_options_init</a></li><li><a href="module-initializers_charts_chart_init.html">initializers/charts/chart_init</a></li><li><a href="module-initializers_charts_colors_init.html">initializers/charts/colors_init</a></li><li><a href="module-initializers_charts_credits_init.html">initializers/charts/credits_init</a></li><li><a href="module-initializers_charts_exporting_init.html">initializers/charts/exporting_init</a></li><li><a href="module-initializers_charts_legend_init.html">initializers/charts/legend_init</a></li><li><a href="module-initializers_charts_plot_options_init.html">initializers/charts/plot_options_init</a></li><li><a href="module-initializers_charts_series_init.html">initializers/charts/series_init</a></li><li><a href="module-initializers_charts_subtitle_init.html">initializers/charts/subtitle_init</a></li><li><a href="module-initializers_charts_title_init.html">initializers/charts/title_init</a></li><li><a href="module-initializers_charts_tooltip_init.html">initializers/charts/tooltip_init</a></li><li><a href="module-initializers_charts_x_axis_init.html">initializers/charts/x_axis_init</a></li><li><a href="module-initializers_charts_y_axis_init.html">initializers/charts/y_axis_init</a></li><li><a href="module-initializers_maps_map_animation_init.html">initializers/maps/map_animation_init</a></li><li><a href="module-initializers_maps_map_circle_sizes_init.html">initializers/maps/map_circle_sizes_init</a></li><li><a href="module-initializers_maps_map_colors_init.html">initializers/maps/map_colors_init</a></li><li><a href="module-initializers_maps_map_credits_init.html">initializers/maps/map_credits_init</a></li><li><a href="module-initializers_maps_map_title_init.html">initializers/maps/map_title_init</a></li><li><a href="module-parsers_parse_for_animated_bubble.html">parsers/parse_for_animated_bubble</a></li><li><a href="module-parsers_parse_for_bubble.html">parsers/parse_for_bubble</a></li><li><a href="module-parsers_parse_for_drilldown.html">parsers/parse_for_drilldown</a></li><li><a href="module-parsers_parse_for_map.html">parsers/parse_for_map</a></li><li><a href="module-parsers_parse_for_range.html">parsers/parse_for_range</a></li><li><a href="module-parsers_parse_for_scatter.html">parsers/parse_for_scatter</a></li><li><a href="module-parsers_parse_for_typical_chart.html">parsers/parse_for_typical_chart</a></li><li><a href="module-parsers_parse_table_input.html">parsers/parse_table_input</a></li><li><a href="module-utils_areas_colored_report.html">utils/areas_colored_report</a></li><li><a href="module-utils_jq_extensions.html">utils/jq_extensions</a></li><li><a href="module-utils_load_from_table_wizard.html">utils/load_from_table_wizard</a></li></ul><h3>Classes</h3><ul><li><a href="AllChartOptions.html">AllChartOptions</a></li><li><a href="ChartOptions.html">ChartOptions</a></li><li><a href="Colors.html">Colors</a></li><li><a href="Credits.html">Credits</a></li><li><a href="Exporting.html">Exporting</a></li><li><a href="Legend.html">Legend</a></li><li><a href="PlotOptions.html">PlotOptions</a></li><li><a href="Series.html">Series</a></li><li><a href="Subtitle.html">Subtitle</a></li><li><a href="Title.html">Title</a></li><li><a href="Tooltip.html">Tooltip</a></li><li><a href="XAxis.html">XAxis</a></li><li><a href="yAxis.html">yAxis</a></li></ul><h3>Namespaces</h3><ul><li><a href="calculate_recession_dates.html">calculate_recession_dates</a></li><li><a href="chart_animation_init.html">chart_animation_init</a></li><li><a href="chart_recall.html">chart_recall</a></li><li><a href="draw_chart.html">draw_chart</a></li><li><a href="keyboard_inputs.html">keyboard_inputs</a></li><li><a href="map_init.html">map_init</a></li><li><a href="map_legend_init.html">map_legend_init</a></li><li><a href="map_subtitle_init.html">map_subtitle_init</a></li><li><a href="map_tooltip_init.html">map_tooltip_init</a></li><li><a href="navigation_setup.html">navigation_setup</a></li><li><a href="update_chart_options.html">update_chart_options</a></li><li><a href="update_credits.html">update_credits</a></li><li><a href="update_data.html">update_data</a></li><li><a href="update_legend.html">update_legend</a></li><li><a href="update_map_individual_series.html">update_map_individual_series</a></li><li><a href="update_map_palettes.html">update_map_palettes</a></li><li><a href="update_template.html">update_template</a></li><li><a href="update_tooltip.html">update_tooltip</a></li><li><a href="update_x_axis.html">update_x_axis</a></li><li><a href="update_y_axis.html">update_y_axis</a></li><li><a href="utils_forms.html">utils_forms</a></li><li><a href="utils_main.html">utils_main</a></li><li><a href="write_code.html">write_code</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-form_updates_all_form_updates.html">form_updates/all_form_updates</a></li><li><a href="module-form_updates_update_chart_type.html">form_updates/update_chart_type</a></li><li><a href="module-form_updates_update_colors.html">form_updates/update_colors</a></li><li><a href="module-form_updates_update_individual_series.html">form_updates/update_individual_series</a></li><li><a href="module-initializers_charts_all_chart_options_init.html">initializers/charts/all_chart_options_init</a></li><li><a href="module-initializers_charts_chart_init.html">initializers/charts/chart_init</a></li><li><a href="module-initializers_charts_colors_init.html">initializers/charts/colors_init</a></li><li><a href="module-initializers_charts_credits_init.html">initializers/charts/credits_init</a></li><li><a href="module-initializers_charts_exporting_init.html">initializers/charts/exporting_init</a></li><li><a href="module-initializers_charts_legend_init.html">initializers/charts/legend_init</a></li><li><a href="module-initializers_charts_plot_options_init.html">initializers/charts/plot_options_init</a></li><li><a href="module-initializers_charts_series_init.html">initializers/charts/series_init</a></li><li><a href="module-initializers_charts_subtitle_init.html">initializers/charts/subtitle_init</a></li><li><a href="module-initializers_charts_title_init.html">initializers/charts/title_init</a></li><li><a href="module-initializers_charts_tooltip_init.html">initializers/charts/tooltip_init</a></li><li><a href="module-initializers_charts_x_axis_init.html">initializers/charts/x_axis_init</a></li><li><a href="module-initializers_charts_y_axis_init.html">initializers/charts/y_axis_init</a></li><li><a href="module-initializers_maps_map_animation_init.html">initializers/maps/map_animation_init</a></li><li><a href="module-initializers_maps_map_circle_sizes_init.html">initializers/maps/map_circle_sizes_init</a></li><li><a href="module-initializers_maps_map_colors_init.html">initializers/maps/map_colors_init</a></li><li><a href="module-initializers_maps_map_credits_init.html">initializers/maps/map_credits_init</a></li><li><a href="module-initializers_maps_map_title_init.html">initializers/maps/map_title_init</a></li><li><a href="module-parsers_parse_for_animated_bubble.html">parsers/parse_for_animated_bubble</a></li><li><a href="module-parsers_parse_for_bubble.html">parsers/parse_for_bubble</a></li><li><a href="module-parsers_parse_for_drilldown.html">parsers/parse_for_drilldown</a></li><li><a href="module-parsers_parse_for_map.html">parsers/parse_for_map</a></li><li><a href="module-parsers_parse_for_range.html">parsers/parse_for_range</a></li><li><a href="module-parsers_parse_for_scatter.html">parsers/parse_for_scatter</a></li><li><a href="module-parsers_parse_for_typical_chart.html">parsers/parse_for_typical_chart</a></li><li><a href="module-parsers_parse_table_input.html">parsers/parse_table_input</a></li><li><a href="module-utils_areas_colored_report.html">utils/areas_colored_report</a></li><li><a href="module-utils_jq_extensions.html">utils/jq_extensions</a></li><li><a href="module-utils_load_from_table_wizard.html">utils/load_from_table_wizard</a></li></ul><h3>Classes</h3><ul><li><a href="AllChartOptions.html">AllChartOptions</a></li><li><a href="ChartOptions.html">ChartOptions</a></li><li><a href="Colors.html">Colors</a></li><li><a href="Credits.html">Credits</a></li><li><a href="Exporting.html">Exporting</a></li><li><a href="Legend.html">Legend</a></li><li><a href="PlotOptions.html">PlotOptions</a></li><li><a href="Series.html">Series</a></li><li><a href="Subtitle.html">Subtitle</a></li><li><a href="Title.html">Title</a></li><li><a href="Tooltip.html">Tooltip</a></li><li><a href="XAxis.html">XAxis</a></li><li><a href="yAxis.html">yAxis</a></li></ul><h3>Namespaces</h3><ul><li><a href="calculate_recession_dates.html">calculate_recession_dates</a></li><li><a href="chart_animation_init.html">chart_animation_init</a></li><li><a href="chart_recall.html">chart_recall</a></li><li><a href="draw_chart.html">draw_chart</a></li><li><a href="keyboard_inputs.html">keyboard_inputs</a></li><li><a href="map_init.html">map_init</a></li><li><a href="map_legend_init.html">map_legend_init</a></li><li><a href="map_subtitle_init.html">map_subtitle_init</a></li><li><a href="map_tooltip_init.html">map_tooltip_init</a></li><li><a href="navigation_setup.html">navigation_setup</a></li><li><a href="update_chart_options.html">update_chart_options</a></li><li><a href="update_credits.html">update_credits</a></li><li><a href="update_data.html">update_data</a></li><li><a href="update_legend.html">update_legend</a></li><li><a href="update_map_individual_series.html">update_map_individual_series</a></li><li><a href="update_map_palettes.html">update_map_palettes</a></li><li><a href="update_template.html">update_template</a></li><li><a href="update_tooltip.html">update_tooltip</a></li><li><a href="update_x_axis.html">update_x_axis</a></li><li><a href="update_y_axis.html">update_y_axis</a></li><li><a href="utils_forms.html">utils_forms</a></li><li><a href="utils_main.html">utils_main</a></li><li><a href="write_code.html">write_code</a></li></ul><h3>Global</h3><ul><li><a href="global.html#getInvisibleBubble">getInvisibleBubble</a></li><li><a href="global.html#pushDrillSeries">pushDrillSeries</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Mon Sep 19 2016 23:42:06 GMT-0400 (EDT)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Tue Sep 20 2016 12:23:38 GMT-0400 (EDT)
 </footer>
 
 <script> prettyPrint(); </script>
