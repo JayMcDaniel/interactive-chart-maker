@@ -12,7 +12,68 @@
     };
 
 
-    //creates and pushes a new series object into the drilldown.series array
+
+
+    /** get an invisible bubble (so sizes are constant between drills) **/
+
+    var getInvisibleBubble = function (size, output) {
+
+        //given a series, calls utils_main.limits.setMin() for each data.z
+        var getZ = function (series, func) {
+            $.each(series, function (i, serie) {
+                $.each(serie.data, function (j, val) {
+                    func(val.z);
+                });
+            });
+        }
+
+
+        var invisible_bubble_series = {
+            name: "invisible size placeholder series",
+            x: 0,
+            y: 0,
+            z: 0,
+            type: "bubble",
+            lineWidth: 0,
+            marker: {
+                enabled: false
+            },
+            color: "none",
+            showInLegend: false,
+            visible: false,
+            zIndex: -1
+        };
+
+
+        //if min, return a min size bubble
+        if (size === "min") {
+
+            utils_main.limits.resetMin();
+
+            getZ(output.drilldown.series, utils_main.limits.setMin);
+            getZ(output.series, utils_main.limits.setMin);
+
+            invisible_bubble_series.z = utils_main.limits.getMin();
+
+        } else { //else get max
+
+            utils_main.limits.resetMax();
+
+            getZ(output.drilldown.series, utils_main.limits.setMax);
+            getZ(output.series, utils_main.limits.setMax);
+
+            invisible_bubble_series.z = utils_main.limits.getMax();
+
+        }
+
+        return invisible_bubble_series;
+    };
+
+
+
+
+
+    /** creates and pushes a new series object into the drilldown.series array **/
     var pushDrillSeries = function (output, drill_type, this_name, next_sub) {
 
         output.drilldown.series.push({
@@ -52,8 +113,8 @@
             }];
 
             //drilldown object with a series array of objects - that will have a name, id, and data array
-            
-            
+
+
             //drilldown options, contains drilldown.series
             output.drilldown = {
                 drillUpButton: {
@@ -73,11 +134,12 @@
 
                 series: []
             };
-        
-        //set for current chart
-        chart.options.drilldown.drillUpButton = output.drilldown.drillUpButton;
-        chart.options.drilldown.activeAxisLabelStyle = output.drilldown.activeAxisLabelStyle;
 
+            //set for current chart
+            if (chart) {
+                chart.options.drilldown.drillUpButton = output.drilldown.drillUpButton;
+                chart.options.drilldown.activeAxisLabelStyle = output.drilldown.activeAxisLabelStyle;
+            }
 
 
             /** parsing function for top level series **/
@@ -182,7 +244,6 @@
                         } // end if specfific sub
                     }); //end loop through output.drilldown.series
 
-                    // console.log(output.drilldown.series);
 
                     return {
                         drill_found: drill_found,
@@ -205,10 +266,33 @@
                 drill_stat = parseSubLevel("sub" + current_sub, drill_stat.indexes);
             }
 
+
+            //if this is a bubble drilldown, make a min and max size bubble so sizing is constant between drills
+            if (drill_type === "bubble") {
+                var min_invisible_bubble = getInvisibleBubble("min", output);
+                var max_invisible_bubble = getInvisibleBubble("max", output);
+
+                //apend invisible series to each series and drilldown.series array
+                function appendToEachSeries(series, obj) {
+                    $.each(series, function (i, serie) {
+                        serie.data.push(obj);
+                    });
+                }
+
+                output.series.push(min_invisible_bubble);
+                output.series.push(max_invisible_bubble);
+
+                //  output.drilldown.series.push(max_invisible_bubble);
+
+                appendToEachSeries(output.drilldown.series, max_invisible_bubble);
+                appendToEachSeries(output.drilldown.series, min_invisible_bubble);
+
+            }
+
             return output;
 
         } catch (e) {
-            console.log(e);
+            console.log(e.line, e.stack, e);
             utils_main.showError("Sorry, the table wasn't formatted correctly for a drilldown chart. Please see the example on the data tab.")
         }
     };

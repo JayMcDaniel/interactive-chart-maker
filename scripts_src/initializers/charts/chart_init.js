@@ -15,7 +15,7 @@ var chartInit = function chartInit(chart_type, chart) {
         events: {
             redraw: function () {
                 if (chart) {
-                    $.each(chart.series, function (j, serie) {
+                    $.each(chart.series, function (i, serie) {
                         $.each(serie.data, function (j, point) {
                             if (point.options.cursor === "pointer") {
                                 point.graphic.attr({
