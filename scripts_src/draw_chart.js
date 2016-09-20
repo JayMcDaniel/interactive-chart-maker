@@ -13,6 +13,7 @@ var draw_chart = {
         $(".highcharts-legend-item").css("min-height", "0px").css("z-index", 100); //fix so CMS CSS doesn't make legend taller than it should
         $(".highcharts-tooltip").css("z-index", 200);
 
+
         /**
          * Highcharts plugin for setting a lower opacity for other series than the one that is hovered
          * in the legend
@@ -81,6 +82,7 @@ var draw_chart = {
 
         $(".chart_display_area").attr("id", all_chart_options.chart.renderTo); //change ID of chart area to make sure it matches the renderTo value
 
+
         //set highcharts globals default
         Highcharts.setOptions({
             lang: {
@@ -89,6 +91,9 @@ var draw_chart = {
         });
 
         var chart = new Highcharts.Chart(all_chart_options, draw_chart.chartCallback(all_chart_options));
+
+        //add individual point styles after the fact (not supported with API)
+
         return chart;
     },
 

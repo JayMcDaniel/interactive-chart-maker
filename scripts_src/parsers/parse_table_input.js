@@ -64,7 +64,7 @@ var parseTableInput = function (input, load_series_from, chart_type, legend_togg
 
         } else if (chart_type == "drilldown") {
             var drill_type = $("#drilldown_type_select").val();
-            output = parseForDrilldown(input, drill_type, colors);
+            output = parseForDrilldown(chart, input, drill_type, colors);
         }
 
         //add chart title (same for all types of charts)
