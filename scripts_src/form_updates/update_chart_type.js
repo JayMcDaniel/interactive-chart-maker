@@ -70,7 +70,7 @@ var updateChartType = function (chart_type, chart, all_chart_options) {
     chart.xAxis[0].update({
         gridLineWidth: all_chart_options.xAxis.gridLineWidth,
         plotLines: all_chart_options.xAxis.plotLines,
-        startOnTick : all_chart_options.xAxis.startOnTick
+        startOnTick: all_chart_options.xAxis.startOnTick
     }, false);
 
 
@@ -92,6 +92,9 @@ var updateChartType = function (chart_type, chart, all_chart_options) {
     update_data.updateData(chart, all_chart_options);
 
     all_chart_options.chart.type = type;
+
+    //update whether data labels are enabled
+    $("#chart_show_data_labels_checkbox").change();
 
     //update tooltip
     update_tooltip.updateToolTip(chart, all_chart_options);
