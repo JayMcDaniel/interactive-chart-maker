@@ -386,7 +386,6 @@ var map_init = {
 
             //add main value to tooltip if applicable
             var this_loc_value = $this.attr("loc_value"); //get main value
-            console.log("loc_val", typeof this_loc_value);
             
             if (this_loc_value != "null" && this_loc_value != "undefined") {
                 
