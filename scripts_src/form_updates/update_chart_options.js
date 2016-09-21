@@ -55,15 +55,34 @@ var update_chart_options = {
 
     toggleDataLabels: function (val, chart, all_chart_options) {
 
+        //decide which kind of data labels to show depending on chart type
+        var dataLabelsFormatter = function () {
+            if (all_chart_options.chart.type === "scatter" || all_chart_options.chart.type === "bubble") {
+                return function () {
+                    return this.series.name;
+                };
+
+            } else {
+                return function () {
+                    return $(this.y).addCommas();
+                };
+            }
+
+        }
+
+
+
         $(chart.series).each(function () {
             this.update({
                 dataLabels: {
-                    enabled: val
+                    enabled: val,
+                    formatter: dataLabelsFormatter()
                 }
             });
         });
 
         all_chart_options.plotOptions.series.dataLabels.enabled = val;
+        all_chart_options.plotOptions.series.dataLabels.formatter = dataLabelsFormatter();
     },
 
 
