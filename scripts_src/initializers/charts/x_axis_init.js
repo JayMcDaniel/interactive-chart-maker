@@ -41,7 +41,7 @@ var xAxisInit = function xAxisInit(categories, chart_type) {
             text: $("#chart_x_axis_title_textarea").val(),
             x: chart_type === "bar" || chart_type === "stacked_bar" ? Number($("#chart_x_axis_x_position_input").val()) : 0
         },
-        tickInterval: update_x_axis.updateTickmarkInterval(Number($("#chart_x_axis_tickmark_interval_input").val()), null, null, categories),
+        tickInterval: update_x_axis.updateTickmarkInterval(Number($("#chart_x_axis_tickmark_interval_input").val()), null, null, categories, chart_type),
         type: "linear"
 
     };

@@ -115,7 +115,7 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
 
                 //update tickmark interval (recalculates if not set)
                 var new_x_interval = $("#chart_x_axis_tickmark_interval_input").val();
-                update_x_axis.updateTickmarkInterval(new_x_interval, chart, all_chart_options, all_chart_options.xAxis.categories);
+                update_x_axis.updateTickmarkInterval(new_x_interval, chart, all_chart_options, all_chart_options.xAxis.categories, all_chart_options.chart.type);
 
             }
 
@@ -209,7 +209,7 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
 
             //update tickmark interval (recalculates if not set)
             var new_x_interval = $("#chart_x_axis_tickmark_interval_input").val();
-            update_x_axis.updateTickmarkInterval(new_x_interval, chart, all_chart_options, all_chart_options.xAxis.categories);
+            update_x_axis.updateTickmarkInterval(new_x_interval, chart, all_chart_options, all_chart_options.xAxis.categories, all_chart_options.chart.type);
 
             $("#chart_loading_icon").addClass("invisible"); //show loading icon
 

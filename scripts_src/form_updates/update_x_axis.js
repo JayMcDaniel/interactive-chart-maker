@@ -52,8 +52,8 @@ var update_x_axis = {
 
     },
 
-    
-    
+
+
 
     /** update x-axis max */
     updateMax: function (newMax, chart, all_chart_options) {
@@ -129,11 +129,16 @@ var update_x_axis = {
 
 
     /** update x axis tickmark interval **/
-    updateTickmarkInterval: function (new_interval, chart, all_chart_options, categories) {
+    updateTickmarkInterval: function (new_interval, chart, all_chart_options, categories, chart_type) {
+
+
+        console.log(chart_type);
 
         if (isNaN(Number(new_interval)) || Number(new_interval) === 0) {
 
-            if (!categories) {
+            if (chart_type === "bar" || chart_type === "column") {
+                new_interval = 1;
+            } else if (!categories) {
                 new_interval = null;
             } else {
                 new_interval = categories.length * .2 > 1 ? Math.floor(categories.length * .2) : null;
