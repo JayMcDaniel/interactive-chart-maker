@@ -35,13 +35,16 @@ $(document).ready(function () {
         //all form updates - when updates are made, update the chart. this also calls some nav and keyboard input inits
         var allFormUpdates = require("./form_updates/all_form_updates.js");
         allFormUpdates(chart, all_chart_options, all_map_options);
-        
+
         //diplay only options related to chart type 
         allFormUpdates.displayOptions(chart_type);
 
-        //click selected icon to make sure everything in the chart loads correctly
-      // $("#chart_type_icons .selected").click();
-        
+        //click selected map icon to make sure everything in the map loads correctly
+        if (chart_type === "map") {
+            console.log("map");
+            $("#chart_type_map").click();
+        }
+
 
     });
 
