@@ -328,7 +328,7 @@ var map_init = {
                 if (all_map_options.map_type === "metro_area") {
                     el.setAttributeNS(null, "fill", this.color ? this.color.replace(')', ', 0.75)').replace('rgb', 'rgba') : "#337ab7"); //fill
                 } else {
-                    el.setAttributeNS(null, "fill", this.color ? this.color : "#337ab7"); //fill
+                    el.setAttributeNS(null, "fill", this.color ? this.color : "#f7f7f7"); //fill
 
                 }
 
