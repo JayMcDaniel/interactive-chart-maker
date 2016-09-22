@@ -33,15 +33,6 @@ var navigation_setup = {
     },
 
 
-    /** when chart code is hovered over, update DISABLED FOR NOW  **/
-    //    chartOutputCodeFocus: function (all_chart_options, all_map_options) {
-    //        $("#chart_output_code").unbind().mouseenter(function () {
-    //            write_code.writeCode(all_chart_options, all_map_options);
-    //        });
-    //    },
-
-
-
 
     /** when clear next text area button (X) is clicked, find and clear the text of the next textarea */
     clearNextTextareaClick: function () {
@@ -214,11 +205,17 @@ var navigation_setup = {
 
     openCodeEditorClick: function () {
 
+        
+        
         $("#open_code_editor_button").click(function () {
+          $("#beautify_code_button").click();
+            
             sessionStorage.setItem("export_code_html", $("#chart_html_code").val());
             sessionStorage.setItem("export_code_js", $("#chart_output_code").val());
 
             var newChartWindow = window.open("code_editor/code-editor.htm", "_blank");
+       
+        
         });
     },
 

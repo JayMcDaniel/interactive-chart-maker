@@ -132,8 +132,6 @@ var update_x_axis = {
     updateTickmarkInterval: function (new_interval, chart, all_chart_options, categories, chart_type) {
 
 
-        console.log(chart_type);
-
         if (isNaN(Number(new_interval)) || Number(new_interval) === 0) {
 
             if (chart_type === "bar" || chart_type === "column") {

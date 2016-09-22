@@ -66,7 +66,6 @@ var update_legend = {
 
         all_chart_options.legend.layout = val;
         all_chart_options.legend.enabled = legend.options.enabled;
-        console.log(all_chart_options.legend.enabled);
 
     },
 
