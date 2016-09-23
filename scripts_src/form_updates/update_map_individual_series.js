@@ -70,9 +70,7 @@ var update_map_individual_series = {
         }
 
 
-        
         map_ranges_div.appendChild(range_text);
-
 
         return map_ranges_div;
 
@@ -85,16 +83,39 @@ var update_map_individual_series = {
         var $display_series_options_inner_div = $("#display_series_options_inner_div");
         $display_series_options_inner_div.empty();
 
+        //adds a color box - called in loop below
+        var addColorBox = function (chart, all_chart_options, all_map_options, color, i) {
+            var map_color_box = update_map_individual_series.makeMapColorDiv(chart, all_chart_options, all_map_options, color, i);
+            $display_series_options_inner_div.append(map_color_box);
+        };
+
+        var addRangeInput = function (all_map_options, i) {
+            var map_range_input = update_map_individual_series.makeMapRangeInput(all_map_options, i);
+            $display_series_options_inner_div.append(map_range_input);
+        };
         
+
         $.each(all_map_options.colors, function (i) {
 
-            var map_color_box = update_map_individual_series.makeMapColorDiv(chart, all_chart_options, all_map_options, this, i);
-
-            var map_range_input = update_map_individual_series.makeMapRangeInput(all_map_options, i);
 
 
-            $display_series_options_inner_div.append(map_color_box);
-            $display_series_options_inner_div.append(map_range_input);
+            if (all_map_options.is_colored_by_names) { // if coloring by names  
+                //don't do it for the last color
+                if (i < all_map_options.colors.length - 1) {
+                    //add series title
+                    $display_series_options_inner_div.append($("<h5>"+all_map_options.value_ranges[i]+"</h5>"));
+                    
+                    //add color box
+                    addColorBox(chart, all_chart_options, all_map_options, this, i);
+                    
+                    
+                }
+
+            } else { //coloring by values
+                addColorBox(chart, all_chart_options, all_map_options, this, i);
+                addRangeInput(all_map_options, i);
+            }
+
 
             //make clear float div
             var clear_div = utils_main.makeClearFloatDiv();
@@ -111,7 +132,6 @@ var update_map_individual_series = {
     /** when range color boxes are changed, this is fired to change the colors in the map **/
     updateMapColor: function (chart, all_chart_options, all_map_options, i, jscolor) {
         var map_init = require("../initializers/maps/map_init.js");
-
         all_map_options.colors[i] = typeof jscolor === "string" ? jscolor : jscolor.toRGBString();
         map_init.loadNewMap(chart, all_chart_options, all_map_options, false); // false to not repopulate form
     },

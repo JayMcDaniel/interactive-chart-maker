@@ -104,7 +104,13 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
                 $(".just_map").show();
                 $("#chart_credits_text_textarea").val("Hover over an area to see data.\nHover over legend items to see areas in a category.\nSource: U.S. Bureau of Labor Statistics."); //update credits area
 
-                map_colors_init.loadMapColorPalettes(4); //loads color palettes then loads new map
+
+                if (utils_forms.getCheckBoxValue($("#map_color_by_names_checkbox"))) { //color by name
+                    map_colors_init.loadMapColorPalettes(11);
+                } else {
+                    map_colors_init.loadMapColorPalettes(4); //loads color palettes then loads new map
+                }
+
 
 
             } else { //if not map
@@ -126,21 +132,21 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
     });
 
 
-    
-    
-    
+
+
+
 
     /* when drilldown type dropdown is changed */
 
     $("#drilldown_type_select").unbind().change(function () {
-        
+
         //show bubble tooltip options if selected
-        if($(this).val() === "bubble"){
+        if ($(this).val() === "bubble") {
             $("#display_chart_tooltip .just_bubble").show();
-        }else{
+        } else {
             $(".just_bubble").hide();
         }
-        
+
         updateChartType("drilldown", chart, all_chart_options);
 
     });
@@ -550,7 +556,14 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
 
     //type of map changed
     $("#map_type_select, #map_color_by_names_checkbox").unbind().change(function () {
-        map_colors_init.loadMapColorPalettes(4);
+
+        if (utils_forms.getCheckBoxValue($("#map_color_by_names_checkbox"))) {
+            map_colors_init.loadMapColorPalettes(11);
+        } else {
+            map_colors_init.loadMapColorPalettes(4);
+        }
+
+
         // map_init.loadNewMap(chart, all_chart_options, all_map_options, true); // true to repopulate form
     });
 
