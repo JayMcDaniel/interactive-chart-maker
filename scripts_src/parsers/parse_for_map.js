@@ -15,9 +15,15 @@ var parseForMap = function (all_map_options, table_input) {
 
         var thisRow = this;
         var row_loc_name = $.trim($("th", thisRow).text()); //location name
-        var row_val = $("td:eq(0)", thisRow).getNumber(); //main value
-
-
+        
+        //get number from cell, or get string if "colored by names" was checked. Main value that area will be colored by (from first column)
+        
+        if (all_map_options.is_colored_by_names){
+            var row_val = $.trim($("td:eq(0)", thisRow).text());
+        }else{
+            var row_val = $("td:eq(0)", thisRow).getNumber(); 
+        }
+        
         var extra_vals = []; //extra values
         var animated_vals = []; //animated values for animated maps
 

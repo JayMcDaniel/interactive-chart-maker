@@ -46,7 +46,7 @@ var navigation_setup = {
     closeBoxIconClick: function () {
         $(".close_box_icon").click(function () {
             $(this).parent().parent().slideUp(50);
-       //     $(".chart_display_area, .map_display_area").toggleClass("fixed");
+            //     $(".chart_display_area, .map_display_area").toggleClass("fixed");
 
         });
     },
@@ -100,7 +100,7 @@ var navigation_setup = {
 
             $(this).toggleClass("code_on");
 
-        //    $(".chart_display_area, .map_display_area").toggleClass("fixed"); //so chart will go down to still be visible
+            //    $(".chart_display_area, .map_display_area").toggleClass("fixed"); //so chart will go down to still be visible
 
             //scroll to top of page
             $("html, body").animate({
@@ -140,7 +140,7 @@ var navigation_setup = {
                 $("#load_chart_div").slideToggle(50);
                 $(".code_on").removeClass("code_on");
                 $("#get_code_text").text("Get code");
-               // $(".chart_display_area").toggleClass("fixed");
+                // $(".chart_display_area").toggleClass("fixed");
             });
 
             $(this).toggleClass("load_chart_showing");
@@ -205,17 +205,15 @@ var navigation_setup = {
 
     openCodeEditorClick: function () {
 
-        
-        
         $("#open_code_editor_button").click(function () {
-          $("#beautify_code_button").click();
-            
+            $("#beautify_code_button").click();
+
             sessionStorage.setItem("export_code_html", $("#chart_html_code").val());
             sessionStorage.setItem("export_code_js", $("#chart_output_code").val());
 
             var newChartWindow = window.open("code_editor/code-editor.htm", "_blank");
-       
-        
+
+
         });
     },
 
@@ -225,12 +223,13 @@ var navigation_setup = {
 
     /** INIT ALL NAVIGATION that needs parameters, called from all_form_updates when page is loaded, and whenever a saved chart is loaded **/
     initNavWithChart: function (chart, all_chart_options, all_map_options) {
+        var ns = navigation_setup;
 
         //  navigation_setup.chartOutputCodeFocus(all_chart_options, all_map_options);
-        navigation_setup.getCodeButtonClick(all_chart_options, all_map_options);
-        navigation_setup.loadChartButtonClick(chart, all_chart_options);
-        navigation_setup.sideNavTabsChange(chart, all_chart_options);
-        navigation_setup.chartClicks();
+        ns.getCodeButtonClick(all_chart_options, all_map_options);
+        ns.loadChartButtonClick(chart, all_chart_options);
+        ns.sideNavTabsChange(chart, all_chart_options);
+        ns.chartClicks();
 
         keyboard_inputs.initListeners(chart, all_chart_options);
         keyboard_inputs.sideNavTabShortcuts(chart, all_chart_options);
@@ -240,12 +239,13 @@ var navigation_setup = {
 
     /** FIRST NAVIGATION INIT, called from app.js when page is loaded. These never need to be re-initialized **/
     firstNavInit: function () {
-
-        navigation_setup.closeBoxIconClick();
-        navigation_setup.clearNextTextareaClick();
-        navigation_setup.colorPaletteReverseIconClick();
-        navigation_setup.helpIconClick();
-        navigation_setup.openCodeEditorClick();
+        var ns = navigation_setup;
+        
+        ns.closeBoxIconClick();
+        ns.clearNextTextareaClick();
+        ns.colorPaletteReverseIconClick();
+        ns.helpIconClick();
+        ns.openCodeEditorClick();
 
     }
 

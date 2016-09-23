@@ -48,7 +48,7 @@ var write_code = {
     /** creates and returns map HTML code  **/
     writeMapHTMLCode: function (all_map_options, width, height, id) {
 
-        var html_string = '<div class="map_display_area" id="' + id + '" style = "width: ' + width + 'px; height: ' + (height - 60) + 'px; margin: auto; padding: 0px;"> </div>';
+        var html_string = '<div class="map_display_area" id="' + id + '" style = "width: ' + width + 'px; height: ' + height + 'px; margin: auto; padding: 0px;"> </div>';
 
         return html_string;
     },

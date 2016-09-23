@@ -1,7 +1,7 @@
     /** 
-                                creates and returns a styled map div legend with color boxes and text 
-                                @namespace
-                                **/
+                                                        creates and returns a styled map div legend with color boxes and text 
+                                                        @namespace
+                                                        **/
 
 
     var map_legend_init = {
@@ -23,37 +23,46 @@
             $.each(all_map_options.colors, function (i) {
 
 
-                var map_legend_item = document.createElement("div"); //outer div for each legend item
+                //outer div for each legend item
+                var map_legend_item = document.createElement("div");
                 map_legend_item.setAttribute("class", "map_legend_item");
                 map_legend_item.setAttribute("style", "min-width: 171px; min-height: 15px; margin-bottom: 7px; cursor: default;");
 
-                var map_legend_color = document.createElement("div"); //map color box div for each legend item
+                //map color box div for each legend item
+                var map_legend_color = document.createElement("div");
                 map_legend_color.setAttribute("class", "map_legend_color");
 
                 //set round color boxes for metro type maps
                 var border_radius = all_map_options.map_type === "metro_area" ? "50px" : "0px";
+                //set legend color
                 map_legend_color.setAttribute("style", "width: 15px; height: 15px; background-color: " + all_map_options.colors[i] + "; float: left; border: rgb(153, 153, 153) solid .5px; border-radius: " + border_radius + "");
 
-                var map_legend_text = document.createElement("div"); //map text div for each legend item
+                //map text div for each legend item
+                var map_legend_text = document.createElement("div");
                 map_legend_text.setAttribute("class", "map_legend_text");
                 map_legend_text.setAttribute("style", "color: black; float: left; line-height: 1em; margin-left: 5px; font-size: 12px;");
 
-                var dec = all_map_options.tooltip.decimals;
-
-                //set mod so that numbers in legend are 1, .1, .01, or .001 off    
 
 
+                //if map is colored by names, just use unique names, otherwise use ranges
+                if (all_map_options.is_colored_by_names) {
 
-                //set legend text content
-                if (i === 0) {
-                    map_legend_text.textContent = dollar + $(all_map_options.value_ranges[i]).addCommas(dec) + percent + " and lower";
-                } else if (i === all_map_options.colors.length - 1) {
+                    map_legend_text.textContent = all_map_options.value_ranges[i];
 
-                    map_legend_text.textContent = dollar + $(map_legend_init.valueMod(all_map_options.value_ranges[i - 1], all_map_options, dec)).addCommas(dec) + percent + " and higher";
-                } else {
-                    map_legend_text.textContent = dollar + $(map_legend_init.valueMod(all_map_options.value_ranges[i - 1], all_map_options, dec)).addCommas(dec) + percent + " to " + dollar + $(all_map_options.value_ranges[i]).addCommas(dec) + all_map_options.tooltip.percent_sign;
+
+                } else { //coloring by values
+
+                    //set legend text content and set mod so that numbers in legend are 1, .1, .01, or .001 off    
+                    var dec = all_map_options.tooltip.decimals;
+                    if (i === 0) {
+                        map_legend_text.textContent = dollar + $(all_map_options.value_ranges[i]).addCommas(dec) + percent + " and lower";
+                    } else if (i === all_map_options.colors.length - 1) {
+
+                        map_legend_text.textContent = dollar + $(map_legend_init.valueMod(all_map_options.value_ranges[i - 1], all_map_options, dec)).addCommas(dec) + percent + " and higher";
+                    } else {
+                        map_legend_text.textContent = dollar + $(map_legend_init.valueMod(all_map_options.value_ranges[i - 1], all_map_options, dec)).addCommas(dec) + percent + " to " + dollar + $(all_map_options.value_ranges[i]).addCommas(dec) + all_map_options.tooltip.percent_sign;
+                    }
                 }
-
 
                 map_legend_item.appendChild(map_legend_color);
                 map_legend_item.appendChild(map_legend_text);
@@ -63,13 +72,13 @@
             });
 
             return map_legend_div;
-            
+
         },
 
 
 
         /** returns a mod so that numbers in legend are 1, .1, .01, or .001 off so they don't overlap **/
-        valueMod: function (val, all_map_options, dec) { 
+        valueMod: function (val, all_map_options, dec) {
             var mod = .01;
 
             switch (dec) {
@@ -100,14 +109,14 @@
                 }
 
             }
-            
+
 
             if (dec > 0 || mod > .01) { //if decimals are not set
                 return val + mod;
             } else if (mod === .01) {
-                
+
                 return Number((val + mod).toFixed(2));
-            } else if (mod === .001){
+            } else if (mod === .001) {
                 return Number((val + mod).toFixed(3));
             }
         }

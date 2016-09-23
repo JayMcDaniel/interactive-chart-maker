@@ -5,7 +5,7 @@
 var map_tooltip_init = {
     
         /** creates and returns an empty tooltip div template **/
-    getMapTooltip: function () {
+    getMapTooltip: function (all_map_options) {
 
         var tooltip_div = document.createElement("div");
         tooltip_div.className = "map_tooltip";
@@ -17,7 +17,7 @@ var map_tooltip_init = {
 
         var tooltip_main_value = document.createElement("h4");
         tooltip_main_value.className = "tooltip_main_value";
-        tooltip_main_value.setAttribute("style", "color: #395463; font-family: sans-serif; font-weight: bold; font-size:38px; margin: 0px 0px 0px 5px;");
+        tooltip_main_value.setAttribute("style", "color: #395463; font-family: sans-serif; font-weight: bold; font-size:"+all_map_options.value_font_size+"; margin: 0px 0px 0px 5px;");
         
         
         tooltip_div.appendChild(tooltip_title);
