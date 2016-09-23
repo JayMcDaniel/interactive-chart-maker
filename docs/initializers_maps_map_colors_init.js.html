@@ -51,37 +51,65 @@ var map_colors_init = {
     /** assigns colors to all_map_options.areas depending on where their values are on a range**/
     getBoundaryMapColors: function (all_map_options, colors) {
 
-        all_map_options = all_map_options || map_colors_init.cached_map_options; //used cached if all_map_options not passed
+        //used cached if all_map_options not passed
+        all_map_options = all_map_options || map_colors_init.cached_map_options;
 
 
         //get all values in order
         var values_arr = utils_main.valueSort(all_map_options.areas);
-
-
-        //divide values into ranges
         var value_ranges = []; //to be used to color areas
 
 
-        //use custom input if available
-        if ($(".map_range_input").length > 0) { //grab from custom if available
 
-            $.each($(".map_range_input"), function () {
-                value_ranges.push(Number($(this).val()));
-            });
+        //if coloring by value, calculate ranges
+        if (!all_map_options.is_colored_by_names) {
 
-        } else { //else calculate
 
-            var fraction = 1 / all_map_options.ranges_amount;
-            for (var i = fraction; i &lt; 1; i = i + fraction) {
-                value_ranges.push(values_arr[Math.floor(values_arr.length * i)]);
+            //use custom input if available
+            if ($(".map_range_input").length > 0) { //grab from custom if available
+
+                $.each($(".map_range_input"), function () {
+                    value_ranges.push(Number($(this).val()));
+                });
+
+            } else { //else calculate
+
+                var fraction = 1 / all_map_options.ranges_amount;
+                for (var i = fraction; i &lt; 1; i = i + fraction) {
+                    value_ranges.push(values_arr[Math.floor(values_arr.length * i)]);
+                }
             }
+
+
+
+        } else { ///else all_map_options.is_colored_by_names is true
+
+            //populate value_ranges with array of unique strings from values_arr
+            $.each(values_arr, function (i, el) {
+                if ($.inArray(el, value_ranges) === -1) {
+                    value_ranges.push(el);
+                }
+            });
+            value_ranges.sort();
+            
+            //if a value is "N/A", put at the end
+            
+                value_ranges.push(value_ranges.splice(value_ranges.indexOf("N/A"), 1)[0]);
+
+            //truncate colors array to be same length as values_ranges (keeps legend from showing extra colors) with gray at end
+            colors = colors.slice(0, value_ranges.length-1);
+            colors.push("rgb(223, 223, 223)");
+            
+
         }
 
-        //set new cached array
-        map_colors_init.cached_value_ranges = value_ranges;
+
+
+
 
 
         //add color property to each obj in map_objs depending on its value
+        var value_ranges_len = all_map_options.is_colored_by_names ? value_ranges.length-1 : value_ranges.length;
         $.each(all_map_options.areas, function () {
             if (this.value === null || this.value === "N/A") {
                 this.color = "rgb(223, 223, 223)" //gray
@@ -93,7 +121,7 @@ var map_colors_init = {
 
                 }
 
-                for (i = 0; i &lt; value_ranges.length; i++) { //for length of value_ranges array, assign colors
+                for (i = 0; i &lt; value_ranges_len; i++) { //for length of value_ranges array, assign colors
                     if (this.value > value_ranges[i]) {
                         this.color = colors[i + 1];
                     }
@@ -103,32 +131,39 @@ var map_colors_init = {
         });
 
 
+        //set new cached array
+        map_colors_init.cached_value_ranges = value_ranges;
         map_colors_init.cached_map_options = all_map_options;
 
         all_map_options.value_ranges = value_ranges;
         all_map_options.colors = colors;
+
         return all_map_options;
     },
 
 
     /** make and return an array of colors from a color palette **/
-    newColorArray: function (color_palette) {
+    newColorArray: function (color_palette, all_map_options) {
         var selected_colors = [];
 
+        //if coloring by strings
+        if (all_map_options.is_colored_by_names) {
 
-        if ($(".map_color_div .jscolor").length > 0) { //grab from custom if available
+            selected_colors = ["rgb(166, 206, 227)", "rgb(31, 120, 180)", "rgb(178, 223, 138)", "rgb(51, 160, 44)", "rgb(251, 154, 153)", "rgb(227, 26, 28)", "rgb(253, 191, 111)", "rgb(255, 127, 0)", "rgb(202, 178, 214)", "rgb(106, 61, 154)", "rgb(255, 255, 153)"];
+
+            //else coloring by values
+        } else if ($(".map_color_div .jscolor").length > 0) { //grab from custom if available
 
             $.each($(".map_color_div .jscolor"), function () {
                 selected_colors.push($(this).css("background-color"));
             });
 
-        } else {
+        } else { //else grab from selected template
             $.each($(".map_color_palette_cell", color_palette), function () {
                 selected_colors.push($(this).css("background-color"));
             });
 
         }
-
 
         return selected_colors;
     },
@@ -150,8 +185,8 @@ var map_colors_init = {
             if (val > 2) {
                 $("#minus_map_color").attr("class", "on"); //turn minus button on
             }
-            
-            if (val &lt; 6){
+
+            if (val &lt; 6) {
                 $("#add_map_color").attr("class", "on"); //turn plus button on
             }
 
@@ -178,7 +213,7 @@ module.exports = map_colors_init;</code></pre>
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Thu Sep 22 2016 16:35:13 GMT-0400 (EDT)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Fri Sep 23 2016 14:12:29 GMT-0400 (EDT)
 </footer>
 
 <script> prettyPrint(); </script>

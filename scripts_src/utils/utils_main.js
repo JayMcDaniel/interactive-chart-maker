@@ -200,6 +200,7 @@ var utils_main = {
 
     },
 
+    /** returns a sorted array, given an array of objects, each with a value key **/
     valueSort(arr) {
         var values_arr = [];
         $.each(arr, function () {

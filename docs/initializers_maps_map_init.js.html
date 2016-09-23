@@ -59,6 +59,7 @@ var map_init = {
             colors: [],
             circle_size_multiple: 1,
             is_animated: utils_forms.getCheckBoxValue($("#map_animated_checkbox")),
+            is_colored_by_names: utils_forms.getCheckBoxValue($("#map_color_by_names_checkbox")),
             animation_delay: Number($("#map_animation_speed_range").val()),
             legend: {
                 enabled: utils_forms.getCheckBoxValue($("#map_legend_enabled_checkbox")),
@@ -78,13 +79,13 @@ var map_init = {
                 decimals: "",
                 na_text: ""
             },
+            value_font_size: utils_forms.getCheckBoxValue($("#map_color_by_names_checkbox")) ? "24px" : "36px",
             extra_value_titles: [],
             animated_value_titles: [],
             areas: areas
 
         };
 
-        //   console.log(all_map_options);
 
         //set viewbox
         switch (map_type) {
@@ -115,12 +116,12 @@ var map_init = {
         map_tooltip_init.formatMapToolTip(all_map_options);
 
 
-        //assign values to all_map_options.areas based on table input
+        ////// assign values to all_map_options.areas based on table input ////
 
         parseForMap(all_map_options, table_input);
 
 
-        var colors = map_colors_init.newColorArray($(".map_color_palette_row.selected")); //gets array of colors depending on what is selected
+        var colors = map_colors_init.newColorArray($(".map_color_palette_row.selected"), all_map_options); //gets array of colors depending on what is selected
         map_colors_init.getBoundaryMapColors(all_map_options, colors); //mods all_map_options.areas to include fill colors depending on values
 
         //get circle sizes for circle type maps
@@ -143,21 +144,19 @@ var map_init = {
     /** converts all_map_options (actually an array of objects by now after the .get() auto conversion) to svg and puts it on page **/
     convertMapOptionsToSVG: function (all_map_options) {
         var map_display_area = $("#" + all_map_options.render_ID + ".map_display_area");
-
-
-        //  var map_display_area = $(".map_display_area");
         map_display_area.empty();
 
         var map_outer_div = map_init.getMapOuterDiv(all_map_options); //creates and returns outer map div
 
         var map_outer_svg = map_init.getMapOuterSVG(all_map_options); //creates and returns empty map svg tag
+
         map_init.populateSVGAreas(all_map_options, map_outer_svg); //colorizes paths, sets circle attributes, appends g elements to svg
 
         var map_title = map_title_init.getMapTitle(all_map_options.title); //creates and returns a styled map h2 title with text
         var map_subtitle = map_subtitle_init.getMapSubtitle(all_map_options.subtitle); //creates and returns a styled map h3 title with text
         var map_credits = map_credits_init.getMapCredits(all_map_options.credits); //creates and returns a styled map div credits with text
 
-        var tooltip_div = map_tooltip_init.getMapTooltip(); //creates and returns an empty tooltip div template 
+        var tooltip_div = map_tooltip_init.getMapTooltip(all_map_options); //creates and returns an empty tooltip div template 
 
         //put elements together
         $(map_outer_div).append(tooltip_div, map_title, map_subtitle); //tooltip
@@ -168,6 +167,7 @@ var map_init = {
             var map_animation_div = map_animation_init.getAnimationDiv(all_map_options);
             map_outer_div.appendChild(map_animation_div);
         }
+
 
         var map_legend = all_map_options.legend.enabled ? map_legend_init.getMapLegend(all_map_options) : undefined; //creates and returns a styled map div legend with color boxes and text
 
@@ -201,8 +201,8 @@ var map_init = {
 
         $(div).css({
                 position: "relative",
-                width: all_map_options.sized_for_spotlight ? "595px" : "695px",
-                "min-height": all_map_options.sized_for_spotlight ? "530px" : "590px",
+                width: all_map_options.sized_for_spotlight ? "595px" : "99%",
+                "min-height": all_map_options.sized_for_spotlight ? "530px" : "96%",
                 "text-align": "left",
                 margin: "auto",
                 "background-color": "#FFFFFF"
@@ -241,7 +241,9 @@ var map_init = {
 
 
 
-    /** Initial Function (called from map icon click) - calls functions to loads the map json, convert it to svg, loads options and displays map in .map_display_area **/
+
+
+    /** ******* Initial Function (called from map icon click) - calls functions to loads the map json, convert it to svg, loads options and displays map in .map_display_area******  **/
     loadNewMap: function (chart, all_chart_options, all_map_options, repopulate_form) {
 
         $(".map_play_button.playing").click(); //if animated map is playing, stop it - prevents errors
@@ -300,12 +302,33 @@ var map_init = {
 
 
 
+
+
+
+
+
     /** resizes chart_display_area by changing input values and triggering keyup **/
     resizeMap: function (all_map_options) {
-        var new_width = all_map_options.sized_for_spotlight ? 615 : 710;
-        var new_height = all_map_options.sized_for_spotlight ? 590 : 650;
-        $("#chart_width_textinput").val(new_width).keyup();
-        $("#chart_height_textinput").val(new_height).keyup();
+
+        var current_width = $("#chart_width_textinput").val();
+        var current_height = $("#chart_height_textinput").val();
+
+        if (all_map_options.sized_for_spotlight) {
+            var new_width = 615;
+            var new_height = 590;
+        } else {
+            var new_width = 710 > current_width ? 710 : current_width;
+            var new_height = 650 > current_height ? 650 : current_height;
+        }
+
+        if (new_width != current_width) {
+            $("#chart_width_textinput").val(new_width).keyup();
+        }
+
+        if (new_height != current_height) {
+            $("#chart_height_textinput").val(new_height).keyup();
+        }
+
     },
 
 
@@ -361,7 +384,6 @@ var map_init = {
                 }
 
 
-
                 if (this.loc_name) { //if it's a named area, set value and color
                     el.setAttributeNS(null, "loc_value", this.value);
                     el.setAttribute("loc_name", this.loc_name);
@@ -397,6 +419,8 @@ var map_init = {
     /** sets up hover functionality for the map **/
     setUpMapHover: function (all_map_options, map_display_area) {
 
+        var map = all_map_options;
+
         //other areas fade out when an area is hovered
         $("path[loc_name], circle[loc_name]", map_display_area).hover(function () {
 
@@ -414,22 +438,24 @@ var map_init = {
 
             //add main value to tooltip if applicable
             var this_loc_value = $this.attr("loc_value"); //get main value
-            
+
             if (this_loc_value != "null" &amp;&amp; this_loc_value != "undefined") {
-                
-                this_loc_value = Number(this_loc_value);
-                
-                var value_html = "&lt;span style='font-size: 80%'>" + all_map_options.tooltip.dollar_sign + "&lt;/span>" + ($(this_loc_value).addCommas(all_map_options.tooltip.decimals || "")) + "&lt;span style='font-size: 80%'>" + all_map_options.tooltip.percent_sign + "&lt;/span>";
+
+                if (!map.is_colored_by_names) { //if colored by values
+                    this_loc_value = $(Number(this_loc_value)).addCommas(map.tooltip.decimals || "");
+                }
+
+                var value_html = "&lt;span style='font-size: 80%'>" + map.tooltip.dollar_sign + "&lt;/span>" + this_loc_value + "&lt;span style='font-size: 80%'>" + map.tooltip.percent_sign + "&lt;/span>";
+
 
                 //add extra values to tooltip if applicable, and not animated
-
-                if (!all_map_options.is_animated) {
+                if (!map.is_animated) {
 
                     var this_extra_vals = $this.attr("extra_vals"); //get extra values (if applicable)
                     if (this_extra_vals) {
                         this_extra_vals = this_extra_vals.split(";");
                         $.each(this_extra_vals, function (i) {
-                            value_html = value_html + "&lt;p style='font-size: 40%; line-height: 1.1; margin: 2px 0px 2px 0px;'>&lt;span style='color: black'>" + all_map_options.extra_value_titles[i] + ": &lt;/span>" + this_extra_vals[i] + "&lt;/p>";
+                            value_html = value_html + "&lt;p style='font-size: 14px; line-height: 1.1; margin: 2px 0px 2px 0px;'>&lt;span style='color: black'>" + map.extra_value_titles[i] + ": &lt;/span>" + this_extra_vals[i] + "&lt;/p>";
                         });
 
                     }
@@ -437,7 +463,7 @@ var map_init = {
 
 
             } else { //if no loc_value
-                var value_html = "&lt;span style='font-size: 70%'>" + all_map_options.tooltip.na_text + "&lt;/span>";
+                var value_html = "&lt;span style='font-size: 70%'>" + map.tooltip.na_text + "&lt;/span>";
             }
 
 
@@ -535,7 +561,7 @@ module.exports = map_init;</code></pre>
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Thu Sep 22 2016 16:35:13 GMT-0400 (EDT)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Fri Sep 23 2016 14:12:29 GMT-0400 (EDT)
 </footer>
 
 <script> prettyPrint(); </script>

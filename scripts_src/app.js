@@ -41,7 +41,6 @@ $(document).ready(function () {
 
         //click selected map icon to make sure everything in the map loads correctly
         if (chart_type === "map") {
-            console.log("map");
             $("#chart_type_map").click();
         }
 

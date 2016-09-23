@@ -11,8 +11,8 @@ var areas_colored_report = {
         var areas_not_colored = [];
 
         $.each(all_map_options.areas, function (i, e) {
-                        
-            if (e.loc_name && typeof e.value === "number") { //if the area has a value
+
+            if (e.loc_name && e.value != undefined ) { //if the area has a value
                 areas_colored.push(e.loc_name);
             } else if (e.loc_name && typeof e.value === "object") { //if it's null or undefined
                 areas_not_colored.push(e.loc_name)

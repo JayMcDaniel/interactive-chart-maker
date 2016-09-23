@@ -549,7 +549,7 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
     /* MAP SPECIFIC FORM CHANGES */
 
     //type of map changed
-    $("#map_type_select").unbind().change(function () {
+    $("#map_type_select, #map_color_by_names_checkbox").unbind().change(function () {
         map_colors_init.loadMapColorPalettes(4);
         // map_init.loadNewMap(chart, all_chart_options, all_map_options, true); // true to repopulate form
     });
