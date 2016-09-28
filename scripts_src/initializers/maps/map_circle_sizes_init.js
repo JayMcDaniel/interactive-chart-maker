@@ -21,17 +21,13 @@ var map_circle_sizes_init = {
 
         $(all_map_options.areas).each(function () {
 
-            console.log(this.value);
-
             if (this.value != undefined) {
-                console.log("coloring", this.value);
                 var this_area = this.value ? Math.abs(this.value) || 1 : 1;
                 this.r = Math.sqrt(this_area / Math.PI) * all_map_options.circle_size_multiple;
             }else{
                 this.r = 0;
             }
 
-            console.log("r",this.r);
 
 
         });
