@@ -45,7 +45,7 @@ var yAxis = function (o) {
     this.tickWidth = o.tickWidth || 1;
 
     this.title = {
-        useHTML: true,
+        useHTML: false,
         text: o.title ? o.title.text || '' : '',
         margin: o.title ? o.title.margin || 6 : 6,
         align: o.title ? o.title.align || 'middle' : 'middle',
