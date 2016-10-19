@@ -127,7 +127,7 @@
                 },
 
                 activeAxisLabelStyle: {
-                    cursor: drill_type === "bubble" ? "default" : "cursor",
+                    cursor: drill_type === "bubble" ? "default" : "pointer",
                     fontWeight: drill_type === "bubble" ? "normal" : "bold",
                     textDecoration: drill_type === "bubble" ? "none" : "underline"
                 },

@@ -11,9 +11,12 @@ var PlotOptions = function (o) {
         },
         dataLabels: {
             enabled: o.series.dataLabels.enabled || false,
-            allowOverlap: o.series.dataLabels.allowOverlap || true,
+            allowOverlap: o.series.dataLabels.allowOverlap || false,
+            padding: 0,
+            verticalAlign: "bottom",
             style:{
-                "textShadow": "none"
+                "textShadow": "none",
+                "color": "#000"
             }
         },
         pointPlacement: o.series.pointPlacement,
