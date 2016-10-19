@@ -59,7 +59,7 @@ var update_chart_options = {
         var dataLabelsFormatter = function () {
             if (all_chart_options.chart.type === "scatter" || all_chart_options.chart.type === "bubble") {
                 return function () {
-                    return this.series.name;
+                    return this.key.match("invisible") ? "" : this.key;
                 };
 
             } else {

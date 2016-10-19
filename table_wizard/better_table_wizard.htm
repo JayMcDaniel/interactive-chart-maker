@@ -990,15 +990,25 @@ $("#tableDisplay table tbody tr").each(function(rowIndex){
         var sub2 = /^\s{4}/;
         var sub3 = /^\s{6}/;
         var sub4 = /^\s{8}/;
+        var sub5 = /^\s{10}/;
+        var sub6 = /^\s{12}/;
 
 
 ///////////add indents to sub categories
-
+console.log("new");
         $("#tableDisplay table tbody th p").each(function () {
 				var thisHTML = $(this).html();
 				
-
-            if (thisHTML.match(sub4)) {
+            
+            if (thisHTML.match(sub6)) {
+                $(this).addClass("sub6");
+				$(this).html(thisHTML.replace(sub6,""));
+           
+            } else if (thisHTML.match(sub5)) {
+                $(this).addClass("sub5");
+				$(this).html(thisHTML.replace(sub5,""));
+           
+            } else if (thisHTML.match(sub4)) {
                 $(this).addClass("sub4");
 				$(this).html(thisHTML.replace(sub4,""));
            

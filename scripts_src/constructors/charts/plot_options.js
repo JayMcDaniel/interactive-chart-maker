@@ -10,7 +10,11 @@ var PlotOptions = function (o) {
             legendItemClick: o.series.events.legendItemClick
         },
         dataLabels: {
-            enabled: o.series.dataLabels.enabled || false
+            enabled: o.series.dataLabels.enabled || false,
+            allowOverlap: o.series.dataLabels.allowOverlap || true,
+            style:{
+                "textShadow": "none"
+            }
         },
         pointPlacement: o.series.pointPlacement,
         stacking: o.series.stacking,

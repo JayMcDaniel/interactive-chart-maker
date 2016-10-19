@@ -279,8 +279,8 @@
                     });
                 }
 
-                output.series.push(min_invisible_bubble);
-                output.series.push(max_invisible_bubble);
+                output.series[0].data.push(min_invisible_bubble);
+                output.series[0].data.push(max_invisible_bubble);
 
                 //  output.drilldown.series.push(max_invisible_bubble);
 
