@@ -27,14 +27,24 @@ var map_colors_init = require("../initializers/maps/map_colors_init.js");
 var allFormUpdates = function (chart, all_chart_options, all_map_options) {
 
 
-    /* CHART TYPE CHANGES */
 
+    /* CHART TYPE CHANGES */
 
     /** highlights the icon clicked by adding 'selected' class **/
     allFormUpdates.selectChart = function (selected) {
         //change selected icon
         $("#chart_type_icons .chart_type_icon").removeClass("selected");
         $(selected).addClass("selected");
+
+        //change small icon in setup options menu
+        var new_img_url = $(selected).css("background-image");
+        var y_pos = new_img_url.match("map") ? "-1px" : "1px";
+
+        $("#side_nav_tab_icon_chart_type").css({
+            "background-image": new_img_url,
+            "background-position-y": y_pos
+        });
+
 
     };
 

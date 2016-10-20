@@ -13,6 +13,7 @@ var plotOptionsInit = function plotOptionsInit(chart_type, legend_toggle_enabled
             events: {
                 // when one legend item is clicked, the others hide
                 legendItemClick: update_legend.updateToggle(legend_toggle_enabled, null, null, chart_type)
+                
             },
 
             dataLabels: {

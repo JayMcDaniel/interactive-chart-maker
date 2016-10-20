@@ -75,8 +75,6 @@ var update_chart_options = {
 
         }
 
-
-
         $(chart.series).each(function () {
             this.update({
                 dataLabels: {
