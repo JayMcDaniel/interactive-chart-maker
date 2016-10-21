@@ -87,7 +87,7 @@ var write_code = {
 
 
         //add surrounding JS (doc ready, render chart, jq extensions...)
-        chart_options_js.string = '$(document).ready(function(){\n\
+        chart_options_js.string = '$(function(){\n\
              var all_chart_options = ' + chart_options_js.string + ';\n\
 Highcharts.setOptions({lang: {thousandsSep: ","}});\n\n\
     var chart = new Highcharts.Chart(all_chart_options, chartCallback(all_chart_options));\n';
@@ -128,7 +128,7 @@ jQuery.fn.extend({addCommas:' + $("string").addCommas.toString() + ' });';
         var map_js = utils_main.deepStringify(all_map_options);
 
         //write out map options object
-        map_js.string = "$(document).ready(function(){\n" +
+        map_js.string = "$(function(){\n" +
 
             "var all_map_options = " + map_js.string + ";\n\n" +
 

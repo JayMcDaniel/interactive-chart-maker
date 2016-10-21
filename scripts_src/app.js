@@ -1,5 +1,5 @@
 /** main app file, starts everything off **/
-$(document).ready(function () {
+$(function () {
 
     //utils
     var jq_extensions = require("./utils/jq_extensions.js");
