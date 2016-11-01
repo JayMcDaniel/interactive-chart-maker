@@ -567,14 +567,21 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
     //type of map changed
     $("#map_type_select, #map_color_by_names_checkbox").unbind().change(function () {
 
+        
+        //make new map
         if (utils_forms.getCheckBoxValue($("#map_color_by_names_checkbox"))) {
             map_colors_init.loadMapColorPalettes(11);
         } else {
             map_colors_init.loadMapColorPalettes(4);
         }
+        
+        //hide/show relevent options
+        if($("#map_type_select").val() === "state"){
+            $(".state_map_only").show();
+        }else{
+            $(".state_map_only").hide();
+        }
 
-
-        // map_init.loadNewMap(chart, all_chart_options, all_map_options, true); // true to repopulate form
     });
 
 
