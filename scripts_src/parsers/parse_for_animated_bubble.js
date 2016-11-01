@@ -219,7 +219,6 @@
             chart_animation_div.appendChild(chart_slider);
             chart_animation_div.appendChild(animation_title);
 
-            console.log("appending");
             var chart_id = "#" + all_chart_options.chart.renderTo;
             setTimeout(function () {
                 $(chart_id).prepend(chart_animation_div);

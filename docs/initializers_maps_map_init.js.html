@@ -115,6 +115,9 @@ var map_init = {
         //set tooltip format
         map_tooltip_init.formatMapToolTip(all_map_options);
 
+        //hide / enable areas
+        all_map_options.areas = map_init.setHiddenAreas(all_map_options);
+
 
         ////// assign values to all_map_options.areas based on table input ////
 
@@ -332,6 +335,27 @@ var map_init = {
     },
 
 
+    /** sets hidden areas i.e. Puerto Rico and VI **/
+
+    setHiddenAreas: function (all_map_options) {
+
+        var hidden_areas = [];
+
+        $("#map_include_puerto_rico_checkbox, #map_include_virgin_islands_checkbox").each(function () {
+            if (!utils_forms.getCheckBoxValue($(this))) {
+                hidden_areas.push($(this).val());
+            }
+        });
+
+        $.each(all_map_options.areas, function (i, e) {
+            if (hidden_areas.indexOf(this.id) > -1) {
+                this.enabled = false;
+            }
+        });
+
+        return all_map_options.areas;
+    },
+
 
 
     /** populates map svg (creates paths and circles) with options from all_map_options.areas. Called from convertMapOptionsToSVG() **/
@@ -342,72 +366,73 @@ var map_init = {
 
             var g = document.createElementNS("http://www.w3.org/2000/svg", "g");
 
-            if (this.d) { //path outline
+            if (this.enabled) {
+                if (this.d) { //path outline
 
-                var el = document.createElementNS("http://www.w3.org/2000/svg", "path");
-                el.setAttributeNS(null, "d", this.d); //sets path outline
-                el.setAttributeNS(null, "stroke", "#646464"); //set path stroke
+                    var el = document.createElementNS("http://www.w3.org/2000/svg", "path");
+                    el.setAttributeNS(null, "d", this.d); //sets path outline
+                    el.setAttributeNS(null, "stroke", "#646464"); //set path stroke
 
 
-                if (all_map_options.map_type === "metro_area") {
-                    //transform smaller for metro area maps
-                    el.setAttributeNS(null, "transform", "scale(0.8) translate(0, 5.471371609992666)");
-                    el.setAttributeNS(null, "fill", this.color || "#f7f7f7"); //light gray if NA val
+                    if (all_map_options.map_type === "metro_area") {
+                        //transform smaller for metro area maps
+                        el.setAttributeNS(null, "transform", "scale(0.8) translate(0, 5.471371609992666)");
+                        el.setAttributeNS(null, "fill", this.color || "#f7f7f7"); //light gray if NA val
+                    }
+
+                    if (this.loc_name) { //if it's a named area, set values and color
+                        el.setAttributeNS(null, "loc_value", this.value);
+                        el.setAttributeNS(null, "fill", this.color || "#f7f7f7"); //light gray if NA val
+                        el.setAttribute("loc_name", this.loc_name);
+
+                    }
+
+                    if (this.class === "border") {
+                        el.setAttributeNS(null, "fill", "none");
+                        el.setAttributeNS(null, "stroke", "#A9A9A9");
+                        el.setAttributeNS(null, "stroke-width", 2);
+                    }
+
+                } else { //circle (DC or metro area)
+
+                    var el = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+                    el.setAttributeNS(null, "r", this.r); //radius
+                    el.setAttributeNS(null, "cx", this.cx); //x pos
+                    el.setAttributeNS(null, "cy", this.cy); //y pos
+                    el.setAttributeNS(null, "stroke", this.color ? "rgba(67, 67, 72, .8)" : "#337ab7"); //stroke
+
+                    if (all_map_options.map_type === "metro_area") {
+                        el.setAttributeNS(null, "fill", this.color ? this.color.replace(')', ', 0.75)').replace('rgb', 'rgba') : "#337ab7"); //fill
+                    } else {
+                        el.setAttributeNS(null, "fill", this.color ? this.color : "#f7f7f7"); //fill
+
+                    }
+
+
+                    if (this.loc_name) { //if it's a named area, set value and color
+                        el.setAttributeNS(null, "loc_value", this.value);
+                        el.setAttribute("loc_name", this.loc_name);
+                    }
+
                 }
 
-                if (this.loc_name) { //if it's a named area, set values and color
-                    el.setAttributeNS(null, "loc_value", this.value);
-                    el.setAttributeNS(null, "fill", this.color || "#f7f7f7"); //light gray if NA val
-                    el.setAttribute("loc_name", this.loc_name);
 
+                if (this.style) {
+                    el.setAttribute("style", this.style);
                 }
 
-                if (this.class === "border") {
-                    el.setAttributeNS(null, "fill", "none");
-                    el.setAttributeNS(null, "stroke", "#A9A9A9");
-                    el.setAttributeNS(null, "stroke-width", 2);
-                }
+                el.setAttribute("class", this.class);
+                this.extra_vals ? el.setAttributeNS(null, "extra_vals", this.extra_vals.join(";")) : null;
+                this.animated_vals ? el.setAttributeNS(null, "animated_vals", this.animated_vals.join(";")) : null;
 
-            } else { //circle (DC or metro area)
-
-                var el = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-                el.setAttributeNS(null, "r", this.r); //radius
-                el.setAttributeNS(null, "cx", this.cx); //x pos
-                el.setAttributeNS(null, "cy", this.cy); //y pos
-                el.setAttributeNS(null, "stroke", this.color ? "rgba(67, 67, 72, .8)" : "#337ab7"); //stroke
-
-                if (all_map_options.map_type === "metro_area") {
-                    el.setAttributeNS(null, "fill", this.color ? this.color.replace(')', ', 0.75)').replace('rgb', 'rgba') : "#337ab7"); //fill
-                } else {
-                    el.setAttributeNS(null, "fill", this.color ? this.color : "#f7f7f7"); //fill
-
+                if (this.id) {
+                    el.setAttribute("id", this.id);
                 }
 
 
-                if (this.loc_name) { //if it's a named area, set value and color
-                    el.setAttributeNS(null, "loc_value", this.value);
-                    el.setAttribute("loc_name", this.loc_name);
-                }
-
+                g.appendChild(el);
+                map_outer_svg.appendChild(g);
             }
-
-
-            if (this.style) {
-                el.setAttribute("style", this.style);
-            }
-
-            el.setAttribute("class", this.class);
-            this.extra_vals ? el.setAttributeNS(null, "extra_vals", this.extra_vals.join(";")) : null;
-            this.animated_vals ? el.setAttributeNS(null, "animated_vals", this.animated_vals.join(";")) : null;
-
-            if (this.id) {
-                el.setAttribute("id", this.id);
-            }
-
-
-            g.appendChild(el);
-            map_outer_svg.appendChild(g);
-
         });
 
     },
@@ -561,7 +586,7 @@ module.exports = map_init;</code></pre>
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Fri Oct 21 2016 11:16:01 GMT-0400 (EDT)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Tue Nov 01 2016 09:09:08 GMT-0400 (EDT)
 </footer>
 
 <script> prettyPrint(); </script>

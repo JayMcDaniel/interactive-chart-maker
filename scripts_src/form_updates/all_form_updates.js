@@ -166,7 +166,7 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
 
     $("#bubble_animated_checkbox").unbind().change(function () {
         $(".chart_animation_div").remove();
-      //  updateChartType("bubble", chart, all_chart_options);
+        //  updateChartType("bubble", chart, all_chart_options);
         all_chart_options.timeline = null;
         update_data.updateData(chart, all_chart_options);
 
@@ -374,17 +374,17 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
         update_x_axis.updateTickmarkInterval(new_interval, chart, all_chart_options, all_chart_options.xAxis.categories);
     });
 
-
+ 
     //x-axis max input changed
     $("#chart_x_axis_max_input").unbind().keyup(function () {
-        var newMax = $(this).val();
-        update_x_axis.updateMax(newMax, chart, all_chart_options);
+        var new_max = $(this).val();
+        update_x_axis.updateMax(new_max, chart, all_chart_options);
     });
 
     //x-axis min input changed
     $("#chart_x_axis_min_input").unbind().keyup(function () {
-        var newMin = $(this).val();
-        update_x_axis.updateMin(newMin, chart, all_chart_options);
+        var new_min = $(this).val();
+        update_x_axis.updateMin(new_min, chart, all_chart_options);
     });
 
 
@@ -589,14 +589,15 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
         map_init.loadNewMap(chart, all_chart_options, all_map_options, true); // true to repopulate form
     });
 
+        
 
     //map tooltip N/A input value changed
     $("#map_tooltip_na_text_input").unbind().on("input", function () {
         map_init.loadNewMap(chart, all_chart_options, all_map_options, true); // true to repopulate form
     });
 
-    //map size for spotlight checkbox changed
-    $("#map_spotlight_size_checkbox").unbind().change(function () {
+    //map size for spotlight, include VI and PR checkboxes changed
+    $("#map_spotlight_size_checkbox, #map_include_puerto_rico_checkbox, #map_include_virgin_islands_checkbox").unbind().change(function () {
         map_init.loadNewMap(chart, all_chart_options, all_map_options, true); // true to repopulate form
     });
 
@@ -604,7 +605,6 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
     $("#map_animation_speed_range").unbind().on("input", function () {
         map_init.loadNewMap(chart, all_chart_options, all_map_options, true); // true to repopulate form
     });
-
 
 
     //map palette + / - buttons clicked to change amount of colors

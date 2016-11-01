@@ -1,6 +1,7 @@
 var update_x_axis = require("../../form_updates/update_x_axis.js");
 var XAxis = require("../../constructors/charts/x_axis.js");
 var utils_forms = require("../../utils/utils_forms.js");
+var utils_main = require("../../utils/utils_main.js");
 
 /** Initializer for "xAxis" options section of all_chart_options. Creates and returns a new instance 
 @module
@@ -45,6 +46,7 @@ var xAxisInit = function xAxisInit(categories, chart_type) {
         type: "linear"
 
     };
+    
 
     var xAxis = new XAxis(options);
     return xAxis;

@@ -29,7 +29,7 @@
     <div id="top_nav_bar_filler"></div>
     <div id="top_nav_bar">
         <h1>Interactive Chart Maker</h1>
-        <span id="app_version">v2.0.5</span>
+        <span id="app_version">v2.0.6</span>
         <span id="get_code_button" title="Get chart/map code"><span id="get_code_icon">&lt; / &gt;</span> <span id="get_code_text">Get code</span><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span></span>
         <span id="show_load_chart_area_button" title="Load saved chart" alt="Load chart"></span>
         <a href="user-guide/user-guide.pdf" target="_blank" style="float: right; top: 18px; position: relative; right: 10px; color: #fff">User guide</a>
@@ -102,13 +102,13 @@
 
                         <br>
                         <span class="notes">With animated maps, instead of extra values being loaded from columns after the first, these values will make up each stage in the animation. The title for each stage (i.e. "2010") will come from the column headers. <br></span>
-                        
+
                         <label for="map_animated_checkbox">Animated map: </label>
                         <input type="checkbox" id="map_animated_checkbox">
-                          <br>
-                        
+                        <br>
+
                         <span class="notes">When you color a map by names instead of values, each unique string in the first column will get a unique color and legend item in the map.<br></span>
-                        
+
                         <label for="map_color_by_names_checkbox">Color by names (instead of values): </label>
                         <input type="checkbox" id="map_color_by_names_checkbox">
                         <br>
@@ -121,7 +121,7 @@
                         <label for="bubble_animated_checkbox">Animated bubble chart: </label>
                         <input type="checkbox" id="bubble_animated_checkbox">
                         <br>
-                        
+
                         <span class="notes">
                         With animated bubble charts, each stage of the animation will load from rows in the table body. Each series can only have one bubble, so each set of three columns in the table body will load a series x,y and z-values.
                             <table id="BLS_table" class="regular" cellspacing="0" cellpadding="0" xborder="1" style="width: 95%"><caption><span class="tableTitle">Example table data for animated bubble charts</span></caption>
@@ -227,7 +227,7 @@
 
                 <div class="display_options">
 
-                   <span class="show_map">
+                    <span class="show_map">
                     <label style="margin-bottom: -10px;">Chart size:</label>
                     <span class="notes"><br>Values in number boxes can be adjusted with up/down arrow keys. You can also adjust the chart size at any time by using the shift + arrow keys.</span>
                     <br>
@@ -237,7 +237,7 @@
                     <span style="position: relative; top: 3px;"><span style="position: relative; left: 9px; top: -8px;">&uarr;</span>&darr;</span>
                     <input type="text" id="chart_height_textinput" value="430" class="small number_entry" />
                     <br>
-                   </span>
+                    </span>
 
                     <div class="show_bar show_line show_scatter show_bubble show_drilldown show_column show_area show_arearange show_columnrange">
                         <label>Chart margins:</label>
@@ -727,9 +727,11 @@
                     <br>
                     </span>
 
-                    <label for="chart_x_axis_tickmark_interval_input">Tick mark (label) interval: </label>
+                    <label for="chart_x_axis_tickmark_interval_input">Tick mark interval: </label>
                     <input type="text" id="chart_x_axis_tickmark_interval_input" class="small number_entry" value="" placeholder="(Auto)" />
                     <br>
+
+                   
 
                     <span class="just_scatter just_bubble">
                         <label for="chart_x_axis_min_input">Min value: </label>
@@ -1036,6 +1038,13 @@
                         <div class="clear_float"></div>
                         </div>
                     <br>
+                        <label for="map_include_puerto_rico_checkbox">Include Puerto Rico: </label>
+                    <input type="checkbox" id="map_include_puerto_rico_checkbox" value="PR"/>
+                    <br>
+                        <label for="map_include_virgin_islands_checkbox">Include U.S. Virgin Islands: </label>
+                    <input type="checkbox" id="map_include_virgin_islands_checkbox" value="VI" />
+                    <br>
+                        
                     </span>
 
 

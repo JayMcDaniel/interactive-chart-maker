@@ -7,7 +7,6 @@ var utils_main = require("../utils/utils_main.js");
 var update_x_axis = {
 
 
-
     /** update x-axis formatter **/
     /** update format when dollar / percent signs select is changed TODO!*/
     updateFormatter: function (only_numbers, add_commas, sign, x_axis_decimals, chart, all_chart_options) {
@@ -53,36 +52,36 @@ var update_x_axis = {
     },
 
 
-
-
+   
+    
     /** update x-axis max */
-    updateMax: function (newMax, chart, all_chart_options) {
-        newMax = utils_main.checkForUndefined(newMax);
+    updateMax: function (new_max, chart, all_chart_options) {
+        new_max = utils_main.checkForUndefined(new_max);
         if (!chart) { // called when this is used in x_axis_init
-            return newMax;
+            return new_max;
         }
 
         chart.xAxis[0].update({
-            max: newMax
+            max: new_max
         });
 
-        all_chart_options.xAxis.max = newMax;
+        all_chart_options.xAxis.max = new_max;
     },
 
 
 
     /** update y-axis min */
-    updateMin: function (newMin, chart, all_chart_options) {
-        newMin = utils_main.checkForUndefined(newMin);
+    updateMin: function (new_min, chart, all_chart_options) {
+        new_min = utils_main.checkForUndefined(new_min);
         if (!chart) { // called when this is used in x_axis_init
-            return newMin;
+            return new_min;
         }
 
         chart.xAxis[0].update({
-            min: newMin
+            min: new_min
         });
 
-        all_chart_options.xAxis.min = newMin;
+        all_chart_options.xAxis.min = new_min;
     },
 
 
