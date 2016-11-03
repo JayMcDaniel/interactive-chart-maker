@@ -12,7 +12,7 @@ var write_code = {
 
         var width = $("#chart_width_textinput").val();
         var height = $("#chart_height_textinput").val();
-        var id = all_chart_options.chart.renderTo;
+        var id = $("#chart_id_textinput").val();
 
         if (all_chart_options.chart.type !== "map") { //not map
 
@@ -38,7 +38,7 @@ var write_code = {
 
     /** creates and returns chart HTML code  **/
     writeChartHTMLCode: function (all_chart_options, width, height, id) {
-
+console.log("id-c", id);
         var html_string = '<div id="' + id + '" style = "position: relative; width: ' + width + 'px; height: ' + height + 'px; margin: auto; padding: 0px;"> </div>';
 
         return html_string;
@@ -48,6 +48,7 @@ var write_code = {
     /** creates and returns map HTML code  **/
     writeMapHTMLCode: function (all_map_options, width, height, id) {
 
+        console.log("id", id);
         var html_string = '<div class="map_display_area" id="' + id + '" style = "width: ' + width + 'px; height: ' + height + 'px; margin: auto; padding: 0px;"> </div>';
 
         return html_string;

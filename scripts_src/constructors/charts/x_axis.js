@@ -3,7 +3,6 @@
  * @param o {object} XAxis options object
  */
 var XAxis = function (o) {
-
     this.categories = o.categories;
     this.gridLineColor = o.gridLineColor || '#c0c0c0';
     this.gridLineWidth = o.gridLineWidth || 0;
@@ -12,6 +11,7 @@ var XAxis = function (o) {
     this.labels = {
         formatter: o.labels ? o.labels.formatter || undefined : undefined,
         rotation: o.labels ? o.labels.rotation || 0 : 0,
+        useHTML: true,
         style: {
             color: '#000000',
             fontFamily: 'Calibri, Verdana, Arial, Helvetica, sans-serif',
