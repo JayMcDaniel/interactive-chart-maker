@@ -38,7 +38,6 @@ var write_code = {
 
     /** creates and returns chart HTML code  **/
     writeChartHTMLCode: function (all_chart_options, width, height, id) {
-console.log("id-c", id);
         var html_string = '<div id="' + id + '" style = "position: relative; width: ' + width + 'px; height: ' + height + 'px; margin: auto; padding: 0px;"> </div>';
 
         return html_string;
@@ -48,7 +47,6 @@ console.log("id-c", id);
     /** creates and returns map HTML code  **/
     writeMapHTMLCode: function (all_map_options, width, height, id) {
 
-        console.log("id", id);
         var html_string = '<div class="map_display_area" id="' + id + '" style = "width: ' + width + 'px; height: ' + height + 'px; margin: auto; padding: 0px;"> </div>';
 
         return html_string;
@@ -90,7 +88,7 @@ console.log("id-c", id);
         //add surrounding JS (doc ready, render chart, jq extensions...)
         chart_options_js.string = '$(function(){\n\
              var all_chart_options = ' + chart_options_js.string + ';\n\
-Highcharts.setOptions({lang: {thousandsSep: ","}});\n\n\
+Highcharts.setOptions({lang: {thousandsSep: ",",\n\drillUpText: "◁ Back "\n\   }});\n\n\
     var chart = new Highcharts.Chart(all_chart_options, chartCallback(all_chart_options));\n';
 
         //redraw the chart if its a drilldown (to customize individual points)\n\

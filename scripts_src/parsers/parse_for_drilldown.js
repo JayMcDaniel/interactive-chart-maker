@@ -74,11 +74,11 @@
 
 
     /** creates and pushes a new series object into the drilldown.series array **/
-    var pushDrillSeries = function (output, drill_type, this_name, next_sub) {
+    var pushDrillSeries = function (output, drill_type, this_name, next_sub, this_drilldown) {
 
         output.drilldown.series.push({
             name: this_name,
-            id: this_name,
+            id: this_drilldown,
             data: [],
             type: drill_type,
             lineWidth: 0,
@@ -95,6 +95,17 @@
      * @param colors {array}
      * @returns {object} Object with series array and drilldown series array of objects*/
     var parseForDrilldown = function (chart, input, drill_type, colors) {
+
+
+        //returns a unique number for the drilldown ids
+        var IDcounter = {
+            count: 0,
+            getNextID: function () {
+                this.count++;
+                return this.count;
+            }
+
+        }
 
         try {
 
@@ -129,7 +140,7 @@
                 activeAxisLabelStyle: {
                     cursor: drill_type === "bubble" ? "default" : "pointer",
                     fontWeight: drill_type === "bubble" ? "normal" : "bold",
-                    textDecoration: drill_type === "bubble" ? "none" : "underline"
+                    textDecoration: "none"
                 },
 
                 series: []
@@ -157,8 +168,9 @@
 
                             //if so, set up a drilldown series obj
                             if (this_drilldown) {
+                                this_drilldown = this_drilldown + "_" + IDcounter.getNextID();
                                 top_indexes.push(i);
-                                pushDrillSeries(output, drill_type, this_name, "sub1");
+                                pushDrillSeries(output, drill_type, this_name, "sub1", this_drilldown);
                             }
 
 
@@ -215,6 +227,7 @@
                                 //check if there's a level beneath this
                                 var next_sub = "sub" + Number(Number(this_sub.replace("sub", "")) + 1);
                                 var this_drilldown = $("p", this_row.next()).is('[class="' + next_sub + '"]') ? this_name : null;
+                                
 
                                 output.drilldown.series[drill_series_index].data.push({
                                     name: this_name,
@@ -224,16 +237,22 @@
                                     sub: next_sub,
                                     type: drill_type,
                                     cursor: this_drilldown ? "pointer" : "default",
-                                    lineWidth: 0,
-                                    drilldown: this_drilldown
+                                    lineWidth: 0
                                 });
+                                
+                                
 
                                 //if there was a next sub level found, create that drilldown series with an id, name, and empty data array
                                 if (this_drilldown) {
+                                    
+                                    //assign drilldown id to this last series (just pushed)
+                                    this_drilldown = this_drilldown + "_" + IDcounter.getNextID();
+                                    output.drilldown.series[drill_series_index].data[output.drilldown.series[drill_series_index].data.length -1].drilldown = this_drilldown;
+                                    
                                     drill_found = true;
                                     new_indexes.push(this_row_index);
 
-                                    pushDrillSeries(output, drill_type, this_name, next_sub);
+                                    pushDrillSeries(output, drill_type, this_name, next_sub, this_drilldown);
 
                                 }
 
