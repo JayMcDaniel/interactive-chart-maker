@@ -24,7 +24,7 @@ var PlotOptions = function (o) {
         pointPadding: o.series.pointPadding,
         groupPadding: o.series.groupPadding,
         minPointLength: o.series.minPointLength,
-        maxSize: o.series.maxSize,
+      //  maxSize: o.series.maxSize,
         minSize: o.series.minSize,
         sizeBy: o.series.sizeBy,
         lineWidth: o.series.lineWidth,

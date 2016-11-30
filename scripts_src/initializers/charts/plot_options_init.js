@@ -52,7 +52,7 @@ var plotOptionsInit = function plotOptionsInit(chart_type, legend_toggle_enabled
 
 
     //just for bubble charts
-    options.series.maxSize = 90;
+  //  options.series.maxSize = 90;
     options.series.minSize = 4;
     options.series.sizeBy = 'width'; //instead of 'area', seems more accurate
 
