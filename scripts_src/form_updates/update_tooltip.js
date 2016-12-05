@@ -160,7 +160,7 @@ var update_tooltip = {
                 $.each(extra_data, function (i) {
                     if (extra_data[i].values[point.index]) {
 
-                        s = s + "<br>  " + extra_data[i].name + ": " + extra_data[i].values[point.index];
+                        s = s + "<br>" + extra_data[i].name + ": " + extra_data[i].values[point.index];
                     }
                 });
             }
