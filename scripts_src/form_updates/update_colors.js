@@ -10,11 +10,13 @@ var updateColors = function (chart, all_chart_options, chart_type) {
     chart.options.colors = all_chart_options.colors;
 
 
-
+    console.log("updating colors", chart_type);
 
     if (chart_type === "drilldown") { //drilldowns color by point
 
         $(chart.series[0].data).each(function (i) {
+            console.log(this.color);
+            
             if (this.color != "none") {
                 //update chart
                 this.update({
@@ -22,6 +24,8 @@ var updateColors = function (chart, all_chart_options, chart_type) {
                 }, false);
                 //update all_chart_options.series.data colors
                 all_chart_options.series[0].data[i].color = all_chart_options.colors[i];
+            }else{
+                console.log("is none");
             }
 
         });

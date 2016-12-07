@@ -30,6 +30,9 @@ var plotOptionsInit = function plotOptionsInit(chart_type, legend_toggle_enabled
                     }
                 }
             },
+            
+           
+            
             states: {
                 hover: {
                     lineWidth: 4

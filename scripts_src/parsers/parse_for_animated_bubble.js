@@ -108,32 +108,32 @@
             //outer div//
             var chart_animation_div = document.createElement("div");
             $(chart_animation_div).css({
-                position: "absolute",
-                top: "33px",
-                "margin-left": "20px",
-                "z-index": "500",
-                "margin-bottom": "-6px",
-                "-webkit-user-select": "none"  
-            })
-            .addClass("chart_animation_div");
-            
+                    position: "absolute",
+                    top: "33px",
+                    "margin-left": "20px",
+                    "z-index": "500",
+                    "margin-bottom": "-6px",
+                    "-webkit-user-select": "none"
+                })
+                .addClass("chart_animation_div");
+
 
             //animation title (i.e. date shown)//
             var animation_title = document.createElement("h3");
-           
+
             $(animation_title).text(all_chart_options.timeline.dates[0])
-            .css({
-                margin: "0px",
-                "font-family": "sans-serif",
-                "font-weight": "200",
-                color: "#337ab7",
-                "font-size": "20px",
-                position: "relative",
-                top: "10px",
-                float: "left"
-            })
-            .addClass("animation_title");
-            
+                .css({
+                    margin: "0px",
+                    "font-family": "sans-serif",
+                    "font-weight": "200",
+                    color: "#337ab7",
+                    "font-size": "20px",
+                    position: "relative",
+                    top: "10px",
+                    float: "left"
+                })
+                .addClass("animation_title");
+
 
 
             //slider//
@@ -157,6 +157,9 @@
                     top: "15px"
                 })
                 .on("input change", function () {
+
+                    chart.tooltip.hide(0);
+
                     var new_time_index = this.value;
 
                     $.each(chart.series, function (i, e) {
@@ -166,6 +169,8 @@
                     });
 
                     animation_title.textContent = all_chart_options.timeline.dates[new_time_index];
+
+
                 });
 
 
