@@ -31,7 +31,6 @@ var chart_recall = {
             });
 
         });
-        //console.log(JSON.stringify(saved_values));
         return saved_values;
 
     },
@@ -56,10 +55,10 @@ var chart_recall = {
 
             $.each(arr, function () {
 
-                if (!set_individual_series && this.id.match(/series_color|line_style_select|series_type_div/)) { //look if this id has to do with individual series options
+                if (!set_individual_series && this.id.match(/series_color|series_type_div|line_style_select|series_visible_checkbox|series_extra_data/)) { //look if this id has to do with individual series options
                     individual_series_options.push(this);
                 } else {
-
+                    
                     var element = document.getElementById(this.id);
                     if (element) {
                         if (element.nodeName === "DIV") {
@@ -77,6 +76,8 @@ var chart_recall = {
                 }
             });
 
+            
+            
             return individual_series_options;
         }; //end setValues
 
@@ -85,7 +86,7 @@ var chart_recall = {
 
 
         var individual_series_options = setValues(input, false); //false to not set indivdual series yet
-
+        
         //initial all chart options init and redraw chart
         var allChartOptionsInit = require("../initializers/charts/all_chart_options_init.js");
         var draw_chart = require("../draw_chart.js");
@@ -107,9 +108,12 @@ var chart_recall = {
         /*  trigger changes to update chart  */
 
         //line style changes
-        $(".line_style_select").each(function () {
+        $(".line_style_select, .series_visible_checkbox").each(function () {
             $(this).change();
         });
+        
+        //extra data change
+        $(".series_extra_data_title_textarea, .series_extra_data_values_textarea").trigger('input');
 
         //individual color changes
         $(".jscolor").each(function (i) {

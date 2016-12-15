@@ -15,6 +15,7 @@ var update_individual_series = {
 
     /** updates all the extra data titles and values. Called from  seriesExtraDataChange()**/
     updateExtraData: function (chart, all_chart_options) {
+        
 
         $(".series_snippet").each(function (i) {
 
@@ -237,7 +238,7 @@ var update_individual_series = {
 
 
     /** add line style option - shown only if type is line**/
-    makeLineStyleDiv: function (i) {
+    makeLineStyleDiv: function (i, series) {
 
         var line_style_div = document.createElement("div");
         $(line_style_div).addClass("line_style_div");
@@ -272,6 +273,8 @@ var update_individual_series = {
 
         $(line_style_select).append(line_style_option_solid, line_style_option_dash, line_style_option_dot, line_style_option_long_dash, line_style_option_dash_dot);
 
+        $(line_style_select).val(series.dashStyle || "Solid"); //set selected value
+        
         $(line_style_div).append(line_style_label, line_style_select);
 
         return line_style_div;
@@ -320,6 +323,9 @@ var update_individual_series = {
         return series_type_div;
     },
 
+    
+    
+    
     /** makes and returns a div with a checkbox that lets user determine whether the series should be visible by default **/
 
     makeSeriesVisibleDiv: function (all_chart_options, i) {
@@ -345,6 +351,8 @@ var update_individual_series = {
         return series_visible_div;
     },
 
+    
+    
 
     /** makes and returns a div that has options to add extra data to a series for its tooltip **/
 
@@ -379,7 +387,7 @@ var update_individual_series = {
         var series_extra_data_values_textarea = document.createElement("textarea");
         series_extra_data_values_textarea.className = "series_extra_data_values_textarea";
         series_extra_data_values_textarea.id = "series_extra_data_values_textarea_" + i;
-        series_extra_data_values_textarea.value = all_chart_options.series[i].extra_data ? all_chart_options.series[i].extra_data[j].values.join("\n") : ""; ///need to make this LOPP THROUGH EACH EXTRA DATA IN ARRAY
+        series_extra_data_values_textarea.value = all_chart_options.series[i].extra_data ? all_chart_options.series[i].extra_data[j].values.join("\n") : ""; ///need to make this LOOP THROUGH EACH EXTRA DATA IN ARRAY
 
 
         //notes
@@ -451,7 +459,7 @@ var update_individual_series = {
         var display_series_options_inner_div = $("#display_series_options_inner_div");
         display_series_options_inner_div.empty();
 
-        $(chart.series).each(function (i, series) {
+        $(all_chart_options.series).each(function (i, series) {
 
             //make series name header
             var series_name = document.createElement('h5');
@@ -474,7 +482,7 @@ var update_individual_series = {
             }
 
             //make line style div
-            var line_style_div = update_individual_series.makeLineStyleDiv(i);
+            var line_style_div = update_individual_series.makeLineStyleDiv(i, series);
             series_snippet.appendChild(line_style_div);
 
             //make "is series visible on startup?" div

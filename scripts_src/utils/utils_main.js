@@ -56,7 +56,7 @@ var utils_main = {
             } else {
                 return value;
             }
-        }).replace(/\\n/g, "");
+        });
 
         return stringified_obj;
 

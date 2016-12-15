@@ -63,6 +63,7 @@ var write_code = {
         //save chart input values
         all_chart_options.saved_values = chart_recall.saveValues();
 
+        
         var chart_options_js = utils_main.deepStringify(all_chart_options);
 
         chart_options_js.string = chart_options_js.string
@@ -80,7 +81,7 @@ var write_code = {
             .replace('"drilldown":{},', "") //replace empty drilldown obj with nothing
             + ";\n\n";
 
-
+        
         //write callback function
         chart_options_js.string = chart_options_js.string + "var chartCallback = " + draw_chart.chartCallback.toString(); + "\n";
 
