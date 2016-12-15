@@ -79,7 +79,7 @@ var calculate_recession_dates = {
         return plot_bands_arr;
     },
 
-    
+
     /** add the recession plot bands array to the actual chart **/
     insertPlotBands: function (plot_bands_arr, chart, all_chart_options) {
 
@@ -88,9 +88,11 @@ var calculate_recession_dates = {
         });
 
         //add note about recession shading if applicable
-        if (plot_bands_arr.length > 0) {
-            var credits = "Shaded areas represent recessions as determined by the National Bureau of Economic Research.\nClick legend items to change data display. Hover over chart to view data.\nSource: U.S. Bureau of Labor Statistics.";
+        if (plot_bands_arr.length === 1) {
+            var credits = "Shaded area represents a recession as determined by the National Bureau of Economic Research.\nClick legend items to change data display. Hover over chart to view data.\nSource: U.S. Bureau of Labor Statistics.";
 
+        } else if (plot_bands_arr.length > 1) {
+            var credits = "Shaded areas represent recessions as determined by the National Bureau of Economic Research.\nClick legend items to change data display. Hover over chart to view data.\nSource: U.S. Bureau of Labor Statistics.";
         } else {
             var credits = "Click legend items to change data display. Hover over chart to view data.\nSource: U.S. Bureau of Labor Statistics.";
         }
