@@ -15,15 +15,26 @@ var update_legend = {
     },
 
 
-
-    /** updates legend item width - usefull for making legends with lots of items look more aligned */
-    updateItemWidth: function (newItemWidth, chart, all_chart_options) {
+        /** updates legend width */
+    updateLegendWidth: function (new_legend_width, chart, all_chart_options) {
 
         var legend = chart.legend;
-        legend.options.itemWidth = newItemWidth;
+        legend.options.width = new_legend_width;
         legend.render(false);
 
-        all_chart_options.legend.itemWidth = newItemWidth;
+        all_chart_options.legend.width = new_legend_width;
+    },
+    
+    
+
+    /** updates legend item width - usefull for making legends with lots of items look more aligned */
+    updateItemWidth: function (new_item_width, chart, all_chart_options) {
+
+        var legend = chart.legend;
+        legend.options.itemWidth = new_item_width;
+        legend.render(false);
+
+        all_chart_options.legend.itemWidth = new_item_width;
     },
 
 

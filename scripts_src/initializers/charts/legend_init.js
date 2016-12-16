@@ -6,7 +6,7 @@ var utils_main = require("../../utils/utils_main.js");
 @module
 */
 var legendInit = function legendInit(chart_type) {
-
+console.log("legend");
 
     var getLegendLayout = function () {
         var legend_layout_val = $("#legend_layout_select").val();
@@ -27,12 +27,14 @@ var legendInit = function legendInit(chart_type) {
         },
         itemStyle: {
             cursor: chart_type === "drilldown" ? "default" : "pointer"
-        }
+        },
+        width: utils_main.checkForUndefined($("#legend_width_input").val())
 
     };
 
 
     var legend = new Legend(options);
+    
     return legend;
 };
 

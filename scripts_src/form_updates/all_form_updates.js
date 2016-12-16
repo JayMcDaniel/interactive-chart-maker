@@ -310,12 +310,21 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
         update_legend.updateLayout($(this).val(), chart, all_chart_options);
     });
 
+    
+    //legend width changed
+
+    $("#legend_width_input").unbind().keyup(function () {
+        var new_legend_width = utils_main.checkForUndefined($(this).val());
+        update_legend.updateLegendWidth(new_legend_width, chart, all_chart_options);
+
+    });
+    
 
     //legend item width changed
 
     $("#legend_item_width_input").unbind().keyup(function () {
-        var newItemWidth = utils_main.checkForUndefined($(this).val());
-        update_legend.updateItemWidth(newItemWidth, chart, all_chart_options);
+        var new_item_width = utils_main.checkForUndefined($(this).val());
+        update_legend.updateItemWidth(new_item_width, chart, all_chart_options);
 
     });
 
