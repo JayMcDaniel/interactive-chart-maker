@@ -436,7 +436,7 @@ var map_init = {
             //add main value to tooltip if applicable
             var this_loc_value = $this.attr("loc_value"); //get main value
 
-            if (this_loc_value != "null" && this_loc_value != "undefined") {
+            if (["null", "", "undefined"].indexOf(this_loc_value) > -1) {
 
                 if (!map.is_colored_by_names) { //if colored by values
                     this_loc_value = $(Number(this_loc_value)).addCommas(map.tooltip.decimals || "");
