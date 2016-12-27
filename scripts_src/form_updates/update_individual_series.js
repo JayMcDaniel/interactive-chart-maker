@@ -375,7 +375,7 @@ var update_individual_series = {
 
             $(series_extra_data_title_textarea).css({"height": "30px"})
             .addClass("series_extra_data_title_textarea")
-            .attr("id", "series_extra_data_title_textarea")
+            .attr("id", "series_extra_data_title_textarea_" + i)
             .val(all_chart_options.series[i].extra_data ? all_chart_options.series[i].extra_data[j].name : "");
 
         //make values box and label
@@ -385,10 +385,10 @@ var update_individual_series = {
 
         //values text area
         var series_extra_data_values_textarea = document.createElement("textarea");
-        series_extra_data_values_textarea.className = "series_extra_data_values_textarea";
-        series_extra_data_values_textarea.id = "series_extra_data_values_textarea_" + i;
-        series_extra_data_values_textarea.value = all_chart_options.series[i].extra_data ? all_chart_options.series[i].extra_data[j].values.join("\n") : ""; ///need to make this LOOP THROUGH EACH EXTRA DATA IN ARRAY
-
+        $(series_extra_data_values_textarea).addClass("series_extra_data_values_textarea")
+            .attr("id", "series_extra_data_values_textarea_" + i)
+            .val(all_chart_options.series[i].extra_data ? all_chart_options.series[i].extra_data[j].values.join("\n") : "");
+        
 
         //notes
         var extra_data_notes = document.createElement("p");
