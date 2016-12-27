@@ -6,7 +6,6 @@ var utils_main = require("../../utils/utils_main.js");
 @module
 */
 var legendInit = function legendInit(chart_type) {
-console.log("legend");
 
     var getLegendLayout = function () {
         var legend_layout_val = $("#legend_layout_select").val();

@@ -373,10 +373,10 @@ var update_individual_series = {
         //title text area
         var series_extra_data_title_textarea = document.createElement("textarea");
 
-        series_extra_data_title_textarea.style = "height: 30px";
-        series_extra_data_title_textarea.className = "series_extra_data_title_textarea";
-        series_extra_data_title_textarea.id = "series_extra_data_title_textarea_" + i;
-        series_extra_data_title_textarea.value = all_chart_options.series[i].extra_data ? all_chart_options.series[i].extra_data[j].name : "";
+            $(series_extra_data_title_textarea).css({"height": "30px"})
+            .addClass("series_extra_data_title_textarea")
+            .attr("id", "series_extra_data_title_textarea")
+            .val(all_chart_options.series[i].extra_data ? all_chart_options.series[i].extra_data[j].name : "");
 
         //make values box and label
         var series_extra_data_values_label = document.createElement("label");
@@ -432,8 +432,8 @@ var update_individual_series = {
 
         //horizontal rule
         var extra_data_hr = document.createElement("hr");
-        extra_data_hr.style = "margin-bottom: 0px;"
-
+            $(extra_data_hr).css({"margin-bottom": "0px"});
+        
 
         //put it all together
 
