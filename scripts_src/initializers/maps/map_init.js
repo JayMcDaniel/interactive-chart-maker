@@ -205,10 +205,9 @@ var map_init = {
 
 
             })
-            .addClass("map_svg")
+            .addClass("map_svg");
 
         svg.setAttribute("viewBox", all_map_options.viewbox);
-
         return svg;
     },
 
@@ -228,9 +227,12 @@ var map_init = {
         var map_type = $("#map_type_select").val();
 
         var filename = "json/maps/" + map_type + "_map.json";
+        
+       
 
         $.get(filename, function (areas) {
 
+            
             var all_map_options = map_init.createAllMapOptions(all_map_options, areas, map_type);
 
             //give .map_display_area the chosen ID
@@ -238,6 +240,7 @@ var map_init = {
 
             //convert all_map_options to svg and puts it on page, returns jquery object of map div
             var map_display_area = map_init.convertMapOptionsToSVG(all_map_options);
+            
 
             //adjust map_display_area size
             map_init.resizeMap(all_map_options);
@@ -322,6 +325,8 @@ var map_init = {
         $.each(all_map_options.areas, function (i, e) {
             if (hidden_areas.indexOf(this.id) > -1) {
                 this.enabled = false;
+            }else{
+                this.enabled = true;
             }
         });
 
@@ -339,6 +344,7 @@ var map_init = {
             var g = document.createElementNS("http://www.w3.org/2000/svg", "g");
 
             if (this.enabled) {
+
                 if (this.d) { //path outline
 
                     var el = document.createElementNS("http://www.w3.org/2000/svg", "path");

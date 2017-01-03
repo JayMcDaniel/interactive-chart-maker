@@ -146,7 +146,7 @@ var map_colors_init = {
         $("#map_color_palettes").load("./components/map_color_palettes_" + val + ".htm", function () {
             allFormUpdates.colorPaletteRowClick(); // reinits the click functionality
 
-            $(".map_color_palette_row:eq(" + selected_index + ")").click(); //click a color to initiialize a new map
+            $(".map_color_palette_row:eq(" + selected_index + ")").click(); //click a color to initialize a new map
 
             if (val > 2) {
                 $("#minus_map_color").attr("class", "on"); //turn minus button on
