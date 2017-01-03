@@ -9,7 +9,6 @@ var write_code = {
     /** calls code writing functions and writes to code area*/
     writeCode: function writeCode(all_chart_options, all_map_options) {
 
-
         var width = $("#chart_width_textinput").val();
         var height = $("#chart_height_textinput").val();
         var id = $("#chart_id_textinput").val();

@@ -268,7 +268,7 @@ var map_init = {
             }
 
             //reinit navigation get code button click so that load chart code button will work
-            navigation_setup.getCodeButtonClick(all_chart_options, all_map_options);
+            navigation_setup.getCodeButtonClick(chart, all_chart_options, all_map_options);
 
             //generate areas colored report
             areas_colored_report.generateReport(all_map_options);
@@ -440,9 +440,9 @@ var map_init = {
 
 
             //add main value to tooltip if applicable
-            var this_loc_value = $this.attr("loc_value"); //get main value
-
-            if (["null", "", "undefined"].indexOf(this_loc_value) > -1) {
+            var this_loc_value = $this.attr("loc_value"); //get main value            
+            
+            if (["null", "", "undefined"].indexOf(this_loc_value) < 0) {
 
                 if (!map.is_colored_by_names) { //if colored by values
                     this_loc_value = $(Number(this_loc_value)).addCommas(map.tooltip.decimals || "");
