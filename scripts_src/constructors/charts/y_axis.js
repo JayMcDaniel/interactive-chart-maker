@@ -16,7 +16,7 @@ var yAxis = function (o) {
         rotation: o.labels ? o.labels.rotation || 0 : 0,
         style: {
             color: '#000000',
-            fontFamily: 'Calibri, Verdana, Arial, Helvetica, sans-serif',
+            fontFamily: 'Calibri, Arial, Helvetica, sans-serif',
             fontWeight: 'normal',
             backgroundColor: '#fff',
             fontSize: '12px'
@@ -56,7 +56,7 @@ var yAxis = function (o) {
         
         style: {
             color: '#000000',
-            fontFamily: 'Calibri, Verdana, Arial, Helvetica, sans-serif',
+            fontFamily: 'Calibri, Arial, Helvetica, sans-serif',
             fontWeight: 'normal',
             fontSize: '13px'
         }

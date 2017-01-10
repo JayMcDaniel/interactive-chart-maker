@@ -14,7 +14,7 @@ var XAxis = function (o) {
         useHTML: false,
         style: {
             color: '#000000',
-            fontFamily: 'Calibri, Verdana, Arial, Helvetica, sans-serif',
+            fontFamily: 'Calibri, Arial, Helvetica, sans-serif',
             fontWeight: 'normal',
             backgroundColor: '#fff',
             fontSize: '12px',
@@ -49,7 +49,7 @@ var XAxis = function (o) {
         rotation: 0,
         style: {
             color: '#000000',
-            fontFamily: 'Calibri, Verdana, Arial, Helvetica, sans-serif',
+            fontFamily: 'Calibri, Arial, Helvetica, sans-serif',
             fontWeight: 'normal',
             backgroundColor: '#fff',
             fontSize: '13px'

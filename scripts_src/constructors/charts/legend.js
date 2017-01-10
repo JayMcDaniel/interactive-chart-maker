@@ -22,7 +22,7 @@ var Legend = function (o) {
     this.y = o.y || 30;
 
     this.itemStyle = {
-        fontFamily: 'Calibri, Verdana, Arial, Helvetica, sans-serif',
+        fontFamily: 'Calibri, Arial, Helvetica, sans-serif',
         color: '#000',
         cursor: o.itemStyle.cursor
     };

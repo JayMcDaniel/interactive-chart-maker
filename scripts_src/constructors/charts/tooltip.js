@@ -10,7 +10,7 @@ var Tooltip = function (o) {
 
     this.style = {
         color: '#000000',
-        fontFamily: 'Calibri, Verdana, Arial, Helvetica, sans-serif'
+        fontFamily: 'Calibri, Arial, Helvetica, sans-serif'
     };
 
     this.useHTML = false;
