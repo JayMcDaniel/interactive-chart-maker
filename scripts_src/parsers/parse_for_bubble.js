@@ -36,6 +36,7 @@ var parseForBubble = function (input, chart_type, colors) {
             seriesObj.data.push(xyz_arr);
         });
 
+        
         output.series.push(seriesObj);
 
     });

@@ -128,10 +128,11 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
                 $(".chart_display_area").show();
                 chart.reflow(); //fits chart to size
                 navigation_setup.chartClicks();
-
                 //update tickmark interval (recalculates if not set)
                 var new_x_interval = $("#chart_x_axis_tickmark_interval_input").val();
+
                 update_x_axis.updateTickmarkInterval(new_x_interval, chart, all_chart_options, all_chart_options.xAxis.categories, all_chart_options.chart.type);
+                
 
             }
 

@@ -147,10 +147,14 @@ var update_x_axis = {
             return new_interval;
         }
 
-        if (new_interval > chart.xAxis[0].dataMax) {
-            new_interval = chart.xAxis[0].dataMax;
-        }
+//        if (new_interval > chart.xAxis[0].dataMax) {
+//            console.log("here b");
+//            new_interval = (chart.xAxis[0].dataMax - chart.xAxis[0].dataMin) / 6;
+//        }
 
+        
+        console.log("new x axis interval", new_interval);
+        
         chart.xAxis[0].update({
             tickInterval: new_interval
         });

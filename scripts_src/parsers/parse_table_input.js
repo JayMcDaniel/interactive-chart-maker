@@ -71,6 +71,7 @@ var parseTableInput = function (input, load_series_from, chart_type, legend_togg
         output.title_text = $("caption", input).text();
 
 
+       // console.log("out", output);
         return output
 
 

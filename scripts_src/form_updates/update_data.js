@@ -12,7 +12,7 @@ var update_data = {
     updateData: function (chart, all_chart_options) {
 
         var chart_type = $("#chart_type_icons .selected").divVal();
-        var input = $("#table_input_textarea").val();
+        var input = $("#table_input_textarea").val() || " ";
 
         var legend_toggle_enabled = utils_forms.getCheckBoxValue($("#legend_make_toggle_checkbox"));
         var load_series_from = $("#table_input_load_series_from_icons .selected").divVal();
