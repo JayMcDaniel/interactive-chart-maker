@@ -21,10 +21,8 @@ var jq_extensions = (function () {
         addCommas: function (decimals) {
 
             var val = this[0] || 0;
-
-            if (val == 0) {
-                return 0;
-            } else if (isNaN(val) || (((val < 999) && (val > -999)) && decimals < 1)) { //small numbers auto decimals
+                
+                if (isNaN(val) || (((val < 999) && (val > -999)) && decimals < 1)) { //small numbers auto decimals
                 return val;
             } else if (((val < 999) && (val > -999)) && decimals > 0) { //small numbers fixed decimals
                 return val.toFixed(decimals);

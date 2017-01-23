@@ -153,7 +153,6 @@ var update_x_axis = {
 //        }
 
         
-        console.log("new x axis interval", new_interval);
         
         chart.xAxis[0].update({
             tickInterval: new_interval
