@@ -15,15 +15,15 @@ var parseForMap = function (all_map_options, table_input) {
 
         var thisRow = this;
         var row_loc_name = $.trim($("th", thisRow).text()); //location name
-        
+
         //get number from cell, or get string if "colored by names" was checked. Main value that area will be colored by (from first column)
-        
-        if (all_map_options.is_colored_by_names){
+
+        if (all_map_options.is_colored_by_names) {
             var row_val = $.trim($("td:eq(0)", thisRow).text());
-        }else{
-            var row_val = $("td:eq(0)", thisRow).getNumber(); 
+        } else {
+            var row_val = $("td:eq(0)", thisRow).getNumber();
         }
-        
+
         var extra_vals = []; //extra values
         var animated_vals = []; //animated values for animated maps
 
@@ -31,11 +31,20 @@ var parseForMap = function (all_map_options, table_input) {
         //if animated, add animated titles and values
         if (all_map_options.is_animated) {
 
-            $("td", thisRow).each(function () {
-                animated_vals.push($(this).getNumber());
-            });
+            //coloring by names, we push the text of the cell
+            if (all_map_options.is_colored_by_names) {
+                $("td", thisRow).each(function () {
+                    animated_vals.push($.trim($(this).text()));
+                });
+                
+            } else { //otherwise (not colored by names) we push the number value
+                $("td", thisRow).each(function () {
+                    animated_vals.push($(this).getNumber());
+                });
+            }
 
-            //else add extra value titles and values
+
+            //else (not animated) add extra value titles and values
         } else {
 
             $("td:gt(0)", thisRow).each(function () {

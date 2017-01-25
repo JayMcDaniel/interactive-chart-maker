@@ -13,7 +13,7 @@
             //create outer legend box
             var map_legend_div = document.createElement("div");
             map_legend_div.setAttribute("class", "map_legend_div");
-            map_legend_div.setAttribute("style", "position: absolute; top: " + (all_map_options.legend.y + 390) + "px; left: " + (all_map_options.legend.x + 261) + "px; min-width: 131px; min-height: 130px; margin: auto; z-index: 500");
+            map_legend_div.setAttribute("style", "position: absolute; top: " + (all_map_options.legend.y + 430) + "px; left: " + (all_map_options.legend.x + 261) + "px; min-width: 131px; min-height: 130px; margin: auto; z-index: 500");
 
 
             //create legend item for each color

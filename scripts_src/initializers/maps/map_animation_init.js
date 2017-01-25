@@ -120,8 +120,6 @@ var map_animation_init = {
 
     /** sets up the play, pause, and slider functionality in animated maps **/
     setUpMapAnimation: function (all_map_options, map_display_area) {
-
-
         //when slider changes, change the values displayed in the map and the animation title
         $(".map_slider", map_display_area).on("input", function () {
             var slider_val = $(this).val();
@@ -135,18 +133,12 @@ var map_animation_init = {
                 var this_animated_vals = $this.attr("animated_vals");
                 var new_val = this_animated_vals ? this_animated_vals.split(";")[slider_val] : "N/A";
 
-                $this.attr("loc_value", new_val);
+
 
                 var new_fill = ""; //new color to be assigned
                 //then recolor
-                if (new_val === null || new_val === "N/A") {
-                    new_fill = "rgb(223, 223, 223)";
-                }
 
-                if (new_val <= all_map_options.value_ranges[0]) {
-                    new_fill = all_map_options.colors[0];
 
-                }
 
                 for (var i = 0; i < all_map_options.value_ranges.length; i++) { //for length of value_ranges array, assign colors
                     if (new_val > all_map_options.value_ranges[i]) {
@@ -154,13 +146,23 @@ var map_animation_init = {
                     }
                 }
 
+                if (new_val <= all_map_options.value_ranges[0]) {
+                    new_fill = all_map_options.colors[0];
+                }
+
+                if (new_val === null || new_val === "N/A") {
+                    new_fill = "#f7f7f7";
+                    $this.attr("loc_value", new_val);
+                }
+
+
                 //if a circle, resize and give opacity
 
                 if ($this.attr("r") && all_map_options.map_type !== "state") {
 
                     var this_area = new_val ? (Math.abs(new_val) / all_map_options.circle_size_multiple) || 0 : 0;
                     $this.attr("r", Math.sqrt(this_area / Math.PI));
-                    
+
                     $this.attr("fill", new_fill.replace(')', ', 0.75)').replace('rgb', 'rgba'));
                 } else { //for paths, no resize or opacity
                     $this.attr("fill", new_fill);

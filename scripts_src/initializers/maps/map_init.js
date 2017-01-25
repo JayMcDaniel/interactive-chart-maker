@@ -97,6 +97,8 @@ var map_init = {
 
 
         var colors = map_colors_init.newColorArray($(".map_color_palette_row.selected"), all_map_options); //gets array of colors depending on what is selected
+        
+        
         map_colors_init.getBoundaryMapColors(all_map_options, colors); //mods all_map_options.areas to include fill colors depending on values
 
         //get circle sizes for circle type maps
@@ -402,7 +404,7 @@ var map_init = {
                 el.setAttribute("class", this.class);
                 this.extra_vals ? el.setAttributeNS(null, "extra_vals", this.extra_vals.join(";")) : null;
                 this.animated_vals ? el.setAttributeNS(null, "animated_vals", this.animated_vals.join(";")) : null;
-
+                
                 if (this.id) {
                     el.setAttribute("id", this.id);
                 }
@@ -453,7 +455,7 @@ var map_init = {
 
                 //add extra values to tooltip if applicable, and not animated
                 if (!map.is_animated) {
-
+                    
                     var this_extra_vals = $this.attr("extra_vals"); //get extra values (if applicable)
                     if (this_extra_vals) {
                         this_extra_vals = this_extra_vals.split(";");
