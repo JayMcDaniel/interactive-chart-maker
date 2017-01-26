@@ -1,19 +1,22 @@
     /** 
-                                                        creates and returns a styled map div legend with color boxes and text 
-                                                        @namespace
-                                                        **/
+                                                                    creates and returns a styled map div legend with color boxes and text 
+                                                                    @namespace
+                                                                    **/
 
 
     var map_legend_init = {
 
-
         /** creates and returns a map legend div **/
         getMapLegend: function (all_map_options) {
+
+            console.log("map_legend_init.getMapLegend");
 
             //create outer legend box
             var map_legend_div = document.createElement("div");
             map_legend_div.setAttribute("class", "map_legend_div");
-            map_legend_div.setAttribute("style", "position: absolute; top: " + (all_map_options.legend.y + 430) + "px; left: " + (all_map_options.legend.x + 261) + "px; min-width: 131px; min-height: 130px; margin: auto; z-index: 500");
+
+            var top_adjustment = all_map_options.is_animated ? 480 : 420;
+            map_legend_div.setAttribute("style", "position: absolute; top: " + (all_map_options.legend.y + top_adjustment) + "px; left: " + (all_map_options.legend.x + 261) + "px; min-width: 131px; min-height: 130px; margin: auto; z-index: 500");
 
 
             //create legend item for each color
@@ -62,11 +65,16 @@
                     } else {
                         map_legend_text.textContent = dollar + $(map_legend_init.valueMod(all_map_options.value_ranges[i - 1], all_map_options, dec)).addCommas(dec) + percent + " to " + dollar + $(all_map_options.value_ranges[i]).addCommas(dec) + all_map_options.tooltip.percent_sign;
                     }
+
+
                 }
 
-                map_legend_item.appendChild(map_legend_color);
-                map_legend_item.appendChild(map_legend_text);
-                map_legend_div.appendChild(map_legend_item);
+                if ($(map_legend_text).text() !== "") {
+
+                    map_legend_item.appendChild(map_legend_color);
+                    map_legend_item.appendChild(map_legend_text);
+                    map_legend_div.appendChild(map_legend_item);
+                }
 
 
             });

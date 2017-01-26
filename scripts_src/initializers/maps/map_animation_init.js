@@ -132,6 +132,8 @@ var map_animation_init = {
                 var $this = $(this);
                 var this_animated_vals = $this.attr("animated_vals");
                 var new_val = this_animated_vals ? this_animated_vals.split(";")[slider_val] : "N/A";
+                //assign new loc_value
+                $this.attr("loc_value", new_val);
 
 
 
@@ -152,7 +154,6 @@ var map_animation_init = {
 
                 if (new_val === null || new_val === "N/A") {
                     new_fill = "#f7f7f7";
-                    $this.attr("loc_value", new_val);
                 }
 
 

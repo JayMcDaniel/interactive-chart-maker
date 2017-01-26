@@ -56,12 +56,35 @@ var map_colors_init = {
 
         } else { ///else all_map_options.is_colored_by_names is true
 
-            //populate value_ranges with array of unique strings from values_arr
-            $.each(values_arr, function (i, el) {
-                if ($.inArray(el, value_ranges) === -1) {
-                    value_ranges.push(el);
+            //populate value_ranges with array of unique strings from values_arr ///TODO make this look at all future animated values also
+            $.each(values_arr, function (i, val) {
+                if ($.inArray(val, value_ranges) === -1) { //if not already in the value_ranges array, push it in
+                    value_ranges.push(val);
                 }
             });
+
+            //add in animated vals when coloring by names (if they have animated vals)
+            if (all_map_options.is_animated) {
+
+                $.each(all_map_options.areas, function (i, area) {
+
+                    if (area.animated_vals) {
+                        $.each(area.animated_vals, function (j, val) {
+                            if ($.inArray(val, value_ranges) === -1) { //if not already in the value_ranges array, push it in
+                                value_ranges.push(val);
+                            }
+
+                        });
+                    }
+
+                });
+
+            }
+
+
+
+            //[i].animated_vals
+
             value_ranges.sort();
 
             //if a value is "N/A", put at the end
@@ -69,8 +92,9 @@ var map_colors_init = {
             value_ranges.push(value_ranges.splice(value_ranges.indexOf("N/A"), 1)[0]);
 
             //truncate colors array to be same length as values_ranges (keeps legend from showing extra colors) with gray at end
-            colors = colors.slice(0, value_ranges.length - 1);
-            colors.push("rgb(223, 223, 223)");
+            // colors = colors.slice(0, value_ranges.length - 1);
+            //add gray color at the end
+            //  colors.push("rgb(223, 223, 223)");
 
 
         }
