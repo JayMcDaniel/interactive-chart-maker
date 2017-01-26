@@ -56,7 +56,8 @@ var map_colors_init = {
 
         } else { ///else all_map_options.is_colored_by_names is true
 
-            //populate value_ranges with array of unique strings from values_arr ///TODO make this look at all future animated values also
+            console.log("colors");
+            //populate value_ranges with array of unique strings from values_arr 
             $.each(values_arr, function (i, val) {
                 if ($.inArray(val, value_ranges) === -1) { //if not already in the value_ranges array, push it in
                     value_ranges.push(val);
@@ -89,7 +90,7 @@ var map_colors_init = {
 
             //if a value is "N/A", put at the end
 
-            value_ranges.push(value_ranges.splice(value_ranges.indexOf("N/A"), 1)[0]);
+          //  value_ranges.push(value_ranges.splice(value_ranges.indexOf("N/A"), 1)[0]);
 
             //truncate colors array to be same length as values_ranges (keeps legend from showing extra colors) with gray at end
             // colors = colors.slice(0, value_ranges.length - 1);
@@ -108,7 +109,7 @@ var map_colors_init = {
         var value_ranges_len = all_map_options.is_colored_by_names ? value_ranges.length - 1 : value_ranges.length;
         $.each(all_map_options.areas, function () {
             if (this.value === null || this.value === "N/A") {
-                this.color = "rgb(223, 223, 223)" //gray
+                this.color = "#f7f7f7" //gray
 
             } else { //not N/A
 
