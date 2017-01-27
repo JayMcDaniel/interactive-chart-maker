@@ -98,16 +98,13 @@ var update_map_individual_series = {
         $.each(all_map_options.colors, function (i) {
 
 
-
             if (all_map_options.is_colored_by_names) { // if coloring by names  
-                //don't do it for the last color
-                if (i < all_map_options.colors.length - 1) {
+                if (i < all_map_options.value_ranges.length) {
                     //add series title
                     $display_series_options_inner_div.append($("<h5>"+all_map_options.value_ranges[i]+"</h5>"));
                     
                     //add color box
                     addColorBox(chart, all_chart_options, all_map_options, this, i);
-                    
                     
                 }
 

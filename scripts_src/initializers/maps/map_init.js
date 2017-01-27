@@ -36,6 +36,7 @@ var map_init = {
             legend: {
                 enabled: utils_forms.getCheckBoxValue($("#map_legend_enabled_checkbox")),
                 reversed: utils_forms.getCheckBoxValue($("#legend_reverse_layout_checkbox")),
+                alphabetized: utils_forms.getCheckBoxValue($("#legend_alphabetical_layout_checkbox")),
                 x: Number($("#legend_placement_x").val()),
                 y: Number($("#legend_placement_y").val())
             },
@@ -48,10 +49,12 @@ var map_init = {
             tooltip: {
                 dollar_sign: "",
                 percent_sign: "",
+                prepend_to_value: "",
                 decimals: "",
-                na_text: ""
+                na_text: "",
+                value_font_size: $("#map_tooltip_main_value_font_size_input").val() + "px",
+
             },
-            value_font_size: utils_forms.getCheckBoxValue($("#map_color_by_names_checkbox")) ? "24px" : "36px",
             extra_value_titles: [],
             animated_value_titles: [],
             areas: areas
@@ -97,8 +100,8 @@ var map_init = {
 
 
         var colors = map_colors_init.newColorArray($(".map_color_palette_row.selected"), all_map_options); //gets array of colors depending on what is selected
-        
-        
+
+
         map_colors_init.getBoundaryMapColors(all_map_options, colors); //mods all_map_options.areas to include fill colors depending on values
 
         //get circle sizes for circle type maps
@@ -222,6 +225,8 @@ var map_init = {
     /** ******* Initial Function (called from map icon click) - calls functions to loads the map json, convert it to svg, loads options and displays map in .map_display_area******  **/
     loadNewMap: function (chart, all_chart_options, all_map_options, repopulate_form) {
 
+
+
         $(".map_play_button.playing").click(); //if animated map is playing, stop it - prevents errors
 
         var navigation_setup = require("../../navigation_setup.js");
@@ -229,12 +234,12 @@ var map_init = {
         var map_type = $("#map_type_select").val();
 
         var filename = "json/maps/" + map_type + "_map.json";
-        
-       
+
+
 
         $.get(filename, function (areas) {
 
-            
+
             var all_map_options = map_init.createAllMapOptions(all_map_options, areas, map_type);
 
             //give .map_display_area the chosen ID
@@ -242,7 +247,7 @@ var map_init = {
 
             //convert all_map_options to svg and puts it on page, returns jquery object of map div
             var map_display_area = map_init.convertMapOptionsToSVG(all_map_options);
-            
+
 
             //adjust map_display_area size
             map_init.resizeMap(all_map_options);
@@ -327,7 +332,7 @@ var map_init = {
         $.each(all_map_options.areas, function (i, e) {
             if (hidden_areas.indexOf(this.id) > -1) {
                 this.enabled = false;
-            }else{
+            } else {
                 this.enabled = true;
             }
         });
@@ -404,7 +409,7 @@ var map_init = {
                 el.setAttribute("class", this.class);
                 this.extra_vals ? el.setAttributeNS(null, "extra_vals", this.extra_vals.join(";")) : null;
                 this.animated_vals ? el.setAttributeNS(null, "animated_vals", this.animated_vals.join(";")) : null;
-                
+
                 if (this.id) {
                     el.setAttribute("id", this.id);
                 }
@@ -427,7 +432,8 @@ var map_init = {
         var map = all_map_options;
 
         //other areas fade out when an area is hovered
-        $("path[loc_name], circle[loc_name]", map_display_area).hover(function () {
+        $("path[loc_name], circle[loc_name]", map_display_area).hover(function (event) {
+
 
             var $this = $(this);
 
@@ -437,25 +443,26 @@ var map_init = {
 
             //// populate tooltip
             var this_tooltip = $(".map_tooltip", map_display_area); //get element
+
             //set title
             $(".tooltip_title", this_tooltip).text($this.attr("loc_name") || "");
 
 
             //add main value to tooltip if applicable
             var this_loc_value = $this.attr("loc_value"); //get main value            
-            
+
             if (["null", "", "undefined"].indexOf(this_loc_value) < 0) {
 
                 if (!map.is_colored_by_names) { //if colored by values
                     this_loc_value = $(Number(this_loc_value)).addCommas(map.tooltip.decimals || "");
                 }
 
-                var value_html = "<span style='font-size: 80%'>" + map.tooltip.dollar_sign + "</span>" + this_loc_value + "<span style='font-size: 80%'>" + map.tooltip.percent_sign + "</span>";
+                var value_html = "<span style='font-size: 80%'>" + map.tooltip.prepend_to_value + map.tooltip.dollar_sign + "</span>" + this_loc_value + "<span style='font-size: 80%'>" + map.tooltip.percent_sign + "</span>";
 
 
                 //add extra values to tooltip if applicable, and not animated
                 if (!map.is_animated) {
-                    
+
                     var this_extra_vals = $this.attr("extra_vals"); //get extra values (if applicable)
                     if (this_extra_vals) {
                         this_extra_vals = this_extra_vals.split(";");
@@ -475,7 +482,13 @@ var map_init = {
             //set main value
             $(".tooltip_main_value", this_tooltip).html(value_html);
 
-            this_tooltip.show(); //show just this map's tooltip
+
+            //get mouse position to setup tooltip position
+            var parentOffset = $this.parent().parent().offset();
+            var relX = event.pageX - parentOffset.left;
+            var left_position = relX > 340 ? "10px" : "353px";
+
+            this_tooltip.css("left", left_position).show(); //show just this map's tooltip
 
         }, function () { //mouse out
 
@@ -492,7 +505,8 @@ var map_init = {
 
     /** set up hover functionality for the map legend **/
     setUpMapLegendHover: function (map_display_area) {
-        $(".map_legend_item", map_display_area).hover(function () {
+        $(".map_legend_item", map_display_area).hover(function (event) {
+
                 var this_color = $(this).children(".map_legend_color").css("background-color");
                 $(".map_legend_text", this).css("color", "#B73438"); //make text red
 

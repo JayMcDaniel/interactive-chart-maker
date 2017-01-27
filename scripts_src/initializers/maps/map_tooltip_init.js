@@ -17,7 +17,7 @@ var map_tooltip_init = {
 
         var tooltip_main_value = document.createElement("h4");
         tooltip_main_value.className = "tooltip_main_value";
-        tooltip_main_value.setAttribute("style", "color: #395463; font-family: sans-serif; font-weight: bold; font-size:"+all_map_options.value_font_size+"; margin: 0px 0px 0px 5px;");
+        tooltip_main_value.setAttribute("style", "color: #395463; font-family: sans-serif; font-weight: bold; font-size:"+all_map_options.tooltip.value_font_size+"; margin: 0px 0px 0px 5px;");
         
         
         tooltip_div.appendChild(tooltip_title);
@@ -30,6 +30,7 @@ var map_tooltip_init = {
     formatMapToolTip: function(all_map_options){
         all_map_options.tooltip.dollar_sign = $("#chart_tooltip_signs_select").val() === "$" ? "$" : "";
         all_map_options.tooltip.percent_sign = $("#chart_tooltip_signs_select").val() === "%" ? "%" : "";
+        all_map_options.tooltip.prepend_to_value = $("#map_tooltip_prepend_to_value_text_input").val();
         all_map_options.tooltip.decimals = $("#chart_tooltip_force_decimals_select").val();
         all_map_options.tooltip.na_text = $("#map_tooltip_na_text_input").val();
     }

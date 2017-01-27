@@ -23,6 +23,8 @@ var map_colors_init = {
     /** assigns colors to all_map_options.areas depending on where their values are on a range**/
     getBoundaryMapColors: function (all_map_options, colors) {
 
+        console.log ("map_colors_init.getBoundaryMapColors");
+        
         //used cached if all_map_options not passed
         all_map_options = all_map_options || map_colors_init.cached_map_options;
 
@@ -56,7 +58,6 @@ var map_colors_init = {
 
         } else { ///else all_map_options.is_colored_by_names is true
 
-            console.log("colors");
             //populate value_ranges with array of unique strings from values_arr 
             $.each(values_arr, function (i, val) {
                 if ($.inArray(val, value_ranges) === -1) { //if not already in the value_ranges array, push it in
@@ -84,19 +85,10 @@ var map_colors_init = {
 
 
 
-            //[i].animated_vals
-
-            value_ranges.sort();
-
-            //if a value is "N/A", put at the end
-
-          //  value_ranges.push(value_ranges.splice(value_ranges.indexOf("N/A"), 1)[0]);
-
-            //truncate colors array to be same length as values_ranges (keeps legend from showing extra colors) with gray at end
-            // colors = colors.slice(0, value_ranges.length - 1);
-            //add gray color at the end
-            //  colors.push("rgb(223, 223, 223)");
-
+            //if alphabetized, sort
+            if (all_map_options.legend.alphabetized) {
+                value_ranges.sort();
+            }
 
         }
 
@@ -118,11 +110,33 @@ var map_colors_init = {
 
                 }
 
-                for (i = 0; i < value_ranges_len; i++) { //for length of value_ranges array, assign colors
-                    if (this.value > value_ranges[i]) {
-                        this.color = colors[i + 1];
+
+
+                //if coloring by names, assign color from same colors index as the index ofvalue found in value ranages
+                if (all_map_options.is_colored_by_names) {
+
+                    var found_index = $.inArray(this.value, value_ranges);
+        
+                    if (found_index > -1) {
+                        this.color = colors[found_index];
+                        
                     }
+                                        
+                    
+                } else { //else coloring by values
+
+                    for (i = 0; i < value_ranges_len; i++) { //for length of value_ranges array, assign colors
+                        if (this.value > value_ranges[i]) {
+                            this.color = colors[i + 1];
+                        }
+                    }
+
+
                 }
+
+
+
+
 
             }
         });

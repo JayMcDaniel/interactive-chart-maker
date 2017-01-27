@@ -132,7 +132,7 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
                 var new_x_interval = $("#chart_x_axis_tickmark_interval_input").val();
 
                 update_x_axis.updateTickmarkInterval(new_x_interval, chart, all_chart_options, all_chart_options.xAxis.categories, all_chart_options.chart.type);
-                
+
 
             }
 
@@ -311,7 +311,7 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
         update_legend.updateLayout($(this).val(), chart, all_chart_options);
     });
 
-    
+
     //legend width changed
 
     $("#legend_width_input").unbind().keyup(function () {
@@ -319,7 +319,7 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
         update_legend.updateLegendWidth(new_legend_width, chart, all_chart_options);
 
     });
-    
+
 
     //legend item width changed
 
@@ -330,8 +330,8 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
     });
 
 
-    //legend reverse ceckbox changed
-    $("#legend_reverse_layout_checkbox, #map_legend_enabled_checkbox").unbind().change(function () {
+    //legend reverse, enabled, or alphabetized ceckbox changed
+    $("#legend_reverse_layout_checkbox, #map_legend_enabled_checkbox, #legend_alphabetical_layout_checkbox").unbind().change(function () {
 
         if (all_chart_options.chart.type === "map") { //for maps
             map_init.loadNewMap(chart, all_chart_options, all_map_options, true); // true to repopulate form
@@ -384,7 +384,7 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
         update_x_axis.updateTickmarkInterval(new_interval, chart, all_chart_options, all_chart_options.xAxis.categories);
     });
 
- 
+
     //x-axis max input changed
     $("#chart_x_axis_max_input").unbind().keyup(function () {
         var new_max = $(this).val();
@@ -577,18 +577,20 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
     //type of map changed
     $("#map_type_select, #map_color_by_names_checkbox").unbind().change(function () {
 
-        
         //make new map
-        if (utils_forms.getCheckBoxValue($("#map_color_by_names_checkbox"))) {
+        if (utils_forms.getCheckBoxValue($("#map_color_by_names_checkbox"))) { //coloring by names
+            $(".just_map_colored_by_names").show();
             map_colors_init.loadMapColorPalettes(11);
-        } else {
+
+        } else { //coloring by values
+            $(".just_map_colored_by_names").hide();
             map_colors_init.loadMapColorPalettes(4);
         }
-        
+
         //hide/show relevent options
-        if($("#map_type_select").val() === "state"){
+        if ($("#map_type_select").val() === "state") {
             $(".state_map_only").show();
-        }else{
+        } else {
             $(".state_map_only").hide();
         }
 
@@ -597,31 +599,33 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
 
     //is animated checkbox changed
     $("#map_animated_checkbox").unbind().change(function () {
-        $("#legend_placement_y").val(70); // set legend y value so legend is lower for animated maps
+        // $("#legend_placement_y").val(70); // set legend y value so legend is lower for animated maps
         map_init.loadNewMap(chart, all_chart_options, all_map_options, true); // true to repopulate form
     });
+
 
     //circle size range slider changed
-    $("#map_circle_size_range").unbind().on("input", function () {
+    //map tooltip N/A, and prepend to value inputs changed 
+    //map animation delay input changed
+
+    $("#map_circle_size_range, #map_tooltip_na_text_input, #map_tooltip_prepend_to_value_text_input, #map_animation_speed_range").unbind().on("input", function () {
         map_init.loadNewMap(chart, all_chart_options, all_map_options, true); // true to repopulate form
     });
 
-        
-
-    //map tooltip N/A input value changed
-    $("#map_tooltip_na_text_input").unbind().on("input", function () {
+    //main tooltip fontsize changed
+    $("#map_tooltip_main_value_font_size_input").unbind().keyup(function () {
         map_init.loadNewMap(chart, all_chart_options, all_map_options, true); // true to repopulate form
+
     });
+
 
     //map size for spotlight, include VI and PR checkboxes changed
     $("#map_spotlight_size_checkbox, #map_include_puerto_rico_checkbox, #map_include_virgin_islands_checkbox").unbind().change(function () {
         map_init.loadNewMap(chart, all_chart_options, all_map_options, true); // true to repopulate form
     });
 
-    //map animation delay input changed
-    $("#map_animation_speed_range").unbind().on("input", function () {
-        map_init.loadNewMap(chart, all_chart_options, all_map_options, true); // true to repopulate form
-    });
+
+
 
 
     //map palette + / - buttons clicked to change amount of colors

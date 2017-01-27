@@ -112,8 +112,11 @@ var chart_recall = {
             $(this).change();
         });
         
-        //extra data change
+        //extra data 
         $(".series_extra_data_title_textarea, .series_extra_data_values_textarea").trigger('input');
+        
+        //chart size
+        $("#chart_width_textinput, #chart_height_textinput").keyup();
 
         //individual color changes
         $(".jscolor").each(function (i) {
@@ -124,6 +127,11 @@ var chart_recall = {
 
         //add recession shading
         $("#chart_add_recession_shading_select").change();
+        
+        //click selected chart type (refreshes some .just_ options showing)
+        $("#chart_type_icons .selected").click();
+        
+        
 
         window.scrollTo(0, 0); //scrolls to top
 

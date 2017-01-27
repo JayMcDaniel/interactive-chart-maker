@@ -84,13 +84,11 @@
             
                   //if map legend text is N/A, make gray color and move to end
                 
-                console.log($(map_legend_div));
                 
             $.each($(map_legend_div).children(), function(i, el){
                 
                 if ($(this).text() === "N/A"){
                     
-                    console.log($(this).children(".map_legend_color"));
                     $(this).children(".map_legend_color").css("background-color", "#f7f7f7");
                    $(this).appendTo($(map_legend_div));
                 }
@@ -99,7 +97,6 @@
                 
                 //rgb(223, 223, 223)
             
-            console.log("2nd", $(map_legend_div));
 
             return map_legend_div;
 
