@@ -8,7 +8,7 @@ $(function () {
 
     //load test table into table_input_textarea
 
-    $.get("./dev/test_tables/map_by_names_table.htm", function (table) {
+    $.get("./dev/test_tables/test_table.htm", function (table) {
         $("#table_input_textarea").val(table);
 
         //check if app was opened from the chart wizard (imediately invoked function)
