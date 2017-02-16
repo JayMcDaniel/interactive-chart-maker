@@ -9,12 +9,12 @@
 var parseForMap = function (all_map_options, table_input) {
 
     all_map_options.areas_not_found_from_table = [];
-
+    
     $("tbody tr", $(table_input)).each(function () {
         //get location name, value, and extra values from table input
 
         var thisRow = this;
-        var row_loc_name = $.trim($("th", thisRow).text()); //location name
+        var row_loc_name = $.trim($("th", thisRow).text().replace(/  +/g, ' ')); //location name
 
         //get number from cell, or get string if "colored by names" was checked. Main value that area will be colored by (from first column)
 
