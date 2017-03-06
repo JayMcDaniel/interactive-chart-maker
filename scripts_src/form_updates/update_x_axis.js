@@ -16,7 +16,9 @@ var update_x_axis = {
 
         if (only_numbers) {
             newXFormat = function () {
-                return this.value.replace(/[^0-9\.\-]+/g, '') //hide non-numbers if show only years box is checked//
+                //hide non-numbers if show only years box is checked//
+                var num = this.value.match(/\d{4}/);
+                return num;
             }
         }
 
@@ -52,8 +54,8 @@ var update_x_axis = {
     },
 
 
-   
-    
+
+
     /** update x-axis max */
     updateMax: function (new_max, chart, all_chart_options) {
         new_max = utils_main.checkForUndefined(new_max);
@@ -147,13 +149,13 @@ var update_x_axis = {
             return new_interval;
         }
 
-//        if (new_interval > chart.xAxis[0].dataMax) {
-//            console.log("here b");
-//            new_interval = (chart.xAxis[0].dataMax - chart.xAxis[0].dataMin) / 6;
-//        }
+        //        if (new_interval > chart.xAxis[0].dataMax) {
+        //            console.log("here b");
+        //            new_interval = (chart.xAxis[0].dataMax - chart.xAxis[0].dataMin) / 6;
+        //        }
 
-        
-        
+
+
         chart.xAxis[0].update({
             tickInterval: new_interval
         });
