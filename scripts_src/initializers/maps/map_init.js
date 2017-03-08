@@ -356,7 +356,10 @@ var map_init = {
 
                     var el = document.createElementNS("http://www.w3.org/2000/svg", "path");
                     el.setAttributeNS(null, "d", this.d); //sets path outline
-                    el.setAttributeNS(null, "stroke", "#646464"); //set path stroke
+                    
+                    //set stroke (lighter for county maps)
+                    var new_stroke = all_map_options.map_type === "county" ? "#b3b3b3" : "#646464";
+                    el.setAttributeNS(null, "stroke", new_stroke); //set path stroke
 
 
                     if (all_map_options.map_type === "metro_area") {
@@ -510,6 +513,7 @@ var map_init = {
                 var this_color = $(this).children(".map_legend_color").css("background-color");
                 $(".map_legend_text", this).css("color", "#B73438"); //make text red
 
+        
                 //lower opacity on other areas (paths)
                 $("path", map_display_area).each(function () {
                     var this_fill = $(this).attr("fill");
