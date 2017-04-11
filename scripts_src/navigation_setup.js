@@ -122,6 +122,7 @@ var navigation_setup = {
 
 
     /** when a help icon is clicked */
+ 
     helpIconClick: function () {
 
         $(".help_icon").click(function () {
@@ -138,7 +139,7 @@ var navigation_setup = {
 
 
     /** when show_load_chart_area_button is clicked, show that entry area **/
-
+   
     loadChartButtonClick: function (chart, all_chart_options) {
         $("#show_load_chart_area_button").unbind().click(function () {
             $("#main_result_code_div").slideUp(50, function () { //hide the get code area if it's showing
@@ -155,9 +156,19 @@ var navigation_setup = {
 
 
 
+    /** when black_and_white_button is clicked, toggle grascale of chart **/
+    
+    blackAndWhiteButtonClick: function(){
+        $("#black_and_white_button").click(function(){
+            $(".chart_display_area, .map_display_area, #black_and_white_button").toggleClass("grayscale");
+            
+        });
+    },
+    
 
 
     /** when areas of the chart are clicked, open that section **/
+    
     chartClicks: function () {
 
         //give applicable chart areas pointer mouse
@@ -251,6 +262,9 @@ var navigation_setup = {
         ns.colorPaletteReverseIconClick();
         ns.helpIconClick();
         ns.openCodeEditorClick();
+        ns.blackAndWhiteButtonClick();
+        
+        console.log("new");
 
     }
 

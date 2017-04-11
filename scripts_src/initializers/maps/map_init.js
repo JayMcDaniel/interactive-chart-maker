@@ -441,7 +441,7 @@ var map_init = {
             var $this = $(this);
 
             //gray out other states, highlight this one
-            $("path, circle", map_display_area).attr("fill-opacity", ".05");
+            $("path, circle", map_display_area).attr("fill-opacity", ".4");
             $this.attr("fill-opacity", "1");
 
             //// populate tooltip

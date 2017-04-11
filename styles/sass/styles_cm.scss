@@ -628,7 +628,8 @@
     #get_code_button,
     #show_load_chart_area_button,
     .copy_to_clipboard_button,
-    #open_table_wizard_button {
+    #open_table_wizard_button,
+    #black_and_white_button {
         padding: 0px 5px 0px 5px;
         margin-left: 30px;
         cursor: pointer;
@@ -721,17 +722,31 @@
         font-weight: bold;
     }
     
-    #show_load_chart_area_button {
-        background-image: url("../../images/icons/load.png");
+    #show_load_chart_area_button, #black_and_white_button {
+        
         width: 35px;
         background-size: 80% 80%;
         background-repeat: no-repeat;
         background-position: center;
+
+    }
+
+    #show_load_chart_area_button {
+      background-image: url("../../images/icons/load.png");  
         &:hover,
         &.load_chart_showing {
             background-image: url("../../images/icons/load_hover.png");
             background-size: 100% 100%;
         }
+    }
+
+    #black_and_white_button {
+        background-image: url("../../images/icons/colors_icon.png"); 
+    }
+
+    .grayscale {
+        -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+        filter: grayscale(100%);
     }
     
     #open_table_wizard_button {
