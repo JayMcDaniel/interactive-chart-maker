@@ -933,7 +933,19 @@
     "loc_name": "Tulsa, OK",
     "previous_fill": "",
     "style": ""
-}, {
+}, 
+ 
+   {
+        "cy": "259.70666203872975",
+        "cx": "348.52466279642084",
+        "r": "2",
+        "class": "metro-area-circle",
+        "loc_name": "Enid, OK",
+        "previous_fill": "",
+        "style": ""
+    },
+ 
+ {
     "cy": "305.5863593619142",
     "cx": "497.26028676854077",
     "r": "2",
