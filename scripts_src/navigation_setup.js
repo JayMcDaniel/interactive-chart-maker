@@ -255,6 +255,8 @@ var navigation_setup = {
 
     /** FIRST NAVIGATION INIT, called from app.js when page is loaded. These never need to be re-initialized **/
     firstNavInit: function () {
+        console.log("navigation_setup.firstNavInit");
+        
         var ns = navigation_setup;
 
         ns.closeBoxIconClick();
@@ -264,8 +266,7 @@ var navigation_setup = {
         ns.openCodeEditorClick();
         ns.blackAndWhiteButtonClick();
         
-        console.log("new");
-
+        
     }
 
 }

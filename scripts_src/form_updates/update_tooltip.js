@@ -179,11 +179,6 @@ var update_tooltip = {
             x_decimals = Number($("#chart_tooltip_force_decimals_x_select").val()),
             //z value decimals
             z_decimals = Number($("#chart_tooltip_force_decimals_z_select").val()),
-
-            //y value signs
-            y_signs = $("#chart_tooltip_signs_select").val(),
-
-            y_signs_arr = [y_signs === "$" ? "$" : "", y_signs === "%" ? "%" : ""],
             //x value signs
             x_signs = $("#chart_tooltip_signs_x_select").val(),
             x_signs_arr = [x_signs === "$" ? "$" : "", x_signs === "%" ? "%" : ""],
@@ -194,7 +189,27 @@ var update_tooltip = {
             multiplier = Number($("#chart_tooltip_y_multiple_select").val()),
 
             //bubble size title
-            z_title = $("#chart_z_title_text_input").val() === "" ? "Z" : $("#chart_z_title_text_input").val();
+            z_title = $("#chart_z_title_text_input").val() === "" ? "Z" : $("#chart_z_title_text_input").val(),
+
+            //y value signs
+            y_signs = $("#chart_tooltip_signs_select").val();
+
+        var y_signs_arr = [];
+
+        switch (y_signs) {
+        case "$":
+            y_signs_arr = ["$", ""];
+            break;
+        case "%":
+            y_signs_arr = ["", "%"];
+            break;
+        case "percentage point(s)":
+            y_signs_arr = ["", " percentage point(s)"];
+            break;
+        default:
+            y_signs_arr = ["", ""];
+        };
+
 
 
         //IF A TYPICAL CHART

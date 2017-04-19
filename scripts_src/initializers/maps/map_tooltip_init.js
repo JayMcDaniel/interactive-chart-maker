@@ -28,8 +28,12 @@ var map_tooltip_init = {
     
     /** mods all_map_options.tooltip to have a dollar sign or percent sign if that option is selected **/
     formatMapToolTip: function(all_map_options){
-        all_map_options.tooltip.dollar_sign = $("#chart_tooltip_signs_select").val() === "$" ? "$" : "";
-        all_map_options.tooltip.percent_sign = $("#chart_tooltip_signs_select").val() === "%" ? "%" : "";
+        var tool_sign = $("#chart_tooltip_signs_select").val();
+        
+        all_map_options.tooltip.dollar_sign = tool_sign === "$" ? "$" : "";
+        all_map_options.tooltip.percent_sign = tool_sign === "%" || tool_sign === "percentage point(s)" ? tool_sign.replace("per", " per") : "";
+        
+        
         all_map_options.tooltip.prepend_to_value = $("#map_tooltip_prepend_to_value_text_input").val();
         all_map_options.tooltip.decimals = $("#chart_tooltip_force_decimals_select").val();
         all_map_options.tooltip.na_text = $("#map_tooltip_na_text_input").val();
