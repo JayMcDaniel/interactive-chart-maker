@@ -1,7 +1,7 @@
     /** 
-                                                                    creates and returns a styled map div legend with color boxes and text 
-                                                                    @namespace
-                                                                    **/
+                                                                        creates and returns a styled map div legend with color boxes and text 
+                                                                        @namespace
+                                                                        **/
 
 
     var map_legend_init = {
@@ -38,8 +38,8 @@
                 //set round color boxes for metro type maps
                 var border_radius = all_map_options.map_type === "metro_area" ? "50px" : "0px";
                 //set legend color
-                
-                
+
+
                 map_legend_color.setAttribute("style", "width: 15px; height: 15px; background-color: " + all_map_options.colors[i] + "; float: left; border: rgb(153, 153, 153) solid .5px; border-radius: " + border_radius + "");
 
                 //map text div for each legend item
@@ -53,7 +53,7 @@
                 if (all_map_options.is_colored_by_names) {
 
                     map_legend_text.textContent = all_map_options.value_ranges[i];
-                    
+
 
                 } else { //coloring by values
 
@@ -68,6 +68,8 @@
                         map_legend_text.textContent = dollar + $(map_legend_init.valueMod(all_map_options.value_ranges[i - 1], all_map_options, dec)).addCommas(dec) + percent + " to " + dollar + $(all_map_options.value_ranges[i]).addCommas(dec) + all_map_options.tooltip.percent_sign;
                     }
 
+                    //replace dash signs with minus signs 
+                    map_legend_text.textContent = map_legend_text.textContent.replace("-","\u2212");
 
                 }
 
@@ -77,26 +79,26 @@
                     map_legend_item.appendChild(map_legend_text);
                     map_legend_div.appendChild(map_legend_item);
                 }
-                
+
 
 
             });
-            
-                  //if map legend text is N/A, make gray color and move to end
-                
-                
-            $.each($(map_legend_div).children(), function(i, el){
-                
-                if ($(this).text() === "N/A"){
-                    
+
+
+            //if map legend text is N/A, make gray color and move to end
+
+            $.each($(map_legend_div).children(), function (i, el) {
+
+                if ($(this).text() === "N/A") {
+
                     $(this).children(".map_legend_color").css("background-color", "#f7f7f7");
-                   $(this).appendTo($(map_legend_div));
+                    $(this).appendTo($(map_legend_div));
                 }
-                
+
             });
-                
-                //rgb(223, 223, 223)
-            
+
+            //rgb(223, 223, 223)
+
 
             return map_legend_div;
 
