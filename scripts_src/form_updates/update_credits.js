@@ -22,7 +22,25 @@ var update_credits = {
 
         $(chart.credits.element).html(credits_text);
 
+    },
+
+    /** update chart_credits_text_textarea box with new text **/
+    updateTextAreaBox: function (all_chart_options) {
+
+        //if it's a map...
+        if (all_chart_options.chart.type === "map") {
+
+            var map_type = $("#map_type_select option:selected").text().toLowerCase();
+            var map_type_plural = map_type === "county" ? "counties" : map_type + "s";
+
+            $("#chart_credits_text_textarea").val("Hover over a " + map_type + " to see data.\nHover over legend items to see " + map_type_plural + " in a category.\nSource: U.S. Bureau of Labor Statistics."); //update credits area
+
+        }
+
+
     }
+
+
 
 }
 

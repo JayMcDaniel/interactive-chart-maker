@@ -112,8 +112,10 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
                 $(".chart_tab").not(".map_tab").hide();
                 $(".display_options:gt(0)>*").not(".notes").not(".show_map").hide(); //hide everything except map relevent options
                 $(".just_map").show();
-                $("#chart_credits_text_textarea").val("Hover over an area to see data.\nHover over legend items to see areas in a category.\nSource: U.S. Bureau of Labor Statistics."); //update credits area
-
+                
+                //update credits input box with custom text
+                update_credits.updateTextAreaBox(all_chart_options);
+               
 
                 if (utils_forms.getCheckBoxValue($("#map_color_by_names_checkbox"))) { //color by name
                     map_colors_init.loadMapColorPalettes(11);
@@ -577,6 +579,9 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
     //type of map changed
     $("#map_type_select, #map_color_by_names_checkbox").unbind().change(function () {
 
+        //update credit box
+        update_credits.updateTextAreaBox(all_chart_options);
+        
         //make new map
         if (utils_forms.getCheckBoxValue($("#map_color_by_names_checkbox"))) { //coloring by names
             $(".just_map_colored_by_names").show();
