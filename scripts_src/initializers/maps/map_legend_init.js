@@ -69,7 +69,7 @@
                     }
 
                     //replace dash signs with minus signs 
-                    map_legend_text.textContent = map_legend_text.textContent.replace("-","\u2212");
+                    map_legend_text.textContent = map_legend_text.textContent.replace(/-/g,"\u2212");
 
                 }
 
