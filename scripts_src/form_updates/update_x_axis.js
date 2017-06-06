@@ -150,7 +150,7 @@ var update_x_axis = {
         }
 
         //        if (new_interval > chart.xAxis[0].dataMax) {
-        //            console.log("here b");
+        //            
         //            new_interval = (chart.xAxis[0].dataMax - chart.xAxis[0].dataMin) / 6;
         //        }
 

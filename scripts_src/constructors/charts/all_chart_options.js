@@ -16,7 +16,7 @@ var AllChartOptions = function (o) {
     this.xAxis = o.xAxis;
     this.yAxis = o.yAxis;
     this.credits = o.credits;
-  //  this.exporting = o.exporting;
+    this.exporting = o.exporting;
 }
 
 

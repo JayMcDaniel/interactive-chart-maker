@@ -38,7 +38,7 @@
          chart: chartInit(chart_type),
          credits: creditsInit(),
          colors: colors,
-         // exporting: exportingInit(),
+         exporting: exportingInit(),
          legend: legendInit(chart_type),
          plotOptions: plotOptionsInit(chart_type, legend_toggle_enabled),
          series: parsed_table_output.series, //removed seriesInit(parsed_table_output.series)

@@ -10,7 +10,7 @@ var Subtitle = function (o) {
     
     this.style = {
         color: '#000000',
-        fontFamily: 'sans-serif',
+        fontFamily: 'arial',
         fontWeight: 'normal',
         fontSize: '12px'
     };

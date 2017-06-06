@@ -9,7 +9,7 @@ var Title = function (o) {
     
     this.style = {
         color: '#000000',
-        fontFamily: 'sans-serif',
+        fontFamily: 'arial',
         fontWeight: 'bold',
         fontSize: '14px'
     };

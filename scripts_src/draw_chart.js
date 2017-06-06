@@ -79,7 +79,7 @@ var draw_chart = {
 
     /** initialize function **/
     init: function (all_chart_options, chartCallback) {
-
+        
         $(".chart_display_area").attr("id", all_chart_options.chart.renderTo); //change ID of chart area to make sure it matches the renderTo value
 
 
