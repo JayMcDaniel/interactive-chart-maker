@@ -16,7 +16,6 @@ var update_individual_series = {
     /** updates all the extra data titles and values. Called from  seriesExtraDataChange()**/
     updateExtraData: function (chart, all_chart_options) {
         
-
         $(".series_snippet").each(function (i) {
 
             chart.series[i].extra_data = [];
@@ -34,7 +33,7 @@ var update_individual_series = {
                 //push values
                 $(".series_extra_data_values_textarea:eq(" + j + ")", $series_snippet).each(function (k) {
 
-                    extra_data_obj.values = $(this).val().split("\n"); // TODO turn values into array
+                    extra_data_obj.values = $(this).val().split("\n"); 
                 });
 
 
@@ -455,6 +454,7 @@ var update_individual_series = {
 
     /** populates #display_series_options with options for each series. Called when its side nav tab is selected from navigation_setup. **/
     populateForm: function (chart, all_chart_options) {
+        
 
         var display_series_options_inner_div = $("#display_series_options_inner_div");
         display_series_options_inner_div.empty();
@@ -524,6 +524,7 @@ var update_individual_series = {
 
         //bind extra data changes
         update_individual_series.seriesExtraDataChange(chart, all_chart_options);
+        
     }
 
 }

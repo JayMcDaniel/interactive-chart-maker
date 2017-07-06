@@ -58,13 +58,13 @@ var chart_recall = {
                 if (!set_individual_series && this.id.match(/series_color|series_type_div|line_style_select|series_visible_checkbox|series_extra_data/)) { //look if this id has to do with individual series options
                     individual_series_options.push(this);
                 } else {
-                    
+
                     var element = document.getElementById(this.id);
                     if (element) {
                         if (element.nodeName === "DIV") {
                             $(element).children().removeClass("selected");
                             $(element).children("[value='" + this.val + "']").addClass("selected");
-                            //   $(element).children("[type='" + this.val + "']").click();
+                            $(element).children("[type='" + this.val + "']").click();
 
 
                         } else if (element.type === "checkbox") {
@@ -72,12 +72,16 @@ var chart_recall = {
                         } else {
                             element.value = this.val;
                         }
+
+                    } else {
+                        console.log(this.id + " not found");
+
                     }
                 }
             });
 
-            
-            
+
+
             return individual_series_options;
         }; //end setValues
 
@@ -86,7 +90,7 @@ var chart_recall = {
 
 
         var individual_series_options = setValues(input, false); //false to not set indivdual series yet
-        
+
         //initial all chart options init and redraw chart
         var allChartOptionsInit = require("../initializers/charts/all_chart_options_init.js");
         var draw_chart = require("../draw_chart.js");
@@ -107,14 +111,15 @@ var chart_recall = {
 
         /*  trigger changes to update chart  */
 
+
         //line style changes
         $(".line_style_select, .series_visible_checkbox").each(function () {
             $(this).change();
         });
-        
+
         //extra data 
-        $(".series_extra_data_title_textarea, .series_extra_data_values_textarea").trigger('input');
-        
+        $(".series_extra_data_title_textarea, .series_extra_data_values_textarea").trigger('propertychange');
+
         //chart size
         $("#chart_width_textinput, #chart_height_textinput").keyup();
 
@@ -127,13 +132,14 @@ var chart_recall = {
 
         //add recession shading
         $("#chart_add_recession_shading_select").change();
-        
-        //click selected chart type (refreshes some .just_ options showing)
-        $("#chart_type_icons .selected").click();
-        
-        
+
+        //click selected chart type (refreshes some .just_ options showing) FIX - this makes it all one type of chart
+        allFormUpdates.displayOptions(chart_type);
+        //  $("#chart_type_icons .selected").click();
+
 
         window.scrollTo(0, 0); //scrolls to top
+
 
     },
 

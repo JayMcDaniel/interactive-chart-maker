@@ -12,7 +12,6 @@ var exportingInit = function exportingInit() {
 
 
     var exporting = new Exporting(options);
-    console.log("exporting", exporting);
     return exporting;
 };
 
