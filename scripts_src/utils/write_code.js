@@ -73,8 +73,8 @@ var write_code = {
             .replace(/headers=\\"rowHead\d+ columnHead\d+\\"/g, "") //trim down table alt output to make it smaller
             .replace(/id=\\"(rowHead|columnHead)\d+\\"/g, "")
             //replace ansi symbols (n-dash etc), with printed js code
-            .replace(/–/, "\\u2013") //ndash
-            .replace(/—/, "\\u2014") //mdash
+            .replace(/–/g, "\\u2013") //ndash
+            .replace(/—/g, "\\u2014") //mdash
             .replace(/\s{2,} /g, " ") //replace several spaces with one
             .replace(/"null"/g, "null") //replace "null" with null
             .replace('"drilldown":{},', "") //replace empty drilldown obj with nothing
