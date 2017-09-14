@@ -88,7 +88,7 @@ var write_code = {
         //add surrounding JS (doc ready, render chart, jq extensions...)
         chart_options_js.string = '$(function(){\n\
              var all_chart_options = ' + chart_options_js.string + ';\n\
-Highcharts.setOptions({lang: {thousandsSep: ",",\n\drillUpText: "◁ Back "\n\   }});\n\n\
+Highcharts.setOptions({lang: {thousandsSep: ",",\n\drillUpText: "◁ Back ",\n\contextButtonTitle: "Download chart image"\n\   }});\n\n\
     var chart = new Highcharts.Chart(all_chart_options, chartCallback(all_chart_options));\n';
 
         //redraw the chart if its a drilldown (to customize individual points)\n\
