@@ -21,8 +21,8 @@ var utils_forms = {
 
     })(),
 
-    
-    /** When clipboard icon is clicked, this copies the next <pre> text to a clipboard via a hidden textarea **/
+
+    /** When clipboard icon is clicked, this copies the next textarea to a clipboard **/
     copyToClipBoard: (function () {
         $(".copy_to_clipboard_button").click(
             function () {
@@ -45,6 +45,26 @@ var utils_forms = {
 
             });
     })(),
+
+
+
+
+    /** When download .js icon is clicked, this will create and download a .js file from the .js text area **/
+    downloadJSFile: (function () {
+
+        $("#download_js_button").click(function () {
+            var text = $("#chart_output_code").val();
+            var filename = $("#js_filename_textarea").val();
+            filename = filename != "" ? filename : $("#chart_id_textinput").val(); 
+            var blob = new Blob([text], {
+                type: "text/plain;charset=utf-8"
+            });
+            saveAs(blob, filename + ".js");
+        });
+
+    })(),
+
+   
 
     /** returns true if checkbox is checked, false if not 
     @param elem {element} checkbox element

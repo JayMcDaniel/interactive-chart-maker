@@ -162,6 +162,14 @@
         height: 290px;
         color: $primary_color;
     }
+
+    #js_filename_textarea{
+    float: left;
+    width: 30%;
+    height: 30px;
+    position: relative;
+    top: 8px;
+    }
     
     .clearfloat {
         clear: both;
@@ -629,7 +637,8 @@
     #show_load_chart_area_button,
     .copy_to_clipboard_button,
     #open_table_wizard_button,
-    #black_and_white_button {
+    #black_and_white_button,
+    #download_js_button{
         padding: 0px 5px 0px 5px;
         margin-left: 30px;
         cursor: pointer;
@@ -696,7 +705,8 @@
         color: $highlight_color;
     }
     
-    .copy_to_clipboard_button {
+    .copy_to_clipboard_button,
+    #download_js_button{
         border: solid 1px #b73438;
         border-radius: 2px;
         width: 31px;
@@ -709,6 +719,7 @@
         background-repeat: no-repeat;
         background-position: center;
         top: -10px;
+        
         &:hover {
             background-image: url(../../images/icons/copy_to_clipboard_icon_hover.png);
         }
@@ -722,6 +733,14 @@
         font-weight: bold;
     }
     
+
+    #download_js_button{
+        background-image: url(../../images/icons/download_file_icon.png);
+        &:hover {
+            background-image: url(../../images/icons/download_file_icon_hover.png);
+        }
+    }
+
     #show_load_chart_area_button, #black_and_white_button {
         
         width: 35px;

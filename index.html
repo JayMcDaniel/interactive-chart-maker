@@ -1131,21 +1131,32 @@
 
 
         <!--HTML  Code box -->
+        <h4>HTML <span class="copy_message"></span></h4>
         <div class="copy_to_clipboard_button" style="position: relative;
     top: -5px;"></div>
-        <h4>HTML <span class="copy_message"></span></h4>
+        
         <p class="notes">The chart HTML is where the chart will load into on your page. Copy this into your HTML file where you want the chart to appear. Or, in the BLS CMS, this is what you put in the "chart template" section.</p>
 
         <textarea class="html" id="chart_html_code"></textarea>
 
         <br>
         <!--JS  Code box -->
+        <h4>JavaScript <span class="copy_message"></span></h4>
+        
         <div class="copy_to_clipboard_button" style="position: relative;
-    top: 5px;"></div>
+    top: 5px;" alt="Copy to clipboard" title="Copy to clipboard"></div>
+        
+        <div id="download_js_button" style="position: relative;
+    top: 5px;" alt="Download .js file" title="Download .js file"></div>
+        
+        <div id="js_filename_div"><label style="float: left;
+    position: relative;
+    top: 10px;">File name:</label>
+            <textarea id="js_filename_textarea"></textarea></div>
 
         <div id="beautify_code_button">Unpack</div>
 
-        <h4>JavaScript <span class="copy_message"></span></h4>
+        
 
         <p class="notes">The JS comes packed by default. If you need to unpack it, click the "Unpack" button to the right.
             <br> For these interactive charts to work on your web page, you need to first link to the supporting libraries from your HTML document:
@@ -1237,6 +1248,7 @@
     <script src="libraries/Highcharts-4.2.3/js/highcharts.src.js"></script>
     <script src="libraries/Highcharts-4.2.3/js/highcharts-more.src.js"></script>
     <script src="libraries/Highcharts-4.2.3/js/modules/drilldown.src.js"></script>
+    <script src="libraries/fileSaver/fileSaver.min.js"></script>
     <!--<script src="libraries/Highcharts-4.2.3/js/modules/exporting.js"></script> -->
 
     <!--JS Color for color picker boxes -->
