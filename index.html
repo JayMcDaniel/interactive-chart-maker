@@ -33,6 +33,9 @@
         <span id="get_code_button" title="Get chart/map code"><span id="get_code_icon">&lt; / &gt;</span> <span id="get_code_text">Get code</span><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span></span>
         <span id="show_load_chart_area_button" title="Load saved chart" alt="Load chart"></span>
         <span id="black_and_white_button" class="grayscale" title="Toggle grayscale" alt="Toggle grayscale"></span>
+
+
+
         <a href="user-guide/user-guide.pdf" target="_blank" style="float: right; top: 18px; position: relative; right: 10px; color: #fff">User guide</a>
 
     </div>
@@ -1126,15 +1129,34 @@
 
     <!-- chart / map code boxes -->
     <div id="main_result_code_div">
+
+        
+
         <h3>Chart code <sup class = "help_icon">?</sup> <span id="open_code_editor_button" title="Open in code editor"></span></h3>
 
+     
+
+
+        <canvas id="chart_image_canvas" width=800 height=600 style="display: none;"></canvas>
+        <!--needed in svg to canvas to png conversion -->
+
+        <!-- <div id="chart_image_container"></div> -->
 
 
         <!--HTML  Code box -->
         <h4>HTML <span class="copy_message"></span></h4>
         <div class="copy_to_clipboard_button" style="position: relative;
-    top: -5px;"></div>
-        
+    top: 5px;"></div>
+
+        <div id="download_html_button" style="position: relative;
+    top: 5px; margin-left: 30px;" alt="Download .htm file" title="Download .htm file"></div>
+
+        <div id="html_filename_div">
+
+            <textarea id="html_filename_textarea" placeholder="file name"></textarea>
+        </div>
+
+
         <p class="notes">The chart HTML is where the chart will load into on your page. Copy this into your HTML file where you want the chart to appear. Or, in the BLS CMS, this is what you put in the "chart template" section.</p>
 
         <textarea class="html" id="chart_html_code"></textarea>
@@ -1142,21 +1164,21 @@
         <br>
         <!--JS  Code box -->
         <h4>JavaScript <span class="copy_message"></span></h4>
-        
+
         <div class="copy_to_clipboard_button" style="position: relative;
     top: 5px;" alt="Copy to clipboard" title="Copy to clipboard"></div>
-        
+
         <div id="download_js_button" style="position: relative;
-    top: 5px;" alt="Download .js file" title="Download .js file"></div>
-        
-        <div id="js_filename_div"><label style="float: left;
-    position: relative;
-    top: 10px;">File name:</label>
-            <textarea id="js_filename_textarea"></textarea></div>
+    top: 5px; margin-left: 30px;" alt="Download .js file" title="Download .js file"></div>
+
+        <div id="js_filename_div">
+
+            <textarea id="js_filename_textarea" placeholder="file name"></textarea>
+        </div>
 
         <div id="beautify_code_button">Unpack</div>
 
-        
+
 
         <p class="notes">The JS comes packed by default. If you need to unpack it, click the "Unpack" button to the right.
             <br> For these interactive charts to work on your web page, you need to first link to the supporting libraries from your HTML document:
@@ -1172,6 +1194,14 @@
 
         </p>
         <textarea class="js" id="chart_output_code"></textarea>
+
+        <br>
+        <div id="chart_image_div">
+           <h4 >Chart Image (.png)</h4>
+        
+            <div id="download_chart_image_button" title="Download chart image" alt="Download chart image" style="position: relative; top: 3px;"></div>
+            <textarea id="chart_image_filename_textarea" style="float:none;" placeholder="file name"></textarea>
+        </div>
 
 
     </div>
@@ -1249,6 +1279,7 @@
     <script src="libraries/Highcharts-4.2.3/js/highcharts-more.src.js"></script>
     <script src="libraries/Highcharts-4.2.3/js/modules/drilldown.src.js"></script>
     <script src="libraries/fileSaver/fileSaver.min.js"></script>
+    <script src="libraries/blob/blob.js"></script>
     <!--<script src="libraries/Highcharts-4.2.3/js/modules/exporting.js"></script> -->
 
     <!--JS Color for color picker boxes -->

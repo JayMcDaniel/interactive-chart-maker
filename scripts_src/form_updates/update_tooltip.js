@@ -106,7 +106,9 @@ var update_tooltip = {
 
                 var shared_tooltip_arr = ["<b>" + this.x + "</b>"];
 
-                $.each(this.points, function (i) {
+                $.each(this.points, function (i, e) {
+                    
+                    var index = e.series.index;
 
                     var y_val = this.point.high ? " High: " + y_signs_arr[0] + $(this.point.high * multiplier).addCommas(y_decimals) + y_signs_arr[1] + " | Low: " + y_signs_arr[0] + $(this.point.low * multiplier).addCommas(y_decimals) + y_signs_arr[1] :
                         y_signs_arr[0] + $(this.point.y * multiplier).addCommas(y_decimals) + y_signs_arr[1];
@@ -114,7 +116,7 @@ var update_tooltip = {
 
                     var s = this.series.name + ": " + y_val;
 
-                    all_chart_options.series[i].extra_data ? s = all_chart_options.tooltip.addExtraData(all_chart_options.series[i].extra_data, this.point, s) : s = s;
+                    all_chart_options.series[index].extra_data ? s = all_chart_options.tooltip.addExtraData(all_chart_options.series[index].extra_data, this.point, s) : s = s;
 
                     shared_tooltip_arr.push(s);
 

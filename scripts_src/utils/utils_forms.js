@@ -55,7 +55,7 @@ var utils_forms = {
         $("#download_js_button").click(function () {
             var text = $("#chart_output_code").val();
             var filename = $("#js_filename_textarea").val();
-            filename = filename != "" ? filename : $("#chart_id_textinput").val(); 
+            filename = filename != "" ? filename : $("#chart_id_textinput").val();
             var blob = new Blob([text], {
                 type: "text/plain;charset=utf-8"
             });
@@ -63,8 +63,71 @@ var utils_forms = {
         });
 
     })(),
+    
+    
+        /** When download .js icon is clicked, this will create and download a .js file from the .js text area **/
+    downloadHTMLFile: (function () {
 
-   
+        $("#download_html_button").click(function () {
+            var text = $("#chart_html_code").val();
+            var filename = $("#html_filename_textarea").val();
+            filename = filename != "" ? filename : $("#chart_id_textinput").val();
+            var blob = new Blob([text], {
+                type: "text/plain;charset=utf-8"
+            });
+            saveAs(blob, filename + ".htm");
+        });
+
+    })(),
+
+
+
+    /** when download chart image icon is clicked, this will covert the svg to canvas then to png and download **/
+
+    downloadChartImage: (function () {
+
+        $("#download_chart_image_button").click(function () {
+
+            var svgString = null;
+            svgString = $("#highcharts-0 svg").outerHTML();
+
+            var canvas = document.getElementById("chart_image_canvas");
+            canvas.width = $("#chart_width_textinput").val() ;
+            canvas.height = $("#chart_height_textinput").val();
+            
+            var ctx = canvas.getContext("2d");
+            var DOMURL = self.URL || self.webkitURL || self;
+            var img = new Image();
+
+
+            var svg = new Blob([svgString], {
+                type: "image/svg+xml;charset=utf-8"
+            });
+
+
+            var url = DOMURL.createObjectURL(svg);
+
+            img.onload = function () {
+                ctx.drawImage(img, 0, 0);
+
+                var png = canvas.toDataURL("image/png");
+                //  document.querySelector('#chart_image_container').innerHTML = '<img src="' + png + '"/>';
+                  DOMURL.revokeObjectURL(png);
+
+                var filename = $("#chart_image_filename_textarea").val();
+                filename = filename != "" ? filename : $("#chart_id_textinput").val();
+                canvas.toBlob(function (blob) {
+                    saveAs(blob, filename);
+                });
+            }
+
+            img.src = url;
+
+
+
+        });
+    })(),
+
 
     /** returns true if checkbox is checked, false if not 
     @param elem {element} checkbox element

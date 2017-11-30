@@ -96,6 +96,15 @@ var navigation_setup = {
                     $("#get_code_button .glyphicon-refresh-animate").css("visibility", "hidden");
 
                 });
+                
+                
+                //show download image div if a chart, hide if a map
+                if(all_chart_options.chart.type == "map"){
+                    $("#chart_image_div").hide();
+                }else{
+                    $("#chart_image_div").show();
+                }
+                
 
             } else {
                 $("#main_result_code_div").slideUp(50);
