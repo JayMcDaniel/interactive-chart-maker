@@ -63,9 +63,9 @@ var utils_forms = {
         });
 
     })(),
-    
-    
-        /** When download .js icon is clicked, this will create and download a .js file from the .js text area **/
+
+
+    /** When download .js icon is clicked, this will create and download a .js file from the .js text area **/
     downloadHTMLFile: (function () {
 
         $("#download_html_button").click(function () {
@@ -89,12 +89,22 @@ var utils_forms = {
         $("#download_chart_image_button").click(function () {
 
             var svgString = null;
-            svgString = $("#highcharts-0 svg").outerHTML();
+
+
+            console.log($("#chart_type_icons .selected").divVal());
+            if ($("#chart_type_icons .selected").divVal() === "map") {
+                svgString = $("svg.map_svg").outerHTML();
+
+            } else {
+                svgString = $("#highcharts-0 svg").outerHTML();
+
+                console.log("MAP");
+            }
 
             var canvas = document.getElementById("chart_image_canvas");
-            canvas.width = $("#chart_width_textinput").val() ;
+            canvas.width = $("#chart_width_textinput").val();
             canvas.height = $("#chart_height_textinput").val();
-            
+
             var ctx = canvas.getContext("2d");
             var DOMURL = self.URL || self.webkitURL || self;
             var img = new Image();
@@ -112,7 +122,7 @@ var utils_forms = {
 
                 var png = canvas.toDataURL("image/png");
                 //  document.querySelector('#chart_image_container').innerHTML = '<img src="' + png + '"/>';
-                  DOMURL.revokeObjectURL(png);
+                DOMURL.revokeObjectURL(png);
 
                 var filename = $("#chart_image_filename_textarea").val();
                 filename = filename != "" ? filename : $("#chart_id_textinput").val();

@@ -213,6 +213,8 @@ var map_init = {
             .addClass("map_svg");
 
         svg.setAttribute("viewBox", all_map_options.viewbox);
+        
+        svg.setAttribute("xmlns", "http://www.w3.org/2000/svg");
         return svg;
     },
 
