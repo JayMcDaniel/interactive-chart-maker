@@ -1,7 +1,7 @@
     /** 
-                                                                        creates and returns a styled map div legend with color boxes and text 
-                                                                        @namespace
-                                                                        **/
+                                                                            creates and returns a styled map div legend with color boxes and text 
+                                                                            @namespace
+                                                                            **/
 
 
     var map_legend_init = {
@@ -58,18 +58,17 @@
                 } else { //coloring by values
 
                     //set legend text content and set mod so that numbers in legend are 1, .1, .01, or .001 off    
-                    var dec = all_map_options.tooltip.decimals;
+                    var dec = all_map_options.legend.decimals;
                     if (i === 0) {
                         map_legend_text.textContent = dollar + $(all_map_options.value_ranges[i]).addCommas(dec) + percent + " and lower";
                     } else if (i === all_map_options.colors.length - 1) {
-
                         map_legend_text.textContent = dollar + $(map_legend_init.valueMod(all_map_options.value_ranges[i - 1], all_map_options, dec)).addCommas(dec) + percent + " and higher";
                     } else {
                         map_legend_text.textContent = dollar + $(map_legend_init.valueMod(all_map_options.value_ranges[i - 1], all_map_options, dec)).addCommas(dec) + percent + " to " + dollar + $(all_map_options.value_ranges[i]).addCommas(dec) + all_map_options.tooltip.percent_sign;
                     }
 
                     //replace dash signs with minus signs 
-                    map_legend_text.textContent = map_legend_text.textContent.replace(/-/g,"\u2212");
+                    map_legend_text.textContent = map_legend_text.textContent.replace(/-/g, "\u2212");
 
                 }
 
@@ -108,17 +107,25 @@
 
         /** returns a mod so that numbers in legend are 1, .1, .01, or .001 off so they don't overlap **/
         valueMod: function (val, all_map_options, dec) {
-            var mod = .01;
+            var mod;
 
             switch (dec) {
 
-            case "0":
+            case "null":
                 {
                     if (all_map_options.value_ranges[all_map_options.value_ranges.length - 1] > 100) {
                         mod = 1;
-                    } else if (all_map_options.value_ranges[all_map_options.value_ranges.length - 1] > 10) {
-                        mod = .1;
+                        dec = 0;
+                    } else{
+                        mod = .01;
+                        dec = 2;
                     }
+                    break;
+                }
+
+            case "0":
+                {
+                    mod = 1;
                     break;
                 }
             case "1":
@@ -140,14 +147,9 @@
             }
 
 
-            if (dec > 0 || mod > .01) { //if decimals are not set
-                return val + mod;
-            } else if (mod === .01) {
-
-                return Number((val + mod).toFixed(2));
-            } else if (mod === .001) {
-                return Number((val + mod).toFixed(3));
-            }
+            return Number((val + mod).toFixed(dec));
+            
+      
         }
 
 

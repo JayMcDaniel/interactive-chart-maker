@@ -34,6 +34,7 @@ var map_init = {
             is_colored_by_names: utils_forms.getCheckBoxValue($("#map_color_by_names_checkbox")),
             animation_delay: Number($("#map_animation_speed_range").val()),
             legend: {
+                decimals: $("#map_legend_decimals_select").val(),
                 enabled: utils_forms.getCheckBoxValue($("#map_legend_enabled_checkbox")),
                 reversed: utils_forms.getCheckBoxValue($("#legend_reverse_layout_checkbox")),
                 alphabetized: utils_forms.getCheckBoxValue($("#legend_alphabetical_layout_checkbox")),

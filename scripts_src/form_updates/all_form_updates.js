@@ -57,7 +57,6 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
         $(".alert-danger").text("");
 
         $(".chart_tab, .display_options>*").not(".notes").show(); //start showing all, and might hide later if map selected
-        $(".just_map").hide(); //hide just map stuff
 
         //hide stuff unrelated to that chart type (line, bar, column)
         if (["area", "line", "bar", "column", "stacked_column", "stacked_bar"].indexOf(chart_type) > -1) { //if one of these
@@ -67,7 +66,7 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
         }
 
         //hide all classes with just_ ...
-        $(".just_drilldown, .just_scatter, .just_bubble, .just_column, .just_bar, .just_arearange, .just_columnrange").hide();
+        $(".just_drilldown, .just_scatter, .just_bubble, .just_column, .just_bar, .just_arearange, .just_columnrange, .just_map").hide();
 
         //show just_...
         if (["scatter", "drilldown", "bubble", "bar", "column", "stacked_column", "stacked_bar", "arearange", "columnrange"].indexOf(chart_type) > -1) {
@@ -332,8 +331,8 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
     });
 
 
-    //legend reverse, enabled, or alphabetized ceckbox changed
-    $("#legend_reverse_layout_checkbox, #map_legend_enabled_checkbox, #legend_alphabetical_layout_checkbox").unbind().change(function () {
+    //legend reverse, enabled, alphabetized ceckbox, or map legend decimals dropdown changed
+    $("#legend_reverse_layout_checkbox, #map_legend_enabled_checkbox, #legend_alphabetical_layout_checkbox, #map_legend_decimals_select").unbind().change(function () {
 
         if (all_chart_options.chart.type === "map") { //for maps
             map_init.loadNewMap(chart, all_chart_options, all_map_options, true); // true to repopulate form
