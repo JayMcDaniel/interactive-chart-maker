@@ -2018,6 +2018,14 @@
     "previous_fill": "",
     "style": ""
 }, {
+    "cy": "211.0930584390296",
+    "cx": "513.0317122059485",
+    "r": "2",
+    "class": "metro-area-circle",
+    "loc_name": "Louisville-Jefferson County, KY-IN",
+    "previous_fill": "",
+    "style": ""
+}, {
     "cy": "311.46327860345866",
     "cx": "295.0075845358134",
     "r": "2",
@@ -3998,6 +4006,15 @@
     "cx": "683.5002962593828",
     "r": "2",
     "class": "metro-area-circle",
+    "loc_name": "Boston-Cambridge-Newton, MA-NH",
+    "previous_fill": "",
+    "style": ""
+},
+ {
+    "cy": "98.02341185923207",
+    "cx": "683.5002962593828",
+    "r": "2",
+    "class": "metro-area-circle",
     "loc_name": "Boston-Cambridge-Quincy, MA",
     "previous_fill": "",
     "style": ""
@@ -4146,6 +4163,14 @@
     "previous_fill": "",
     "style": ""
 }, {
+    "cy": "88.70091090908032",
+    "cx": "675.6166219351519",
+    "r": "2",
+    "class": "metro-area-circle",
+    "loc_name": "Manchester-Nashua, NH",
+    "previous_fill": "",
+    "style": ""
+}, {
     "cy": "110.4517891309135",
     "cx": "690.522514973999",
     "r": "2",
@@ -4178,6 +4203,14 @@
     "previous_fill": "",
     "style": ""
 }, {
+    "cy": "121.44492727053414",
+    "cx": "669.4384959838417",
+    "r": "2",
+    "class": "metro-area-circle",
+    "loc_name": "New Haven-Milford, CT",
+    "previous_fill": "",
+    "style": ""
+}, {
     "cy": "117.40496140633539",
     "cx": "677.7318309761149",
     "r": "2",
@@ -4191,6 +4224,14 @@
     "r": "2",
     "class": "metro-area-circle",
     "loc_name": "Norwich-New London, CT-RI",
+    "previous_fill": "",
+    "style": ""
+}, {
+    "cy": "117.40496140633539",
+    "cx": "677.7318309761149",
+    "r": "2",
+    "class": "metro-area-circle",
+    "loc_name": "Norwich-New London, CT",
     "previous_fill": "",
     "style": ""
 }, {
@@ -4215,6 +4256,14 @@
     "r": "2",
     "class": "metro-area-circle",
     "loc_name": "Portland-South Portland, ME NECTA",
+    "previous_fill": "",
+    "style": ""
+}, {
+    "cy": "73.74760095822738",
+    "cx": "685.5164872658274",
+    "r": "2",
+    "class": "metro-area-circle",
+    "loc_name": "Portland-South Portland, ME",
     "previous_fill": "",
     "style": ""
 }, {
@@ -4254,6 +4303,14 @@
     "cx": "683.5756798009379",
     "r": "2",
     "class": "metro-area-circle",
+    "loc_name": "Providence-Warwick, RI-MA",
+    "previous_fill": "",
+    "style": ""
+}, {
+    "cy": "111.17817432371938",
+    "cx": "683.5756798009379",
+    "r": "2",
+    "class": "metro-area-circle",
     "loc_name": "Providence-Fall River-Warwick, RI-MA",
     "previous_fill": "",
     "style": ""
@@ -4271,6 +4328,14 @@
     "r": "2",
     "class": "metro-area-circle",
     "loc_name": "Springfield, MA-CT",
+    "previous_fill": "",
+    "style": ""
+}, {
+    "cy": "106.36593430785165",
+    "cx": "666.1928927194414",
+    "r": "2",
+    "class": "metro-area-circle",
+    "loc_name": "Springfield, MA",
     "previous_fill": "",
     "style": ""
 }, {
