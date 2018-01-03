@@ -14,11 +14,12 @@ var areas_colored_report = {
 
             if (e.loc_name && e.value != undefined ) { //if the area has a value
                 areas_colored.push(e.loc_name);
-            } else if (e.loc_name && typeof e.value === "object") { //if it's null or undefined
-                areas_not_colored.push(e.loc_name)
+            } else if (e.loc_name) { //if it's null or undefined
+                areas_not_colored.push(e.loc_name);
             }
 
         });
+        console.log(areas_not_colored);
 
         //alphabetize lists
         areas_colored.sort();
