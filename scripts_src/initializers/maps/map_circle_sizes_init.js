@@ -19,12 +19,27 @@ var map_circle_sizes_init = {
 
         //assign R value to each circle area
 
+        var circle_sized_by = all_map_options.circle_sized_by;
+
         $(all_map_options.areas).each(function () {
 
             if (this.value != undefined) {
-                var this_area = this.value ? Math.abs(this.value) || 1 : 1;
+
+                var this_area;
+
+                if (circle_sized_by === "main_values") {
+                    this_area = this.value ? Math.abs(this.value) || 1 : 1;
+
+                } else if (circle_sized_by === "extra_data_1") {
+                    this_area = this_area = this.extra_vals[0] ? Math.abs(this.extra_vals[0]) || 1 : 1;;
+                    
+                } else if (circle_sized_by === "same_size") {
+                    this_area = 400;
+                }
+
+
                 this.r = Math.sqrt(this_area / Math.PI) * all_map_options.circle_size_multiple;
-            }else{
+            } else {
                 this.r = 0;
             }
 

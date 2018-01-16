@@ -19,7 +19,7 @@ var areas_colored_report = {
             }
 
         });
-        console.log(areas_not_colored);
+      //  console.log(areas_not_colored);
 
         //alphabetize lists
         areas_colored.sort();

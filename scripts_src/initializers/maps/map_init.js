@@ -30,6 +30,7 @@ var map_init = {
             subtitle: {},
             colors: [],
             circle_size_multiple: 1,
+            circle_sized_by: $("#map_circle_size_by_select").val(),
             is_animated: utils_forms.getCheckBoxValue($("#map_animated_checkbox")),
             is_colored_by_names: utils_forms.getCheckBoxValue($("#map_color_by_names_checkbox")),
             animation_delay: Number($("#map_animation_speed_range").val()),
