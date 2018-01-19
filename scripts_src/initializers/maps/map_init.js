@@ -65,6 +65,7 @@ var map_init = {
 
 
         //set viewbox
+        console.log("setting viewbox");
         switch (map_type) {
         case "county":
             all_map_options.viewbox = "95 -10 380 380";
@@ -74,6 +75,12 @@ var map_init = {
             break;
         case "metro_area":
             all_map_options.viewbox = "45 0 670 510";
+            break;
+        case "region":
+            all_map_options.viewbox = "180 0 620 620";
+            break;
+        case "division":
+            all_map_options.viewbox = "180 0 620 620";
             break;
         }
 
@@ -94,6 +101,8 @@ var map_init = {
 
         //hide / enable areas
         all_map_options.areas = map_init.setHiddenAreas(all_map_options);
+
+
 
 
         ////// assign values to all_map_options.areas based on table input ////
@@ -215,7 +224,7 @@ var map_init = {
             .addClass("map_svg");
 
         svg.setAttribute("viewBox", all_map_options.viewbox);
-        
+
         svg.setAttribute("xmlns", "http://www.w3.org/2000/svg");
         return svg;
     },
@@ -360,7 +369,7 @@ var map_init = {
 
                     var el = document.createElementNS("http://www.w3.org/2000/svg", "path");
                     el.setAttributeNS(null, "d", this.d); //sets path outline
-                    
+
                     //set stroke (lighter for county maps)
                     var new_stroke = all_map_options.map_type === "county" ? "#b3b3b3" : "#646464";
                     el.setAttributeNS(null, "stroke", new_stroke); //set path stroke
@@ -372,12 +381,24 @@ var map_init = {
                         el.setAttributeNS(null, "fill", this.color || "#f7f7f7"); //light gray if NA val
                     }
 
-                    if (this.loc_name) { //if it's a named area, set values and color
+                    //if it's a named area, set values and color
+                    if (this.loc_name) {
                         el.setAttributeNS(null, "loc_value", this.value);
                         el.setAttributeNS(null, "fill", this.color || "#f7f7f7"); //light gray if NA val
                         el.setAttribute("loc_name", this.loc_name);
 
                     }
+
+                    //if it has a region, set it on the svg path
+                    if (this.region) {
+                        el.setAttributeNS(null, "region", this.region);
+                    }
+
+                    //if it has a division, set it on the svg path
+                    if (this.division) {
+                        el.setAttributeNS(null, "division", this.division);
+                    }
+
 
                     if (this.class === "border") {
                         el.setAttributeNS(null, "fill", "none");
@@ -454,7 +475,13 @@ var map_init = {
 
             //set title
             $(".tooltip_title", this_tooltip).text($this.attr("loc_name") || "");
-
+            
+            //set region name
+            $(".tooltip_region", this_tooltip).text($this.attr("region") || "");
+            
+            //set division name
+            $(".tooltip_division", this_tooltip).text($this.attr("division") || "");
+            
 
             //add main value to tooltip if applicable
             var this_loc_value = $this.attr("loc_value"); //get main value            
@@ -518,7 +545,7 @@ var map_init = {
                 var this_color = $(this).children(".map_legend_color").css("background-color");
                 $(".map_legend_text", this).css("color", "#B73438"); //make text red
 
-        
+
                 //lower opacity on other areas (paths)
                 $("path", map_display_area).each(function () {
                     var this_fill = $(this).attr("fill");

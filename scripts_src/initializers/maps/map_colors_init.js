@@ -97,8 +97,9 @@ var map_colors_init = {
 
 
 
-        //add color property to each obj in map_objs depending on its value
+        //add color property to each area in all_map_options depending on its value
         var value_ranges_len = all_map_options.is_colored_by_names ? value_ranges.length - 1 : value_ranges.length;
+        
         $.each(all_map_options.areas, function () {
             if (this.value === null || this.value === "N/A") {
                 this.color = "#f7f7f7" //gray
@@ -111,8 +112,7 @@ var map_colors_init = {
                 }
 
 
-
-                //if coloring by names, assign color from same colors index as the index ofvalue found in value ranages
+                //if coloring by names, assign color from same colors index as the index of value found in value ranages
                 if (all_map_options.is_colored_by_names) {
 
                     var found_index = $.inArray(this.value, value_ranges);
@@ -131,12 +131,7 @@ var map_colors_init = {
                         }
                     }
 
-
                 }
-
-
-
-
 
             }
         });
