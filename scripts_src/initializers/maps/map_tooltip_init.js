@@ -20,20 +20,6 @@ var map_tooltip_init = {
         tooltip_main_value.setAttribute("style", "color: #395463; font-family: sans-serif; font-weight: bold; font-size:" + all_map_options.tooltip.value_font_size + "; margin: 0px 0px 0px 5px;");
 
 
-        if (all_map_options.map_type === "region") {
-            var tooltip_region = document.createElement("h2");
-            tooltip_region.className = "tooltip_region";
-            tooltip_region.setAttribute("style", "color: #000; font-family: sans-serif; font-weight: bold; font-size:20px; margin: 5px 0px 0px 5px; ");
-            tooltip_div.appendChild(tooltip_region);
-        }
-
-        if (all_map_options.map_type === "division") {
-            var tooltip_division = document.createElement("h2");
-            tooltip_division.className = "tooltip_division";
-            tooltip_division.setAttribute("style", "color: #000; font-family: sans-serif; font-weight: bold; font-size:20px; margin: 5px 0px 0px 5px; ");
-            tooltip_div.appendChild(tooltip_division);
-        }
-
         tooltip_div.appendChild(tooltip_title);
         tooltip_div.appendChild(tooltip_main_value);
 

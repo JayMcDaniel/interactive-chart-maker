@@ -473,15 +473,17 @@ var map_init = {
             //// populate tooltip
             var this_tooltip = $(".map_tooltip", map_display_area); //get element
 
+            var tooltip_title;
+            if (map.map_type === "division") {
+                tooltip_title = $this.attr("division");
+            } else if (map.map_type === "region") {
+                tooltip_title = $this.attr("region");
+            } else {
+                tooltip_title = $this.attr("loc_name") || ""
+            }
+
             //set title
-            $(".tooltip_title", this_tooltip).text($this.attr("loc_name") || "");
-            
-            //set region name
-            $(".tooltip_region", this_tooltip).text($this.attr("region") || "");
-            
-            //set division name
-            $(".tooltip_division", this_tooltip).text($this.attr("division") || "");
-            
+            $(".tooltip_title", this_tooltip).text(tooltip_title);
 
             //add main value to tooltip if applicable
             var this_loc_value = $this.attr("loc_value"); //get main value            
