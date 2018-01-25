@@ -466,11 +466,26 @@ var map_init = {
             var $this = $(this);
 
             //gray out other states, highlight this one
-            var opacity = all_map_options.map_type === "state" ? ".1" : ".35";
+
+            var opacity = ["state", "region", "division"].indexOf(map.map_type) > -1 ? ".1" : ".35";
             $("path, circle", map_display_area).attr("fill-opacity", opacity);
             $this.attr("fill-opacity", "1");
 
-            //// populate tooltip
+
+            //highlight other states if a region or division map
+
+            var is_region = ["region", "division"].indexOf(map.map_type);
+            if (is_region > -1) {
+                var region_type = ["region", "division"][is_region];
+                var region_name = $this.attr(region_type);
+
+
+                $("path[" + region_type + "='" + region_name + "']", map_display_area).attr("fill-opacity", "1");
+
+            }
+
+
+            // populate tooltip
             var this_tooltip = $(".map_tooltip", map_display_area); //get element
 
             var tooltip_title;
