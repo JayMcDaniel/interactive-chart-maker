@@ -66,10 +66,10 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
         }
 
         //hide all classes with just_ ...
-        $(".just_drilldown, .just_scatter, .just_bubble, .just_column, .just_bar, .just_arearange, .just_columnrange, .just_map").hide();
+        $(".just_drilldown, .just_scatter, .just_bubble, .just_column, .just_bar, .just_arearange, .just_columnrange, .just_map, .just_line").hide();
 
         //show just_...
-        if (["scatter", "drilldown", "bubble", "bar", "column", "stacked_column", "stacked_bar", "arearange", "columnrange"].indexOf(chart_type) > -1) {
+        if (["scatter", "drilldown", "bubble", "bar", "column", "line", "stacked_column", "stacked_bar", "arearange", "columnrange"].indexOf(chart_type) > -1) {
             $(".just_" + chart_type.replace("stacked_", "")).show();
             $(".show_" + chart_type.replace("stacked_", "")).show();
         }
@@ -111,10 +111,10 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
                 $(".chart_tab").not(".map_tab").hide();
                 $(".display_options:gt(0)>*").not(".notes").not(".show_map").hide(); //hide everything except map relevent options
                 $(".just_map").show();
-                
+
                 //update credits input box with custom text
                 update_credits.updateTextAreaBox(all_chart_options);
-               
+
 
                 if (utils_forms.getCheckBoxValue($("#map_color_by_names_checkbox"))) { //color by name
                     map_colors_init.loadMapColorPalettes(11);
@@ -415,33 +415,38 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
     /* Y-AXIS CHANGES */
 
     //y-axis title textarea changed
-    $("#chart_y_axis_title_textarea").unbind().keyup(function () {
+    $("#chart_y_axis_title_textarea, #chart_y_axis_title_textarea_2").unbind().keyup(function () {
         var newTitle = $(this).val();
-        update_y_axis.updateTitle(newTitle, chart, all_chart_options);
+        var axis_number = $(this).attr("id").slice(-1);
+        update_y_axis.updateTitle(newTitle, chart, all_chart_options, axis_number);
     });
 
     //y-axis title indent changed
-    $("#chart_y_axis_x_position_input").unbind().keyup(function () {
+    $("#chart_y_axis_x_position_input, #chart_y_axis_x_position_input_2").unbind().keyup(function () {
         var newXPosition = $(this).val();
-        update_y_axis.updateXPosition(newXPosition, chart, all_chart_options);
+        var axis_number = $(this).attr("id").slice(-1);
+        update_y_axis.updateXPosition(newXPosition, chart, all_chart_options, axis_number);
     });
 
     //y-axis tickmark interval input changed
-    $("#chart_y_axis_tickmark_interval_input").unbind().keyup(function () {
+    $("#chart_y_axis_tickmark_interval_input, #chart_y_axis_tickmark_interval_input_2").unbind().keyup(function () {
         var newInterval = $(this).val();
-        update_y_axis.updateTickmarkInterval(newInterval, chart, all_chart_options);
+        var axis_number = $(this).attr("id").slice(-1);
+        update_y_axis.updateTickmarkInterval(newInterval, chart, all_chart_options, axis_number);
     });
 
     //y-axis max input changed
-    $("#chart_y_axis_max_input").unbind().keyup(function () {
+    $("#chart_y_axis_max_input, #chart_y_axis_max_input_2").unbind().keyup(function () {
         var newMax = $(this).val();
-        update_y_axis.updateMax(newMax, chart, all_chart_options);
+        var axis_number = $(this).attr("id").slice(-1);
+        update_y_axis.updateMax(newMax, chart, all_chart_options, axis_number);
     });
 
     //y-axis min input changed
-    $("#chart_y_axis_min_input").unbind().keyup(function () {
+    $("#chart_y_axis_min_input, #chart_y_axis_min_input_2").unbind().keyup(function () {
         var newMin = $(this).val();
-        update_y_axis.updateMin(newMin, chart, all_chart_options);
+        var axis_number = $(this).attr("id").slice(-1);
+        update_y_axis.updateMin(newMin, chart, all_chart_options, axis_number);
     });
 
     //y-axis opposite side ceckbox changed
@@ -455,6 +460,7 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
         var val = utils_forms.getCheckBoxValue($(this));
         update_y_axis.updateIsLog(val, chart, all_chart_options);
     });
+    
 
     //y-axis dollar / percent or decimal selects changed (format)
     $("#chart_y_axis_signs_select, #chart_y_axis_decimals_select, #chart_y_axis_divide_select").unbind().change(function () {
@@ -463,13 +469,42 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
         var dividend = Number($("#chart_y_axis_divide_select").val());
         update_y_axis.updateFormatter(sign, decimals, dividend, chart, all_chart_options);
     });
+    
+    
+    
     $("#chart_y_axis_signs_select").change(); //call once on load
+
+
+
+    /* SECONDARY Y-AXIS CHANGES */
+    $("#chart_y_axis_2_enabled_checkbox").unbind().change(function () {
+       var is_checked = utils_forms.getCheckBoxValue($(this));
+        
+        if (is_checked){
+            $(".secondary_y_axis_span").show();
+            update_y_axis.addSecondAxis(chart, all_chart_options);
+        }else{
+            $(".secondary_y_axis_span").hide();
+            update_y_axis.removeSecondAxis(chart, all_chart_options);
+        }
+        
+    });
+    
+    
+    //secondary y-axis dollar / percent or decimal selects changed (format)
+    $("#chart_y_axis_signs_select_2, #chart_y_axis_decimals_select_2, #chart_y_axis_divide_select_2").unbind().change(function () {
+        var sign = $("#chart_y_axis_signs_select_2").val();
+        var decimals = $("#chart_y_axis_decimals_select_2").val();
+        var dividend = Number($("#chart_y_axis_divide_select_2").val());
+        update_y_axis.updateFormatter(sign, decimals, 1, chart, all_chart_options, "2"); //"2" is for second axis
+    });
 
 
     /* TOOLTIP CHANGES */
 
     //change shared tooltip checkbox, decimals, signs, or mulitplier selects
-    $("#chart_tooltip_shared_checkbox, #chart_tooltip_force_decimals_select, #chart_tooltip_force_decimals_x_select, #chart_tooltip_force_decimals_z_select, #chart_tooltip_signs_select, #chart_tooltip_signs_x_select, #chart_tooltip_signs_z_select, #chart_tooltip_y_multiple_select").unbind().change(function () {
+    $("#chart_tooltip_shared_checkbox, #chart_tooltip_force_decimals_select, #chart_tooltip_force_decimals_x_select, #chart_tooltip_force_decimals_z_select, #chart_tooltip_signs_select, #chart_tooltip_signs_x_select, #chart_tooltip_signs_z_select, #chart_tooltip_y_multiple_select, #chart_tooltip_force_decimals_select_2, #chart_tooltip_signs_select_2, #chart_tooltip_y_multiple_select_2").unbind().change(function () {
+        
         if (all_chart_options.chart.type === "map") { //for maps
             map_init.loadNewMap(chart, all_chart_options, all_map_options, true); // true to repopulate form
         } else {
@@ -580,7 +615,7 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
 
         //update credit box
         update_credits.updateTextAreaBox(all_chart_options);
-        
+
         //make new map
         if (utils_forms.getCheckBoxValue($("#map_color_by_names_checkbox"))) { //coloring by names
             $(".just_map_colored_by_names").show();

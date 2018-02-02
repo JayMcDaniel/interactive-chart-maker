@@ -104,7 +104,7 @@
                             <option value="metro_area">Metro area</option>
                             <option value="region">Region</option>
                             <option value="division">Division</option>
-                            
+
                         </select>
 
                         <br>
@@ -892,6 +892,73 @@
                         <option value="1000000">1,000,000</option>
                     </select>
 
+
+
+
+                    <!-- 2nd Y-Axis (only for line charts) -->
+                    <span class="just_line">
+                        <br>
+                    <label for="chart_y_axis_2_enabled_checkbox">Use secondary y-axis?</label>
+                        <input type="checkbox" id="chart_y_axis_2_enabled_checkbox" />    
+                        
+                        
+                    <br>
+                    <span class="secondary_y_axis_span" style="display: none;">  
+                    <h4>Secondary Y-axis <sup class = "help_icon">?</sup></h4>
+                         <span class="notes">You can assign series to the second y-axis in the "Individual series options" tab.
+                                <br>
+                        </span>
+
+
+
+                    <label for="chart_y_axis_title_textarea_2">Title: </label>
+                    <br>
+                    <textarea id="chart_y_axis_title_textarea_2"></textarea>
+                    <br>
+
+                    <span id="chart_y_axis_x_position_span_2" class="not_bar">
+                    <label for="chart_y_axis_x_position_input_2">Title indent: </label>
+                    <input type="text" id="chart_y_axis_x_position_input_2" class="small number_entry" value="-75" />
+                    <span class="notes">(higher value moves title to the right)</span>
+                    <br>
+                    </span>
+
+                    <label for="chart_y_axis_tickmark_interval_input_2">Tickmark interval: </label>
+                    <input type="text" id="chart_y_axis_tickmark_interval_input_2" class="small number_entry" placeholder="Auto" value="5" />
+                    <br>
+
+                    <label for="chart_y_axis_min_input_2">Min value: </label>
+                    <input type="text" id="chart_y_axis_min_input_2" class="medium number_entry" placeholder="Auto" value="0" />
+                    <br>
+
+                    <label for="chart_y_axis_max_input_2">Max value: </label>
+                    <input type="text" id="chart_y_axis_max_input_2" class="medium number_entry" placeholder="Auto" value="100" />
+                    <br>
+
+
+                    <label for="chart_y_axis_signs_select_2">Dollar / percent signs: </label>
+                    <select id="chart_y_axis_signs_select_2">
+                        <option value="no_signs" selected>&nbsp;</option>
+                        <option value="$">$</option>
+                        <option value="%">%</option>
+                    </select>
+                    <br>
+
+                    <label for="chart_y_axis_decimals_select_2">Decimal points: </label>
+                    <select id="chart_y_axis_decimals_select_2">
+                        <option value="null" selected>Auto</option>
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                    <br>
+
+
+                    </span>
+                    </span>
+
+
                 </div>
 
             </div>
@@ -1027,6 +1094,53 @@
                     </select>
                     <span class="notes">This can be useful when using data from a table that shows its values divided by a number.</span>
                     </span>
+
+
+
+                    <span class="show_line">
+                    <!--tooltip options for secondary y-axis formatting -->
+                    <span class="secondary_y_axis_span" style="display: none">
+                        <br>
+                    <h4 style="font-size: 80%;">Secondary Y-axis tooltip options</h4>
+                     <span class="notes">These options will only apply to the series that are associated with a second Y-axis. To associate a series, use the "Individual Series Options" tab.</span>
+
+
+
+
+                    <label for="chart_tooltip_force_decimals_select_2">Decimal points: </label>
+                    <select id="chart_tooltip_force_decimals_select_2">
+                        <option value="0">Auto</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                    <span class="notes">This will force the values shown to the selected decimal point, so "5" will be "5.0".</span>
+                    <br>
+
+                    <label for="chart_tooltip_signs_select_2">Dollar / percent signs: </label>
+                    <select id="chart_tooltip_signs_select_2">
+                        <option value="no_signs" selected>&nbsp;</option>
+                        <option value="$">$</option>
+                        <option value="%">%</option>
+                        <option value="percentage point(s)">percentage point(s)</option>
+                    </select>
+                    <span class="notes">This will add a dollar or percent sign after the y-value associated with the second axis in the tooltip.</span>
+                    <br>
+                    <label for="chart_tooltip_y_multiple_select_2">Multiply values by: </label>
+                    <select id="chart_tooltip_y_multiple_select_2">
+                        <option value="1">&nbsp;</option>
+                        <option value="10">10</option>
+                        <option value="100">100</option>
+                        <option value="1000">1,000</option>
+                        <option value="10000">10,000</option>
+                        <option value="100000">100,000</option>
+                        <option value="1000000">1,000,000</option>
+                    </select>
+
+                    </span>
+                    </span>
+
+
                 </div>
 
             </div>

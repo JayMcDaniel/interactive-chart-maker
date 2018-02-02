@@ -3,6 +3,7 @@ var plotOptionsInit = require("../initializers/charts/plot_options_init.js");
 var update_data = require("./update_data.js");
 var update_tooltip = require("./update_tooltip.js");
 var update_x_axis = require("./update_x_axis.js");
+var update_y_axis = require("./update_y_axis.js");
 var utils_main = require("../utils/utils_main.js");
 
 
@@ -29,6 +30,13 @@ var updateChartType = function (chart_type, chart, all_chart_options) {
 
         type = $("#drilldown_type_select").val();
     }
+
+    //if not a line and has a second y-axis, remove that axis
+
+    if (type != "line") {
+        $("#chart_y_axis_2_enabled_checkbox").prop('checked', false).change();
+    }
+
 
     if (type === "bar") {
         //fix y axis position

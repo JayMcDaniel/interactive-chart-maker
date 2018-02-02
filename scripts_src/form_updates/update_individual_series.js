@@ -1,6 +1,7 @@
 var utils_main = require("../utils/utils_main.js");
 var utils_forms = require("../utils/utils_forms.js");
 var keyboard_inputs = require("../keyboard_inputs.js");
+var update_y_axis = require("./update_y_axis.js");
 
 /** methods for updating individual series options in  #display_series_options - called when its side nav tab is selected in navigation_setup.
 @module
@@ -15,7 +16,7 @@ var update_individual_series = {
 
     /** updates all the extra data titles and values. Called from  seriesExtraDataChange()**/
     updateExtraData: function (chart, all_chart_options) {
-        
+
         $(".series_snippet").each(function (i) {
 
             chart.series[i].extra_data = [];
@@ -33,7 +34,7 @@ var update_individual_series = {
                 //push values
                 $(".series_extra_data_values_textarea:eq(" + j + ")", $series_snippet).each(function (k) {
 
-                    extra_data_obj.values = $(this).val().split("\n"); 
+                    extra_data_obj.values = $(this).val().split("\n");
                 });
 
 
@@ -138,7 +139,7 @@ var update_individual_series = {
             $(".selected", $(this).parent()).removeClass("selected");
             $(this).addClass("selected");
 
-            //hide or show the line styles for that series
+            //hide or show the line styles optoins for that series
             type === "line" ? $(".line_style_div:eq(" + i + ")").show() : $(".line_style_div:eq(" + i + ")").hide();
 
         });
@@ -161,6 +162,35 @@ var update_individual_series = {
             all_chart_options.series[i].visible = is_visible;
         });
     },
+
+
+
+    /** called when use second y-axis checkbox is changed.  Binded at the end of populateForm **/
+    useSecondYAxisChange: function (chart, all_chart_options) {
+
+        $(".use_2nd_y_axis_checkbox").change(function () {
+
+
+            var axis_index = utils_forms.getCheckBoxValue($(this)) ? 1 : 0;
+            
+            //add second axis if not there by clicking the add y axis checkbox
+            if (!Array.isArray(all_chart_options.yAxis) && axis_index === 1) {
+                $("#chart_y_axis_2_enabled_checkbox").prop('checked', true).change();
+            }
+
+
+            var i = $(this).parents(".series_snippet").index();
+
+            chart.series[i].update({
+                yAxis: axis_index
+            });
+
+            //update all_chart_options
+            all_chart_options.series[i].yAxis = axis_index;
+        });
+    },
+
+
 
 
 
@@ -273,7 +303,7 @@ var update_individual_series = {
         $(line_style_select).append(line_style_option_solid, line_style_option_dash, line_style_option_dot, line_style_option_long_dash, line_style_option_dash_dot);
 
         $(line_style_select).val(series.dashStyle || "Solid"); //set selected value
-        
+
         $(line_style_div).append(line_style_label, line_style_select);
 
         return line_style_div;
@@ -322,9 +352,9 @@ var update_individual_series = {
         return series_type_div;
     },
 
-    
-    
-    
+
+
+
     /** makes and returns a div with a checkbox that lets user determine whether the series should be visible by default **/
 
     makeSeriesVisibleDiv: function (all_chart_options, i) {
@@ -340,8 +370,6 @@ var update_individual_series = {
         series_visible_checkbox.setAttribute("type", "checkbox");
         series_visible_checkbox.checked = all_chart_options.series[i].visible ? "checked" : null;
         series_visible_checkbox.id = "series_visible_checkbox_" + i;
-
-
         series_visible_checkbox.className = "series_visible_checkbox";
 
         series_visible_div.appendChild(series_visible_label);
@@ -350,8 +378,33 @@ var update_individual_series = {
         return series_visible_div;
     },
 
-    
-    
+
+
+
+    /** makes and returns a div with a checkbox that lets the user choose to put the series (line only) on the second y-axis **/
+    use2ndYAxisDiv: function (all_chart_options, i) {
+        var use_2nd_y_axis_div = document.createElement("div");
+        use_2nd_y_axis_div.className = "use_2nd_y_axis_div";
+
+        var use_2nd_y_axis_label = document.createElement("label");
+        use_2nd_y_axis_label.className = "use_2nd_y_axis_label";
+        use_2nd_y_axis_label.textContent = "Plot on second Y-Axis: ";
+        use_2nd_y_axis_label.setAttribute("for", "use_2nd_y_axis_checkbox_" + i);
+
+        var use_2nd_y_axis_checkbox = document.createElement("input");
+        use_2nd_y_axis_checkbox.setAttribute("type", "checkbox");
+        use_2nd_y_axis_checkbox.checked = all_chart_options.series[i].yAxis == 1 ? "checked" : null;
+        use_2nd_y_axis_checkbox.id = "use_2nd_y_axis_checkbox_" + i;
+        use_2nd_y_axis_checkbox.className = "use_2nd_y_axis_checkbox";
+
+        use_2nd_y_axis_div.appendChild(use_2nd_y_axis_label);
+        use_2nd_y_axis_div.appendChild(use_2nd_y_axis_checkbox);
+
+        return use_2nd_y_axis_div;
+    },
+
+
+
 
     /** makes and returns a div that has options to add extra data to a series for its tooltip **/
 
@@ -372,7 +425,9 @@ var update_individual_series = {
         //title text area
         var series_extra_data_title_textarea = document.createElement("textarea");
 
-            $(series_extra_data_title_textarea).css({"height": "30px"})
+        $(series_extra_data_title_textarea).css({
+                "height": "30px"
+            })
             .addClass("series_extra_data_title_textarea")
             .attr("id", "series_extra_data_title_textarea_" + i)
             .val(all_chart_options.series[i].extra_data ? all_chart_options.series[i].extra_data[j].name : "");
@@ -387,7 +442,7 @@ var update_individual_series = {
         $(series_extra_data_values_textarea).addClass("series_extra_data_values_textarea")
             .attr("id", "series_extra_data_values_textarea_" + i)
             .val(all_chart_options.series[i].extra_data ? all_chart_options.series[i].extra_data[j].values.join("\n") : "");
-        
+
 
         //notes
         var extra_data_notes = document.createElement("p");
@@ -431,8 +486,10 @@ var update_individual_series = {
 
         //horizontal rule
         var extra_data_hr = document.createElement("hr");
-            $(extra_data_hr).css({"margin-bottom": "0px"});
-        
+        $(extra_data_hr).css({
+            "margin-bottom": "0px"
+        });
+
 
         //put it all together
 
@@ -454,7 +511,7 @@ var update_individual_series = {
 
     /** populates #display_series_options with options for each series. Called when its side nav tab is selected from navigation_setup. **/
     populateForm: function (chart, all_chart_options) {
-        
+
 
         var display_series_options_inner_div = $("#display_series_options_inner_div");
         display_series_options_inner_div.empty();
@@ -484,6 +541,10 @@ var update_individual_series = {
             //make line style div
             var line_style_div = update_individual_series.makeLineStyleDiv(i, series);
             series_snippet.appendChild(line_style_div);
+
+            //make use second y-axis checkbox div
+            var use_2nd_y_axis_div = update_individual_series.use2ndYAxisDiv(all_chart_options, i);
+            series_snippet.appendChild(use_2nd_y_axis_div);
 
             //make "is series visible on startup?" div
             var series_visible_div = update_individual_series.makeSeriesVisibleDiv(all_chart_options, i);
@@ -519,12 +580,15 @@ var update_individual_series = {
         //bind line style changes
         update_individual_series.lineStyleSelectChange(chart, all_chart_options);
 
+        //bind use second y-axis checkbox changes
+        update_individual_series.useSecondYAxisChange(chart, all_chart_options);
+
         //bind is visible by default changes
         update_individual_series.seriesVisibleChange(chart, all_chart_options);
 
         //bind extra data changes
         update_individual_series.seriesExtraDataChange(chart, all_chart_options);
-        
+
     }
 
 }

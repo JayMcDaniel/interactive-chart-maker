@@ -132,7 +132,7 @@
                     }
                 },
                 "series": [{
-                        "name": "TPO Abs (units IU/mL)",
+                        "name": "TPO Abs (IU/mL)",
                         "data": [[Date.UTC(2017, 3, 20), 600], [Date.UTC(2017, 7, 1), 580], [Date.UTC(2017, 9, 6), 600], [Date.UTC(2017, 11, 15), 600]],
                         pointStart: Date.UTC(2017, 3, 1),
                         pointEnd: Date.UTC(2017, 11, 30),
@@ -177,33 +177,18 @@
                                     x: 25,
                                     y: -5
                                 }
-                        }, 
+                        },
 
 
 
                                  [Date.UTC(2017, 9, 15), 300],
-                                 [Date.UTC(2017, 9, 25), null],
-                                 
-                            {
-                                x: Date.UTC(2017, 9, 25),
-                                y: 300,
-                                dataLabels: {
-                                    enabled: true,
-                                    formatter: function () {
-                                        return "Hydrocortisone<br>10 mg"
-                                    },
-                                    align: "center",
-                                    style:{
-                                        textAlign: "center"
-                                    },
-                                    x: 55,
-                                    y: -5
-                                }
-                            },
-                            [Date.UTC(2017, 11, 30), 300]],
-                
-                
-                
+                                 [Date.UTC(2017, 9, 25), null]
+
+                          
+                                ],
+
+
+
                         pointStart: Date.UTC(2017, 3, 1),
                         pointEnd: Date.UTC(2017, 11, 30),
                         "type": "line",
@@ -214,8 +199,61 @@
                         showInLegend: false
 
                     },
+                           
+                           
+                           
+                           
+                           
+                           
+                      {
+                        "name": "Medications",
+                        "data": [
+
+                            {
+                                x: Date.UTC(2017, 9, 25),
+                                y: 300,
+                                dataLabels: {
+                                    enabled: true,
+                                    formatter: function () {
+                                        return "Hydrocortisone<br>10 mg"
+                                    },
+                                    align: "center",
+                                    style: {
+                                        textAlign: "center"
+                                    },
+                                    x: 55,
+                                    y: -5
+                                }
+                            },
+                                 {x:Date.UTC(2017, 11, 30), y:300, "color": "blue"}
+                                ],
+
+
+
+                        pointStart: Date.UTC(2017, 3, 1),
+                        pointEnd: Date.UTC(2017, 11, 30),
+                        "type": "line",
+                          dashStyle: "Dash",
+                        "color": "blue",
+                        "_symbolIndex": 2,
+                        "stacking": null,
+                        "visible": true,
+                        showInLegend: false
+
+                    },     
+                           
+                           
+                           
+                           
+                           
+                           
+                           
+                           
+                           
+                           
+                           
                     {
-                        "name": "TG Abs (units IU/mL)",
+                        "name": "TG Abs (IU/mL)",
                         "data": [[Date.UTC(2017, 3, 20), 14.4], [Date.UTC(2017, 7, 1), 15.9], [Date.UTC(2017, 9, 6), 12.6], [Date.UTC(2017, 11, 15), 18]],
                         "type": "line",
                         yAxis: 1,
@@ -237,7 +275,7 @@
                     }
                 },
                 "title": {
-                    "text": "Thyroid Antibody",
+                    "text": "",
                     "align": "left",
                     "style": {
                         "color": "#000000",

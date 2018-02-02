@@ -183,7 +183,27 @@
                         },
 
                                  [Date.UTC(2017, 9, 15), .7],
-                                 [Date.UTC(2017, 9, 25), null],
+                                 [Date.UTC(2017, 9, 25), null]],
+
+
+
+                        pointStart: Date.UTC(2017, 3, 1),
+                        pointEnd: Date.UTC(2017, 11, 30),
+                        "type": "line",
+                        "color": "red",
+                        "_symbolIndex": 2,
+                        "stacking": null,
+                        "visible": true,
+                        showInLegend: false
+
+                    },
+                           
+                           
+                           
+                           
+                           {
+                        "name": "Medications",
+                        "data": [
 
                             {
                                 x: Date.UTC(2017, 9, 25),
@@ -201,25 +221,33 @@
                                     y: -5
                                 }
                             },
-                            [Date.UTC(2017, 11, 30), .7]],
+                                 {x: Date.UTC(2017, 11, 30), y:.7}],
 
 
 
                         pointStart: Date.UTC(2017, 3, 1),
                         pointEnd: Date.UTC(2017, 11, 30),
                         "type": "line",
-                        "color": "red",
+                        "color": "blue",
                         "_symbolIndex": 2,
                         "stacking": null,
                         "visible": true,
-                        showInLegend: false
+                        showInLegend: false,
+                               dashStyle: "Dash"
 
                     },
+                           
+                           
+                           
+                           
+                           
+                           
+                           
 
 
 
                     {
-                        "name": "Free T4 (mg/dL)",
+                        "name": "Free T4 (ng/dL)",
                         "data": [[Date.UTC(2017, 1, 21), 1.31], [Date.UTC(2017, 4, 3), 1.61], [Date.UTC(2017, 5, 16), 1.12], [Date.UTC(2017, 7, 1), 1.45], [Date.UTC(2017, 8, 15), 1.38], [Date.UTC(2017, 9, 6), 1.26], [Date.UTC(2017, 11, 15), 1.56]],
 
                         "type": "line",
@@ -231,7 +259,7 @@
                         "dashStyle": "Dash"
                     },
                     {
-                        "name": "ToVd T3 (mg/dL)",
+                        "name": "Total T3 (ng/dL)",
                         "data": [[Date.UTC(2017, 1, 21), null], [Date.UTC(2017, 4, 3), 108], [Date.UTC(2017, 5, 16), null], [Date.UTC(2017, 7, 1), 130], [Date.UTC(2017, 8, 15), null], [Date.UTC(2017, 9, 6), 98], [Date.UTC(2017, 11, 15), null]],
 
                         "type": "line",
@@ -255,7 +283,7 @@
                     }
                 },
                 "title": {
-                    "text": "Serum TSH (mcIU/mL), Free T4 (mg/dL), ToVd T3 (mg/dL)",
+                    "text": "",
                     "align": "left",
                     "style": {
                         "color": "#000000",
@@ -438,7 +466,7 @@
                         "tickWidth": 1,
                         "title": {
                             "useHTML": false,
-                            "text": "Free T4 (mg/dL)",
+                            "text": "Free T4 (ng/dL)",
                             "margin": 6,
                           //  "align": "center",
                           //  "offset": 20,
@@ -494,7 +522,7 @@
                         "tickWidth": 1,
                         "title": {
                             "useHTML": false,
-                            "text": "ToVd T3 (mg/dL)",
+                            "text": "Total T3 (ng/dL)",
                             "margin": 6,
                            // "align": "high",
                         //    "offset": 20,

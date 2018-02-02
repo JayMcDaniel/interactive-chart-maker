@@ -38,16 +38,33 @@ var update_tooltip = {
 
 
     /** gets a tooltip for bubble charts. Called from updateToolTip **/
-    getBubbleTooltip: function (chart, y_decimals, x_decimals, z_decimals, y_signs_arr, x_signs_arr, z_signs_arr, multiplier, chart_type, z_title, all_chart_options) {
+    getBubbleTooltip: function (chart, chart_type, all_chart_options) {
 
         all_chart_options.tooltip.formatter = function () {
+
+            var options = this.series.chart.tooltip.options;
+
+            var y_dollar = options.y_signs_arr[0];
+            var y_percent = options.y_signs_arr[1];
+            var x_dollar = options.x_signs_arr[0];
+            var x_percent = options.x_signs_arr[1];
+            var z_dollar = options.z_signs_arr[0];
+            var z_percent = options.z_signs_arr[1];
+
+            var y_decimals = options.y_decimals;
+            var x_decimals = options.x_decimals;
+            var z_decimals = options.z_decimals;
+
+            var multiple = options.multiplier;
+            var z_title = options.z_title;
+
             var y_axis_title = this.series.yAxis.axisTitle ? this.series.yAxis.axisTitle.textStr : "Y-Axis";
             var x_axis_title = this.series.xAxis.axisTitle ? this.series.xAxis.axisTitle.textStr : "X-Axis";
 
-            var s = "&lt;b>" + this.series.name + "&lt;/b>&lt;br>" + y_axis_title + ": &lt;b>" + y_signs_arr[0] +
-                $(this.y * multiplier).addCommas(y_decimals) + y_signs_arr[1] + "&lt;/b>&lt;br/>" +
-                x_axis_title + ": &lt;b>" + x_signs_arr[0] + $(this.x * multiplier).addCommas(x_decimals) + x_signs_arr[1] + "&lt;/b>&lt;br/>" +
-                z_title + ": &lt;b>" + z_signs_arr[0] + $(this.point.z * multiplier).addCommas(z_decimals) + z_signs_arr[1] + "&lt;/b>";
+            var s = "&lt;b>" + this.series.name + "&lt;/b>&lt;br>" + y_axis_title + ": &lt;b>" + y_dollar +
+                $(this.y * multiple).addCommas(y_decimals) + y_percent + "&lt;/b>&lt;br/>" +
+                x_axis_title + ": &lt;b>" + x_dollar + $(this.x * multiple).addCommas(x_decimals) + x_percent + "&lt;/b>&lt;br/>" +
+                z_title + ": &lt;b>" + z_dollar + $(this.point.z * multiple).addCommas(z_decimals) + z_percent + "&lt;/b>";
 
             //extra data//
             all_chart_options.series[this.series.index] ? s = all_chart_options.tooltip.addExtraData(all_chart_options.series[this.series.index].extra_data, this.point, s) : s = s;
@@ -60,22 +77,38 @@ var update_tooltip = {
 
 
     /** gets a tooltip for drilldown charts. Called from updateToolTip**/
-    getDrilldownTooltip: function (chart, y_decimals, x_decimals, z_decimals, y_signs_arr, x_signs_arr, z_signs_arr, multiplier, chart_type, z_title, all_chart_options) {
+    getDrilldownTooltip: function (chart, chart_type, all_chart_options) {
 
         //if a bubble drilldown//
         if ($("#drilldown_type_select").val() === "bubble") {
 
             all_chart_options.tooltip.formatter = function () {
 
+                var options = this.series.chart.tooltip.options;
+
+                var y_dollar = options.y_signs_arr[0];
+                var y_percent = options.y_signs_arr[1];
+                var x_dollar = options.x_signs_arr[0];
+                var x_percent = options.x_signs_arr[1];
+                var z_dollar = options.z_signs_arr[0];
+                var z_percent = options.z_signs_arr[1];
+
+                var y_decimals = options.y_decimals;
+                var x_decimals = options.x_decimals;
+                var z_decimals = options.z_decimals;
+
+                var multiple = options.multiplier;
+                var z_title = options.z_title;
+
                 var y_axis_title = this.series.yAxis.axisTitle ? this.series.yAxis.axisTitle.textStr : "Y-Axis";
                 var x_axis_title = this.series.xAxis.axisTitle ? this.series.xAxis.axisTitle.textStr : "X-Axis";
 
                 var s = "&lt;b>" + this.series.name + "&lt;/b>&lt;br>" +
                     this.key + "&lt;br>" +
-                    y_axis_title + ": &lt;b>" + y_signs_arr[0] +
-                    $(this.y * multiplier).addCommas(y_decimals) + y_signs_arr[1] + "&lt;/b>&lt;br/>" +
-                    x_axis_title + ": &lt;b>" + x_signs_arr[0] + $(this.x * multiplier).addCommas(x_decimals) + x_signs_arr[1] + "&lt;/b>&lt;br/>" +
-                    z_title + ": &lt;b>" + z_signs_arr[0] + $(this.point.z * multiplier).addCommas(z_decimals) + z_signs_arr[1] + "&lt;/b>";
+                    y_axis_title + ": &lt;b>" + y_dollar +
+                    $(this.y * multiple).addCommas(y_decimals) + y_percent + "&lt;/b>&lt;br/>" +
+                    x_axis_title + ": &lt;b>" + x_dollar + $(this.x * multiple).addCommas(x_decimals) + x_percent + "&lt;/b>&lt;br/>" +
+                    z_title + ": &lt;b>" + z_dollar + $(this.point.z * multiple).addCommas(z_decimals) + z_percent + "&lt;/b>";
 
                 this.point.drilldown ? s = s + "&lt;br>(Click to drill down)" : s = s;
                 return s.replace(/\$-/g, "-$");
@@ -85,7 +118,13 @@ var update_tooltip = {
 
             all_chart_options.tooltip.formatter = function () {
 
-                var y_val = y_signs_arr[0] + $(this.y * multiplier).addCommas(y_decimals) + y_signs_arr[1];
+                var options = this.series.chart.tooltip.options;
+
+                var y_dollar = options.y_signs_arr[0];
+                var y_percent = options.y_signs_arr[1];
+                var y_decimals = options.y_decimals;
+
+                var y_val = y_dollar + $(this.y * multiple).addCommas(y_decimals) + y_percent;
                 var s = "&lt;b>" + this.series.name + "&lt;/b>&lt;br>" + this.key + ": " + y_val;
                 this.point.drilldown ? s = s + "&lt;br>(Click to drill down)" : s = s;
                 return s.replace(/\$-/g, "-$");
@@ -96,16 +135,31 @@ var update_tooltip = {
 
 
 
+
     /** gets a tooltip for scatter charts. Called from updateToolTip**/
-    getScatterTooltip: function (chart, y_decimals, x_decimals, y_signs_arr, x_signs_arr, multiplier, chart_type, all_chart_options) {
+    getScatterTooltip: function (chart, chart_type, all_chart_options) {
 
         all_chart_options.tooltip.formatter = function () {
+
+            var options = this.series.chart.tooltip.options;
+
+            var y_dollar = options.y_signs_arr[0];
+            var y_percent = options.y_signs_arr[1];
+            var x_dollar = options.x_signs_arr[0];
+            var x_percent = options.x_signs_arr[1];
+
+            var y_decimals = options.y_decimals;
+            var x_decimals = options.x_decimals;
+
+            var multiple = options.multiplier;
+
+
             var y_axis_title = this.series.yAxis.axisTitle ? this.series.yAxis.axisTitle.textStr : "Y-Axis";
             var x_axis_title = this.series.xAxis.axisTitle ? this.series.xAxis.axisTitle.textStr : "X-Axis";
 
-            var s = "&lt;b>" + this.series.name + "&lt;/b>&lt;br>" + y_axis_title + ": &lt;b>" + y_signs_arr[0] +
-                $(this.y * multiplier).addCommas(y_decimals) + y_signs_arr[1] + "&lt;/b>&lt;br>" +
-                x_axis_title + ": &lt;b>" + x_signs_arr[0] + $(this.x * multiplier).addCommas(x_decimals) + x_signs_arr[1] + "&lt;/b>";
+            var s = "&lt;b>" + this.series.name + "&lt;/b>&lt;br>" + y_axis_title + ": &lt;b>" + y_dollar +
+                $(this.y * multiple).addCommas(y_decimals) + y_percent + "&lt;/b>&lt;br>" +
+                x_axis_title + ": &lt;b>" + x_dollar + $(this.x * multiple).addCommas(x_decimals) + x_percent + "&lt;/b>";
 
             //add extra data//
             all_chart_options.series[this.series.index] ? s = all_chart_options.tooltip.addExtraData(all_chart_options.series[this.series.index].extra_data, this.point, s) : s = s;
@@ -122,7 +176,7 @@ var update_tooltip = {
 
 
     /** gets a tooltip for typical charts (line, area, bar etc). Called from updateToolTip**/
-    getTypicalTooltip: function (chart, is_shared, y_decimals, y_signs_arr, multiplier, chart_type, all_chart_options) {
+    getTypicalTooltip: function (chart, is_shared, chart_type, all_chart_options) {
 
 
         if (is_shared) { //SHARED TOOLTIP
@@ -132,14 +186,30 @@ var update_tooltip = {
 
             all_chart_options.tooltip.formatter = function () {
 
+
+
                 var shared_tooltip_arr = ["&lt;b>" + this.x + "&lt;/b>"];
 
                 $.each(this.points, function (i, e) {
-                    
+
+                    var options = this.series.chart.tooltip.options;
+                    var dollar = options.y_signs_arr[0];
+                    var percent = options.y_signs_arr[1];
+                    var decimals = options.y_decimals;
+                    var multiple = options.multiplier;
+
+                    if (this.series.chart.options.series[this.series.index].yAxis == 1) {
+                        dollar = options.y_signs_arr_2[0];
+                        percent = options.y_signs_arr_2[1];
+                        decimals = options.y_decimals_2;
+                        multiple = options.multiplier_2;
+                    }
+
+
                     var index = e.series.index;
 
-                    var y_val = this.point.high ? " High: " + y_signs_arr[0] + $(this.point.high * multiplier).addCommas(y_decimals) + y_signs_arr[1] + " | Low: " + y_signs_arr[0] + $(this.point.low * multiplier).addCommas(y_decimals) + y_signs_arr[1] :
-                        y_signs_arr[0] + $(this.point.y * multiplier).addCommas(y_decimals) + y_signs_arr[1];
+                    var y_val = this.point.high ? " High: " + dollar + $(this.point.high * multiple).addCommas(decimals) + percent + " | Low: " + dollar + $(this.point.low * multiple).addCommas(decimals) + percent :
+                        dollar + $(this.point.y * multiple).addCommas(decimals) + percent;
 
 
                     var s = this.series.name + ": " + y_val;
@@ -160,10 +230,27 @@ var update_tooltip = {
 
             all_chart_options.tooltip.formatter = function () {
 
-                var y_val = this.point.high ? "High: " + y_signs_arr[0] + $(this.point.high * multiplier).addCommas(y_decimals) + y_signs_arr[1] + " | Low: " + y_signs_arr[0] + $(this.point.low * multiplier).addCommas(y_decimals) + y_signs_arr[1] :
-                    y_signs_arr[0] + $(this.y * multiplier).addCommas(y_decimals) + y_signs_arr[1];
+                var options = this.series.chart.tooltip.options;
+                var dollar = options.y_signs_arr[0];
+                var percent = options.y_signs_arr[1];
+                var decimals = options.y_decimals;
+                var multiple = options.multiplier;
+
+                if (this.series.chart.options.series[this.series.index].yAxis == 1) {
+
+                    dollar = options.y_signs_arr_2[0];
+                    percent = options.y_signs_arr_2[1];
+                    decimals = options.y_decimals_2;
+                    multiple = options.multiplier_2;
+                }
+
+
+                var y_val = this.point.high ? "High: " + dollar + $(this.point.high * multiple).addCommas(decimals) + percent + " | Low: " + dollar + $(this.point.low * multiple).addCommas(decimals) + percent
+
+                    : dollar + $(this.y * multiple).addCommas(decimals) + percent;
 
                 var s = "&lt;b>" + this.series.name + "&lt;/b>&lt;br>" + this.x + ": " + y_val;
+
 
                 all_chart_options.series[this.series.index] ? s = all_chart_options.tooltip.addExtraData(all_chart_options.series[this.series.index].extra_data, this.point, s) : s = s;
                 return s.replace(/\$-/g, "-$");
@@ -199,68 +286,92 @@ var update_tooltip = {
 
 
 
-        //tooltip vars//
-        var is_shared = utils_forms.getCheckBoxValue($("#chart_tooltip_shared_checkbox")),
-            chart_type = $("#chart_type_icons .selected").divVal(),
+        //update chart and all_chart_options  options //
+        var is_shared = utils_forms.getCheckBoxValue($("#chart_tooltip_shared_checkbox"));
+        var chart_type = $("#chart_type_icons .selected").divVal();
 
-            //y value decimals
-            y_decimals = Number($("#chart_tooltip_force_decimals_select").val()),
-            //x value decimals
-            x_decimals = Number($("#chart_tooltip_force_decimals_x_select").val()),
-            //z value decimals
-            z_decimals = Number($("#chart_tooltip_force_decimals_z_select").val()),
-            //x value signs
-            x_signs = $("#chart_tooltip_signs_x_select").val(),
-            x_signs_arr = [x_signs === "$" ? "$" : "", x_signs === "%" ? "%" : ""],
-            //z value signs
-            z_signs = $("#chart_tooltip_signs_z_select").val(),
-            z_signs_arr = [z_signs === "$" ? "$" : "", z_signs === "%" ? "%" : ""],
 
-            multiplier = Number($("#chart_tooltip_y_multiple_select").val()),
+        //x value signs
+        var x_signs = $("#chart_tooltip_signs_x_select").val();
+        var x_signs_arr = [x_signs === "$" ? "$" : "", x_signs === "%" ? "%" : ""];
+        all_chart_options.tooltip.x_signs_arr = chart.tooltip.options.x_signs_arr = x_signs_arr;
 
-            //bubble size title
-            z_title = $("#chart_z_title_text_input").val() === "" ? "Z" : $("#chart_z_title_text_input").val(),
+        //z value signs
+        var z_signs = $("#chart_tooltip_signs_z_select").val();
+        var z_signs_arr = [z_signs === "$" ? "$" : "", z_signs === "%" ? "%" : ""];
+        all_chart_options.tooltip.z_signs_arr = chart.tooltip.options.z_signs_arr = z_signs_arr;
 
-            //y value signs
-            y_signs = $("#chart_tooltip_signs_select").val();
+        //y decimals
+        all_chart_options.tooltip.y_decimals = chart.tooltip.options.y_decimals = Number($("#chart_tooltip_force_decimals_select").val());
 
-        var y_signs_arr = [];
+        //y decimals (second y-axis)
+        all_chart_options.tooltip.y_decimals_2 = chart.tooltip.options.y_decimals_2 = Number($("#chart_tooltip_force_decimals_select_2").val());
 
-        switch (y_signs) {
-        case "$":
-            y_signs_arr = ["$", ""];
-            break;
-        case "%":
-            y_signs_arr = ["", "%"];
-            break;
-        case "percentage point(s)":
-            y_signs_arr = ["", " percentage point(s)"];
-            break;
-        default:
-            y_signs_arr = ["", ""];
-        };
+        //x decimals
+        all_chart_options.tooltip.x_decimals = chart.tooltip.options.x_decimals = Number($("#chart_tooltip_force_decimals_x_select").val());
 
+        //z decimals
+        all_chart_options.tooltip.z_decimals = chart.tooltip.options.z_decimals = Number($("#chart_tooltip_force_decimals_z_select").val());
+
+        //z (bubble size) title
+        all_chart_options.tooltip.z_title = chart.tooltip.options.z_title = $("#chart_z_title_text_input").val() === "" ? "Z" : $("#chart_z_title_text_input").val();
+
+        //mutiplier
+        all_chart_options.tooltip.multiplier = chart.tooltip.options.multiplier = Number($("#chart_tooltip_y_multiple_select").val());
+
+        //mutiplier (second y-axis)
+        all_chart_options.tooltip.multiplier_2 = chart.tooltip.options.multiplier_2 = Number($("#chart_tooltip_y_multiple_select_2").val());
+
+
+        function makeSignsArray(signs) {
+
+            var signs_arr = [];
+
+            switch (signs) {
+            case "$":
+                signs_arr = ["$", ""];
+                break;
+            case "%":
+                signs_arr = ["", "%"];
+                break;
+            case "percentage point(s)":
+                signs_arr = ["", " percentage point(s)"];
+                break;
+            default:
+                signs_arr = ["", ""];
+            };
+
+            return signs_arr;
+        }
+
+
+
+        //y value signs
+        all_chart_options.tooltip.y_signs_arr = chart.tooltip.options.y_signs_arr = makeSignsArray($("#chart_tooltip_signs_select").val());
+
+        //y value signs (second y-axis)
+        all_chart_options.tooltip.y_signs_arr_2 = chart.tooltip.options.y_signs_arr_2 = makeSignsArray($("#chart_tooltip_signs_select_2").val());
 
 
         //IF A TYPICAL CHART
         if (["area", "line", "bar", "stacked_bar", "column", "stacked_column", "arearange", "columnrange"].indexOf(chart_type) > -1) {
-            update_tooltip.getTypicalTooltip(chart, is_shared, y_decimals, y_signs_arr, multiplier, chart_type, all_chart_options);
+            update_tooltip.getTypicalTooltip(chart, is_shared, chart_type, all_chart_options);
         }
 
         //IF A DRILLDOWN CHART
         else if (chart_type === "drilldown") {
-            update_tooltip.getDrilldownTooltip(chart, y_decimals, x_decimals, z_decimals, y_signs_arr, x_signs_arr, z_signs_arr, multiplier, chart_type, z_title, all_chart_options);
+            update_tooltip.getDrilldownTooltip(chart, chart_type, all_chart_options);
         }
 
 
         //IF A SCATTER CHART
         else if (chart_type === "scatter") {
-            update_tooltip.getScatterTooltip(chart, y_decimals, x_decimals, y_signs_arr, x_signs_arr, multiplier, chart_type, all_chart_options);
+            update_tooltip.getScatterTooltip(chart, chart_type, all_chart_options);
         }
 
         //IF A BUBBLE CHART
         else if (chart_type === "bubble") {
-            update_tooltip.getBubbleTooltip(chart, y_decimals, x_decimals, z_decimals, y_signs_arr, x_signs_arr, z_signs_arr, multiplier, chart_type, z_title, all_chart_options);
+            update_tooltip.getBubbleTooltip(chart, chart_type, all_chart_options);
         }
 
 
@@ -270,19 +381,6 @@ var update_tooltip = {
         }
 
         chart.tooltip.options.formatter = all_chart_options.tooltip.formatter;
-        //these are looped through in utils.deepStringify from write_code to replace variable names with their values
-        update_tooltip.replacement_obj = {
-            y_decimals: y_decimals,
-            x_decimals: x_decimals,
-            z_decimals: z_decimals,
-            multiplier: multiplier,
-            y_signs_arr: y_signs_arr,
-            x_signs_arr: x_signs_arr,
-            z_signs_arr: z_signs_arr,
-            z_title: z_title
-        };
-
-        //  all_chart_options.tooltip.formatter = utils_main.stringifyFormatter(all_chart_options.tooltip.formatter, update_tooltip.replacement_obj);
 
     }
 
@@ -305,7 +403,7 @@ module.exports = update_tooltip;</code></pre>
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Thu Jan 25 2018 11:30:24 GMT-0500 (EST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Fri Feb 02 2018 13:07:39 GMT-0500 (EST)
 </footer>
 
 <script> prettyPrint(); </script>
