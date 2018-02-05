@@ -261,6 +261,9 @@
                 "backgroundColor": "#FEFFEF",
                 "crosshairs": [false, false],
                 "formatter": function() {
+                    
+                    console.log(this);
+                    
                     var options = this.series.chart.tooltip.options;
                     var y_dollar = options.y_signs_arr[0];
                     var y_percent = options.y_signs_arr[1];

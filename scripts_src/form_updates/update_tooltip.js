@@ -170,7 +170,7 @@ var update_tooltip = {
                     var decimals = options.y_decimals;
                     var multiple = options.multiplier;
 
-                    if (this.series.chart.options.series[this.series.index].yAxis == 1) {
+                    if (all_chart_options.series[this.series.index].yAxis == 1) {
                         dollar = options.y_signs_arr_2[0];
                         percent = options.y_signs_arr_2[1];
                         decimals = options.y_decimals_2;
@@ -208,7 +208,7 @@ var update_tooltip = {
                 var decimals = options.y_decimals;
                 var multiple = options.multiplier;
 
-                if (this.series.chart.options.series[this.series.index].yAxis == 1) {
+                if (all_chart_options.series[this.series.index].yAxis == 1) {
 
                     dollar = options.y_signs_arr_2[0];
                     percent = options.y_signs_arr_2[1];

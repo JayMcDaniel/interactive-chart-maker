@@ -388,7 +388,7 @@ var update_individual_series = {
 
         var use_2nd_y_axis_label = document.createElement("label");
         use_2nd_y_axis_label.className = "use_2nd_y_axis_label";
-        use_2nd_y_axis_label.textContent = "Plot on second Y-Axis: ";
+        use_2nd_y_axis_label.textContent = "Plot on second Y-axis: ";
         use_2nd_y_axis_label.setAttribute("for", "use_2nd_y_axis_checkbox_" + i);
 
         var use_2nd_y_axis_checkbox = document.createElement("input");
