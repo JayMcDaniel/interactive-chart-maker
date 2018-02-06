@@ -172,11 +172,29 @@ var update_individual_series = {
 
 
             var axis_index = utils_forms.getCheckBoxValue($(this)) ? 1 : 0;
-            
+
             //add second axis if not there by clicking the add y axis checkbox
             if (!Array.isArray(all_chart_options.yAxis) && axis_index === 1) {
                 $("#chart_y_axis_2_enabled_checkbox").prop('checked', true).change();
             }
+
+
+            //if unchecked, look if there is still a need for the second axis. if not, remove it
+            if (axis_index === 0) {
+                var need_2nd_axis = false;
+
+                $(".use_2nd_y_axis_checkbox").each(function () {
+                    if (utils_forms.getCheckBoxValue($(this))) {
+                        need_2nd_axis = true;
+                    }
+                });
+
+                if (need_2nd_axis === false) {
+                    $("#chart_y_axis_2_enabled_checkbox").prop('checked', false).change();
+                }
+
+            }
+
 
 
             var i = $(this).parents(".series_snippet").index();
@@ -388,7 +406,7 @@ var update_individual_series = {
 
         var use_2nd_y_axis_label = document.createElement("label");
         use_2nd_y_axis_label.className = "use_2nd_y_axis_label";
-        use_2nd_y_axis_label.textContent = "Plot on second Y-axis: ";
+        use_2nd_y_axis_label.textContent = "Plot on second Y-Axis: ";
         use_2nd_y_axis_label.setAttribute("for", "use_2nd_y_axis_checkbox_" + i);
 
         var use_2nd_y_axis_checkbox = document.createElement("input");
