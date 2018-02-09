@@ -23,11 +23,11 @@ var update_tooltip = {
             var ranges = this.series.options.ranges;
 
             return "<b>" + this.x + "</b><br>" +
-                ranges[0] + ": " + dollar + $(this.point.high).addCommas(decimals) + percent + "<br/>" + 
-                ranges[1] + ": " + dollar + $(this.point.q3).addCommas(decimals) + percent + "<br/>" + 
+                ranges[4] + ": " + dollar + $(this.point.high).addCommas(decimals) + percent + "<br/>" + 
+                ranges[3] + ": " + dollar + $(this.point.q3).addCommas(decimals) + percent + "<br/>" + 
                 ranges[2] + ": " + dollar + $(this.point.median).addCommas(decimals) + percent + "<br/>" + 
-                ranges[3] + ": " + dollar + $(this.point.q1).addCommas(decimals) + percent + "<br/>" + 
-                ranges[4] + ": " + dollar + $(this.point.low).addCommas(decimals) + percent;
+                ranges[1] + ": " + dollar + $(this.point.q1).addCommas(decimals) + percent + "<br/>" + 
+                ranges[0] + ": " + dollar + $(this.point.low).addCommas(decimals) + percent;
 
         };
 
