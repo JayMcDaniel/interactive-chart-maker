@@ -17,7 +17,7 @@ var Legend = function (o) {
     this.shadow = o.shadow || false;
     this.useHTML = o.useHTML || false;
     this.verticalAlign = o.verticalAlign || 'top';
-    this.width = o.width || 550;
+    this.width = o.width || 540;
     this.x = o.x || 0;
     this.y = o.y || 30;
 
