@@ -82,6 +82,7 @@
                         <div class="chart_type_icon" id="chart_type_column" value="column" title="column"></div>
                         <div class="chart_type_icon" id="chart_type_stacked_column" value="stacked_column" title="stacked column"></div>
                         <div class="chart_type_icon" id="chart_type_column_range" value="columnrange" title="column range"></div>
+                        <div class="chart_type_icon" id="chart_type_box_plot" value="boxplot" title="box plot"></div>
                         <div class="chart_type_icon" id="chart_type_bubble" value="bubble" title="bubble"></div>
                         <div class="chart_type_icon" id="chart_type_scatter" value="scatter" title="scatter"></div>
                         <div class="chart_type_icon" id="chart_type_drilldown" value="drilldown" title="drilldown"></div>
@@ -456,6 +457,22 @@
                     </div>
 
 
+                    
+                    <!-- box plot chart example -->
+                    <div class="just_boxplot" style="display: none;">
+                     This will load the table into a box plot chart. A box plot table should be formatted like the following. The X-axis categories will come from the row headers and the data for the quintiles will come from the following columns.
+                        <br>
+                        
+                        <table id="BLS_table" class="regular" cellspacing="0" cellpadding="0" xborder="1" style="width: 95%; font-size: 70%;"><caption><span class="tableTitle">Annual mean and percentile wages, protective service occupations, May 2014</span></caption><thead><tr><th rowspan="1" id="columnHead0" style="vertical-align: middle;">Occupation</th><th id="columnHead1">10th percentile</th><th id="columnHead2">25th percentile</th><th id="columnHead3">50th percentile (median)</th><th id="columnHead4">75th percentile</th><th id="columnHead5">90th percentile</th></tr></thead><tbody><tr><th id="rowHead0"><p>Protective Service Occupations</p></th><td headers="rowHead0 columnHead1">$19,090</td><td headers="rowHead0 columnHead2">$24,510</td><td headers="rowHead0 columnHead3">$37,180</td><td headers="rowHead0 columnHead4">$57,270</td><td headers="rowHead0 columnHead5">$80,360</td></tr><tr class="greenbar"><th id="rowHead1"><p>First-Line Supervisors of Police and Detectives</p></th><td headers="rowHead1 columnHead1">47,720</td><td headers="rowHead1 columnHead2">61,480</td><td headers="rowHead1 columnHead3">80,930</td><td headers="rowHead1 columnHead4">104,150</td><td headers="rowHead1 columnHead5">128,970</td></tr><tr><th id="rowHead2"><p>Detectives and Criminal Investigators</p></th><td headers="rowHead2 columnHead1">40,780</td><td headers="rowHead2 columnHead2">53,280</td><td headers="rowHead2 columnHead3">79,870</td><td headers="rowHead2 columnHead4">101,940</td><td headers="rowHead2 columnHead5">127,400</td></tr><tr class="greenbar"><th id="rowHead3"><p>First-Line Supervisors of Fire Fighting and Prevention Workers</p></th><td headers="rowHead3 columnHead1">41,930</td><td headers="rowHead3 columnHead2">54,570</td><td headers="rowHead3 columnHead3">70,670</td><td headers="rowHead3 columnHead4">90,920</td><td headers="rowHead3 columnHead5">112,420</td></tr><tr><th id="rowHead4"><p>First-Line Supervisors of Correctional Officers</p></th><td headers="rowHead4 columnHead1">37,090</td><td headers="rowHead4 columnHead2">43,120</td><td headers="rowHead4 columnHead3">57,970</td><td headers="rowHead4 columnHead4">77,520</td><td headers="rowHead4 columnHead5">93,470</td></tr></tbody></table>
+                    
+                    
+                    </div>
+                    
+                    
+                    
+                    
+                    
+                    
                     <!-- drilldown chart example table in load data section -->
                     <div class="just_drilldown">
                         <p>
@@ -583,6 +600,7 @@
                         <option value="animated_map_table">Animated state map</option>
                         <option value="animated_map_by_names_table">Animated state map by names</option>
                         <option value="animated_metro_area_map_table">Animated metro area map</option>
+                        <option value="box_plot_table">Box plot</option>
                         <option value="bubble_table">Bubble</option>
                         <option value="animated_bubble_table">Bubble animated</option>
                         <option value="bubble_drilldown_table">Bubble drilldown</option>

@@ -41,7 +41,7 @@
          exporting: exportingInit(),
          legend: legendInit(chart_type),
          plotOptions: plotOptionsInit(chart_type, legend_toggle_enabled),
-         series: parsed_table_output.series, //removed seriesInit(parsed_table_output.series)
+         series: parsed_table_output.series, 
          drilldown: parsed_table_output.drilldown || {},
          subtitle: subtitleInit(),
          title: titleInit(parsed_table_output.title_text),
@@ -52,6 +52,7 @@
      };
 
      var all_chart_options = new AllChartOptions(options);
+     
      return all_chart_options;
  };
 

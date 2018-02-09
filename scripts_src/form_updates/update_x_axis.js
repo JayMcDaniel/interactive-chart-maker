@@ -135,7 +135,7 @@ var update_x_axis = {
 
         if (isNaN(Number(new_interval)) || Number(new_interval) === 0) {
 
-            if (chart_type === "bar" || chart_type === "column") {
+            if (chart_type === "bar" || chart_type === "column" || chart_type === "boxplot") {
                 new_interval = 1;
             } else if (!categories) {
                 new_interval = null;

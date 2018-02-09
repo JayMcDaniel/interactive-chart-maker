@@ -1,4 +1,4 @@
-/* takes the table html from a given textarea and parses it into an object, depending on useer-selected inputs */
+/* takes the table html from a given textarea and parses it into an object, depending on user-selected inputs */
 
 /* parsing function for typical chart types (line, bar, column) */
 var parseForTypicalChart = require("./parse_for_typical_chart.js");
@@ -9,8 +9,13 @@ var parseForRange = require("./parse_for_range.js");
 /* parsing function for scatter charts */
 var parseForScatter = require("./parse_for_scatter.js");
 
+
+/* parsing function for box plot charts */
+var parseForBoxPlot = require("./parse_for_box_plot.js");
+
 /* parsing function for bubble charts */
 var parseForBubble = require("./parse_for_bubble.js");
+
 
 /* parsing function for animated bubble charts */
 var parseForAnimatedBubble = require("./parse_for_animated_bubble.js");
@@ -65,7 +70,11 @@ var parseTableInput = function (input, load_series_from, chart_type, legend_togg
         } else if (chart_type == "drilldown") {
             var drill_type = $("#drilldown_type_select").val();
             output = parseForDrilldown(chart, input, drill_type, colors);
+        } else if (chart_type == "boxplot") {
+            output = parseForBoxPlot(input, chart_type, colors);
         }
+            
+            
 
         //add chart title (same for all types of charts)
         output.title_text = $("caption", input).text();

@@ -38,7 +38,7 @@ var updateChartType = function (chart_type, chart, all_chart_options) {
     }
 
 
-    if (type === "bar") {
+    if (type === "bar" || type === "boxplot") {
         //fix y axis position
         chart.inverted = true;
         all_chart_options.yAxis.title.align = "middle";

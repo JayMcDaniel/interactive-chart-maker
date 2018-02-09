@@ -13,7 +13,6 @@
 
 
 
-    <div id="chart1" style="position: relative; width: 580px; height: 430px; margin: auto; padding: 0px;"> </div>
 
 
 
@@ -29,7 +28,6 @@
 
     <script>
   
-    
     $(function() {
         var all_chart_options = {
             "chart": {
@@ -38,7 +36,7 @@
                 "borderWidth": 0,
                 "plotBorderColor": "#000",
                 "plotBorderWidth": 0,
-                "type": "bubble",
+                "type": "boxplot",
                 "events": {
                     "redraw": function redraw() {
                         if (chart) {
@@ -56,7 +54,8 @@
                 },
                 "zoomType": null,
                 "alignTicks": false,
-                "ignoreHiddenSeries": true
+                "ignoreHiddenSeries": true,
+                "inverted": true
             },
             "colors": ["#7cb5ec", "#434348", "#90ed7d", "#f7a35c", "#8085e9", "#f15c80", "#e4d354", "#2b908f", "#f45b5b", "#91e8e1", "#2f7ed8", "#0d233a", "#8bbc21", "#910000", "#1aadce", "#492970", "#f28f43", "#77a1e5", "#c42525", "#a6c96a"],
             "legend": {
@@ -100,13 +99,6 @@
                         "style": {
                             "textShadow": "none",
                             "color": "#000"
-                        },
-                        "formatter": function() {
-                            if (typeof this.key === "string") {
-                                return this.key.match("invisible") ? "" : this.key;
-                            } else {
-                                return this.series.name;
-                            }
                         }
                     },
                     "pointPlacement": null,
@@ -136,107 +128,57 @@
                     "tooltip": {
                         "followPointer": true
                     }
+                },
+                "boxplot": {
+                    "fillColor": "#F0F0E0",
+                    "lineWidth": 2,
+                    "medianColor": "blue",
+                    "medianWidth": 3,
+                    "stemColor": "blue",
+                    "stemDashStyle": "solid",
+                    "stemWidth": 1,
+                    "whiskerColor": "blue",
+                    "whiskerLength": "50%",
+                    "whiskerWidth": 3
                 }
             },
             "series": [{
-                "name": "2010",
-                "data": [
-                    [6.9, 13.1, 10.7],
-                    [4.7, 13.1, 10.7]
-                ],
-                "type": "bubble",
-                "lineWidth": 0,
+                "name": "test",
+              
+              data:  [
+[47720, 61480, 80930, 104150, 128970],
+[40780, 53280, 79870, 101940, 127400],
+[41930, 54570, 70670, 90920, 112420],
+[37090, 43120, 57970, 77520, 93470],
+[33030, 42260, 56810, 74870, 92450],
+[34010, 42990, 56130, 73050, 90330],
+[33280, 42100, 51690, 61790, 78020],
+[32660, 40700, 50880, 62320, 75690],
+[22130, 31340, 45970, 61950, 81450],
+[27000, 34530, 44570, 63370, 85560],
+[27280, 32390, 39780, 55670, 72790],
+[20630, 28390, 38150, 56120, 70970],
+[32770, 35470, 38090, 41090, 45560],
+
+[19090,	24510,	37180,	57270,	80360],
+
+[22040, 27830, 36570, 46930, 56200],
+[24550, 28920, 36430, 53510, 74050],
+[20390, 25800, 32560, 41010, 51630],
+[20850, 25120, 29840, 37810, 47740],
+[17520, 19440, 24750, 32060, 38540],
+[17720, 20060, 24410, 32650, 44200],
+[16460, 17560, 19090, 22880, 29300]
+             ],
+                "type": "boxplot",
                 "marker": {
-                    "enabled": true
+                    "enabled": false
                 },
-                "color": "#7cb5ec",
-                "_symbolIndex": 0,
-                "visible": true
-            }, {
-                "name": "2011",
-                "data": [
-                    [6.9, 14, 10.5],
-                    [4.9, 13.1, 10.7]
-                ],
-                "type": "bubble",
-                "lineWidth": 0,
-                "marker": {
-                    "enabled": true
-                },
-                "color": "#434348",
-                "_symbolIndex": 1,
-                "visible": true
-            }, {
-                "name": "2012",
-                "data": [
-                    [6.6, 13.2, 9.6],
-                    [4.6, 13.1, 10.7]
-                ],
-                "type": "bubble",
-                "lineWidth": 0,
-                "marker": {
-                    "enabled": true
-                },
-                "color": "#90ed7d",
-                "_symbolIndex": 2,
-                "visible": true
-            }, {
-                "name": "2013",
-                "data": [
-                    [6.7, 14.1, 10.1],
-                    [4.6, 13.1, 10.7]
-                ],
-                "type": "bubble",
-                "lineWidth": 0,
-                "marker": {
-                    "enabled": true
-                },
-                "color": "#f7a35c",
-                "_symbolIndex": 3,
-                "visible": true
-            }, {
-                "name": "2014",
-                "data": [
-                    [6.6, 13.9, 9.7],
-                    [4.4, 13.1, 10.7]
-                ],
-                "type": "bubble",
-                "lineWidth": 0,
-                "marker": {
-                    "enabled": true
-                },
-                "color": "#8085e9",
-                "_symbolIndex": 4,
-                "visible": true
-            }, {
-                "name": "2015",
-                "data": [
-                    [6.6, 13.9, 9.7],
-                    [4.4, 13.1, 10.7]
-                ],
-                "type": "bubble",
-                "lineWidth": 0,
-                "marker": {
-                    "enabled": true
-                },
-                "color": "#f15c80",
-                "_symbolIndex": 5,
-                "visible": true
-            }, {
-                "name": "2016",
-                "data": [
-                    [6.6, 13.9, 9.7],
-                    [4.4, 13.1, 10.7]
-                ],
-                "type": "bubble",
-                "lineWidth": 0,
-                "marker": {
-                    "enabled": true
-                },
-                "color": "#e4d354",
-                "_symbolIndex": 6,
-                "visible": true
+                "color": "#7cb5ec"
             }],
+            
+           
+            
             "subtitle": {
                 "text": "",
                 "align": "left",
@@ -248,7 +190,7 @@
                 }
             },
             "title": {
-                "text": "Union membership rates of employed wage and salary workers, annual averages, 2000\u201315",
+                "text": "Annual mean and percentile wages, protective service occupations, May 2014",
                 "align": "left",
                 "style": {
                     "color": "#000000",
@@ -260,28 +202,6 @@
             "tooltip": {
                 "backgroundColor": "#FEFFEF",
                 "crosshairs": [false, false],
-                "formatter": function() {
-                    
-                    console.log(this);
-                    
-                    var options = this.series.chart.tooltip.options;
-                    var y_dollar = options.y_signs_arr[0];
-                    var y_percent = options.y_signs_arr[1];
-                    var x_dollar = options.x_signs_arr[0];
-                    var x_percent = options.x_signs_arr[1];
-                    var z_dollar = options.z_signs_arr[0];
-                    var z_percent = options.z_signs_arr[1];
-                    var y_decimals = options.y_decimals;
-                    var x_decimals = options.x_decimals;
-                    var z_decimals = options.z_decimals;
-                    var multiple = options.multiplier;
-                    var z_title = options.z_title;
-                    var y_axis_title = this.series.yAxis.axisTitle ? this.series.yAxis.axisTitle.textStr : "Y-Axis";
-                    var x_axis_title = this.series.xAxis.axisTitle ? this.series.xAxis.axisTitle.textStr : "X-Axis";
-                    var s = "<b>" + this.series.name + "</b><br>" + y_axis_title + ": <b>" + y_dollar + $(this.y * multiple).addCommas(y_decimals) + y_percent + "</b><br/>" + x_axis_title + ": <b>" + x_dollar + $(this.x * multiple).addCommas(x_decimals) + x_percent + "</b><br/>" + z_title + ": <b>" + z_dollar + $(this.point.z * multiple).addCommas(z_decimals) + z_percent + "</b>";
-                    all_chart_options.series[this.series.index] ? s = all_chart_options.tooltip.addExtraData(all_chart_options.series[this.series.index].extra_data, this.point, s) : s = s;
-                    return s.replace(/\$-/g, "-$");
-                },
                 "style": {
                     "color": "#000000",
                     "fontFamily": "Calibri, Arial, Helvetica, sans-serif"
@@ -300,16 +220,20 @@
                 },
                 "x_signs_arr": ["", ""],
                 "z_signs_arr": ["", ""],
-                "y_decimals": 3,
+                "y_decimals": 0,
+                "y_decimals_2": 0,
                 "x_decimals": 0,
-                "z_decimals": 3,
-                "z_title": "kjkh",
+                "z_decimals": 0,
+                "z_title": "Z",
                 "multiplier": 1,
-                "y_signs_arr": ["$", ""]
+                "multiplier_2": 1,
+                "y_signs_arr": ["", ""],
+                "y_signs_arr_2": ["", ""]
             },
             "xAxis": {
+                "categories": ["Protective Service Occupations", "First-Line Supervisors of Police and Detectives", "Detectives and Criminal Investigators", "First-Line Supervisors of Fire Fighting and Prevention Workers", "First-Line Supervisors of Correctional Officers", "Police and Sheriff's Patrol Officers", "Fire Inspectors and Investigators", "Transit and Railroad Police", "Fish and Game Wardens", "Firefighters", "First-Line Supervisors of Protective Service Workers, All Other", "Private Detectives and Investigators", "Correctional Officers and Jailers", "Bailiffs", "Transportation Security Screeners", "Parking Enforcement Workers", "Forest Fire Inspectors and Prevention Specialists", "Animal Control Workers", "Gaming Surveillance Officers and Gaming Investigators", "Crossing Guards", "Security Guards", "Lifeguards, Ski Patrol, and Other Recreational Protective Service Workers"],
                 "gridLineColor": "#c0c0c0",
-                "gridLineWidth": 1,
+                "gridLineWidth": 0,
                 "gridLineDashStyle": "Dot",
                 "labels": {
                     "rotation": 0,
@@ -332,10 +256,10 @@
                     "value": 0,
                     "color": "#c0c0c0",
                     "dashStyle": "solid",
-                    "width": 1
+                    "width": 0
                 }],
-                "startOnTick": true,
-                "tickInterval": null,
+                "startOnTick": false,
+                "tickInterval": 4,
                 "tickmarkPlacement": "on",
                 "tickPosition": "outside",
                 "tickColor": "#C0D0E0",
@@ -352,8 +276,7 @@
                         "backgroundColor": "#fff",
                         "fontSize": "13px"
                     },
-                    "x": 0,
-                    "y": 0
+                    "x": 0
                 },
                 "type": "linear"
             },
@@ -446,7 +369,7 @@
             },
             "saved_values": [{
                 "id": "chart_type_icons",
-                "val": "bubble"
+                "val": "boxplot"
             }, {
                 "id": "chart_id_textinput",
                 "val": "chart1"
@@ -470,7 +393,7 @@
                 "val": "580"
             }, {
                 "id": "chart_height_textinput",
-                "val": "430"
+                "val": "690"
             }, {
                 "id": "top_margin_textinput",
                 "val": "100"
@@ -500,7 +423,7 @@
                 "val": ""
             }, {
                 "id": "table_input_textarea",
-                "val": "<table id=\"BLS_table\" class=\"regular\" cellspacing=\"0\" cellpadding=\"0\" xborder=\"1\" style=\" width: 95%;\">\n <caption><span class=\"tableTitle\">Union membership rates of employed wage and salary workers, annual averages, 2000\u201315</span></caption>\n\n <thead>\n <tr>\n <th rowspan=\"1\"  style=\" vertical-align: middle;\">Year</th>\n <th >Total private</th>\n\n\n <th >Construction</th>\n <th >Manufacturing</th>\n\n <th >Retail trade</th>\n <th >trade</th>\n <th >trade 2</th>\n\n\n\n </tr>\n\n </thead>\n <tbody>\n\n\n <tr>\n <th >\n <p>2010</p>\n </th>\n <td >6.9</td>\n <td >13.1</td>\n <td >10.7</td>\n\n <td >4.7</td>\n \n <td >13.1</td>\n <td >10.7</td>\n\n\n\n </tr>\n\n <tr class=\"greenbar\">\n <th >\n <p>2011</p>\n </th>\n <td >6.9</td>\n\n\n <td >14.0</td>\n <td >10.5</td>\n\n <td >4.9</td>\n\n \n <td >13.1</td>\n <td >10.7</td>\n\n\n </tr>\n\n <tr>\n <th >\n <p>2012</p>\n </th>\n <td >6.6</td>\n\n\n <td >13.2</td>\n <td >9.6</td>\n\n <td >4.6</td>\n\n <td >13.1</td>\n <td >10.7</td>\n\n\n </tr>\n\n <tr class=\"greenbar\">\n <th >\n <p>2013</p>\n </th>\n <td >6.7</td>\n\n\n <td >14.1</td>\n <td >10.1</td>\n\n <td >4.6</td>\n \n <td >13.1</td>\n <td >10.7</td>\n\n\n\n </tr>\n\n <tr>\n <th >\n <p>2014</p>\n </th>\n <td >6.6</td>\n\n\n <td >13.9</td>\n <td >9.7</td>\n\n <td >4.4</td>\n \n <td >13.1</td>\n <td >10.7</td>\n\n\n\n </tr>\n \n <tr>\n <th >\n <p>2015</p>\n </th>\n <td >6.6</td>\n\n\n <td >13.9</td>\n <td >9.7</td>\n\n <td >4.4</td>\n \n <td >13.1</td>\n <td >10.7</td>\n\n\n\n </tr>\n \n <tr>\n <th >\n <p>2016</p>\n </th>\n <td >6.6</td>\n\n\n <td >13.9</td>\n <td >9.7</td>\n\n <td >4.4</td>\n \n <td >13.1</td>\n <td >10.7</td>\n\n\n\n </tr>\n \n\n \n\n </tbody>\n</table>"
+                "val": "<table id=\"BLS_table\" class=\"regular\" cellspacing=\"0\" cellpadding=\"0\" xborder=\"1\" style=\"width: 95%\"><caption><span class=\"tableTitle\">Annual mean and percentile wages, protective service occupations, May 2014</span></caption><thead><tr><th rowspan=\"1\"  style=\"vertical-align: middle;\">Occupation</th><th >&nbsp;&nbsp;&nbsp;Mean&nbsp;&nbsp;&nbsp;</th><th >10th percentile</th><th >25th percentile</th><th >50th percentile (median)</th><th >75th percentile</th><th >90th percentile</th></tr></thead><tbody><tr><th ><p>Protective Service Occupations</p></th><td >$43,980</td><td >$19,090</td><td >$24,510</td><td >$37,180</td><td >$57,270</td><td >$80,360</td></tr><tr class=\"greenbar\"><th ><p>First-Line Supervisors of Police and Detectives</p></th><td >84,260</td><td >47,720</td><td >61,480</td><td >80,930</td><td >104,150</td><td >128,970</td></tr><tr><th ><p>Detectives and Criminal Investigators</p></th><td >80,540</td><td >40,780</td><td >53,280</td><td >79,870</td><td >101,940</td><td >127,400</td></tr><tr class=\"greenbar\"><th ><p>First-Line Supervisors of Fire Fighting and Prevention Workers</p></th><td >73,550</td><td >41,930</td><td >54,570</td><td >70,670</td><td >90,920</td><td >112,420</td></tr><tr><th ><p>First-Line Supervisors of Correctional Officers</p></th><td >61,790</td><td >37,090</td><td >43,120</td><td >57,970</td><td >77,520</td><td >93,470</td></tr><tr class=\"greenbar\"><th ><p>Police and Sheriff's Patrol Officers</p></th><td >59,560</td><td >33,030</td><td >42,260</td><td >56,810</td><td >74,870</td><td >92,450</td></tr><tr><th ><p>Fire Inspectors and Investigators</p></th><td >58,980</td><td >34,010</td><td >42,990</td><td >56,130</td><td >73,050</td><td >90,330</td></tr><tr class=\"greenbar\"><th ><p>Transit and Railroad Police</p></th><td >53,170</td><td >33,280</td><td >42,100</td><td >51,690</td><td >61,790</td><td >78,020</td></tr><tr><th ><p>Fish and Game Wardens</p></th><td >53,260</td><td >32,660</td><td >40,700</td><td >50,880</td><td >62,320</td><td >75,690</td></tr><tr class=\"greenbar\"><th ><p>Firefighters</p></th><td >48,750</td><td >22,130</td><td >31,340</td><td >45,970</td><td >61,950</td><td >81,450</td></tr><tr><th ><p>First-Line Supervisors of Protective Service Workers, All Other</p></th><td >48,440</td><td >26,420</td><td >34,120</td><td >45,830</td><td >58,500</td><td >74,810</td></tr><tr class=\"greenbar\"><th ><p>Private Detectives and Investigators</p></th><td >52,880</td><td >27,000</td><td >34,530</td><td >44,570</td><td >63,370</td><td >85,560</td></tr><tr><th ><p>Correctional Officers and Jailers</p></th><td >44,910</td><td >27,280</td><td >32,390</td><td >39,780</td><td >55,670</td><td >72,790</td></tr><tr class=\"greenbar\"><th ><p>Bailiffs</p></th><td >42,360</td><td >20,630</td><td >28,390</td><td >38,150</td><td >56,120</td><td >70,970</td></tr><tr><th ><p>Transportation Security Screeners</p></th><td >38,600</td><td >32,770</td><td >35,470</td><td >38,090</td><td >41,090</td><td >45,560</td></tr><tr class=\"greenbar\"><th ><p>Parking Enforcement Workers</p></th><td >37,750</td><td >22,040</td><td >27,830</td><td >36,570</td><td >46,930</td><td >56,200</td></tr><tr><th ><p>Forest Fire Inspectors and Prevention Specialists</p></th><td >43,230</td><td >24,550</td><td >28,920</td><td >36,430</td><td >53,510</td><td >74,050</td></tr><tr class=\"greenbar\"><th ><p>Animal Control Workers</p></th><td >34,370</td><td >20,390</td><td >25,800</td><td >32,560</td><td >41,010</td><td >51,630</td></tr><tr><th ><p>Gaming Surveillance Officers and Gaming Investigators</p></th><td >32,290</td><td >20,850</td><td >25,120</td><td >29,840</td><td >37,810</td><td >47,740</td></tr><tr class=\"greenbar\"><th ><p>Crossing Guards</p></th><td >27,040</td><td >17,520</td><td >19,440</td><td >24,750</td><td >32,060</td><td >38,540</td></tr><tr><th ><p>Security Guards</p></th><td >28,040</td><td >17,720</td><td >20,060</td><td >24,410</td><td >32,650</td><td >44,200</td></tr><tr class=\"greenbar\"><th ><p>Lifeguards, Ski Patrol, and Other Recreational Protective Service Workers</p></th><td >21,030</td><td >16,460</td><td >17,560</td><td >19,090</td><td >22,880</td><td >29,300</td></tr></tbody></table>"
             }, {
                 "id": "color_palettes",
                 "val": -1
@@ -515,120 +438,12 @@
                 "val": false
             }, {
                 "id": "series_visible_checkbox_0",
-                "val": true
+                "val": false
             }, {
                 "id": "series_extra_data_title_textarea_0",
                 "val": ""
             }, {
                 "id": "series_extra_data_values_textarea_0",
-                "val": ""
-            }, {
-                "id": "series_color_1",
-                "val": "434348"
-            }, {
-                "id": "line_style_select_1",
-                "val": "Solid"
-            }, {
-                "id": "use_2nd_y_axis_checkbox_1",
-                "val": false
-            }, {
-                "id": "series_visible_checkbox_1",
-                "val": true
-            }, {
-                "id": "series_extra_data_title_textarea_1",
-                "val": ""
-            }, {
-                "id": "series_extra_data_values_textarea_1",
-                "val": ""
-            }, {
-                "id": "series_color_2",
-                "val": "90ED7D"
-            }, {
-                "id": "line_style_select_2",
-                "val": "Solid"
-            }, {
-                "id": "use_2nd_y_axis_checkbox_2",
-                "val": false
-            }, {
-                "id": "series_visible_checkbox_2",
-                "val": true
-            }, {
-                "id": "series_extra_data_title_textarea_2",
-                "val": ""
-            }, {
-                "id": "series_extra_data_values_textarea_2",
-                "val": ""
-            }, {
-                "id": "series_color_3",
-                "val": "F7A35C"
-            }, {
-                "id": "line_style_select_3",
-                "val": "Solid"
-            }, {
-                "id": "use_2nd_y_axis_checkbox_3",
-                "val": false
-            }, {
-                "id": "series_visible_checkbox_3",
-                "val": true
-            }, {
-                "id": "series_extra_data_title_textarea_3",
-                "val": ""
-            }, {
-                "id": "series_extra_data_values_textarea_3",
-                "val": ""
-            }, {
-                "id": "series_color_4",
-                "val": "8085E9"
-            }, {
-                "id": "line_style_select_4",
-                "val": "Solid"
-            }, {
-                "id": "use_2nd_y_axis_checkbox_4",
-                "val": false
-            }, {
-                "id": "series_visible_checkbox_4",
-                "val": true
-            }, {
-                "id": "series_extra_data_title_textarea_4",
-                "val": ""
-            }, {
-                "id": "series_extra_data_values_textarea_4",
-                "val": ""
-            }, {
-                "id": "series_color_5",
-                "val": "F15C80"
-            }, {
-                "id": "line_style_select_5",
-                "val": "Solid"
-            }, {
-                "id": "use_2nd_y_axis_checkbox_5",
-                "val": false
-            }, {
-                "id": "series_visible_checkbox_5",
-                "val": true
-            }, {
-                "id": "series_extra_data_title_textarea_5",
-                "val": ""
-            }, {
-                "id": "series_extra_data_values_textarea_5",
-                "val": ""
-            }, {
-                "id": "series_color_6",
-                "val": "E4D354"
-            }, {
-                "id": "line_style_select_6",
-                "val": "Solid"
-            }, {
-                "id": "use_2nd_y_axis_checkbox_6",
-                "val": false
-            }, {
-                "id": "series_visible_checkbox_6",
-                "val": true
-            }, {
-                "id": "series_extra_data_title_textarea_6",
-                "val": ""
-            }, {
-                "id": "series_extra_data_values_textarea_6",
                 "val": ""
             }, {
                 "id": "legend_layout_select",
@@ -746,10 +561,10 @@
                 "val": false
             }, {
                 "id": "chart_tooltip_force_decimals_select",
-                "val": "3"
+                "val": "0"
             }, {
                 "id": "chart_tooltip_signs_select",
-                "val": "$"
+                "val": "no_signs"
             }, {
                 "id": "chart_tooltip_force_decimals_x_select",
                 "val": "0"
@@ -758,7 +573,7 @@
                 "val": "no_signs"
             }, {
                 "id": "chart_tooltip_force_decimals_z_select",
-                "val": "3"
+                "val": "0"
             }, {
                 "id": "chart_tooltip_signs_z_select",
                 "val": "no_signs"
@@ -773,9 +588,18 @@
                 "val": ""
             }, {
                 "id": "chart_z_title_text_input",
-                "val": "kjkh"
+                "val": ""
             }, {
                 "id": "chart_tooltip_y_multiple_select",
+                "val": "1"
+            }, {
+                "id": "chart_tooltip_force_decimals_select_2",
+                "val": "0"
+            }, {
+                "id": "chart_tooltip_signs_select_2",
+                "val": "no_signs"
+            }, {
+                "id": "chart_tooltip_y_multiple_select_2",
                 "val": "1"
             }, {
                 "id": "chart_credits_text_textarea",

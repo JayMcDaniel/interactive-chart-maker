@@ -14,6 +14,7 @@ var ChartOptions = function (o) {
     this.zoomType = 'xy';
     this.alignTicks = o.alignTicks || false;
     this.ignoreHiddenSeries = o.ignoreHiddenSeries || true; //false for bubble charts so bubbles won't resize
+    this.inverted = o.inverted;
 }
 
 

@@ -14,7 +14,7 @@ var PlotOptions = function (o) {
             allowOverlap: o.series.dataLabels.allowOverlap || false,
             padding: 0,
             verticalAlign: "bottom",
-            style:{
+            style: {
                 "textShadow": "none",
                 "color": "#000"
             }
@@ -24,7 +24,7 @@ var PlotOptions = function (o) {
         pointPadding: o.series.pointPadding,
         groupPadding: o.series.groupPadding,
         minPointLength: o.series.minPointLength,
-      //  maxSize: o.series.maxSize,
+        //  maxSize: o.series.maxSize,
         minSize: o.series.minSize,
         sizeBy: o.series.sizeBy,
         lineWidth: o.series.lineWidth,
@@ -37,6 +37,10 @@ var PlotOptions = function (o) {
         tooltip: {
             followPointer: true
         }
+    };
+
+    this.boxplot = {
+        fillColor: '#F0F0E0'
     };
 
 }

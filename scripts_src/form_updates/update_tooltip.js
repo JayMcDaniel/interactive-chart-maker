@@ -9,6 +9,32 @@ var utils_forms = require("../utils/utils_forms");
 var update_tooltip = {
 
 
+
+
+    /** gets a tooltip for box plot charts. Called from updateToolTip **/
+    getBoxPlotTooltip: function (chart, chart_type, all_chart_options) {
+
+        all_chart_options.tooltip.formatter = function () {
+
+            var options = this.series.chart.tooltip.options;
+            var dollar = options.y_signs_arr[0];
+            var percent = options.y_signs_arr[1];
+            var decimals = options.y_decimals;
+            var ranges = this.series.options.ranges;
+
+            return "<b>" + this.x + "</b><br>" +
+                ranges[0] + ": " + dollar + $(this.point.high).addCommas(decimals) + percent + "<br/>" + 
+                ranges[1] + ": " + dollar + $(this.point.q3).addCommas(decimals) + percent + "<br/>" + 
+                ranges[2] + ": " + dollar + $(this.point.median).addCommas(decimals) + percent + "<br/>" + 
+                ranges[3] + ": " + dollar + $(this.point.q1).addCommas(decimals) + percent + "<br/>" + 
+                ranges[4] + ": " + dollar + $(this.point.low).addCommas(decimals) + percent;
+
+        };
+
+    },
+
+
+
     /** gets a tooltip for bubble charts. Called from updateToolTip **/
     getBubbleTooltip: function (chart, chart_type, all_chart_options) {
 
@@ -345,6 +371,13 @@ var update_tooltip = {
         else if (chart_type === "bubble") {
             update_tooltip.getBubbleTooltip(chart, chart_type, all_chart_options);
         }
+
+
+        //IF A BOX PLOT CHART
+        else if (chart_type === "boxplot") {
+            update_tooltip.getBoxPlotTooltip(chart, chart_type, all_chart_options);
+        }
+
 
 
 

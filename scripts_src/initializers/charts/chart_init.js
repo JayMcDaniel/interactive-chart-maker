@@ -27,13 +27,6 @@ var chartInit = function chartInit(chart_type, chart) {
                     });
                 }
             }
-                //,
-//
-//            drilldown: function () {
-//                if(update_chart_options){
-//                    $("#chart_show_data_labels_checkbox").change();
-//                }
-//            }
 
         },
         margin: [Number($("#top_margin_textinput").val()),
@@ -42,7 +35,8 @@ var chartInit = function chartInit(chart_type, chart) {
                   Number($("#left_margin_textinput").val()),
                  ],
         renderTo: update_template.changeID($("#chart_id_textinput").val()),
-        type: chart_type
+        type: chart_type,
+        inverted: chart_type == "boxplot" ? true : false
     }
 
     var chart_options = new ChartOptions(options);
