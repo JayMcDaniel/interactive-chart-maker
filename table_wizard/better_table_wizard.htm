@@ -559,7 +559,9 @@ break;
 
 //////////////if bold button on ////////////////////
 case "toolBoxTextBold":{
-	if ($(this).css("font-weight") == "bold"){
+    
+    var font_weight = $(this).css("font-weight");
+	if ( (font_weight == "bold") || (font_weight > 400)) {
 		$(this).css("font-weight","normal");
 	}
 	else{
