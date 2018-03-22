@@ -432,6 +432,7 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
     $("#chart_y_axis_tickmark_interval_input, #chart_y_axis_tickmark_interval_input_2").unbind().keyup(function () {
         var newInterval = $(this).val();
         var axis_number = $(this).attr("id").slice(-1);
+        console.log(axis_number);
         update_y_axis.updateTickmarkInterval(newInterval, chart, all_chart_options, axis_number);
     });
 

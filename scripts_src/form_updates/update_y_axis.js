@@ -71,9 +71,9 @@ var update_y_axis = {
                 });
 
             });
-            
-            $(all_chart_options.series).each(function(i,series){
-               series.yAxis = 0; 
+
+            $(all_chart_options.series).each(function (i, series) {
+                series.yAxis = 0;
             });
 
 
@@ -211,6 +211,10 @@ var update_y_axis = {
 
         var index = axis_number == "2" ? 1 : 0;
 
+
+
+
+
         new_max = utils_main.checkForUndefined(new_max);
         if (!chart) { // called when this is used in y_axis_init
             return new_max;
@@ -323,11 +327,10 @@ var update_y_axis = {
         });
 
 
-        if (all_chart_options.yAxis.tickInterval) {
-            all_chart_options.yAxis.tickInterval = new_interval;
-        } else {
-            all_chart_options.yAxis[index].tickInterval = new_interval;
-        }
+        var y_axis = all_chart_options.yAxis[0] ? all_chart_options.yAxis[index] : all_chart_options.yAxis;
+
+        y_axis.tickInterval = new_interval;
+
 
     }
 
