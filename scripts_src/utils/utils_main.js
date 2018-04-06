@@ -164,15 +164,15 @@ var utils_main = {
 
         //x,y,z signs array replacements
 
-      //  formatter_str = formatter_str
+        formatter_str = formatter_str
         //    .replace(/y_signs_arr\[0\]/g, '"' + replacement_obj.y_signs_arr[0] + '"')
         //    .replace(/y_signs_arr\[1\]/g, '"' + replacement_obj.y_signs_arr[1] + '"')
         //    .replace(/x_signs_arr\[0\]/g, '"' + replacement_obj.x_signs_arr[0] + '"')
         //    .replace(/x_signs_arr\[1\]/g, '"' + replacement_obj.x_signs_arr[1] + '"')
         //    .replace(/z_signs_arr\[0\]/g, '"' + replacement_obj.z_signs_arr[0] + '"')
         ///    .replace(/z_signs_arr\[1\]/g, '"' + replacement_obj.z_signs_arr[1] + '"')
-        //    .replace(/x_axis_signs_arr\[0\]/g, '"' + replacement_obj.x_axis_signs_arr[0] + '"')
-        //    .replace(/x_axis_signs_arr\[1\]/g, '"' + replacement_obj.x_axis_signs_arr[1] + '"');
+            .replace(/x_axis_signs_arr\[0\]/g, '"' + replacement_obj.x_axis_signs_arr[0] + '"')
+            .replace(/x_axis_signs_arr\[1\]/g, '"' + replacement_obj.x_axis_signs_arr[1] + '"');
          
 
         for (name in replacement_obj) {
