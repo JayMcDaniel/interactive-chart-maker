@@ -40,7 +40,9 @@ var map_init = {
                 reversed: utils_forms.getCheckBoxValue($("#legend_reverse_layout_checkbox")),
                 alphabetized: utils_forms.getCheckBoxValue($("#legend_alphabetical_layout_checkbox")),
                 x: Number($("#legend_placement_x").val()),
-                y: Number($("#legend_placement_y").val())
+                y: Number($("#legend_placement_y").val()),
+                item_width: Number($("#legend_item_width_input").val()) == 0 ? Number($("#legend_width_input").val()) : Number($("#legend_item_width_input").val()),
+                legend_width: Number($("#legend_width_input").val())
             },
             map_type: map_type,
             viewbox: "",

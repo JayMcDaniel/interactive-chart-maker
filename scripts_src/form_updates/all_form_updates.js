@@ -316,8 +316,12 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
     //legend width changed
 
     $("#legend_width_input").unbind().keyup(function () {
-        var new_legend_width = utils_main.checkForUndefined($(this).val());
-        update_legend.updateLegendWidth(new_legend_width, chart, all_chart_options);
+        if (all_chart_options.chart.type === "map") { //for maps
+            map_init.loadNewMap(chart, all_chart_options, all_map_options, true); // true to repopulate form
+        } else {
+            var new_legend_width = utils_main.checkForUndefined($(this).val());
+            update_legend.updateLegendWidth(new_legend_width, chart, all_chart_options);
+        }
 
     });
 
@@ -325,8 +329,13 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
     //legend item width changed
 
     $("#legend_item_width_input").unbind().keyup(function () {
-        var new_item_width = utils_main.checkForUndefined($(this).val());
-        update_legend.updateItemWidth(new_item_width, chart, all_chart_options);
+
+        if (all_chart_options.chart.type === "map") { //for maps
+            map_init.loadNewMap(chart, all_chart_options, all_map_options, true); // true to repopulate form
+        } else {
+            var new_item_width = utils_main.checkForUndefined($(this).val());
+            update_legend.updateItemWidth(new_item_width, chart, all_chart_options);
+        }
 
     });
 
@@ -461,7 +470,7 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
         var val = utils_forms.getCheckBoxValue($(this));
         update_y_axis.updateIsLog(val, chart, all_chart_options);
     });
-    
+
 
     //y-axis dollar / percent or decimal selects changed (format)
     $("#chart_y_axis_signs_select, #chart_y_axis_decimals_select, #chart_y_axis_divide_select").unbind().change(function () {
@@ -470,28 +479,28 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
         var dividend = Number($("#chart_y_axis_divide_select").val());
         update_y_axis.updateFormatter(sign, decimals, dividend, chart, all_chart_options);
     });
-    
-    
-    
+
+
+
     $("#chart_y_axis_signs_select").change(); //call once on load
 
 
 
     /* SECONDARY Y-AXIS CHANGES */
     $("#chart_y_axis_2_enabled_checkbox").unbind().change(function () {
-       var is_checked = utils_forms.getCheckBoxValue($(this));
-        
-        if (is_checked){
+        var is_checked = utils_forms.getCheckBoxValue($(this));
+
+        if (is_checked) {
             $(".secondary_y_axis_span").show();
             update_y_axis.addSecondAxis(chart, all_chart_options);
-        }else{
+        } else {
             $(".secondary_y_axis_span").hide();
             update_y_axis.removeSecondAxis(chart, all_chart_options);
         }
-        
+
     });
-    
-    
+
+
     //secondary y-axis dollar / percent or decimal selects changed (format)
     $("#chart_y_axis_signs_select_2, #chart_y_axis_decimals_select_2, #chart_y_axis_divide_select_2").unbind().change(function () {
         var sign = $("#chart_y_axis_signs_select_2").val();
@@ -505,7 +514,7 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
 
     //change shared tooltip checkbox, decimals, signs, or mulitplier selects
     $("#chart_tooltip_shared_checkbox, #chart_tooltip_force_decimals_select, #chart_tooltip_force_decimals_x_select, #chart_tooltip_force_decimals_z_select, #chart_tooltip_signs_select, #chart_tooltip_signs_x_select, #chart_tooltip_signs_z_select, #chart_tooltip_y_multiple_select, #chart_tooltip_force_decimals_select_2, #chart_tooltip_signs_select_2, #chart_tooltip_y_multiple_select_2").unbind().change(function () {
-        
+
         if (all_chart_options.chart.type === "map") { //for maps
             map_init.loadNewMap(chart, all_chart_options, all_map_options, true); // true to repopulate form
         } else {

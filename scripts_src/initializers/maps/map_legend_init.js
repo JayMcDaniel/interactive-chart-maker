@@ -16,7 +16,7 @@
             map_legend_div.setAttribute("class", "map_legend_div");
 
             var top_adjustment = all_map_options.is_animated ? 480 : 420;
-            map_legend_div.setAttribute("style", "position: absolute; top: " + (all_map_options.legend.y + top_adjustment) + "px; left: " + (all_map_options.legend.x + 261) + "px; min-width: 131px; min-height: 130px; margin: auto; z-index: 500");
+            map_legend_div.setAttribute("style", "position: absolute; top: " + (all_map_options.legend.y + top_adjustment) + "px; left: " + (all_map_options.legend.x + 261) + "px; width: "+ all_map_options.legend.legend_width +"px; min-height: 130px; margin: auto; z-index: 500");
 
 
             //create legend item for each color
@@ -29,7 +29,7 @@
                 //outer div for each legend item
                 var map_legend_item = document.createElement("div");
                 map_legend_item.setAttribute("class", "map_legend_item");
-                map_legend_item.setAttribute("style", "min-width: 171px; min-height: 15px; margin-bottom: 7px; cursor: default;");
+                map_legend_item.setAttribute("style", "min-width: "+ all_map_options.legend.item_width +"px; min-height: 15px; margin-bottom: 7px; cursor: default; float: left;");
 
                 //map color box div for each legend item
                 var map_legend_color = document.createElement("div");
