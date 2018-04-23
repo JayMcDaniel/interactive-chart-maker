@@ -273,6 +273,11 @@ var map_init = {
             //init legend hovering
             map_init.setUpMapLegendHover(map_display_area);
 
+            //init legend clicking
+            if (all_map_options.map_type === "metro_area") {
+                map_init.setUpMapLegendClick(map_display_area);
+            }
+
             //init animation functionality if applicabla
             if (all_map_options.is_animated) {
                 map_animation_init.setUpMapAnimation(all_map_options, map_display_area);
@@ -594,6 +599,40 @@ var map_init = {
     },
 
 
+
+    /** set up click functionality for the map legend (just for metro area for now**/
+    setUpMapLegendClick: function setUpMapLegendClick(map_display_area) {
+        $(".map_legend_item", map_display_area).css("cursor", "pointer")
+            .addClass("showing")
+            .click(function () {
+                var this_color = $(".map_legend_color", $(this)).css("background-color").replace("rgb", "rgba").replace(")", ", 0.75)");
+                var is_showing = $(this).hasClass("showing");
+
+                if (is_showing) {
+                    $(this).removeClass("showing");
+                    $(".map_legend_color", $(this)).css("visibility", "hidden");
+                    $("circle", map_display_area).each(function (i, e) {
+                        var area_color = $(e).attr("fill");
+                        console.log(this_color, area_color);
+                        if (this_color === area_color) {
+                            console.log("hiding");
+                            $(e).hide();
+                        }
+                    });
+
+                } else {
+                    $(this).addClass("showing");
+                    $(".map_legend_color", $(this)).css("visibility", "visible");
+                    $("circle", map_display_area).each(function (i, e) {
+                        var area_color = $(e).attr("fill");
+                        if (this_color === area_color) {
+                            $(e).show();
+                        }
+                    });
+                }
+
+            });
+    },
 
 
 
