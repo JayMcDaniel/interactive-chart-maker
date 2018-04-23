@@ -21,7 +21,7 @@ var update_map_palettes = {
             map_colors_init.loadMapColorPalettes(new_palette_num);
 
             $("#add_map_color, #minus_map_color").removeClass("off");
-            if (new_palette_num > 19) {
+            if (new_palette_num > 22) {
                 $("#add_map_color").addClass("off");
             }else if (new_palette_num < 3) {
                 $("#minus_map_color").addClass("off");

@@ -4616,6 +4616,24 @@
         "loc_name": "San Rafael, CA",
         "previous_fill": "",
         "style": ""
+    },
+
+    {
+        "cy": "176.93848050724546",
+        "cx": "625.4765941636945",
+        "r": "2",
+        "class": "metro-area-circle",
+        "loc_name": "Silver Spring-Frederick-Rockville, MD",
+        "previous_fill": "",
+        "style": ""
+    }, {
+        "cy": "106.36830388619565",
+        "cx": "687.107470836172",
+        "r": "2",
+        "class": "metro-area-circle",
+        "loc_name": "Taunton-Middleborough-Norton, MA",
+        "previous_fill": "",
+        "style": ""
     }
 
 ]
