@@ -15,7 +15,6 @@ var parseForTypicalChart = function (input, load_series_from, chart_type, legend
     var output = {};
     output.series = [];
 
-console.time();
     /** If loading series names from column heads is selected*/
     if (load_series_from === "column_heads") {
         //load x-axis categories from row heads

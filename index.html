@@ -686,8 +686,7 @@
 
                     <div class="clear_next_textarea_button show_map" title="Clear the text area">X</div>
 
-                    <textarea id="table_input_textarea" class="large show_map" placeholder="Insert table html here">
-                    </textarea>
+                    <textarea id="table_input_textarea" class="large show_map" placeholder="Insert table html here"></textarea>
 
 
                     <br>
@@ -708,8 +707,9 @@
             <!-- color palette options box -->
             <div class="display map_display chart_display" id="display_color_palette">
                 <h4>Colors <sup class = "help_icon">?</sup> <sup id="color_palette_reverse_icon" title="Reverse palettes">(&#8596;)</sup>
-                
-                <sup class="just_map on" id="minus_map_color">&minus;</sup>&nbsp;<sup class="just_map on" id="add_map_color">+</sup>
+                <span class ="just_map">
+                <sup class="on" id="minus_map_color">&minus;</sup>&nbsp;<sup class="just_map on" id="add_map_color">+</sup>
+                </span>
                 </h4>
                 <div class="display_options">
 
@@ -717,14 +717,32 @@
 
                     <!-- color palettes are loaded the first time user clicks on that tab -->
 
+
+
                     <div id="color_palettes">
 
                     </div>
+
+
 
                     <div id="map_color_palettes" class="just_map" style="display: block;">
 
                     </div>
 
+
+                    <span class="show_map">
+                    <label for="use_custom_colors_checkbox">Use custom color palette?</label>
+                    <input type="checkbox" id="use_custom_colors_checkbox" />
+
+
+                    <br>
+                    
+                    <p class="notes">Insert RGB, Hex codes, or color names here, i.e. rgb(50,50,50), separated by spaces or new lines.</p>
+                        <div class="clear_next_textarea_button show_map" title="Clear the text area">X</div>
+                    <textarea id="custom_colors_textarea" class="medium show_map" placeholder="Insert RGB, Hex codes, or color names here, i.e. rgb(50,50,50), separated by spaces or new lines" value="" style="height: ">Aqua green CornflowerBlue #FF1493 #A52A2A #FF7F50 rgb(184,134,11) rgb(139,0,139) rgb(255,215,0)
+                    </textarea>
+                    <br>
+                        </span>
 
                 </div>
                 <!-- end all color palettes -->

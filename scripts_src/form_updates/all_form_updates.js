@@ -301,6 +301,35 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
         allFormUpdates.colorPaletteRowClick(); // runs when this main function is called with chart_recall
     }
 
+    //custom colors palette checkbox
+    $("#use_custom_colors_checkbox").unbind().click(function () {
+        var checked = utils_forms.getCheckBoxValue($(this));
+
+        if (checked) {
+            updateColors.addCustomPalette(all_chart_options, allFormUpdates.colorPaletteRowClick);
+        } else {
+            $(".color_palette_row_custom").remove();
+        }
+
+    });
+
+    //custom colors textbox
+    $("#custom_colors_textarea").unbind().bind('blur paste', function () {
+
+        var checked = utils_forms.getCheckBoxValue($("#use_custom_colors_checkbox"));
+
+        if (checked) {
+
+            $(".color_palette_row_custom").remove();
+            setTimeout(function () {
+                    updateColors.addCustomPalette(all_chart_options, allFormUpdates.colorPaletteRowClick);
+                },
+                100);
+
+        }
+    });
+
+
 
 
 

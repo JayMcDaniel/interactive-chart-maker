@@ -186,11 +186,12 @@ var map_colors_init = {
                 $("#minus_map_color").attr("class", "on"); //turn minus button on
             }
 
-            if (val < 6) {
+            if (val < 23) {
                 $("#add_map_color").attr("class", "on"); //turn plus button on
             }
 
         });
+        $("#use_custom_colors_checkbox").prop('checked',false);
     }
 
 
