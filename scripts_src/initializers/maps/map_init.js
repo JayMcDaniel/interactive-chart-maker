@@ -6,11 +6,13 @@ var map_title_init = require("./map_title_init.js");
 var map_subtitle_init = require("./map_subtitle_init.js");
 var map_tooltip_init = require("./map_tooltip_init.js");
 var map_legend_init = require("./map_legend_init");
+var map_ranked_columns_init = require("./map_ranked_columns_init");
 var map_credits_init = require("./map_credits_init.js");
 var map_circle_sizes_init = require("./map_circle_sizes_init.js");
 var update_map_individual_series = require("../../form_updates/update_map_individual_series.js");
 var update_template = require("../../form_updates/update_template.js");
 var areas_colored_report = require("../../utils/areas_colored_report.js");
+var is_checked = utils_forms.getCheckBoxValue;
 
 /** 
 Map initialization object
@@ -31,14 +33,15 @@ var map_init = {
             colors: [],
             circle_size_multiple: 1,
             circle_sized_by: $("#map_circle_size_by_select").val(),
-            is_animated: utils_forms.getCheckBoxValue($("#map_animated_checkbox")),
-            is_colored_by_names: utils_forms.getCheckBoxValue($("#map_color_by_names_checkbox")),
+            is_animated: is_checked($("#map_animated_checkbox")),
+            is_colored_by_names: is_checked($("#map_color_by_names_checkbox")),
+            add_ranked_columns: is_checked($("#map_add_ranked_columns_checkbox")),
             animation_delay: Number($("#map_animation_speed_range").val()),
             legend: {
                 decimals: $("#map_legend_decimals_select").val(),
-                enabled: utils_forms.getCheckBoxValue($("#map_legend_enabled_checkbox")),
-                reversed: utils_forms.getCheckBoxValue($("#legend_reverse_layout_checkbox")),
-                alphabetized: utils_forms.getCheckBoxValue($("#legend_alphabetical_layout_checkbox")),
+                enabled: is_checked($("#map_legend_enabled_checkbox")),
+                reversed: is_checked($("#legend_reverse_layout_checkbox")),
+                alphabetized: is_checked($("#legend_alphabetical_layout_checkbox")),
                 x: Number($("#legend_placement_x").val()),
                 y: Number($("#legend_placement_y").val()),
                 item_width: Number($("#legend_item_width_input").val()) == 0 ? Number($("#legend_width_input").val()) : Number($("#legend_item_width_input").val()),
@@ -164,15 +167,22 @@ var map_init = {
 
         var map_legend = all_map_options.legend.enabled ? map_legend_init.getMapLegend(all_map_options) : undefined; //creates and returns a styled map div legend with color boxes and text
 
+
+        var ranked_columns_inset = all_map_options.add_ranked_columns ? map_ranked_columns_init.getRankedColumns(all_map_options) : undefined;
+
+
         //put more together
-        $(map_outer_div).append(map_outer_svg, map_legend, map_credits);
+        $(map_outer_div).append(map_outer_svg, map_legend, ranked_columns_inset, map_credits);
+
+
+
 
 
         map_display_area.append($(map_outer_div)); //put map on page
 
         //reverse legend if needed
         if (all_map_options.legend.reversed) {
-            var map_legend_div = $(".map_legend_div");
+            var map_legend_div = $("#" + all_map_options.render_ID + " .map_legend_div");
             $(map_legend_div).children().each(function (i, div) {
                 map_legend_div.prepend(div)
             });
@@ -273,6 +283,10 @@ var map_init = {
             //init legend hovering
             map_init.setUpMapLegendHover(map_display_area);
 
+            //init ranked column hovering if applicable
+            map_init.setUpMapRankedColumnsHover(map_display_area);
+
+
             //init legend clicking
             if (all_map_options.map_type === "metro_area") {
                 map_init.setUpMapLegendClick(map_display_area);
@@ -344,7 +358,7 @@ var map_init = {
         var hidden_areas = [];
 
         $("#map_include_puerto_rico_checkbox, #map_include_virgin_islands_checkbox").each(function () {
-            if (!utils_forms.getCheckBoxValue($(this))) {
+            if (!is_checked($(this))) {
                 hidden_areas.push($(this).val());
             }
         });
@@ -549,6 +563,16 @@ var map_init = {
 
             this_tooltip.css("left", left_position).show(); //show just this map's tooltip
 
+
+
+            //highlight ranked column if enabled
+
+            if (all_map_options.add_ranked_columns) {
+                var column = $("#" + all_map_options.render_ID + " .map_ranked_column[rel='" + $(this).attr('id') + "']");
+                column.css("background-color", "#FFEB00");
+            }
+
+
         }, function () { //mouse out
 
             //return to all previous fill opacity
@@ -556,6 +580,13 @@ var map_init = {
 
             //hide tooltip
             $(".map_tooltip").hide();
+
+            //dehighlight ranked column if enabled
+
+            if (all_map_options.add_ranked_columns) {
+                var column = $("#" + all_map_options.render_ID + " .map_ranked_column[rel='" + $(this).attr('id') + "']");
+                column.css("background-color", column.attr("previous_color"));
+            }
         });
 
     },
@@ -599,6 +630,19 @@ var map_init = {
     },
 
 
+    setUpMapRankedColumnsHover: function setUpMapRankedColumnsHover(map_display_area) {
+        //add mouseover function
+        $(".map_ranked_column").hover(function () {
+                $(this).css("background-color", "#FFEB00");
+            
+                $("#" + $(this).attr("rel"), map_display_area).mouseenter();
+            },
+            function () {
+                $(this).css("background-color", $(this).attr("previous_color"));
+            $("#" + $(this).attr("rel"), map_display_area).mouseleave();
+            });
+
+    },
 
     /** set up click functionality for the map legend (just for metro area for now**/
     setUpMapLegendClick: function setUpMapLegendClick(map_display_area) {

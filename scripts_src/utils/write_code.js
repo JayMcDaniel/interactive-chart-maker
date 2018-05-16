@@ -118,6 +118,7 @@ jQuery.fn.extend({addCommas:' + $("string").addCommas.toString() + ' });';
         var map_credits_init = require("../initializers/maps/map_credits_init.js");
         var map_legend_init = require("../initializers/maps/map_legend_init.js");
         var map_tooltip_init = require("../initializers/maps/map_tooltip_init.js");
+        var map_ranked_columns_init = require("../initializers/maps/map_ranked_columns_init.js");
         var map_animation_init = require("../initializers/maps/map_animation_init.js");
 
         //save chart input values
@@ -161,6 +162,9 @@ jQuery.fn.extend({addCommas:' + $("string").addCommas.toString() + ' });';
 
             //map_legend_init.getMapLegend
             "map_legend_init.getMapLegend = " + map_legend_init.getMapLegend.toString() + ";\n\n" +
+            
+            //map_ranked_columns_init.getRankedColumns
+            "var map_ranked_columns_init = {}; \n map_ranked_columns_init.getRankedColumns = " + map_ranked_columns_init.getRankedColumns.toString() + ";\n\n" +
 
             //map_tooltip_init.getMapTooltip
             "var map_tooltip_init = {}; \n map_tooltip_init.getMapTooltip = " + map_tooltip_init.getMapTooltip.toString() + ";\n\n" +
@@ -170,6 +174,9 @@ jQuery.fn.extend({addCommas:' + $("string").addCommas.toString() + ' });';
 
             //map_init.setUpMapHover
             "map_init.setUpMapHover = " + map_init.setUpMapHover.toString() + ";\n\n" +
+            
+            //map_init.setUpMapRankedColumnsHover
+            "map_init.setUpMapRankedColumnsHover = " + map_init.setUpMapRankedColumnsHover.toString() + ";\n\n" +
 
             //map_init.setUpMapLegendHover
             "map_init.setUpMapLegendHover = " + map_init.setUpMapLegendHover.toString() + ";\n\n" +
@@ -197,6 +204,9 @@ jQuery.fn.extend({addCommas:' + $("string").addCommas.toString() + ' });';
 
             //init legend hovering
             "map_init.setUpMapLegendHover(map_display_area);\n\n" +
+            
+            //init ranked column hovering
+            "map_init.setUpMapRankedColumnsHover(map_display_area);\n\n" + 
             
             //init legend clicking
              "if (all_map_options.map_type === 'metro_area') {\n map_init.setUpMapLegendClick(map_display_area); \n } \n\n" +

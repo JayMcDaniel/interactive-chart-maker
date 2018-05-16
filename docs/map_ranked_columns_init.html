@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Namespace: keyboard_inputs</title>
+    <title>JSDoc: Namespace: map_ranked_columns_init</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Namespace: keyboard_inputs</h1>
+    <h1 class="page-title">Namespace: map_ranked_columns_init</h1>
 
     
 
@@ -28,7 +28,7 @@
 
 <header>
     
-        <h2>keyboard_inputs</h2>
+        <h2>map_ranked_columns_init</h2>
         
     
 </header>
@@ -37,7 +37,7 @@
     <div class="container-overview">
     
         
-            <div class="description">Contains functions that deal with keyboard inputs</div>
+            <div class="description">creates and returns some columns in a div that are ranked and sized and associated with the areas provided</div>
         
 
         
@@ -72,7 +72,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="keyboard_inputs.js.html">keyboard_inputs.js</a>, <a href="keyboard_inputs.js.html#line7">line 7</a>
+        <a href="initializers_maps_map_ranked_columns_init.js.html">initializers/maps/map_ranked_columns_init.js</a>, <a href="initializers_maps_map_ranked_columns_init.js.html#line7">line 7</a>
     </li></ul></dd>
     
 
@@ -108,170 +108,14 @@
 
     
 
-    <h4 class="name" id=".clickNext"><span class="type-signature">(static) </span>clickNext<span class="signature">(classname, selected_classname)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id=".getRankedColumns"><span class="type-signature">(static) </span>getRankedColumns<span class="signature">()</span><span class="type-signature"></span></h4>
 
     
 
 
 
 <div class="description">
-    clicks the next element of a given classname than the one selected
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>classname</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">the class name of each of the elements</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>selected_classname</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">the name of the selected element</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="keyboard_inputs.js.html">keyboard_inputs.js</a>, <a href="keyboard_inputs.js.html#line22">line 22</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id=".initListeners"><span class="type-signature">(static) </span>initListeners<span class="signature">()</span><span class="type-signature"></span></h4>
-
-    
-
-
-
-<div class="description">
-    initialize listenters 
-    when a number entry input is focused on, attach those event listeners
-    when it leaves to main document, attach those. called from navigation_setup.InitNavWithChart()
+    creates and returns a ranked and sized columns div
 </div>
 
 
@@ -315,171 +159,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="keyboard_inputs.js.html">keyboard_inputs.js</a>, <a href="keyboard_inputs.js.html#line185">line 185</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id=".numberChange"><span class="type-signature">(static) </span>numberChange<span class="signature">()</span><span class="type-signature"></span></h4>
-
-    
-
-
-
-<div class="description">
-    in number entry inputs, pressing up or down will adjust value
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="keyboard_inputs.js.html">keyboard_inputs.js</a>, <a href="keyboard_inputs.js.html#line173">line 173</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id=".sideNavTabShortcuts"><span class="type-signature">(static) </span>sideNavTabShortcuts<span class="signature">()</span><span class="type-signature"></span></h4>
-
-    
-
-
-
-<div class="description">
-    when nothing is selected, pressing up or down changes which side nav tab is selected
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="keyboard_inputs.js.html">keyboard_inputs.js</a>, <a href="keyboard_inputs.js.html#line42">line 42</a>
+        <a href="initializers_maps_map_ranked_columns_init.js.html">initializers/maps/map_ranked_columns_init.js</a>, <a href="initializers_maps_map_ranked_columns_init.js.html#line10">line 10</a>
     </li></ul></dd>
     
 

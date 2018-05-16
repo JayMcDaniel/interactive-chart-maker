@@ -34,11 +34,13 @@ var map_title_init = require("./map_title_init.js");
 var map_subtitle_init = require("./map_subtitle_init.js");
 var map_tooltip_init = require("./map_tooltip_init.js");
 var map_legend_init = require("./map_legend_init");
+var map_ranked_columns_init = require("./map_ranked_columns_init");
 var map_credits_init = require("./map_credits_init.js");
 var map_circle_sizes_init = require("./map_circle_sizes_init.js");
 var update_map_individual_series = require("../../form_updates/update_map_individual_series.js");
 var update_template = require("../../form_updates/update_template.js");
 var areas_colored_report = require("../../utils/areas_colored_report.js");
+var is_checked = utils_forms.getCheckBoxValue;
 
 /** 
 Map initialization object
@@ -59,14 +61,15 @@ var map_init = {
             colors: [],
             circle_size_multiple: 1,
             circle_sized_by: $("#map_circle_size_by_select").val(),
-            is_animated: utils_forms.getCheckBoxValue($("#map_animated_checkbox")),
-            is_colored_by_names: utils_forms.getCheckBoxValue($("#map_color_by_names_checkbox")),
+            is_animated: is_checked($("#map_animated_checkbox")),
+            is_colored_by_names: is_checked($("#map_color_by_names_checkbox")),
+            add_ranked_columns: is_checked($("#map_add_ranked_columns_checkbox")),
             animation_delay: Number($("#map_animation_speed_range").val()),
             legend: {
                 decimals: $("#map_legend_decimals_select").val(),
-                enabled: utils_forms.getCheckBoxValue($("#map_legend_enabled_checkbox")),
-                reversed: utils_forms.getCheckBoxValue($("#legend_reverse_layout_checkbox")),
-                alphabetized: utils_forms.getCheckBoxValue($("#legend_alphabetical_layout_checkbox")),
+                enabled: is_checked($("#map_legend_enabled_checkbox")),
+                reversed: is_checked($("#legend_reverse_layout_checkbox")),
+                alphabetized: is_checked($("#legend_alphabetical_layout_checkbox")),
                 x: Number($("#legend_placement_x").val()),
                 y: Number($("#legend_placement_y").val()),
                 item_width: Number($("#legend_item_width_input").val()) == 0 ? Number($("#legend_width_input").val()) : Number($("#legend_item_width_input").val()),
@@ -192,15 +195,22 @@ var map_init = {
 
         var map_legend = all_map_options.legend.enabled ? map_legend_init.getMapLegend(all_map_options) : undefined; //creates and returns a styled map div legend with color boxes and text
 
+
+        var ranked_columns_inset = all_map_options.add_ranked_columns ? map_ranked_columns_init.getRankedColumns(all_map_options) : undefined;
+
+
         //put more together
-        $(map_outer_div).append(map_outer_svg, map_legend, map_credits);
+        $(map_outer_div).append(map_outer_svg, map_legend, ranked_columns_inset, map_credits);
+
+
+
 
 
         map_display_area.append($(map_outer_div)); //put map on page
 
         //reverse legend if needed
         if (all_map_options.legend.reversed) {
-            var map_legend_div = $(".map_legend_div");
+            var map_legend_div = $("#" + all_map_options.render_ID + " .map_legend_div");
             $(map_legend_div).children().each(function (i, div) {
                 map_legend_div.prepend(div)
             });
@@ -301,6 +311,10 @@ var map_init = {
             //init legend hovering
             map_init.setUpMapLegendHover(map_display_area);
 
+            //init ranked column hovering if applicable
+            map_init.setUpMapRankedColumnsHover(map_display_area);
+
+
             //init legend clicking
             if (all_map_options.map_type === "metro_area") {
                 map_init.setUpMapLegendClick(map_display_area);
@@ -372,7 +386,7 @@ var map_init = {
         var hidden_areas = [];
 
         $("#map_include_puerto_rico_checkbox, #map_include_virgin_islands_checkbox").each(function () {
-            if (!utils_forms.getCheckBoxValue($(this))) {
+            if (!is_checked($(this))) {
                 hidden_areas.push($(this).val());
             }
         });
@@ -577,6 +591,16 @@ var map_init = {
 
             this_tooltip.css("left", left_position).show(); //show just this map's tooltip
 
+
+
+            //highlight ranked column if enabled
+
+            if (all_map_options.add_ranked_columns) {
+                var column = $("#" + all_map_options.render_ID + " .map_ranked_column[rel='" + $(this).attr('id') + "']");
+                column.css("background-color", "#FFEB00");
+            }
+
+
         }, function () { //mouse out
 
             //return to all previous fill opacity
@@ -584,6 +608,13 @@ var map_init = {
 
             //hide tooltip
             $(".map_tooltip").hide();
+
+            //dehighlight ranked column if enabled
+
+            if (all_map_options.add_ranked_columns) {
+                var column = $("#" + all_map_options.render_ID + " .map_ranked_column[rel='" + $(this).attr('id') + "']");
+                column.css("background-color", column.attr("previous_color"));
+            }
         });
 
     },
@@ -627,6 +658,19 @@ var map_init = {
     },
 
 
+    setUpMapRankedColumnsHover: function setUpMapRankedColumnsHover(map_display_area) {
+        //add mouseover function
+        $(".map_ranked_column").hover(function () {
+                $(this).css("background-color", "#FFEB00");
+            
+                $("#" + $(this).attr("rel"), map_display_area).mouseenter();
+            },
+            function () {
+                $(this).css("background-color", $(this).attr("previous_color"));
+            $("#" + $(this).attr("rel"), map_display_area).mouseleave();
+            });
+
+    },
 
     /** set up click functionality for the map legend (just for metro area for now**/
     setUpMapLegendClick: function setUpMapLegendClick(map_display_area) {
@@ -696,13 +740,13 @@ module.exports = map_init;</code></pre>
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-form_updates_all_form_updates.html">form_updates/all_form_updates</a></li><li><a href="module-form_updates_update_chart_type.html">form_updates/update_chart_type</a></li><li><a href="module-form_updates_update_colors.html">form_updates/update_colors</a></li><li><a href="module-form_updates_update_individual_series.html">form_updates/update_individual_series</a></li><li><a href="module-initializers_charts_all_chart_options_init.html">initializers/charts/all_chart_options_init</a></li><li><a href="module-initializers_charts_chart_init.html">initializers/charts/chart_init</a></li><li><a href="module-initializers_charts_colors_init.html">initializers/charts/colors_init</a></li><li><a href="module-initializers_charts_credits_init.html">initializers/charts/credits_init</a></li><li><a href="module-initializers_charts_exporting_init.html">initializers/charts/exporting_init</a></li><li><a href="module-initializers_charts_legend_init.html">initializers/charts/legend_init</a></li><li><a href="module-initializers_charts_plot_options_init.html">initializers/charts/plot_options_init</a></li><li><a href="module-initializers_charts_series_init.html">initializers/charts/series_init</a></li><li><a href="module-initializers_charts_subtitle_init.html">initializers/charts/subtitle_init</a></li><li><a href="module-initializers_charts_title_init.html">initializers/charts/title_init</a></li><li><a href="module-initializers_charts_tooltip_init.html">initializers/charts/tooltip_init</a></li><li><a href="module-initializers_charts_x_axis_init.html">initializers/charts/x_axis_init</a></li><li><a href="module-initializers_charts_y_axis_init.html">initializers/charts/y_axis_init</a></li><li><a href="module-initializers_maps_map_animation_init.html">initializers/maps/map_animation_init</a></li><li><a href="module-initializers_maps_map_circle_sizes_init.html">initializers/maps/map_circle_sizes_init</a></li><li><a href="module-initializers_maps_map_colors_init.html">initializers/maps/map_colors_init</a></li><li><a href="module-initializers_maps_map_credits_init.html">initializers/maps/map_credits_init</a></li><li><a href="module-initializers_maps_map_title_init.html">initializers/maps/map_title_init</a></li><li><a href="module-parsers_parse_for_animated_bubble.html">parsers/parse_for_animated_bubble</a></li><li><a href="module-parsers_parse_for_box_plot.html">parsers/parse_for_box_plot</a></li><li><a href="module-parsers_parse_for_bubble.html">parsers/parse_for_bubble</a></li><li><a href="module-parsers_parse_for_drilldown.html">parsers/parse_for_drilldown</a></li><li><a href="module-parsers_parse_for_map.html">parsers/parse_for_map</a></li><li><a href="module-parsers_parse_for_range.html">parsers/parse_for_range</a></li><li><a href="module-parsers_parse_for_scatter.html">parsers/parse_for_scatter</a></li><li><a href="module-parsers_parse_for_typical_chart.html">parsers/parse_for_typical_chart</a></li><li><a href="module-parsers_parse_table_input.html">parsers/parse_table_input</a></li><li><a href="module-utils_areas_colored_report.html">utils/areas_colored_report</a></li><li><a href="module-utils_jq_extensions.html">utils/jq_extensions</a></li><li><a href="module-utils_load_from_table_wizard.html">utils/load_from_table_wizard</a></li></ul><h3>Classes</h3><ul><li><a href="AllChartOptions.html">AllChartOptions</a></li><li><a href="ChartOptions.html">ChartOptions</a></li><li><a href="Colors.html">Colors</a></li><li><a href="Credits.html">Credits</a></li><li><a href="Exporting.html">Exporting</a></li><li><a href="Legend.html">Legend</a></li><li><a href="PlotOptions.html">PlotOptions</a></li><li><a href="Series.html">Series</a></li><li><a href="Subtitle.html">Subtitle</a></li><li><a href="Title.html">Title</a></li><li><a href="Tooltip.html">Tooltip</a></li><li><a href="XAxis.html">XAxis</a></li><li><a href="yAxis.html">yAxis</a></li></ul><h3>Namespaces</h3><ul><li><a href="calculate_recession_dates.html">calculate_recession_dates</a></li><li><a href="chart_animation_init.html">chart_animation_init</a></li><li><a href="chart_recall.html">chart_recall</a></li><li><a href="draw_chart.html">draw_chart</a></li><li><a href="keyboard_inputs.html">keyboard_inputs</a></li><li><a href="map_init.html">map_init</a></li><li><a href="map_legend_init.html">map_legend_init</a></li><li><a href="map_subtitle_init.html">map_subtitle_init</a></li><li><a href="map_tooltip_init.html">map_tooltip_init</a></li><li><a href="navigation_setup.html">navigation_setup</a></li><li><a href="update_chart_options.html">update_chart_options</a></li><li><a href="update_credits.html">update_credits</a></li><li><a href="update_data.html">update_data</a></li><li><a href="update_legend.html">update_legend</a></li><li><a href="update_map_individual_series.html">update_map_individual_series</a></li><li><a href="update_map_palettes.html">update_map_palettes</a></li><li><a href="update_template.html">update_template</a></li><li><a href="update_tooltip.html">update_tooltip</a></li><li><a href="update_x_axis.html">update_x_axis</a></li><li><a href="update_y_axis.html">update_y_axis</a></li><li><a href="utils_forms.html">utils_forms</a></li><li><a href="utils_main.html">utils_main</a></li><li><a href="write_code.html">write_code</a></li></ul><h3>Global</h3><ul><li><a href="global.html#getInvisibleBubble">getInvisibleBubble</a></li><li><a href="global.html#pushDrillSeries">pushDrillSeries</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-form_updates_all_form_updates.html">form_updates/all_form_updates</a></li><li><a href="module-form_updates_update_chart_type.html">form_updates/update_chart_type</a></li><li><a href="module-form_updates_update_colors.html">form_updates/update_colors</a></li><li><a href="module-form_updates_update_individual_series.html">form_updates/update_individual_series</a></li><li><a href="module-initializers_charts_all_chart_options_init.html">initializers/charts/all_chart_options_init</a></li><li><a href="module-initializers_charts_chart_init.html">initializers/charts/chart_init</a></li><li><a href="module-initializers_charts_colors_init.html">initializers/charts/colors_init</a></li><li><a href="module-initializers_charts_credits_init.html">initializers/charts/credits_init</a></li><li><a href="module-initializers_charts_exporting_init.html">initializers/charts/exporting_init</a></li><li><a href="module-initializers_charts_legend_init.html">initializers/charts/legend_init</a></li><li><a href="module-initializers_charts_plot_options_init.html">initializers/charts/plot_options_init</a></li><li><a href="module-initializers_charts_series_init.html">initializers/charts/series_init</a></li><li><a href="module-initializers_charts_subtitle_init.html">initializers/charts/subtitle_init</a></li><li><a href="module-initializers_charts_title_init.html">initializers/charts/title_init</a></li><li><a href="module-initializers_charts_tooltip_init.html">initializers/charts/tooltip_init</a></li><li><a href="module-initializers_charts_x_axis_init.html">initializers/charts/x_axis_init</a></li><li><a href="module-initializers_charts_y_axis_init.html">initializers/charts/y_axis_init</a></li><li><a href="module-initializers_maps_map_animation_init.html">initializers/maps/map_animation_init</a></li><li><a href="module-initializers_maps_map_circle_sizes_init.html">initializers/maps/map_circle_sizes_init</a></li><li><a href="module-initializers_maps_map_colors_init.html">initializers/maps/map_colors_init</a></li><li><a href="module-initializers_maps_map_credits_init.html">initializers/maps/map_credits_init</a></li><li><a href="module-initializers_maps_map_title_init.html">initializers/maps/map_title_init</a></li><li><a href="module-parsers_parse_for_animated_bubble.html">parsers/parse_for_animated_bubble</a></li><li><a href="module-parsers_parse_for_box_plot.html">parsers/parse_for_box_plot</a></li><li><a href="module-parsers_parse_for_bubble.html">parsers/parse_for_bubble</a></li><li><a href="module-parsers_parse_for_drilldown.html">parsers/parse_for_drilldown</a></li><li><a href="module-parsers_parse_for_map.html">parsers/parse_for_map</a></li><li><a href="module-parsers_parse_for_range.html">parsers/parse_for_range</a></li><li><a href="module-parsers_parse_for_scatter.html">parsers/parse_for_scatter</a></li><li><a href="module-parsers_parse_for_typical_chart.html">parsers/parse_for_typical_chart</a></li><li><a href="module-parsers_parse_table_input.html">parsers/parse_table_input</a></li><li><a href="module-utils_areas_colored_report.html">utils/areas_colored_report</a></li><li><a href="module-utils_jq_extensions.html">utils/jq_extensions</a></li><li><a href="module-utils_load_from_table_wizard.html">utils/load_from_table_wizard</a></li></ul><h3>Classes</h3><ul><li><a href="AllChartOptions.html">AllChartOptions</a></li><li><a href="ChartOptions.html">ChartOptions</a></li><li><a href="Colors.html">Colors</a></li><li><a href="Credits.html">Credits</a></li><li><a href="Exporting.html">Exporting</a></li><li><a href="Legend.html">Legend</a></li><li><a href="PlotOptions.html">PlotOptions</a></li><li><a href="Series.html">Series</a></li><li><a href="Subtitle.html">Subtitle</a></li><li><a href="Title.html">Title</a></li><li><a href="Tooltip.html">Tooltip</a></li><li><a href="XAxis.html">XAxis</a></li><li><a href="yAxis.html">yAxis</a></li></ul><h3>Namespaces</h3><ul><li><a href="calculate_recession_dates.html">calculate_recession_dates</a></li><li><a href="chart_animation_init.html">chart_animation_init</a></li><li><a href="chart_recall.html">chart_recall</a></li><li><a href="draw_chart.html">draw_chart</a></li><li><a href="keyboard_inputs.html">keyboard_inputs</a></li><li><a href="map_init.html">map_init</a></li><li><a href="map_legend_init.html">map_legend_init</a></li><li><a href="map_ranked_columns_init.html">map_ranked_columns_init</a></li><li><a href="map_subtitle_init.html">map_subtitle_init</a></li><li><a href="map_tooltip_init.html">map_tooltip_init</a></li><li><a href="navigation_setup.html">navigation_setup</a></li><li><a href="update_chart_options.html">update_chart_options</a></li><li><a href="update_credits.html">update_credits</a></li><li><a href="update_data.html">update_data</a></li><li><a href="update_legend.html">update_legend</a></li><li><a href="update_map_individual_series.html">update_map_individual_series</a></li><li><a href="update_map_palettes.html">update_map_palettes</a></li><li><a href="update_template.html">update_template</a></li><li><a href="update_tooltip.html">update_tooltip</a></li><li><a href="update_x_axis.html">update_x_axis</a></li><li><a href="update_y_axis.html">update_y_axis</a></li><li><a href="utils_forms.html">utils_forms</a></li><li><a href="utils_main.html">utils_main</a></li><li><a href="write_code.html">write_code</a></li></ul><h3>Global</h3><ul><li><a href="global.html#getInvisibleBubble">getInvisibleBubble</a></li><li><a href="global.html#pushDrillSeries">pushDrillSeries</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Thu Apr 26 2018 12:15:25 GMT-0400 (EDT)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Wed May 16 2018 13:00:50 GMT-0400 (EDT)
 </footer>
 
 <script> prettyPrint(); </script>

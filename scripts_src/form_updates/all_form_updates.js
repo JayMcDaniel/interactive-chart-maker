@@ -697,12 +697,18 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
     });
 
 
-    //map size for spotlight, include VI and PR checkboxes changed
-    $("#map_spotlight_size_checkbox, #map_include_puerto_rico_checkbox, #map_include_virgin_islands_checkbox").unbind().change(function () {
+    //CHECKBOXES - map size for spotlight, VI, PR, and add columns inset checkboxes changed
+    $("#map_spotlight_size_checkbox, #map_include_puerto_rico_checkbox, #map_include_virgin_islands_checkbox, #map_add_ranked_columns_checkbox").unbind().change(function () {
+   
+        //move legend over if adding columns inset
+        if ($(this).attr("id") == "map_add_ranked_columns_checkbox"){
+            $("#legend_placement_x").val(10);
+        }
+        
         map_init.loadNewMap(chart, all_chart_options, all_map_options, true); // true to repopulate form
     });
 
-
+    
 
 
 
