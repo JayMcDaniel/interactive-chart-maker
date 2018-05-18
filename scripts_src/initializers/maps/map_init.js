@@ -168,7 +168,7 @@ var map_init = {
         var map_legend = all_map_options.legend.enabled ? map_legend_init.getMapLegend(all_map_options) : undefined; //creates and returns a styled map div legend with color boxes and text
 
 
-        var ranked_columns_inset = all_map_options.add_ranked_columns ? map_ranked_columns_init.getRankedColumns(all_map_options) : undefined;
+        var ranked_columns_inset = all_map_options.add_ranked_columns && all_map_options.map_type == "state" ? map_ranked_columns_init.getRankedColumns(all_map_options) : undefined;
 
 
         //put more together

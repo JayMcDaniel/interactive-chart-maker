@@ -29,6 +29,11 @@
             });
 
 
+            
+            //end if no areas
+            if (!areas[areas.length - 1]){
+                return undefined;
+            }
             var largest_val = areas[areas.length - 1].value;
 
             //create inner columns
