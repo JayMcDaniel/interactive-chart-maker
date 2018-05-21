@@ -41,20 +41,23 @@ var updateColors = function (chart, all_chart_options, chart_type) {
             color_index_mod = 2;
         }
 
+        var colors_len = all_chart_options.colors.length;
+        console.log("colors_len", colors_len);
+        
         $(chart.series).each(function (i) {
 
             if (i >= start_coloring_index) {
+                var color_index = (i - color_index_mod) - Math.floor((i - color_index_mod) / colors_len) * colors_len;
+                var new_color = all_chart_options.colors[color_index];
                 //update chart
                 this.update({
-                    color: all_chart_options.colors[(i - color_index_mod) - Math.floor((i - color_index_mod) / 15) * 15]
+                    color: new_color
                 }, false);
                 //update all_chart_options.series colors
-                all_chart_options.series[i - color_index_mod].color = all_chart_options.colors[(i - color_index_mod) - Math.floor((i - color_index_mod) / 15) * 15];
+                all_chart_options.series[i - color_index_mod].color = new_color;
 
             }
         });
-
-
 
 
     }
