@@ -584,7 +584,15 @@ break;
 
 //////////////if increase width button on ////////////////////
 case "toolBoxCellWidthIncrease":{
-		if($(this).css("width")){
+		
+ 
+  //  var new_text = "\u00A0" + $(this).text() + "\u00A0";
+    
+ 
+    
+    
+    
+    if($(this).css("width")){
 			var newWidth = Number($(this).css("width").replace("px","")) +10;
 			
 		
@@ -997,7 +1005,6 @@ $("#tableDisplay table tbody tr").each(function(rowIndex){
 
 
 ///////////add indents to sub categories
-console.log("new");
         $("#tableDisplay table tbody th p").each(function () {
 				var thisHTML = $(this).html();
 				
@@ -1031,6 +1038,10 @@ console.log("new");
 
 
         });
+     
+     
+////make first column wider
+     $("#tableDisplay table thead tr:last th:first").css("min-width","110px");
 	
 //////////translate series IDs code...
 		
