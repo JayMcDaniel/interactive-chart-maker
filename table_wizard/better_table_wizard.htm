@@ -677,6 +677,20 @@ showTableCode(); //refresh table code
 
 
         var tableID = $("#tableID").val();
+        
+        if (tableID == ""){
+            
+            var date = new Date();
+            var day = date.getDate();
+            var year = date.getFullYear();
+            var hours = date.getHours();
+            var minutes = date.getMinutes();
+            var seconds = date.getSeconds();
+            tableID = "BLStable" + "_" + year + "_" + day +"_" + hours + "_" + minutes + "_" + seconds;
+        }
+        
+        
+        
 
         var rowsWithCells = [];
 /////get raw data  
@@ -1393,7 +1407,7 @@ Real estate sales agents	194,000	194,000	194,000	194,000	680	680	680	680	12	15[p
 
 <br>
    <span style="margin-left:20px"> Give your table a unique ID:
-<input id="tableID" cols="20" rows="1" value="BLS_table">
+<input id="tableID" cols="20" rows="1" value="">
 
 </span>
 
