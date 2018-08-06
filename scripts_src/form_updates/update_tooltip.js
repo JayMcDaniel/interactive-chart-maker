@@ -132,6 +132,24 @@ var update_tooltip = {
         }
 
     },
+    
+    
+    
+    /** gets a tooltip for pie charts. Called from updateToolTip **/
+    getPieTooltip: function (chart, chart_type, all_chart_options) {
+
+        all_chart_options.tooltip.formatter = function () {
+
+            var options = this.series.chart.tooltip.options;
+            var dollar = options.y_signs_arr[0];
+            var percent = options.y_signs_arr[1];
+            var decimals = options.y_decimals;
+
+            return "<b>" + this.point.name + "</b>: " + dollar + $(this.y).addCommas(decimals) + percent;
+
+        };
+
+    },
 
 
 
@@ -380,6 +398,10 @@ var update_tooltip = {
             update_tooltip.getBoxPlotTooltip(chart, chart_type, all_chart_options);
         }
 
+        //IF A PIE CHART
+        else if (chart_type === "pie") {
+            update_tooltip.getPieTooltip(chart, chart_type, all_chart_options);
+        }
 
 
 

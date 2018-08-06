@@ -13,7 +13,7 @@ var plotOptionsInit = function plotOptionsInit(chart_type, legend_toggle_enabled
             events: {
                 // when one legend item is clicked, the others hide
                 legendItemClick: update_legend.updateToggle(legend_toggle_enabled, null, null, chart_type)
-                
+
             },
 
             dataLabels: {
@@ -30,9 +30,9 @@ var plotOptionsInit = function plotOptionsInit(chart_type, legend_toggle_enabled
                     }
                 }
             },
-            
-           
-            
+
+
+
             states: {
                 hover: {
                     lineWidth: 4
@@ -49,13 +49,13 @@ var plotOptionsInit = function plotOptionsInit(chart_type, legend_toggle_enabled
     //bar or column options
     options.series.groupPadding = $("#group_padding_input").getValNumber() || 0.2;
     options.series.pointPadding = $("#point_padding_input").getValNumber() || 0.1;
-    options.series.pointPlacement = null; 
+    options.series.pointPlacement = null;
     options.series.stacking = null;
     options.series.minPointLength = 2;
 
 
     //just for bubble charts
-  //  options.series.maxSize = 90;
+    //  options.series.maxSize = 90;
     options.series.minSize = 4;
     options.series.sizeBy = 'width'; //instead of 'area', seems more accurate
 

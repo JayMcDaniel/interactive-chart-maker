@@ -20,6 +20,8 @@ var update_data = {
         //if drilled into a drilldown, click the up button to get out - prevents errors
         utils_main.drillUp();
 
+        
+        
         ///parse data //
         var parsed_table_output = parseTableInput(input, load_series_from, chart_type, legend_toggle_enabled, all_chart_options.colors, chart, all_chart_options);
 

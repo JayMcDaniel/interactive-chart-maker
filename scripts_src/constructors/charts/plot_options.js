@@ -43,6 +43,11 @@ var PlotOptions = function (o) {
         fillColor: '#F0F0E0'
     };
 
+    this.pie = {
+        showInLegend: true,
+        size: "130%"
+    };
+
 }
 
 

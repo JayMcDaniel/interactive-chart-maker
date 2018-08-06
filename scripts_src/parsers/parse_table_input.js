@@ -16,6 +16,8 @@ var parseForBoxPlot = require("./parse_for_box_plot.js");
 /* parsing function for bubble charts */
 var parseForBubble = require("./parse_for_bubble.js");
 
+/*parsing function for pie charts */
+var parseForPie = require("./parse_for_pie.js");
 
 /* parsing function for animated bubble charts */
 var parseForAnimatedBubble = require("./parse_for_animated_bubble.js");
@@ -39,8 +41,19 @@ var utils_main = require("../utils/utils_main.js");
 var parseTableInput = function (input, load_series_from, chart_type, legend_toggle_enabled, colors, chart, all_chart_options) {
 
     try {
+        
+        
+           if (chart) {
+                chart.yAxis[0].update({
+                    lineWidth: chart_type == "pie" ? 0 : 1
+                });
 
-     
+                chart.xAxis[0].update({
+                    lineWidth: chart_type == "pie" ? 0 : 1
+                });
+            }
+
+
         var output = {};
 
         //if animated map is playing, stop it and remove - also prevents errors
@@ -51,6 +64,11 @@ var parseTableInput = function (input, load_series_from, chart_type, legend_togg
         /** Depending on the chart type, start that parsing */
         if (["area", "line", "bar", "stacked_bar", "column", "stacked_column"].indexOf(chart_type) > -1) {
             output = parseForTypicalChart(input, load_series_from, chart_type, legend_toggle_enabled, colors);
+
+        } else if (chart_type == "pie") {
+
+            output = parseForPie(input, chart_type, colors);
+
 
         } else if (chart_type == "arearange" || chart_type == "columnrange") {
             output = parseForRange(input, chart_type, colors);
@@ -73,14 +91,14 @@ var parseTableInput = function (input, load_series_from, chart_type, legend_togg
         } else if (chart_type == "boxplot") {
             output = parseForBoxPlot(input, chart_type, colors);
         }
-            
-            
+
+
 
         //add chart title (same for all types of charts)
         output.title_text = $("caption", input).text();
 
 
-       // console.log("out", output);
+        // console.log("out", output);
         return output
 
 

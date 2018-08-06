@@ -66,10 +66,10 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
         }
 
         //hide all classes with just_ ...
-        $(".just_drilldown, .just_scatter, .just_bubble, .just_column, .just_bar, .just_arearange, .just_columnrange, .just_map, .just_line, .just_boxplot").hide();
+        $(".just_drilldown, .just_scatter, .just_bubble, .just_column, .just_bar, .just_arearange, .just_columnrange, .just_map, .just_line, .just_boxplot, .just_pie").hide();
 
         //show just_...
-        if (["scatter", "drilldown", "bubble", "bar", "column", "line", "stacked_column", "stacked_bar", "arearange", "columnrange", "boxplot"].indexOf(chart_type) > -1) {
+        if (["scatter", "drilldown", "bubble", "bar", "column", "line", "stacked_column", "stacked_bar", "pie", "arearange", "columnrange", "boxplot"].indexOf(chart_type) > -1) {
             $(".just_" + chart_type.replace("stacked_", "")).show();
             $(".show_" + chart_type.replace("stacked_", "")).show();
         }
