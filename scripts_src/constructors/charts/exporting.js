@@ -11,8 +11,7 @@ var Exporting = function (o) {
         contextButton: {
             enabled: true,
             verticalAlign: 'bottom',
-            x: -10,
-            symbol: 'url(https://www.bls.gov/images/icons/download-icon.png)'
+            x: -10
         }
     };
 }

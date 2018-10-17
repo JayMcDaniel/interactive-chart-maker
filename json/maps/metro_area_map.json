@@ -4114,7 +4114,20 @@
         "loc_name": "Boston-Cambridge-Nashua, MA-NH NECTA",
         "previous_fill": "",
         "style": ""
-}, {
+}, 
+ 
+ {
+        "cy": "98.02341185923207",
+        "cx": "683.5002962593828",
+        "r": "2",
+        "class": "metro-area-circle",
+        "loc_name": "Boston-Cambridge-Nashua, MA-NH",
+        "previous_fill": "",
+        "style": ""
+},
+ 
+ 
+ {
         "cy": "98.02341185923207",
         "cx": "683.5002962593828",
         "r": "2",
