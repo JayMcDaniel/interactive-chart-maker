@@ -135,8 +135,6 @@ var map_animation_init = {
                 //assign new loc_value
                 $this.attr("loc_value", new_val);
 
-
-
                 var new_fill = ""; //new color to be assigned
                 //then recolor
 
@@ -161,13 +159,41 @@ var map_animation_init = {
 
                 if ($this.attr("r") && all_map_options.map_type !== "state") {
 
-                    var this_area = new_val ? (Math.abs(new_val) / all_map_options.circle_size_multiple) || 0 : 0;
-                    $this.attr("r", Math.sqrt(this_area / Math.PI));
+                    var circle_sized_by = all_map_options.circle_sized_by;
+                    var this_area;
+                    var this_r;
+
+                    
+                    if (new_val == "N/A") {
+                        this_r = 0;
+
+                    } else if (circle_sized_by === "main_values") {
+                        this_area = new_val ? Math.abs(new_val) || 0 : 0;
+
+                    } else if (circle_sized_by === "extra_data_1") {
+                        this_area = this_area = this.extra_vals[0] ? Math.abs(this.extra_vals[0]) || 0 : 0;
+
+                    } else if (circle_sized_by === "same_size") {
+                        this_area = 400;
+                    }
+
+
+                    this_r = Math.sqrt(this_area / Math.PI) * all_map_options.circle_size_multiple;
+                   
+                    if (isNaN(this_r)) {
+                        this_r = 0;
+                    }
+
+
+                    $this.attr("r", this_r);
+
 
                     $this.attr("fill", new_fill.replace(')', ', 0.75)').replace('rgb', 'rgba'));
                 } else { //for paths, no resize or opacity
                     $this.attr("fill", new_fill);
                 }
+
+
 
             }); // end path / circle loop
 
