@@ -7,7 +7,7 @@ var utils_main = require("../../utils/utils_main.js");
 @module
 */
 var xAxisInit = function xAxisInit(categories, chart_type) {
-
+    
     var only_numbers = utils_forms.getCheckBoxValue($("#chart_x_axis_show_only_years"));
     var add_commas = utils_forms.getCheckBoxValue($("#chart_x_axis_add_commas"));
     var sign = $("#chart_x_axis_signs_select").val();
@@ -16,7 +16,7 @@ var xAxisInit = function xAxisInit(categories, chart_type) {
     //load options from user inputs
     var options = {
 
-        categories: categories || undefined,
+        categories: chart_type === "drilldown" ? null : categories || undefined,
         only_numbers,
         add_commas,
         sign,
@@ -43,7 +43,7 @@ var xAxisInit = function xAxisInit(categories, chart_type) {
             x: chart_type === "bar" || chart_type === "stacked_bar" ? Number($("#chart_x_axis_x_position_input").val()) : 0
         },
         tickInterval: update_x_axis.updateTickmarkInterval(Number($("#chart_x_axis_tickmark_interval_input").val()), null, null, categories, chart_type),
-        type: "linear"
+        type: chart_type === "drilldown" ? "category" : "linear"
 
     };
     

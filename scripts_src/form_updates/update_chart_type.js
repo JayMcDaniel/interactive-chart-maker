@@ -25,12 +25,19 @@ var updateChartType = function (chart_type, chart, all_chart_options) {
 
     //if not map
     var type = chart_type.replace("stacked_", "");
+    
 
+    //update xaxis for drilldown and make "bar" type
     if (type === "drilldown") {
-
         type = $("#drilldown_type_select").val();
+        all_chart_options.xAxis.type = "category";
+        all_chart_options.xAxis.categories = null;
+    }else{
+        all_chart_options.xAxis.type = "linear";
+        all_chart_options.xAxis.categories = undefined;    
     }
 
+    
     //if not a line and has a second y-axis, remove that axis
 
     if (type != "line") {
@@ -78,7 +85,9 @@ var updateChartType = function (chart_type, chart, all_chart_options) {
     chart.xAxis[0].update({
         gridLineWidth: all_chart_options.xAxis.gridLineWidth,
         plotLines: all_chart_options.xAxis.plotLines,
-        startOnTick: all_chart_options.xAxis.startOnTick
+        startOnTick: all_chart_options.xAxis.startOnTick,
+        type: all_chart_options.xAxis.type,
+        categories: all_chart_options.xAxis.categories
     }, false);
 
 
