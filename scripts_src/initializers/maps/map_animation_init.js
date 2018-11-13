@@ -72,7 +72,7 @@ var map_animation_init = {
                 "type": "range",
                 "min": "0",
                 "max": all_map_options.animated_value_titles.length - 1,
-                "value": "0"
+                "value": all_map_options.animation_start_at_end ? all_map_options.animated_value_titles.length - 1 : 0 
             })
             .css({
                 float: "left",
@@ -266,7 +266,7 @@ var map_animation_init = {
             moveSlider(-1);
         });
 
-
+      $(".map_slider").trigger("input");
 
     }
 

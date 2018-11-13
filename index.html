@@ -74,7 +74,7 @@
                 <div class="display_options">
 
                     <div id="chart_type_icons">
-                        <div class="chart_type_icon" id="chart_type_line" value="line" title="line"></div>
+                        <div class="chart_type_icon selected" id="chart_type_line" value="line" title="line"></div>
                         <div class="chart_type_icon" id="chart_type_area" value="area" title="area"></div>
                         <div class="chart_type_icon" id="chart_type_area_range" value="arearange" title="area range"></div>
                         <div class="chart_type_icon" id="chart_type_bar" value="bar" title="bar"></div>
@@ -86,7 +86,7 @@
                         <div class="chart_type_icon" id="chart_type_bubble" value="bubble" title="bubble"></div>
                         <div class="chart_type_icon" id="chart_type_scatter" value="scatter" title="scatter"></div>
                         <div class="chart_type_icon" id="chart_type_pie" value="pie" title="pie"></div>
-                        <div class="chart_type_icon selected" id="chart_type_drilldown" value="drilldown" title="drilldown"></div>
+                        <div class="chart_type_icon" id="chart_type_drilldown" value="drilldown" title="drilldown"></div>
                         <div class="chart_type_icon" id="chart_type_map" value="map" title="map"></div>
                     </div>
                     <div class="clearfloat"></div>
@@ -1318,9 +1318,13 @@
                           <div style="height: 20px; width: 20px; float: left; position: relative; top: -4px;  margin-left: 10px; ">Fast</div>
                         <div class="clear_float"></div>
                         </div>
+                        
+                        <label for="map_animated_start_at_last_date_checkbox">Start animated maps at last date in time frame?</label>
+                        <input type="checkbox" id="map_animated_start_at_last_date_checkbox">
+                        <br>
                     
                         <span class ="state_map_only">
-                        <br>
+                        
                         <label for="map_include_puerto_rico_checkbox">Include Puerto Rico: </label>
                     <input type="checkbox" id="map_include_puerto_rico_checkbox" value="PR"/>
                     <br>

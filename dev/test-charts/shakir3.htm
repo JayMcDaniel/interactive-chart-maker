@@ -28,7 +28,7 @@
             var all_chart_options = {
                 "chart": {
                     "renderTo": "chart1",
-                    "margin": [80, 40, 110, 80],
+                    "margin": [80, 40, 110, 120],
                     "borderWidth": 0,
                     "plotBorderColor": "#000",
                     "plotBorderWidth": 0,
@@ -153,7 +153,7 @@
                     }
                 },
                 "title": {
-                    "text": "Effects of Oct?",
+                    "text": "Effects of Octreotide on Serum Pancreatic Polypeptide Levels (pg/mL)",
                     "align": "left",
                     "style": {
                         "color": "#000000",
@@ -273,13 +273,13 @@
                     "tickWidth": 1,
                     "title": {
                         "useHTML": false,
-                        "text": "serum ? levels pg/mL",
+                        "text": "Serum Pancreatic Polypeptide levels (pg/mL)",
                         "margin": 6,
                         "align": "high",
                         "offset": 20,
-                        "rotation": 0,
-                        "x": 80,
-                        "y": -20,
+                    //    "rotation": 0,
+                        "x": -45,
+                    //    "y": -20,
                         "style": {
                             "color": "#000000",
                             "fontFamily": "Calibri, Arial, Helvetica, sans-serif",
@@ -673,7 +673,7 @@
 
             var chart = new Highcharts.Chart(all_chart_options, chartCallback(all_chart_options));
 
-            chart.renderer.text('Oct injection?', 330, 180) 
+            chart.renderer.text('Octreotide Injection', 330, 140) 
                 .css({
                     color: '#000',
                     fontSize: '13px'
@@ -681,7 +681,7 @@
                 .add();
             
             
-            chart.renderer.text('Oct injection continued?', 380, 280) 
+            chart.renderer.text('Octreotide Injection Continued', 340, 280) 
                 .css({
                     color: '#000',
                     fontSize: '13px'

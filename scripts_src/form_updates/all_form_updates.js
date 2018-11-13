@@ -675,8 +675,8 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
     });
 
 
-    //is animated checkbox changed
-    $("#map_animated_checkbox, #map_circle_size_by_select").unbind().change(function () {
+    // animated and various map checkbox changed
+    $("#map_animated_checkbox, #map_circle_size_by_select, #map_animated_start_at_last_date_checkbox").unbind().change(function () {
         // $("#legend_placement_y").val(70); // set legend y value so legend is lower for animated maps
         map_init.loadNewMap(chart, all_chart_options, all_map_options, true); // true to repopulate form
     });

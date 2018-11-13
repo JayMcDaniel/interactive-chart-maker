@@ -37,6 +37,7 @@ var map_init = {
             is_colored_by_names: is_checked($("#map_color_by_names_checkbox")),
             add_ranked_columns: is_checked($("#map_add_ranked_columns_checkbox")),
             animation_delay: Number($("#map_animation_speed_range").val()),
+            animation_start_at_end: is_checked($("#map_animated_start_at_last_date_checkbox")),
             legend: {
                 decimals: $("#map_legend_decimals_select").val(),
                 enabled: is_checked($("#map_legend_enabled_checkbox")),
@@ -292,7 +293,7 @@ var map_init = {
                 map_init.setUpMapLegendClick(map_display_area);
             }
 
-            //init animation functionality if applicabla
+            //init animation functionality if applicable
             if (all_map_options.is_animated) {
                 map_animation_init.setUpMapAnimation(all_map_options, map_display_area);
             }
@@ -634,12 +635,12 @@ var map_init = {
         //add mouseover function
         $(".map_ranked_column").hover(function () {
                 $(this).css("background-color", "#FFEB00");
-            
+
                 $("#" + $(this).attr("rel"), map_display_area).mouseenter();
             },
             function () {
                 $(this).css("background-color", $(this).attr("previous_color"));
-            $("#" + $(this).attr("rel"), map_display_area).mouseleave();
+                $("#" + $(this).attr("rel"), map_display_area).mouseleave();
             });
 
     },
