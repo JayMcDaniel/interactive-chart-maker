@@ -11,14 +11,13 @@
     <h1>Test Chart!</h1>
 
 
-    <div id="chart1" style="position: relative; width: 580px; height: 480px; margin: auto; padding: 0px;"> </div>
+    <div id="chart1" style="position: relative; width: 640px; height: 480px; margin: auto; padding: 0px;"> </div>
 
     <!-- external libraries -->
     <script src="../../libraries/jquery/jquery-2.2.0.min.js"></script>
-    <script src="../../libraries/Highcharts-4.2.3/js/highcharts.src.js"></script>
-    <script src="../../libraries/Highcharts-4.2.3/js/highcharts-more.src.js"></script>
-    <script src="../../libraries/Highcharts-4.2.3/js/modules/drilldown.js"></script>
-
+   
+<script src="https://code.highcharts.com/highcharts.src.js"></script>
+    <script src="https://www.bls.gov/assets/highcharts/latest/highcharts-more.js"></script>
 
 
 
@@ -28,7 +27,7 @@
             var all_chart_options = {
                 "chart": {
                     "renderTo": "chart1",
-                    "margin": [80, 40, 110, 120],
+                    "margin": [50, 40, 110, 100],
                     "borderWidth": 0,
                     "plotBorderColor": "#000",
                     "plotBorderWidth": 0,
@@ -83,55 +82,7 @@
                     }
                 },
                 "plotOptions": {
-                    "series": {
-                        "events": {
-                            "legendItemClick": function legendItemClick(event) {}
-                        },
-                        "dataLabels": {
-                            "enabled": false,
-                            "allowOverlap": false,
-                            "padding": 0,
-                            "verticalAlign": "bottom",
-                            "style": {
-                                "textShadow": "none",
-                                "color": "#000"
-                            }
-                        },
-                        "pointPlacement": null,
-                        "stacking": null,
-                        "pointPadding": 0.1,
-                        "groupPadding": 0.2,
-                        "minPointLength": 2,
-                        "minSize": 4,
-                        "sizeBy": "width",
-                        "lineWidth": 1.5,
-                        "states": {
-                            "hover": {
-                                "lineWidth": 4
-                            }
-                        },
-                        "marker": {
-                            "enabled": true,
-                            "states": {
-                                "hover": {
-                                    "enabled": true,
-                                    "radius": 5
-                                }
-                            }
-                        }
-                    },
-                    "bubble": {
-                        "tooltip": {
-                            "followPointer": true
-                        }
-                    },
-                    "boxplot": {
-                        "fillColor": "#F0F0E0"
-                    },
-                    "pie": {
-                        "showInLegend": true,
-                        "size": "130%"
-                    }
+                   
                 },
                 "series": [{
                     "name": "serum ? levels pg/mL",
@@ -153,7 +104,7 @@
                     }
                 },
                 "title": {
-                    "text": "Effects of Octreotide on Serum Pancreatic Polypeptide Levels (pg/mL)",
+                    "text": "Effects of Octreotide Administration on Serum Pancreatic Polypeptide Levels (pg/mL)",
                     "align": "left",
                     "style": {
                         "color": "#000000",
@@ -222,7 +173,7 @@
                     },
                     tickInterval: 24 * 3600 * 1000 * 360,
                     title: {
-                        text: ''
+                        text: 'Time (years)'
                     }
                 },
                 "yAxis": {
@@ -673,7 +624,7 @@
 
             var chart = new Highcharts.Chart(all_chart_options, chartCallback(all_chart_options));
 
-            chart.renderer.text('Octreotide Injection', 330, 140) 
+            chart.renderer.text('Octreotide injection started', 330, 70) 
                 .css({
                     color: '#000',
                     fontSize: '13px'
@@ -681,7 +632,7 @@
                 .add();
             
             
-            chart.renderer.text('Octreotide Injection Continued', 340, 280) 
+            chart.renderer.text('Octreotide injection continued', 400, 280) 
                 .css({
                     color: '#000',
                     fontSize: '13px'

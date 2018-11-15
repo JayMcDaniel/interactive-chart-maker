@@ -38,6 +38,8 @@ var PlotOptions = function (o) {
             followPointer: true
         }
     };
+    
+    this.line = {};
 
     this.boxplot = {
         fillColor: '#F0F0E0'
