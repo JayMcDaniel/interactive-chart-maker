@@ -13,7 +13,7 @@ var updateColors = function (chart, all_chart_options, chart_type) {
 
     console.log("updating colors", chart_type);
 
-    if (chart_type === "drilldown") { //drilldowns color by point
+    if (chart_type === "drilldown" || chart_type === "pie") { //drilldowns color by point
 
         $(chart.series[0].data).each(function (i) {
 
