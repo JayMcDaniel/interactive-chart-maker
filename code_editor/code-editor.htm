@@ -55,7 +55,7 @@
             
             //attempt to patch chart code button
             $("#patchChart").click(function(){
-                var new_code = $("#JScodeText").val().replace('"floating": false,', '"floating": true, \n"symbolRadius": 0,\n');
+                var new_code = $("#JScodeText").val().replace('"floating": false,', '"floating": true, \n"symbolRadius": 0,\n "alignColumns": false,\n');
                 
                 $("#JScodeText").val(new_code);
                 console.log(new_code);

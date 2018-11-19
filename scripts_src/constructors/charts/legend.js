@@ -5,6 +5,7 @@
 var Legend = function (o) {
 
     this.align = o.align || 'left';
+    this.alignColumns = o.alignColumns || false;
     this.backgroundColor = o.backgroundColor || 'none';
     this.borderColor = o.borderColor || 'none';
     this.borderWidth = o.borderWidth || 0;
