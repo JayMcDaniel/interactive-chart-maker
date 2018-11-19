@@ -31,7 +31,7 @@ var parseForTypicalChart = function (input, load_series_from, chart_type, legend
                 data: [],
                 type: type,
                 color: colors[i],
-                _symbolIndex: i,
+                _symbolIndex: 0,
                 stacking: ["area", "stacked_bar", "stacked_column"].indexOf(chart_type) > -1 ? "stacked" : null,
                 visible: i > 0 && legend_toggle_enabled === true ? false : true
 

@@ -61,7 +61,7 @@
                     enabled: true
                 },
                 color: colors[i],
-                _symbolIndex: i
+                _symbolIndex: 0
             };
             output.series.push(series_obj);
         });

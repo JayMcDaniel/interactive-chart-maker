@@ -24,7 +24,7 @@ var parseForBubble = function (input, chart_type, colors) {
                 enabled: true
             },
             color: colors[i],
-            _symbolIndex: i
+            _symbolIndex: 0
         };
 
         //get data values from each row's td cells (every third cell for xyz groups)

@@ -35,7 +35,7 @@ var parseForRange = function (input, chart_type, colors) {
                 enabled: chart_type === "columnrange"
             },
             color: colors[i],
-            _symbolIndex: i,
+            _symbolIndex: 0,
             stacking: null,
             zIndex: 1,
         };

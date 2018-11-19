@@ -25,11 +25,13 @@
 
 
     <!--	<script  type="text/javascript" src="http:www.bls.gov/javascripts/bls.js"></script>-->
- <script src="https://www.bls.gov/assets/highcharts/latest/highcharts.js"></script>
+        <script src="https://code.highcharts.com/highcharts.src.js"></script>
     <script src="https://www.bls.gov/assets/highcharts/latest/highcharts-more.js"></script>
     <script src="https://www.bls.gov/assets/highcharts/latest/modules/drilldown.js"></script>
+<!--
     <script src="https://www.bls.gov/assets/highcharts/latest/modules/exporting.js"></script>
     <script src="https://www.bls.gov/assets/highcharts/latest/modules/offline-exporting.js"></script>
+-->
     <script src="https://www.bls.gov/assets/highcharts/latest/modules/accessibility.js"></script>
 
 
@@ -48,6 +50,21 @@
 
 
             });
+            
+            
+            
+            //attempt to patch chart code button
+            $("#patchChart").click(function(){
+                var new_code = $("#JScodeText").val().replace('"floating": false,', '"floating": true, \n"symbolRadius": 0,\n');
+                
+                $("#JScodeText").val(new_code);
+                console.log(new_code);
+                $("#patch_status").text("Patch applied. To use, copy new JS code from text box below!");
+                setTimeout(function(){
+                    $("#patch_status").text("");
+                }, 10000);
+                $("#refreshChart").click();
+            });
 
 
 
@@ -61,8 +78,8 @@
 
                 if (window.opener) {
 
-                    exportCodeHTML = sessionStorage.getItem("export_code_html");
-                    exportCodeJS = sessionStorage.getItem("export_code_js");
+                    exportCodeHTML = sessionStorage.getItem("export_code_html") || "";
+                    exportCodeJS = sessionStorage.getItem("export_code_js") || "";
                 }
 
 
@@ -96,91 +113,878 @@
     </div>
     <br>
     <button id="refreshChart">Refresh chart</button>
+    <br><br>
+     <button id="patchChart">Apply new version patch</button>
     <br>
+    <p id="patch_status" style="color: crimson"></p>
     <br> HTML code:
     <br><span class="notes">Warning: If the Div ID in this HTML and the renderTo value in the JS below are changed to not match, the chart will not render until you refresh the browser.</span>
     <br>
     <textarea id="HTMLcodeText" style="height: 200px; width:860px; background-color:#fff;">
-        <div id="chart0" style="width: 580px; height: 450px; margin: auto; padding: 0px"></div>
+        <div id="chart1" style="width: 580px; height: 450px; margin: auto; padding: 0px"></div>
     </textarea>
     <br> JS code:
     <br>
     <textarea id="JScodeText" style="height: 400px; width:860px; background-color:#fff;">
-
-        $(document).ready(function(){ ///////add commas function function addCommas(val) { if ((val > 999) || (val
-        < -999)) { while (/(\d+)(\d{3})/.test(val.toString())) { val=v al.toString().replace(/(\d+)(\d{3})/, '$1' + ',' + '$2'); } } return val; } /////function to add dollarsigns if needed, and correctly do it for neg values var negDollarFormat=f unction(val) { if (false==t rue) { //if using dollars==t rue ///convert to number again val=N umber(val.replace(/,/g, "")); if (val>= 0) { return "$" + Highcharts.numberFormat(val, 0); } else { return "-$" + Highcharts.numberFormat(Math.abs(val), 0); } } else { ///not using dollars return val; } } ///initialize chart with options//// var chart0_chart = new Highcharts.Chart({ chart: { renderTo: "chart0", spacingLeft: 20, spacingRight: 0, // margin: [110, 60, 70, 70], //[top, right, bottom, left], the higher the number the more pushed in marginBottom: 80, marginTop: 110, marginLeft: 75, marginRight: 40, borderColor: 'white', plotBorderColor: 'none', plotBorderWidth: 1, defaultSeriesType: 'line', //line, bar, etc... zoomType: null, alignTicks: false, inverted: false, ignoreHiddenSeries: true //false for bubble so bubbles won't resize }, title: { text: "Title Goes Here", align: 'left', margin: 20, x: 0, width: '540px', style: { color: '#000000', fontFamily: 'sans-serif', fontWeight: 'bold', fontSize: '14px' } }, subtitle: { text: "", align: 'left', x: 0, style: { color: '#000000', fontFamily: 'sans-serif', fontWeight: 'normal', backgroundColor: '#fff', fontSize: '12px' } }, ///////series data////////////////// series: [{"name":"Series 1","visible":true,"color":"rgb(47, 126, 216)","dashStyle":"Solid","type":"line","lineWidth":1.5,"marker":{"enabled":false},"data":[40,23,13,15,18,40,45,32,10,20,5,10,40,40],"_symbolIndex":0},{"name":"Series 2","visible":true,"color":"rgb(176, 76, 76)","dashStyle":"Solid","type":"line","lineWidth":1.5,"marker":{"enabled":false},"data":[40,40,40,23,13,32,10,20,5,10,15,18,40,45],"_symbolIndex":1}], ///////////////x axis///////////////////// xAxis: { title: { useHTML: true, text: '', margin: 6, style: { color: '#000000', fontFamily: 'Calibri, Verdana, Arial, Helvetica, sans-serif', fontWeight: 'normal', backgroundColor: '#fff', fontSize: '13px' } }, tickInterval: null, tickmarkPlacement: 'on', tickPosition: 'outside', tickColor: '#C0D0E0', lineWidth: 1.2, lineColor: 'gray', gridLineColor: '#c0c0c0', gridLineWidth: 0, gridLineDashStyle: 'Dot', labels: { // formatter: function() {return Highcharts.numberFormat(this.value,0)}, formatter: function() { var hideMonths = false; if (hideMonths == true) { return this.value.replace(/\D+/g, ''); } else if (this.chart.options.chart.defaultSeriesType =="bubble"){ return addCommas(this.value); }else{ return this.value; } }, rotation: 0, // overflow: 'justify', // x: -2, // y: 18, style: { color: '#000000', fontFamily: 'Calibri, Verdana, Arial, Helvetica, sans-serif', fontWeight: 'normal', backgroundColor: '#fff', fontSize: '12px' } }, plotBands: [], categories: ["Dec 2012","Jan 2013","Feb 2013","Mar 2013","Apr 2013","May 2013","Jun 2013","Jul 2013","Aug 2013","Sep 2013","Oct 2013","Nov 2013","Dec 2013","Jan 2014"] }, //end xaxis //////////// Y AXIS //////////////////////////////////// yAxis: [ { title: { useHTML: true, text: 'Y-axis title', align: 'high', offset: 0, rotation: 0, y: -15, x: 35, style: { color: '#000000', fontFamily: 'Calibri, Verdana, Arial, Helvetica, sans-serif', fontWeight: 'normal', backgroundColor: '#fff', fontSize: '13px' } }, type: 'linear', labels: { formatter: function() { ///////if butterfly chart /////////////////////////// if (false == true) { if (this.value > 0) { ///don't show positive values on this y axis for butterfly charts return ""; } else { return Math.abs(this.value); } /////////end if butterfly chart/////////// ///ALL Other types of charts , show all values at specified decimal and divisor //////////////////////// } else { if (false == true) { // if forced decimals chosen var val = ' '.replace(' ', '') + Highcharts.numberFormat(this.value / 1, 0) + ''; val = val.replace("$-", "-$"); return val; } else { var val = ' '.replace(' ', '') + addCommas(this.value / 1) + ''; val = val.replace("$-", "-$"); return val; } } /// end y axis formatter }, style: { color: '#000000', fontWeight: 'normal', backgroundColor: '#fff', fontSize: '12px', fontFamily: 'Calibri, Verdana, Arial, Helvetica, sans-serif' } }, opposite: false, tickInterval: null, tickWidth: 1, lineWidth: 1, lineColor: 'gray', gridLineColor: '#c0c0c0', gridLineWidth: 1.0, gridLineDashStyle: 'Dot', min: null, max: null, plotLines: [{"value":0,"color":"#c0c0c0","dashStyle":"solid","width":1}] }, ///second y axis (for recession or butterfly)! {"max":20,"labels":{formatter: function() {if (this.value
-            < 0){return "";}else{return Math.abs(this.value);}}, "style":{ "color": "#fff"}}, "lineWidth":0, "gridLineWidth":0, "plotLines":null, "title":{ "text": ""}, "linkedTo":0, "opposite":true, "index":1} //end second y axis ], ////////////////////LEGEND//////////////////// legend: { layout: 'horizontal', //make vertical or horizontal useHTML: true, enabled: true, backgroundColor: 'none', borderWidth: 0, borderColor: 'none', shadow: false, align: 'center', //alignment of legend items verticalAlign: 'top', x: 0, //Higher number moves legend right y: 30, //Higher number moves legend down // width: 590, //small widths will cause horizontal layouts to stack floating: false, //true makes legend independent of chart objects reversed: false, //reverses legend item order - handy to line up with column order // itemWidth: 195, // symbolWidth: 30, itemDistance: 30, itemStyle: { //Three legend item styles for active, hover, and deselected - setting these specifically fixes browser differences fontFamily: 'Calibri, Verdana, Arial, Helvetica, sans-serif', width: 580, color: '#000' }, itemHiddenStyle: { color: 'gray' }, itemHoverStyle: { // cursor: "default" ///un note when legend click is disabled } }, ///////////////////////TOOLTIP///////////////////// (making from manual entry) tooltip: { backgroundColor: '#FEFFEF', useHTML: true, crosshairs: [false,false], style: { color: '#000000', fontFamily: 'Calibri, Verdana, Arial, Helvetica, sans-serif' }, //tooltip is what shows on hover formatter: function () { var s="" ; if (this.point.high) { ///for ranges var s='<b>' + this.series.name + '</b><br>' + this.x + "<br>High: <b>" + negDollarFormat(Highcharts.numberFormat(this.point.high * 1, 0)) + '' + '</b>' + "<br>Low: <b>" + negDollarFormat(Highcharts.numberFormat(this.point.low * 1, 0)) + '' + '</b>'; } else { ///for not ranges var s='<b>' + this.series.name + '</b><br>' + this.x + ": <b>" + negDollarFormat(Highcharts.numberFormat(this.y * 1, 0)) + '' + '</b>'; } return s; }, shared: false }, /////////////////PLOT OPTIONS/////////////////// plotOptions: { series: { events: { legendItemClick: function(event) { var legendToggleEnabled=f alse; if(legendToggleEnabled==t rue){ var selected=t his.index; var allSeries=t his.chart.series; $.each(allSeries, function(index, series) { selected==i ndex ? series.show() : series.hide(); }); return false; } } }, dataLabels: { enabled: false }, pointPadding: 0.1, //padding between points in bar charts (0 is tight)1 is loose groupPadding: 0.2, // padding between groups in bar charts (0 is tight)1 is loose maxSize: 50, //for bubble sizes sizeBy: 'width', //for bubble sizing, instead of 'area' pointPlacement: null, borderWidth: 0, shadow: false, animation: true }, bar:{ stacking: null, pointPadding: 0.1, //padding between points in bar charts (0 is tight)1 is loose groupPadding: 0.2, // padding between groups in bar charts (0 is tight)1 is loose minPointLength: 3 }, column:{ stacking: null, pointPadding: 0.1, //padding between points in bar charts (0 is tight)1 is loose groupPadding: 0.2, // padding between groups in bar charts (0 is tight)1 is loose minPointLength: 3 }, line: { lineWidth: 1.5, states: { hover: { lineWidth: 4 } }, marker: { enabled: true, //status of tick symbols states: { hover: { enabled: true, radius: 5 } } } } }, credits: { useHTML: true, text: "Click legend items to change data display. Hover over chart to view data.<br>Source: U.S. Bureau of Labor Statistics.", position: { align: 'left', x: 10, y: -20 }, style: { cursor: "default", color: "#2C2C2C" }, href: "" }, exporting: { buttons: { contextButton: { enabled: true, verticalAlign: 'bottom', x: -10 } } } }, function() { $( ".highcharts-legend-item").css( "min-height", "0px").css( "z-index",100); //fix so CMS CSS doesn 't make legend taller than it should
-				$(".highcharts-tooltip").css("z-index",200);
-
-                //		 * Callback function for setting a lower opacity for other series than the one that is hovered in the legend
-                var grayOtherSeries = function(isReversed, chartDiv) {
-
-						var thisChart = $("#"+chartDiv);
-						
-                        if (isReversed) {
-                            var mod = $(".highcharts-legend:eq(0) .highcharts-legend-item", thisChart).length -1;
-                            if (mod <= 0) {
-                                mod = 1;
+        
+   
+    $(function() {
+        var all_chart_options = {
+            "chart": {
+                "renderTo": "chart1",
+                "margin": [100, 40, 80, 80],
+                "borderWidth": 0,
+                "plotBorderColor": "#000",
+                "plotBorderWidth": 0,
+                "type": "bar",
+                "events": {
+                    "redraw": function redraw() {
+                        if (chart) {
+                            $.each(chart.series, function(i, serie) {
+                                $.each(serie.data, function(j, point) {
+                                    if (point.options.cursor === "pointer") {
+                                        point.graphic.attr({
+                                            cursor: 'pointer'
+                                        });
+                                    }
+                                });
+                            });
+                        }
+                    }
+                },
+                "zoomType": null,
+                "alignTicks": false,
+                "ignoreHiddenSeries": true,
+                "inverted": false
+            },
+            "colors": ["#7cb5ec", "#434348", "#90ed7d", "#f7a35c", "#8085e9", "#f15c80", "#e4d354", "#2b908f", "#f45b5b", "#91e8e1", "#2f7ed8", "#0d233a", "#8bbc21", "#910000", "#1aadce", "#492970", "#f28f43", "#77a1e5", "#c42525", "#a6c96a"],
+            "legend": {
+                "align": "left",
+                "backgroundColor": "none",
+                "borderColor": "none",
+                "borderWidth": 0,
+                "enabled": true,
+                "floating": false,
+                "itemDistance": 30,
+                "layout": "horizontal",
+                "reversed": false,
+                "shadow": false,
+                "title": {},
+                "useHTML": false,
+                "verticalAlign": "top",
+                "width": 540,
+                "x": 50,
+                "y": 40,
+                "itemStyle": {
+                    "fontFamily": "Calibri, Arial, Helvetica, sans-serif",
+                    "color": "#000",
+                    "cursor": "pointer"
+                },
+                "itemHiddenStyle": {
+                    "color": "gray"
+                },
+                "itemHoverStyle": {
+                    "cursor": "pointer"
+                }
+            },
+            "plotOptions": {
+                "series": {
+                    "events": {
+                        "legendItemClick": function legendItemClick(event) {}
+                    },
+                    "dataLabels": {
+                        "enabled": false,
+                        "allowOverlap": false,
+                        "padding": 0,
+                        "verticalAlign": "bottom",
+                        "style": {
+                            "textShadow": "none",
+                            "color": "#000"
+                        }
+                    },
+                    "pointPlacement": null,
+                    "stacking": null,
+                    "pointPadding": 0.1,
+                    "groupPadding": 0.2,
+                    "minPointLength": 2,
+                    "minSize": 4,
+                    "sizeBy": "width",
+                    "lineWidth": 1.5,
+                    "states": {
+                        "hover": {
+                            "lineWidth": 4
+                        }
+                    },
+                    "marker": {
+                        "enabled": false,
+                        "states": {
+                            "hover": {
+                                "enabled": true,
+                                "radius": 5
                             }
                         }
-
-                        $(".highcharts-legend-item", thisChart).unbind("hover");
-
-                        var thisSeriesIndex = 0;
-
-                        $(".highcharts-legend-item", thisChart).hover(function() {
-
-                            if (isReversed) {
-                                thisSeriesIndex = mod - $(this).index();
-
-                            } else {
-                                thisSeriesIndex = $(this).index();
+                    }
+                },
+                "bubble": {
+                    "tooltip": {
+                        "followPointer": true
+                    }
+                },
+                "line": {},
+                "boxplot": {
+                    "fillColor": "#F0F0E0"
+                },
+                "pie": {
+                    "showInLegend": true,
+                    "size": "130%"
+                }
+            },
+            "series": [{
+                "name": "Total private",
+                "data": [6.9, 6.9, 6.6, 6.7, 6.6, 6.6, 6.6],
+                "type": "bar",
+                "color": "#7cb5ec",
+                "_symbolIndex": 0,
+                "stacking": null,
+                "visible": true
+            }, {
+                "name": "Construction",
+                "data": [13.1, 14, 13.2, 14.1, 13.9, 13.9, 13.9],
+                "type": "bar",
+                "color": "#434348",
+                "_symbolIndex": 0,
+                "stacking": null,
+                "visible": true
+            }, {
+                "name": "Manufacturing",
+                "data": [10.7, 10.5, 9.6, 10.1, 9.7, 9.7, 9.7],
+                "type": "bar",
+                "color": "#90ed7d",
+                "_symbolIndex": 0,
+                "stacking": null,
+                "visible": true
+            }, {
+                "name": "Retail trade",
+                "data": [4.7, 4.9, 4.6, 4.6, 4.4, 4.4, 4.4],
+                "type": "bar",
+                "color": "#f7a35c",
+                "_symbolIndex": 0,
+                "stacking": null,
+                "visible": true
+            }, {
+                "name": "trade",
+                "data": [13.1, 13.1, 13.1, 13.1, 13.1, 13.1, 13.1],
+                "type": "bar",
+                "color": "#8085e9",
+                "_symbolIndex": 0,
+                "stacking": null,
+                "visible": true
+            }, {
+                "name": "trade 2",
+                "data": [10.7, 10.7, 10.7, 10.7, 10.7, 10.7, 10.7],
+                "type": "bar",
+                "color": "#f15c80",
+                "_symbolIndex": 0,
+                "stacking": null,
+                "visible": true
+            }],
+            "subtitle": {
+                "text": "",
+                "align": "left",
+                "style": {
+                    "color": "#000000",
+                    "fontFamily": "arial",
+                    "fontWeight": "normal",
+                    "fontSize": "12px"
+                }
+            },
+            "title": {
+                "text": "Union membership rates of employed wage and salary workers, annual averages, 2000\u201315",
+                "align": "left",
+                "style": {
+                    "color": "#000000",
+                    "fontFamily": "arial",
+                    "fontWeight": "bold",
+                    "fontSize": "14px"
+                }
+            },
+            "tooltip": {
+                "backgroundColor": "#FEFFEF",
+                "crosshairs": [false, false],
+                "formatter": function() {
+                    var options = this.series.chart.tooltip.options;
+                    var dollar = options.y_signs_arr[0];
+                    var percent = options.y_signs_arr[1];
+                    var decimals = options.y_decimals;
+                    var multiple = options.multiplier;
+                    if (all_chart_options.series[this.series.index].yAxis == 1) {
+                        dollar = options.y_signs_arr_2[0];
+                        percent = options.y_signs_arr_2[1];
+                        decimals = options.y_decimals_2;
+                        multiple = options.multiplier_2;
+                    }
+                    var y_val = this.point.high ? "High: " + dollar + $(this.point.high * multiple).addCommas(decimals) + percent + " | Low: " + dollar + $(this.point.low * multiple).addCommas(decimals) + percent : dollar + $(this.y * multiple).addCommas(decimals) + percent;
+                    var s = "<b>" + this.series.name + "</b><br>" + this.x + ": " + y_val;
+                    all_chart_options.series[this.series.index] ? s = all_chart_options.tooltip.addExtraData(all_chart_options.series[this.series.index].extra_data, this.point, s) : s = s;
+                    return s.replace(/\$-/g, "-$");
+                },
+                "style": {
+                    "color": "#000000",
+                    "fontFamily": "Calibri, Arial, Helvetica, sans-serif"
+                },
+                "useHTML": false,
+                "shared": false,
+                "addExtraData": function(extra_data, point, s) {
+                    if (extra_data && extra_data[0].name) {
+                        $.each(extra_data, function(i) {
+                            if (extra_data[i].values[point.index]) {
+                                s = s + "<br>" + extra_data[i].name + ": " + extra_data[i].values[point.index];
                             }
-
-                            $(".highcharts-series", thisChart).each(function(index, element) {
-
-                                if (index != thisSeriesIndex) {
-                                    $(this).attr("opacity", 0.10);
-                                }
-                            });
-							
-							$(".highcharts-markers", thisChart).each(function(index, element) {
-
-                                if (index != thisSeriesIndex) {
-                                    $(this).attr("opacity", 0.10);
-                                }
-                            });
-							
-
-                        }, function() {
-                            $(".highcharts-series, .highcharts-markers", thisChart).each(function(index, element) {
-                                $(this).attr("opacity", 1.0);
-                            });
-							
-							
                         });
-                    } //end grayOtherSeries(Bool)
+                    }
+                    return s;
+                },
+                "x_signs_arr": ["", ""],
+                "z_signs_arr": ["", ""],
+                "y_decimals": 0,
+                "y_decimals_2": 0,
+                "x_decimals": 0,
+                "z_decimals": 0,
+                "z_title": "Z",
+                "multiplier": 1,
+                "multiplier_2": 1,
+                "y_signs_arr": ["", ""],
+                "y_signs_arr_2": ["", ""]
+            },
+            "xAxis": {
+                "categories": ["2010", "2011", "2012", "2013", "2014", "2015", "2016"],
+                "gridLineColor": "#c0c0c0",
+                "gridLineWidth": 0,
+                "gridLineDashStyle": "Dot",
+                "labels": {
+                    "rotation": 0,
+                    "useHTML": false,
+                    "style": {
+                        "color": "#000000",
+                        "fontFamily": "Calibri, Arial, Helvetica, sans-serif",
+                        "fontWeight": "normal",
+                        "backgroundColor": "#fff",
+                        "fontSize": "12px",
+                        "textOverflow": "none"
+                    }
+                },
+                "lineWidth": 1.2,
+                "lineColor": "gray",
+                "max": null,
+                "min": null,
+                "plotBands": [],
+                "plotLines": [{
+                    "value": 0,
+                    "color": "#c0c0c0",
+                    "dashStyle": "solid",
+                    "width": 0
+                }],
+                "startOnTick": false,
+                "tickInterval": 1,
+                "tickmarkPlacement": "on",
+                "tickPosition": "outside",
+                "tickColor": "#C0D0E0",
+                "title": {
+                    "align": "middle",
+                    "useHTML": true,
+                    "text": "",
+                    "margin": 6,
+                    "rotation": 0,
+                    "style": {
+                        "color": "#000000",
+                        "fontFamily": "Calibri, Arial, Helvetica, sans-serif",
+                        "fontWeight": "normal",
+                        "backgroundColor": "#fff",
+                        "fontSize": "13px"
+                    },
+                    "x": 0
+                },
+                "type": "linear"
+            },
+            "yAxis": {
+                "gridLineColor": "#c0c0c0",
+                "gridLineWidth": 1,
+                "gridLineDashStyle": "Dot",
+                "labels": {
+                    "formatter": function yAxisFormat() {
+                        var decimals = this.axis.options.labels.decimals;
+                        var signs_arr = this.axis.options.labels.signs_arr;
+                        var dividend = this.axis.options.labels.dividend;
+                        var s = this.value / dividend == parseInt(this.value / dividend) ? Highcharts.numberFormat(this.value / dividend, 0, ".", ",") : Highcharts.numberFormat(this.value / dividend, 1, ".", ",");
+                        s = signs_arr[0] + s + signs_arr[1];
+                        return s.replace(/\$-/g, "-$");
+                    },
+                    "rotation": 0,
+                    "style": {
+                        "color": "#000000",
+                        "fontFamily": "Calibri, Arial, Helvetica, sans-serif",
+                        "fontWeight": "normal",
+                        "backgroundColor": "#fff",
+                        "fontSize": "12px"
+                    },
+                    "signs_arr": ["", ""],
+                    "decimals": null,
+                    "dividend": 1
+                },
+                "lineColor": "gray",
+                "lineWidth": 1,
+                "max": null,
+                "min": null,
+                "opposite": false,
+                "plotBands": [],
+                "plotLines": [{
+                    "value": 0,
+                    "color": "#c0c0c0",
+                    "dashStyle": "solid",
+                    "width": 1
+                }],
+                "tickInterval": null,
+                "tickmarkPlacement": "on",
+                "tickPosition": "outside",
+                "tickColor": "#C0D0E0",
+                "tickWidth": 1,
+                "title": {
+                    "useHTML": false,
+                    "text": "",
+                    "margin": 6,
+                    "align": "high",
+                    "offset": 20,
+                    "rotation": 0,
+                    "x": 35,
+                    "y": -20,
+                    "style": {
+                        "color": "#000000",
+                        "fontFamily": "Calibri, Arial, Helvetica, sans-serif",
+                        "fontWeight": "normal",
+                        "fontSize": "13px"
+                    }
+                },
+                "type": "linear"
+            },
+            "credits": {
+                "href": "/",
+                "position": {
+                    "align": "left",
+                    "x": 10,
+                    "y": -22
+                },
+                "style": {
+                    "cursor": "default",
+                    "color": "#2C2C2C"
+                },
+                "target": "_blank",
+                "text": "Click legend items to change data display. Hover over chart to view data.<br>Source: U.S. Bureau of Labor Statistics.",
+                "useHTML": true
+            },
+            "exporting": {
+                "sourceWidth": 640,
+                "scale": 1,
+                "buttons": {
+                    "contextButton": {
+                        "enabled": true,
+                        "verticalAlign": "bottom",
+                        "x": -10
+                    }
+                }
+            },
+            "saved_values": [{
+                "id": "chart_type_icons",
+                "val": "line"
+            }, {
+                "id": "chart_id_textinput",
+                "val": "chart1"
+            }, {
+                "id": "map_type_select",
+                "val": "state"
+            }, {
+                "id": "map_animated_checkbox",
+                "val": false
+            }, {
+                "id": "map_color_by_names_checkbox",
+                "val": false
+            }, {
+                "id": "bubble_animated_checkbox",
+                "val": false
+            }, {
+                "id": "drilldown_type_select",
+                "val": "bar"
+            }, {
+                "id": "chart_width_textinput",
+                "val": "580"
+            }, {
+                "id": "chart_height_textinput",
+                "val": "430"
+            }, {
+                "id": "top_margin_textinput",
+                "val": "100"
+            }, {
+                "id": "right_margin_textinput",
+                "val": "40"
+            }, {
+                "id": "bottom_margin_textinput",
+                "val": "80"
+            }, {
+                "id": "left_margin_textinput",
+                "val": "80"
+            }, {
+                "id": "map_spotlight_size_checkbox",
+                "val": false
+            }, {
+                "id": "map_circle_size_range",
+                "val": "10"
+            }, {
+                "id": "map_circle_size_by_select",
+                "val": "main_values"
+            }, {
+                "id": "table_input_load_series_from_icons",
+                "val": "column_heads"
+            }, {
+                "id": "example_table_select",
+                "val": ""
+            }, {
+                "id": "table_input_textarea",
+                "val": "<table id=\"BLS_table\" class=\"regular\" cellspacing=\"0\" cellpadding=\"0\" xborder=\"1\" style=\" width: 95%;\">\n <caption><span class=\"tableTitle\">Union membership rates of employed wage and salary workers, annual averages, 2000\u201315</span></caption>\n\n <thead>\n <tr>\n <th rowspan=\"1\"  style=\" vertical-align: middle;\">Year</th>\n <th >Total private</th>\n\n\n <th >Construction</th>\n <th >Manufacturing</th>\n\n <th >Retail trade</th>\n <th >trade</th>\n <th >trade 2</th>\n\n\n\n </tr>\n\n </thead>\n <tbody>\n\n\n <tr>\n <th >\n <p>2010</p>\n </th>\n <td >6.9</td>\n <td >13.1</td>\n <td >10.7</td>\n\n <td >4.7</td>\n \n <td >13.1</td>\n <td >10.7</td>\n\n\n\n </tr>\n\n <tr class=\"greenbar\">\n <th >\n <p>2011</p>\n </th>\n <td >6.9</td>\n\n\n <td >14.0</td>\n <td >10.5</td>\n\n <td >4.9</td>\n\n \n <td >13.1</td>\n <td >10.7</td>\n\n\n </tr>\n\n <tr>\n <th >\n <p>2012</p>\n </th>\n <td >6.6</td>\n\n\n <td >13.2</td>\n <td >9.6</td>\n\n <td >4.6</td>\n\n <td >13.1</td>\n <td >10.7</td>\n\n\n </tr>\n\n <tr class=\"greenbar\">\n <th >\n <p>2013</p>\n </th>\n <td >6.7</td>\n\n\n <td >14.1</td>\n <td >10.1</td>\n\n <td >4.6</td>\n \n <td >13.1</td>\n <td >10.7</td>\n\n\n\n </tr>\n\n <tr>\n <th >\n <p>2014</p>\n </th>\n <td >6.6</td>\n\n\n <td >13.9</td>\n <td >9.7</td>\n\n <td >4.4</td>\n \n <td >13.1</td>\n <td >10.7</td>\n\n\n\n </tr>\n \n <tr>\n <th >\n <p>2015</p>\n </th>\n <td >6.6</td>\n\n\n <td >13.9</td>\n <td >9.7</td>\n\n <td >4.4</td>\n \n <td >13.1</td>\n <td >10.7</td>\n\n\n\n </tr>\n \n <tr>\n <th >\n <p>2016</p>\n </th>\n <td >6.6</td>\n\n\n <td >13.9</td>\n <td >9.7</td>\n\n <td >4.4</td>\n \n <td >13.1</td>\n <td >10.7</td>\n\n\n\n </tr>\n \n\n \n\n </tbody>\n</table>"
+            }, {
+                "id": "color_palettes",
+                "val": -1
+            }, {
+                "id": "use_custom_colors_checkbox",
+                "val": false
+            }, {
+                "id": "custom_colors_textarea",
+                "val": "Aqua green CornflowerBlue #FF1493 #A52A2A #FF7F50 rgb(184,134,11) rgb(139,0,139) rgb(255,215,0)\n "
+            }, {
+                "id": "series_color_0",
+                "val": "7CB5EC"
+            }, {
+                "id": "series_type_div_0",
+                "val": "line"
+            }, {
+                "id": "line_style_select_0",
+                "val": "Solid"
+            }, {
+                "id": "use_2nd_y_axis_checkbox_0",
+                "val": false
+            }, {
+                "id": "series_visible_checkbox_0",
+                "val": true
+            }, {
+                "id": "series_extra_data_title_textarea_0",
+                "val": ""
+            }, {
+                "id": "series_extra_data_values_textarea_0",
+                "val": ""
+            }, {
+                "id": "series_color_1",
+                "val": "434348"
+            }, {
+                "id": "series_type_div_1",
+                "val": "line"
+            }, {
+                "id": "line_style_select_1",
+                "val": "Solid"
+            }, {
+                "id": "use_2nd_y_axis_checkbox_1",
+                "val": false
+            }, {
+                "id": "series_visible_checkbox_1",
+                "val": true
+            }, {
+                "id": "series_extra_data_title_textarea_1",
+                "val": ""
+            }, {
+                "id": "series_extra_data_values_textarea_1",
+                "val": ""
+            }, {
+                "id": "series_color_2",
+                "val": "90ED7D"
+            }, {
+                "id": "series_type_div_2",
+                "val": "line"
+            }, {
+                "id": "line_style_select_2",
+                "val": "Solid"
+            }, {
+                "id": "use_2nd_y_axis_checkbox_2",
+                "val": false
+            }, {
+                "id": "series_visible_checkbox_2",
+                "val": true
+            }, {
+                "id": "series_extra_data_title_textarea_2",
+                "val": ""
+            }, {
+                "id": "series_extra_data_values_textarea_2",
+                "val": ""
+            }, {
+                "id": "series_color_3",
+                "val": "F7A35C"
+            }, {
+                "id": "series_type_div_3",
+                "val": "line"
+            }, {
+                "id": "line_style_select_3",
+                "val": "Solid"
+            }, {
+                "id": "use_2nd_y_axis_checkbox_3",
+                "val": false
+            }, {
+                "id": "series_visible_checkbox_3",
+                "val": true
+            }, {
+                "id": "series_extra_data_title_textarea_3",
+                "val": ""
+            }, {
+                "id": "series_extra_data_values_textarea_3",
+                "val": ""
+            }, {
+                "id": "series_color_4",
+                "val": "8085E9"
+            }, {
+                "id": "series_type_div_4",
+                "val": "line"
+            }, {
+                "id": "line_style_select_4",
+                "val": "Solid"
+            }, {
+                "id": "use_2nd_y_axis_checkbox_4",
+                "val": false
+            }, {
+                "id": "series_visible_checkbox_4",
+                "val": true
+            }, {
+                "id": "series_extra_data_title_textarea_4",
+                "val": ""
+            }, {
+                "id": "series_extra_data_values_textarea_4",
+                "val": ""
+            }, {
+                "id": "series_color_5",
+                "val": "F15C80"
+            }, {
+                "id": "series_type_div_5",
+                "val": "line"
+            }, {
+                "id": "line_style_select_5",
+                "val": "Solid"
+            }, {
+                "id": "use_2nd_y_axis_checkbox_5",
+                "val": false
+            }, {
+                "id": "series_visible_checkbox_5",
+                "val": true
+            }, {
+                "id": "series_extra_data_title_textarea_5",
+                "val": ""
+            }, {
+                "id": "series_extra_data_values_textarea_5",
+                "val": ""
+            }, {
+                "id": "legend_layout_select",
+                "val": "horizontal"
+            }, {
+                "id": "map_legend_enabled_checkbox",
+                "val": true
+            }, {
+                "id": "map_legend_decimals_select",
+                "val": null
+            }, {
+                "id": "legend_placement_x",
+                "val": "50"
+            }, {
+                "id": "legend_placement_y",
+                "val": "40"
+            }, {
+                "id": "legend_reverse_layout_checkbox",
+                "val": false
+            }, {
+                "id": "legend_width_input",
+                "val": "540"
+            }, {
+                "id": "legend_item_width_input",
+                "val": ""
+            }, {
+                "id": "legend_alphabetical_layout_checkbox",
+                "val": false
+            }, {
+                "id": "legend_make_toggle_checkbox",
+                "val": false
+            }, {
+                "id": "chart_x_axis_title_textarea",
+                "val": ""
+            }, {
+                "id": "chart_x_axis_x_position_input",
+                "val": "40"
+            }, {
+                "id": "chart_x_axis_tickmark_interval_input",
+                "val": ""
+            }, {
+                "id": "chart_x_axis_min_input",
+                "val": ""
+            }, {
+                "id": "chart_x_axis_max_input",
+                "val": ""
+            }, {
+                "id": "chart_x_axis_show_only_years",
+                "val": false
+            }, {
+                "id": "chart_x_axis_add_commas",
+                "val": false
+            }, {
+                "id": "chart_x_axis_signs_select",
+                "val": "no_signs"
+            }, {
+                "id": "chart_x_axis_decimals_select",
+                "val": null
+            }, {
+                "id": "chart_y_axis_title_textarea",
+                "val": ""
+            }, {
+                "id": "chart_y_axis_x_position_input",
+                "val": "35"
+            }, {
+                "id": "chart_y_axis_tickmark_interval_input",
+                "val": ""
+            }, {
+                "id": "chart_y_axis_min_input",
+                "val": ""
+            }, {
+                "id": "chart_y_axis_max_input",
+                "val": ""
+            }, {
+                "id": "chart_y_axis_opposite_checkbox",
+                "val": false
+            }, {
+                "id": "chart_y_axis_log_checkbox",
+                "val": false
+            }, {
+                "id": "chart_y_axis_signs_select",
+                "val": "no_signs"
+            }, {
+                "id": "chart_y_axis_decimals_select",
+                "val": null
+            }, {
+                "id": "chart_y_axis_divide_select",
+                "val": "1"
+            }, {
+                "id": "chart_y_axis_2_enabled_checkbox",
+                "val": false
+            }, {
+                "id": "chart_y_axis_title_textarea_2",
+                "val": ""
+            }, {
+                "id": "chart_y_axis_x_position_input_2",
+                "val": "-75"
+            }, {
+                "id": "chart_y_axis_tickmark_interval_input_2",
+                "val": "5"
+            }, {
+                "id": "chart_y_axis_min_input_2",
+                "val": "0"
+            }, {
+                "id": "chart_y_axis_max_input_2",
+                "val": "100"
+            }, {
+                "id": "chart_y_axis_signs_select_2",
+                "val": "no_signs"
+            }, {
+                "id": "chart_y_axis_decimals_select_2",
+                "val": null
+            }, {
+                "id": "chart_tooltip_shared_checkbox",
+                "val": false
+            }, {
+                "id": "chart_tooltip_force_decimals_select",
+                "val": "0"
+            }, {
+                "id": "chart_tooltip_signs_select",
+                "val": "no_signs"
+            }, {
+                "id": "chart_tooltip_force_decimals_x_select",
+                "val": "0"
+            }, {
+                "id": "chart_tooltip_signs_x_select",
+                "val": "no_signs"
+            }, {
+                "id": "chart_tooltip_force_decimals_z_select",
+                "val": "0"
+            }, {
+                "id": "chart_tooltip_signs_z_select",
+                "val": "no_signs"
+            }, {
+                "id": "map_tooltip_main_value_font_size_input",
+                "val": "30"
+            }, {
+                "id": "map_tooltip_na_text_input",
+                "val": "N/A"
+            }, {
+                "id": "map_tooltip_prepend_to_value_text_input",
+                "val": ""
+            }, {
+                "id": "chart_z_title_text_input",
+                "val": ""
+            }, {
+                "id": "chart_tooltip_y_multiple_select",
+                "val": "1"
+            }, {
+                "id": "chart_tooltip_force_decimals_select_2",
+                "val": "0"
+            }, {
+                "id": "chart_tooltip_signs_select_2",
+                "val": "no_signs"
+            }, {
+                "id": "chart_tooltip_y_multiple_select_2",
+                "val": "1"
+            }, {
+                "id": "chart_credits_text_textarea",
+                "val": "Click legend items to change data display. Hover over chart to view data.\nSource: U.S. Bureau of Labor Statistics."
+            }, {
+                "id": "point_padding_input",
+                "val": ".1"
+            }, {
+                "id": "group_padding_input",
+                "val": ".2"
+            }, {
+                "id": "chart_subtitle_textarea",
+                "val": ""
+            }, {
+                "id": "map_animation_speed_range",
+                "val": "500"
+            }, {
+                "id": "map_animated_start_at_last_date_checkbox",
+                "val": false
+            }, {
+                "id": "map_include_puerto_rico_checkbox",
+                "val": false
+            }, {
+                "id": "map_include_virgin_islands_checkbox",
+                "val": false
+            }, {
+                "id": "map_add_ranked_columns_checkbox",
+                "val": false
+            }, {
+                "id": "chart_zoom_select",
+                "val": "false,false,null"
+            }, {
+                "id": "chart_show_data_labels_checkbox",
+                "val": false
+            }, {
+                "id": "chart_add_recession_shading_select",
+                "val": "no_recession"
+            }]
+        };
 
-                grayOtherSeries(false, "chart0"); ///true is legend is reversed.
+        var chartCallback = function chartCallback(all_chart_options) {
 
+            if (all_chart_options.timeline) {
+                //call animation if applicable
+                all_chart_options.timeline.animation();
             }
 
-        );
+            $(".highcharts-legend-item").css("min-height", "0px").css("z-index", 100); //fix so CMS CSS doesn't make legend taller than it should
+            $(".highcharts-tooltip").css("z-index", 200);
 
-        window.chart0_chart = chart0_chart;
+            /**
+             * Highcharts plugin for setting a lower opacity for other series than the one that is hovered
+             * in the legend
+             */
+            (function(Highcharts) {
+                var each = Highcharts.each;
 
-        /* Saved chart information - paste everything between the note lines into chartmaker to load chart
+                Highcharts.wrap(Highcharts.Legend.prototype, 'renderItem', function(proceed, item) {
 
+                    proceed.call(this, item);
 
+                    var isPoint = !!item.series,
+                        collection = isPoint ? item.series.points : this.chart.series,
+                        groups = isPoint ? ['graphic'] : ['group', 'markerGroup'],
+                        element = (this.options.useHTML ? item.legendItem : item.legendGroup).element;
 
-{"chartType":"line","dataLabelsEnabled":false,"isStacked":false,"chartPointPadding":0.1,"chartGroupPadding":0.2,"chartWidth":"580","chartHeight":"450","chartID":"chart0","useMLRStyles":false,"chartIsInverted":false,"chartIsZoom":"null","addRecession":false,"margins":{"top":"110","bottom":"80","left":"75","right":"40"},"xAxis":{"title":"","tickInterval":"1","autoInterval":true},"yAxis":{"title":"Y-axis title","titleIndent":"35","minVal":"","maxVal":"","autoInterval":true,"yAxisIsLog":false,"yAxisIsOpposite":false,"signs":"noSigns","tickInterval":"10","forcedDecimal":"yDecimalNoForce","divide":"1"},"legend":{"layout":"horizontal","x":"0","y":"30","toggleLegend":false,"legendIsReversed":false},"tooltip":{"isShared":false,"forcedDecimal":"0","signs":"noSigns","multiple":"1"},"credits":{"text":"Click legend items to change data display. Hover over chart to view data.<br>Source: U.S. Bureau of Labor Statistics.","yPos":"-20"},"fromTableChecked":false,"fromTable":{"loadFrom":"rowsSelected","drillChartType":"drillChartTypeBarSelected","drawRegressionLineCheckBox":false,"colorScatterBySeries":false,"data":"\n<table class=\"regular\" id=\"BLS_table\" style=\"width: 95%;\" cellspacing=\"0\" cellpadding=\"0\" xborder=\"1\"><caption><span class=\"tableTitle\">Table title goes here</span></caption><thead><tr><th id=\"columnHead0\" style=\"vertical-align: middle;\" rowspan=\"1\">Date</th><th id=\"columnHead1\">Series 1</th><th id=\"columnHead2\">Series 2</th></tr></thead><tbody><tr><th id=\"rowHead0\"><p>Jan 2012</p></th><td headers=\"rowHead0 columnHead1\">10</td><td headers=\"rowHead0 columnHead2\">400</td></tr><tr class=\"greenbar\"><th id=\"rowHead1\"><p>Feb 2012</p></th><td headers=\"rowHead1 columnHead1\">20</td><td headers=\"rowHead1 columnHead2\">390</td></tr><tr><th id=\"rowHead2\"><p>Mar 2012</p></th><td headers=\"rowHead2 columnHead1\">30</td><td headers=\"rowHead2 columnHead2\">380</td></tr><tr class=\"greenbar\"><th id=\"rowHead3\"><p>Apr 2012</p></th><td headers=\"rowHead3 columnHead1\">40</td><td headers=\"rowHead3 columnHead2\">370</td></tr><tr><th id=\"rowHead4\"><p>May 2012</p></th><td headers=\"rowHead4 columnHead1\">50</td><td headers=\"rowHead4 columnHead2\">360</td></tr><tr class=\"greenbar\"><th id=\"rowHead5\"><p>Jun 2012</p></th><td headers=\"rowHead5 columnHead1\">60</td><td headers=\"rowHead5 columnHead2\">350</td></tr><tr><th id=\"rowHead6\"><p>Jul 2012</p></th><td headers=\"rowHead6 columnHead1\">70</td><td headers=\"rowHead6 columnHead2\">340</td></tr><tr class=\"greenbar\"><th id=\"rowHead7\"><p>Aug 2012</p></th><td headers=\"rowHead7 columnHead1\">80</td><td headers=\"rowHead7 columnHead2\">330</td></tr><tr><th id=\"rowHead8\"><p>Sep 2012</p></th><td headers=\"rowHead8 columnHead1\">90</td><td headers=\"rowHead8 columnHead2\">320</td></tr><tr class=\"greenbar\"><th id=\"rowHead9\"><p>Oct 2012</p></th><td headers=\"rowHead9 columnHead1\">100</td><td headers=\"rowHead9 columnHead2\">310</td></tr><tr><th id=\"rowHead10\"><p>Nov 2012</p></th><td headers=\"rowHead10 columnHead1\">110</td><td headers=\"rowHead10 columnHead2\">300</td></tr><tr class=\"greenbar\"><th id=\"rowHead11\"><p>Dec 2012</p></th><td headers=\"rowHead11 columnHead1\">120</td><td headers=\"rowHead11 columnHead2\">290</td></tr><tr><th id=\"rowHead12\"><p>Jan 2013</p></th><td headers=\"rowHead12 columnHead1\">130</td><td headers=\"rowHead12 columnHead2\">280</td></tr><tr class=\"greenbar\"><th id=\"rowHead13\"><p>Feb 2013</p></th><td headers=\"rowHead13 columnHead1\">140</td><td headers=\"rowHead13 columnHead2\">270</td></tr><tr><th id=\"rowHead14\"><p>Mar 2013</p></th><td headers=\"rowHead14 columnHead1\">150</td><td headers=\"rowHead14 columnHead2\">260</td></tr><tr class=\"greenbar\"><th id=\"rowHead15\"><p>Apr 2013</p></th><td headers=\"rowHead15 columnHead1\">160</td><td headers=\"rowHead15 columnHead2\">250</td></tr><tr><th id=\"rowHead16\"><p>May 2013</p></th><td headers=\"rowHead16 columnHead1\">170</td><td headers=\"rowHead16 columnHead2\">240</td></tr><tr class=\"greenbar\"><th id=\"rowHead17\"><p>Jun 2013</p></th><td headers=\"rowHead17 columnHead1\">180</td><td headers=\"rowHead17 columnHead2\">230</td></tr><tr><th id=\"rowHead18\"><p>Jul 2013</p></th><td headers=\"rowHead18 columnHead1\">190</td><td headers=\"rowHead18 columnHead2\">220</td></tr><tr class=\"greenbar\"><th id=\"rowHead19\"><p>Aug 2013</p></th><td headers=\"rowHead19 columnHead1\">200</td><td headers=\"rowHead19 columnHead2\">210</td></tr><tr><th id=\"rowHead20\"><p>Sep 2013</p></th><td headers=\"rowHead20 columnHead1\">210</td><td headers=\"rowHead20 columnHead2\">200</td></tr><tr class=\"greenbar\"><th id=\"rowHead21\"><p>Oct 2013</p></th><td headers=\"rowHead21 columnHead1\">220</td><td headers=\"rowHead21 columnHead2\">190</td></tr><tr><th id=\"rowHead22\"><p>Nov 2013</p></th><td headers=\"rowHead22 columnHead1\">230</td><td headers=\"rowHead22 columnHead2\">180</td></tr><tr class=\"greenbar\"><th id=\"rowHead23\"><p>Dec 2013</p></th><td headers=\"rowHead23 columnHead1\">240</td><td headers=\"rowHead23 columnHead2\">170</td></tr><tr><th id=\"rowHead24\"><p>Jan 2014</p></th><td headers=\"rowHead24 columnHead1\">250</td><td headers=\"rowHead24 columnHead2\">160</td></tr><tr class=\"greenbar\"><th id=\"rowHead25\"><p>Feb 2014</p></th><td headers=\"rowHead25 columnHead1\">260</td><td headers=\"rowHead25 columnHead2\">150</td></tr><tr><th id=\"rowHead26\"><p>Mar 2014</p></th><td headers=\"rowHead26 columnHead1\">270</td><td headers=\"rowHead26 columnHead2\">140</td></tr><tr class=\"greenbar\"><th id=\"rowHead27\"><p>Apr 2014</p></th><td headers=\"rowHead27 columnHead1\">280</td><td headers=\"rowHead27 columnHead2\">130</td></tr><tr><th id=\"rowHead28\"><p>May 2014</p></th><td headers=\"rowHead28 columnHead1\">290</td><td headers=\"rowHead28 columnHead2\">120</td></tr><tr class=\"greenbar\"><th id=\"rowHead29\"><p>Jun 2014</p></th><td headers=\"rowHead29 columnHead1\">300</td><td headers=\"rowHead29 columnHead2\">110</td></tr><tr><th id=\"rowHead30\"><p>Jul 2014</p></th><td headers=\"rowHead30 columnHead1\">310</td><td headers=\"rowHead30 columnHead2\">100</td></tr><tr class=\"greenbar\"><th id=\"rowHead31\"><p>Aug 2014</p></th><td headers=\"rowHead31 columnHead1\">320</td><td headers=\"rowHead31 columnHead2\">90</td></tr><tr><th id=\"rowHead32\"><p>Sep 2014</p></th><td headers=\"rowHead32 columnHead1\">330</td><td headers=\"rowHead32 columnHead2\">80</td></tr><tr class=\"greenbar\"><th id=\"rowHead33\"><p>Oct 2014</p></th><td headers=\"rowHead33 columnHead1\">340</td><td headers=\"rowHead33 columnHead2\">70</td></tr><tr><th id=\"rowHead34\"><p>Nov 2014</p></th><td headers=\"rowHead34 columnHead1\">350</td><td headers=\"rowHead34 columnHead2\">60</td></tr><tr class=\"greenbar\"><th id=\"rowHead35\"><p>Dec 2014</p></th><td headers=\"rowHead35 columnHead1\">360</td><td headers=\"rowHead35 columnHead2\">50</td></tr><tr><th id=\"rowHead36\"><p>Jan 2015</p></th><td headers=\"rowHead36 columnHead1\">370</td><td headers=\"rowHead36 columnHead2\">40</td></tr><tr class=\"greenbar\"><th id=\"rowHead37\"><p>Feb 2015</p></th><td headers=\"rowHead37 columnHead1\">380</td><td headers=\"rowHead37 columnHead2\">30</td></tr><tr><th id=\"rowHead38\"><p>Mar 2015</p></th><td headers=\"rowHead38 columnHead1\">390</td><td headers=\"rowHead38 columnHead2\">20</td></tr><tr class=\"greenbar\"><th id=\"rowHead39\"><p>Apr 2015</p></th><td headers=\"rowHead39 columnHead1\">400</td><td headers=\"rowHead39 columnHead2\">10</td></tr></tbody></table>\n","colorRow":0},"fromManual":{"title":"Title Goes Here","subTitle":"","xCategories":"\"Dec 2012\",\"Jan 2013\",\"Feb 2013\",\"Mar 2013\",\"Apr 2013\",\"May 2013\",\"Jun 2013\",\"Jul 2013\",\"Aug 2013\",\"Sep 2013\",\"Oct 2013\",\"Nov 2013\",\"Dec 2013\",\"Jan 2014\"","seriesInfo":[{"title":"Series 1","data":"40,23,13,15,18,40,45,32,10,20,5,10,40,40","seriesType":"line","lineStyle":"Solid","isVisible":true,"color":"rgb(47, 126, 216)"},{"title":"Series 2","data":"40,40,40,23,13,32,10,20,5,10,15,18,40,45","seriesType":"line","lineStyle":"Solid","isVisible":true,"color":"rgb(176, 76, 76)"}]},"histogram":{"chartTitle":"Title Goes Here","subTitle":"","histogramNumberOfColumns":"5","histogramSeriesTitle":"Series","histogramSeriesData":"40,23,13,15,18,40,45,32,10,20,5,10,41,40","histogramBeforeCatLabel":"","histogramAfterCatLabel":"","color":"rgb(47, 126, 216)"},"bubble":{"chartTitle":"Title Goes Here","chartSubTitle":"Bubble size represents... ","bubbleMaxSize":"50","bubbleSizeText":"","seriesInfo":[{"title":"Series 1","x":"","y":"","r":"","isVisible":true,"color":"rgb(139, 188, 33)"}]}}
+                    element.onmouseover = function() {
+                        each(collection, function(seriesItem) {
+                            if (seriesItem !== item) {
+                                each(groups, function(group) {
+                                    seriesItem[group].animate({
+                                        opacity: 0.25
+                                    }, {
+                                        duration: 150
+                                    });
+                                });
+                            }
+                        });
+                    };
+                    element.onmouseout = function() {
+                        each(collection, function(seriesItem) {
+                            if (seriesItem !== item) {
+                                each(groups, function(group) {
+                                    seriesItem[group].animate({
+                                        opacity: 1
+                                    }, {
+                                        duration: 50
+                                    });
+                                });
+                            }
+                        });
+                    };
+                });
 
+                Highcharts.wrap(Highcharts.Chart.prototype, 'showCredits', function(proceed, credits) {
+                    proceed.call(this, credits);
 
+                    if (this.credits && credits.target) {
+                        this.credits.on('click', function() {
+                            $('<a>').attr({
+                                href: credits.href,
+                                target: credits.target
+                            })[0].click();
+                        });
+                    }
+                });
+            })(Highcharts); //end gray other series plugin
+        };
+        Highcharts.setOptions({
+            lang: {
+                thousandsSep: ",",
+                drillUpText: "◁ Back ",
+                contextButtonTitle: "Download chart image"
+            }
+        });
 
-*/
+        var chart = new Highcharts.Chart(all_chart_options, chartCallback(all_chart_options));
+    });
+    jQuery.fn.extend({
+        addCommas: function addCommas(decimals) {
 
-    }
-);</textarea>
+            var val = this[0] || 0;
+
+            if (isNaN(val) || val < 999 && val > -999 && decimals < 1) {
+                //small numbers auto decimals
+                return val;
+            } else if (val < 999 && val > -999 && decimals > 0) {
+                //small numbers fixed decimals
+                return val.toFixed(decimals);
+            } else if ((val > 999 || val < -999) && decimals > 0) {
+                //big numbers fixed decimals
+                while (/(\d+)(\d{3})/.test(val.toString())) {
+                    val = val.toFixed(decimals).replace(/(\d+)(\d{3})/, '$1' + ',' + '$2');
+                }
+            } else if (val > 999 || val < -999) {
+                //big number auto decimals
+                while (/(\d+)(\d{3})/.test(val.toString())) {
+                    val = val.toString().replace(/(\d+)(\d{3})/, '$1' + ',' + '$2');
+                }
+            }
+
+            return val;
+        }
+    });
+
+</textarea>
     <br>
     </body>
     

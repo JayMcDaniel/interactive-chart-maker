@@ -26,7 +26,7 @@ var parseForScatter = function (input, chart_type, colors) {
                 symbol: "circle"
             },
             color: colors[i - Math.floor(i / 15) * 15],
-            _symbolIndex: i
+            _symbolIndex: 0
         };
 
         //get data values from each row's td cells
