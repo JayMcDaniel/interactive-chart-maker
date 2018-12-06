@@ -94,6 +94,20 @@ var update_legend = {
                 $.each(allSeries, function (index, series) {
                     selected == index ? series.show() : series.hide();
                 });
+                
+                
+                var dollar = this.options.dollar || "";
+                var percent = this.options.percent === "%" ? "%" : "";
+                var decimals = this.options.decimals || this.chart.options.yAxis[0].labels.decimals;
+                
+                chart.yAxis[0].update({
+                   labels:{
+                       formatter: function(){
+                           return dollar + $(this.value).addCommas(decimals) + percent;
+                       }
+                   } 
+                });
+                
                 return false;
             };
 

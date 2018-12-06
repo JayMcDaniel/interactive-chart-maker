@@ -249,9 +249,9 @@ var update_tooltip = {
             all_chart_options.tooltip.formatter = function () {
 
                 var options = this.series.chart.tooltip.options;
-                var dollar = options.y_signs_arr[0];
-                var percent = options.y_signs_arr[1];
-                var decimals = options.y_decimals;
+                var dollar = this.series.options.dollar || options.y_signs_arr[0];
+                var percent = this.series.options.percent || options.y_signs_arr[1];
+                var decimals = this.series.options.decimals || options.y_decimals;
                 var multiple = options.multiplier;
 
                 if (all_chart_options.series[this.series.index].yAxis == 1) {

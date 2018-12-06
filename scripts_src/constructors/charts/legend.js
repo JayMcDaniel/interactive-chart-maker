@@ -36,6 +36,7 @@ var Legend = function (o) {
         cursor: o.itemHoverStyle.cursor
     }
 
+   
 }
 
 module.exports = Legend;

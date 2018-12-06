@@ -139,8 +139,13 @@ var update_individual_series = {
             $(".selected", $(this).parent()).removeClass("selected");
             $(this).addClass("selected");
 
-            //hide or show the line styles optoins for that series
+            //hide or show the line styles options for that series
             type === "line" ? $(".line_style_div:eq(" + i + ")").show() : $(".line_style_div:eq(" + i + ")").hide();
+            
+            //hide or show tooltip options for that series
+            type === "line" || type === "bar" || type === "column" ? $(".series_decimals_div:eq(" + i + "), .individual_tooltip_signs_div:eq(" + i + ")").show() : $(".series_decimals_div:eq(" + i + "), .individual_tooltip_signs_div:eq(" + i + ")").hide();
+
+            
 
         });
     },
@@ -239,6 +244,43 @@ var update_individual_series = {
     },
 
 
+    /** bound with populateForm. When the unique tooltip signs dropdown is changed, change that series **/
+    tooltipSignsSelectChange: function (chart, all_chart_options) {
+        $(".individual_tooltip_signs_select").change(function () {
+            var val = $(this).val();
+
+            var dollar = val === "$" ? "$" : undefined;
+            var percent = val === "%" || val === "percentage point(s)" ? val : undefined;
+
+            var i = $(this).parents(".series_snippet").index();
+
+            all_chart_options.series[i].dollar = dollar;
+            all_chart_options.series[i].percent = percent;
+
+            chart.series[i].update({
+                dollar: dollar,
+                percent: percent
+            });
+        });
+    },
+
+
+    
+    seriesDecimalsSelectChange: function (chart, all_chart_options) {
+        $(".series_decimals_select").change(function () {
+           
+            var decimals = $(this).val() || undefined;
+
+            var i = $(this).parents(".series_snippet").index();
+
+            all_chart_options.series[i].decimals = decimals;
+
+            chart.series[i].update({
+                decimals: decimals
+            });
+        });
+    },
+
 
 
     /** makes a color box, called from populateForm **/
@@ -328,6 +370,46 @@ var update_individual_series = {
 
     },
 
+
+
+
+    /** add option to select individual series tooltip sign **/
+    makeIndividualTooltipSignsDiv: function (i, series) {
+
+        var individual_tooltip_signs_div = document.createElement("div");
+        $(individual_tooltip_signs_div).addClass("individual_tooltip_signs_div");
+
+        var individual_tooltip_signs_label = document.createElement("label");
+        $(individual_tooltip_signs_label).addClass("individual_tooltip_signs_label")
+            .text("Unique dollar / percent signs: ");
+
+        var individual_tooltip_signs_select = $('<select class ="individual_tooltip_signs_select" id="individual_tooltip_signs_select_' + i + '"><option value="no_signs" selected="">&nbsp;</option><option value="$">$</option><option value="%">%</option><option value="percentage point(s)">percentage point(s)</option></select>');
+
+        $(individual_tooltip_signs_div).append(individual_tooltip_signs_label, individual_tooltip_signs_select);
+
+        return individual_tooltip_signs_div;
+
+    },
+
+
+    /** add option to select individual series decimal places **/
+
+    makeSeriesDecimalsDiv: function (i, series) {
+
+        var series_decimals_div = document.createElement("div");
+        $(series_decimals_div).addClass("series_decimals_div");
+
+        var series_decimals_label = document.createElement("label");
+        $(series_decimals_label).addClass("series_decimals_label")
+            .text("Unique decimal places: ");
+
+        var series_decimals_select = $('<select class="series_decimals_select" id="series_decimals_select_' + i + '"><option value="null" selected="">Auto</option><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select>');
+
+        $(series_decimals_div).append(series_decimals_label, series_decimals_select);
+
+        return series_decimals_div;
+
+    },
 
 
 
@@ -560,6 +642,14 @@ var update_individual_series = {
             var line_style_div = update_individual_series.makeLineStyleDiv(i, series);
             series_snippet.appendChild(line_style_div);
 
+            //make individual tooltip signs div
+            var individual_tooltip_signs_div = update_individual_series.makeIndividualTooltipSignsDiv(i, series);
+            series_snippet.appendChild(individual_tooltip_signs_div);
+            
+            //make series decimals div
+            var series_decimals_div = update_individual_series.makeSeriesDecimalsDiv(i, series);
+            series_snippet.appendChild(series_decimals_div);
+
             //make use second y-axis checkbox div
             var use_2nd_y_axis_div = update_individual_series.use2ndYAxisDiv(all_chart_options, i);
             series_snippet.appendChild(use_2nd_y_axis_div);
@@ -585,10 +675,18 @@ var update_individual_series = {
             //append all
             $(display_series_options_inner_div).append(series_snippet);
 
-
+            
             if (all_chart_options.chart.type === "line") {
                 $(".line_style_div").show();
             }
+            
+            //show or hide tooltip options
+            if (all_chart_options.chart.type === "line" || all_chart_options.chart.type === "bar" || all_chart_options.chart.type === "column") {
+                $(".series_decimals_div, .individual_tooltip_signs_div, .use_2nd_y_axis_div").show();
+            }else{
+                $(".series_decimals_div, .individual_tooltip_signs_div, .use_2nd_y_axis_div").hide();
+            }
+            
 
         });
 
@@ -598,6 +696,12 @@ var update_individual_series = {
         //bind line style changes
         update_individual_series.lineStyleSelectChange(chart, all_chart_options);
 
+        //bind unique tooltip sign changes
+        update_individual_series.tooltipSignsSelectChange(chart, all_chart_options);
+        
+        //bind series decimals change
+        update_individual_series.seriesDecimalsSelectChange(chart, all_chart_options);
+        
         //bind use second y-axis checkbox changes
         update_individual_series.useSecondYAxisChange(chart, all_chart_options);
 
