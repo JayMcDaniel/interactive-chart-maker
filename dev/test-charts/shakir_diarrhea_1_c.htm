@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Test Chart!</title>
+    <meta name="Author" content="" />
+</head>
+
+<body>
+    <h1>Test Chart!</h1>
+
+
+    <div id="chart1" style="position: relative; width: 700px; height: 600px; margin: auto; padding: 0px;"> </div>
+
+    <!-- external libraries -->
+    <script src="../../libraries/jquery/jquery-2.2.0.min.js"></script>
+
+    <script src="https://code.highcharts.com/highcharts.src.js"></script>
+    <script src="https://www.bls.gov/assets/highcharts/latest/highcharts-more.js"></script>
+
+
+
+
+    <script>
+        $(function () {
+            var colors = ["#006600", "#8085e9", "#f15c80", "#f7a35c", "#8085e9", "#f15c80", "#e4d354", "#2b908f", "#f45b5b", "#91e8e1", "#2f7ed8", "#0d233a", "#8bbc21", "#910000", "#1aadce", "#492970", "#f28f43", "#77a1e5", "#c42525", "#a6c96a"];
+
+            var all_chart_options = {
+                "chart": {
+                    "renderTo": "chart1",
+                    "margin": [50, 150, 110, 60],
+                    "borderWidth": 0,
+                    "plotBorderColor": "#000",
+                    "plotBorderWidth": 0,
+                    "type": "line",
+                    "events": {
+                        "redraw": function redraw() {
+                            if (chart) {
+                                $.each(chart.series, function (i, serie) {
+                                    $.each(serie.data, function (j, point) {
+                                        if (point.options.cursor === "pointer") {
+                                            point.graphic.attr({
+                                                cursor: 'pointer'
+                                            });
+                                        }
+                                    });
+                                });
+                            }
+                        }
+                    },
+                    "zoomType": null,
+                    "alignTicks": false,
+                    "ignoreHiddenSeries": true,
+                    "inverted": false
+                },
+
+                "legend": {
+                    "align": "left",
+                    "backgroundColor": "none",
+                    "borderColor": "none",
+                    "borderWidth": 0,
+                    "enabled": false,
+                    "floating": false,
+                    "itemDistance": 30,
+                    "layout": "horizontal",
+                    "reversed": false,
+                    "shadow": false,
+                    "useHTML": false,
+                    "verticalAlign": "top",
+                    "width": 550,
+                    "x": 50,
+                    "y": 40,
+                    "itemStyle": {
+                        "fontFamily": "Calibri, Arial, Helvetica, sans-serif",
+                        "color": "#000",
+                        "cursor": "pointer"
+                    },
+                    "itemHiddenStyle": {
+                        "color": "gray"
+                    },
+                    "itemHoverStyle": {
+                        "cursor": "pointer"
+                    }
+                },
+                "plotOptions": {
+
+
+                },
+                "series": [{
+                        "name": "Ct. levels ng/L Log<sup>10</sup>",
+                        "data": [[7, 4.72], [6, 4.56], [4, 2.82], [1, 2.65], [1, 2.60], [1, 2.36], [1, 2.32], [1, 2.36], [2, 2.32], [2, 2.43], [2, 2.61], [3, 2.77], [2, 2.5], [3, 2.83], [3, 2.91], [3, 2.79], [3, 2.82], [1, 3.3], [2, 3.62], [2, 3.19], [2, 3.13], [2, 3.21], [2, 3.29], [1, 3.06], [1, 2.48], [1, 2.4], [1, 2.3], [2, 2.91], [4, 3.19], [5, 3.86], [5, 3.74], [5, 4.2]],
+                        color: colors[0],
+                        "type": "scatter",
+                        "_symbolIndex": 0,
+                        "stacking": null,
+                        "visible": true
+            },
+                    {
+                        "name": "Pro Ct. (ng/nL)",
+                        "data": [[7, 16.8], [6, 13.4], [4, 4.1], [1, 2.4], [1, 1.9], [1, 1.7], [1, 0.9], [1, 1.8], [2, null], [2, 1.9], [2, 2.8], [3, 3.2], [2, 3.0], [3, 3.8], [3, null], [3, 2.7], [3, 2.6], [1, 6.91], [2, 10.62], [2, 7.4], [2, 7.0], [2, 8.1], [2, 9.3], [1, 6.8], [1, 3.8], [1, 3.9], [1, 1.2], [2, 3.1], [4, 8.91], [5, 13.7], [5, 10.91], [5, 16.2]],
+                        color: colors[1],
+                        "type": "scatter",
+                        "_symbolIndex": 2,
+                        "stacking": null,
+                        "visible": true,
+                        yAxis: 1,
+            },
+                    {
+                        "name": "CEA (mcg/L)",
+                        "data": [[7, 48.9], [6, 30.5], [4, 15.4], [1, 11.8], [1, 12.0], [1, 5.6], [1, 5.0], [1, 9.6], [2, null], [2, 10.8], [2, 12.4], [3, 14.1], [2, 13.0], [3, 12.8], [3, 16.6], [3, 18.4], [3, 18.8], [1, 10.3], [2, 21.23], [2, 6.84], [2, 5.91], [2, 7.4], [2, 8.21], [1, 6.4], [1, 2.49], [1, 2.01], [1, 5.8], [2, 6.8], [4, 10.4], [5, 12.9], [5, 14.9], [5, 19.2]],
+                        "type": "scatter",
+                        color: colors[2],
+                        "_symbolIndex": 1,
+                        "stacking": null,
+                        "visible": true,
+                        yAxis: 2,
+            }
+
+
+                          ],
+                "subtitle": {
+                    "text": "",
+                    "align": "left",
+                    "style": {
+                        "color": "#000000",
+                        "fontFamily": "arial",
+                        "fontWeight": "normal",
+                        "fontSize": "12px"
+                    }
+                },
+                "title": {
+                    "text": "Patient #1: Correlation of serum Ct., Pro Ct. and CEA levels with episodes of diarrhea",
+                    "align": "left",
+                    "style": {
+                        "color": "#000000",
+                        "fontFamily": "arial",
+                        "fontWeight": "bold",
+                        "fontSize": "14px"
+                    }
+                },
+                "tooltip": {
+                    "backgroundColor": "#FEFFEF",
+                    "crosshairs": [false, false],
+                    "formatter": function () {
+                        var options = this.series.chart.tooltip.options;
+                        var dollar = options.y_signs_arr[0];
+                        var percent = options.y_signs_arr[1];
+                        var decimals = options.y_decimals;
+                        var multiple = options.multiplier;
+                        if (all_chart_options.series[this.series.index].yAxis == 1) {
+                            dollar = options.y_signs_arr_2[0];
+                            percent = options.y_signs_arr_2[1];
+                            decimals = options.y_decimals_2;
+                            multiple = options.multiplier_2;
+                        }
+                        var y_val = this.point.high ? "High: " + dollar + $(this.point.high * multiple).addCommas(decimals) + percent + " | Low: " + dollar + $(this.point.low * multiple).addCommas(decimals) + percent : dollar + $(this.y * multiple).addCommas(decimals) + percent;
+                        var s = "<b>" + this.series.name + "</b><br>" + this.x + ": " + y_val;
+                        all_chart_options.series[this.series.index] ? s = all_chart_options.tooltip.addExtraData(all_chart_options.series[this.series.index].extra_data, this.point, s) : s = s;
+                        return s.replace(/\$-/g, "-$");
+                    },
+                    "style": {
+                        "color": "#000000",
+                        "fontFamily": "Calibri, Arial, Helvetica, sans-serif"
+                    },
+                    "useHTML": false,
+                    "shared": false,
+                    "addExtraData": function (extra_data, point, s) {
+                        if (extra_data && extra_data[0].name) {
+                            $.each(extra_data, function (i) {
+                                if (extra_data[i].values[point.index]) {
+                                    s = s + "<br>" + extra_data[i].name + ": " + extra_data[i].values[point.index];
+                                }
+                            });
+                        }
+                        return s;
+                    },
+                    "x_signs_arr": ["", ""],
+                    "z_signs_arr": ["", ""],
+                    "y_decimals": 0,
+                    "y_decimals_2": 0,
+                    "x_decimals": 0,
+                    "z_decimals": 0,
+                    "z_title": "Z",
+                    "multiplier": 1,
+                    "multiplier_2": 1,
+                    "y_signs_arr": ["", ""],
+                    "y_signs_arr_2": ["", ""]
+                },
+                xAxis: {
+                    type: 'category',
+                    startOnTick: true,
+                    endOnTick: true,
+                    tickmarkPlacement: "on",
+
+                    "labels": {
+                        //                        formatter: function () {
+                        //                            return Highcharts.dateFormat('%b %Y', this.value);
+                        //                        }
+                    },
+
+                    categories: ["0\u20132", "2\u20134", "4\u20136", "6\u20138", "8\u201310", "10\u201312", "12\u201314", "14\u201316"],
+
+                    title: {
+                        text: 'Diarrhea episodes per 24 hours'
+                    }
+                },
+
+
+
+                "yAxis": [{
+                        "gridLineColor": "#c0c0c0",
+                        "gridLineWidth": 0,
+                        "gridLineDashStyle": "Dot",
+                        "labels": {
+                            "formatter": function yAxisFormat() {
+                                var decimals = this.axis.options.labels.decimals;
+                                var signs_arr = this.axis.options.labels.signs_arr;
+                                var dividend = this.axis.options.labels.dividend;
+                                var s = this.value / dividend == parseInt(this.value / dividend) ? Highcharts.numberFormat(this.value / dividend, 1, ".", ",") : Highcharts.numberFormat(this.value / dividend, 1, ".", ",");
+                                s = signs_arr[0] + s + signs_arr[1];
+                                return s.replace(/\$-/g, "-$");
+                            },
+                            "rotation": 0,
+                            "style": {
+                                "color": "#000000",
+                                "fontFamily": "Calibri, Arial, Helvetica, sans-serif",
+                                "fontWeight": "normal",
+                                "backgroundColor": "#fff",
+                                "fontSize": "12px"
+                            },
+                            "signs_arr": ["", ""],
+                            "decimals": null,
+                            "dividend": 1
+                        },
+                        "lineColor": "gray",
+                        "lineWidth": 1,
+                        "max": 4,
+                        "min": 0,
+                        "opposite": false,
+                        plotBands: [{ // mark the weekend
+                            color: '#d8d8d8',
+                            from: 0,
+                            to: 0
+        }],
+                        "plotLines": [{
+                            "value": 0,
+                            "color": "#c0c0c0",
+                            "dashStyle": "solid",
+                            "width": 1
+                }],
+                        "tickInterval": null,
+                        "tickmarkPlacement": "on",
+                        "tickPosition": "outside",
+                        "tickColor": "#C0D0E0",
+                        "tickWidth": 1,
+                        "title": {
+                            "useHTML": false,
+                            "text": 'Ct. levels ng/L Log10 <span style="font-size: 130%; color:' + colors[0] + '">\u25CF</span>',
+                            "margin": 6,
+                            "align": "high",
+                            "offset": 20,
+                            //    "rotation": 0,
+                            "x": -20,
+                            "y": 130,
+                            "style": {
+                                "color": "#000000",
+                                "fontFamily": "Calibri, Arial, Helvetica, sans-serif",
+                                "fontWeight": "normal",
+                                "fontSize": "13px"
+                            }
+                        },
+                        "type": "linear"
+                },
+
+
+
+                          //2nd axis
+                    {
+                        "gridLineColor": "#c0c0c0",
+                        "gridLineWidth": 0,
+                        "gridLineDashStyle": "Dot",
+                        "labels": {
+                            "formatter": function yAxisFormat() {
+                                var decimals = this.axis.options.labels.decimals;
+                                var signs_arr = this.axis.options.labels.signs_arr;
+                                var dividend = this.axis.options.labels.dividend;
+                                var s = this.value / dividend == parseInt(this.value / dividend) ? Highcharts.numberFormat(this.value / dividend, 1, ".", ",") : Highcharts.numberFormat(this.value / dividend, 1, ".", ",");
+                                s = signs_arr[0] + s + signs_arr[1];
+                                return s.replace(/\$-/g, "-$");
+                            },
+                            "rotation": 0,
+                            "style": {
+                                "color": "#000000",
+                                "fontFamily": "Calibri, Arial, Helvetica, sans-serif",
+                                "fontWeight": "normal",
+                                "backgroundColor": "#fff",
+                                "fontSize": "12px"
+                            },
+                            "signs_arr": ["", ""],
+                            "decimals": null,
+                            "dividend": 1
+                        },
+                        "lineColor": "gray",
+                        "lineWidth": 1,
+                        "max": 10,
+                        "min": 0,
+                        "opposite": true,
+                        plotBands: [{ // mark the weekend
+                            color: '#d8d8d8',
+                            from: 0,
+                            to: 0
+        }],
+                        "plotLines": [{
+                            "value": 0,
+                            "color": "#c0c0c0",
+                            "dashStyle": "solid",
+                            "width": 1
+                }],
+                        "tickInterval": null,
+                        "tickmarkPlacement": "on",
+                        "tickPosition": "outside",
+                        "tickColor": "#C0D0E0",
+                        "tickWidth": 1,
+                        "title": {
+                            "useHTML": false,
+                            "text": 'Pro Ct. (ng/mL) <span style="font-size: 130%; color:' + colors[1] + '">\u25A0</span>',
+                            "margin": 6,
+                            "align": "high",
+                            "offset": 60,
+                            //    "rotation": 0,
+                            "x": -15,
+                            "y": 160,
+                            "style": {
+                                "color": "#000000",
+                                "fontFamily": "Calibri, Arial, Helvetica, sans-serif",
+                                "fontWeight": "normal",
+                                "fontSize": "13px"
+                            }
+                        },
+                        "type": "linear"
+                },
+
+
+                          //3rd axis
+                    {
+                        "gridLineColor": "#c0c0c0",
+                        "gridLineWidth": 0,
+                        "gridLineDashStyle": "Dot",
+                        "labels": {
+                            "formatter": function yAxisFormat() {
+                                var decimals = this.axis.options.labels.decimals;
+                                var signs_arr = this.axis.options.labels.signs_arr;
+                                var dividend = this.axis.options.labels.dividend;
+                                var s = this.value / dividend == parseInt(this.value / dividend) ? Highcharts.numberFormat(this.value / dividend, 0, ".", ",") : Highcharts.numberFormat(this.value / dividend, 1, ".", ",");
+                                s = signs_arr[0] + s + signs_arr[1];
+                                return s.replace(/\$-/g, "-$");
+                            },
+                            "rotation": 0,
+                            "style": {
+                                "color": "#000000",
+                                "fontFamily": "Calibri, Arial, Helvetica, sans-serif",
+                                "fontWeight": "normal",
+                                "backgroundColor": "#fff",
+                                "fontSize": "12px"
+                            },
+                            "signs_arr": ["", ""],
+                            "decimals": null,
+                            "dividend": 1
+                        },
+                        "lineColor": "gray",
+                        "lineWidth": 1,
+                        "max": 65,
+                        "min": 0,
+                        "opposite": true,
+                        plotBands: [{ // mark the weekend
+                            color: '#d8d8d8',
+                            from: 0,
+                            to: 0
+        }],
+                        "plotLines": [{
+                            "value": 0,
+                            "color": "#c0c0c0",
+                            "dashStyle": "solid",
+                            "width": 1
+                }],
+                        "tickInterval": null,
+                        "tickmarkPlacement": "on",
+                        "tickPosition": "outside",
+                        "tickColor": "#C0D0E0",
+                        "tickWidth": 1,
+                        "title": {
+                            "useHTML": false,
+                            "text": 'CEA (mcg/L) <span style="font-size: 130%; color:' + colors[2] + '">\u25C6</span>',
+                            "margin": 6,
+                            "align": "high",
+                            "offset": 20,
+                            //    "rotation": 0,
+                            "x": 15,
+                            "y": 160,
+                            "style": {
+                                "color": "#000000",
+                                "fontFamily": "Calibri, Arial, Helvetica, sans-serif",
+                                "fontWeight": "normal",
+                                "fontSize": "13px"
+                            }
+                        },
+                        "type": "linear"
+                }
+
+
+
+
+
+                          ],
+
+
+
+
+
+
+
+                "credits": {
+                    "href": "/",
+                    "position": {
+                        "align": "left",
+                        "x": 40,
+                        "y": -22
+                    },
+                    "style": {
+                        "cursor": "default",
+                        "color": "#2C2C2C",
+                        fontSize: 12
+                    },
+                    "target": "_blank",
+                    "text": "",
+                    "useHTML": true
+                },
+                "exporting": {
+                    "sourceWidth": 640,
+                    "scale": 1,
+                    "buttons": {
+                        "contextButton": {
+                            "enabled": true,
+                            "verticalAlign": "bottom",
+                            "x": -10
+                        }
+                    }
+                },
+                "saved_values": [{
+                    "id": "chart_type_icons",
+                    "val": "line"
+            }, {
+                    "id": "chart_id_textinput",
+                    "val": "chart1"
+            }, {
+                    "id": "map_type_select",
+                    "val": "state"
+            }, {
+                    "id": "map_animated_checkbox",
+                    "val": false
+            }, {
+                    "id": "map_color_by_names_checkbox",
+                    "val": false
+            }, {
+                    "id": "bubble_animated_checkbox",
+                    "val": false
+            }, {
+                    "id": "drilldown_type_select",
+                    "val": "bar"
+            }, {
+                    "id": "chart_width_textinput",
+                    "val": "580"
+            }, {
+                    "id": "chart_height_textinput",
+                    "val": "430"
+            }, {
+                    "id": "top_margin_textinput",
+                    "val": "100"
+            }, {
+                    "id": "right_margin_textinput",
+                    "val": "40"
+            }, {
+                    "id": "bottom_margin_textinput",
+                    "val": "80"
+            }, {
+                    "id": "left_margin_textinput",
+                    "val": "80"
+            }, {
+                    "id": "map_spotlight_size_checkbox",
+                    "val": false
+            }, {
+                    "id": "map_circle_size_range",
+                    "val": "10"
+            }, {
+                    "id": "map_circle_size_by_select",
+                    "val": "main_values"
+            }, {
+                    "id": "table_input_load_series_from_icons",
+                    "val": "column_heads"
+            }, {
+                    "id": "example_table_select",
+                    "val": ""
+            }, {
+                    "id": "table_input_textarea",
+                    "val": "<table id=\"BLStable_2018_6_15_4_4\" class=\"regular\" cellspacing=\"0\" cellpadding=\"0\" xborder=\"1\" style=\"width: 95%\"><caption><span class=\"tableTitle\">Effects of ?</span></caption><thead><tr><th rowspan=\"1\"  style=\"vertical-align: middle; min-width: 110px;\">Date</th><th >serum ? levels pg/mL</th></tr></thead><tbody><tr><th ><p>7/21/10</p></th><td >358</td></tr><tr class=\"greenbar\"><th ><p>1/23/12</p></th><td >520</td></tr><tr><th ><p>12/10/13</p></th><td >1198</td></tr><tr class=\"greenbar\"><th ><p>1/2/14</p></th><td >1215</td></tr><tr><th ><p>5/19/14</p></th><td >62</td></tr><tr class=\"greenbar\"><th ><p>11/3/14</p></th><td >374</td></tr><tr><th ><p>4/14/15</p></th><td >93</td></tr><tr class=\"greenbar\"><th ><p>12/16/15</p></th><td >92</td></tr><tr><th ><p>5/31/17</p></th><td >118</td></tr></tbody></table>"
+            }, {
+                    "id": "color_palettes",
+                    "val": -1
+            }, {
+                    "id": "use_custom_colors_checkbox",
+                    "val": false
+            }, {
+                    "id": "custom_colors_textarea",
+                    "val": "Aqua green CornflowerBlue #FF1493 #A52A2A #FF7F50 rgb(184,134,11) rgb(139,0,139) rgb(255,215,0)\n "
+            }, {
+                    "id": "series_color_0",
+                    "val": "7CB5EC"
+            }, {
+                    "id": "series_type_div_0",
+                    "val": "line"
+            }, {
+                    "id": "line_style_select_0",
+                    "val": "Solid"
+            }, {
+                    "id": "use_2nd_y_axis_checkbox_0",
+                    "val": false
+            }, {
+                    "id": "series_visible_checkbox_0",
+                    "val": true
+            }, {
+                    "id": "series_extra_data_title_textarea_0",
+                    "val": ""
+            }, {
+                    "id": "series_extra_data_values_textarea_0",
+                    "val": ""
+            }, {
+                    "id": "legend_layout_select",
+                    "val": "horizontal"
+            }, {
+                    "id": "map_legend_enabled_checkbox",
+                    "val": true
+            }, {
+                    "id": "map_legend_decimals_select",
+                    "val": null
+            }, {
+                    "id": "legend_placement_x",
+                    "val": "50"
+            }, {
+                    "id": "legend_placement_y",
+                    "val": "40"
+            }, {
+                    "id": "legend_reverse_layout_checkbox",
+                    "val": false
+            }, {
+                    "id": "legend_width_input",
+                    "val": "550"
+            }, {
+                    "id": "legend_item_width_input",
+                    "val": ""
+            }, {
+                    "id": "legend_alphabetical_layout_checkbox",
+                    "val": false
+            }, {
+                    "id": "legend_make_toggle_checkbox",
+                    "val": false
+            }, {
+                    "id": "chart_x_axis_title_textarea",
+                    "val": ""
+            }, {
+                    "id": "chart_x_axis_x_position_input",
+                    "val": "40"
+            }, {
+                    "id": "chart_x_axis_tickmark_interval_input",
+                    "val": ""
+            }, {
+                    "id": "chart_x_axis_min_input",
+                    "val": ""
+            }, {
+                    "id": "chart_x_axis_max_input",
+                    "val": ""
+            }, {
+                    "id": "chart_x_axis_show_only_years",
+                    "val": false
+            }, {
+                    "id": "chart_x_axis_add_commas",
+                    "val": false
+            }, {
+                    "id": "chart_x_axis_signs_select",
+                    "val": "no_signs"
+            }, {
+                    "id": "chart_x_axis_decimals_select",
+                    "val": null
+            }, {
+                    "id": "chart_y_axis_title_textarea",
+                    "val": ""
+            }, {
+                    "id": "chart_y_axis_x_position_input",
+                    "val": "35"
+            }, {
+                    "id": "chart_y_axis_tickmark_interval_input",
+                    "val": ""
+            }, {
+                    "id": "chart_y_axis_min_input",
+                    "val": ""
+            }, {
+                    "id": "chart_y_axis_max_input",
+                    "val": ""
+            }, {
+                    "id": "chart_y_axis_opposite_checkbox",
+                    "val": false
+            }, {
+                    "id": "chart_y_axis_log_checkbox",
+                    "val": false
+            }, {
+                    "id": "chart_y_axis_signs_select",
+                    "val": "no_signs"
+            }, {
+                    "id": "chart_y_axis_decimals_select",
+                    "val": null
+            }, {
+                    "id": "chart_y_axis_divide_select",
+                    "val": "1"
+            }, {
+                    "id": "chart_y_axis_2_enabled_checkbox",
+                    "val": false
+            }, {
+                    "id": "chart_y_axis_title_textarea_2",
+                    "val": ""
+            }, {
+                    "id": "chart_y_axis_x_position_input_2",
+                    "val": "-75"
+            }, {
+                    "id": "chart_y_axis_tickmark_interval_input_2",
+                    "val": "5"
+            }, {
+                    "id": "chart_y_axis_min_input_2",
+                    "val": "0"
+            }, {
+                    "id": "chart_y_axis_max_input_2",
+                    "val": "100"
+            }, {
+                    "id": "chart_y_axis_signs_select_2",
+                    "val": "no_signs"
+            }, {
+                    "id": "chart_y_axis_decimals_select_2",
+                    "val": null
+            }, {
+                    "id": "chart_tooltip_shared_checkbox",
+                    "val": false
+            }, {
+                    "id": "chart_tooltip_force_decimals_select",
+                    "val": "0"
+            }, {
+                    "id": "chart_tooltip_signs_select",
+                    "val": "no_signs"
+            }, {
+                    "id": "chart_tooltip_force_decimals_x_select",
+                    "val": "0"
+            }, {
+                    "id": "chart_tooltip_signs_x_select",
+                    "val": "no_signs"
+            }, {
+                    "id": "chart_tooltip_force_decimals_z_select",
+                    "val": "0"
+            }, {
+                    "id": "chart_tooltip_signs_z_select",
+                    "val": "no_signs"
+            }, {
+                    "id": "map_tooltip_main_value_font_size_input",
+                    "val": "30"
+            }, {
+                    "id": "map_tooltip_na_text_input",
+                    "val": "N/A"
+            }, {
+                    "id": "map_tooltip_prepend_to_value_text_input",
+                    "val": ""
+            }, {
+                    "id": "chart_z_title_text_input",
+                    "val": ""
+            }, {
+                    "id": "chart_tooltip_y_multiple_select",
+                    "val": "1"
+            }, {
+                    "id": "chart_tooltip_force_decimals_select_2",
+                    "val": "0"
+            }, {
+                    "id": "chart_tooltip_signs_select_2",
+                    "val": "no_signs"
+            }, {
+                    "id": "chart_tooltip_y_multiple_select_2",
+                    "val": "1"
+            }, {
+                    "id": "chart_credits_text_textarea",
+                    "val": "Click legend items to change data display. Hover over chart to view data.\nSource: U.S. Bureau of Labor Statistics."
+            }, {
+                    "id": "point_padding_input",
+                    "val": ".1"
+            }, {
+                    "id": "group_padding_input",
+                    "val": ".2"
+            }, {
+                    "id": "chart_subtitle_textarea",
+                    "val": ""
+            }, {
+                    "id": "map_animation_speed_range",
+                    "val": "500"
+            }, {
+                    "id": "map_include_puerto_rico_checkbox",
+                    "val": false
+            }, {
+                    "id": "map_include_virgin_islands_checkbox",
+                    "val": false
+            }, {
+                    "id": "map_add_ranked_columns_checkbox",
+                    "val": false
+            }, {
+                    "id": "chart_zoom_select",
+                    "val": "false,false,null"
+            }, {
+                    "id": "chart_show_data_labels_checkbox",
+                    "val": false
+            }, {
+                    "id": "chart_add_recession_shading_select",
+                    "val": "no_recession"
+            }]
+            };
+
+            var chartCallback = function chartCallback(all_chart_options) {
+
+                if (all_chart_options.timeline) {
+                    //call animation if applicable
+                    all_chart_options.timeline.animation();
+                }
+
+                $(".highcharts-legend-item").css("min-height", "0px").css("z-index", 100); //fix so CMS CSS doesn't make legend taller than it should
+                $(".highcharts-tooltip").css("z-index", 200);
+
+                /**
+                 * Highcharts plugin for setting a lower opacity for other series than the one that is hovered
+                 * in the legend
+                 */
+                (function (Highcharts) {
+                    var each = Highcharts.each;
+
+                    Highcharts.wrap(Highcharts.Legend.prototype, 'renderItem', function (proceed, item) {
+
+                        proceed.call(this, item);
+
+                        var isPoint = !!item.series,
+                            collection = isPoint ? item.series.points : this.chart.series,
+                            groups = isPoint ? ['graphic'] : ['group', 'markerGroup'],
+                            element = (this.options.useHTML ? item.legendItem : item.legendGroup).element;
+
+                        element.onmouseover = function () {
+                            each(collection, function (seriesItem) {
+                                if (seriesItem !== item) {
+                                    each(groups, function (group) {
+                                        seriesItem[group].animate({
+                                            opacity: 0.25
+                                        }, {
+                                            duration: 150
+                                        });
+                                    });
+                                }
+                            });
+                        };
+                        element.onmouseout = function () {
+                            each(collection, function (seriesItem) {
+                                if (seriesItem !== item) {
+                                    each(groups, function (group) {
+                                        seriesItem[group].animate({
+                                            opacity: 1
+                                        }, {
+                                            duration: 50
+                                        });
+                                    });
+                                }
+                            });
+                        };
+                    });
+
+                    Highcharts.wrap(Highcharts.Chart.prototype, 'showCredits', function (proceed, credits) {
+                        proceed.call(this, credits);
+
+                        if (this.credits && credits.target) {
+                            this.credits.on('click', function () {
+                                $('<a>').attr({
+                                    href: credits.href,
+                                    target: credits.target
+                                })[0].click();
+                            });
+                        }
+                    });
+                })(Highcharts); //end gray other series plugin
+            };
+            Highcharts.setOptions({
+                lang: {
+                    thousandsSep: ",",
+                    drillUpText: "◁ Back ",
+                    contextButtonTitle: "Download chart image"
+                }
+            });
+
+            var chart = new Highcharts.Chart(all_chart_options, chartCallback(all_chart_options));
+
+
+
+
+        });
+        jQuery.fn.extend({
+            addCommas: function addCommas(decimals) {
+
+                var val = this[0] || 0;
+
+                if (isNaN(val) || val < 999 && val > -999 && decimals < 1) {
+                    //small numbers auto decimals
+                    return val;
+                } else if (val < 999 && val > -999 && decimals > 0) {
+                    //small numbers fixed decimals
+                    return val.toFixed(decimals);
+                } else if ((val > 999 || val < -999) && decimals > 0) {
+                    //big numbers fixed decimals
+                    while (/(\d+)(\d{3})/.test(val.toString())) {
+                        val = val.toFixed(decimals).replace(/(\d+)(\d{3})/, '$1' + ',' + '$2');
+                    }
+                } else if (val > 999 || val < -999) {
+                    //big number auto decimals
+                    while (/(\d+)(\d{3})/.test(val.toString())) {
+                        val = val.toString().replace(/(\d+)(\d{3})/, '$1' + ',' + '$2');
+                    }
+                }
+
+                return val;
+            }
+        });
+    </script>
+
+</body>
+
+</html>

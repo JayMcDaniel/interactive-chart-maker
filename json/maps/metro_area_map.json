@@ -2934,6 +2934,14 @@
         "previous_fill": "",
         "style": ""
 }, {
+        "cy": "134.23",
+        "cx": "137.161",
+        "r": "2",
+        "class": "metro-area-circle",
+        "loc_name": "Twin Falls, ID",
+        "previous_fill": "",
+        "style": ""
+}, {
         "cy": "187.51652747072373",
         "cx": "502.2256763073625",
         "r": "2",
@@ -4114,9 +4122,9 @@
         "loc_name": "Boston-Cambridge-Nashua, MA-NH NECTA",
         "previous_fill": "",
         "style": ""
-}, 
- 
- {
+},
+
+    {
         "cy": "98.02341185923207",
         "cx": "683.5002962593828",
         "r": "2",
@@ -4125,9 +4133,9 @@
         "previous_fill": "",
         "style": ""
 },
- 
- 
- {
+
+
+    {
         "cy": "98.02341185923207",
         "cx": "683.5002962593828",
         "r": "2",
