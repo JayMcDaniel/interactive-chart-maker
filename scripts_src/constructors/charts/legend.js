@@ -27,7 +27,8 @@ var Legend = function (o) {
     this.itemStyle = {
         fontFamily: 'Calibri, Arial, Helvetica, sans-serif',
         color: '#000',
-        cursor: o.itemStyle.cursor
+        cursor: o.itemStyle.cursor,
+        textOverflow: "wrap"
     };
     this.itemHiddenStyle = {
         color: 'gray'

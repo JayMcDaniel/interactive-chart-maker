@@ -18,7 +18,7 @@ var XAxis = function (o) {
             fontWeight: 'normal',
             backgroundColor: '#fff',
             fontSize: '12px',
-            textOverflow: 'none'
+            textOverflow: 'wrap'
         }
 
     };

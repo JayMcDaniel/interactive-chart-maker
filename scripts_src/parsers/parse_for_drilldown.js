@@ -113,7 +113,7 @@
             var output = {};
 
 
-            output.x_axis_categories = drill_type === "bubble" ? null : [];
+            output.x_axis_categories =  null;
 
             //top series array
             output.series = [{
