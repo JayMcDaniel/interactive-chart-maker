@@ -250,9 +250,8 @@ var update_y_axis = {
         });
 
 
-
         if (Array.isArray(all_chart_options.yAxis)) {
-            all_chart_options.yAxis[index].min = new_max;
+            all_chart_options.yAxis[index].min = new_min;
         } else {
             all_chart_options.yAxis.min = new_min;
         }
