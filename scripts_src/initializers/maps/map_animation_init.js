@@ -72,7 +72,7 @@ var map_animation_init = {
                 "type": "range",
                 "min": "0",
                 "max": all_map_options.animated_value_titles.length - 1,
-                "value": all_map_options.animation_start_at_end ? all_map_options.animated_value_titles.length - 1 : 0 
+                "value": all_map_options.animation_start_at_end ? all_map_options.animated_value_titles.length - 1 : 0
             })
             .css({
                 float: "left",
@@ -139,7 +139,6 @@ var map_animation_init = {
                 //then recolor
 
 
-
                 for (var i = 0; i < all_map_options.value_ranges.length; i++) { //for length of value_ranges array, assign colors
                     if (new_val > all_map_options.value_ranges[i]) {
                         new_fill = all_map_options.colors[i + 1];
@@ -150,7 +149,7 @@ var map_animation_init = {
                     new_fill = all_map_options.colors[0];
                 }
 
-                if (new_val === null || new_val === "N/A") {
+                if (new_val === null || new_val === "N/A" || new_val === "") {
                     new_fill = "#f7f7f7";
                 }
 
@@ -163,7 +162,7 @@ var map_animation_init = {
                     var this_area;
                     var this_r;
 
-                    
+
                     if (new_val == "N/A") {
                         this_r = 0;
 
@@ -179,7 +178,7 @@ var map_animation_init = {
 
 
                     this_r = Math.sqrt(this_area / Math.PI) * all_map_options.circle_size_multiple;
-                   
+
                     if (isNaN(this_r)) {
                         this_r = 0;
                     }
@@ -266,7 +265,7 @@ var map_animation_init = {
             moveSlider(-1);
         });
 
-      $(".map_slider").trigger("input");
+        $(".map_slider").trigger("input");
 
     }
 
