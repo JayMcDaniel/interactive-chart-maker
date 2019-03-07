@@ -120,6 +120,8 @@ jQuery.fn.extend({addCommas:' + $("string").addCommas.toString() + ' });';
         var map_tooltip_init = require("../initializers/maps/map_tooltip_init.js");
         var map_ranked_columns_init = require("../initializers/maps/map_ranked_columns_init.js");
         var map_animation_init = require("../initializers/maps/map_animation_init.js");
+        var map_data_labels_init = require("../initializers/maps/map_data_labels_init");
+
 
         //save chart input values
         all_map_options.saved_values = chart_recall.saveValues();
@@ -187,7 +189,13 @@ jQuery.fn.extend({addCommas:' + $("string").addCommas.toString() + ' });';
             //map_init.setUpMapStateLinks
             "map_init.setUpMapStateLinks = " + map_init.setUpMapStateLinks.toString() + ";\n\n" +
 
-
+           
+            
+            //map_data_labels_init.addDataLabels (only if used)  
+            "var map_data_labels_init = " + (all_map_options.has_data_labels ? JSON.stringify(map_data_labels_init) : "{}") + ";\n\n" +
+            "map_data_labels_init.addDataLabels = " + (all_map_options.has_data_labels ? map_data_labels_init.addDataLabels.toString() : null) + ";\n\n" +
+            
+            
             //map_animation_init.getAnimationDiv (only if used)
             "var map_animation_init = {}; \n map_animation_init.getAnimationDiv = " + (all_map_options.is_animated ? map_animation_init.getAnimationDiv.toString() : null) + ";\n\n" +
 
@@ -211,13 +219,15 @@ jQuery.fn.extend({addCommas:' + $("string").addCommas.toString() + ' });';
             //init legend clicking
              "if (all_map_options.map_type === 'metro_area') {\n map_init.setUpMapLegendClick(map_display_area); \n } \n\n" +
             
-            
+            //init legend hover
             "map_init.setUpMapLegendHover(map_display_area);\n\n" +
 
             //init state links to eag pages
             "map_init.setUpMapStateLinks(map_display_area);\n\n" +
 
-
+            //init data labels function (if used)
+            (all_map_options.has_data_labels ? "map_data_labels_init.addDataLabels(all_map_options);\n\n" : "") +
+        
             //init setup of animation functions (if used)
             (all_map_options.is_animated ? "map_animation_init.setUpMapAnimation(all_map_options, map_display_area);\n\n" : "") +
 

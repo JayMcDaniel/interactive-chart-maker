@@ -698,7 +698,7 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
 
 
     //CHECKBOXES - map size for spotlight, VI, PR, and add columns inset checkboxes changed
-    $("#map_spotlight_size_checkbox, #map_include_puerto_rico_checkbox, #map_include_virgin_islands_checkbox, #map_add_ranked_columns_checkbox").unbind().change(function () {
+    $("#map_spotlight_size_checkbox, #map_include_puerto_rico_checkbox, #map_include_virgin_islands_checkbox, #map_add_ranked_columns_checkbox, #map_add_state_labels_checkbox").unbind().change(function () {
    
         //move legend over if adding columns inset
         if ($(this).attr("id") == "map_add_ranked_columns_checkbox"){

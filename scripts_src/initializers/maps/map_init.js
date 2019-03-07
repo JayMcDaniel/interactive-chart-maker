@@ -7,6 +7,7 @@ var map_subtitle_init = require("./map_subtitle_init.js");
 var map_tooltip_init = require("./map_tooltip_init.js");
 var map_legend_init = require("./map_legend_init");
 var map_ranked_columns_init = require("./map_ranked_columns_init");
+var map_data_labels_init = require("./map_data_labels_init");
 var map_credits_init = require("./map_credits_init.js");
 var map_circle_sizes_init = require("./map_circle_sizes_init.js");
 var update_map_individual_series = require("../../form_updates/update_map_individual_series.js");
@@ -36,6 +37,7 @@ var map_init = {
             is_animated: is_checked($("#map_animated_checkbox")),
             is_colored_by_names: is_checked($("#map_color_by_names_checkbox")),
             add_ranked_columns: is_checked($("#map_add_ranked_columns_checkbox")),
+            has_data_labels: is_checked($("#map_add_state_labels_checkbox")),
             animation_delay: Number($("#map_animation_speed_range").val()),
             animation_start_at_end: is_checked($("#map_animated_start_at_last_date_checkbox")),
             legend: {
@@ -168,18 +170,24 @@ var map_init = {
 
         var map_legend = all_map_options.legend.enabled ? map_legend_init.getMapLegend(all_map_options) : undefined; //creates and returns a styled map div legend with color boxes and text
 
-
+        
+        //add ranked columns if applicable
         var ranked_columns_inset = all_map_options.add_ranked_columns && all_map_options.map_type == "state" ? map_ranked_columns_init.getRankedColumns(all_map_options) : undefined;
-
+    
 
         //put more together
         $(map_outer_div).append(map_outer_svg, map_legend, ranked_columns_inset, map_credits);
 
 
-
-
-
         map_display_area.append($(map_outer_div)); //put map on page
+        
+            
+        //add state data labels if applicable
+        if (all_map_options.has_data_labels && all_map_options.map_type == "state"){
+            map_data_labels_init.addDataLabels(all_map_options);
+        }
+        
+
 
         //reverse legend if needed
         if (all_map_options.legend.reversed) {
