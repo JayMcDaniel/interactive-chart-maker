@@ -28,8 +28,9 @@ var jq_extensions = (function () {
                 return val.toFixed(decimals);
 
             } else if (((val > 999) || (val < -999)) && decimals > 0) { //big numbers fixed decimals
+                val = val.toFixed(decimals);
                 while (/(\d+)(\d{3})/.test(val.toString())) {
-                    val = val.toFixed(decimals).replace(/(\d+)(\d{3})/, '$1' + ',' + '$2');
+                    val = val.replace(/(\d+)(\d{3})/, '$1' + ',' + '$2');
                 }
             } else if ((val > 999) || (val < -999)) { //big number auto decimals
                 while (/(\d+)(\d{3})/.test(val.toString())) {
