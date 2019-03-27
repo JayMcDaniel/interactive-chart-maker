@@ -34,6 +34,13 @@ var update_y_axis = {
                 formatter: function () {
                     return $(this.value).addCommas(0);
                 },
+                style: {
+                    color: "#000000",
+                    fontFamily: "Calibri, Arial, Helvetica, sans-serif",
+                    fontWeight: "normal",
+                    backgroundColor: "#fff",
+                    fontSize: "12px"
+                },
                 decimals: $("#chart_y_axis_decimals_select_2").val(),
                 dividend: 1,
                 signs_arr: [sign === "$" ? "$" : "", sign === "%" ? "%" : ""]
@@ -210,9 +217,6 @@ var update_y_axis = {
     updateMax: function (new_max, chart, all_chart_options, axis_number) {
 
         var index = axis_number == "2" ? 1 : 0;
-
-
-
 
 
         new_max = utils_main.checkForUndefined(new_max);
