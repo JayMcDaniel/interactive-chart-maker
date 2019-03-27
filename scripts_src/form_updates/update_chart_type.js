@@ -45,27 +45,31 @@ var updateChartType = function (chart_type, chart, all_chart_options) {
     }
 
 
+    //update options
+    var y_axis = all_chart_options.yAxis[0] ? all_chart_options.yAxis[0] : all_chart_options.yAxis;
+    var x_axis = all_chart_options.xAxis;
+    
     if (type === "bar" || type === "boxplot") {
         //fix y axis position
         chart.inverted = true;
-        all_chart_options.yAxis.title.align = "middle";
-        all_chart_options.xAxis.title.align = "high";
-        all_chart_options.yAxis.title.x = 0;
-        all_chart_options.yAxis.title.y = 8;
-        all_chart_options.xAxis.title.y = -20;
-        all_chart_options.xAxis.title.x = Number($("#chart_x_axis_x_position_input").val());
+        y_axis.title.align = "middle";
+        x_axis.title.align = "high";
+        y_axis.title.x = 0;
+        y_axis.title.y = 8;
+        x_axis.title.y = -20;
+        x_axis.title.x = Number($("#chart_x_axis_x_position_input").val());
 
         //hide non-relevant elements
         $(".not_bar").hide();
 
     } else { //chart not bar
         chart.inverted = false;
-        all_chart_options.yAxis.title.align = "high";
-        all_chart_options.xAxis.title.align = "middle";
-        all_chart_options.yAxis.title.x = Number($("#chart_y_axis_x_position_input").val());
-        all_chart_options.yAxis.title.y = -20;
-        all_chart_options.xAxis.title.y = 0;
-        all_chart_options.xAxis.title.x = 0;
+        y_axis.title.align = "high";
+        x_axis.title.align = "middle";
+        y_axis.title.x = Number($("#chart_y_axis_x_position_input").val());
+        y_axis.title.y = -20;
+        x_axis.title.y = 0;
+        x_axis.title.x = 0;
 
         $(".not_bar").show();
     }
@@ -79,8 +83,8 @@ var updateChartType = function (chart_type, chart, all_chart_options) {
         "width": type === "scatter" || type === "bubble" ? 1 : 0
         }];
 
-    all_chart_options.xAxis.gridLineWidth = type === "scatter" || type === "bubble" ? 1 : 0;
-    all_chart_options.xAxis.startOnTick = type === "scatter" || type === "bubble" ? true : false;
+    x_axis.gridLineWidth = type === "scatter" || type === "bubble" ? 1 : 0;
+    x_axis.startOnTick = type === "scatter" || type === "bubble" ? true : false;
 
     chart.xAxis[0].update({
         gridLineWidth: all_chart_options.xAxis.gridLineWidth,
@@ -99,9 +103,9 @@ var updateChartType = function (chart_type, chart, all_chart_options) {
     }, false);
 
     chart.yAxis[0].setTitle({
-        align: all_chart_options.yAxis.title.align,
-        x: all_chart_options.yAxis.title.x,
-        y: all_chart_options.yAxis.title.y
+        align: y_axis.title.align,
+        x: y_axis.title.x,
+        y: y_axis.title.y
     }, false);
 
 
