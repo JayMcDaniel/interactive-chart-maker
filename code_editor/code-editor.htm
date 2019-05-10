@@ -26,14 +26,15 @@
     <script src="../libraries/jquery/jquery-2.2.0.min.js"></script>
 
 
-        <script src="https://www.bls.gov/assets/highcharts/latest/highcharts.js"></script>
-    <script src="https://www.bls.gov/assets/highcharts/latest/highcharts-more.js"></script>
+ <!--   <script src="https://www.bls.gov/assets/highcharts/latest/highcharts.js"></script> -->
+       <script src="https://code.highcharts.com/6.1.0/highcharts.src.js"></script>
+   <!-- <script src="https://www.bls.gov/assets/highcharts/latest/highcharts-more.js"></script>
     <script src="https://www.bls.gov/assets/highcharts/latest/modules/drilldown.js"></script>
 
     <script src="https://www.bls.gov/assets/highcharts/latest/modules/exporting.js"></script>
     <script src="https://www.bls.gov/assets/highcharts/latest/modules/offline-exporting.js"></script>
 
-    <script src="https://www.bls.gov/assets/highcharts/latest/modules/accessibility.js"></script>
+    <script src="https://www.bls.gov/assets/highcharts/latest/modules/accessibility.js"></script> -->
 
 
     <script>
@@ -56,7 +57,7 @@
             
             //attempt to patch chart code button
             $("#patchChart").click(function(){
-                var new_code = $("#JScodeText").val().replace('"floating": false,', '"floating": true, \n"symbolRadius": 0,\n "alignColumns": false,\n');
+                var new_code = $("#JScodeText").val().replace('"floating": false,', '"floating": true, \n"symbolRadius": 0,\n "alignColumns": false,\n').replace('"floating":false,', '"floating": true, \n"symbolRadius": 0,\n "alignColumns": false,\n');
                 
                 $("#JScodeText").val(new_code);
                 console.log(new_code);

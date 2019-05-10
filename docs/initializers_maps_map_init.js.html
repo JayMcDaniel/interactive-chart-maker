@@ -67,6 +67,7 @@ var map_init = {
             add_ranked_columns: is_checked($("#map_add_ranked_columns_checkbox")),
             has_data_labels: is_checked($("#map_add_state_labels_checkbox")),
             animation_delay: Number($("#map_animation_speed_range").val()),
+            animation_index: 0,
             animation_start_at_end: is_checked($("#map_animated_start_at_last_date_checkbox")),
             legend: {
                 decimals: $("#map_legend_decimals_select").val(),
@@ -85,6 +86,7 @@ var map_init = {
             value_ranges: [],
             credits: {},
             tooltip: {
+                current_loc_name: null,
                 dollar_sign: "",
                 percent_sign: "",
                 prepend_to_value: "",
@@ -200,11 +202,11 @@ var map_init = {
 
         
         //add ranked columns if applicable
-        var ranked_columns_inset = all_map_options.add_ranked_columns &amp;&amp; all_map_options.map_type == "state" ? map_ranked_columns_init.getRankedColumns(all_map_options) : undefined;
+        var ranked_columns_div = all_map_options.add_ranked_columns &amp;&amp; all_map_options.map_type == "state" ? map_ranked_columns_init.getRankedColumns(all_map_options, map_display_area) : undefined;
     
 
         //put more together
-        $(map_outer_div).append(map_outer_svg, map_legend, ranked_columns_inset, map_credits);
+        $(map_outer_div).append(map_outer_svg, map_legend, ranked_columns_div, map_credits);
 
 
         map_display_area.append($(map_outer_div)); //put map on page
@@ -319,10 +321,6 @@ var map_init = {
 
             //init legend hovering
             map_init.setUpMapLegendHover(map_display_area);
-
-            //init ranked column hovering if applicable
-            map_init.setUpMapRankedColumnsHover(map_display_area);
-
 
             //init legend clicking
             if (all_map_options.map_type === "metro_area") {
@@ -520,8 +518,11 @@ var map_init = {
         //other areas fade out when an area is hovered
         $("path[loc_name], circle[loc_name]", map_display_area).hover(function (event) {
 
-
+            
             var $this = $(this);
+            
+            //set current loc name - to be used if tooltip needs to be updated without disapearing (animated maps)
+            all_map_options.tooltip.current_loc_name = $this.attr("loc_name");
 
             //gray out other states, highlight this one
 
@@ -536,8 +537,6 @@ var map_init = {
             if (is_region > -1) {
                 var region_type = ["region", "division"][is_region];
                 var region_name = $this.attr(region_type);
-
-
                 $("path[" + region_type + "='" + region_name + "']", map_display_area).attr("fill-opacity", "1");
 
             }
@@ -617,6 +616,8 @@ var map_init = {
 
             //hide tooltip
             $(".map_tooltip").hide();
+            
+            all_map_options.tooltip.current_loc_name = null;
 
             //dehighlight ranked column if enabled
 
@@ -630,6 +631,8 @@ var map_init = {
 
 
 
+    
+    
     /** set up hover functionality for the map legend **/
     setUpMapLegendHover: function (map_display_area) {
         $(".map_legend_item", map_display_area).hover(function (event) {
@@ -667,20 +670,6 @@ var map_init = {
     },
 
 
-    setUpMapRankedColumnsHover: function setUpMapRankedColumnsHover(map_display_area) {
-        //add mouseover function
-        $(".map_ranked_column").hover(function () {
-                $(this).css("background-color", "#FFEB00");
-
-                $("#" + $(this).attr("rel"), map_display_area).mouseenter();
-            },
-            function () {
-                $(this).css("background-color", $(this).attr("previous_color"));
-                $("#" + $(this).attr("rel"), map_display_area).mouseleave();
-            });
-
-    },
-
     /** set up click functionality for the map legend (just for metro area for now**/
     setUpMapLegendClick: function setUpMapLegendClick(map_display_area) {
         $(".map_legend_item", map_display_area).css("cursor", "pointer")
@@ -694,9 +683,7 @@ var map_init = {
                     $(".map_legend_color", $(this)).css("visibility", "hidden");
                     $("circle", map_display_area).each(function (i, e) {
                         var area_color = $(e).attr("fill");
-                        console.log(this_color, area_color);
                         if (this_color === area_color) {
-                            console.log("hiding");
                             $(e).hide();
                         }
                     });
@@ -749,13 +736,13 @@ module.exports = map_init;</code></pre>
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-form_updates_all_form_updates.html">form_updates/all_form_updates</a></li><li><a href="module-form_updates_update_chart_type.html">form_updates/update_chart_type</a></li><li><a href="module-form_updates_update_colors.html">form_updates/update_colors</a></li><li><a href="module-form_updates_update_individual_series.html">form_updates/update_individual_series</a></li><li><a href="module-initializers_charts_all_chart_options_init.html">initializers/charts/all_chart_options_init</a></li><li><a href="module-initializers_charts_chart_init.html">initializers/charts/chart_init</a></li><li><a href="module-initializers_charts_colors_init.html">initializers/charts/colors_init</a></li><li><a href="module-initializers_charts_credits_init.html">initializers/charts/credits_init</a></li><li><a href="module-initializers_charts_exporting_init.html">initializers/charts/exporting_init</a></li><li><a href="module-initializers_charts_legend_init.html">initializers/charts/legend_init</a></li><li><a href="module-initializers_charts_plot_options_init.html">initializers/charts/plot_options_init</a></li><li><a href="module-initializers_charts_series_init.html">initializers/charts/series_init</a></li><li><a href="module-initializers_charts_subtitle_init.html">initializers/charts/subtitle_init</a></li><li><a href="module-initializers_charts_title_init.html">initializers/charts/title_init</a></li><li><a href="module-initializers_charts_tooltip_init.html">initializers/charts/tooltip_init</a></li><li><a href="module-initializers_charts_x_axis_init.html">initializers/charts/x_axis_init</a></li><li><a href="module-initializers_charts_y_axis_init.html">initializers/charts/y_axis_init</a></li><li><a href="module-initializers_maps_map_animation_init.html">initializers/maps/map_animation_init</a></li><li><a href="module-initializers_maps_map_circle_sizes_init.html">initializers/maps/map_circle_sizes_init</a></li><li><a href="module-initializers_maps_map_colors_init.html">initializers/maps/map_colors_init</a></li><li><a href="module-initializers_maps_map_credits_init.html">initializers/maps/map_credits_init</a></li><li><a href="module-initializers_maps_map_data_labels_init.html">initializers/maps/map_data_labels_init</a></li><li><a href="module-initializers_maps_map_title_init.html">initializers/maps/map_title_init</a></li><li><a href="module-parsers_parse_for_animated_bubble.html">parsers/parse_for_animated_bubble</a></li><li><a href="module-parsers_parse_for_box_plot.html">parsers/parse_for_box_plot</a></li><li><a href="module-parsers_parse_for_bubble.html">parsers/parse_for_bubble</a></li><li><a href="module-parsers_parse_for_drilldown.html">parsers/parse_for_drilldown</a></li><li><a href="module-parsers_parse_for_map.html">parsers/parse_for_map</a></li><li><a href="module-parsers_parse_for_pie.html">parsers/parse_for_pie</a></li><li><a href="module-parsers_parse_for_range.html">parsers/parse_for_range</a></li><li><a href="module-parsers_parse_for_scatter.html">parsers/parse_for_scatter</a></li><li><a href="module-parsers_parse_for_typical_chart.html">parsers/parse_for_typical_chart</a></li><li><a href="module-parsers_parse_table_input.html">parsers/parse_table_input</a></li><li><a href="module-utils_areas_colored_report.html">utils/areas_colored_report</a></li><li><a href="module-utils_jq_extensions.html">utils/jq_extensions</a></li><li><a href="module-utils_load_from_table_wizard.html">utils/load_from_table_wizard</a></li></ul><h3>Classes</h3><ul><li><a href="AllChartOptions.html">AllChartOptions</a></li><li><a href="ChartOptions.html">ChartOptions</a></li><li><a href="Colors.html">Colors</a></li><li><a href="Credits.html">Credits</a></li><li><a href="Exporting.html">Exporting</a></li><li><a href="Legend.html">Legend</a></li><li><a href="PlotOptions.html">PlotOptions</a></li><li><a href="Series.html">Series</a></li><li><a href="Subtitle.html">Subtitle</a></li><li><a href="Title.html">Title</a></li><li><a href="Tooltip.html">Tooltip</a></li><li><a href="XAxis.html">XAxis</a></li><li><a href="yAxis.html">yAxis</a></li></ul><h3>Namespaces</h3><ul><li><a href="calculate_recession_dates.html">calculate_recession_dates</a></li><li><a href="chart_animation_init.html">chart_animation_init</a></li><li><a href="chart_recall.html">chart_recall</a></li><li><a href="draw_chart.html">draw_chart</a></li><li><a href="keyboard_inputs.html">keyboard_inputs</a></li><li><a href="map_init.html">map_init</a></li><li><a href="map_legend_init.html">map_legend_init</a></li><li><a href="map_ranked_columns_init.html">map_ranked_columns_init</a></li><li><a href="map_subtitle_init.html">map_subtitle_init</a></li><li><a href="map_tooltip_init.html">map_tooltip_init</a></li><li><a href="navigation_setup.html">navigation_setup</a></li><li><a href="update_chart_options.html">update_chart_options</a></li><li><a href="update_credits.html">update_credits</a></li><li><a href="update_data.html">update_data</a></li><li><a href="update_legend.html">update_legend</a></li><li><a href="update_map_individual_series.html">update_map_individual_series</a></li><li><a href="update_map_palettes.html">update_map_palettes</a></li><li><a href="update_template.html">update_template</a></li><li><a href="update_tooltip.html">update_tooltip</a></li><li><a href="update_x_axis.html">update_x_axis</a></li><li><a href="update_y_axis.html">update_y_axis</a></li><li><a href="utils_forms.html">utils_forms</a></li><li><a href="utils_main.html">utils_main</a></li><li><a href="write_code.html">write_code</a></li></ul><h3>Global</h3><ul><li><a href="global.html#getInvisibleBubble">getInvisibleBubble</a></li><li><a href="global.html#pushDrillSeries">pushDrillSeries</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-form_updates_all_form_updates.html">form_updates/all_form_updates</a></li><li><a href="module-form_updates_update_chart_type.html">form_updates/update_chart_type</a></li><li><a href="module-form_updates_update_colors.html">form_updates/update_colors</a></li><li><a href="module-form_updates_update_individual_series.html">form_updates/update_individual_series</a></li><li><a href="module-initializers_charts_all_chart_options_init.html">initializers/charts/all_chart_options_init</a></li><li><a href="module-initializers_charts_chart_init.html">initializers/charts/chart_init</a></li><li><a href="module-initializers_charts_colors_init.html">initializers/charts/colors_init</a></li><li><a href="module-initializers_charts_credits_init.html">initializers/charts/credits_init</a></li><li><a href="module-initializers_charts_exporting_init.html">initializers/charts/exporting_init</a></li><li><a href="module-initializers_charts_legend_init.html">initializers/charts/legend_init</a></li><li><a href="module-initializers_charts_plot_options_init.html">initializers/charts/plot_options_init</a></li><li><a href="module-initializers_charts_series_init.html">initializers/charts/series_init</a></li><li><a href="module-initializers_charts_subtitle_init.html">initializers/charts/subtitle_init</a></li><li><a href="module-initializers_charts_title_init.html">initializers/charts/title_init</a></li><li><a href="module-initializers_charts_tooltip_init.html">initializers/charts/tooltip_init</a></li><li><a href="module-initializers_charts_x_axis_init.html">initializers/charts/x_axis_init</a></li><li><a href="module-initializers_charts_y_axis_init.html">initializers/charts/y_axis_init</a></li><li><a href="module-initializers_maps_map_animation_init.html">initializers/maps/map_animation_init</a></li><li><a href="module-initializers_maps_map_circle_sizes_init.html">initializers/maps/map_circle_sizes_init</a></li><li><a href="module-initializers_maps_map_colors_init.html">initializers/maps/map_colors_init</a></li><li><a href="module-initializers_maps_map_credits_init.html">initializers/maps/map_credits_init</a></li><li><a href="module-initializers_maps_map_data_labels_init.html">initializers/maps/map_data_labels_init</a></li><li><a href="module-initializers_maps_map_title_init.html">initializers/maps/map_title_init</a></li><li><a href="module-parsers_parse_for_animated_bubble.html">parsers/parse_for_animated_bubble</a></li><li><a href="module-parsers_parse_for_box_plot.html">parsers/parse_for_box_plot</a></li><li><a href="module-parsers_parse_for_bubble.html">parsers/parse_for_bubble</a></li><li><a href="module-parsers_parse_for_drilldown.html">parsers/parse_for_drilldown</a></li><li><a href="module-parsers_parse_for_map.html">parsers/parse_for_map</a></li><li><a href="module-parsers_parse_for_pie.html">parsers/parse_for_pie</a></li><li><a href="module-parsers_parse_for_range.html">parsers/parse_for_range</a></li><li><a href="module-parsers_parse_for_scatter.html">parsers/parse_for_scatter</a></li><li><a href="module-parsers_parse_for_typical_chart.html">parsers/parse_for_typical_chart</a></li><li><a href="module-parsers_parse_table_input.html">parsers/parse_table_input</a></li><li><a href="module-utils_areas_colored_report.html">utils/areas_colored_report</a></li><li><a href="module-utils_jq_extensions.html">utils/jq_extensions</a></li><li><a href="module-utils_load_from_table_wizard.html">utils/load_from_table_wizard</a></li></ul><h3>Classes</h3><ul><li><a href="AllChartOptions.html">AllChartOptions</a></li><li><a href="ChartOptions.html">ChartOptions</a></li><li><a href="Colors.html">Colors</a></li><li><a href="Credits.html">Credits</a></li><li><a href="Exporting.html">Exporting</a></li><li><a href="Legend.html">Legend</a></li><li><a href="PlotOptions.html">PlotOptions</a></li><li><a href="Series.html">Series</a></li><li><a href="Subtitle.html">Subtitle</a></li><li><a href="Title.html">Title</a></li><li><a href="Tooltip.html">Tooltip</a></li><li><a href="XAxis.html">XAxis</a></li><li><a href="yAxis.html">yAxis</a></li></ul><h3>Namespaces</h3><ul><li><a href="calculate_recession_dates.html">calculate_recession_dates</a></li><li><a href="chart_animation_init.html">chart_animation_init</a></li><li><a href="chart_recall.html">chart_recall</a></li><li><a href="draw_chart.html">draw_chart</a></li><li><a href="keyboard_inputs.html">keyboard_inputs</a></li><li><a href="map_init.html">map_init</a></li><li><a href="map_legend_init.html">map_legend_init</a></li><li><a href="map_subtitle_init.html">map_subtitle_init</a></li><li><a href="map_tooltip_init.html">map_tooltip_init</a></li><li><a href="navigation_setup.html">navigation_setup</a></li><li><a href="update_chart_options.html">update_chart_options</a></li><li><a href="update_credits.html">update_credits</a></li><li><a href="update_data.html">update_data</a></li><li><a href="update_legend.html">update_legend</a></li><li><a href="update_map_individual_series.html">update_map_individual_series</a></li><li><a href="update_map_palettes.html">update_map_palettes</a></li><li><a href="update_template.html">update_template</a></li><li><a href="update_tooltip.html">update_tooltip</a></li><li><a href="update_x_axis.html">update_x_axis</a></li><li><a href="update_y_axis.html">update_y_axis</a></li><li><a href="utils_forms.html">utils_forms</a></li><li><a href="utils_main.html">utils_main</a></li><li><a href="write_code.html">write_code</a></li></ul><h3>Global</h3><ul><li><a href="global.html#getInvisibleBubble">getInvisibleBubble</a></li><li><a href="global.html#map_ranked_columns_init">map_ranked_columns_init</a></li><li><a href="global.html#pushDrillSeries">pushDrillSeries</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Wed Mar 27 2019 09:33:02 GMT-0400 (EDT)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Fri May 10 2019 11:23:16 GMT-0400 (EDT)
 </footer>
 
 <script> prettyPrint(); </script>

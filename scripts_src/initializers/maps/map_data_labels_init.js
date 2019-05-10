@@ -213,17 +213,22 @@ var map_data_labels_init = {
     }],
 
     /** adds data labels (svg text) to states **/
-    addDataLabels: function (all_map_options) {
+    addDataLabels: function (all_map_options, map_display_area) {
+        
+        console.log("adding labels");
+        
+        $(".state_data_label", map_display_area).remove();
 
         var labels = map_data_labels_init.labels;
         
         for (var i = 0; i < labels.length; i++) {
-            var path = $("#" + all_map_options.render_ID + " #" + labels[i].id);
+            var path = $("#" + labels[i].id, map_display_area);
 
             var label = document.createElementNS('http://www.w3.org/2000/svg', 'text');
             label.setAttributeNS(null, 'x', labels[i].x);
             label.setAttributeNS(null, 'y', labels[i].y);
             label.setAttributeNS(null, 'fill', "black");
+            label.setAttribute("class", "state_data_label");
 
             var id_tspan = document.createElementNS('http://www.w3.org/2000/svg', 'tspan');
             var val_tspan = document.createElementNS('http://www.w3.org/2000/svg', 'tspan');
@@ -238,7 +243,7 @@ var map_data_labels_init = {
             val_tspan.appendChild(val_txt_node);
             label.appendChild(id_tspan);
             label.appendChild(val_tspan);
-            $(".map_svg").append(label);
+            $(".map_svg", map_display_area).append(label);
         }
 
     }

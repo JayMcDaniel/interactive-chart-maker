@@ -177,9 +177,6 @@ jQuery.fn.extend({addCommas:' + $("string").addCommas.toString() + ' });';
             //map_init.setUpMapHover
             "map_init.setUpMapHover = " + map_init.setUpMapHover.toString() + ";\n\n" +
             
-            //map_init.setUpMapRankedColumnsHover
-            "map_init.setUpMapRankedColumnsHover = " + map_init.setUpMapRankedColumnsHover.toString() + ";\n\n" +
-
             //map_init.setUpMapLegendHover
             "map_init.setUpMapLegendHover = " + map_init.setUpMapLegendHover.toString() + ";\n\n" +
             
@@ -213,9 +210,7 @@ jQuery.fn.extend({addCommas:' + $("string").addCommas.toString() + ' });';
             //init legend hovering
             "map_init.setUpMapLegendHover(map_display_area);\n\n" +
             
-            //init ranked column hovering
-            "map_init.setUpMapRankedColumnsHover(map_display_area);\n\n" + 
-            
+
             //init legend clicking
              "if (all_map_options.map_type === 'metro_area') {\n map_init.setUpMapLegendClick(map_display_area); \n } \n\n" +
             

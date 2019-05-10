@@ -1,3 +1,8 @@
+var map_ranked_columns_init = require("./map_ranked_columns_init");
+var map_init = require("./map_init");
+var map_data_labels_init = require("./map_data_labels_init");
+
+
 /** Called from map_init.convertMapOptionsToSVG if user selected animated map. 
 @module
 **/
@@ -122,7 +127,7 @@ var map_animation_init = {
     setUpMapAnimation: function (all_map_options, map_display_area) {
         //when slider changes, change the values displayed in the map and the animation title
         $(".map_slider", map_display_area).on("input", function () {
-            var slider_val = $(this).val();
+            var slider_val = all_map_options.animation_index = $(this).val();
 
             //update animated title
             $(".animation_title", map_display_area).text(all_map_options.animated_value_titles[slider_val]);
@@ -132,13 +137,13 @@ var map_animation_init = {
                 var $this = $(this);
                 var this_animated_vals = $this.attr("animated_vals");
                 var new_val = this_animated_vals ? this_animated_vals.split(";")[slider_val] : "N/A";
+
                 //assign new loc_value
                 $this.attr("loc_value", new_val);
 
                 var new_fill = ""; //new color to be assigned
+
                 //then recolor
-
-
                 for (var i = 0; i < all_map_options.value_ranges.length; i++) { //for length of value_ranges array, assign colors
                     if (new_val > all_map_options.value_ranges[i]) {
                         new_fill = all_map_options.colors[i + 1];
@@ -193,11 +198,35 @@ var map_animation_init = {
                 }
 
 
-
             }); // end path / circle loop
 
 
-        });
+            //update tooltip
+            var tooltip = all_map_options.tooltip;
+            var loc_value = $("path[loc_name='" + tooltip.current_loc_name + "'], circle[loc_name='" + tooltip.current_loc_name + "']", map_display_area).attr("loc_value");
+
+            if (!all_map_options.is_colored_by_names) { //if colored by values
+                loc_value = $(Number(loc_value)).addCommas(tooltip.decimals || "");
+            }
+
+            var value_html = "<span style='font-size: 80%'>" + tooltip.prepend_to_value + tooltip.dollar_sign + "</span>" + loc_value + "<span style='font-size: 80%'>" + tooltip.percent_sign + "</span>";
+
+            $(".tooltip_main_value", map_display_area).html(value_html);
+
+
+            //add ranked columns if applicable
+            $("#ranked_column_div", map_display_area).remove();
+            var ranked_columns_div = all_map_options.add_ranked_columns && all_map_options.map_type == "state" ? map_ranked_columns_init.getRankedColumns(all_map_options) : undefined;
+            $(".map_outer_div", map_display_area).append(ranked_columns_div);
+
+
+
+            //update map labels if applicable
+            if (all_map_options.has_data_labels && all_map_options.map_type == "state") {
+                map_data_labels_init.addDataLabels(all_map_options, map_display_area);
+            }
+
+        }); //end .map_slider trigger
 
 
 
@@ -265,7 +294,7 @@ var map_animation_init = {
             moveSlider(-1);
         });
 
-        $(".map_slider").trigger("input");
+        $(".map_slider").trigger("input"); //called at the end of this setUpMapAnimation function
 
     }
 

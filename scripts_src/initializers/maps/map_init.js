@@ -39,6 +39,7 @@ var map_init = {
             add_ranked_columns: is_checked($("#map_add_ranked_columns_checkbox")),
             has_data_labels: is_checked($("#map_add_state_labels_checkbox")),
             animation_delay: Number($("#map_animation_speed_range").val()),
+            animation_index: 0,
             animation_start_at_end: is_checked($("#map_animated_start_at_last_date_checkbox")),
             legend: {
                 decimals: $("#map_legend_decimals_select").val(),
@@ -57,6 +58,7 @@ var map_init = {
             value_ranges: [],
             credits: {},
             tooltip: {
+                current_loc_name: null,
                 dollar_sign: "",
                 percent_sign: "",
                 prepend_to_value: "",
@@ -172,11 +174,11 @@ var map_init = {
 
         
         //add ranked columns if applicable
-        var ranked_columns_inset = all_map_options.add_ranked_columns && all_map_options.map_type == "state" ? map_ranked_columns_init.getRankedColumns(all_map_options) : undefined;
+        var ranked_columns_div = all_map_options.add_ranked_columns && all_map_options.map_type == "state" ? map_ranked_columns_init.getRankedColumns(all_map_options, map_display_area) : undefined;
     
 
         //put more together
-        $(map_outer_div).append(map_outer_svg, map_legend, ranked_columns_inset, map_credits);
+        $(map_outer_div).append(map_outer_svg, map_legend, ranked_columns_div, map_credits);
 
 
         map_display_area.append($(map_outer_div)); //put map on page
@@ -291,10 +293,6 @@ var map_init = {
 
             //init legend hovering
             map_init.setUpMapLegendHover(map_display_area);
-
-            //init ranked column hovering if applicable
-            map_init.setUpMapRankedColumnsHover(map_display_area);
-
 
             //init legend clicking
             if (all_map_options.map_type === "metro_area") {
@@ -492,8 +490,11 @@ var map_init = {
         //other areas fade out when an area is hovered
         $("path[loc_name], circle[loc_name]", map_display_area).hover(function (event) {
 
-
+            
             var $this = $(this);
+            
+            //set current loc name - to be used if tooltip needs to be updated without disapearing (animated maps)
+            all_map_options.tooltip.current_loc_name = $this.attr("loc_name");
 
             //gray out other states, highlight this one
 
@@ -508,8 +509,6 @@ var map_init = {
             if (is_region > -1) {
                 var region_type = ["region", "division"][is_region];
                 var region_name = $this.attr(region_type);
-
-
                 $("path[" + region_type + "='" + region_name + "']", map_display_area).attr("fill-opacity", "1");
 
             }
@@ -589,6 +588,8 @@ var map_init = {
 
             //hide tooltip
             $(".map_tooltip").hide();
+            
+            all_map_options.tooltip.current_loc_name = null;
 
             //dehighlight ranked column if enabled
 
@@ -602,6 +603,8 @@ var map_init = {
 
 
 
+    
+    
     /** set up hover functionality for the map legend **/
     setUpMapLegendHover: function (map_display_area) {
         $(".map_legend_item", map_display_area).hover(function (event) {
@@ -639,20 +642,6 @@ var map_init = {
     },
 
 
-    setUpMapRankedColumnsHover: function setUpMapRankedColumnsHover(map_display_area) {
-        //add mouseover function
-        $(".map_ranked_column").hover(function () {
-                $(this).css("background-color", "#FFEB00");
-
-                $("#" + $(this).attr("rel"), map_display_area).mouseenter();
-            },
-            function () {
-                $(this).css("background-color", $(this).attr("previous_color"));
-                $("#" + $(this).attr("rel"), map_display_area).mouseleave();
-            });
-
-    },
-
     /** set up click functionality for the map legend (just for metro area for now**/
     setUpMapLegendClick: function setUpMapLegendClick(map_display_area) {
         $(".map_legend_item", map_display_area).css("cursor", "pointer")
@@ -666,9 +655,7 @@ var map_init = {
                     $(".map_legend_color", $(this)).css("visibility", "hidden");
                     $("circle", map_display_area).each(function (i, e) {
                         var area_color = $(e).attr("fill");
-                        console.log(this_color, area_color);
                         if (this_color === area_color) {
-                            console.log("hiding");
                             $(e).hide();
                         }
                     });

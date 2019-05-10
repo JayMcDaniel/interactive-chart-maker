@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Test Chart!</title>
+    <meta name="Author" content="" />
+</head>
+
+<body>
+    <h1>Test Chart!</h1>
+
+
+
+
+    <div id="chart1" style="position: relative; width: 580px; height: 450px; margin: auto; padding: 0px;"> </div>
+
+
+
+    <!-- external libraries -->
+    <script src="../../libraries/jquery/jquery-2.2.0.min.js"></script>
+    <script src="../../libraries/Highcharts-4.2.3/js/highcharts.src.js"></script>
+    <script src="../../libraries/Highcharts-4.2.3/js/highcharts-more.src.js"></script>
+    <script src="../../libraries/Highcharts-4.2.3/js/modules/drilldown.js"></script>
+
+
+
+
+
+    <script>
+        $(function () {
+            var all_chart_options = {
+                "chart": {
+                    "renderTo": "chart1",
+                    "margin": [70, 40, 85, 80],
+                    "borderWidth": 0,
+                    "plotBorderColor": "#000",
+                    "plotBorderWidth": 0,
+                    "type": "line",
+                    "events": {
+                        "redraw": function redraw() {
+                            if (chart) {
+                                $.each(chart.series, function (i, serie) {
+                                    $.each(serie.data, function (j, point) {
+                                        if (point.options.cursor === "pointer") {
+                                            point.graphic.attr({
+                                                cursor: 'pointer'
+                                            });
+                                        }
+                                    });
+                                });
+                            }
+                        }
+                    },
+                    "zoomType": null,
+                    "alignTicks": false,
+                    "ignoreHiddenSeries": true
+                },
+                "colors": ["#7cb5ec", "#434348", "#90ed7d", "#f7a35c", "#8085e9", "#f15c80", "#e4d354", "#2b908f", "#f45b5b", "#91e8e1", "#2f7ed8", "#0d233a", "#8bbc21", "#910000", "#1aadce", "#492970", "#f28f43", "#77a1e5", "#c42525", "#a6c96a"],
+                "legend": {
+                    "align": "left",
+                    "backgroundColor": "none",
+                    "borderColor": "none",
+                    "borderWidth": 0,
+                    "enabled": true,
+                    "floating": false,
+                    "itemDistance": 30,
+                    itemWidth: 390,
+                    "layout": "horizontal",
+                    "reversed": false,
+                    "shadow": false,
+                    "useHTML": false,
+                    "verticalAlign": "top",
+                    "width": 900,
+                    "x": 30,
+                    "y": 30,
+                    "itemStyle": {
+                        "fontFamily": "Calibri, Arial, Helvetica, sans-serif",
+                        "color": "#000",
+                        "cursor": "pointer"
+                    },
+                    "itemHiddenStyle": {
+                        "color": "gray"
+                    },
+                    "itemHoverStyle": {
+                        "cursor": "pointer"
+                    }
+                },
+                "plotOptions": {
+                    "series": {
+                        "events": {
+                            "legendItemClick": function legendItemClick(event) {}
+                        },
+                        "dataLabels": {
+                            "enabled": false,
+                            "allowOverlap": false,
+                            "padding": 0,
+                            "verticalAlign": "bottom",
+                            "style": {
+                                "textShadow": "none",
+                                "color": "#000"
+                            }
+                        },
+                        "pointPlacement": null,
+                        "stacking": null,
+                        "pointPadding": 0.1,
+                        "groupPadding": 0.2,
+                        "minPointLength": 2,
+                        "minSize": 4,
+                        "sizeBy": "width",
+                        "lineWidth": 1.5,
+                        "states": {
+                            "hover": {
+                                "lineWidth": 4
+                            }
+                        },
+                        "marker": {
+                            "enabled": true,
+                            radius: 6,
+                            "states": {
+                                "hover": {
+                                    "enabled": true,
+                                    "radius": 5
+                                }
+                            }
+                        }
+                    },
+                    "bubble": {
+                        "tooltip": {
+                            "followPointer": true
+                        }
+                    }
+                },
+                "series": [{
+                        "name": "TSH",
+                        "data": [[Date.UTC(2014, 4, 10), 1.43], [Date.UTC(2014, 12, 19), 5.9], [Date.UTC(2015, 2, 10), 4.0], [Date.UTC(2015, 4, 20), 3.1], [Date.UTC(2015, 8, 2), 2.5], [Date.UTC(2016, 1, 3), 2.3], [Date.UTC(2016, 4, 4), 2.1], [Date.UTC(2016, 12, 19), 2.9], [Date.UTC(2017, 2, 17), 0.005], [Date.UTC(2017, 2, 17), 0.005], [Date.UTC(2017, 3, 3), 0.9], [Date.UTC(2017, 4, 28), 0.84] , [Date.UTC(2017, 6, 14), 0.009 ], [Date.UTC(2017, 10, 15), 21.00], [Date.UTC(2017, 11, 14 ), 1.24 ] ],
+
+
+                            pointStart: Date.UTC(2014, 4, 10),
+                            pointEnd: Date.UTC(2017, 11, 14 ),
+                        "type": "line",
+                        "color": "#7cb5ec",
+                        "_symbolIndex": 0,
+                        "stacking": null,
+                        "visible": true
+
+            }, {
+                        "name": "Medications",
+                        "data": [{
+                                x: Date.UTC(2017, 4, 5),
+                                y: 300,
+                                dataLabels: {
+                                    enabled: true,
+                                    formatter: function () {
+                                        return "R-CHOP"
+                                    },
+                                    x: 75,
+                                    y: -5
+                                }
+                        }, {
+                                x: Date.UTC(2017, 6, 12),
+                                y: 300,
+                                dataLabels: {
+                                    enabled: true,
+                                    formatter: function () {
+                                        return "RTX"
+                                    },
+                                    x: 45,
+                                    y: -5
+                                }
+                        }, {
+                                x: Date.UTC(2017, 8, 15),
+                                y: 300,
+                                dataLabels: {
+                                    enabled: true,
+                                    formatter: function () {
+                                        return "MMI"
+                                    },
+                                    x: 25,
+                                    y: -5
+                                }
+                        },
+
+
+
+                                 [Date.UTC(2017, 9, 15), 300],
+                                 [Date.UTC(2017, 9, 25), null]
+
+
+                                ],
+
+
+
+                        pointStart: Date.UTC(2017, 3, 1),
+                        pointEnd: Date.UTC(2017, 11, 30),
+                        "type": "line",
+                        "color": "red",
+                        "_symbolIndex": 2,
+                        "stacking": null,
+                        "visible": true,
+                        showInLegend: false
+
+                    },
+
+
+
+
+
+
+                    {
+                        "name": "Medications",
+                        "data": [
+
+                            {
+                                x: Date.UTC(2017, 9, 25),
+                                y: 300,
+                                dataLabels: {
+                                    enabled: true,
+                                    formatter: function () {
+                                        return "I131";
+                                    },
+                                    align: "center",
+                                    style: {
+                                        textAlign: "center"
+                                    },
+                                    x: 55,
+                                    y: -5
+                                }
+                            },
+                            {
+                                x: Date.UTC(2017, 11, 30),
+                                y: 300,
+                                "color": "blue"
+                            }
+                                ],
+
+
+
+                        pointStart: Date.UTC(2017, 3, 1),
+                        pointEnd: Date.UTC(2017, 11, 30),
+                        "type": "line",
+                        dashStyle: "Dash",
+                        "color": "blue",
+                        "_symbolIndex": 2,
+                        "stacking": null,
+                        "visible": true,
+                        showInLegend: false
+
+                    },
+
+
+
+
+
+
+
+
+
+
+
+                    {
+                        "name": "Free T4",
+                        "data": [[Date.UTC(2017, 3, 20), 14.4], [Date.UTC(2017, 7, 1), 15.9], [Date.UTC(2017, 9, 6), 12.6], [Date.UTC(2017, 11, 15), 18]],
+                        "type": "line",
+                        yAxis: 1,
+                        "color": "#434348",
+                        "_symbolIndex": 1,
+                        "stacking": null,
+                        "visible": true,
+                        "dashStyle": "Dash"
+                    }
+                    ],
+                "subtitle": {
+                    "text": "",
+                    "align": "left",
+                    "style": {
+                        "color": "#000000",
+                        "fontFamily": "arial",
+                        "fontWeight": "normal",
+                        "fontSize": "12px"
+                    }
+                },
+                "title": {
+                    "text": "",
+                    "align": "left",
+                    "style": {
+                        "color": "#000000",
+                        "fontFamily": "arial",
+                        "fontWeight": "bold",
+                        "fontSize": "14px"
+                    }
+                },
+                "tooltip": {
+                    "backgroundColor": "#FEFFEF",
+                    "crosshairs": [false, false],
+                    "formatter": function () {
+                        var y_val = this.point.high ? "High: " + $(this.point.high * 1).addCommas(0) + " | Low: " + $(this.point.low * 1).addCommas(0) : $(this.y).addCommas(0);
+                        var s = "<b>" + this.series.name + "</b><br>" + Highcharts.dateFormat('%b %d %Y', this.x) + ": " + y_val;
+                        all_chart_options.series[this.series.index] ? s = all_chart_options.tooltip.addExtraData(all_chart_options.series[this.series.index].extra_data, this.point, s) : s = s;
+                        return s.replace(/\$-/g, "-$");
+                    },
+                    "style": {
+                        "color": "#000000",
+                        "fontFamily": "Calibri, Arial, Helvetica, sans-serif"
+                    },
+                    "useHTML": false,
+                    "shared": false,
+                    "addExtraData": function (extra_data, point, s) {
+                        if (extra_data && extra_data[0].name) {
+                            $.each(extra_data, function (i) {
+                                if (extra_data[i].values[point.index]) {
+                                    s = s + "<br>" + extra_data[i].name + ": " + extra_data[i].values[point.index];
+                                }
+                            });
+                        }
+                        return s;
+                    }
+                },
+                "xAxis": {
+                    // "categories": ["4/20/2017", "8/1/2017", "10/6/2017", "12/15/2017"],
+                    "gridLineColor": "#c0c0c0",
+                    "gridLineWidth": 0,
+                    "gridLineDashStyle": "Dot",
+                    "labels": {
+                        formatter: function () {
+                            return Highcharts.dateFormat('%Y', this.value);
+                        },
+                        "rotation": 0,
+                        "useHTML": false,
+                        "style": {
+                            "color": "#000000",
+                            "fontFamily": "Calibri, Arial, Helvetica, sans-serif",
+                            "fontWeight": "normal",
+                            "backgroundColor": "#fff",
+                            "fontSize": "12px",
+                            "textOverflow": "none"
+                        }
+                    },
+                    "lineWidth": 1.2,
+                    "lineColor": "gray",
+                    "max": null,
+                    "min": null,
+                    "plotBands": [],
+                    "plotLines": [{
+                        "value": 0,
+                        "color": "#c0c0c0",
+                        "dashStyle": "solid",
+                        "width": 0
+                }],
+                    "startOnTick": false,
+                    "tickInterval": null,
+                    "tickmarkPlacement": "on",
+                    "tickPosition": "outside",
+                    "tickColor": "#C0D0E0",
+                    "title": {
+                        "align": "middle",
+                        "useHTML": true,
+                        "text": "Time (in years)",
+                        "margin": 6,
+                        "rotation": 0,
+                        "style": {
+                            "color": "#000000",
+                            "fontFamily": "Calibri, Arial, Helvetica, sans-serif",
+                            "fontWeight": "bold",
+                            "backgroundColor": "#fff",
+                            "fontSize": "13px",
+                            textAlign: "center"
+                        },
+                        "x": 0
+                    },
+                    type: 'datetime',
+
+                },
+                "yAxis": [{
+                        "gridLineColor": "#c0c0c0",
+                        "gridLineWidth": 1,
+                        "gridLineDashStyle": "Solid",
+                        "labels": {
+                            "formatter": function newYFormat() {
+                                var s = this.value == parseInt(this.value) ? Highcharts.numberFormat(this.value, 0, ".", ",") : Highcharts.numberFormat(this.value, 1, ".", ",");
+                                s = s;
+                                return s.replace(/\$-/g, "-$");
+                            },
+                            "rotation": 0,
+                            "style": {
+                                "color": "#000000",
+                                "fontFamily": "Calibri, Arial, Helvetica, sans-serif",
+                                "fontWeight": "normal",
+                                "backgroundColor": "#fff",
+                                "fontSize": "12px"
+                            }
+                        },
+                        "lineColor": "gray",
+                        "lineWidth": 1,
+                        "max": 25,
+                        "min": 0,
+                        "opposite": false,
+                        "plotBands": [],
+                        "plotLines": [{
+                            "value": 0,
+                            "color": "#c0c0c0",
+                            "dashStyle": "Solid",
+                            "width": 1
+                }],
+                        "tickInterval": null,
+                        "tickmarkPlacement": "on",
+                        "tickPosition": "outside",
+                        "tickColor": "#C0D0E0",
+                        "tickWidth": 1,
+                        "title": {
+                            "useHTML": false,
+                            "text": "",
+                            "margin": 6,
+                            "align": "high",
+                            "offset": 20,
+                            "rotation": 0,
+                            "x": 35,
+                            "y": -20,
+                            "style": {
+                                "color": "#000000",
+                                "fontFamily": "Calibri, Arial, Helvetica, sans-serif",
+                                "fontWeight": "normal",
+                                "fontSize": "13px"
+                            }
+                        },
+                        "type": "linear"
+            },
+
+                    {
+                        "gridLineColor": "#c0c0c0",
+                        "gridLineWidth": 1,
+                        "gridLineDashStyle": "Dot",
+                        "labels": {
+                            "formatter": function newYFormat() {
+                                var s = this.value == parseInt(this.value) ? Highcharts.numberFormat(this.value, 0, ".", ",") : Highcharts.numberFormat(this.value, 1, ".", ",");
+                                s = s;
+                                return s.replace(/\$-/g, "-$");
+                            },
+                            "rotation": 0,
+                            "style": {
+                                "color": "#000000",
+                                "fontFamily": "Calibri, Arial, Helvetica, sans-serif",
+                                "fontWeight": "normal",
+                                "backgroundColor": "#fff",
+                                "fontSize": "12px"
+                            }
+                        },
+                        "lineColor": "gray",
+                        "lineWidth": 1,
+                        "max": 25,
+                        "min": 0,
+                        "opposite": true,
+                        "plotBands": [],
+                        "plotLines": [{
+                            "value": 0,
+                            "color": "#c0c0c0",
+                            "dashStyle": "solid",
+                            "width": 1
+                }],
+                        "tickInterval": null,
+                        "tickmarkPlacement": "on",
+                        "tickPosition": "outside",
+                        "tickColor": "#C0D0E0",
+                        "tickWidth": 1,
+                        "title": {
+                            "useHTML": false,
+                            "text": "",
+                            "margin": 6,
+                            "align": "high",
+                            "offset": 20,
+                            "rotation": 0,
+                            "x": 35,
+                            "y": -20,
+                            "style": {
+                                "color": "#000000",
+                                "fontFamily": "Calibri, Arial, Helvetica, sans-serif",
+                                "fontWeight": "normal",
+                                "fontSize": "13px"
+                            }
+                        },
+                        "type": "linear"
+            }
+
+
+                     ],
+                "credits": {
+                    "href": "/",
+                    "position": {
+                        "align": "left",
+                        "x": 10,
+                        "y": -11
+                    },
+                    "style": {
+                        "cursor": "default",
+                        "color": "#2C2C2C"
+                    },
+                    "target": "_blank",
+                    "text": "",
+                    "useHTML": true
+                },
+                "exporting": {
+                    "sourceWidth": 640,
+                    "scale": 1,
+                    "buttons": {
+                        "contextButton": {
+                            "enabled": true,
+                            "verticalAlign": "bottom",
+                            "x": -10,
+                            "symbol": "url(https://www.bls.gov/images/icons/download-icon.png)"
+                        }
+                    }
+                }
+            };
+
+            var chartCallback = function chartCallback(all_chart_options) {
+
+                if (all_chart_options.timeline) {
+                    //call animation if applicable
+                    all_chart_options.timeline.animation();
+                }
+
+                $(".highcharts-legend-item").css("min-height", "0px").css("z-index", 100); //fix so CMS CSS doesn't make legend taller than it should
+                $(".highcharts-tooltip").css("z-index", 200);
+
+                /**
+                 * Highcharts plugin for setting a lower opacity for other series than the one that is hovered
+                 * in the legend
+                 */
+                (function (Highcharts) {
+                    var each = Highcharts.each;
+
+                    Highcharts.wrap(Highcharts.Legend.prototype, 'renderItem', function (proceed, item) {
+
+                        proceed.call(this, item);
+
+                        var isPoint = !!item.series,
+                            collection = isPoint ? item.series.points : this.chart.series,
+                            groups = isPoint ? ['graphic'] : ['group', 'markerGroup'],
+                            element = (this.options.useHTML ? item.legendItem : item.legendGroup).element;
+
+                        element.onmouseover = function () {
+                            each(collection, function (seriesItem) {
+                                if (seriesItem !== item) {
+                                    each(groups, function (group) {
+                                        seriesItem[group].animate({
+                                            opacity: 0.25
+                                        }, {
+                                            duration: 150
+                                        });
+                                    });
+                                }
+                            });
+                        };
+                        element.onmouseout = function () {
+                            each(collection, function (seriesItem) {
+                                if (seriesItem !== item) {
+                                    each(groups, function (group) {
+                                        seriesItem[group].animate({
+                                            opacity: 1
+                                        }, {
+                                            duration: 50
+                                        });
+                                    });
+                                }
+                            });
+                        };
+                    });
+
+                    Highcharts.wrap(Highcharts.Chart.prototype, 'showCredits', function (proceed, credits) {
+                        proceed.call(this, credits);
+
+                        if (this.credits && credits.target) {
+                            this.credits.on('click', function () {
+                                $('<a>').attr({
+                                    href: credits.href,
+                                    target: credits.target
+                                })[0].click();
+                            });
+                        }
+                    });
+                })(Highcharts); //end gray other series plugin
+            };
+            Highcharts.setOptions({
+                lang: {
+                    thousandsSep: ",",
+                    drillUpText: "◁ Back ",
+                    contextButtonTitle: "Download chart image"
+                }
+            });
+
+            var chart = new Highcharts.Chart(all_chart_options, chartCallback(all_chart_options));
+        });
+        jQuery.fn.extend({
+            addCommas: function addCommas(decimals) {
+
+                var val = this[0] || 0;
+
+                if (isNaN(val) || val < 999 && val > -999 && decimals < 1) {
+                    //small numbers auto decimals
+                    return val;
+                } else if (val < 999 && val > -999 && decimals > 0) {
+                    //small numbers fixed decimals
+                    return val.toFixed(decimals);
+                } else if ((val > 999 || val < -999) && decimals > 0) {
+                    //big numbers fixed decimals
+                    while (/(\d+)(\d{3})/.test(val.toString())) {
+                        val = val.toFixed(decimals).replace(/(\d+)(\d{3})/, '$1' + ',' + '$2');
+                    }
+                } else if (val > 999 || val < -999) {
+                    //big number auto decimals
+                    while (/(\d+)(\d{3})/.test(val.toString())) {
+                        val = val.toString().replace(/(\d+)(\d{3})/, '$1' + ',' + '$2');
+                    }
+                }
+
+                return val;
+            }
+        });
+    </script>
+
+</body>
+
+</html>
