@@ -65,13 +65,13 @@
                     "enabled": true,
                     "floating": false,
                     "itemDistance": 30,
-                    itemWidth: 390,
+                    itemWidth: 410,
                     "layout": "horizontal",
                     "reversed": false,
                     "shadow": false,
                     "useHTML": false,
                     "verticalAlign": "top",
-                    "width": 900,
+                    "width": 950,
                     "x": 30,
                     "y": 30,
                     "itemStyle": {
@@ -131,145 +131,197 @@
                         }
                     }
                 },
-                "series": [{
-                        "name": "TSH",
-                        "data": [[Date.UTC(2014, 4, 10), 1.43], [Date.UTC(2014, 12, 19), 5.9], [Date.UTC(2015, 2, 10), 4.0], [Date.UTC(2015, 4, 20), 3.1], [Date.UTC(2015, 8, 2), 2.5], [Date.UTC(2016, 1, 3), 2.3], [Date.UTC(2016, 4, 4), 2.1], [Date.UTC(2016, 12, 19), 2.9], [Date.UTC(2017, 2, 17), 0.005], [Date.UTC(2017, 2, 17), 0.005], [Date.UTC(2017, 3, 3), 0.9], [Date.UTC(2017, 4, 28), 0.84] , [Date.UTC(2017, 6, 14), 0.009 ], [Date.UTC(2017, 10, 15), 21.00], [Date.UTC(2017, 11, 14 ), 1.24 ] ],
+                "series": [
 
 
-                            pointStart: Date.UTC(2014, 4, 10),
-                            pointEnd: Date.UTC(2017, 11, 14 ),
+                    {
+                        "name": "R-CHOP",
+                        "data": [{
+                                x: Date.UTC(2015, 0, 15),
+                                y: 7,
+                                dataLabels: {
+                                    enabled: true,
+                                    formatter: function () {
+                                        return this.series.name;
+                                    },
+                                    x: 25,
+                                    y: -10
+                                }
+                        },
+                            {
+                                x: Date.UTC(2015, 5, 15),
+                                y: 7
+                            }
+                                ],
+
                         "type": "line",
-                        "color": "#7cb5ec",
+                        "color": "#c6c4c4",
+                        showInLegend: false,
+                        lineWidth: 10,
+                        marker: {
+                            enabled: false
+                        }
+                    },
+
+
+                    {
+                        "name": "RTX",
+                        "data": [{
+                                x: Date.UTC(2015, 6, 20),
+                                y: 7,
+                                dataLabels: {
+                                    enabled: true,
+                                    formatter: function () {
+                                        return this.series.name;
+                                    },
+                                    x: 7,
+                                    y: -10
+                                }
+                        },
+                            {
+                                x: Date.UTC(2015, 7, 30),
+                                y: 7
+                            }
+                                ],
+
+                        "type": "line",
+                        "color": "#c6c4c4",
+                        showInLegend: false,
+                        lineWidth: 10,
+                        marker: {
+                            enabled: false
+                        }
+                    },
+
+
+                    {
+                        "name": "MMI",
+                        "data": [{
+                                x: Date.UTC(2017, 1, 18),
+                                y: 7,
+                                dataLabels: {
+                                    enabled: true,
+                                    formatter: function () {
+                                        return this.series.name;
+                                    },
+                                    x: 0,
+                                    y: -10
+                                }
+                        },
+                            {
+                                x: Date.UTC(2017, 4, 5),
+                                y: 7
+                            }
+                                ],
+
+                        "type": "line",
+                        "color": "#c6c4c4",
+                        showInLegend: false,
+                        lineWidth: 10,
+                        marker: {
+                            enabled: false
+                        }
+                    },
+
+
+                    {
+                        "name": "I131",
+                        "data": [{
+                                x: Date.UTC(2017, 4, 12),
+                                y: 9,
+                                dataLabels: {
+                                    enabled: true,
+                                    formatter: function () {
+                                        return this.series.name;
+                                    },
+                                    x: 15,
+                                    y: -10
+                                }
+                        },
+                            {
+                                x: Date.UTC(2017, 4, 13),
+                                y: 9
+                            }
+                                ],
+
+                        "type": "line",
+                        "color": "#c6c4c4",
+                        showInLegend: false,
+                        lineWidth: 10,
+                        marker: {
+                            enabled: false
+                        }
+                    },
+                    
+                    
+                    
+                       {
+                        "name": "L-T4",
+                        "data": [{
+                                x: Date.UTC(2017, 7, 1),
+                                y: 7,
+                                dataLabels: {
+                                    enabled: true,
+                                    formatter: function () {
+                                        return this.series.name;
+                                    },
+                                    x: 25,
+                                    y: -10
+                                }
+                        },
+                            {
+                                x: Date.UTC(2017, 10, 14),
+                                y: 7
+                            }
+                                ],
+
+                        "type": "line",
+                        "color": "#c6c4c4",
+                        showInLegend: false,
+                        lineWidth: 10,
+                        marker: {
+                            enabled: false
+                        }
+                    },
+
+
+
+
+
+                    {
+                        "name": "TSH (mIu/mL)",
+                        "data": [[Date.UTC(2014, 3, 10), 1.43], [Date.UTC(2014, 11, 19), 5.9], [Date.UTC(2015, 1, 10), 4.0], [Date.UTC(2015, 3, 20), 3.1], [Date.UTC(2015, 7, 2), 2.5], [Date.UTC(2016, 0, 3), 2.3], [Date.UTC(2016, 3, 4), 2.1], [Date.UTC(2016, 11, 19), 2.9], [Date.UTC(2017, 1, 17), 0.005], [Date.UTC(2017, 1, 17), 0.005], [Date.UTC(2017, 2, 3), 0.9], [Date.UTC(2017, 3, 28), 0.84], [Date.UTC(2017, 5, 14), 0.009], [Date.UTC(2017, 9, 15), 21.00], [Date.UTC(2017, 10, 14), 1.24]],
+
+                        pointStart: Date.UTC(2014, 4, 10),
+                        pointEnd: Date.UTC(2017, 11, 14),
+                        "type": "line",
+                        "color": "#303030",
                         "_symbolIndex": 0,
                         "stacking": null,
                         "visible": true
 
-            }, {
-                        "name": "Medications",
-                        "data": [{
-                                x: Date.UTC(2017, 4, 5),
-                                y: 300,
-                                dataLabels: {
-                                    enabled: true,
-                                    formatter: function () {
-                                        return "R-CHOP"
-                                    },
-                                    x: 75,
-                                    y: -5
-                                }
-                        }, {
-                                x: Date.UTC(2017, 6, 12),
-                                y: 300,
-                                dataLabels: {
-                                    enabled: true,
-                                    formatter: function () {
-                                        return "RTX"
-                                    },
-                                    x: 45,
-                                    y: -5
-                                }
-                        }, {
-                                x: Date.UTC(2017, 8, 15),
-                                y: 300,
-                                dataLabels: {
-                                    enabled: true,
-                                    formatter: function () {
-                                        return "MMI"
-                                    },
-                                    x: 25,
-                                    y: -5
-                                }
-                        },
-
-
-
-                                 [Date.UTC(2017, 9, 15), 300],
-                                 [Date.UTC(2017, 9, 25), null]
-
-
-                                ],
-
-
-
-                        pointStart: Date.UTC(2017, 3, 1),
-                        pointEnd: Date.UTC(2017, 11, 30),
-                        "type": "line",
-                        "color": "red",
-                        "_symbolIndex": 2,
-                        "stacking": null,
-                        "visible": true,
-                        showInLegend: false
-
-                    },
-
-
-
-
+            },
 
 
                     {
-                        "name": "Medications",
-                        "data": [
+                        "name": "Free T4 (ng/dL)",
+                        "data": [[Date.UTC(2014, 3, 10), 1.28], [Date.UTC(2014, 11, 19), 1.10], [Date.UTC(2015, 1, 10), 1.12], [Date.UTC(2015, 3, 20), 1.48], [Date.UTC(2015, 7, 2), 1.38], [Date.UTC(2016, 0, 3), 1.28], [Date.UTC(2016, 3, 4), 1.3], [Date.UTC(2016, 11, 19), 1.38], [Date.UTC(2017, 1, 17), 5.6], [Date.UTC(2017, 1, 17), 6.73], [Date.UTC(2017, 2, 3), 1.68], [Date.UTC(2017, 3, 28), 1.49], [Date.UTC(2017, 5, 14), 1.23], [Date.UTC(2017, 9, 15), 0.99], [Date.UTC(2017, 10, 14), 1.58]],
 
-                            {
-                                x: Date.UTC(2017, 9, 25),
-                                y: 300,
-                                dataLabels: {
-                                    enabled: true,
-                                    formatter: function () {
-                                        return "I131";
-                                    },
-                                    align: "center",
-                                    style: {
-                                        textAlign: "center"
-                                    },
-                                    x: 55,
-                                    y: -5
-                                }
-                            },
-                            {
-                                x: Date.UTC(2017, 11, 30),
-                                y: 300,
-                                "color": "blue"
-                            }
-                                ],
+                        pointStart: Date.UTC(2014, 4, 10),
+                        pointEnd: Date.UTC(2017, 11, 14),
 
-
-
-                        pointStart: Date.UTC(2017, 3, 1),
-                        pointEnd: Date.UTC(2017, 11, 30),
-                        "type": "line",
-                        dashStyle: "Dash",
-                        "color": "blue",
-                        "_symbolIndex": 2,
-                        "stacking": null,
-                        "visible": true,
-                        showInLegend: false
-
-                    },
-
-
-
-
-
-
-
-
-
-
-
-                    {
-                        "name": "Free T4",
-                        "data": [[Date.UTC(2017, 3, 20), 14.4], [Date.UTC(2017, 7, 1), 15.9], [Date.UTC(2017, 9, 6), 12.6], [Date.UTC(2017, 11, 15), 18]],
                         "type": "line",
                         yAxis: 1,
-                        "color": "#434348",
+                        "color": "#7a7777",
                         "_symbolIndex": 1,
                         "stacking": null,
                         "visible": true,
                         "dashStyle": "Dash"
                     }
-                    ],
+                     ],
+
+
+
                 "subtitle": {
                     "text": "",
                     "align": "left",
@@ -447,7 +499,7 @@
                         },
                         "lineColor": "gray",
                         "lineWidth": 1,
-                        "max": 25,
+                        "max": 8,
                         "min": 0,
                         "opposite": true,
                         "plotBands": [],
@@ -457,7 +509,7 @@
                             "dashStyle": "solid",
                             "width": 1
                 }],
-                        "tickInterval": null,
+                        "tickInterval": 2,
                         "tickmarkPlacement": "on",
                         "tickPosition": "outside",
                         "tickColor": "#C0D0E0",

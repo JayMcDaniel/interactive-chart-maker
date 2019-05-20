@@ -7,17 +7,17 @@
  */
 var parseForScatter = function (input, chart_type, colors) {
 
+    console.log("parsing for scatter");
+    
     var output = {};
     output.x_axis_categories = undefined; //resets this in case there were previous categories
 
     //load series names from row heads, and data from row tds
     output.series = [];
-    $("tbody tr", input).each(function (i) {
-
-        var this_row = $(this);
+    $("tbody tr", input).each(function (i, tr) {
 
         var seriesObj = {
-            name: $.trim($("th:eq(0)", this_row).text()),
+            name: $.trim($("th:eq(0)", tr).text()),
             data: [],
             type: chart_type,
             lineWidth: 0,
@@ -30,9 +30,9 @@ var parseForScatter = function (input, chart_type, colors) {
         };
 
         //get data values from each row's td cells
-        $("td:even", this_row).each(function (i) {
-            var x = $(this).getNumber();
-            var y = $(this).next().getNumber();
+        $("td:even", tr).each(function (i, td) {
+            var x = $(td).getNumber();
+            var y = $(td).next().getNumber();
             if (y === null || y === undefined) {
                 $(".alert-danger").text("Sorry, the table wasn't formatted correctly for a scatter chart. Please see the example on the data tab.");
 
@@ -51,6 +51,22 @@ var parseForScatter = function (input, chart_type, colors) {
 
     });
 
+    
+    //add point names if applicable (more than one row of column headers)
+    
+    var header_rows = $("thead tr", input);
+    if (header_rows.length > 1){
+        var point_names = [];
+        $("th:gt(0)", header_rows[0]).each(function(i, th){
+           point_names.push($(th).text());
+        });
+        
+        $.each(output.series, function(i, series){
+            series.point_names = point_names
+        });
+        
+    }
+        
 
     return output;
 

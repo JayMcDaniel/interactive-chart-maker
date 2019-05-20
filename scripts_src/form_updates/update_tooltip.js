@@ -132,9 +132,9 @@ var update_tooltip = {
         }
 
     },
-    
-    
-    
+
+
+
     /** gets a tooltip for pie charts. Called from updateToolTip **/
     getPieTooltip: function (chart, chart_type, all_chart_options) {
 
@@ -171,11 +171,12 @@ var update_tooltip = {
 
             var multiple = options.multiplier;
 
-
+            var point_name = this.series.options.point_names ? this.series.options.point_names[this.point.index] + "<br>" : "";
+            
             var y_axis_title = this.series.yAxis.axisTitle ? this.series.yAxis.axisTitle.textStr : "Y-Axis";
             var x_axis_title = this.series.xAxis.axisTitle ? this.series.xAxis.axisTitle.textStr : "X-Axis";
 
-            var s = "<b>" + this.series.name + "</b><br>" + y_axis_title + ": <b>" + y_dollar +
+            var s = "<b>" + this.series.name + "</b><br>" + point_name + y_axis_title + ": <b>" + y_dollar +
                 $(this.y * multiple).addCommas(y_decimals) + y_percent + "</b><br>" +
                 x_axis_title + ": <b>" + x_dollar + $(this.x * multiple).addCommas(x_decimals) + x_percent + "</b>";
 
