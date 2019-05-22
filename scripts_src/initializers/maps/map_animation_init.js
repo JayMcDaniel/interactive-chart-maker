@@ -216,7 +216,7 @@ var map_animation_init = {
 
             //add ranked columns if applicable
             $("#ranked_column_div", map_display_area).remove();
-            var ranked_columns_div = all_map_options.add_ranked_columns && all_map_options.map_type == "state" ? map_ranked_columns_init.getRankedColumns(all_map_options) : undefined;
+            var ranked_columns_div = all_map_options.add_ranked_columns && all_map_options.map_type == "state" ? map_ranked_columns_init.getRankedColumns(all_map_options, map_display_area) : undefined;
             $(".map_outer_div", map_display_area).append(ranked_columns_div);
 
 

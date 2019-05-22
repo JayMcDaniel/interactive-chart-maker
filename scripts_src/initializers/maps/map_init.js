@@ -186,7 +186,7 @@ var map_init = {
             
         //add state data labels if applicable
         if (all_map_options.has_data_labels && all_map_options.map_type == "state"){
-            map_data_labels_init.addDataLabels(all_map_options);
+            map_data_labels_init.addDataLabels(all_map_options, map_display_area);
         }
         
 
@@ -243,11 +243,10 @@ var map_init = {
                 "width": all_map_options.sized_for_spotlight ? "578px" : "680px"
 
 
-            })
-            .addClass("map_svg");
+            });
 
+        svg.setAttribute("class", "map_svg");
         svg.setAttribute("viewBox", all_map_options.viewbox);
-
         svg.setAttribute("xmlns", "http://www.w3.org/2000/svg");
         return svg;
     },

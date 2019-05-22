@@ -19,8 +19,7 @@
 
     <!-- external libraries -->
     <script src="../../libraries/jquery/jquery-2.2.0.min.js"></script>
-    <script src="../../libraries/Highcharts-4.2.3/js/highcharts.src.js"></script>
-    <script src="../../libraries/Highcharts-4.2.3/js/highcharts-more.src.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="../../libraries/Highcharts-4.2.3/js/modules/drilldown.js"></script>
 
 
@@ -31,6 +30,7 @@
         $(function () {
             var all_chart_options = {
                 "chart": {
+
                     "renderTo": "chart1",
                     "margin": [70, 40, 85, 80],
                     "borderWidth": 0,
@@ -134,6 +134,135 @@
                 "series": [
 
 
+
+                    {
+                        "name": "Hashimotos Thyroiditis",
+                        "data": [{
+                                x: Date.UTC(2014, 3, 10),
+                                y: 20,
+                                dataLabels: {
+                                    enabled: true,
+                                    formatter: function () {
+                                        return this.series.name;
+                                    },
+                                    x: 25,
+                                    y: -10
+                                }
+                        },
+                            {
+                                x: Date.UTC(2014, 11, 1),
+                                y: 20
+                            }
+                                ],
+
+                        "type": "line",
+                        "color": "#545454",
+                        showInLegend: false,
+                        lineWidth: 10,
+                        marker: {
+                            enabled: false
+                        }
+                    },
+
+
+                    {
+                        "name": "Thyroid Lymphoma",
+                        "data": [{
+                                x: Date.UTC(2015, 0, 1),
+                                y: 20,
+                                dataLabels: {
+                                    enabled: true,
+                                    formatter: function () {
+                                        return this.series.name;
+                                    },
+                                    x: 35,
+                                    y: 25
+                                }
+                        },
+                            {
+                                x: Date.UTC(2015, 6, 1),
+                                y: 20
+                            }
+                                ],
+
+                        "type": "line",
+                        "color": "#545454",
+                        showInLegend: false,
+                        lineWidth: 10,
+                        marker: {
+                            enabled: false
+                        }
+                    },
+
+
+                       {
+                        "name": "Graves Hyperthyroidism",
+                        "data": [{
+                                x: Date.UTC(2016, 11, 15),
+                                y: 20,
+                                dataLabels: {
+                                    enabled: true,
+                                    formatter: function () {
+                                        return this.series.name;
+                                    },
+                                    x: 15,
+                                    y: -20
+                                }
+                        },
+                            {
+                                x: Date.UTC(2017, 4, 15),
+                                y: 20
+                            }
+                                ],
+
+                        "type": "line",
+                        "color": "#545454",
+                        showInLegend: false,
+                        lineWidth: 10,
+                        marker: {
+                            enabled: false
+                        }
+                    },
+
+
+                    {
+                        "name": "Hyperthyroidism",
+                        "data": [{
+                                x: Date.UTC(2017, 5, 13),
+                                y: 20,
+                                dataLabels: {
+                                    enabled: true,
+                                    overflow: "allow",
+                                    crop: false,
+                                    formatter: function () {
+                                        return this.series.name;
+                                    },
+                                    x: 25,
+                                    y: 25
+                                }
+                        },
+                            {
+                                x: Date.UTC(2017, 10, 14),
+                                y: 20
+                            }
+                                ],
+
+                        "type": "line",
+                        "color": "#545454",
+                        showInLegend: false,
+                        lineWidth: 10,
+                        marker: {
+                            enabled: false
+                        }
+                    },
+
+
+
+
+
+
+
+
                     {
                         "name": "R-CHOP",
                         "data": [{
@@ -229,14 +358,30 @@
                         "data": [{
                                 x: Date.UTC(2017, 4, 12),
                                 y: 9,
-                                dataLabels: {
-                                    enabled: true,
-                                    formatter: function () {
-                                        return this.series.name;
-                                    },
-                                    x: 15,
-                                    y: -10
+                                dataLabels: [{
+                                        enabled: true,
+                                        formatter: function () {
+                                            return "I";
+                                        },
+                                        x: 10,
+                                        y: -10
+                                },
+                                    {
+                                        enabled: true,
+                                        formatter: function () {
+                                            return "31";
+                                        },
+                                        x: 20,
+                                        y: -18,
+                                        style: {
+                                            fontSize: "8px"
+                                        }
+
                                 }
+                                        ]
+
+
+
                         },
                             {
                                 x: Date.UTC(2017, 4, 13),
@@ -252,10 +397,10 @@
                             enabled: false
                         }
                     },
-                    
-                    
-                    
-                       {
+
+
+
+                    {
                         "name": "L-T4",
                         "data": [{
                                 x: Date.UTC(2017, 7, 1),
@@ -289,7 +434,7 @@
 
 
                     {
-                        "name": "TSH (mIu/mL)",
+                        "name": "TSH (IU/L)",
                         "data": [[Date.UTC(2014, 3, 10), 1.43], [Date.UTC(2014, 11, 19), 5.9], [Date.UTC(2015, 1, 10), 4.0], [Date.UTC(2015, 3, 20), 3.1], [Date.UTC(2015, 7, 2), 2.5], [Date.UTC(2016, 0, 3), 2.3], [Date.UTC(2016, 3, 4), 2.1], [Date.UTC(2016, 11, 19), 2.9], [Date.UTC(2017, 1, 17), 0.005], [Date.UTC(2017, 1, 17), 0.005], [Date.UTC(2017, 2, 3), 0.9], [Date.UTC(2017, 3, 28), 0.84], [Date.UTC(2017, 5, 14), 0.009], [Date.UTC(2017, 9, 15), 21.00], [Date.UTC(2017, 10, 14), 1.24]],
 
                         pointStart: Date.UTC(2014, 4, 10),
@@ -318,6 +463,12 @@
                         "visible": true,
                         "dashStyle": "Dash"
                     }
+
+
+
+
+
+
                      ],
 
 
