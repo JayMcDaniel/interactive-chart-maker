@@ -9,7 +9,7 @@
 
                if (all_map_options.is_animated && area.animated_vals) {
                    area.value = area.animated_vals[all_map_options.animation_index];
-                   area.color = $("path.state[loc_name='" + area.loc_name + "']").css("fill");
+                   area.color = $("#" + area.id, map_display_area).css("fill");
                }
 
                return area.value;

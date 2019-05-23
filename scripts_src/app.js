@@ -9,7 +9,8 @@ $(function () {
 
     //load test table into table_input_textarea
 
-    $.get("./dev/test_tables/test_table.htm", function (table) {
+    $.get("./dev/test_tables/scatter_with_unique_point_names.htm", function (table) {
+
         $("#table_input_textarea").val(table);
         //check if app was opened from the chart wizard (imediately invoked function)
         var loadFromTableWizard = require("./utils/load_from_table_wizard");
@@ -48,6 +49,6 @@ $(function () {
     });
 
 //set app version (better through JS than statically to make sure JS is new)
-    $("#app_version").text("v2.8.1");
+    $("#app_version").text("v2.8.2");
 
 });
