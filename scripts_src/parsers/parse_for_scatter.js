@@ -96,7 +96,6 @@ var parseForScatter = function (input, chart_type, colors) {
         if ($("#chart_scatter_add_line_checkbox").is(':checked')) {
             console.log("adding line");
 
-
             var x_vals = [];
             var y_vals = [];
 
@@ -108,10 +107,8 @@ var parseForScatter = function (input, chart_type, colors) {
             });
 
 
-            var plot_x_min = Math.min(...x_vals);
-            var plot_y_min = Math.min(...y_vals);
-            var plot_x_max = Math.max(...x_vals);
-            var plot_y_max = Math.max(...y_vals);
+            var plot_min = Math.min(...x_vals, ...y_vals);
+            var plot_max = Math.max(...x_vals, ...y_vals);
 
 
             var min_x = 0,
@@ -119,16 +116,16 @@ var parseForScatter = function (input, chart_type, colors) {
                 max_x = 0,
                 max_y = 0;
 
-            while (min_x > plot_x_min) {
+            while (min_x > plot_min) {
                 min_x -= 5;
             }
-            while (min_y > plot_y_min) {
+            while (min_y > plot_min) {
                 min_y -= 5;
             }
-            while (max_x < plot_x_max) {
+            while (max_x < plot_max) {
                 max_x += 5;
             }
-            while (max_y < plot_y_max) {
+            while (max_y < plot_max) {
                 max_y += 5;
             }
 
