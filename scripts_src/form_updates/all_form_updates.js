@@ -45,7 +45,6 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
             "background-position-y": y_pos
         });
 
-
     };
 
 
@@ -632,6 +631,13 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
     $("#chart_show_data_labels_checkbox").unbind().change(function () {
         var val = utils_forms.getCheckBoxValue($(this));
         update_chart_options.toggleDataLabels(val, chart, all_chart_options);
+    });
+    
+    
+    //scatter plot 45-degree line checkbox toggled
+    chart_scatter_add_line_checkbox
+       $("#chart_scatter_add_line_checkbox").unbind().change(function () {
+        update_data.updateData(chart, all_chart_options);
     });
 
 

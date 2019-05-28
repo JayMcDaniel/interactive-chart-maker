@@ -43,13 +43,13 @@ var parseForScatter = function (input, chart_type, colors) {
 
 
             //if it's an indented th in the row, use the previously made series_obj, else, make a new one and push it to the output series
-            
+
             if ($("th p[class^='sub']", tr).length > 0) {
 
-                var series_obj = output.series[output.series.length-1];
+                var series_obj = output.series[output.series.length - 1];
                 series_obj.point_names.push($.trim($("th:eq(0)", tr).text()));
                 getRowData(tr, series_obj);
-                
+
             } else {
 
                 var series_obj = {
@@ -90,6 +90,71 @@ var parseForScatter = function (input, chart_type, colors) {
             });
 
         }
+
+
+        //add regression (or 45-degree line if applicable)
+        if ($("#chart_scatter_add_line_checkbox").is(':checked')) {
+            console.log("adding line");
+
+
+            var x_vals = [];
+            var y_vals = [];
+
+            $.each(output.series, function (i, series) {
+                $.each(series.data, function (j, data) {
+                    x_vals.push(data[0]);
+                    y_vals.push(data[1]);
+                });
+            });
+
+
+            var plot_x_min = Math.min(...x_vals);
+            var plot_y_min = Math.min(...y_vals);
+            var plot_x_max = Math.max(...x_vals);
+            var plot_y_max = Math.max(...y_vals);
+
+
+            var min_x = 0,
+                min_y = 0,
+                max_x = 0,
+                max_y = 0;
+
+            while (min_x > plot_x_min) {
+                min_x -= 5;
+            }
+            while (min_y > plot_y_min) {
+                min_y -= 5;
+            }
+            while (max_x < plot_x_max) {
+                max_x += 5;
+            }
+            while (max_y < plot_y_max) {
+                max_y += 5;
+            }
+
+            output.series.unshift(
+
+                {
+                    type: 'line',
+                    name: 'Regression Line',
+                    data: [[min_x, min_y], [max_x, max_y]],
+                    marker: {
+                        enabled: false
+                    },
+                    states: {
+                        hover: {
+                            lineWidth: 0
+                        }
+                    },
+                    color: "#999",
+                    enableMouseTracking: false,
+                    showInLegend: false
+                }
+
+            )
+        }
+
+
 
     } catch (error) {
 

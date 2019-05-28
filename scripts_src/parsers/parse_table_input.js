@@ -83,6 +83,7 @@ var parseTableInput = function (input, load_series_from, chart_type, legend_togg
 
 
         } else if (chart_type == "scatter") {
+            console.log("is scatter");
             output = parseForScatter(input, chart_type, colors);
 
         } else if (chart_type == "drilldown") {
