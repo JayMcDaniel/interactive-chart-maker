@@ -11,7 +11,7 @@ var XAxis = function (o) {
     this.labels = {
         formatter: o.labels ? o.labels.formatter || undefined : undefined,
         rotation: o.labels ? o.labels.rotation || 0 : 0,
-        useHTML: true,
+        useHTML: false,
         style: {
             color: '#000000',
             fontFamily: 'Calibri, Arial, Helvetica, sans-serif',

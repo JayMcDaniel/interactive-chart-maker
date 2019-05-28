@@ -194,14 +194,14 @@ var map_data_labels_init = {
         "y": 243.77499999999998
     }, {
         "id": "MD",
-          "x": 883.67296875,
+        "x": 883.67296875,
         "y": 273.17499999999995
-       
+
     }, {
         "id": "DC",
-         "x": 840.77296875,
+        "x": 840.77296875,
         "y": 274.575
-      
+
     }, {
         "id": "DE",
         "x": 894.67296875,
@@ -212,22 +212,88 @@ var map_data_labels_init = {
         "y": 236.77499999999998
     }],
 
+
+
+
+
     /** adds data labels (svg text) to states **/
     addDataLabels: function (all_map_options, map_display_area) {
-        
+
         console.log("adding labels");
-        
+
+
+
+        var rgbToHex = function (rgb) {
+
+            var hex = Number(rgb).toString(16);
+
+            if (hex.length < 2) {
+                hex = "0" + hex;
+            }
+            return hex;
+        };
+
+
+        var fullColorHex = function (r, g, b) {
+            var red = rgbToHex(r);
+            var green = rgbToHex(g);
+            var blue = rgbToHex(b);
+            return red + green + blue;
+        };
+
+
+
+        var invertColor = function (hex) {
+
+            if (/rgb/.test(hex)) {
+                var rgbs = hex.replace(/[^\d,]/g, '').split(',');
+                hex = fullColorHex(rgbs[0], rgbs[1], rgbs[2]);
+
+            }
+
+            if (hex.indexOf('#') === 0) {
+                hex = hex.slice(1);
+            }
+
+            // convert 3-digit hex to 6-digits.
+            if (hex.length === 3) {
+                hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2];
+            }
+
+            if (hex.length !== 6) {
+                throw new Error('Invalid HEX color.');
+            }
+
+            var r = parseInt(hex.slice(0, 2), 16),
+                g = parseInt(hex.slice(2, 4), 16),
+                b = parseInt(hex.slice(4, 6), 16);
+
+            return (r * 0.299 + g * 0.587 + b * 0.114) > 186 ? '#000000' : '#FFFFFF';
+
+        };
+
+
+
+
         $(".state_data_label", map_display_area).remove();
 
         var labels = map_data_labels_init.labels;
-        
+
         for (var i = 0; i < labels.length; i++) {
+
             var path = $("#" + labels[i].id, map_display_area);
+            var background_color = path.attr("fill");
+
+            if (["NH", "MA", "RI", "CT", "NJ", "DE", "DC", "MD", "HI", "VT"].indexOf(labels[i].id) > -1) { //these labels are outside of path fills
+                var fill_color = "#000"
+            } else {
+                var fill_color = invertColor(background_color);
+            }
 
             var label = document.createElementNS('http://www.w3.org/2000/svg', 'text');
             label.setAttributeNS(null, 'x', labels[i].x);
             label.setAttributeNS(null, 'y', labels[i].y);
-            label.setAttributeNS(null, 'fill', "black");
+            label.setAttributeNS(null, 'fill', fill_color);
             label.setAttribute("class", "state_data_label");
 
             var id_tspan = document.createElementNS('http://www.w3.org/2000/svg', 'tspan');
@@ -236,7 +302,7 @@ var map_data_labels_init = {
             val_tspan.setAttributeNS(null, "dx", "-1.5em");
 
             var id_txt_node = document.createTextNode(labels[i].id);
-            var val_txt = path.attr("loc_value") ? path.attr("loc_value").replace("null", "N/A").replace("undefined","") : "";
+            var val_txt = path.attr("loc_value") ? path.attr("loc_value").replace("null", "N/A").replace("undefined", "") : "";
             var val_txt_node = document.createTextNode(all_map_options.tooltip.dollar_sign + val_txt + all_map_options.tooltip.percent_sign);
 
             id_tspan.appendChild(id_txt_node);
