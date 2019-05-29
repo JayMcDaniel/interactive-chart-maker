@@ -171,7 +171,7 @@ var update_tooltip = {
 
             var multiple = options.multiplier;
 
-            var point_name = this.series.options.point_names ? this.series.options.point_names[this.point.index] + "<br>" : "";
+            var point_name = this.series.options.point_names && this.series.options.point_names[this.point.index] ? this.series.options.point_names[this.point.index] + "<br>" : "";
             
             var y_axis_title = this.series.yAxis.axisTitle ? this.series.yAxis.axisTitle.textStr : "Y-Axis";
             var x_axis_title = this.series.xAxis.axisTitle ? this.series.xAxis.axisTitle.textStr : "X-Axis";

@@ -49,6 +49,6 @@ $(function () {
     });
 
 //set app version (better through JS than statically to make sure JS is new)
-    $("#app_version").text("v2.8.6");
+    $("#app_version").text("v2.8.7");
 
 });
