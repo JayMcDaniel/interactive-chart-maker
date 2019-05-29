@@ -500,6 +500,9 @@ var map_init = {
             var opacity = ["state", "region", "division"].indexOf(map.map_type) > -1 ? ".1" : ".35";
             $("path, circle", map_display_area).attr("fill-opacity", opacity);
             $this.attr("fill-opacity", "1");
+            
+             //hide labels
+            $(".state_data_label", map_display_area).hide();
 
 
             //highlight other states if a region or division map
@@ -587,6 +590,9 @@ var map_init = {
 
             //hide tooltip
             $(".map_tooltip").hide();
+            
+            //show labels
+            $(".state_data_label", map_display_area).show();
             
             all_map_options.tooltip.current_loc_name = null;
 

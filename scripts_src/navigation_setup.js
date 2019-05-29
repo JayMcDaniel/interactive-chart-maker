@@ -77,7 +77,7 @@ var navigation_setup = {
         $("#get_code_button").unbind().click(function (e) {
 
             //populate individual series tab
-            update_individual_series.populateForm(chart, all_chart_options);
+     // (not needed? - makes a chart form for maps)       update_individual_series.populateForm(chart, all_chart_options);
 
             //hide the load saved chart area if it's showing
             $(".load_chart_showing").removeClass("load_chart_showing"); 

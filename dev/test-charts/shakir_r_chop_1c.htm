@@ -13,7 +13,7 @@
 
 
 
-    <div id="chart1" style="position: relative; width: 680px; height: 450px; margin: auto; padding: 0px;"> </div>
+    <div id="chart1" style="position: relative; width: 580px; height: 450px; margin: auto; padding: 0px;"> </div>
 
 
 
@@ -28,28 +28,11 @@
 
     <script>
         $(function () {
-
-            var y_axis_labels = {
-                "formatter": function newYFormat() {
-                    var s = this.value == parseInt(this.value) ? Highcharts.numberFormat(this.value, 0, ".", ",") : Highcharts.numberFormat(this.value, 1, ".", ",");
-                    s = s;
-                    return s.replace(/\$-/g, "-$");
-                },
-                "rotation": 0,
-                "style": {
-                    "color": "#000000",
-                    "fontFamily": "Calibri, Arial, Helvetica, sans-serif",
-                    "fontWeight": "normal",
-                    "backgroundColor": "#fff",
-                    "fontSize": "12px"
-                }
-            };
-
             var all_chart_options = {
                 "chart": {
 
                     "renderTo": "chart1",
-                    "margin": [90, 160, 85, 110],
+                    "margin": [70, 40, 85, 80],
                     "borderWidth": 0,
                     "plotBorderColor": "#000",
                     "plotBorderWidth": 0,
@@ -82,15 +65,15 @@
                     "enabled": true,
                     "floating": false,
                     "itemDistance": 30,
-                    itemWidth: 500,
+                    itemWidth: 410,
                     "layout": "horizontal",
                     "reversed": false,
                     "shadow": false,
                     "useHTML": false,
                     "verticalAlign": "top",
-                    "width": 1150,
+                    "width": 950,
                     "x": 30,
-                    "y": 20,
+                    "y": 30,
                     "itemStyle": {
                         "fontFamily": "Calibri, Arial, Helvetica, sans-serif",
                         "color": "#000",
@@ -105,17 +88,12 @@
                 },
                 "plotOptions": {
                     "series": {
-
-                        connectNulls: true,
-
                         "events": {
                             "legendItemClick": function legendItemClick(event) {}
                         },
                         "dataLabels": {
                             "enabled": false,
-                            "allowOverlap": true,
-                            crop: false,
-                            overflow: "allow",
+                            "allowOverlap": false,
                             "padding": 0,
                             "verticalAlign": "bottom",
                             "style": {
@@ -153,9 +131,6 @@
                         }
                     }
                 },
-
-
-
                 "series": [
 
 
@@ -164,7 +139,7 @@
                         "name": "Hashimoto's Thyroiditis",
                         "data": [{
                                 x: Date.UTC(2014, 3, 10),
-                                y: 49,
+                                y: 20,
                                 dataLabels: {
                                     enabled: true,
                                     formatter: function () {
@@ -176,12 +151,12 @@
                         },
                             {
                                 x: Date.UTC(2014, 11, 1),
-                                y: 49
+                                y: 20
                             }
                                 ],
 
                         "type": "line",
-                        "color": "#545454",
+                        "color": "#3f3ffc",
                         showInLegend: false,
                         lineWidth: 10,
                         marker: {
@@ -194,7 +169,7 @@
                         "name": "Thyroid Lymphoma",
                         "data": [{
                                 x: Date.UTC(2015, 0, 1),
-                                y: 49,
+                                y: 20,
                                 dataLabels: {
                                     enabled: true,
                                     formatter: function () {
@@ -206,12 +181,12 @@
                         },
                             {
                                 x: Date.UTC(2015, 6, 1),
-                                y: 49
+                                y: 20
                             }
                                 ],
 
                         "type": "line",
-                        "color": "#545454",
+                        "color": "#bc0300",
                         showInLegend: false,
                         lineWidth: 10,
                         marker: {
@@ -224,7 +199,7 @@
                         "name": "Graves' Hyperthyroidism",
                         "data": [{
                                 x: Date.UTC(2016, 11, 15),
-                                y: 49,
+                                y: 20,
                                 dataLabels: {
                                     enabled: true,
                                     formatter: function () {
@@ -236,12 +211,12 @@
                         },
                             {
                                 x: Date.UTC(2017, 4, 15),
-                                y: 49
+                                y: 20
                             }
                                 ],
 
                         "type": "line",
-                        "color": "#545454",
+                        "color": "#7e5ca8",
                         showInLegend: false,
                         lineWidth: 10,
                         marker: {
@@ -254,7 +229,7 @@
                         "name": "Hypothyroidism",
                         "data": [{
                                 x: Date.UTC(2017, 5, 13),
-                                y: 49,
+                                y: 20,
                                 dataLabels: {
                                     enabled: true,
                                     overflow: "allow",
@@ -268,12 +243,12 @@
                         },
                             {
                                 x: Date.UTC(2017, 10, 14),
-                                y: 49
+                                y: 20
                             }
                                 ],
 
                         "type": "line",
-                        "color": "#545454",
+                        "color": "#333",
                         showInLegend: false,
                         lineWidth: 10,
                         marker: {
@@ -292,7 +267,7 @@
                         "name": "R-CHOP",
                         "data": [{
                                 x: Date.UTC(2015, 0, 15),
-                                y: 1,
+                                y: 7,
                                 dataLabels: {
                                     enabled: true,
                                     formatter: function () {
@@ -304,7 +279,7 @@
                         },
                             {
                                 x: Date.UTC(2015, 5, 15),
-                                y: 1
+                                y: 7
                             }
                                 ],
 
@@ -322,7 +297,7 @@
                         "name": "RXT",
                         "data": [{
                                 x: Date.UTC(2015, 6, 20),
-                                y: 1,
+                                y: 7,
                                 dataLabels: {
                                     enabled: true,
                                     formatter: function () {
@@ -334,7 +309,7 @@
                         },
                             {
                                 x: Date.UTC(2015, 7, 30),
-                                y: 1
+                                y: 7
                             }
                                 ],
 
@@ -352,7 +327,7 @@
                         "name": "MMI",
                         "data": [{
                                 x: Date.UTC(2017, 1, 18),
-                                y: 1,
+                                y: 7,
                                 dataLabels: {
                                     enabled: true,
                                     formatter: function () {
@@ -363,8 +338,8 @@
                                 }
                         },
                             {
-                                x: Date.UTC(2017, 3, 29),
-                                y: 1
+                                x: Date.UTC(2017, 4, 5),
+                                y: 7
                             }
                                 ],
 
@@ -379,16 +354,16 @@
 
 
                     {
-                        "name": "I131",
+                        "name": "I",
                         "data": [{
-                                x: Date.UTC(2017, 4, 29),
-                                y: 1,
+                                x: Date.UTC(2017, 4, 12),
+                                y: 9,
                                 dataLabels: [{
                                         enabled: true,
                                         formatter: function () {
                                             return "I";
                                         },
-                                        x: 0,
+                                        x: 10,
                                         y: -10
                                 },
                                     {
@@ -396,7 +371,7 @@
                                         formatter: function () {
                                             return "131";
                                         },
-                                        x: 10,
+                                        x: 20,
                                         y: -18,
                                         style: {
                                             fontSize: "8px"
@@ -409,8 +384,8 @@
 
                         },
                             {
-                                x: Date.UTC(2017, 4, 30),
-                                y: 1
+                                x: Date.UTC(2017, 4, 13),
+                                y: 9
                             }
                                 ],
 
@@ -429,19 +404,19 @@
                         "name": "L-T4",
                         "data": [{
                                 x: Date.UTC(2017, 7, 1),
-                                y: 1,
+                                y: 7,
                                 dataLabels: {
                                     enabled: true,
                                     formatter: function () {
                                         return this.series.name;
                                     },
-                                    x: 20,
+                                    x: 25,
                                     y: -10
                                 }
                         },
                             {
                                 x: Date.UTC(2017, 10, 14),
-                                y: 1
+                                y: 7
                             }
                                 ],
 
@@ -459,76 +434,42 @@
 
 
                     {
-                        "name": "TSI",
-                        "data": [[Date.UTC(2014, 3, 10), 88], [Date.UTC(2015, 1, 15), null], [Date.UTC(2015, 7, 2), null], [Date.UTC(2016, 3, 16), 96], [Date.UTC(2017, 1, 19), 535]],
+                        "name": "TSH (IU/L)",
+                        "data": [[Date.UTC(2014, 3, 10), 1.43], [Date.UTC(2014, 11, 19), 5.9], [Date.UTC(2015, 1, 10), 4.0], [Date.UTC(2015, 3, 20), 3.1], [Date.UTC(2015, 7, 2), 2.5], [Date.UTC(2016, 0, 3), 2.3], [Date.UTC(2016, 3, 4), 2.1], [Date.UTC(2016, 11, 19), 2.9], [Date.UTC(2017, 1, 17), 0.005], [Date.UTC(2017, 1, 17), 0.005], [Date.UTC(2017, 2, 3), 0.9], [Date.UTC(2017, 3, 28), 0.84], [Date.UTC(2017, 5, 14), 0.009], [Date.UTC(2017, 9, 15), 21.00], [Date.UTC(2017, 10, 14), 1.24]],
 
-                        pointStart: Date.UTC(2014, 3, 10),
-                        pointEnd: Date.UTC(2017, 1, 19),
+                        pointStart: Date.UTC(2014, 4, 10),
+                        pointEnd: Date.UTC(2017, 11, 14),
                         "type": "line",
-                        "color": "#303030",
+                        "color": "#bc0300",
                         "_symbolIndex": 0,
                         "stacking": null,
-                        "visible": true,
-                        yAxis: 1,
-                        legendIndex: 0
+                        "visible": true
 
-                    },
+            },
 
 
                     {
-                        "name": "TBR Ab",
-                        "data": [[Date.UTC(2014, 3, 10), 10], [Date.UTC(2015, 1, 15), null], [Date.UTC(2015, 7, 2), null], [Date.UTC(2016, 3, 16), 10], [Date.UTC(2017, 1, 19), 28]],
+                        "name": "Free T4 (ng/dL)",
+                        "data": [[Date.UTC(2014, 3, 10), 1.28], [Date.UTC(2014, 11, 19), 1.10], [Date.UTC(2015, 1, 10), 1.12], [Date.UTC(2015, 3, 20), 1.48], [Date.UTC(2015, 7, 2), 1.38], [Date.UTC(2016, 0, 3), 1.28], [Date.UTC(2016, 3, 4), 1.3], [Date.UTC(2016, 11, 19), 1.38], [Date.UTC(2017, 1, 17), 5.6], [Date.UTC(2017, 1, 17), 6.73], [Date.UTC(2017, 2, 3), 1.68], [Date.UTC(2017, 3, 28), 1.49], [Date.UTC(2017, 5, 14), 1.23], [Date.UTC(2017, 9, 15), 0.99], [Date.UTC(2017, 10, 14), 1.58]],
 
-                        pointStart: Date.UTC(2014, 3, 10),
-                        pointEnd: Date.UTC(2017, 1, 19),
+                        pointStart: Date.UTC(2014, 4, 10),
+                        pointEnd: Date.UTC(2017, 11, 14),
+
                         "type": "line",
-                        "color": "#666666",
+                        yAxis: 1,
+                        "color": "#3f3ffc",
                         "_symbolIndex": 1,
                         "stacking": null,
                         "visible": true,
-                        yAxis: 0,
-                        dashStyle: "Dash",
-                        legendIndex: 2
-
-                    },
-
-
-                    {
-                        "name": "TPO Ab",
-                        "data": [[Date.UTC(2014, 3, 10), 18290], [Date.UTC(2015, 1, 15), 11288], [Date.UTC(2015, 7, 2), 9600], [Date.UTC(2016, 3, 16), 9186], [Date.UTC(2017, 1, 19), 8868]],
-
-                        pointStart: Date.UTC(2014, 3, 10),
-                        pointEnd: Date.UTC(2017, 1, 19),
-                        "type": "line",
-                        "color": "#878787",
-                        "_symbolIndex": 2,
-                        "stacking": null,
-                        "visible": true,
-                        yAxis: 2,
-                        legendIndex: 1
-
-                    },
-
-
-
-                    {
-                        "name": "Tg Ab",
-                        "data": [[Date.UTC(2014, 3, 10), 2250], [Date.UTC(2015, 1, 15), 1860], [Date.UTC(2015, 7, 2), 1600], [Date.UTC(2016, 3, 16), 1122], [Date.UTC(2017, 1, 19), 986]],
-
-                        pointStart: Date.UTC(2014, 3, 10),
-                        pointEnd: Date.UTC(2017, 1, 19),
-                        "type": "line",
-                        "color": "#a8a8a8",
-                        "_symbolIndex": 3,
-                        "stacking": null,
-                        "visible": true,
-                        yAxis: 3,
-                        legendIndex: 3
-
-
+                        "dashStyle": "Dash"
                     }
 
-                ],
+
+
+
+
+
+                     ],
 
 
 
@@ -633,145 +574,118 @@
                     type: 'datetime',
 
                 },
-
-
-
-                "yAxis": [
-
+                "yAxis": [{
+                        "gridLineColor": "#c0c0c0",
+                        "gridLineWidth": 1,
+                        "gridLineDashStyle": "Solid",
+                        "labels": {
+                            "formatter": function newYFormat() {
+                                var s = this.value == parseInt(this.value) ? Highcharts.numberFormat(this.value, 0, ".", ",") : Highcharts.numberFormat(this.value, 1, ".", ",");
+                                s = s;
+                                return s.replace(/\$-/g, "-$");
+                            },
+                            "rotation": 0,
+                            "style": {
+                                "color": "#000000",
+                                "fontFamily": "Calibri, Arial, Helvetica, sans-serif",
+                                "fontWeight": "normal",
+                                "backgroundColor": "#fff",
+                                "fontSize": "12px"
+                            }
+                        },
+                        "lineColor": "gray",
+                        "lineWidth": 1,
+                        "max": 25,
+                        "min": 0,
+                        "opposite": false,
+                        "plotBands": [],
+                        "plotLines": [{
+                            "value": 0,
+                            "color": "#c0c0c0",
+                            "dashStyle": "Solid",
+                            "width": 1
+                }],
+                        "tickInterval": null,
+                        "tickmarkPlacement": "on",
+                        "tickPosition": "outside",
+                        "tickColor": "#C0D0E0",
+                        "tickWidth": 1,
+                        "title": {
+                            "useHTML": false,
+                            "text": "",
+                            "margin": 6,
+                            "align": "high",
+                            "offset": 20,
+                            "rotation": 0,
+                            "x": 35,
+                            "y": -20,
+                            "style": {
+                                "color": "#000000",
+                                "fontFamily": "Calibri, Arial, Helvetica, sans-serif",
+                                "fontWeight": "normal",
+                                "fontSize": "13px"
+                            }
+                        },
+                        "type": "linear"
+            },
 
                     {
                         "gridLineColor": "#c0c0c0",
                         "gridLineWidth": 1,
-                        "gridLineDashStyle": "Solid",
-                        "labels": y_axis_labels,
-                        "lineColor": "gray",
-                        "lineWidth": 1,
-                        "max": 50,
-                        "min": 0,
-                        "opposite": false,
-                        "tickInterval": null,
-                        "tickmarkPlacement": "on",
-                        "tickPosition": "outside",
-                        "tickColor": "#C0D0E0",
-                        "tickWidth": 1,
-                        "title": {
-                            "text": "TB Ab (%)",
-                            "margin": 6,
-
+                        "gridLineDashStyle": "Dot",
+                        "labels": {
+                            "formatter": function newYFormat() {
+                                var s = this.value == parseInt(this.value) ? Highcharts.numberFormat(this.value, 0, ".", ",") : Highcharts.numberFormat(this.value, 1, ".", ",");
+                                s = s;
+                                return s.replace(/\$-/g, "-$");
+                            },
+                            "rotation": 0,
                             "style": {
                                 "color": "#000000",
                                 "fontFamily": "Calibri, Arial, Helvetica, sans-serif",
                                 "fontWeight": "normal",
-                                "fontSize": "13px"
+                                "backgroundColor": "#fff",
+                                "fontSize": "12px"
                             }
-                        }
-                    },
-
-
-                    {
-                        "gridLineColor": "#c0c0c0",
-                        "gridLineWidth": 0,
-                        "gridLineDashStyle": "Solid",
-                        "labels": y_axis_labels,
+                        },
                         "lineColor": "gray",
                         "lineWidth": 1,
-                        "max": 600,
-                        margin: 10,
-                        "min": 0,
-                        "opposite": false,
-                        "tickInterval": null,
-                        "tickmarkPlacement": "on",
-                        "tickPosition": "outside",
-                        "tickColor": "#C0D0E0",
-                        "tickWidth": 1,
-                        "title": {
-                            "text": "TSI (%)",
-                            "margin": 6,
-
-                            "style": {
-                                "color": "#000000",
-                                "fontFamily": "Calibri, Arial, Helvetica, sans-serif",
-                                "fontWeight": "normal",
-                                "fontSize": "13px"
-                            }
-                        }
-                    },
-
-
-
-                    {
-                        "gridLineColor": "#c0c0c0",
-                        "gridLineWidth": 0,
-                        "gridLineDashStyle": "Solid",
-                        "labels": y_axis_labels,
-                        "lineColor": "gray",
-                        "lineWidth": 1,
-                        "max": 20000,
-                        margin: 10,
+                        "max": 8,
                         "min": 0,
                         "opposite": true,
-                        "tickInterval": null,
+                        "plotBands": [],
+                        "plotLines": [{
+                            "value": 0,
+                            "color": "#c0c0c0",
+                            "dashStyle": "solid",
+                            "width": 1
+                }],
+                        "tickInterval": 2,
                         "tickmarkPlacement": "on",
                         "tickPosition": "outside",
                         "tickColor": "#C0D0E0",
                         "tickWidth": 1,
                         "title": {
-                            "text": "TPO Ab (IU/mL)",
+                            "useHTML": false,
+                            "text": "",
                             "margin": 6,
-
+                            "align": "high",
+                            "offset": 20,
+                            "rotation": 0,
+                            "x": 35,
+                            "y": -20,
                             "style": {
                                 "color": "#000000",
                                 "fontFamily": "Calibri, Arial, Helvetica, sans-serif",
                                 "fontWeight": "normal",
                                 "fontSize": "13px"
                             }
-                        }
-                    },
-
-                    {
-                        "gridLineColor": "#c0c0c0",
-                        "gridLineWidth": 0,
-                        "gridLineDashStyle": "Solid",
-                        "labels": y_axis_labels,
-                        "lineColor": "gray",
-                        "lineWidth": 1,
-                        "max": 2500,
-                        margin: 10,
-                        "min": 0,
-                        "opposite": true,
-                        "tickInterval": null,
-                        "tickmarkPlacement": "on",
-                        "tickPosition": "outside",
-                        "tickColor": "#C0D0E0",
-                        "tickWidth": 1,
-                        "title": {
-                            "text": "Tg Ab (IU/mL)",
-                            "margin": 6,
-
-                            "style": {
-                                "color": "#000000",
-                                "fontFamily": "Calibri, Arial, Helvetica, sans-serif",
-                                "fontWeight": "normal",
-                                "fontSize": "13px"
-                            }
-                        }
-                    }
-
-
-
-
-
-
-
+                        },
+                        "type": "linear"
+            }
 
 
                      ],
-
-
-
-
-
-
                 "credits": {
                     "href": "/",
                     "position": {
