@@ -1340,20 +1340,24 @@
                      
                     <div class="just_scatter">
                         
-                    <label for="chart_scatter_add_line_checkbox">Add 45-degree line: </label>
-                    <input type="checkbox" id="chart_scatter_add_line_checkbox" />
+                    <label for="chart_scatter_add_45_line_checkbox">Add 45-degree line: </label>
+                    <input type="checkbox" id="chart_scatter_add_45_line_checkbox" />
                     <br>
                         
-                    <!--    
+                    <label for="chart_scatter_add_regression_line_checkbox">Add regression (average value) line: </label>
+                    <input type="checkbox" id="chart_scatter_add_regression_line_checkbox" />
+                    <br>
+                        
+                    
                     <label for="chart_scatter_highlight_points_select">Highlight points (with red outline): </label>
                     <select id="chart_scatter_highlight_points_select">
-                        <option>&nbsp;</option>
-                        <option value="x>y">When X value is greater than Y value</option>
-                        <option value="x<y">When X value is less than Y value</option>
+                        <option value="no_highlight">&nbsp;</option>
+                        <option value="x>y">When below 45-degree line</option>
+                        <option value="x<y">When above 45-degree line</option>
                       
                     </select>
                     <br>
--->
+
                     
                     
                         

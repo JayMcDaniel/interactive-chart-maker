@@ -632,11 +632,11 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
         var val = utils_forms.getCheckBoxValue($(this));
         update_chart_options.toggleDataLabels(val, chart, all_chart_options);
     });
-    
-    
-    //scatter plot 45-degree line checkbox toggled
-    chart_scatter_add_line_checkbox
-       $("#chart_scatter_add_line_checkbox").unbind().change(function () {
+
+
+    //scatter plot 45-degree, regression line checkbox toggled, highlight select changed
+    chart_scatter_add_45_line_checkbox
+    $("#chart_scatter_add_45_line_checkbox, #chart_scatter_highlight_points_select, #chart_scatter_add_regression_line_checkbox").unbind().change(function () {
         update_data.updateData(chart, all_chart_options);
     });
 
@@ -705,16 +705,16 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
 
     //CHECKBOXES - map size for spotlight, VI, PR, and add columns inset checkboxes changed
     $("#map_spotlight_size_checkbox, #map_include_puerto_rico_checkbox, #map_include_virgin_islands_checkbox, #map_add_ranked_columns_checkbox, #map_add_state_labels_checkbox").unbind().change(function () {
-   
+
         //move legend over if adding columns inset
-        if ($(this).attr("id") == "map_add_ranked_columns_checkbox"){
+        if ($(this).attr("id") == "map_add_ranked_columns_checkbox") {
             $("#legend_placement_x").val(10);
         }
-        
+
         map_init.loadNewMap(chart, all_chart_options, all_map_options, true); // true to repopulate form
     });
 
-    
+
 
 
 

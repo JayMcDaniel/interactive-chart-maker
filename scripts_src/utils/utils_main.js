@@ -39,7 +39,6 @@ var utils_main = {
             //functions are named "function1, function2" and later replaced with the real function after the rest of the json has been stringified
             if (typeof value === 'function') {
 
-
                 //combine y axis and tooltip replacement objs
                 var replacements_obj = $.extend({}, update_x_axis.replacement_obj);
                 //update_tooltip.replacement_obj, 
@@ -70,38 +69,75 @@ var utils_main = {
     },
 
 
-    /** functions to set or return min max values **/
+
+
+    /** find index of greatest in array funct **/
+
+    findIndex: function (arr, findIndex) {
+
+        var selected;
+        var selected_index;
+        for (var i = 0, len = arr.length; i < len; i++) {
+            if (!selected || findIndex(arr[i], selected)) {
+                selected = arr[i];
+                selected_index = i;
+            }
+        }
+        return selected_index;
+    },
+
+
+    /** find index of greatest val in array funct **/
+    findIndexOfGreatest: function (array) {
+        return this.findIndex(array, function (val, selected) {
+            return val > selected;
+        });
+    },
+
+
+    /** find index of lowest val in array funct **/
+
+    findIndexOfLowest: function (array) {
+
+        return this.findIndex(array, function (val, selected) {
+            return val < selected;
+        });
+    },
+
+
+
+    /** functions to set or return chart min max values **/
     limits: {
 
         max: 0,
         min: undefined,
 
         setMax: function (val) {
-            utils_main.limits.max = val > utils_main.limits.max ? val : utils_main.limits.max;
+            this.max = val > this.max ? val : this.max;
         },
 
         setMin: function (val) {
-            if (utils_main.limits.min === undefined) {
-                utils_main.limits.min = val;
+            if (this.min === undefined) {
+                this.min = val;
             } else {
-                utils_main.limits.min = val < utils_main.limits.min ? val : utils_main.limits.min;
+                this.min = val < this.min ? val : this.min;
             }
         },
 
         resetMax: function () {
-            utils_main.limits.max = 0;
+            this.max = 0;
         },
 
         resetMin: function () {
-            utils_main.limits.min = undefined;
+            this.min = undefined;
         },
 
         getMax: function () {
-            return utils_main.limits.max;
+            return this.max;
         },
 
         getMin: function () {
-            return utils_main.limits.min;
+            return this.min;
         }
     },
 
@@ -165,15 +201,9 @@ var utils_main = {
         //x,y,z signs array replacements
 
         formatter_str = formatter_str
-        //    .replace(/y_signs_arr\[0\]/g, '"' + replacement_obj.y_signs_arr[0] + '"')
-        //    .replace(/y_signs_arr\[1\]/g, '"' + replacement_obj.y_signs_arr[1] + '"')
-        //    .replace(/x_signs_arr\[0\]/g, '"' + replacement_obj.x_signs_arr[0] + '"')
-        //    .replace(/x_signs_arr\[1\]/g, '"' + replacement_obj.x_signs_arr[1] + '"')
-        //    .replace(/z_signs_arr\[0\]/g, '"' + replacement_obj.z_signs_arr[0] + '"')
-        ///    .replace(/z_signs_arr\[1\]/g, '"' + replacement_obj.z_signs_arr[1] + '"')
             .replace(/x_axis_signs_arr\[0\]/g, '"' + replacement_obj.x_axis_signs_arr[0] + '"')
             .replace(/x_axis_signs_arr\[1\]/g, '"' + replacement_obj.x_axis_signs_arr[1] + '"');
-         
+
 
         for (name in replacement_obj) {
             var re = new RegExp("\\b" + name, "g");
