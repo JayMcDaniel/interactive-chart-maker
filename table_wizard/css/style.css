@@ -187,3 +187,9 @@ h3 {
     width: 40px;
     height: 40px;
 }
+
+.clear_next_textarea_button{
+    color: #b73438;
+    top: 14px;
+    right: 2px;
+}

@@ -21,8 +21,8 @@ function makeNewTable(input) {
         //insert tfoot elements
         insertTFoot(parsed_input, table_ID);
 
-        //stripe rows
-        $("#table_result tbody tr:odd").addClass("greenbar");
+        //style table
+        styleTable();
 
         //add indents to row headers
         addIndents();
@@ -30,7 +30,10 @@ function makeNewTable(input) {
         //merge first cell of THead if needed
         formatFirstTHead();
 
+        //footer links back to table
         addFooterLinks(table_ID);
+
+
 
         //linkify urls
         $("th, td", $("#table_result table")).each(function (i, e) {
@@ -120,6 +123,9 @@ function insertTFoot(parsed_input, table_ID) {
 /*returns an object out of the inputed Excell (text) table data */
 function parseInput(input) {
 
+    var is_text_tabulation = $('#is_text_tabulation_checkbox').attr('checked');
+    
+    
     parsed_input = {
         caption: "",
         thead: [],
@@ -131,15 +137,26 @@ function parseInput(input) {
 
     var all_rows = input.split("\n");
 
-    parsed_input.caption = $.trim(all_rows[0]);
+    var header_row = 1;
+    //no caption if a tabulation table
+    if (is_text_tabulation) {
+        header_row = 0;
 
-    parsed_input.thead.push(all_rows[1].split("\t"));
+    } else { //else a normal table
+        parsed_input.caption = $.trim(all_rows[0]);
+    }
+    parsed_input.thead.push(all_rows[header_row].split("\t"));
+
+
+
 
     var in_header = true;
     var in_footer = false;
 
 
-    for (var i = 2; i < all_rows.length; i++) {
+    var start_body_row = is_text_tabulation ? 1 : 2;
+    
+    for (var i = start_body_row; i < all_rows.length; i++) {
         var row = all_rows[i].split("\t");
 
         //test if begining of the footer
@@ -153,7 +170,7 @@ function parseInput(input) {
 
         if (in_footer) {
             parsed_input.tfoot.push(row);
-        } else if (in_header && row[0] === "") {
+        } else if (!is_text_tabulation && in_header && row[0] === "") {
             parsed_input.thead.push(row);
         } else {
             in_header = false;
@@ -284,6 +301,39 @@ function linkify(inputText) {
     return replacedText;
 }
 
+
+
+//style table function
+function styleTable() {
+
+    //stripe rows or format for text-tablulation table
+    if ($('#is_text_tabulation_checkbox').attr('checked')) {
+        $("td, th, p, table", $("#table_result")).css({
+            "text-align": "center",
+            "border-width": "0",
+            "background": "#fff"
+        });
+
+
+    } else {
+        $("#table_result tbody tr:odd").addClass("greenbar");
+    }
+
+    //make smaller if it's for mlr
+
+    if ($('#for_MLR_checkbox').attr('checked')) {
+        $("#table_result table").css("width", "618px");
+    }
+
+    //left align columns if desired
+    var left_align_columns = Math.floor(Number($("#left_align").val()));
+    if (!isNaN(left_align_columns) && left_align_columns > 0) {
+
+        $("td:lt(" + left_align_columns + ")", $("#table_result table tbody tr")).css("text-align", "left");
+
+    }
+
+}
 
 
 //show html when button clicked
@@ -570,18 +620,29 @@ function tableClicks() {
 }
 
 
+
+/** when clear next text area button (X) is clicked, find and clear the text of the next textarea */
+function clearNextTextareaClick() {
+    $(".clear_next_textarea_button").click(function () {
+        $(this).next("textarea").val("");
+        console.log("click");
+    });
+}
+
+
+
+
 //when chart button is clicked, opens up chartmaker
 function makeChartSetup() {
 
     $(".chartThisTableButton").click(function () {
-        
+
         sessionStorage.setItem('imported_chart_type', $(this).attr('id'));
         sessionStorage.setItem('imported_table', $("#table_html").val());
-        
+
         var newChartWindow = window.open("../");
     });
 }
-
 
 
 
@@ -590,7 +651,7 @@ $(document).ready(function () {
     $("#app_version").text("2.0.0");
 
     //update table when text area is edited
-    $("#table_input_textarea").bind("input blur paste", function (e) {
+    $("#table_input_textarea, #is_text_tabulation_checkbox, #for_MLR_checkbox, #left_align").bind("input blur paste", function (e) {
         var input = $("#table_input_textarea").val();
         makeNewTable(input);
 
@@ -599,6 +660,7 @@ $(document).ready(function () {
     getCodeSetup();
     loadTableSetup()
     copyToClipBoardSetup();
+    clearNextTextareaClick();
     toolboxSetup();
     makeChartSetup();
 

@@ -32,16 +32,18 @@
 
         <span id="show_load_chart_area_button" title="Load saved table" alt="Load table"></span>
 
-        <div class="tool_box_button" title="Align text left" alt="Align text left" id="toolBoxAlignLeft"></div>
-        <div class="tool_box_button" title="Center text" alt="Center text" id="toolBoxAlignCenter"></div>
         <div class="tool_box_button" title="Align text right" alt="Align text right" style="margin-bottom:15px;" id="toolBoxAlignRight"></div>
+     
+        <div class="tool_box_button" title="Center text" alt="Center text" id="toolBoxAlignCenter"></div>
+        <div class="tool_box_button" title="Align text left" alt="Align text left" id="toolBoxAlignLeft"></div>
 
         <div class="tool_box_button" title="Vertically align text to top" alt="Vertically align text to top" id="toolBoxVertAlignTop"></div>
         <div class="tool_box_button" title="Vertically center text" alt="Vertically center text" id="toolBoxVertAlignMiddle"></div>
         <div class="tool_box_button" title="Vertically align text to bottom" alt="Vertically align text to bottom" style="margin-bottom:15px;" id="toolBoxVertAlignBottom"></div>
 
-        <div class="tool_box_button" title="Increaase indent" alt="Increaase indent" id="toolBoxIncreaseIndent"></div>
         <div class="tool_box_button" title="Decrease indent" alt="Decrease indent" style="margin-bottom:15px;" id="toolBoxDecreaseIndent"></div>
+        <div class="tool_box_button" title="Increaase indent" alt="Increaase indent" id="toolBoxIncreaseIndent"></div>
+        
 
         <div class="tool_box_button" title="Bold text" alt="Bold text" id="toolBoxTextBold"></div>
         <div class="tool_box_button" title="Italicize text" alt="Italicize text" style="margin-bottom:15px;" id="toolBoxTextItalic"></div>
@@ -54,8 +56,10 @@
 
 
     <div id="side_main">
-
         <label for="table_input_textarea">Insert Excel table here:</label>
+<div class="clear_next_textarea_button" title="Clear the text area">X</div>
+        
+        
         <textarea id="table_input_textarea" class="large" placeholder="Insert table data here. Make sure that your table has a title and row and column headers.">Spending and income				
 Date	Spending	test	Net Worth	Assets * .04 / 12
 February 2017	4514	5461	188,713.84	629.05
@@ -64,6 +68,22 @@ April	3694	5576	202,540.44	675.13</textarea>
         <br>
         <br>
 
+        
+        <h3>Setup options</h3>
+        
+        <label for="left_align">Left align how many columns? (from left): </label>
+<input id="left_align" rows="1" value="0" style="width:30px"/>
+    
+        <label for="for_MLR_checkbox">Size smaller for MLR?</label>
+<input type="checkbox"  id="for_MLR_checkbox"/> 
+        
+        <br>
+
+ <label for="is_text_tabulation_checkbox">Text-tabulation table with no title?</label>
+<input type="checkbox"  id="is_text_tabulation_checkbox"/>
+
+
+        
     </div>
 
 
@@ -109,10 +129,11 @@ April	3694	5576	202,540.44	675.13</textarea>
     <div id="load_table_div">
         <h3>Load table from saved HTML</h3>
         <p>Copy and paste the output from a previous table here. You can then edit the table and retrieve the new HTML.</p>
+   <button id="load_table_button">Load table</button>
+        <div class="clear_next_textarea_button" title="Clear the text area" style="top: 5px;">X</div>  
+     
 
-        <button id="load_table_button">Load table</button>
-
-
+        
         <textarea id="load_table_textarea"></textarea>
 
     </div>
