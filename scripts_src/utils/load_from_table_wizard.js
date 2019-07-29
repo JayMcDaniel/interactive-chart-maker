@@ -3,18 +3,24 @@
 **/
 
 var loadFromTableWizard = (function () {
-    if (window.opener) {
+    
+    var imported_table = sessionStorage.getItem('imported_table');
 
-        if (window.opener.importedTable && window.opener.importedTable.length > 0) {
-            
+    var imported_chart_type = sessionStorage.getItem('imported_chart_type');
+    
+    console.log("importing", imported_table, imported_chart_type);
+    
+    if (imported_table && imported_chart_type) {
+
+        
             $(".chart_type_icon").removeClass("selected");
             
-            $("#"+window.opener.importedChartType).addClass("selected");
+            $("#"+imported_chart_type).addClass("selected");
             
-            $("#table_input_textarea").val(window.opener.importedTable);
+            $("#table_input_textarea").val(imported_table);
             
-            window.opener.importedTable = null; //clear it so when page refreshes it's not the same table still
-        }
+          //  window.opener.importedTable = null; //clear it so when page refreshes it's not the same table still
+        
     }
     
 })();

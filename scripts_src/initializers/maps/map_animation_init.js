@@ -77,7 +77,8 @@ var map_animation_init = {
                 "type": "range",
                 "min": "0",
                 "max": all_map_options.animated_value_titles.length - 1,
-                "value": all_map_options.animation_start_at_end ? all_map_options.animated_value_titles.length - 1 : 0
+                "value": all_map_options.animation_start_at_end ? all_map_options.animated_value_titles.length - 1 : 0,
+                "title": "Animation slider"
             })
             .css({
                 float: "left",

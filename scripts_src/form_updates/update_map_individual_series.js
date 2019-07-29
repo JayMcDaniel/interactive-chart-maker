@@ -52,6 +52,7 @@ var update_map_individual_series = {
 
         var range = document.createElement("input");
         range.className = "map_range_input";
+        range.id = "map_range_input_"+i;
 
         var range_text = document.createElement("span");
 

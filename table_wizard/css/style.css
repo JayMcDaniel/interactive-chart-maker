@@ -1,0 +1,189 @@
+#top_nav_bar {
+    background-color: #7d0707;
+    padding-right: 40px;
+}
+
+#main_content_div {
+    top: 30px;
+    position: relative;
+    padding: 20px;
+}
+
+#side_main {
+    background-color: #c1c1c1;
+    color: #000;
+    padding-top: 50px;
+    color: #7d0707;
+}
+
+body {
+    color: #7d0707;
+}
+
+h3 {
+    color: #7d0707;
+    margin-bottom: 10px;
+}
+
+#main_content_div .notes {
+    display: inline !important;
+    font-size: 60% !important;
+}
+
+#main_content_div a {
+    color: #337ab7;
+    cursor: pointer;
+}
+
+#get_code_button {
+    color: #7d0707;
+}
+
+#get_code_button:hover {
+    color: #337ab7;
+}
+
+#show_load_chart_area_button {
+    background-image: url(../../images/icons/load_hover.png);
+    background-size: 90%;
+    margin-right: 25px;
+}
+
+#show_load_chart_area_button:hover {
+    background-image: url(../../images/icons/load.png);
+    background-size: 75%;
+}
+
+#table_input_textarea {
+    height: 250px;
+}
+
+#main_result_code_div {
+    display: none;
+    position: absolute;
+    top: 40px;
+}
+
+#table_html {
+    height: 400px;
+}
+
+.copy_to_clipboard_button {
+    background-image: url(../../images/icons/copy_to_clipboard_icon_hover.png);
+}
+
+.copy_to_clipboard_button:hover {
+    background-image: url(../../images/icons/copy_to_clipboard_icon.png);
+}
+
+#load_table_div {
+    display: none;
+    position: absolute;
+    width: 100%;
+    min-height: 750px;
+    z-index: 200;
+    padding: 10px;
+    background-color: #fff;
+    border: solid 1px #b73438;
+}
+
+#load_table_textarea {
+    height: 600px;
+}
+
+
+/*TOOL BOX CSS */
+
+#wizardToolBox {
+    position: fixed;
+    left: 20px;
+    top: 20px;
+    z-index: 100;
+    /* min-height: 400px; */
+    width: 745px;
+    height: 58px;
+    background-color: #FFD45F;
+    border-radius: 5px;
+}
+
+.tool_box_button {
+    width: 25px;
+    height: 25px;
+    margin: 7px 5px 15px 5px;
+    background-color: #FFFFFF;
+    border: #000 solid 1px;
+    border-radius: 5px;
+    cursor: pointer;
+    float: right;
+    right: 40px;
+    background-size: 100% 96%;
+}
+
+.tool_box_button:hover {
+    border: #337ab7 solid 1px;
+}
+
+#toolBoxAlignLeft {
+    background-image: url(../images/alignLeftIcon.png);
+}
+
+#toolBoxAlignCenter {
+    background-image: url(../images/alignCenterIcon.png);
+}
+
+#toolBoxAlignRight {
+    background-image: url(../images/alignRightIcon.png);
+}
+
+#toolBoxVertAlignTop {
+    background-image: url(../images/alignTopIcon.png);
+}
+
+#toolBoxVertAlignMiddle {
+    background-image: url(../images/alignMiddleIcon.png);
+}
+
+#toolBoxVertAlignBottom {
+    background-image: url(../images/alignBottomIcon.png);
+}
+
+#toolBoxTextBold {
+    background-image: url(../images/boldTextIcon.png);
+}
+
+#toolBoxTextItalic {
+    background-image: url(../images/italicTextIcon.png);
+}
+
+#toolBoxCellWidthIncrease {
+    background-image: url(../images/widthIncreaseIcon.png);
+}
+
+#toolBoxCellWidthDecrease {
+    background-image: url(../images/widthDecreaseIcon.png);
+}
+
+#toolBoxMergeCells {
+    background-image: url(../images/mergeCellsIcon.png);
+}
+
+#toolBoxIncreaseIndent {
+    background-image: url(../images/increaseIndentIcon.png);
+}
+
+#toolBoxDecreaseIndent {
+    background-image: url(../images/decreaseIndentIcon.png);
+}
+
+.tool_box_button.active {
+    background-color: #fff59a;
+}
+
+#table_result table .to_be_merged{
+    background-color: yellow !important;
+}
+
+.chart_type_icon{
+    width: 40px;
+    height: 40px;
+}

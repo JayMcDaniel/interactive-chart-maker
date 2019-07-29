@@ -154,7 +154,7 @@ var map_init = {
         map_init.populateSVGAreas(all_map_options, map_outer_svg); //colorizes paths, sets circle attributes, appends g elements to svg
 
         var map_title = map_title_init.getMapTitle(all_map_options.title); //creates and returns a styled map h2 title with text
-        var map_subtitle = map_subtitle_init.getMapSubtitle(all_map_options.subtitle); //creates and returns a styled map h3 title with text
+        var map_subtitle = map_subtitle_init.getMapSubtitle(all_map_options.subtitle) || undefined; //creates and returns a styled map h3 title with text
         var map_credits = map_credits_init.getMapCredits(all_map_options.credits); //creates and returns a styled map div credits with text
 
         var tooltip_div = map_tooltip_init.getMapTooltip(all_map_options); //creates and returns an empty tooltip div template 

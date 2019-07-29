@@ -333,11 +333,18 @@ var badIEurl = /http:\/\/opubrev08\.bls\.gov\/chart_maker_v1\/table_wizard\/bett
 
 var chartThisTable = function(chartType){
 
-importedTable = $("#tableCode textarea").val();
-importedChartType = chartType;
-//alert(typeof importedTable);
-
-	var newChartWindow = window.open("../");
+//importedTable = $("#tableCode textarea").val();
+//importedChartType = chartType;
+////alert(typeof importedTable);
+//
+//	var newChartWindow = window.open("../");
+//    
+    
+     sessionStorage.setItem('imported_chart_type', chartType);
+        sessionStorage.setItem('imported_table', $("#tableCode textarea").val());
+        
+        var newChartWindow = window.open("../");
+    
 	//newChartWindow.importedTable = $("#tableCode textarea").val();
 //	newChartWindow.importedChartType = chartType;
 	

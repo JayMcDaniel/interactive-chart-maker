@@ -55,7 +55,9 @@ var chart_recall = {
 
             $.each(arr, function () {
 
-                if (!set_individual_series && this.id.match(/series_color|series_type_div|line_style_select|series_visible_checkbox|series_extra_data/)) { //look if this id has to do with individual series options
+                console.log(this);
+                
+                if (!set_individual_series && this.id && this.id.match(/series_color|series_type_div|line_style_select|series_visible_checkbox|series_extra_data/)) { //look if this id has to do with individual series options
                     individual_series_options.push(this);
                 } else {
 

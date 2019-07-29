@@ -4,7 +4,7 @@ functions for map subtitle
 */
 
 var map_subtitle_init = {
-    
+
     /**Gets title from a text input element and returns it **/
     mapSubtitleInit: function (input) {
         var map_subtitle = {
@@ -17,10 +17,14 @@ var map_subtitle_init = {
     /** creates and returns a styled map h3 subtitle with text **/
     getMapSubtitle: function (subtitle) {
         var map_subtitle = document.createElement("h3");
-        map_subtitle.textContent = subtitle.text;
+        map_subtitle.textContent = subtitle.text || undefined;
         map_subtitle.setAttribute("style", subtitle.style);
 
-        return map_subtitle;
+        if (map_subtitle.textContent != '') {
+            console.log("returning");
+            return map_subtitle;
+        }
+
     },
 }
 
