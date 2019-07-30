@@ -117,6 +117,10 @@ h3 {
     float: right;
     right: 40px;
     background-size: 100% 96%;
+    color: #67645c;
+    text-align: center;
+    font-size: 143%;
+    font-weight: 600;
 }
 
 .tool_box_button:hover {

@@ -124,8 +124,8 @@ function insertTFoot(parsed_input, table_ID) {
 function parseInput(input) {
 
     var is_text_tabulation = $('#is_text_tabulation_checkbox').attr('checked');
-    
-    
+
+
     parsed_input = {
         caption: "",
         thead: [],
@@ -155,7 +155,7 @@ function parseInput(input) {
 
 
     var start_body_row = is_text_tabulation ? 1 : 2;
-    
+
     for (var i = start_body_row; i < all_rows.length; i++) {
         var row = all_rows[i].split("\t");
 
@@ -212,10 +212,7 @@ function addIndents() {
 
         var indent = $(p).text().match(/^\s+/);
         if (indent) {
-
             var sub = "sub" + Math.floor(indent[0].length / 2);
-            console.log("indent", indent[0].length);
-
             $(p).addClass(sub);
         }
 
@@ -317,20 +314,21 @@ function styleTable() {
 
     } else {
         $("#table_result tbody tr:odd").addClass("greenbar");
+         $("td, th, p, table", $("#table_result")).removeAttr("style");
     }
 
     //make smaller if it's for mlr
 
     if ($('#for_MLR_checkbox').attr('checked')) {
         $("#table_result table").css("width", "618px");
+    }else{
+        $("#table_result table").css("width", "95%");
     }
 
     //left align columns if desired
     var left_align_columns = Math.floor(Number($("#left_align").val()));
     if (!isNaN(left_align_columns) && left_align_columns > 0) {
-
         $("td:lt(" + left_align_columns + ")", $("#table_result table tbody tr")).css("text-align", "left");
-
     }
 
 }
@@ -477,6 +475,61 @@ var tool_functions = {
         $(elem).css("vertical-align", "bottom");
 
     },
+
+    toolBoxAddPercent: function (elem) {
+
+        var index = $(elem).index() - 1;
+
+        var text = $(elem).text();
+        var new_text = "";
+
+        if (/%/.test(text)) {
+            var new_text = text.replace("%", "");
+        } else {
+            var new_text = text + "%";
+        }
+
+        $("td:eq(" + index + ")", $("#table_result tbody tr")).text(new_text);
+
+    },
+
+
+
+    toolBoxAddDollar: function (elem) {
+
+        var index = $(elem).index() - 1;
+
+        var text = $(elem).text();
+        var new_text = "";
+
+        if (/\$/.test(text)) {
+            var new_text = text.replace("$", "");
+        } else {
+            var new_text = "$" + text;
+        }
+
+        $("td:eq(" + index + ")", $("#table_result tbody tr")).text(new_text);
+
+    },
+
+
+    toolBoxAddCommas: function (elem) {
+
+        var index = $(elem).index() - 1;
+        var text = $(elem).text();
+        var new_text = "";
+
+        if (/,/.test(text)) {
+            var new_text = text.replace(",", "");
+        } else {
+            var new_text = addCommas(text);
+            console.log(new_text);
+        }
+
+        $("td:eq(" + index + ")", $("#table_result tbody tr")).text(new_text);
+
+    },
+
 
     toolBoxIncreaseIndent: function (elem) {
 
@@ -625,9 +678,32 @@ function tableClicks() {
 function clearNextTextareaClick() {
     $(".clear_next_textarea_button").click(function () {
         $(this).next("textarea").val("");
-        console.log("click");
     });
 }
+
+
+
+
+
+
+
+
+/** puts commas in a number */
+function addCommas(val) {
+
+    console.log("val", val);
+
+    if (isNaN(val) || ((val < 999) && (val > -999))) { //small numbers auto decimals
+        return val;
+    } else if ((val > 999) || (val < -999)) { //big numbers fixed decimals
+        while (/(\d+)(\d{3})/.test(val.toString())) {
+            val = val.replace(/(\d+)(\d{3})/, '$1' + ',' + '$2');
+        }
+    }
+
+    return val;
+}
+
 
 
 
@@ -651,11 +727,12 @@ $(document).ready(function () {
     $("#app_version").text("2.0.0");
 
     //update table when text area is edited
-    $("#table_input_textarea, #is_text_tabulation_checkbox, #for_MLR_checkbox, #left_align").bind("input blur paste", function (e) {
-        var input = $("#table_input_textarea").val();
+    $("#table_input_textarea").bind("input blur paste", function (e) {
+        var input = $.trim($("#table_input_textarea").val());
         makeNewTable(input);
-
     });
+
+    $("#is_text_tabulation_checkbox, #for_MLR_checkbox, #left_align").bind("input", styleTable);
 
     getCodeSetup();
     loadTableSetup()
