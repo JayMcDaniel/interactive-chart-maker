@@ -293,9 +293,12 @@ var map_init = {
             //init legend hovering
             map_init.setUpMapLegendHover(map_display_area);
 
-            //init legend clicking
+            //init legend clicking for metro maps only
             if (all_map_options.map_type === "metro_area") {
                 map_init.setUpMapLegendClick(map_display_area);
+            }else{    
+            //init state links to eag pages
+         //   map_init.setUpMapStateLinks(map_display_area);
             }
 
             //init animation functionality if applicable
@@ -303,8 +306,6 @@ var map_init = {
                 map_animation_init.setUpMapAnimation(all_map_options, map_display_area);
             }
 
-            //init state links to eag pages
-            map_init.setUpMapStateLinks(map_display_area);
 
             //init individual series range setup
             if (repopulate_form === true) {
@@ -396,21 +397,28 @@ var map_init = {
 
                     var el = document.createElementNS("http://www.w3.org/2000/svg", "path");
                     el.setAttributeNS(null, "d", this.d); //sets path outline
-
+                    
                     //set stroke (lighter for county maps)
                     var new_stroke = all_map_options.map_type === "county" ? "#b3b3b3" : "#646464";
                     el.setAttributeNS(null, "stroke", new_stroke); //set path stroke
 
 
-                    if (all_map_options.map_type === "metro_area") {
+                    if (all_map_options.map_type === "metro_area" && this.id!="PR") {
                         //transform smaller for metro area maps
                         el.setAttributeNS(null, "transform", "scale(0.8) translate(0, 5.471371609992666)");
                         el.setAttributeNS(null, "fill", this.color || "#f7f7f7"); //light gray if NA val
                     }
+                    
+                    if (all_map_options.map_type === "state" && this.id==="PR") {
+                        console.log("setting PR");
+                        el.setAttributeNS(null, "transform", "scale(0.8) translate(410, 300)");
+                    }
+                    
+                    
 
                     //if it's a named area, set values and color
                     if (this.loc_name) {
-                        el.setAttributeNS(null, "loc_value", this.value);
+                        el.setAttributeNS(null, "loc_value", this.value || null);
                         el.setAttributeNS(null, "fill", this.color || "#f7f7f7"); //light gray if NA val
                         el.setAttribute("loc_name", this.loc_name);
 
@@ -444,24 +452,25 @@ var map_init = {
                     if (all_map_options.map_type === "metro_area") {
                         el.setAttributeNS(null, "fill", this.color ? this.color.replace(')', ', 0.75)').replace('rgb', 'rgba') : "#337ab7"); //fill
                     } else {
-                        el.setAttributeNS(null, "fill", this.color ? this.color : "#f7f7f7"); //fill
+                        el.setAttributeNS(null, "fill", this.color || "#f7f7f7"); //fill
 
                     }
 
 
                     if (this.loc_name) { //if it's a named area, set value and color
-                        el.setAttributeNS(null, "loc_value", this.value);
+                        el.setAttributeNS(null, "loc_value", this.value || null);
                         el.setAttribute("loc_name", this.loc_name);
                     }
 
                 }
 
+                
 
                 if (this.style) {
-                    el.setAttribute("style", this.style);
+                    el.setAttribute("style", this.style || null);
                 }
 
-                el.setAttribute("class", this.class);
+                el.setAttribute("class", this.class || null);
                 this.extra_vals ? el.setAttributeNS(null, "extra_vals", this.extra_vals.join(";")) : null;
                 this.animated_vals ? el.setAttributeNS(null, "animated_vals", this.animated_vals.join(";")) : null;
 

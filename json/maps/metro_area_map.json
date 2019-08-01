@@ -253,7 +253,20 @@
         "class": "state-path",
         "previous_fill": "",
         "style": ""
-}, {
+},
+
+
+    {
+        "d": "M669.2,450.2l0.9-2.1l1.7,0.4l1.7,1.3l7.3,0.9l7.3-0.4h3l2.6,0.9l1.7-1.3h2.1l5.1,0.4l5.1,1.3 l1.7,1.7h3l0.4,2.6l-0.4,1.7l-3.4,0.4l-2.1,0.9l-0.9,2.1l-1.3,2.1l-2.6,1.3h-5.1h-4.3l-2.1-0.9h-4.3l-2.1-0.9l-3.4,0.9h-4.3 l-2.1-1.7l-2.6,0.9l-3.4,0.4l-0.4-2.1l0.9-1.3l0.9-2.1l-0.9-2.6l-3.4-2.6l1.3-0.9L669.2,450.2z M715.9,461.8l-1.9,0.6l3.7,1.2 l5-1.2l1.2-1.9l-3.1,0.6L715.9,461.8z M724.6,457.5l-1.5-0.9l2.2-1.5l0.6,1.5L724.6,457.5Z",
+        "class": "state-path",
+        "previous_fill": "",
+        "enabled": true,
+        "loc_name": "Puerto Rico",
+        "id": "PR"
+
+},
+
+    {
         "cy": "122.84235799224248",
         "cx": "415.03339476654793",
         "r": "2",
@@ -4655,6 +4668,76 @@
         "loc_name": "Taunton-Middleborough-Norton, MA",
         "previous_fill": "",
         "style": ""
+    },
+
+
+    {
+        "cy": "446",
+        "cx": "665",
+        "r": "2",
+        "class": "metro-area-circle",
+        "loc_name": "Aguadilla-Isabela, PR",
+        "previous_fill": "",
+        "style": ""
+    },
+
+    {
+        "cy": "448",
+        "cx": "680",
+        "r": "2",
+        "class": "metro-area-circle",
+        "loc_name": "Arecibo, PR",
+        "previous_fill": "",
+        "style": ""
+    },
+
+    {
+        "cy": "465",
+        "cx": "700",
+        "r": "2",
+        "class": "metro-area-circle",
+        "loc_name": "Guayama, PR",
+        "previous_fill": "",
+        "style": ""
+    },
+    {
+        "cy": "455",
+        "cx": "666",
+        "r": "2",
+        "class": "metro-area-circle",
+        "loc_name": "Mayaguez, PR",
+        "previous_fill": "",
+        "style": ""
+    },
+    {
+        "cy": "465",
+        "cx": "686",
+        "r": "2",
+        "class": "metro-area-circle",
+        "loc_name": "Ponce, PR",
+        "previous_fill": "",
+        "style": ""
+    },
+    {
+        "cy": "460",
+        "cx": "672",
+        "r": "2",
+        "class": "metro-area-circle",
+        "loc_name": "San German, PR",
+        "previous_fill": "",
+        "style": ""
+    },
+    {
+        "cy": "452",
+        "cx": "699",
+        "r": "2",
+        "class": "metro-area-circle",
+        "loc_name": "San Juan-Carolina-Caguas, PR",
+        "previous_fill": "",
+        "style": ""
     }
+
+
+
 
 ]
