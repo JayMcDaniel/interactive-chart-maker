@@ -411,7 +411,7 @@ var map_init = {
                     
                     if (all_map_options.map_type === "state" && this.id==="PR") {
                         console.log("setting PR");
-                        el.setAttributeNS(null, "transform", "scale(0.8) translate(410, 300)");
+                        el.setAttributeNS(null, "transform", "scale(0.8) translate(390, 2500)");
                     }
                     
                     
