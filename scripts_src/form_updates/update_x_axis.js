@@ -129,9 +129,30 @@ var update_x_axis = {
     },
 
 
+    /** update label widths (bar charts are set, others are auto ) **/
+    updatelabelWidth: function (chart, all_chart_options) {
+        
+        var label_width = null;
+
+        if (all_chart_options.chart.type === "bar") {
+            label_width = all_chart_options.chart.margin[3] - 30 + "px";
+        }
+
+        chart.xAxis[0].update({
+            labels: {
+                style: {
+                    width: label_width
+                }
+            }
+        });
+
+        all_chart_options.xAxis.labels.style.width = label_width;
+
+    },
+
+
     /** update x axis tickmark interval **/
     updateTickmarkInterval: function (new_interval, chart, all_chart_options, categories, chart_type) {
-
 
         if (isNaN(Number(new_interval)) || Number(new_interval) === 0) {
 
@@ -148,13 +169,6 @@ var update_x_axis = {
         if (!chart) { // called when this is used in x_axis_init
             return new_interval;
         }
-
-        //        if (new_interval > chart.xAxis[0].dataMax) {
-        //            
-        //            new_interval = (chart.xAxis[0].dataMax - chart.xAxis[0].dataMin) / 6;
-        //        }
-
-
 
         chart.xAxis[0].update({
             tickInterval: new_interval

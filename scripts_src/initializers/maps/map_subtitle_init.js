@@ -17,7 +17,7 @@ var map_subtitle_init = {
     /** creates and returns a styled map h3 subtitle with text **/
     getMapSubtitle: function (subtitle) {
         var map_subtitle = document.createElement("h3");
-        map_subtitle.textContent = subtitle.text || undefined;
+        map_subtitle.textContent = subtitle.text;
         map_subtitle.setAttribute("style", subtitle.style);
 
         if (map_subtitle.textContent != '') {

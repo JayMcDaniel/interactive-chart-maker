@@ -133,6 +133,7 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
 
                 update_x_axis.updateTickmarkInterval(new_x_interval, chart, all_chart_options, all_chart_options.xAxis.categories, all_chart_options.chart.type);
 
+                update_x_axis.updatelabelWidth(chart, all_chart_options);
 
             }
 
@@ -202,6 +203,7 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
     $(".margin_input").unbind().keyup(function () {
         var margins_arr = utils_forms.getClassValuesArray("margin_input");
         update_template.margin(margins_arr, chart, all_chart_options);
+        update_x_axis.updatelabelWidth(chart, all_chart_options);
     });
 
 
