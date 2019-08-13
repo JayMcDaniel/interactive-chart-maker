@@ -48,6 +48,9 @@ var update_legend = {
             legend.display = false;
             legend.options.enabled = false;
             legend.render(true);
+            
+            //remove "click legend" instructions from credits
+            $("#chart_credits_text_textarea").val($("#chart_credits_text_textarea").val().replace("Click legend items to change data display. ", "")).trigger("input");
 
             if (legend.pager) {
                 legend.pager.hide();

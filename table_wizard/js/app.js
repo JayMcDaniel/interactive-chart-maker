@@ -340,7 +340,7 @@ function getCodeSetup() {
     $("#get_code_button").click(function () {
         if ($(this).hasClass("showing")) {
             $(this).removeClass("showing");
-            $("#get_code_text").text("Get HTML");
+            $("#get_code_text").text("Get HTML and make charts");
             $("#main_result_code_div").hide();
 
         } else {
