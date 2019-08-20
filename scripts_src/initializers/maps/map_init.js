@@ -418,7 +418,7 @@ var map_init = {
 
                     //if it's a named area, set values and color
                     if (this.loc_name) {
-                        el.setAttributeNS(null, "loc_value", this.value || null);
+                        el.setAttributeNS(null, "loc_value", this.value);
                         el.setAttributeNS(null, "fill", this.color || "#f7f7f7"); //light gray if NA val
                         el.setAttribute("loc_name", this.loc_name);
 
