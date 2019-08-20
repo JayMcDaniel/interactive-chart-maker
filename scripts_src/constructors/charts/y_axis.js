@@ -28,6 +28,7 @@ var yAxis = function (o) {
     this.lineWidth = o.lineWidth || 1;
     this.max = o.max || null;
     this.min = o.min || null;
+    this.minPadding = 0.6;
     this.opposite = o.opposite || false;
     this.plotBands = o.plotBands || [];
 
