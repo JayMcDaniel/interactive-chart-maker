@@ -46,7 +46,10 @@ var jq_extensions = (function () {
 
         /** takes an element's text string and returns a number, trimming spaces and removing non-numbers (good for numbers with commas etc.)*/
         getNumber: function () {
-            var val = $.trim($(this).text().replace(/\(.*\)/, "").replace(/[^0-9\.\-]+/g, ''));
+            
+            var val = $(this).length > 0 ? $(this).text() : $(this).selector;
+            
+            val = $.trim(val.replace(/\(.*\)/, "").replace(/[^0-9\.\-]+/g, ''));
 
             return val === "" || isNaN(Number(val)) ? null : Number(val);
         },
