@@ -6,7 +6,6 @@ $(function () {
     var jq_extensions = require("./utils/jq_extensions.js");
     var utils_main = require("./utils/utils_main");
 
-
     //load test table into table_input_textarea
 
     $.get("./dev/test_tables/scatter_with_unique_point_names.htm", function (table) {
@@ -37,7 +36,7 @@ $(function () {
         var allFormUpdates = require("./form_updates/all_form_updates.js");
         allFormUpdates(chart, all_chart_options, all_map_options);
 
-        //diplay only options related to chart type 
+        //diplay only options related to chart type
         allFormUpdates.displayOptions(chart_type);
 
         //click selected map icon to make sure everything in the map loads correctly
@@ -49,5 +48,5 @@ $(function () {
     });
 
 //set app version (better through JS than statically to make sure JS is new)
-    $("#app_version").text("v2.9.8");
+    $("#app_version").text("v2.9.9");
 });
