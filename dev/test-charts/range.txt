@@ -1,37 +1,8 @@
-<!DOCTYPE html>
-<html lang="">
-
-<head>
-    <meta charset="UTF-8">
-    <title>Test Chart</title>
-    <meta name="Author" content="" />
-</head>
-
-<body>
-    <h1>Test Chart</h1>
-
-
-
-
-
-
-
-    <!-- external libraries -->
-    <script src="../../libraries/jquery/jquery-2.2.0.min.js"></script>
-    <script src="../../libraries/Highcharts-4.2.3/js/highcharts.src.js"></script>
-    <script src="../../libraries/Highcharts-4.2.3/js/highcharts-more.src.js"></script>
-    <script src="../../libraries/Highcharts-4.2.3/js/modules/drilldown.js"></script>
-
-
-
-
-
-    <script>
-  $(function() {
+$(function() {
         var all_chart_options = {
             "chart": {
                 "renderTo": "chart1",
-                "margin": [80, 40, 100, 180],
+                "margin": [80, 40, 100, 220],
                 "borderWidth": 0,
                 "plotBorderColor": "#000",
                 "plotBorderWidth": 0,
@@ -771,10 +742,3 @@
             return val;
         }
     });
-
-    </script>
-
-    <div id="chart1" style="position: relative; width: 580px; height: 730px; margin: auto; padding: 0px;"> </div>
-</body>
-
-</html>

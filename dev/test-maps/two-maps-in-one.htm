@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Test Chart</title>
+    <meta name="Author" content="" />
+</head>
+
+<body>
+    <h1>Test Chart</h1>
+
+
+
+
+    <!-- map html here -->
+
+    <!-- external libraries -->
+    <script src="../../libraries/jquery/jquery-2.2.0.min.js"></script>
+    <script src="../../libraries/Highcharts-4.2.3/js/highcharts.src.js"></script>
+    <script src="../../libraries/Highcharts-4.2.3/js/highcharts-more.src.js"></script>
+    <script src="../../libraries/Highcharts-4.2.3/js/modules/drilldown.js"></script>
+
+    <script src="empmap.js"></script>
+    <script src="wagesmap.js"></script>
+    <script src="map-changer.js"></script>
+
+
+    <!--map JS here -->
+    <script>
+    </script>
+
+
+    <div id="map_holder">
+        <p id="map_toggle_button" style="position: absolute; text-align: center; cursor: pointer; text-decoration: underline; top: 40px; z-index: 500; left: 40%; color: #0c61ab">Show wages map</p>
+        <div class="map_display_area" id="employmentmap" style="width: 710px; height: 650px; margin: auto; padding: 0px;"> </div>
+        <div class="map_display_area" id="wagesmap" style="width: 710px; height: 650px; margin: auto; padding: 0px; display: none"> </div>
+
+    </div>
+
+</body>
+
+</html>
