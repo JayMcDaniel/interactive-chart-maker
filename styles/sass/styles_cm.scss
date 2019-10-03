@@ -11,12 +11,12 @@
         font-weight: normal;
         font-style: normal;
     }
-    
+
     html {
         position: relative;
         height: 100%;
     }
-    
+
     body {
         position: relative;
         height: 100%;
@@ -33,7 +33,7 @@
             margin: 5px 0px 5px 0px;
         }
     }
-    
+
     a {
         text-decoration: underline;
         color: $dark_color;
@@ -41,17 +41,17 @@
             color: $highlight_color !important;
         }
     }
-    
+
     br {
         display: block;
         line-height: 1.5em;
     }
-    
+
     br.small {
         display: block;
         line-height: .5em;
     }
-    
+
     .alert-danger {
         display: block;
         margin: 0px;
@@ -59,7 +59,7 @@
         padding-left: 5px;
         padding-right: 5px;
     }
-    
+
     .chart_display_area,
     .map_display_area {
         width: 580px;
@@ -68,15 +68,15 @@
         padding: 5px;
         background-color: $primary_color;
     }
-    
+
     .map_display_area {
         display: none;
     }
-    
+
     .map_tooltip br {
         line-height: 0em
     }
-    
+
     .chart_type_icon,
     .load_series_from_icon,
     .series_type_icon {
@@ -111,7 +111,7 @@
          &#chart_type_box_plot {
             background-image: url(../../images/icons/boxplot_chart_icon.png);
         }
-        
+
         &#chart_type_bubble {
             background-image: url(../../images/icons/bubble_chart_icon.png);
         }
@@ -152,19 +152,20 @@
             background-image: url(../../images/icons/load_series_from_row_headers_icon.png);
         }
     }
-    
+
     .load_series_from_icon {
         margin-bottom: 0px;
     }
-    
+
     #chart_loading_icon {
         position: fixed;
         top: 23%;
         left: 50%;
         font-size: 686%;
+        z-index: 600;
         color: $secondary_color;
     }
-    
+
     #chart_output_code {
         height: 290px;
         color: $primary_color;
@@ -187,10 +188,10 @@
         width: 100%;
     }
 
-   
 
-   
-    
+
+
+
     .clearfloat {
         clear: both;
         height: 0px;
@@ -198,7 +199,7 @@
         line-height: 0px;
         margin-bottom: 0px;
     }
-    
+
     .clear_next_textarea_button {
         float: right;
         color: $primary_color;
@@ -209,7 +210,7 @@
         right: 22px;
         font-size: 110%;
     }
-    
+
     .close_box_icon {
         text-decoration: underline;
         cursor: pointer;
@@ -221,14 +222,14 @@
     #custom_colors_textarea{
       //  display: none !important;
     }
-    
+
     .color_palette_cell,
     .map_color_palette_cell {
         width: 17px;
         height: 17px;
         float: left;
     }
-    
+
     .color_palette_row,
     .map_color_palette_row {
         margin-bottom: 5px;
@@ -240,20 +241,20 @@
             background-color: $primary_light_color;
         }
     }
-    
+
     .example_table {
         width: 100%;
         margin-top: 10px;
     }
-    
+
     .float_left {
         float: left;
     }
-    
+
     .fixed {
         position: fixed;
     }
-    
+
     h3 {
         margin-top: 0px;
         margin-bottom: 20px;
@@ -261,13 +262,13 @@
         color: $primary_color;
         font-weight: bold;
     }
-    
+
     h5 {
         font-family: "sinkin_sans200_x_light";
         color: $primary_light_color;
         font-size: 120%;
     }
-    
+
     .help_icon,
     #color_palette_reverse_icon,
     #add_map_color,
@@ -303,12 +304,12 @@
         }
     }
 
-    
+
     input,
     textarea {
         color: #000;
     }
-    
+
     input[type="text"] {
         &.small {
             width: 50px;
@@ -322,7 +323,7 @@
             height: 50px;
         }
     }
-    
+
     .jscolor {
         width: 50px;
         height: 25px;
@@ -333,7 +334,7 @@
         top: 4px;
         margin-bottom: 8px;
     }
-    
+
     .just_scatter,
     .just_bubble,
     .just_drilldown,
@@ -345,33 +346,33 @@
     .just_columnrange {
         display: none;
     }
-    
+
     label {
         font-weight: normal;
         margin-top: 10px;
         margin-right: 5px;
     }
-    
+
     label.small {
         margin-top: -5px;
     }
-    
+
     #load_chart_textarea {
         height: 600px;
     }
-    
+
     .line_style_div {
         display: none;
     }
     /* MAP styles */
-    
+
     .state {
         //        fill: #E0E0E0;
         stroke: #646464;
         stroke-width: 1;
         stroke-opacity: 1;
     }
-    
+
     .territory {
         opacity: 0;
         fill: #E0E0E0;
@@ -380,35 +381,35 @@
         stroke-opacity: 1;
         cursor: pointer;
     }
-    
+
     .territoryborder {
         opacity: 0;
         fill: none;
         stroke: #A9A9A9;
         stroke-width: 2;
     }
-    
+
     .border {
         opacity: 1;
         fill: none;
         stroke: #A9A9A9;
         stroke-width: 2;
     }
-    
+
     .circle {
         //        opacity: 1;
         //      fill: #E0E0E0;
         stroke: #646464;
         stroke-width: 1;
     }
-    
+
     .map_range_input {
         width: 30%;
         float: left;
         margin-left: 10px;
         margin-right: 10px;
     }
-    
+
     [id^="map_color_input"] {
         position: relative;
         top: 3px;
@@ -416,13 +417,13 @@
         float: left;
     }
     /* end map styles */
-    
+
     #main_content_div {
         width: 70%;
         min-height: 100%;
         float: left;
     }
-    
+
     #main_result_code_div,
     #load_chart_div,
     #areas_colored_report_div {
@@ -435,11 +436,11 @@
         background-color: $primary_light_color;
         border: solid 1px $highlight-color;
     }
-    
+
     #areas_colored_report_div textarea {
         min-height: 400px;
     }
-    
+
     #margins_outer_div {
         position: relative;
         div,
@@ -487,7 +488,7 @@
             top: 52px;
         }
     }
-    
+
     .notes {
         font-size: 85%;
         color: $highlight_color;
@@ -498,13 +499,13 @@
         }
     }
     /* left side div with all of the configurations options etc. inside it */
-    
+
     option,
     select {
         color: #000;
         margin-left: 3px;
     }
-    
+
     .rotate_90 {
         -webkit-transform: rotate(-90deg);
         -moz-transform: rotate(-90deg);
@@ -512,11 +513,11 @@
         width: 20px;
         height: 20px;
     }
-    
+
     .series_type_div {
         padding-top: 10px;
     }
-    
+
     .series_type_icon {
         width: 30px;
         height: 30px;
@@ -530,18 +531,18 @@
             background-image: url(../../images/icons/scatter_chart_icon.png);
         }
     }
-    
+
     .series_type_label,
     .series_color_label {
         float: left;
         margin-right: 10px;
     }
-    
+
     //p tags with individual series info in them
     .series_snippet {
         margin-bottom: 55px;
     }
-    
+
     #side_main {
         float: left;
         width: 30%;
@@ -634,7 +635,7 @@
         }
     }
     /* bar at the top with h1 head, get code button, and menu for other links */
-    
+
     #top_nav_bar {
         width: 100%;
         background-color: $primary_color;
@@ -656,7 +657,7 @@
             font-family: "sinkin_sans200_x_light";
         }
     }
-    
+
     #get_code_button,
     #show_load_chart_area_button,
     .copy_to_clipboard_button,
@@ -665,7 +666,7 @@
     #download_js_button,
     #download_html_button,
     #download_chart_image_button{
-        
+
         padding: 0px 5px 0px 5px;
         margin-left: 30px;
         cursor: pointer;
@@ -691,7 +692,7 @@
             visibility: hidden;
         }
     }
-    
+
     #beautify_code_button {
         text-decoration: underline;
         cursor: pointer;
@@ -702,14 +703,14 @@
             color: $highlight_color;
         }
     }
-    
+
     .glyphicon-refresh-animate {
         margin-left: 3px;
         -animation: spin .7s infinite linear;
         -webkit-animation: spin2 .7s infinite linear;
         //   visibility: hidden;
     }
-    
+
     @-webkit-keyframes spin2 {
         from {
             -webkit-transform: rotate(0deg);
@@ -718,7 +719,7 @@
             -webkit-transform: rotate(360deg);
         }
     }
-    
+
     @keyframes spin {
         from {
             transform: scale(1) rotate(0deg);
@@ -727,11 +728,11 @@
             transform: scale(1) rotate(360deg);
         }
     }
-    
+
     #get_code_button:hover {
         color: $highlight_color;
     }
-    
+
     .copy_to_clipboard_button,
     #download_js_button,
     #download_html_button,
@@ -748,12 +749,12 @@
         background-repeat: no-repeat;
         background-position: center;
         top: -10px;
-        
+
         &:hover {
             background-image: url(../../images/icons/copy_to_clipboard_icon_hover.png);
         }
     }
-    
+
     .copy_message {
         position: relative;
         left: 3px;
@@ -761,9 +762,9 @@
         font-size: 80%;
         font-weight: bold;
     }
-    
 
-    #download_js_button, 
+
+    #download_js_button,
     #download_html_button,
     #download_chart_image_button{
         background-image: url(../../images/icons/download_file_icon.png);
@@ -773,7 +774,7 @@
     }
 
     #show_load_chart_area_button, #black_and_white_button {
-        
+
         width: 35px;
         background-size: 80% 80%;
         background-repeat: no-repeat;
@@ -782,7 +783,7 @@
     }
 
     #show_load_chart_area_button {
-      background-image: url("../../images/icons/load.png");  
+      background-image: url("../../images/icons/load.png");
         &:hover,
         &.load_chart_showing {
             background-image: url("../../images/icons/load_hover.png");
@@ -791,14 +792,14 @@
     }
 
     #black_and_white_button {
-        background-image: url("../../images/icons/colors_icon.png"); 
+        background-image: url("../../images/icons/colors_icon.png");
     }
 
     .grayscale {
         -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
         filter: grayscale(100%);
     }
-    
+
     #open_table_wizard_button {
         width: 25px;
         height: 25px;
@@ -812,7 +813,7 @@
         background-repeat: no-repeat;
         background-image: url(../../table_wizard/images/ff1-red-wizard.png);
     }
-    
+
     #open_code_editor_button {
         float: right;
         position: inherit;
@@ -830,12 +831,12 @@
             background-image: url(../../images/icons/code_editor_hover_icon.png);
         }
     }
-    
+
     #top_nav_bar_filler {
         width: 100%;
         height: 40px;
     }
-    
+
     textarea {
         width: 100%;
         height: 50px;
@@ -846,7 +847,7 @@
             height: 400px;
         }
     }
-    
+
     .underline {
         text-decoration: underline;
     }

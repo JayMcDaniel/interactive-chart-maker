@@ -21,7 +21,7 @@ var map_colors_init = require("../initializers/maps/map_colors_init.js");
 
 
 
-/** listens for any form updates and calls appropriate function 
+/** listens for any form updates and calls appropriate function
 @module
 */
 var allFormUpdates = function (chart, all_chart_options, all_map_options) {
@@ -691,7 +691,7 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
 
 
     //circle size range slider changed
-    //map tooltip N/A, and prepend to value inputs changed 
+    //map tooltip N/A, and prepend to value inputs changed
     //map animation delay input changed
 
     $("#map_circle_size_range, #map_tooltip_na_text_input, #map_tooltip_prepend_to_value_text_input, #map_animation_speed_range").unbind().on("input", function () {
@@ -717,17 +717,11 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
     });
 
 
-
-
-
     //map palette + / - buttons clicked to change amount of colors
     $("#add_map_color, #minus_map_color").unbind().click(function () {
         update_map_palettes.changeAmount($(this));
 
     });
-
-
-
 
 
 
