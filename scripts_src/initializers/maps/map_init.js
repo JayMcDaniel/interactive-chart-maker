@@ -49,8 +49,8 @@ var map_init = {
         alphabetized: is_checked($("#legend_alphabetical_layout_checkbox")),
         x: Number($("#legend_placement_x").val()),
         y: Number($("#legend_placement_y").val()),
-        item_width: Number($("#legend_item_width_input").val()) == 0 ? 220 : Number($("#legend_item_width_input").val()),
-        legend_width: Number($("#legend_width_input").val()) == 0 ? 220 : Number($("#legend_width_input").val())
+        item_width: Number($("#legend_item_width_input").val()) == 0 ? 110 : Number($("#legend_item_width_input").val()),
+        legend_width: Number($("#legend_width_input").val()) == 0 ? 110 : Number($("#legend_width_input").val())
       },
       map_type: map_type,
       viewbox: "",
