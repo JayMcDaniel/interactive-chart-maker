@@ -74,7 +74,7 @@
                 <div class="display_options">
 
                     <div id="chart_type_icons">
-                        <div class="chart_type_icon" id="chart_type_line" value="line" title="line"></div>
+                        <div class="chart_type_icon selected" id="chart_type_line" value="line" title="line"></div>
                         <div class="chart_type_icon" id="chart_type_area" value="area" title="area"></div>
                         <div class="chart_type_icon" id="chart_type_area_range" value="arearange" title="area range"></div>
                         <div class="chart_type_icon" id="chart_type_bar" value="bar" title="bar"></div>
@@ -84,7 +84,7 @@
                         <div class="chart_type_icon" id="chart_type_column_range" value="columnrange" title="column range"></div>
                         <div class="chart_type_icon" id="chart_type_box_plot" value="boxplot" title="box plot"></div>
                         <div class="chart_type_icon" id="chart_type_bubble" value="bubble" title="bubble"></div>
-                        <div class="chart_type_icon selected" id="chart_type_scatter" value="scatter" title="scatter"></div>
+                        <div class="chart_type_icon" id="chart_type_scatter" value="scatter" title="scatter"></div>
                         <div class="chart_type_icon" id="chart_type_pie" value="pie" title="pie"></div>
                         <div class="chart_type_icon" id="chart_type_drilldown" value="drilldown" title="drilldown"></div>
                         <div class="chart_type_icon" id="chart_type_map" value="map" title="map"></div>
@@ -365,7 +365,7 @@
                         <table id="BLStable_2019_20_13_48_27" class="regular" cellspacing="0" cellpadding="0" xborder="1" style="width: 95%"><caption><span class="tableTitle">Test table data for scatter charts</span></caption><thead><tr><th rowspan="2" id="columnHead0" style="vertical-align: middle;">categories</th><th colspan="2" id="columnHead0">point 1</th><th colspan="2" id="columnHead0">point 2</th><th colspan="2" id="columnHead0">point 3</th></tr><tr><th id="columnHead1" style="min-width: 110px; width: 99px;">x1</th><th id="columnHead2">y1</th><th id="columnHead3">x2</th><th id="columnHead4">y2</th><th id="columnHead5">x3</th><th id="columnHead6">y3</th></tr></thead><tbody><tr><th id="rowHead0"><p>series 1</p></th><td headers="rowHead0 columnHead1">1</td><td headers="rowHead0 columnHead2">1</td><td headers="rowHead0 columnHead3">3</td><td headers="rowHead0 columnHead4">3</td><td headers="rowHead0 columnHead5">5</td><td headers="rowHead0 columnHead6">5</td></tr><tr class="greenbar"><th id="rowHead1"><p>series 2</p></th><td headers="rowHead1 columnHead1">2</td><td headers="rowHead1 columnHead2">1</td><td headers="rowHead1 columnHead3">4</td><td headers="rowHead1 columnHead4">3</td><td headers="rowHead1 columnHead5">8</td><td headers="rowHead1 columnHead6">9</td></tr></tbody></table>
 
                         <br>
-                        
+
                         <p>If you want unique names for the points in each series, format your table like this, where points in a series are indented:</p>
                         <table id="BLStable_2019_21_17_5_51" class="regular" cellspacing="0" cellpadding="0" xborder="1" style="width: 95%"><caption><span class="tableTitle">Scatter chart - unique names in series</span></caption><thead><tr><th rowspan="1" id="columnHead0" style="vertical-align: middle; min-width: 110px;">Series</th><th id="columnHead1">X value</th><th id="columnHead2">Y value</th></tr></thead><tbody><tr><th id="rowHead0"><p>Series 1</p></th><td headers="rowHead0 columnHead1"></td><td headers="rowHead0 columnHead2"></td></tr><tr class="greenbar"><th id="rowHead1"><p class="sub1">Series 1, name 1</p></th><td headers="rowHead1 columnHead1">10</td><td headers="rowHead1 columnHead2">10</td></tr><tr><th id="rowHead2"><p class="sub1">Series 1, name 2</p></th><td headers="rowHead2 columnHead1">20</td><td headers="rowHead2 columnHead2">20</td></tr><tr class="greenbar"><th id="rowHead3"><p>Series 2</p></th><td headers="rowHead3 columnHead1"></td><td headers="rowHead3 columnHead2"></td></tr><tr><th id="rowHead4"><p class="sub1">Series 2, name 1</p></th><td headers="rowHead4 columnHead1">15</td><td headers="rowHead4 columnHead2">15</td></tr><tr class="greenbar"><th id="rowHead5"><p class="sub1">Series 2, name 2</p></th><td headers="rowHead5 columnHead1">25</td><td headers="rowHead5 columnHead2">25</td></tr></tbody></table>
                     </div>
@@ -503,11 +503,11 @@
 
 
                     <!-- pie chart example table -->
-                    
+
                     <div class="just_pie">
-                    
+
                     <table id="BLS_table" class="regular" cellspacing="0" cellpadding="0" xborder="1" style="width: 95%"><caption><span class="tableTitle">Pie chart example</span></caption><thead><tr><th rowspan="1" id="columnHead0" style="vertical-align: middle; min-width: 110px;">Category</th><th id="columnHead1">Percent</th></tr></thead><tbody><tr><th id="rowHead0"><p>cat 1</p></th><td headers="rowHead0 columnHead1">50</td></tr><tr class="greenbar"><th id="rowHead1"><p>cat 2</p></th><td headers="rowHead1 columnHead1">30</td></tr><tr><th id="rowHead2"><p>cat 3</p></th><td headers="rowHead2 columnHead1">20</td></tr></tbody></table>
-                        
+
                     </div>
 
 
@@ -713,7 +713,7 @@
 
 
                     <br>
-                    
+
                     <p class="notes">Insert RGB, Hex codes, or color names here, i.e. rgb(50,50,50), separated by spaces or new lines.</p>
                         <div class="clear_next_textarea_button show_map" title="Clear the text area">X</div>
                     <textarea id="custom_colors_textarea" class="medium show_map" placeholder="Insert RGB, Hex codes, or color names here, i.e. rgb(50,50,50), separated by spaces or new lines" value="" style="height: ">Aqua green CornflowerBlue #FF1493 #A52A2A #FF7F50 rgb(184,134,11) rgb(139,0,139) rgb(255,215,0)
@@ -765,13 +765,13 @@
                     <br>
 
                     <span class="show_map">
-                        
-                    <span class="just_map"> 
+
+                    <span class="just_map">
 
                     <label for="map_legend_enabled_checkbox">Enabled: </label>
                     <input type="checkbox" id="map_legend_enabled_checkbox" checked />
                     <br>
-                        
+
                     <label for="map_legend_decimals_select">Decimal points: </label>
                     <select id="map_legend_decimals_select">
                         <option value="null" selected>Auto</option>
@@ -781,8 +781,8 @@
                         <option value="3">3</option>
                     </select>
                     <br>
-                        
-                        
+
+
                     </span>
 
 
@@ -790,7 +790,7 @@
                     <br>
 
                     <label for="legend_placement_x">&rarr; <sup>(X)</sup> </label>
-                    <input type="text" id="legend_placement_x" value="30" class="small number_entry" />
+                    <input type="text" id="legend_placement_x" value="60" class="small number_entry" />
 
                     <label for="legend_placement_y">&darr; <sup>(Y)</sup> </label>
                     <input type="text" id="legend_placement_y" value="40" class="small number_entry" />
@@ -800,7 +800,7 @@
                     <input type="checkbox" id="legend_reverse_layout_checkbox" />
                     <br>
                     <label for="legend_width_input">Legend width</label>
-                    <input type="text" id="legend_width_input" value="550" class="small number_entry" />
+                    <input type="text" id="legend_width_input" value="" placeholder="Auto" class="small number_entry" />
                     <br>
                     <span class="notes">This can be helpful to force the legend to be more narrow than usual, causing items to stack vertically.<br></span>
 
@@ -821,7 +821,7 @@
                     </span>
 
                     <span class="show_bar show_line show_scatter show_bubble show_drilldown show_column">
-                    
+
                     <label for="legend_make_toggle_checkbox" style="font-size:100%; font-weight:normal;">When a series is clicked, hide the others: </label>
                     <input type="checkbox" id="legend_make_toggle_checkbox">
                     <br>
@@ -978,11 +978,11 @@
                     <span class="just_line">
                         <br>
                     <label for="chart_y_axis_2_enabled_checkbox">Use secondary Y-axis?</label>
-                        <input type="checkbox" id="chart_y_axis_2_enabled_checkbox" />    
-                        
-                        
+                        <input type="checkbox" id="chart_y_axis_2_enabled_checkbox" />
+
+
                     <br>
-                    <span class="secondary_y_axis_span" style="display: none;">  
+                    <span class="secondary_y_axis_span" style="display: none;">
                     <h4>Secondary Y-axis <sup class = "help_icon">?</sup></h4>
                          <span class="notes">You can assign series to the second y-axis in the "Individual series options" tab.
                                 <br>
@@ -1098,12 +1098,12 @@
                             <option value="%">%</option>
                         </select>
                         <br>
-                        
+
                     </span>
 
 
                     <span class="just_bubble">
-                    
+
                           <label for="chart_tooltip_force_decimals_z_select">Decimal points (Z value): </label>
                         <select id="chart_tooltip_force_decimals_z_select">
                             <option value="0">Auto</option>
@@ -1124,18 +1124,18 @@
 
 
                     <span class="just_map">
-                        
+
                         <label for="map_tooltip_main_value_font_size_input">Main value font size: </label>
                         <br>
                         <input type="text" id="map_tooltip_main_value_font_size_input" class="small number_entry" value="30" />
 
                         <br>
-                        
+
                         <label for="map_tooltip_na_text_input">Text if data not available: </label>
                         <br>
                         <input type="text" id="map_tooltip_na_text_input" class="medium" value="N/A" />
                         <br>
-                        
+
                         <label for="map_tooltip_prepend_to_value_text_input">Text to go before main value: </label>
                         <br>
                         <input type="text" id="map_tooltip_prepend_to_value_text_input" class="large" value="" />
@@ -1159,8 +1159,8 @@
                     <br>
 -->
                     <span class="show_bar show_line show_scatter show_bubble show_drilldown show_column show_arearange show_columnrange">
-                    
-                    
+
+
                     <label for="chart_tooltip_y_multiple_select">Multiply values by: </label>
                     <select id="chart_tooltip_y_multiple_select">
                         <option value="1">&nbsp;</option>
@@ -1255,7 +1255,7 @@
 
 
                     <span class="just_bar just_column">
-                    
+
                     <label for="point_padding_input">Padding between points: </label>
                     <input type="text" id="point_padding_input" value=".1" class="small number_entry" />
                     <br>
@@ -1273,7 +1273,7 @@
                     <label for="chart_subtitle_textarea">Subtitle: </label>
                     <textarea id="chart_subtitle_textarea" placeholder="Subtitle text goes here"></textarea>
                     <br>
-                  
+
                     </span>
 
 
@@ -1287,18 +1287,18 @@
                           <div style="height: 20px; width: 20px; float: left; position: relative; top: -4px;  margin-left: 10px; ">Fast</div>
                         <div class="clear_float"></div>
                         </div>
-                        
+
                         <label for="map_animated_start_at_last_date_checkbox">Start animated maps at last date in time frame?</label>
                         <input type="checkbox" id="map_animated_start_at_last_date_checkbox">
                         <br>
-                    
-                        
-                        
+
+
+
                         <label for="map_include_puerto_rico_checkbox">Include Puerto Rico: </label>
                     <input type="checkbox" id="map_include_puerto_rico_checkbox" value="PR"/>
                     <br>
-                            
-                         <span class ="state_map_only">   
+
+                         <span class ="state_map_only">
                         <label for="map_include_virgin_islands_checkbox">Include U.S. Virgin Islands: </label>
                     <input type="checkbox" id="map_include_virgin_islands_checkbox" value="VI" />
                     <br>
@@ -1308,8 +1308,8 @@
                         <label for="map_add_state_labels_checkbox">Add labels to states: </label>
                     <input type="checkbox" id="map_add_state_labels_checkbox"  />
                     <br>
-                            
-                            
+
+
                         </span>
                     </span>
 
@@ -1338,36 +1338,36 @@
                     <label for="chart_show_data_labels_checkbox">Show data labels: </label>
                     <input type="checkbox" id="chart_show_data_labels_checkbox">
                     <br>
-                    
-                     
+
+
                     <div class="just_scatter">
-                        
+
                     <label for="chart_scatter_add_45_line_checkbox">Add 45-degree line: </label>
                     <input type="checkbox" id="chart_scatter_add_45_line_checkbox" />
                     <br>
-                        
+
                     <label for="chart_scatter_add_regression_line_checkbox">Add regression (average value) line: </label>
                     <input type="checkbox" id="chart_scatter_add_regression_line_checkbox" />
                     <br>
-                        
-                    
+
+
                     <label for="chart_scatter_highlight_points_select">Highlight points (with red outline): </label>
                     <select id="chart_scatter_highlight_points_select">
                         <option value="no_highlight">&nbsp;</option>
                         <option value="x>y">When below 45-degree line</option>
                         <option value="x<y">When above 45-degree line</option>
-                      
+
                     </select>
                     <br>
 
-                    
-                    
-                        
+
+
+
                     </div>
-                    
-                    
+
+
                     <span class="show_line show_bar show_column">
-                                                  
+
                     <label for="chart_add_recession_shading_select">Recession shading: </label>
                     <select id="chart_add_recession_shading_select">
                         <option value="no_recession">&nbsp;</option>
@@ -1525,7 +1525,7 @@
         <div id="map1" class="map_display_area fixed">
         </div>
 
-        <p class="alert-danger"></p>
+        <p id = "status_bar" class="alert-danger"></p>
 
 
     </div>
@@ -1544,12 +1544,12 @@
     <script src="libraries/Highcharts-4.2.3/js/highcharts-more.src.js"></script>
     <script src="libraries/Highcharts-4.2.3/js/modules/drilldown.src.js"></script>
 
-    
-    
-        
+
+
+
     <!--
  <script src="https://code.highcharts.com/highcharts.src.js"></script>
-    
+
     <script src="https://www.bls.gov/assets/highcharts/latest/highcharts.js"></script>
     <script src="https://www.bls.gov/assets/highcharts/latest/highcharts-more.js"></script>
     <script src="https://www.bls.gov/assets/highcharts/latest/modules/drilldown.js"></script>
@@ -1557,12 +1557,12 @@
     <script src="https://www.bls.gov/assets/highcharts/latest/modules/offline-exporting.js"></script>
     <script src="https://www.bls.gov/assets/highcharts/latest/modules/accessibility.js"></script>
 -->
-    
-    
+
+
     <script src="libraries/fileSaver/fileSaver.min.js"></script>
     <script src="libraries/blob/blob.js"></script>
     <!--<script src="libraries/Highcharts-4.2.3/js/modules/exporting.js"></script> -->
-    
+
 
 
     <!--JS Color for color picker boxes -->

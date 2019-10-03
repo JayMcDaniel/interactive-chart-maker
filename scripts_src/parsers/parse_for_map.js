@@ -1,4 +1,4 @@
-/** 
+/**
  * Parsing function for maps  - adds values to all_map_options.areas based on table input
  * @module
  * @param all_map_options {object} main map object with path and svg options
@@ -7,7 +7,7 @@
  */
 
 var parseForMap = function (all_map_options, table_input) {
-    
+
     console.log("parsing for map");
 
     all_map_options.areas_not_found_from_table = [];
@@ -59,9 +59,9 @@ var parseForMap = function (all_map_options, table_input) {
             //assign values on objs in all_map_options.areas array
             for (var i = 0, len = all_map_options.areas.length; i < len; i++) {
                 if (all_map_options.areas[i].loc_name) {
-                    
+
                     //match table row names to area names from map json (replace to match different format styles)
-                    if (all_map_options.areas[i].loc_name.replace(" County", "").replace(" Parish", "").replace("St. ", "St ") === row_loc_name.replace(" County", "").replace(" Parish", "").replace("St. ", "St ").replace(/Washington, D\.*C\.*/, "District of Columbia") || (all_map_options.map_type === "region" && all_map_options.areas[i].region === row_loc_name) || (all_map_options.map_type === "division" && all_map_options.areas[i].division === row_loc_name)) {
+                    if (all_map_options.areas[i].loc_name.replace(" County", "").replace(" Parish", "").replace(" Municipio", "").replace("St. ", "St ") === row_loc_name.replace(" County", "").replace(" Parish", "").replace(" Municipio", "").replace("St. ", "St ").replace(/Washington, D\.*C\.*/, "District of Columbia") || (all_map_options.map_type === "region" && all_map_options.areas[i].region === row_loc_name) || (all_map_options.map_type === "division" && all_map_options.areas[i].division === row_loc_name)) {
 
                         all_map_options.areas[i].value = row_val;
                         all_map_options.areas[i].extra_vals = extra_vals;
