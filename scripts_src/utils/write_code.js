@@ -1,6 +1,6 @@
 var chart_recall = require("./chart_recall.js");
 var utils_main = require("./utils_main.js");
-/** functions for chart / map code output 
+/** functions for chart / map code output
 @namespace
 **/
 
@@ -62,7 +62,7 @@ var write_code = {
         //save chart input values
         all_chart_options.saved_values = chart_recall.saveValues();
 
-        
+
         var chart_options_js = utils_main.deepStringify(all_chart_options);
 
         chart_options_js.string = chart_options_js.string
@@ -80,7 +80,7 @@ var write_code = {
             .replace('"drilldown":{},', "") //replace empty drilldown obj with nothing
             + ";\n\n";
 
-        
+
         //write callback function
         chart_options_js.string = chart_options_js.string + "var chartCallback = " + draw_chart.chartCallback.toString(); + "\n";
 
@@ -88,7 +88,7 @@ var write_code = {
         //add surrounding JS (doc ready, render chart, jq extensions...)
         chart_options_js.string = '$(function(){\n\
              var all_chart_options = ' + chart_options_js.string + ';\n\
-Highcharts.setOptions({lang: {thousandsSep: ",",\n\drillUpText: "◁ Back ",\n\contextButtonTitle: "Download chart image"\n\   }});\n\n\
+Highcharts.setOptions({lang: {thousandsSep: ",",\n\drillUpText: "\\u25C0 Back ",\n\contextButtonTitle: "Download chart image"\n\   }});\n\n\
     var chart = new Highcharts.Chart(all_chart_options, chartCallback(all_chart_options));\n';
 
         //redraw the chart if its a drilldown (to customize individual points)\n\
@@ -164,35 +164,35 @@ jQuery.fn.extend({addCommas:' + $("string").addCommas.toString() + ' });';
 
             //map_legend_init.getMapLegend
             "map_legend_init.getMapLegend = " + map_legend_init.getMapLegend.toString() + ";\n\n" +
-            
+
             //map_ranked_columns_init.getRankedColumns
             "var map_ranked_columns_init = {}; \n map_ranked_columns_init.getRankedColumns = " + map_ranked_columns_init.getRankedColumns.toString() + ";\n\n" +
 
             //map_tooltip_init.getMapTooltip
             "var map_tooltip_init = {}; \n map_tooltip_init.getMapTooltip = " + map_tooltip_init.getMapTooltip.toString() + ";\n\n" +
 
-            //map_init.convertMapOptionsToSVG 
+            //map_init.convertMapOptionsToSVG
             "map_init.convertMapOptionsToSVG = " + map_init.convertMapOptionsToSVG.toString() + ";\n\n" +
 
             //map_init.setUpMapHover
             "map_init.setUpMapHover = " + map_init.setUpMapHover.toString() + ";\n\n" +
-            
+
             //map_init.setUpMapLegendHover
             "map_init.setUpMapLegendHover = " + map_init.setUpMapLegendHover.toString() + ";\n\n" +
-            
+
             //map_init.setUpMapLegendClick
             "map_init.setUpMapLegendClick = " + map_init.setUpMapLegendClick.toString() + ";\n\n" +
 
             //map_init.setUpMapStateLinks
             "map_init.setUpMapStateLinks = " + map_init.setUpMapStateLinks.toString() + ";\n\n" +
 
-           
-            
-            //map_data_labels_init.addDataLabels (only if used)  
+
+
+            //map_data_labels_init.addDataLabels (only if used)
             "var map_data_labels_init = " + (all_map_options.has_data_labels ? JSON.stringify(map_data_labels_init) : "{}") + ";\n\n" +
             "map_data_labels_init.addDataLabels = " + (all_map_options.has_data_labels ? map_data_labels_init.addDataLabels.toString() : null) + ";\n\n" +
-            
-            
+
+
             //map_animation_init.getAnimationDiv (only if used)
             "var map_animation_init = {}; \n map_animation_init.getAnimationDiv = " + (all_map_options.is_animated ? map_animation_init.getAnimationDiv.toString() : null) + ";\n\n" +
 
@@ -209,11 +209,11 @@ jQuery.fn.extend({addCommas:' + $("string").addCommas.toString() + ' });';
 
             //init legend hovering
             "map_init.setUpMapLegendHover(map_display_area);\n\n" +
-            
+
 
             //init legend clicking
              "if (all_map_options.map_type === 'metro_area') {\n map_init.setUpMapLegendClick(map_display_area); \n } \n\n" +
-            
+
             //init legend hover
             "map_init.setUpMapLegendHover(map_display_area);\n\n" +
 
@@ -222,7 +222,7 @@ jQuery.fn.extend({addCommas:' + $("string").addCommas.toString() + ' });';
 
             //init data labels function (if used)
             (all_map_options.has_data_labels ? "map_data_labels_init.addDataLabels(all_map_options);\n\n" : "") +
-        
+
             //init setup of animation functions (if used)
             (all_map_options.is_animated ? "map_animation_init.setUpMapAnimation(all_map_options, map_display_area);\n\n" : "") +
 
