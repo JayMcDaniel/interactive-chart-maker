@@ -58,11 +58,12 @@
             //set legend text content and set mod so that numbers in legend are 1, .1, .01, or .001 off
             var dec = all_map_options.legend.decimals;
             if (i === 0) {
+
               map_legend_text.textContent = dollar + $(ranges[i]).addCommas(dec) + percent + " and lower";
             } else if (i === all_map_options.colors.length - 1) {
               map_legend_text.textContent = dollar + $(map_legend_init.valueMod(ranges[i - 1], all_map_options, dec)).addCommas(dec) + percent + " and higher";
-            } else if (map_legend_init.valueMod(ranges[i], all_map_options, dec) === map_legend_init.valueMod(ranges[i - 1], all_map_options, dec)) {
-              map_legend_text.textContent = dollar + $(map_legend_init.valueMod(ranges[i], all_map_options, dec)).addCommas(dec) + percent;
+            } else if ($(map_legend_init.valueMod(ranges[i - 1], all_map_options, dec)).addCommas(dec) === $(ranges[i]).addCommas(dec)) {
+              map_legend_text.textContent = dollar + $(ranges[i]).addCommas(dec) + percent;
             } else {
               map_legend_text.textContent = dollar + $(map_legend_init.valueMod(ranges[i - 1], all_map_options, dec)).addCommas(dec) + percent + " to " + dollar + $(ranges[i]).addCommas(dec) + percent;
             }
