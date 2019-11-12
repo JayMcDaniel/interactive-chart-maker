@@ -466,7 +466,7 @@ var map_init = {
 
 
           if (this.loc_name) { //if it's a named area, set value and color
-            el.setAttributeNS(null, "loc_value", this.value || null);
+            el.setAttributeNS(null, "loc_value", this.value === undefined ? null : this.value);
             el.setAttribute("loc_name", this.loc_name);
           }
 
