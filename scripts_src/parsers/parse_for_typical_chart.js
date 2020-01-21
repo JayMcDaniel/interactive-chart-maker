@@ -1,5 +1,5 @@
-/** 
- * Parsing function for typical chart types (line, bar, column) 
+/**
+ * Parsing function for typical chart types (line, bar, column)
  * @module
  * @param input {element} input jquery table element retrieved from textarea
  * @param load_series_from {string} column_heads or column_rows
@@ -53,16 +53,16 @@ var parseForTypicalChart = function (input, load_series_from, chart_type, legend
             });
 
         });
-        
-        
+
+
         //populate series data arrays from the matrix
         output.series.forEach(function (series, i) {
             matrix.forEach(function (arr, j) {
                 series.data.push(arr[i]);
             });
         });
-        
-       
+
+
 
         /** Else if loading series names from row heads is selected*/
     } else {
@@ -81,7 +81,7 @@ var parseForTypicalChart = function (input, load_series_from, chart_type, legend
                 data: [],
                 type: type,
                 color: colors[i],
-                _symbolIndex: i,
+                _symbolIndex: 0,
                 stacking: ["area", "stacked_bar", "stacked_column"].indexOf(chart_type) > -1 ? "stacked" : null,
                 visible: i > 0 && legend_toggle_enabled === true ? false : true
             };
