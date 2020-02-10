@@ -141,11 +141,11 @@ var update_individual_series = {
 
             //hide or show the line styles options for that series
             type === "line" ? $(".line_style_div:eq(" + i + ")").show() : $(".line_style_div:eq(" + i + ")").hide();
-            
+
             //hide or show tooltip options for that series
             type === "line" || type === "bar" || type === "column" ? $(".series_decimals_div:eq(" + i + "), .individual_tooltip_signs_div:eq(" + i + ")").show() : $(".series_decimals_div:eq(" + i + "), .individual_tooltip_signs_div:eq(" + i + ")").hide();
 
-            
+
 
         });
     },
@@ -250,7 +250,13 @@ var update_individual_series = {
             var val = $(this).val();
 
             var dollar = val === "$" ? "$" : undefined;
-            var percent = val === "%" || val === "percentage point(s)" ? val : undefined;
+
+            var percent;
+            if (val === "%"){
+              percent = val;
+            }else if (val === "percentage point(s)"){
+              percent = " " + val;
+            }
 
             var i = $(this).parents(".series_snippet").index();
 
@@ -265,10 +271,10 @@ var update_individual_series = {
     },
 
 
-    
+
     seriesDecimalsSelectChange: function (chart, all_chart_options) {
         $(".series_decimals_select").change(function () {
-           
+
             var decimals = $(this).val() || undefined;
 
             var i = $(this).parents(".series_snippet").index();
@@ -645,7 +651,7 @@ var update_individual_series = {
             //make individual tooltip signs div
             var individual_tooltip_signs_div = update_individual_series.makeIndividualTooltipSignsDiv(i, series);
             series_snippet.appendChild(individual_tooltip_signs_div);
-            
+
             //make series decimals div
             var series_decimals_div = update_individual_series.makeSeriesDecimalsDiv(i, series);
             series_snippet.appendChild(series_decimals_div);
@@ -675,18 +681,18 @@ var update_individual_series = {
             //append all
             $(display_series_options_inner_div).append(series_snippet);
 
-            
+
             if (all_chart_options.chart.type === "line") {
                 $(".line_style_div").show();
             }
-            
+
             //show or hide tooltip options
             if (all_chart_options.chart.type === "line" || all_chart_options.chart.type === "bar" || all_chart_options.chart.type === "column") {
                 $(".series_decimals_div, .individual_tooltip_signs_div, .use_2nd_y_axis_div").show();
             }else{
                 $(".series_decimals_div, .individual_tooltip_signs_div, .use_2nd_y_axis_div").hide();
             }
-            
+
 
         });
 
@@ -698,10 +704,10 @@ var update_individual_series = {
 
         //bind unique tooltip sign changes
         update_individual_series.tooltipSignsSelectChange(chart, all_chart_options);
-        
+
         //bind series decimals change
         update_individual_series.seriesDecimalsSelectChange(chart, all_chart_options);
-        
+
         //bind use second y-axis checkbox changes
         update_individual_series.useSecondYAxisChange(chart, all_chart_options);
 
