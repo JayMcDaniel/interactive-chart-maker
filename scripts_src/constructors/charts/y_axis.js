@@ -1,5 +1,5 @@
 /** yAxis options constructor. Info at http://api.highcharts.com/highcharts#yAxis
-* @constructor yAxis 
+* @constructor yAxis
 * @param o {object} yAxis options object
 */
 
@@ -10,7 +10,7 @@ var yAxis = function (o) {
     this.gridLineDashStyle = o.gridLineDashStyle || 'Dot';
 
     this.labels = {
-        
+
      //   format: o.labels ? o.labels.format : {value},
         formatter: o.labels ? o.labels.formatter : undefined,
         rotation: o.labels ? o.labels.rotation || 0 : 0,
@@ -28,7 +28,6 @@ var yAxis = function (o) {
     this.lineWidth = o.lineWidth || 1;
     this.max = o.max || null;
     this.min = o.min || null;
-    this.minPadding = 0.6;
     this.opposite = o.opposite || false;
     this.plotBands = o.plotBands || [];
 
@@ -54,7 +53,7 @@ var yAxis = function (o) {
         rotation: 0,
         x: o.title ? o.title.x || 35 : 35,
         y: o.title ? o.title.y || -15 : -15,
-        
+
         style: {
             color: '#000000',
             fontFamily: 'Calibri, Arial, Helvetica, sans-serif',
