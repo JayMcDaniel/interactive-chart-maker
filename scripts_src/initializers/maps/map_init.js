@@ -38,6 +38,7 @@ var map_init = {
       is_animated: is_checked($("#map_animated_checkbox")),
       is_colored_by_names: is_checked($("#map_color_by_names_checkbox")),
       add_ranked_columns: is_checked($("#map_add_ranked_columns_checkbox")),
+      ranked_columns_multiplier: Number($("#map_ranked_column_size_range").val()),
       has_data_labels: is_checked($("#map_add_state_labels_checkbox")),
       animation_delay: Number($("#map_animation_speed_range").val()),
       animation_index: 0,

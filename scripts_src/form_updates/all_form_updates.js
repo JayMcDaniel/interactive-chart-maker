@@ -694,7 +694,7 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
     //map tooltip N/A, and prepend to value inputs changed
     //map animation delay input changed
 
-    $("#map_circle_size_range, #map_tooltip_na_text_input, #map_tooltip_prepend_to_value_text_input, #map_animation_speed_range").unbind().on("input", function () {
+    $("#map_circle_size_range, #map_tooltip_na_text_input, #map_tooltip_prepend_to_value_text_input, #map_animation_speed_range, #map_ranked_column_size_range").unbind().on("input", function () {
         map_init.loadNewMap(chart, all_chart_options, all_map_options, true); // true to repopulate form
     });
 
