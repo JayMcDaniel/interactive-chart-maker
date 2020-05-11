@@ -13,7 +13,7 @@
                }
 
                return area.value;
-               
+
            }).sort(function (a, b) {
                return a.value - b.value;
            });
@@ -44,7 +44,7 @@
 
            //create inner columns
            $.each(areas, function (i, area) {
-               var height = ((Math.abs(area.value) / largest_val) * 100);
+               var height = ((Math.abs(area.value) / largest_val) * all_map_options.ranked_columns_multiplier);
                var column = $("<div>").attr("rel", area.id)
                    .addClass("map_ranked_column")
                    .css({
