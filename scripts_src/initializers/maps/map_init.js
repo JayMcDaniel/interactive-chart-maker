@@ -46,6 +46,7 @@ var map_init = {
       legend: {
         decimals: $("#map_legend_decimals_select").val(),
         enabled: is_checked($("#map_legend_enabled_checkbox")),
+        hover_enabled: is_checked($("#map_legend_hover_enabled_checkbox")),
         reversed: is_checked($("#legend_reverse_layout_checkbox")),
         alphabetized: is_checked($("#legend_alphabetical_layout_checkbox")),
         x: Number($("#legend_placement_x").val()),
@@ -294,7 +295,9 @@ var map_init = {
       map_init.setUpMapHover(all_map_options, map_display_area);
 
       //init legend hovering
-      map_init.setUpMapLegendHover(map_display_area);
+      if (all_map_options.legend.hover_enabled) {
+        map_init.setUpMapLegendHover(map_display_area);
+      }
 
       //init legend clicking for metro maps only
       if (all_map_options.map_type === "metro_area") {
