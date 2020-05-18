@@ -1,5 +1,5 @@
-/** Legend options constructor. Info at http://api.highcharts.com/highcharts#legend 
- * @constructor Legend 
+/** Legend options constructor. Info at http://api.highcharts.com/highcharts#legend
+ * @constructor Legend
  * @param o {object} legend options object
  */
 var Legend = function (o) {
@@ -11,7 +11,7 @@ var Legend = function (o) {
     this.borderWidth = o.borderWidth || 0;
     this.enabled = o.enabled || true;
     this.floating = o.floating || true;
-    this.itemDistance = o.itemDistance || 30;
+//    this.itemDistance = o.itemDistance || 0;
     this.itemWidth = o.itemWidth;
     this.layout = o.layout || 'horizontal';
     this.reversed = o.reversed || false;
@@ -20,7 +20,7 @@ var Legend = function (o) {
     this.title = {};
     this.useHTML = o.useHTML || false;
     this.verticalAlign = o.verticalAlign || 'top';
-    this.width = o.width || 540;
+    this.width = o.width || 520;
     this.x = o.x || 0;
     this.y = o.y || 30;
 
@@ -37,7 +37,7 @@ var Legend = function (o) {
         cursor: o.itemHoverStyle.cursor
     }
 
-   
+
 }
 
 module.exports = Legend;
