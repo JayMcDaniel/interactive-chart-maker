@@ -1,7 +1,7 @@
 var utils_main = require("../utils/utils_main.js");
 
 
-/** when Y-axis options are changed in the side area, these methods are called 
+/** when Y-axis options are changed in the side area, these methods are called
 @namespace
 */
 var update_y_axis = {
@@ -111,6 +111,7 @@ var update_y_axis = {
         y_axis.labels.signs_arr = y_axis_signs_arr;
         y_axis.labels.decimals = y_axis_decimals;
         y_axis.labels.dividend = y_axis_dividend;
+        y_axis.allowDecimals = y_axis_decimals !== "0";
 
 
         //update chart
@@ -119,13 +120,14 @@ var update_y_axis = {
                 signs_arr: y_axis_signs_arr,
                 decimals: y_axis_decimals,
                 dividend: y_axis_dividend
-            }
+            },
+            allowDecimals: y_axis.allowDecimals
         })
 
 
 
         //create formatter
-        if (y_axis_decimals !== "null") { //if decimals are not null   
+        if (y_axis_decimals !== "null") { //if decimals are not null
 
 
             var yAxisFormat = function () {
