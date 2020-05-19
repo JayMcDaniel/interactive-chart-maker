@@ -207,15 +207,11 @@ jQuery.fn.extend({addCommas:' + $("string").addCommas.toString() + ' });';
             //init tooltip and highlighting
             "map_init.setUpMapHover(all_map_options, map_display_area);\n\n" +
 
-            //init legend hovering
-            "map_init.setUpMapLegendHover(map_display_area);\n\n" +
-
-
             //init legend clicking
              "if (all_map_options.map_type === 'metro_area') {\n map_init.setUpMapLegendClick(map_display_area); \n } \n\n" +
 
-            //init legend hover
-            "map_init.setUpMapLegendHover(map_display_area);\n\n" +
+            //init legend hovering
+            "if (all_map_options.legend.hover_enabled) {\n map_init.setUpMapLegendHover(map_display_area); \n }\n\n" +
 
             //init state links to eag pages
             "map_init.setUpMapStateLinks(map_display_area);\n\n" +
