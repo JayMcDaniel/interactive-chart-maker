@@ -24,8 +24,11 @@
            if (!areas[areas.length - 1]) {
                return undefined;
            }
+
            var largest_val = areas[areas.length - 1].value;
-           var smallest_val = areas[0].value;
+           if (largest_val < 10) {
+             largest_val = 10;
+           }
 
 
 
@@ -45,6 +48,8 @@
            //create inner columns
            $.each(areas, function (i, area) {
                var height = ((Math.abs(area.value) / largest_val) * all_map_options.ranked_columns_multiplier);
+
+               console.log("height", height);
                var column = $("<div>").attr("rel", area.id)
                    .addClass("map_ranked_column")
                    .css({
