@@ -25,9 +25,14 @@
                return undefined;
            }
 
+
+           var smallest_val = areas[0].value;
+           console.log("smallest_val", smallest_val)
+
            var largest_val = areas[areas.length - 1].value;
-           if (largest_val < 10) {
-             largest_val = 10;
+           if (largest_val < 0) {
+             largest_val = Math.abs(smallest_val);
+             console.log("largest_val", largest_val);
            }
 
 
@@ -38,7 +43,7 @@
                width: "252px",
                backgroundColor: "none",
                position: "absolute",
-               top: "470px",
+               top: Math.abs(largest_val) >  Math.abs(smallest_val) ? "470px" : "380px",
                right: "10px",
                zIndex: 510
            });
