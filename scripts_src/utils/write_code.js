@@ -130,7 +130,9 @@ jQuery.fn.extend({addCommas:' + $("string").addCommas.toString() + ' });';
         var map_js = utils_main.deepStringify(all_map_options);
 
         //write out map options object
-        map_js.string = "$(function(){\n" +
+        map_js.string = "(function($){\n" +
+
+            "$(function(){\n" +
 
             "var all_map_options = " + map_js.string + ";\n\n" +
 
@@ -216,14 +218,14 @@ jQuery.fn.extend({addCommas:' + $("string").addCommas.toString() + ' });';
             //init state links to eag pages
             "map_init.setUpMapStateLinks(map_display_area);\n\n" +
 
-            //init data labels function (if used)
-            (all_map_options.has_data_labels ? "map_data_labels_init.addDataLabels(all_map_options);\n\n" : "") +
-
             //init setup of animation functions (if used)
             (all_map_options.is_animated ? "map_animation_init.setUpMapAnimation(all_map_options, map_display_area);\n\n" : "") +
 
             ///end of doc ready
-            "});" +
+            "});\n" +
+
+            //end of IIFE
+            "})(jQuery);\n\n" +
 
             //add jQuery addcommas extension
             'jQuery.fn.extend({addCommas:' + $("string").addCommas.toString() + ' });';
