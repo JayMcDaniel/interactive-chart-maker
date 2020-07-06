@@ -76,7 +76,7 @@
           if ($(map_legend_text).text() !== "") {
             map_legend_item.appendChild(map_legend_color);
             map_legend_item.appendChild(map_legend_text);
-            map_legend_div.prepend(map_legend_item);
+            map_legend_div.appendChild(map_legend_item);
           }
 
 
