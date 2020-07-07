@@ -2,7 +2,7 @@ var Legend = require("../../constructors/charts/legend.js");
 var utils_forms = require("../../utils/utils_forms.js");
 var utils_main = require("../../utils/utils_main.js");
 
-/** Initializer for "legend" options section of all_chart_options. Creates and returns a new instance 
+/** Initializer for "legend" options section of all_chart_options. Creates and returns a new instance
 @module
 */
 var legendInit = function legendInit(chart_type) {
@@ -25,7 +25,8 @@ var legendInit = function legendInit(chart_type) {
             cursor: chart_type === "drilldown" ? "default" : "pointer"
         },
         itemStyle: {
-            cursor: chart_type === "drilldown" ? "default" : "pointer"
+            cursor: chart_type === "drilldown" ? "default" : "pointer",
+            width: utils_main.checkForUndefined($("#legend_item_width_input").val()),
         },
         width: utils_main.checkForUndefined($("#legend_width_input").val())
 
@@ -33,7 +34,7 @@ var legendInit = function legendInit(chart_type) {
 
 
     var legend = new Legend(options);
-    
+
     return legend;
 };
 

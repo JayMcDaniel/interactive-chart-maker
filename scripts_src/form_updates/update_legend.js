@@ -31,10 +31,10 @@ var update_legend = {
   updateItemWidth: function(new_item_width, chart, all_chart_options) {
 
     var legend = chart.legend;
-    legend.options.itemWidth = new_item_width;
+    legend.options.itemWidth = legend.options.itemStyle.width = new_item_width;
     legend.render(false);
 
-    all_chart_options.legend.itemWidth = new_item_width;
+    all_chart_options.legend.itemWidth = all_chart_options.legend.itemStyle.width = new_item_width;
   },
 
 
