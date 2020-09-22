@@ -1,8 +1,6 @@
 var utils_forms = require("./utils_forms.js");
 
 
-
-
 /**
  * Contains functions that deal with chart (options selected and data loaded) saving and loading
  * @namespace
@@ -54,8 +52,6 @@ var chart_recall = {
             var individual_series_options = []; //gets populated if series_color and line_style_select are found
 
             $.each(arr, function () {
-
-                console.log(this);
                 
                 if (!set_individual_series && this.id && this.id.match(/series_color|series_type_div|line_style_select|series_visible_checkbox|series_extra_data/)) { //look if this id has to do with individual series options
                     individual_series_options.push(this);
@@ -103,6 +99,10 @@ var chart_recall = {
 
         //reinit form updates bindings
         var allFormUpdates = require("../form_updates/all_form_updates.js");
+
+
+        $("#chart_type_icons .selected").click();
+        
         allFormUpdates(chart, all_chart_options);
 
         //re populate the individual series options forms
@@ -116,7 +116,7 @@ var chart_recall = {
 
         //line style changes
         $(".line_style_select, .series_visible_checkbox").each(function () {
-            $(this).change();
+            $(this).change(); 
         });
 
         //extra data 
@@ -137,7 +137,6 @@ var chart_recall = {
 
         //click selected chart type (refreshes some .just_ options showing) FIX - this makes it all one type of chart
         allFormUpdates.displayOptions(chart_type);
-        //  $("#chart_type_icons .selected").click();
 
 
         window.scrollTo(0, 0); //scrolls to top

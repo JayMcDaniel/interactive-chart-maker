@@ -24,13 +24,14 @@ gulp.task('sass', function () {
 
 
 gulp.task('sass:watch', function () {
-    gulp.watch('./styles/sass/*.scss', ['sass']);
+    gulp.watch('./styles/sass/*.scss', gulp.series('sass'));
 });
 
 
+gulp.task('compile', function () {
 
+    gutil.log("working?");
 
-gulp.task("default", ['sass', 'sass:watch'], function () {
     var bundler = watchify(
         browserify({
             entries: ["./scripts_src/app.js"],
@@ -42,13 +43,17 @@ gulp.task("default", ['sass', 'sass:watch'], function () {
             fullPaths: false
         })
         .transform("babelify", {
-            presets: ["es2015"]
+            presets: ["@babel/preset-env"]
         })
     );
 
-    function build(file) {
-        if (file) {
-            gutil.log("Recompiling " + file);
+    function build(file_arr) {
+
+        gutil.log("building", file_arr);
+
+
+        if (file_arr) {
+            gutil.log("Recompiling " + file_arr);
         }
 
         return bundler
@@ -60,17 +65,29 @@ gulp.task("default", ['sass', 'sass:watch'], function () {
                         gutil.colors.cyan(err.filename) + ` [${err.loc.line},${err.loc.column}]`,
                         "\r\n" + err.message + "\r\n" + err.codeFrame);
                 } else {
+                    gutil.log("ugh");
                     gutil.log(err);
                 }
                 this.emit("end");
             })
 
-        .pipe(source("scripts_build/main.min.js"))
+            .pipe(source("scripts_build/main.min.js"))
             // .pipe(streamify(uglify()))
             .pipe(gulp.dest("./"));
     };
-    build();
-    bundler.on("update", build);
 
+
+    bundler.on("update", function (file_arr) {
+
+        gutil.log("update triggered");
+        build(file_arr);
+    });
+
+    build();
+
+});
+
+
+gulp.task('default', gulp.series(gulp.parallel('sass', 'sass:watch', 'compile')), function () {
 
 });
