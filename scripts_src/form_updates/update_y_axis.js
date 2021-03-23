@@ -321,14 +321,10 @@ var update_y_axis = {
         if (!chart) { // called when this is used in y_axis_init
             return new_interval;
         }
-
-        if (new_interval > chart.yAxis[index].dataMax) {
-            new_interval = chart.yAxis[index].dataMax;
-        }
+        
 
         chart.yAxis[index].update({
             tickInterval: new_interval
-
         });
 
 

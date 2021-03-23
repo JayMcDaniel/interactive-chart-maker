@@ -246,7 +246,7 @@ var map_data_labels_init = {
         var invertColor = function (hex) {
 
             if (/rgb/.test(hex)) {
-                var rgbs = hex.replace(/[^\d,]/g, '').split(',');
+                var rgbs = hex.replace(/[a-z\s\(\)]*/g, '').split(',');
                 hex = fullColorHex(rgbs[0], rgbs[1], rgbs[2]);
 
             }

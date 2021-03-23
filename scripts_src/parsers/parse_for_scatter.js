@@ -33,7 +33,7 @@ function findLineByLeastSquares(values_x, values_y) {
     }
 
     /*
-     * Calculate m and b for the formular:
+     * Calculate m and b for the formula:
      * y = x * m + b
      */
     var m = (count * sum_xy - sum_x * sum_y) / (count * sum_xx - sum_x * sum_x);
@@ -214,6 +214,10 @@ var parseForScatter = function (input, chart_type, colors) {
             var x = $(td).getNumber();
             var y = $(td).next().getNumber();
             var xy_arr = [x, y];
+
+            // console.log("header class", $("th p", $(this).parent().next()).attr("class"));
+
+            // var this_indent = 
 
             if (!(y === null || y === undefined)) {
                 series_obj.data.push(xy_arr);

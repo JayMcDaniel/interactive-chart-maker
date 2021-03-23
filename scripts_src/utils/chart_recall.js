@@ -39,6 +39,9 @@ var chart_recall = {
     /** takes input (originally from #load_chart_textarea, parses it, and sets option values accordingly, to load a saved chart) **/
 
     loadValues: function (chart, all_chart_options, input) {
+
+        console.log("loading saved chart");
+
         var utils_main = require("./utils_main.js");
         try {
             input = JSON.parse(input);
@@ -52,7 +55,7 @@ var chart_recall = {
             var individual_series_options = []; //gets populated if series_color and line_style_select are found
 
             $.each(arr, function () {
-                
+
                 if (!set_individual_series && this.id && this.id.match(/series_color|series_type_div|line_style_select|series_visible_checkbox|series_extra_data/)) { //look if this id has to do with individual series options
                     individual_series_options.push(this);
                 } else {
@@ -101,9 +104,10 @@ var chart_recall = {
         var allFormUpdates = require("../form_updates/all_form_updates.js");
 
 
-        $("#chart_type_icons .selected").click();
         
+
         allFormUpdates(chart, all_chart_options);
+
 
         //re populate the individual series options forms
         var update_individual_series = require("../form_updates/update_individual_series.js");
@@ -116,7 +120,7 @@ var chart_recall = {
 
         //line style changes
         $(".line_style_select, .series_visible_checkbox").each(function () {
-            $(this).change(); 
+            $(this).change();
         });
 
         //extra data 
@@ -140,6 +144,11 @@ var chart_recall = {
 
 
         window.scrollTo(0, 0); //scrolls to top
+
+        
+        if (chart_type==="map"){
+            $("#chart_type_icons .selected").click();
+        }
 
 
     },

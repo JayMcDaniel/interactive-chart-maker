@@ -86,6 +86,7 @@ var updateChartType = function (chart_type, chart, all_chart_options) {
     x_axis.gridLineWidth = type === "scatter" || type === "bubble" ? 1 : 0;
     x_axis.startOnTick = type === "scatter" || type === "bubble" ? true : false;
 
+
     chart.xAxis[0].update({
         gridLineWidth: all_chart_options.xAxis.gridLineWidth,
         plotLines: all_chart_options.xAxis.plotLines,

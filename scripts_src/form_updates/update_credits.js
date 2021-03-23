@@ -10,6 +10,8 @@ var update_credits = {
     updateCreditText: function (chart, all_chart_options) {
 
         all_chart_options.credits = creditsInit();
+        all_chart_options.exporting.chartOptions.credits.text = all_chart_options.credits.text.replace("Click legend items to change data display. Hover over chart to view data.", "");
+        
 
         var new_y = Number($("#chart_height_textinput").val()) + all_chart_options.credits.position.y - 26;
         chart.credits.element.setAttribute("y", new_y);
@@ -39,7 +41,6 @@ var update_credits = {
 
 
     }
-
 
 
 }

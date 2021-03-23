@@ -91,14 +91,19 @@ var utils_forms = {
             var svgString = null;
 
 
-            console.log($("#chart_type_icons .selected").divVal());
             if ($("#chart_type_icons .selected").divVal() === "map") {
                 svgString = $("svg.map_svg").outerHTML();
 
             } else {
-                svgString = $("#highcharts-0 svg").outerHTML();
+           
+                var chart = $(".chart_display_area").highcharts();
+               
+                //change background from transparent to white
+                chart.chartBackground.attr({
+                    fill: "#fff"
+                  });
 
-                console.log("MAP");
+                svgString = $("#highcharts-0 svg").outerHTML();
             }
 
             var canvas = document.getElementById("chart_image_canvas");

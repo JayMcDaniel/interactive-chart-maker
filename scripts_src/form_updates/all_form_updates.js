@@ -471,7 +471,6 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
     $("#chart_y_axis_tickmark_interval_input, #chart_y_axis_tickmark_interval_input_2").unbind().keyup(function () {
         var newInterval = $(this).val();
         var axis_number = $(this).attr("id").slice(-1);
-        console.log(axis_number);
         update_y_axis.updateTickmarkInterval(newInterval, chart, all_chart_options, axis_number);
     });
 
@@ -646,7 +645,7 @@ var allFormUpdates = function (chart, all_chart_options, all_map_options) {
     //recession shading
     $("#chart_add_recession_shading_select").unbind().change(function () {
         var dates_type = $(this).val();
-        var plot_bands_arr = calculate_recession_dates.createPlotBands(all_chart_options.xAxis.categories, dates_type);
+        var plot_bands_arr = calculate_recession_dates.createPlotBands(all_chart_options.xAxis.categories, dates_type, all_chart_options);
         calculate_recession_dates.insertPlotBands(plot_bands_arr, chart, all_chart_options);
         update_credits.updateCreditText(chart, all_chart_options);
     });

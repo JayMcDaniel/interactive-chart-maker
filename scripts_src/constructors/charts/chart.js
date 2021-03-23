@@ -9,6 +9,7 @@ var ChartOptions = function (o) {
     this.borderWidth = o.borderWidth || 0;
     this.plotBorderColor = o.plotBorderColor || '#000';
     this.plotBorderWidth = o.plotBorderWidth || 0;
+    this.backgroundColor = '#fff';
     this.type = o.type || 'line';
     this.events = o.events;
     this.zoomType = 'xy';

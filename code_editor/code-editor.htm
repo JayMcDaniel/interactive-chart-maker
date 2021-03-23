@@ -5,6 +5,7 @@
 <html>
 
 <head>
+    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Code editor for interactive charts</title>
 
@@ -26,20 +27,27 @@
     <script src="../libraries/jquery/jquery-2.2.0.min.js"></script>
 
 
-    <script src="https://www.bls.gov/assets/highcharts/latest/highcharts.js"></script> 
-   <!--    <script src="https://code.highcharts.com/6.1.0/highcharts.src.js"></script> -->
+    
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+ <script src="https://code.highcharts.com/modules/exporting.js"></script>
+
+
+    <!-- <script src="https://www.bls.gov/assets/highcharts/latest/highcharts.js"></script>  -->
+      <!-- <script src="https://code.highcharts.com/6.1.0/highcharts.src.js"></script>  -->
     <script src="https://www.bls.gov/assets/highcharts/latest/highcharts-more.js"></script>
     <script src="https://www.bls.gov/assets/highcharts/latest/modules/drilldown.js"></script>
 
-    <script src="https://www.bls.gov/assets/highcharts/latest/modules/exporting.js"></script>
-    <script src="https://www.bls.gov/assets/highcharts/latest/modules/offline-exporting.js"></script>
+    <!-- <script src="https://www.bls.gov/assets/highcharts/latest/modules/exporting.js"></script> -->
+    <!-- <script src="https://www.bls.gov/assets/highcharts/latest/modules/offline-exporting.js"></script>  -->
 
     <script src="https://www.bls.gov/assets/highcharts/latest/modules/accessibility.js"></script> 
+
 
 
     <script>
         $(function (e) {
 
+            console.log("NEW!");
             var loadChart;
 
 
