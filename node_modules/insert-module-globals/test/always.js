@@ -9,7 +9,8 @@ test('always true insert', function (t) {
     t.plan(10);
     var s = mdeps({
         modules: {
-            buffer: require.resolve('buffer/')
+            buffer: require.resolve('buffer/'),
+            timers: require.resolve('timers-browserify')
         }
     });
     s.pipe(bpack({ raw: true })).pipe(concat(function (src) {
@@ -32,7 +33,8 @@ test('always true insert custom globals without defaults', function (t) {
     t.plan(7);
     var s = mdeps({
         modules: {
-            buffer: require.resolve('buffer/')
+            buffer: require.resolve('buffer/'),
+            timers: require.resolve('timers-browserify')
         }
     });
     s.pipe(bpack({ raw: true })).pipe(concat(function (src) {
@@ -66,7 +68,8 @@ test('always truthy-but-not-true insert hidden from quick test is not really ins
     var testit = function(always, expected) {
         var s = mdeps({
             modules: {
-                buffer: require.resolve('buffer/')
+                buffer: require.resolve('buffer/'),
+                timers: require.resolve('timers-browserify')
             }
         });
         s.pipe(bpack({ raw: true })).pipe(concat(function (src) {
@@ -96,6 +99,34 @@ test('always truthy-but-not-true insert hidden from quick test is not really ins
 
     always = true; expected = 'inserted custom';
     testit(always, expected);
+});
+
+test('inserted names do not cause const name collisions', function (t) {
+    t.plan(1);
+    var s = mdeps({
+        modules: {
+            buffer: require.resolve('buffer/'),
+            timers: require.resolve('timers-browserify')
+        }
+    });
+    s.on('error', t.fail);
+    s.pipe(bpack({ raw: true })).pipe(concat(function (src) {
+        var c = {
+            t: t,
+            Buffer: 'sandbox Buffer'
+        };
+        vm.runInNewContext(src, c);
+    }));
+    s.write({
+        transform: inserter({
+            always: true,
+            vars: {
+                Buffer: function() { return '"sandbox Buffer"' }
+            }
+        }),
+        global: true
+    });
+    s.end(__dirname + '/always/collision.js');
 });
 
 function inserter (opts) {

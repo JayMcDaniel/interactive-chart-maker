@@ -81,8 +81,10 @@ var builtins = function() {
 
 function reserve_quoted_keys(ast, reserved) {
     ast.walk(new TreeWalker(function(node) {
-        if (node instanceof AST_ObjectKeyVal) {
-            if (node.quote) add(node.key);
+        if (node instanceof AST_ClassProperty) {
+            if (node.start && node.start.quote) add(node.key);
+        } else if (node instanceof AST_ObjectProperty) {
+            if (node.start && node.start.quote) add(node.key);
         } else if (node instanceof AST_Sub) {
             addStrings(node.property, add);
         }
@@ -163,13 +165,12 @@ function mangle_properties(ast, options) {
                 addStrings(node.args[0], add);
                 break;
             }
+        } else if (node instanceof AST_ClassProperty) {
+            if (typeof node.key == "string") add(node.key);
         } else if (node instanceof AST_Dot) {
             add(node.property);
-        } else if (node instanceof AST_ObjectKeyVal) {
-            add(node.key);
         } else if (node instanceof AST_ObjectProperty) {
-            // setter or getter, since KeyVal is handled above
-            add(node.key.name);
+            if (typeof node.key == "string") add(node.key);
         } else if (node instanceof AST_Sub) {
             addStrings(node.property, add);
         }
@@ -196,13 +197,12 @@ function mangle_properties(ast, options) {
                 mangleStrings(node.args[0]);
                 break;
             }
+        } else if (node instanceof AST_ClassProperty) {
+            if (typeof node.key == "string") node.key = mangle(node.key);
         } else if (node instanceof AST_Dot) {
             node.property = mangle(node.property);
-        } else if (node instanceof AST_ObjectKeyVal) {
-            node.key = mangle(node.key);
         } else if (node instanceof AST_ObjectProperty) {
-            // setter or getter
-            node.key.name = mangle(node.key.name);
+            if (typeof node.key == "string") node.key = mangle(node.key);
         } else if (node instanceof AST_Sub) {
             if (!options.keep_quoted) mangleStrings(node.property);
         }
@@ -228,13 +228,11 @@ function mangle_properties(ast, options) {
     }
 
     function mangle(name) {
-        if (!should_mangle(name)) {
-            return name;
-        }
+        if (!should_mangle(name)) return name;
         var mangled = cache.get(name);
         if (!mangled) {
             if (debug) {
-                // debug mode: use a prefix and suffix to preserve readability, e.g. o.foo -> o._$foo$NNN_.
+                // debug mode: use a prefix and suffix to preserve readability, e.g. o.foo ---> o._$foo$NNN_.
                 var debug_mangled = "_$" + name + "$" + debug_suffix + "_";
                 if (can_mangle(debug_mangled)) mangled = debug_mangled;
             }
@@ -242,6 +240,7 @@ function mangle_properties(ast, options) {
             if (!mangled) do {
                 mangled = base54(++cname);
             } while (!can_mangle(mangled));
+            if (/^#/.test(name)) mangled = "#" + mangled;
             cache.set(name, mangled);
         }
         return mangled;
