@@ -106,21 +106,20 @@ var calculate_recession_dates = {
             plotBands: plot_bands_arr
         });
 
-
         var credits = "Click legend items to change data display. Hover over chart to view data.";
         
         var area_str = plot_bands_arr.length > 1 ? "areas represent recessions" : "area represents a recession";
 
-        console.log(covid_recession_found, plot_bands_arr.length);
-
-
         if (covid_recession_found && plot_bands_arr.length === 1){
+
             credits += "\nThe vertical line at February 2020 represents the start of a recession, as determined by the National Bureau of Economic<br>Research. When this chart was published, the NBER had not yet determined an endpoint for that recession."
+        }else if (covid_recession_found && plot_bands_arr.length > 1){
+
+            credits +=  "\nWhen this chart was published, the NBER had not yet determined an endpoint for the recession that began in February 2020."
         }else if (plot_bands_arr.length > 0){
+
             credits +=  "\nShaded "+area_str+" as determined by the National Bureau of Economic Research.";
 
-        }else if (covid_recession_found && plot_bands_arr.length > 1){
-            credits +=  "\nWhen this chart was published, the NBER had not yet determined an endpoint for the recession that began in February 2020."
         }
 
 
