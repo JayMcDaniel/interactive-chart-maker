@@ -62,7 +62,7 @@ var update_tooltip = {
             var s = "<b>" + this.series.name + "</b><br>" + y_axis_title + ": <b>" + y_dollar +
                 $(this.y * multiple).addCommas(y_decimals) + y_percent + "</b><br/>" +
                 x_axis_title + ": <b>" + x_dollar + $(this.x * multiple).addCommas(x_decimals) + x_percent + "</b><br/>" +
-                z_title + ": <b>" + z_dollar + $(this.point.z * multiple).addCommas(z_decimals) + z_percent + "</b>";
+                z_title + ": <b>" + z_dollar + $(this.point.z_val * multiple).addCommas(z_decimals) + z_percent + "</b>";
 
             //extra data//
             all_chart_options.series[this.series.index] ? s = all_chart_options.tooltip.addExtraData(all_chart_options.series[this.series.index].extra_data, this.point, s) : s = s;
@@ -106,7 +106,7 @@ var update_tooltip = {
                     y_axis_title + ": <b>" + y_dollar +
                     $(this.y * multiple).addCommas(y_decimals) + y_percent + "</b><br/>" +
                     x_axis_title + ": <b>" + x_dollar + $(this.x * multiple).addCommas(x_decimals) + x_percent + "</b><br/>" +
-                    z_title + ": <b>" + z_dollar + $(this.point.z * multiple).addCommas(z_decimals) + z_percent + "</b>";
+                    z_title + ": <b>" + z_dollar + $(this.point.z_val * multiple).addCommas(z_decimals) + z_percent + "</b>";
 
                 this.point.drilldown ? s = s + "<br>(Click to drill down)" : s = s;
                 return s.replace(/\$-/g, "-$");

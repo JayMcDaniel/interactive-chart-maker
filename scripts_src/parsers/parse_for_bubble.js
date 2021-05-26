@@ -31,17 +31,27 @@ var parseForBubble = function (input, chart_type, colors) {
         $("td:nth-child(3n - 1)", this_row).each(function (i) {
             var x = $(this).getNumber();
             var y = $(this).next().getNumber();
-            var z = $(this).next().next().getNumber();
-            var xyz_arr = [x, y, z];
+            var z_val = $(this).next().next().getNumber();
+            var z = Math.abs(z_val);
+            var zIndex = 10000000 - z;
+            var xyz_arr = {
+                x: x,
+                y: y,
+                z: z,
+                z_val: z_val,
+                zIndex: zIndex
+            };
             seriesObj.data.push(xyz_arr);
+
+
         });
 
-        
+
         output.series.push(seriesObj);
 
     });
 
-    
+
     return output;
 };
 
