@@ -19,8 +19,8 @@ var calculate_recession_dates = {
         }
 
         if (dates_type === "quarterly_recession") { ///quarterly dates
-            var recession_dates_starts_array = ["Q2 1953", "Q3 1957", "Q2 1960", "Q4 1969", "Q4 1973", "Q1 1980", "Q3 1981", "Q3 1990", "Q1 2001", "Q4 2007", "Q1 2019"];
-            var recession_date_ends_array = ["Q2 1954", "Q2 1958", "Q1 1961", "Q4 1970", "Q1 1975", "Q3 1980", "Q4 1982", "Q1 1991", "Q4 2001", "Q2 2009", "Q2 2019"];
+            var recession_dates_starts_array = ["Q2 1953", "Q3 1957", "Q2 1960", "Q4 1969", "Q4 1973", "Q1 1980", "Q3 1981", "Q3 1990", "Q1 2001", "Q4 2007", "Q4 2019"];
+            var recession_date_ends_array = ["Q2 1954", "Q2 1958", "Q1 1961", "Q4 1970", "Q1 1975", "Q3 1980", "Q4 1982", "Q1 1991", "Q4 2001", "Q2 2009", "Q1 2020"];
         }
 
         if (dates_type === "monthly_recession") { //monthly dates
