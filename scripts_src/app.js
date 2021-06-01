@@ -2,6 +2,7 @@
 'use strict';
 $(function() {
 
+  console.log("mew");
   //utils
   var jq_extensions = require("./utils/jq_extensions.js");
   var utils_main = require("./utils/utils_main");
@@ -48,5 +49,5 @@ $(function() {
   });
 
   //set app version (better through JS than statically to make sure JS is new)
-  $("#app_version").text("v2.12.13"); 
+  $("#app_version").text("v2.12.14"); 
 });

@@ -19,8 +19,8 @@ var calculate_recession_dates = {
         }
 
         if (dates_type === "quarterly_recession") { ///quarterly dates
-            var recession_dates_starts_array = ["Q2 1953", "Q3 1957", "Q2 1960", "Q4 1969", "Q4 1973", "Q1 1980", "Q3 1981", "Q3 1990", "Q1 2001", "Q4 2007", "Q1 2020"];
-            var recession_date_ends_array = ["Q2 1954", "Q2 1958", "Q1 1961", "Q4 1970", "Q1 1975", "Q3 1980", "Q4 1982", "Q1 1991", "Q4 2001", "Q2 2009", "Q2 2020"];
+            var recession_dates_starts_array = ["Q2 1953", "Q3 1957", "Q2 1960", "Q4 1969", "Q4 1973", "Q1 1980", "Q3 1981", "Q3 1990", "Q1 2001", "Q4 2007", "Q1 2019"];
+            var recession_date_ends_array = ["Q2 1954", "Q2 1958", "Q1 1961", "Q4 1970", "Q1 1975", "Q3 1980", "Q4 1982", "Q1 1991", "Q4 2001", "Q2 2009", "Q2 2019"];
         }
 
         if (dates_type === "monthly_recession") { //monthly dates
@@ -45,7 +45,7 @@ var calculate_recession_dates = {
             if (found_start_index >= 0) {
                 plot_band_starts_arr.push(found_start_index);
 
-                if (i === len-1){
+                if (i === len - 1) {
                     all_chart_options.covid_recession_found = true;
                 }
             }
@@ -107,24 +107,24 @@ var calculate_recession_dates = {
         });
 
         var credits = "Click legend items to change data display. Hover over chart to view data.";
-        
+
         var area_str = plot_bands_arr.length > 1 ? "areas represent recessions" : "area represents a recession";
 
-        if (covid_recession_found && plot_bands_arr.length === 1){
+
+        if (covid_recession_found && plot_bands_arr.length === 1) {
 
             credits += "\nThe vertical line at February 2020 represents the start of a recession, as determined by the National Bureau of Economic<br>Research. When this chart was published, the NBER had not yet determined an endpoint for that recession."
-        }else if (covid_recession_found && plot_bands_arr.length > 1){
+        } else if (covid_recession_found && plot_bands_arr.length > 1) {
 
-            credits +=  "\nWhen this chart was published, the NBER had not yet determined an endpoint for the recession that began in February 2020."
-        }else if (plot_bands_arr.length > 0){
+            credits += "\nShaded " + area_str + " as determined by the National Bureau of Economic Research.";
+            credits += "\nWhen this chart was published, the NBER had not yet determined an endpoint for the recession that began in February 2020."
+        } else if (!covid_recession_found && plot_bands_arr.length > 0) {
 
-            credits +=  "\nShaded "+area_str+" as determined by the National Bureau of Economic Research.";
-
+            credits += "\nShaded " + area_str + " as determined by the National Bureau of Economic Research.";
         }
 
 
-    
-        credits+= "\nSource: U.S. Bureau of Labor Statistics."
+        credits += "\nSource: U.S. Bureau of Labor Statistics."
 
 
         $("#chart_credits_text_textarea").val(credits);
