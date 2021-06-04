@@ -708,20 +708,23 @@ var map_init = {
 
 
 
-  /** Set up state links to eag page if applicable **/
+  /** Set up state links to eag page if applicable - not with mobile **/
 
   setUpMapStateLinks: function(map_display_area) {
 
-    $("path[loc_name], circle[loc_name]", map_display_area).each(function() {
-      var thisID = $(this).attr("id");
-      if (thisID) {
-        $(this).css("cursor", "pointer")
-          .click(function() {
-            window.open("http://www.bls.gov/eag/eag." + thisID + ".htm", '_blank');
-          });
-      }
-
-    });
+    if (window.screen.width > 600){
+      $("path[loc_name], circle[loc_name]", map_display_area).each(function() {
+        var thisID = $(this).attr("id");
+  
+        if (thisID) {
+          $(this).css("cursor", "pointer")
+            .click(function() {
+              window.open("http://www.bls.gov/eag/eag." + thisID + ".htm", '_blank');
+            });
+        }
+  
+      });
+    }
 
   }
 
