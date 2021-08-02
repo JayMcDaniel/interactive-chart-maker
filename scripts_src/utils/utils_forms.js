@@ -65,7 +65,7 @@ var utils_forms = {
     })(),
 
 
-    /** When download .js icon is clicked, this will create and download a .js file from the .js text area **/
+    /** When download .htm icon is clicked, this will create and download a .htm file from the .js text area **/
     downloadHTMLFile: (function () {
 
         $("#download_html_button").click(function () {
@@ -79,6 +79,24 @@ var utils_forms = {
         });
 
     })(),
+
+
+      /** When download full .htm icon is clicked, this will create and download a .htm file from the .js text area **/
+      downloadFullHTMLFile: (function () {
+
+        $("#download_full_html_button").click(function () {
+            var text = $("#chart_full_html_output_code").val();
+            var filename = $("#full_html_filename_textarea").val();
+            filename = filename != "" ? filename : $("#chart_id_textinput").val();
+            var blob = new Blob([text], {
+                type: "text/plain;charset=utf-8"
+            });
+            saveAs(blob, filename + ".htm");
+        });
+
+    })(),
+
+
 
 
 

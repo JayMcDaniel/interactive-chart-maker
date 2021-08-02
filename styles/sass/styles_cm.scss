@@ -166,7 +166,7 @@
         color: $secondary_color;
     }
 
-    #chart_output_code {
+    #chart_output_code, #chart_full_html_output_code {
         height: 290px;
         color: $primary_color;
     }
@@ -176,7 +176,7 @@
         color: $primary_color;
     }
 
-    #js_filename_textarea, #chart_image_filename_textarea, #html_filename_textarea{
+    #js_filename_textarea, #chart_image_filename_textarea, #html_filename_textarea, #full_html_filename_textarea{
     float: left;
     width: 30%;
     height: 28px;
@@ -665,6 +665,7 @@
     #black_and_white_button,
     #download_js_button,
     #download_html_button,
+    #download_full_html_button,
     #download_chart_image_button{
 
         padding: 0px 5px 0px 5px;
@@ -735,6 +736,7 @@
 
     .copy_to_clipboard_button,
     #download_js_button,
+    #download_full_html_button,
     #download_html_button,
     #download_chart_image_button{
         border: solid 1px #b73438;
@@ -765,6 +767,7 @@
 
 
     #download_js_button,
+    #download_full_html_button,
     #download_html_button,
     #download_chart_image_button{
         background-image: url(../../images/icons/download_file_icon.png);

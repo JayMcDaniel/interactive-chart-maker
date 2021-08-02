@@ -28,6 +28,40 @@ var write_code = {
         //put js code in code area
         $("#chart_output_code").val(js_string);
 
+        //put full html code in area
+
+        $("#chart_full_html_output_code").val(`
+        
+                <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>BLS Chart</title>
+
+            <script src="http://www.bls.gov/javascripts/jquery-1.11.0.min.js"></script>
+            <script src="http://www.bls.gov/javascripts/jquery-migrate-1.2.1.min.js"></script>
+            <script src="http://www.bls.gov/assets/highcharts/4.2.3/highcharts.js"></script>
+            <script src="http://www.bls.gov/assets/highcharts/4.2.3/highcharts-more.js"></script>
+            <script src="http://www.bls.gov/assets/highcharts/4.2.3/modules/drilldown.js"></script>
+
+           
+        </head>
+        <body>
+
+        <h1>BLS Chart</h1>
+
+        ${html_string}
+            
+        </body>
+
+        <script>
+        ${js_string}
+        </script>
+        </html>
+        `);
+
 
     },
 
