@@ -234,8 +234,8 @@
     .map_color_palette_row {
         margin-bottom: 5px;
         cursor: pointer;
-        width: 264px;
-        min-height: 25px;
+        width: 275px;
+        height: 25px;
         padding: 4px;
         &.selected {
             background-color: $primary_light_color;
@@ -853,4 +853,15 @@
 
     .underline {
         text-decoration: underline;
+    }
+
+    .compliant_star{
+        margin: 0px;
+        margin: 0px;
+        float: right;
+        color: #b73438;
+        font-size: 2em;
+        position: relative;
+        left: 3px;
+        bottom: 15px;
     }
