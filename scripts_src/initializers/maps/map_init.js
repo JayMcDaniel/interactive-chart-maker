@@ -47,7 +47,7 @@ var map_init = {
         decimals: $("#map_legend_decimals_select").val(),
         enabled: is_checked($("#map_legend_enabled_checkbox")),
         hover_enabled: is_checked($("#map_legend_hover_enabled_checkbox")),
-        reversed: is_checked($("#legend_reverse_layout_checkbox")),
+        reversed: !is_checked($("#legend_reverse_layout_checkbox")),
         alphabetized: is_checked($("#legend_alphabetical_layout_checkbox")),
         x: Number($("#legend_placement_x").val()),
         y: Number($("#legend_placement_y").val()),
