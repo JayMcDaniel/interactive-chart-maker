@@ -38,7 +38,11 @@ var map_animation_init = {
                 top: "-6px"
             })
             .html("\u25B6")
-            .addClass("map_play_button");
+            .addClass("map_play_button")
+            .attr({
+                title: "Play",
+                ariaLabel: "Play button"
+            });
 
 
         //step backward button
@@ -53,7 +57,11 @@ var map_animation_init = {
                 top: "-5px"
             })
             .html("&lt")
-            .addClass("map_step_backward_button");
+            .addClass("map_step_backward_button")
+            .attr({
+                title: "Back",
+                ariaLabel: "Back button"
+            });
 
         //step forward button
         var step_forward_button = document.createElement("div");
@@ -68,7 +76,11 @@ var map_animation_init = {
                 top: "-5px"
             })
             .html("&gt")
-            .addClass("map_step_forward_button");
+            .addClass("map_step_forward_button")
+            .attr({
+                title: "Forward",
+                ariaLabel: "Forward button"
+            });
 
 
         //slider
@@ -91,6 +103,10 @@ var map_animation_init = {
                 top: "10px"
             })
             .addClass("map_slider")
+            .attr({
+                title: "Animation slider",
+                ariaLabel: "Animation slider"
+            });
 
 
 
