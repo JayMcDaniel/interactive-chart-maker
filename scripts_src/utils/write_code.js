@@ -29,7 +29,6 @@ var write_code = {
         $("#chart_output_code").val(js_string);
 
         //put full html code in area
-
         $("#chart_full_html_output_code").val(`
         
                 <!DOCTYPE html>
@@ -61,6 +60,15 @@ var write_code = {
         </script>
         </html>
         `);
+
+
+        //put html and js snippet in area
+        $("#chart_html_and_js_snippet_output_code").val(`
+        ${html_string}
+        <script>
+        ${js_string}
+        </script>
+        `)
 
 
     },
