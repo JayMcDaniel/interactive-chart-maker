@@ -17,8 +17,15 @@ var update_x_axis = {
         if (only_numbers) {
             newXFormat = function () {
                 //hide non-numbers if show only years box is checked//
-                var num = this.value.match(/\d{4}/);
-                return num;
+
+                if (typeof this.value.match === 'function'){
+                    var num = this.value.match(/\d{4}/);
+                    return num;
+
+                }else{
+                    return this.value;
+                }
+                
             }
         }
 

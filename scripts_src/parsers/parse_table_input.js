@@ -104,6 +104,7 @@ var parseTableInput = function (input, load_series_from, chart_type, legend_togg
 
 
     } catch (e) {
+        console.log("error", e);
         utils_main.showError("Sorry, the table wasn't formatted correctly for a " + chart_type + " chart. Please see the example on the data tab.")
 
     }

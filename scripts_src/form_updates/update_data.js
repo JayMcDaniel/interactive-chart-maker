@@ -25,6 +25,7 @@ var update_data = {
         ///parse data //
         var parsed_table_output = parseTableInput(input, load_series_from, chart_type, legend_toggle_enabled, all_chart_options.colors, chart, all_chart_options);
 
+        //console.log("parsed_table_output", parsed_table_output);
 
         //update x-axis categories
         chart.xAxis[0].update({

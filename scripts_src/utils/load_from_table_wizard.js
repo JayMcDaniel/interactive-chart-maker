@@ -8,7 +8,7 @@ var loadFromTableWizard = (function () {
 
     var imported_chart_type = sessionStorage.getItem('imported_chart_type');
     
-    console.log("importing", imported_table, imported_chart_type);
+    // console.log("importing", imported_table, imported_chart_type);
     
     if (imported_table && imported_chart_type) {
 
