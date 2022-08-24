@@ -17,6 +17,7 @@ var AllChartOptions = function (o) {
     this.yAxis = o.yAxis;
     this.credits = o.credits;
     this.exporting = o.exporting;
+    this.input_table = $("#table_input_textarea").val();
 }
 
 

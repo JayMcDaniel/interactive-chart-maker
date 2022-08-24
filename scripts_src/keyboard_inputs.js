@@ -126,13 +126,7 @@ var keyboard_inputs = {
             }
 
 
-            //data load - series names from columns / rows
-            else if (e.keyCode === 9) { //tab
-                e.preventDefault();
-                keys.clickNext("load_series_from_icon", "selected");
-            }
-
-
+            
             //color template (cycle through)    
             else if (e.keyCode === 67) { //c
                 e.preventDefault();

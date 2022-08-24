@@ -17,13 +17,72 @@ var Exporting = function (o) {
     };
 
     this.buttons = {
+        // contextButton: {
+        //     enabled: true,
+        //     verticalAlign: 'bottom',
+        //     x: -10
+        // }
+
         contextButton: {
+            text: "<span style='color: #112e51'>Options</span>",
+            symbolY: 14,
+            symbolStroke: '#112e51',
             enabled: true,
             verticalAlign: 'bottom',
-            x: -10
+            x: -10,
+    
+            menuItems: [{
+                    textKey: 'printChart',
+                    onclick: function () {
+                        $(".highcharts-focus-border").remove();
+                        this.print();
+    
+                    }
+                }, {
+                    separator: true
+                }, {
+                    textKey: 'downloadPNG',
+                    onclick: function () {
+                        this.exportChartLocal();
+                    }
+                }, {
+                    textKey: 'downloadJPEG',
+                    onclick: function () {
+                        this.exportChartLocal({
+                            type: 'image/jpeg'
+                        });
+                    }
+                }, {
+                    textKey: 'downloadSVG',
+                    onclick: function () {
+                        this.exportChartLocal({
+                            type: 'image/svg+xml'
+                        });
+                    }
+                }, {
+                    separator: true
+                }, {
+                    text: 'Show table',
+                    onclick: function () {
+                       this.options.chart.showTable();
+                    }
+                },
+                {
+                    text: 'Download CSV',
+                    onclick: function () {
+                        this.options.chart.downloadCSV();
+                    }
+                }
+            ]
         }
+
+        
     };
+
+
 }
 
 
 module.exports = Exporting;
+
+

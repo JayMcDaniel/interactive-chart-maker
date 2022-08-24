@@ -68,7 +68,7 @@ var update_data = {
         all_chart_options.xAxis.categories = parsed_table_output.x_axis_categories;
         all_chart_options.drilldown = parsed_table_output.drilldown;
         all_chart_options.title.text = parsed_table_output.title_text;
-
+        all_chart_options.input_table = $("#table_input_textarea").val();
         
         //update whether legend toggle is enabled 
         $("#legend_make_toggle_checkbox").change();
