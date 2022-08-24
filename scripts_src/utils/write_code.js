@@ -39,11 +39,34 @@ var write_code = {
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>BLS Chart</title>
 
-            <script src="http://www.bls.gov/javascripts/jquery-1.11.0.min.js"></script>
-            <script src="http://www.bls.gov/javascripts/jquery-migrate-1.2.1.min.js"></script>
-            <script src="http://www.bls.gov/assets/highcharts/4.2.3/highcharts.js"></script>
-            <script src="http://www.bls.gov/assets/highcharts/4.2.3/highcharts-more.js"></script>
-            <script src="http://www.bls.gov/assets/highcharts/4.2.3/modules/drilldown.js"></script>
+            <!-- OLDER VERSIONS
+            <script src="https://www.bls.gov/javascripts/jquery-1.11.0.min.js"></script>
+            <script src="https://www.bls.gov/javascripts/jquery-migrate-1.2.1.min.js"></script>
+            <script src="https://www.bls.gov/assets/highcharts/4.2.3/highcharts.js"></script>
+            <script src="https://www.bls.gov/assets/highcharts/4.2.3/highcharts-more.js"></script>
+            <script src="https://www.bls.gov/assets/highcharts/4.2.3/modules/drilldown.js"></script>
+            <script src="https://www.bls.gov/javascripts/filesaver.js"></script>
+            -->
+
+            
+        <script src="https://www.bls.gov/javascripts/jquery-latest.js"></script>
+        <script src="https://www.bls.gov/javascripts/bls-latest.js"></script>
+        <script src="https://www.bls.gov/javascripts/jquery-tools.js"></script>
+        <script src="https://www.bls.gov/javascripts/jquery-migrate-1.2.1.min.js"></script>
+        <script src="https://www.bls.gov/javascripts/jquery-tools-1.2.7.min.js"></script>
+        <script src="https://www.bls.gov/javascripts/proj4.js"></script>
+        <script src="https://www.bls.gov/javascripts/filesaver.js"></script>
+        <script src="https://www.bls.gov/assets/highcharts/latest/highcharts.js"></script>
+        <script src="https://www.bls.gov/assets/highcharts/latest/highcharts-more.js"></script>
+        <script src="https://www.bls.gov/assets/highcharts/latest/modules/map.js"></script>
+        <script src="https://www.bls.gov/assets/highcharts/latest/modules/data.js"></script>
+        <script src="https://www.bls.gov/assets/highcharts/latest/modules/exporting.js"></script>
+        <script src="https://www.bls.gov/assets/highcharts/latest/modules/offline-exporting.js"></script>
+        <script src="https://www.bls.gov/assets/highcharts/latest/modules/drilldown.js"></script>
+        <script src='https://www.bls.gov/assets/highcharts/latest/modules/accessibility.js'></script>
+
+
+        <link rel="stylesheet" type="text/css" href="https://www.bls.gov/stylesheets/bls_tables.css">
 
            
         </head>
