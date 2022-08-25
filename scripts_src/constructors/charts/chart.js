@@ -41,7 +41,7 @@ var ChartOptions = function (o) {
             .prependTo("body");
 
 
-        var table_popup_div_close_button = $("<a href='#'>Close</a>")
+        var table_popup_div_close_button = $("<a href='#' class='close_popup'>Close</a>")
             .css({
                 display: "block",
                 textAlign: "center"
@@ -52,10 +52,14 @@ var ChartOptions = function (o) {
 
                 $("#table_popup_div").remove();
                 $(`#${self.renderTo} .highcharts-a11y-proxy-button`).focus(); 
+                $(".focus-disabled").attr("tabindex", "0").removeClass("focus-disabled");
 
             })
             .prependTo($("#table_popup_div"))
             .focus()
+
+            $('a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, *[tabindex], *[contenteditable]').not(".close_popup")
+            .attr("tabindex", "-1").addClass("focus-disabled");
 
     };
 
