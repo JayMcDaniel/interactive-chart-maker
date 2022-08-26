@@ -30,21 +30,29 @@ var ChartOptions = function (o) {
             .css({
                 display: "block",
                 width: "100%",
-                height: "100%",
+                height: "fit-content",
                 position: "absolute",
-                zIndex: "1000",
-                backgroundColor: "white"
+                zIndex: "5000",
+                backgroundColor: "rgb(255,255,255)",
+                top: "0px",
+                left: "0px",
+                padding: "20px"
             })
             .attr({
-                id: "table_popup_div"
+                id: "table_popup_div",
+                class: "table_popup_div"
             })
-            .prependTo("body");
+            .appendTo("body");
 
 
         var table_popup_div_close_button = $("<a href='#' class='close_popup'>Close</a>")
             .css({
                 display: "block",
-                textAlign: "center"
+                textAlign: "center",
+                fontSize: "1.4em",
+                color: "#e31c3d",
+                margin: "auto",
+                marginBottom: "9px"
 
             })
             .click(function(ev){
