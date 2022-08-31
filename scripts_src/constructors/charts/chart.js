@@ -30,7 +30,8 @@ var ChartOptions = function (o) {
             .css({
                 display: "block",
                 width: "100%",
-                height: "fit-content",
+                height: "100%",
+                overflow: "scroll",
                 position: "absolute",
                 zIndex: "5000",
                 backgroundColor: "rgb(255,255,255)",
