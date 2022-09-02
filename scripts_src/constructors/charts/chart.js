@@ -30,9 +30,10 @@ var ChartOptions = function (o) {
             .css({
                 display: "block",
                 width: "100%",
+                minWidth: "fit-content",
                 height: "100%",
                 overflow: "scroll",
-                position: "absolute",
+                position: "fixed",
                 zIndex: "5000",
                 backgroundColor: "rgb(255,255,255)",
                 top: "0px",
@@ -46,7 +47,8 @@ var ChartOptions = function (o) {
             .appendTo("body");
 
 
-        var table_popup_div_close_button = $("<a href='#' class='close_popup'>Close</a>")
+        var table_popup_div_close_button = $("<a href='#' class='close_popup'></a>")
+            .text("Close")
             .css({
                 display: "block",
                 textAlign: "center",
