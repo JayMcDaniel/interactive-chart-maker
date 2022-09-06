@@ -96,15 +96,6 @@ var ChartOptions = function (o) {
         })
         csv = csv.join("\n");
 
-
-/*
-        map.dataframe.matrix.forEach(function (row) {
-            let str_row = row.map(cell => `"${cell}"`).join(",");
-            csv.push([str_row]);
-        });
-        */
-
-
         var file = new File([csv], `${this.renderTo}.csv`, {
             type: "text/plain;charset=utf-8"
         });

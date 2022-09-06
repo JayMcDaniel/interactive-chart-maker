@@ -102,7 +102,7 @@ var write_code = {
 
     /** creates and returns chart HTML code  **/
     writeChartHTMLCode: function (all_chart_options, width, height, id) {
-        var html_string = '<div id="' + id + '" style = "position: relative; width: ' + width + 'px; height: ' + height + 'px; margin: auto; padding: 0px; background-color: #fff"> </div>';
+        var html_string = '<div id="' + id + '" style = "position: relative; width: ' + width + 'px; height: ' + height + 'px; margin: auto; padding: 0px; background-color: #fff"> <\\/div>';
 
         return html_string;
     },
@@ -143,6 +143,7 @@ var write_code = {
             .replace(/\s{2,} /g, " ") //replace several spaces with one
             .replace(/"null"/g, "null") //replace "null" with null
             .replace('"drilldown":{},', "") //replace empty drilldown obj with nothing
+            .replace(/<\//g,"<\\/") //replace forward slashes with escapes for drupal
             + ";\n\n";
 
 
