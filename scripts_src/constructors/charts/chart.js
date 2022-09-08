@@ -96,7 +96,8 @@ var ChartOptions = function (o) {
         })
         csv = csv.join("\n");
 
-        var file = new File([csv], `${this.renderTo}.csv`, {
+        var filename = $("caption",all_chart_options.input_table).text() + ".csv";
+        var file = new File([csv], filename, {
             type: "text/plain;charset=utf-8"
         });
         saveAs(file);
