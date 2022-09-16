@@ -143,7 +143,7 @@ var write_code = {
             .replace(/\s{2,} /g, " ") //replace several spaces with one
             .replace(/"null"/g, "null") //replace "null" with null
             .replace('"drilldown":{},', "") //replace empty drilldown obj with nothing
-        //    .replace(/<\//g,"<\\/") //replace forward slashes with escapes for drupal
+            .replace(/<\/p/g,"<\\/p").replace(/<\/t/g,"<\\/t") //replace forward slashes with escapes for drupal
             + ";\n\n";
 
 
