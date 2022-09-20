@@ -30,7 +30,6 @@ var ChartOptions = function (o) {
             .css({
                 display: "block",
                 width: "100%",
-                minWidth: "fit-content",
                 height: "100%",
                 overflow: "scroll",
                 position: "fixed",
@@ -51,11 +50,12 @@ var ChartOptions = function (o) {
             .text("Close")
             .css({
                 display: "block",
-                textAlign: "center",
+                textAlign: "left",
                 fontSize: "1.4em",
                 color: "#e31c3d",
                 margin: "auto",
-                marginBottom: "9px"
+                marginBottom: "9px",
+                width: "100%"
 
             })
             .click(function(ev){
@@ -96,7 +96,7 @@ var ChartOptions = function (o) {
         })
         csv = csv.join("\n");
 
-        var filename = $("caption",all_chart_options.input_table).text() + ".csv";
+        var filename = $("caption .tableTitle",all_chart_options.input_table).text() + ".csv";
         var file = new File([csv], filename, {
             type: "text/plain;charset=utf-8"
         });
