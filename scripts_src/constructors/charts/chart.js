@@ -49,13 +49,11 @@ var ChartOptions = function (o) {
         var table_popup_div_close_button = $("<a href='#' class='close_popup'></a>")
             .text("Close")
             .css({
-                display: "block",
                 textAlign: "left",
                 fontSize: "1.4em",
                 color: "#e31c3d",
                 margin: "auto",
-                marginBottom: "9px",
-                width: "100%"
+                marginBottom: "9px"
 
             })
             .click(function(ev){
