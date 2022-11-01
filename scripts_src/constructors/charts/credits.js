@@ -14,7 +14,8 @@ var Credits = function (o) {
 
     this.style = {
         cursor: "default",
-        color: "#2C2C2C"
+        color: "#2C2C2C",
+        "font-size": "11px"
     };
   
     this.target = "_blank";

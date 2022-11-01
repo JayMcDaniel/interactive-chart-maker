@@ -94,7 +94,7 @@ var ChartOptions = function (o) {
         })
         csv = csv.join("\n");
 
-        var filename = $("caption .tableTitle",all_chart_options.input_table).text() + ".csv";
+        var filename = $.trim($("caption .tableTitle",all_chart_options.input_table).text()) + ".csv";
         var file = new File([csv], filename, {
             type: "text/plain;charset=utf-8"
         });
