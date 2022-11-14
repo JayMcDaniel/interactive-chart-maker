@@ -33,7 +33,7 @@ var yAxis = function (o) {
 
     this.plotLines = o.plotLines || [{
         "value": 0,
-        "color": "#c0c0c0",
+        "color": "#000",
         "dashStyle": "solid",
         "width": 1
     }];
