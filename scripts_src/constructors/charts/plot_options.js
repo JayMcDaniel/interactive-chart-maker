@@ -41,6 +41,10 @@ var PlotOptions = function (o) {
     
     this.line = {};
 
+    this.bar = {
+        borderWidth: o.bar.borderWidth
+    };
+
     this.boxplot = {
         fillColor: '#F0F0E0'
     };

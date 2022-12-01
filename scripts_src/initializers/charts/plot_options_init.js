@@ -6,7 +6,7 @@ var utils_forms = require("../../utils/utils_forms.js");
 @module
 */
 var plotOptionsInit = function plotOptionsInit(chart_type, legend_toggle_enabled) {
-
+console.log("TEST");
     //load options from user inputs
     var options = {
         series: {
@@ -31,14 +31,15 @@ var plotOptionsInit = function plotOptionsInit(chart_type, legend_toggle_enabled
                 }
             },
 
-
-
             states: {
                 hover: {
                     lineWidth: 4
                 }
             }
 
+        },
+        bar:{
+            borderWidth: 0
         }
 
     };
