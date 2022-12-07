@@ -16,7 +16,7 @@
         map_legend_div.setAttribute("class", "map_legend_div");
 
         var top_adjustment = all_map_options.is_animated ? 480 : 420;
-        map_legend_div.setAttribute("style", "position: absolute; top: " + (all_map_options.legend.y + top_adjustment) + "px; left: " + (all_map_options.legend.x + 261) + "px; width: " + all_map_options.legend.legend_width + "px; min-height: 130px; margin: auto; z-index: 500");
+        map_legend_div.setAttribute("style", "position: absolute; top: " + (all_map_options.legend.y + top_adjustment) + "px; left: " + (all_map_options.legend.x + 285) + "px; width: " + all_map_options.legend.legend_width + "px; min-height: 130px; margin: auto; z-index: 500");
 
 
         //create legend item for each color

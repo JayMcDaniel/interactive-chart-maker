@@ -240,7 +240,7 @@ var map_init = {
       "z-index": "400",
       position: "absolute",
       left: "13px",
-      top: all_map_options.is_animated ? "93px" : "45px",
+      top: all_map_options.is_animated ? "93px" : "50px",
       "background-color": "#fff",
       "height": all_map_options.sized_for_spotlight ? "382px" : "450px",
       "width": all_map_options.sized_for_spotlight ? "578px" : "680px"
