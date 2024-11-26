@@ -30,7 +30,7 @@
     "watchify": "^3.11.1"
   },
   "dependencies": {
-    "i": "^0.3.6",
+    "i": "^0.3.7",
     "readable-stream": "^3.6.0",
     "vinyl": "^2.2.1",
     "vinyl-fs": "^3.0.3"
